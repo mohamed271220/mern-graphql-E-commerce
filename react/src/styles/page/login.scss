@@ -1,0 +1,90 @@
+.log-in {
+  width: 100%;
+  min-height: 100vh;
+  flex-direction: column;
+  margin-top: 50px;
+  margin-bottom: 20px;
+
+  form {
+    background: #000;
+    width: 40vw;
+    max-width: 300px;
+    height: fit-content;
+    padding: 40px 0;
+    border-radius: 5px;
+    flex-direction: column;
+    // gap: 10px;
+    gap: 25px;
+    overflow: hidden;
+    input {
+      height: 30px;
+    }
+    button {
+      width: 80%;
+      height: 30px;
+
+      margin: 0 auto;
+    }
+  }
+
+  .redirect {
+    color: var(--white);
+    letter-spacing: 1.1px;
+    a {
+      font-size: 1rem;
+      text-decoration: underline;
+      text-decoration-color: var(--wheat);
+      color: var(--green);
+      margin-left: 6px;
+      transition: 0.3s;
+      &:hover {
+        color: var(--wheat);
+        text-decoration-color: var(--green);
+        cursor: pointer;
+      }
+    }
+  }
+
+  .log-with {
+    gap: 10px;
+    .log-social {
+      width: 2.2rem;
+      height: 2.2rem;
+      background: var(--white);
+      border-radius: 5px;
+      transition: 0.5s;
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+  }
+}
+
+.or {
+  position: relative;
+  top: 10px;
+}
+
+.inp-parent {
+  position: relative;
+  width: 80%;
+  input {
+    width: 100%;
+  }
+  .placeholder {
+    position: absolute;
+    top: -18px;
+    left: 5px;
+    color: var(--white);
+  }
+  .x-inp {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: var(--delete);
+    cursor: pointer;
+  }
+}

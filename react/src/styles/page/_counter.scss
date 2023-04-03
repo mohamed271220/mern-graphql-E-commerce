@@ -1,0 +1,24 @@
+.counter {
+  width: fit-content;
+  height: 30px;
+  justify-content: flex-start;
+  background: rgba(128, 128, 128, 0.162);
+  overflow: hidden;
+  button {
+    background: inherit;
+    height: 100%;
+    border-radius: 0;
+    width: 20px;
+    text-shadow: 0 0 0 transparent;
+  }
+
+  .count {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    color: black;
+    height: 100%;
+    background: white;
+  }
+}
