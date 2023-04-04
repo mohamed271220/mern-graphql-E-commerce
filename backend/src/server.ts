@@ -5,11 +5,15 @@ import { MongoDB_URL } from "./config";
 import { graphqlHTTP } from "express-graphql";
 import graphQlSchema from "./graphql/schema/product.js";
 
-const app = express();
-app.use(cors());
-app.use(express.json());
-
 mongoose.connect(MongoDB_URL as unknown as string);
+const app = express();
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:5173",
+  })
+);
+app.use(express.json());
 
 app.use(
   "/graphql",

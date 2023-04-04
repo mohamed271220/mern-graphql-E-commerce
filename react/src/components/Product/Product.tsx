@@ -1,6 +1,8 @@
 import React, { createContext, useState } from "react";
 import ProductImages from "./images";
 import ProductDetails from "./ProductDetails";
+import { useQuery, gql } from "@apollo/client";
+import { GET_Product_By_Id } from "../../graphql/general.js";
 
 const dummy = {
   title: "Chic Leather Jacket",
@@ -75,8 +77,8 @@ const dummy = {
   __v: 0,
   stock: 40,
 };
-const { images, _id, title, description, category, price, rating, stock } =
-  dummy;
+// const { images, _id, title, description, category, price, rating, stock } =
+//   dummy;
 
 interface productContextInterface {
   rating: number[];
@@ -85,27 +87,42 @@ export const productContext = createContext({} as productContextInterface);
 const Product = () => {
   const [bigImgInd, setBigImgInd] = useState(0);
 
-  return (
-    <productContext.Provider value={{ rating }}>
-      <div className="product-container">
-        <section className="product-page">
-          <ProductImages
-            key={_id}
-            data={{
-              images,
-              bigImgInd,
-              setBigImgInd,
-            }}
-          />
+  const id = "642a06258b0a1b45ebf05639";
+  const { data, error, loading } = useQuery(GET_Product_By_Id, {
+    variables: { id },
+  });
+  if (loading) {
+    return <>loading</>;
+  } else {
+    console.log(data, error);
+    const { images, _id, title, description, category, price, rating, stock } =
+      data.product;
+    return (
+      <>
+        {data && (
+          <productContext.Provider value={{ rating }}>
+            <div className="product-container">
+              <section className="product-page">
+                <ProductImages
+                  key={_id}
+                  data={{
+                    images,
+                    bigImgInd,
+                    setBigImgInd,
+                  }}
+                />
 
-          <ProductDetails
-            key={`product-${_id}`}
-            data={{ title, description, category, price, rating, stock }}
-          />
-        </section>
-      </div>
-    </productContext.Provider>
-  );
+                <ProductDetails
+                  key={`product-${_id}`}
+                  data={{ title, description, category, price, rating, stock }}
+                />
+              </section>
+            </div>
+          </productContext.Provider>
+        )}
+      </>
+    );
+  }
 };
 
 export default Product;

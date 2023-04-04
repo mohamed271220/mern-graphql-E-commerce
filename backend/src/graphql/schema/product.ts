@@ -1,4 +1,5 @@
 import {
+  GraphQLID,
   GraphQLInt,
   GraphQLList,
   GraphQLObjectType,
@@ -28,8 +29,9 @@ const query = new GraphQLObjectType({
   fields: {
     product: {
       type: productType,
-      args: { id: { type: GraphQLString } },
+      args: { id: { type: GraphQLID } },
       resolve(_, args) {
+        console.log(args.id);
         return productCollection.findById(args.id);
       },
     },

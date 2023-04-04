@@ -25,8 +25,9 @@ const query = new graphql_1.GraphQLObjectType({
     fields: {
         product: {
             type: productType,
-            args: { id: { type: graphql_1.GraphQLString } },
+            args: { id: { type: graphql_1.GraphQLID } },
             resolve(_, args) {
+                console.log(args.id);
                 return product_js_1.default.findById(args.id);
             },
         },
