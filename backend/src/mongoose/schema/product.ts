@@ -14,6 +14,7 @@ interface reviewInterface {
   image: string;
   user: string;
   review: string;
+  rate: number;
 }
 
 interface productInterface {
@@ -31,6 +32,7 @@ const reviewSchema = new mongoose.Schema({
   image: String,
   user: String,
   review: String,
+  rate: Number,
 });
 
 const productSchema = new mongoose.Schema({

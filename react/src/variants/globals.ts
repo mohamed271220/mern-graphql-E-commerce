@@ -16,3 +16,15 @@ export const opacityVariant = {
   end: { opacity: 1 },
   exit: { opacity: 0 },
 };
+
+export const popVariant = {
+  start: { y: -400 },
+  end: { y: 0, transition: { duration: 0.5, delay: 0.4 } },
+  exit: { y: -400, transition: { duration: 0.5 } },
+};
+
+export const overleyVariant = {
+  start: { opacity: 0 },
+  end: { opacity: 1, transition: { duration: 0.5, when: "beforeChildren" } },
+  exit: { opacity: 0, transition: { duration: 0.5, when: "afterChildren" } },
+};

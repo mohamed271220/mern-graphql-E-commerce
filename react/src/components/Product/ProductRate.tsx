@@ -1,7 +1,7 @@
 import StarIcon from "../../custom/StarIcon";
 import React, { useContext, useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { productContext } from "./Product";
+
 const ProductRate = () => {
   const { rating } = useContext(productContext);
   const [avgRate, setAvgRate] = useState(-1);
@@ -20,14 +20,6 @@ const ProductRate = () => {
   useEffect(() => {
     setAvgRate(getAvg(rating));
   }, []);
-
-  const convertNegativeToZero = (num: number) => {
-    if (num > 0) {
-      return 1;
-    } else {
-      return 0;
-    }
-  };
 
   return (
     <div className="product-rate ">

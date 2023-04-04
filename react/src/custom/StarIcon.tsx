@@ -7,14 +7,10 @@ interface Props {
 }
 
 const StarIcon = ({ avgRate, id }: Props) => {
-  // console.log({ yellow });
-
   const [fill, setFill] = useState(0);
-
   useEffect(() => {
     if (avgRate !== -1) {
       const substract = avgRate - id;
-      console.log({ substract, id });
       if (substract >= 1) {
         setFill(1);
       } else if (substract > 0) {
@@ -25,7 +21,6 @@ const StarIcon = ({ avgRate, id }: Props) => {
     }
   }, [avgRate]);
 
-  console.log({ id, fill });
   return (
     <svg
       width="15"
@@ -66,13 +61,6 @@ const StarIcon = ({ avgRate, id }: Props) => {
           y2="7"
           gradientUnits="userSpaceOnUse"
         >
-          {/* <stop offset="0.8" stopColor="#D3D3D3" />
-          <stop offset="0.2" stopColor="#FFD700" /> */}
-
-          {/* <stop offset={(1 - fill).toString()} stopColor="#D3D3D3" />
-          <stop offset={fill.toString()} stopColor="#FFD700" /> */}
-
-          {/* <stop offset="0" stopColor="#D3D3D3" /> */}
           {fill !== 1 && (
             <stop offset={(1 - fill).toString()} stopColor="#D3D3D3" />
           )}

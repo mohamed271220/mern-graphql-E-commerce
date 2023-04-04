@@ -14,11 +14,12 @@ interface Props {
     price: number;
     stock: number;
     rating: number[];
+    setShowPop: React.Dispatch<React.SetStateAction<boolean>>;
   };
 }
 
 const ProductDetails = ({
-  data: { title, description, category, price, stock },
+  data: { title, description, category, price, stock, setShowPop },
 }: Props) => {
   const [svgRef, svgAnimate] = useAnimate();
 
@@ -33,6 +34,8 @@ const ProductDetails = ({
       transition: { delay: 0.7, type: "spring", stiffness: 70 },
     },
   };
+
+  const handleshowPop = () => setShowPop(true);
 
   return (
     <motion.div
@@ -140,8 +143,18 @@ const ProductDetails = ({
         </div>
       </div>
       <div className="add-rate center">
-        <button className="rate">add rate</button>
-        <button className="review">see all review</button>
+        <button className="rate" onClick={handleshowPop}>
+          add rate
+        </button>
+        <button
+          className="review"
+          onClick={() => {
+            handleshowPop();
+            console.log("clicked");
+          }}
+        >
+          see all review
+        </button>
       </div>
     </motion.div>
   );

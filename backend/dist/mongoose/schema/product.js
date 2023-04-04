@@ -12,6 +12,7 @@ const reviewSchema = new mongoose_1.default.Schema({
     image: String,
     user: String,
     review: String,
+    rate: Number,
 });
 const productSchema = new mongoose_1.default.Schema({
     title: String,

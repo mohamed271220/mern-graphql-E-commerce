@@ -1,20 +1,26 @@
-import { GraphQLObjectType, GraphQLString } from "graphql";
+import {
+  GraphQLID,
+  GraphQLInt,
+  GraphQLObjectType,
+  GraphQLString,
+} from "graphql";
 
 export const imageType = new GraphQLObjectType({
-  name: "image",
+  name: "images",
   fields: () => ({
     productPath: { type: GraphQLString },
     ProductName: { type: GraphQLString },
-    _id: { type: GraphQLString },
+    _id: { type: GraphQLID },
   }),
 });
 
 export const ReviewType = new GraphQLObjectType({
-  name: "review",
+  name: "reviews",
   fields: () => ({
     image: { type: GraphQLString },
     user: { type: GraphQLString },
     review: { type: GraphQLString },
-    _id: { type: GraphQLString },
+    rate: { type: GraphQLInt },
+    _id: { type: GraphQLID },
   }),
 });

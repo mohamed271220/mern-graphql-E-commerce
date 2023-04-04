@@ -1,8 +1,15 @@
 import { gql } from "@apollo/client";
 
 export const GET_Product_By_Id = gql`
-  query {
-    product(id: "642a06258b0a1b45ebf05639") {
+  query ($id: ID!) {
+    product(id: $id) {
+      reviews {
+        image
+        user
+        review
+        rate
+        _id
+      }
       _id
       price
       stock
