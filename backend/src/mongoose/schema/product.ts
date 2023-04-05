@@ -17,7 +17,7 @@ interface reviewInterface {
   rate: number;
 }
 
-interface productInterface {
+export interface productInterface {
   title: string;
   description: string;
   price: number;
@@ -35,7 +35,7 @@ const reviewSchema = new mongoose.Schema({
   rate: Number,
 });
 
-const productSchema = new mongoose.Schema({
+export const productSchema = new mongoose.Schema({
   title: String,
   description: String,
   price: Number,

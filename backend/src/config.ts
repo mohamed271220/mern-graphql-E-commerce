@@ -1,6 +1,11 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-const { MongoDB_URL } = process.env;
+const {
+  MongoDB_URL,
 
-export { MongoDB_URL };
+  BCRYPT_SECRET,
+  BCRYPT_SALT_ROUNDS,
+} = process.env;
+
+export { MongoDB_URL, BCRYPT_SECRET, BCRYPT_SALT_ROUNDS };

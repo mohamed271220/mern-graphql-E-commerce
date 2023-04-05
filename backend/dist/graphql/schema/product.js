@@ -3,10 +3,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.productType = void 0;
 const graphql_1 = require("graphql");
 const types_js_1 = require("../types.js");
 const product_js_1 = __importDefault(require("../../mongoose/schema/product.js"));
-const productType = new graphql_1.GraphQLObjectType({
+exports.productType = new graphql_1.GraphQLObjectType({
     name: "products",
     fields: () => ({
         _id: { type: graphql_1.GraphQLString },
@@ -24,7 +25,7 @@ const query = new graphql_1.GraphQLObjectType({
     name: "query",
     fields: {
         product: {
-            type: productType,
+            type: exports.productType,
             args: { id: { type: graphql_1.GraphQLID } },
             resolve(_, args) {
                 console.log(args.id);
@@ -32,7 +33,7 @@ const query = new graphql_1.GraphQLObjectType({
             },
         },
         products: {
-            type: new graphql_1.GraphQLList(productType),
+            type: new graphql_1.GraphQLList(exports.productType),
             resolve(_par, _args) {
                 return product_js_1.default.find({});
             },

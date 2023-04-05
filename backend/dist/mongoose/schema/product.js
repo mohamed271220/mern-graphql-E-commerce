@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.productSchema = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const imageSchema = new mongoose_1.default.Schema({
     productPath: String,
@@ -14,7 +15,7 @@ const reviewSchema = new mongoose_1.default.Schema({
     review: String,
     rate: Number,
 });
-const productSchema = new mongoose_1.default.Schema({
+exports.productSchema = new mongoose_1.default.Schema({
     title: String,
     description: String,
     price: Number,
@@ -24,5 +25,5 @@ const productSchema = new mongoose_1.default.Schema({
     rating: [Number],
     reviews: [reviewSchema],
 });
-const productCollection = mongoose_1.default.model("products", productSchema);
+const productCollection = mongoose_1.default.model("products", exports.productSchema);
 exports.default = productCollection;

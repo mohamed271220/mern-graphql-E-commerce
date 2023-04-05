@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { FaFacebookF } from "react-icons/fa";
 import { AiOutlineTwitter } from "react-icons/ai";
-import { SiGmail, SiVelog } from "react-icons/si";
+import { SiGmail } from "react-icons/si";
 import { motion, stagger, useAnimate } from "framer-motion";
 import { btnHover } from "../variants/globals";
 import { useForm, FormProvider, FieldValues } from "react-hook-form";
+import { useMutation } from "@apollo/client";
 import Input from "./Input";
+import { ADD_USER } from "../graphql/mutations/user";
 const socialMediaArr = [
   { id: "1", icon: <FaFacebookF color="" />, clr: "var(--fb)" },
   { id: "2", icon: <AiOutlineTwitter />, clr: "var(--twitter)" },
@@ -15,6 +17,7 @@ const socialMediaArr = [
     clr: "var(--gmail)",
   },
 ];
+
 const SignUp = () => {
   const methods = useForm();
   const {
@@ -22,7 +25,7 @@ const SignUp = () => {
     getValues,
     formState: { errors },
   } = methods;
-  const OnSubmot = (data: FieldValues) => {
+  const OnSubmit = (data: FieldValues) => {
     console.log(data);
   };
 
@@ -35,13 +38,16 @@ const SignUp = () => {
       { delay: stagger(0.2) }
     );
   }, []);
+
+  const [addUserFn, { data }] = useMutation(ADD_USER);
+  console.log(data);
   return (
     <div className="log-in center">
       <FormProvider {...methods}>
         <form
           action=""
           className="center"
-          onSubmit={handleSubmit(OnSubmot)}
+          onSubmit={handleSubmit(OnSubmit)}
           ref={formRef}
         >
           <h4 className="heading"> sign Up</h4>
@@ -69,9 +75,14 @@ const SignUp = () => {
             whileHover={btnHover}
             type="submit"
             className="btn"
-            onClick={() => {
-              const data = getValues();
-              console.log(data);
+            onClick={async () => {
+              const { username: name, password, email } = getValues();
+
+              const res = await addUserFn({
+                variables: { name, password, email },
+              });
+
+              console.log(res);
             }}
           >
             sign Up

@@ -9,7 +9,7 @@ import {
 import { ReviewType, imageType } from "../types.js";
 import productCollection from "../../mongoose/schema/product.js";
 
-const productType = new GraphQLObjectType({
+export const productType = new GraphQLObjectType({
   name: "products",
   fields: () => ({
     _id: { type: GraphQLString },
@@ -37,7 +37,7 @@ const query = new GraphQLObjectType({
     },
     products: {
       type: new GraphQLList(productType),
-      resolve(_par, _args) {
+      resolve(_par: any, _args: any) {
         return productCollection.find({});
       },
     },

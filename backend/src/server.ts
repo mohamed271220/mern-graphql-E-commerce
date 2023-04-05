@@ -4,6 +4,9 @@ import mongoose from "mongoose";
 import { MongoDB_URL } from "./config";
 import { graphqlHTTP } from "express-graphql";
 import graphQlSchema from "./graphql/schema/product.js";
+import userSchema from "./graphql/schema/user";
+import  {mergeSchemas }  from   "@graphql-tools/schema"
+
 
 mongoose.connect(MongoDB_URL as unknown as string);
 const app = express();
@@ -15,11 +18,15 @@ app.use(
 );
 app.use(express.json());
 
+const schema = mergeSchemas({
+  schemas: [graphQlSchema, userSchema],
+});
+
 app.use(
   "/graphql",
   graphqlHTTP({
     graphiql: true,
-    schema: graphQlSchema,
+    schema,
   })
 );
 
