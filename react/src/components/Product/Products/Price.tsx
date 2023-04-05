@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useHide from "../../../custom/useHide";
 import { FcMinus } from "react-icons/fc";
 import { BiPlus } from "react-icons/bi";
-import { AnimatePresence, motion, stagger } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { opacityVariant, parentVariant } from "../../../variants/globals";
 const Price = () => {
   const [price, setPrice] = useState(0);
@@ -52,7 +52,6 @@ const Price = () => {
             animate="end"
             exit={"exit"}
             className="price-filter"
-            id="filter"
           >
             <motion.p variants={opacityVariant}>{price} $</motion.p>
             <motion.input

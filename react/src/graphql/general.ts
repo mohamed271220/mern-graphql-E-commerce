@@ -23,3 +23,19 @@ export const GET_Product_By_Id = gql`
     }
   }
 `;
+
+export const Get_All_Products = gql`
+  query {
+    products {
+      _id
+      price
+      stock
+      title
+      rating
+      category
+      images {
+        productPath
+      }
+    }
+  }
+`;

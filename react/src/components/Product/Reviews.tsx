@@ -54,7 +54,7 @@ const Reviews = ({ setShowPop }: Props) => {
             {reviews.map((review, i) => {
               {
                 if (i === reviewIndex) {
-                  return <Review key={review._id} {...review} />;
+                  return <Review key={review._id} {...review} i={i} />;
                 }
               }
             })}

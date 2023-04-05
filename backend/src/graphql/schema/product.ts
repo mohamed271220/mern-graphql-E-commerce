@@ -35,6 +35,12 @@ const query = new GraphQLObjectType({
         return productCollection.findById(args.id);
       },
     },
+    products: {
+      type: new GraphQLList(productType),
+      resolve(_par, _args) {
+        return productCollection.find({});
+      },
+    },
   },
 });
 

@@ -31,6 +31,12 @@ const query = new graphql_1.GraphQLObjectType({
                 return product_js_1.default.findById(args.id);
             },
         },
+        products: {
+            type: new graphql_1.GraphQLList(productType),
+            resolve(_par, _args) {
+                return product_js_1.default.find({});
+            },
+        },
     },
 });
 const graphQlSchema = new graphql_1.GraphQLSchema({

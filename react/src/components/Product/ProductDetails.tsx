@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { BiPurchaseTagAlt } from "react-icons/bi";
-import { FaCheckCircle } from "react-icons/fa";
 import { AiOutlineCheck } from "react-icons/ai";
-import { AnimatePresence, motion, useAnimate } from "framer-motion";
-import { btnHover, opacityVariant } from "../../variants/globals";
+import { motion } from "framer-motion";
+import { btnHover } from "../../variants/globals";
 import ProductRate from "./ProductRate";
+import useAvg from "../../custom/useAvg";
+import HeartSvg from "../widgets/HeartSvg";
 interface Props {
   data: {
     title: string;
@@ -19,12 +20,8 @@ interface Props {
 }
 
 const ProductDetails = ({
-  data: { title, description, category, price, stock, setShowPop },
+  data: { rating, title, description, category, price, stock, setShowPop },
 }: Props) => {
-  const [svgRef, svgAnimate] = useAnimate();
-
-  const [addToFavorate, setAddToFavorite] = useState(false);
-
   const parentVariant = {
     start: { x: 400, opacity: 0 },
     end: {
@@ -36,6 +33,7 @@ const ProductDetails = ({
   };
 
   const handleshowPop = () => setShowPop(true);
+  const avgRate = useAvg(rating);
 
   return (
     <motion.div
@@ -49,81 +47,29 @@ const ProductDetails = ({
         <div className="title-par">
           <h2 className="title center">
             {title}
-
-            <span className="heart-parent ">
-              <svg
-                width="24"
-                height="24"
-                xmlns="http://www.w3.org/2000/svg"
-                fillRule="evenodd"
-                clipRule="evenodd"
-                ref={svgRef}
-                onClick={() => {
-                  setAddToFavorite(!addToFavorate);
-                  svgAnimate(
-                    "path",
-                    {
-                      pathLength: !addToFavorate ? [0, 1] : [1, 0],
-                      pathOffset: !addToFavorate ? [0.4, 0] : [0, 0.4],
-                      stroke: "red",
-                    },
-                    { duration: 1 }
-                  );
-                }}
-              >
-                <path
-                  stroke="none"
-                  d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402m5.726-20.583c-2.203 0-4.446 1.042-5.726 3.238-1.285-2.206-3.522-3.248-5.719-3.248-3.183 0-6.281 2.187-6.281 6.191 0 4.661 5.571 9.429 12 15.809 6.43-6.38 12-11.148 12-15.809 0-4.011-3.095-6.181-6.274-6.181"
-                />
-              </svg>
-            </span>
+            <HeartSvg />
           </h2>
 
-          <span className="center stock-par">
-            {/* <FaCheckCircle className="icon" /> */}
-            <span className="stock-icon">
-              <AiOutlineCheck className="icon" />
+          <span className=" center stock-par shadow">
+            <span className="stock-icon box-shadow">
+              <AiOutlineCheck className=" icon" />
             </span>
             <span className="stock"> {stock}</span>in stock
           </span>
         </div>
         <>
-          <ProductRate />
-
-          {/* <AnimatePresence mode="wait">
-              {!addToFavorate ? (
-                <motion.span
-                  variants={opacityVariant}
-                  initial="start"
-                  animate="end"
-                  exit="exit"
-                  key={"add to favorite"}
-                  transition={{ duration: 0.8 }}
-                >
-                  add to favorite
-                </motion.span>
-              ) : (
-                <motion.span
-                  variants={opacityVariant}
-                  initial="start"
-                  animate="end"
-                  key={"remove from favorites"}
-                  exit="exit"
-                  transition={{ duration: 0.8 }}
-                >
-                  remove from favorites
-                </motion.span>
-              )}
-            </AnimatePresence> */}
+          <ProductRate
+            key={`${description}-rate`}
+            avgRate={avgRate}
+            ratingLen={rating.length}
+          />
         </>
       </div>
 
       <div className="details-bottom">
         <span className="value price">
           <span style={{ marginRight: 6, color: "var(--green)" }}>$</span>
-          {/* <span className="colon">:</span> */}
           {price.toFixed(2)}
-          {/* </span> */}
         </span>
         <p>{description}</p>
 
@@ -150,7 +96,6 @@ const ProductDetails = ({
           className="review"
           onClick={() => {
             handleshowPop();
-            console.log("clicked");
           }}
         >
           see all review

@@ -26,12 +26,11 @@ const Rating = () => {
     stars.push(
       <motion.div
         variants={opacityVariant}
-        className="center category"
-        style={{ width: "100%" }}
+        className="center rate-filter-par"
         key={`group-${i}`}
       >
         <Checkbox />
-        <span>{group}</span>
+        <span className="rate-filter">{group}</span>
       </motion.div>
     );
   }

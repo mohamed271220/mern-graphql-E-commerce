@@ -3,7 +3,15 @@ import StarIcon from "../../custom/StarIcon";
 
 import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 import { AnimatePresence, motion, useInView } from "framer-motion";
-import { opacityVariant, reviewCounter } from "../../variants/globals";
+import { reviewCounter } from "../../variants/globals";
+
+const clrsArr = [
+  "var(--green)",
+  "var(--delete)",
+  "var(--twitter)",
+  "black",
+  "var(--fb)",
+];
 
 interface Props {
   _id: string;
@@ -11,9 +19,10 @@ interface Props {
   user: string;
   rate: number;
   review: string;
+  i: number;
 }
 
-const Review = ({ _id, image, user, rate, review }: Props) => {
+const Review = ({ _id, image, user, rate, review, i }: Props) => {
   const [count, setCount] = useState(0);
 
   const reviewRef = useRef<HTMLDivElement | null>(null);
@@ -33,6 +42,7 @@ const Review = ({ _id, image, user, rate, review }: Props) => {
   return (
     <div className="review" ref={reviewRef}>
       <div className="img-review center">
+        <div className="before" style={{ background: clrsArr[i] }}></div>
         <img src={image} alt={user} title={user} />
       </div>
       <p className="review-user center">{user}</p>
@@ -60,11 +70,11 @@ const Review = ({ _id, image, user, rate, review }: Props) => {
 
       <div className="user-review center">
         <span>
-          <FaQuoteLeft className="icon" />
+          <FaQuoteLeft className="icon" fill={clrsArr[i]} />
         </span>
         {review}
         <span>
-          <FaQuoteRight className="icon" />
+          <FaQuoteRight className="icon" color={clrsArr[i]} />
         </span>
       </div>
     </div>
