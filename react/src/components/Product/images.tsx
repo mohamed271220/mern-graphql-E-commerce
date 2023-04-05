@@ -30,7 +30,6 @@ const ProductImages = ({
     direction = tuple[0] > tuple[1] ? "increase" : "decrease";
   }
 
-  console.log(tuple);
   const parentVariant = {
     start: {},
     end: {},

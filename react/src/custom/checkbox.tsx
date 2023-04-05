@@ -38,7 +38,6 @@ const Checkbox = () => {
       animate="end"
       exit={"exit"}
       custom={isChecked}
-      style={{ marginTop: 200, marginLeft: 40 }}
       onClick={() => setIsChecked(!isChecked)}
     >
       <AnimatePresence mode="wait">
@@ -55,7 +54,7 @@ const Checkbox = () => {
           >
             <motion.path
               fill="none"
-              stroke="#000"
+              stroke="var(--wheat-light)"
               strokeMiterlimit="10"
               strokeWidth="3"
               d="M21 6L9 18 4 13"

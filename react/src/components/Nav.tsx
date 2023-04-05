@@ -82,11 +82,10 @@ const Nav = () => {
 
       <ul className="links center">
         <motion.li className="center">
+          <NavLink to="/"> Home</NavLink>
           <NavLink to="/about"> about</NavLink>
         </motion.li>
       </ul>
-
-      <AppRoutes />
     </motion.nav>
   );
 };

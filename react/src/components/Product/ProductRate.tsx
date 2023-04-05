@@ -30,6 +30,16 @@ const ProductRate = () => {
       </>
 
       <span className="rate"> {avgRate}</span>
+      <span
+        style={{
+          color: "var(--green)",
+          fontWeight: "bold",
+          marginLeft: 6,
+          scale: 0.8,
+        }}
+      >
+        ({rating.length})
+      </span>
     </div>
   );
 };

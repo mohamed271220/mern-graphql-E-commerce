@@ -1,0 +1,86 @@
+@import "../variables.scss";
+
+.products-par {
+  //-remove margin top
+
+  margin-top: 60px;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  .heading {
+    width: fit-content;
+    margin: 30px auto;
+    font-size: 2rem;
+    padding-bottom: 30px;
+  }
+}
+
+aside {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 1rem;
+  padding: 15px;
+  width: 200px;
+  height: 100%;
+  // background: wheat;
+  .aside-head {
+    justify-content: space-between;
+  }
+}
+
+.filter-icon {
+  gap: 5px;
+}
+
+.collapse-par {
+  gap: 6px;
+
+  .btn-collapse {
+    background: transparent;
+    border: 0;
+    outline: 0;
+    font-size: 1rem;
+  }
+}
+
+.filter-head {
+  font-weight: bold;
+  text-transform: capitalize;
+  letter-spacing: 0.8px;
+  margin-top: 6px;
+  margin-bottom: 10px;
+}
+
+.category-par {
+  gap: 5px;
+  flex-direction: column;
+  .filter-head {
+    align-self: flex-start;
+  }
+}
+.category {
+  width: 100%;
+  text-transform: capitalize;
+  letter-spacing: 0.8px;
+  justify-content: flex-start;
+  gap: 8px;
+  font-size: 1rem;
+  padding-left: 10px;
+}
+
+.price-filter {
+  display: flex;
+  flex-direction: column;
+  input {
+    accent-color: var(--wheat);
+    height: 4px;
+  }
+
+  p {
+    font-size: 1rem;
+    font-weight: bold;
+    padding-bottom: 8px;
+    color: var(--green);
+  }
+}

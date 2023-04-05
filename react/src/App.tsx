@@ -6,6 +6,7 @@ import Nav from "./components/Nav";
 import SignUp from "./components/SignUp";
 import { BrowserRouter } from "react-router-dom";
 import Product from "./components/Product/Product";
+import AppRoutes from "./components/routes";
 const App = () => {
   return (
     <BrowserRouter>
@@ -13,8 +14,9 @@ const App = () => {
         {/* <Loading /> */}
         <Nav />
         {/* <Login /> */}
-        <Product />
+        {/* <Product /> */}
         {/* <SignUp /> */}
+        <AppRoutes />
       </div>
     </BrowserRouter>
   );
