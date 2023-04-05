@@ -7,6 +7,7 @@ import { AnimatePresence, motion, Variants } from "framer-motion";
 import useIndex from "../../custom/useIndex";
 import { btnHover, overleyVariant, popVariant } from "../../variants/globals";
 import { productContext } from "./Product";
+import useMeasure from "react-use-measure";
 
 interface Props {
   setShowPop: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,6 +23,7 @@ const Reviews = ({ setShowPop }: Props) => {
 
   const [variant, dir] = useCarousel(reviewIndex, reviews.length);
 
+  const [animateRef, { width }] = useMeasure();
   const [handleIndex] = useIndex();
   return (
     <motion.div
@@ -31,9 +33,10 @@ const Reviews = ({ setShowPop }: Props) => {
       exit="exit"
       animate="end"
       onClick={handlehidePop}
+      ref={animateRef}
     >
       <motion.section
-        className="pop-up-reviews"
+        className="pop-up-reviews pop-up"
         variants={popVariant}
         onClick={(e) => {
           e.stopPropagation();
@@ -41,15 +44,15 @@ const Reviews = ({ setShowPop }: Props) => {
       >
         <h2 className="heading">reviews</h2>
 
-        <AnimatePresence mode="wait" custom={dir}>
+        <AnimatePresence custom={{ dir, width }} mode="wait">
           <motion.div
             id="reviews"
             key={reviewIndex}
             variants={variant as Variants}
-            // initial="start"
+            initial="start"
             exit="exit"
             animate="end"
-            custom={dir}
+            custom={{ dir, width }}
           >
             {reviews.map((review, i) => {
               {

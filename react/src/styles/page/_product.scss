@@ -182,13 +182,12 @@ p {
 .product-rate {
   display: flex;
   height: 30px;
-  width: 140px;
+  width: 110px;
   justify-content: flex-start;
   align-items: center;
-  // transform: scale(0.7);
 }
 .rate {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: bold;
   margin-left: 8px;
   color: var(--star);

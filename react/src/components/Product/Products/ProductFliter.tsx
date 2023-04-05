@@ -2,8 +2,6 @@ import React from "react";
 import ProductRate from "../ProductRate";
 import useAvg from "../../../custom/useAvg";
 import HeartSvg from "../../widgets/HeartSvg";
-import { motion } from "framer-motion";
-import { btnHover } from "../../../variants/globals";
 interface Props {
   _id: string;
   price: number;
@@ -35,14 +33,15 @@ const ProductFliter = ({
       <span className="price-product">${price}</span>
       <span> </span>
 
-      <div className="product-rate ">
+      <div className="product-rate-filter center ">
         <ProductRate
           key={`${_id}-rate`}
           avgRate={avgRate}
           ratingLen={rating.length}
         />
+        <button className="btn shadow">reviews</button>
       </div>
-      <span className="heart-filter">
+      <span className="heart-filter ">
         <HeartSvg />
       </span>
       <button className="btn product-btn">add to cart</button>

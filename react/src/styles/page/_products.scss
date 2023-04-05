@@ -57,6 +57,12 @@ aside {
 .category-par {
   gap: 5px;
   flex-direction: column;
+  width: 100%;
+  h4 {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
   .filter-head {
     align-self: flex-start;
   }
@@ -155,12 +161,20 @@ aside {
         }
       }
     }
-    .product-rate {
-      transform: scale(0.9);
-      width: 120%;
-      margin-top: -4px;
+    .product-rate-filter {
+      transform: scale(0.85);
+      margin-top: -2px;
+      margin-left: 5px;
       margin: 0 auto;
       font-size: 10px;
+      width: 90%;
+
+      button {
+        transform: scale(0.9);
+        background: transparent;
+        color: var(--wheat);
+        // margin-left: -12px;
+      }
     }
   }
 }
@@ -187,4 +201,7 @@ svg.svg-star {
 
 .product-btn {
   transform: scale(0.8);
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
 }

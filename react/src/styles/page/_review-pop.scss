@@ -1,13 +1,16 @@
 @import "../variables.scss";
 
-.pop-up-reviews {
-  width: 300px;
-  height: 300px;
+.pop-up {
   background: var(--white);
   filter: drop-shadow(4px 5px 5px black);
   overflow: hidden;
   position: relative;
   z-index: 10000;
+}
+
+.pop-up-reviews {
+  width: 300px;
+  height: 300px;
 
   h2 {
     width: fit-content;

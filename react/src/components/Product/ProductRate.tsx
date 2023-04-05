@@ -8,7 +8,7 @@ const ProductRate = ({
   avgRate: number;
 }) => {
   return (
-    <div className="product-rate ">
+    <div className="product-rate">
       <>
         {[1, 2, 3, 4, 5].map((e, i) => {
           return <StarIcon key={e} id={i} avgRate={avgRate} />;

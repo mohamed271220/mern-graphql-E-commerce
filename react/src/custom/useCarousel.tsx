@@ -24,16 +24,14 @@ const useCarousel = (index: number, len: number) => {
   }
 
   const variant = {
-    end: (dir: string) => ({
-      // x: 0,
-      x: dir === "increase" ? [200, 0] : [-200, 0],
-
-      opacity: 1,
-      transition: { duration: 0.6, type: "tween", ease: "easeOut" },
+    end: { x: 0 },
+    start: ({ dir, width }: { dir: string; width: number }) => ({
+      x: dir === "increase" ? width : -width,
+      transition: { type: "tween", duraion: 0.4 },
     }),
-    exit: (dir: string) => ({
-      x: dir === "increase" ? -250 : 250,
-      transition: { duration: 0.5 },
+    exit: ({ dir, width }: { dir: string; width: number }) => ({
+      x: dir === "increase" ? -0.5 * width : 0.5 * width,
+      transition: { type: "tween", duraion: 0.2 },
     }),
   };
 
