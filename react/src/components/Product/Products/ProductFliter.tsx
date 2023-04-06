@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import ProductRate from "../ProductRate";
 import useAvg from "../../../custom/useAvg";
 import HeartSvg from "../../widgets/HeartSvg";
@@ -22,6 +22,7 @@ const ProductFliter = ({
   rating,
 }: Props) => {
   const avgRate = useAvg(rating);
+  const [isFavoraited, setIsFavorited] = useState(false);
 
   return (
     <section className="product-List center">
@@ -42,7 +43,11 @@ const ProductFliter = ({
         <button className="btn shadow">reviews</button>
       </div>
       <span className="heart-filter ">
-        <HeartSvg />
+        <HeartSvg
+          isFavoraited={isFavoraited}
+          setIsFavorited={setIsFavorited}
+          _id={_id}
+        />{" "}
       </span>
       <button className="btn product-btn">add to cart</button>
     </section>

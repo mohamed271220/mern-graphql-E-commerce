@@ -26,7 +26,6 @@ const Product = () => {
   if (loading) {
     return <>loading</>;
   } else {
-    console.log(data, error);
     const {
       images,
       _id,
@@ -64,6 +63,7 @@ const Product = () => {
                     rating,
                     stock,
                     setShowPop,
+                    _id,
                   }}
                 />
                 <AnimatePresence mode="wait">

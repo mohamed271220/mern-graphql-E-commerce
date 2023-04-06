@@ -5,7 +5,10 @@ import { SiGmail } from "react-icons/si";
 import { motion } from "framer-motion";
 import { btnHover } from "../variants/globals";
 import { useForm, FormProvider, FieldValues } from "react-hook-form";
+
 import Input from "./Input";
+import { useMutation } from "@apollo/client";
+import { Authenticate_Query } from "../graphql/mutations/user";
 
 const socialMediaArr = [
   { id: "1", icon: <FaFacebookF color="" />, clr: "var(--fb)" },
@@ -21,15 +24,18 @@ const Login = () => {
   const {
     formState: { errors },
     handleSubmit,
+    getValues,
   } = methods;
 
   const onSubmit = (data: FieldValues) => {
     console.log(data);
   };
+
+  const [authenticate, { data }] = useMutation(Authenticate_Query);
   return (
     <div className="log-in center">
       <FormProvider {...methods}>
-        <form action="" className="center">
+        <form action="" className="center" onSubmit={handleSubmit(onSubmit)}>
           <h4 className="heading">log in</h4>
           <Input
             placeholder={"email"}
@@ -39,7 +45,24 @@ const Login = () => {
             placeholder={"password"}
             err={errors.password?.message?.toString()}
           />
-          <motion.button whileHover={btnHover} type="submit" className="btn">
+          <motion.button
+            whileHover={btnHover}
+            type="submit"
+            className="btn"
+            onClick={async () => {
+              const { email, password } = getValues();
+              const res = await authenticate({
+                variables: {
+                  email,
+                  password,
+                },
+                context: {
+                  credentials: "include",
+                },
+              });
+              console.log(res);
+            }}
+          >
             log in
           </motion.button>
 

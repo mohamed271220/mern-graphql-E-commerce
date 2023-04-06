@@ -67,10 +67,10 @@ const SignUp = () => {
             placeholder={"confirm"}
             err={errors?.confirm?.message?.toString()}
           />{" "}
-          <Input
+          {/* <Input
             placeholder={"phone"}
             err={errors?.phone?.message?.toString()}
-          />
+          /> */}
           <motion.button
             whileHover={btnHover}
             type="submit"

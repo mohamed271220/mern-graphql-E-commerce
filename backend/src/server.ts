@@ -1,12 +1,12 @@
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import { MongoDB_URL } from "./config";
 import { graphqlHTTP } from "express-graphql";
 import graphQlSchema from "./graphql/schema/product.js";
 import userSchema from "./graphql/schema/user";
-import  {mergeSchemas }  from   "@graphql-tools/schema"
-
+import { mergeSchemas } from "@graphql-tools/schema";
 
 mongoose.connect(MongoDB_URL as unknown as string);
 const app = express();
@@ -17,7 +17,7 @@ app.use(
   })
 );
 app.use(express.json());
-
+app.use(cookieParser());
 const schema = mergeSchemas({
   schemas: [graphQlSchema, userSchema],
 });

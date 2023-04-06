@@ -6,8 +6,17 @@ const userSchema = new mongoose.Schema({
   email: String,
   password: String,
   phone: Number,
-  fav: [productSchema],
-  cart: [productSchema],
+  fav: [
+    {
+      productId: mongoose.SchemaTypes.ObjectId,
+    },
+  ],
+  cart: [
+    {
+      productId: mongoose.SchemaTypes.ObjectId,
+      count: Number,
+    },
+  ],
 });
 
 export const userCollection = mongoose.model("users", userSchema);

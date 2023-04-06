@@ -8,6 +8,8 @@ nav {
   display: flex;
   justify-content: space-between;
   padding: 4px 20px;
+  box-shadow: var(--nav-shadow);
+
   ul {
     li {
       list-style: none;
@@ -15,10 +17,11 @@ nav {
       margin: 5px;
       a {
         transition: 0.3s;
-        color: var(--green);
+        color: inherit;
         font-weight: bold;
         letter-spacing: 1px;
         text-transform: capitalize;
+
         &::before {
           transition: 0.5s;
           content: "";
@@ -52,7 +55,7 @@ nav {
           border-bottom-left-radius: 3px;
         }
         &.active {
-          color: var(--white);
+          color: var(--green);
           &.active:before,
           &.active:after {
             width: 50%;
