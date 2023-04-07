@@ -1,6 +1,6 @@
 import React from "react";
 
-const Dropdown = () => {
+const Dropdown = ({ children }) => {
   return <div className="dropdown"></div>;
 };
 

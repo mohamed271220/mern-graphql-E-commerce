@@ -19,6 +19,7 @@ export const GET_Product_By_Id = gql`
       category
       images {
         productPath
+        _id
       }
     }
   }
@@ -35,6 +36,7 @@ export const Get_All_Products = gql`
       category
       images {
         productPath
+        _id
       }
     }
   }

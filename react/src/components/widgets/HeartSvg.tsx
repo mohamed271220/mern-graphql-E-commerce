@@ -11,11 +11,12 @@ import { Add_To_Fav, REMOVE_FROM_FAV } from "../../graphql/mutations/user";
 interface Props {
   setIsFavorited: React.Dispatch<React.SetStateAction<boolean>>;
   isFavoraited: boolean;
-  _id: string;
+  _id: string | string[];
 }
 
 const HeartSvg = ({ isFavoraited, setIsFavorited, _id }: Props) => {
   // console.log({ isFavoraited });
+
   const heartVariant = {
     start: {
       pathLength: isFavoraited ? 0 : 1,
@@ -33,18 +34,32 @@ const HeartSvg = ({ isFavoraited, setIsFavorited, _id }: Props) => {
   const { fav: favContext } = useContext(isAuthContext);
 
   const { fav: favArr } = useAppSelector((state) => state.fav);
+  console.log({ favArr, _id });
 
   useEffect(() => {
-    if (favArr.length > 0) {
-      const check = favArr.some((e: favInterface) => _id == e.productId);
-      console.log({ check, favArr, _id });
-      if (check) {
-        setIsFavorited(true);
+    console.log({ _id });
+
+    if (favArr?.length > 0) {
+      if (!Array.isArray(_id)) {
+        const check = favArr.some((e: favInterface) => _id == e.productId);
+        console.log({ check, favArr, _id });
+        if (check) {
+          setIsFavorited(true);
+        } else {
+          setIsFavorited(false);
+        }
       } else {
-        setIsFavorited(false);
+        for (const id of _id) {
+          const check = favArr.some((e: favInterface) => id == e.productId);
+          console.log({ check, favArr, id });
+          if (check) {
+            setIsFavorited(true);
+            break;
+          }
+        }
       }
     }
-  }, [favContext]);
+  }, [favContext, _id]);
 
   const [addToFav, { data: addfavData }] = useMutation(Add_To_Fav);
   const [RemoveFromFav, { data: removefavData }] = useMutation(REMOVE_FROM_FAV);
@@ -62,25 +77,42 @@ const HeartSvg = ({ isFavoraited, setIsFavorited, _id }: Props) => {
         onClick={async () => {
           setIsFavorited(!isFavoraited);
           const userId = Cookies.get("user-id");
-          if (isFavoraited) {
-            const res = await RemoveFromFav({
-              variables: {
-                userId,
-                productId: _id,
-              },
-            });
-            console.log(res);
+          if (!isFavoraited) {
+            const id = Array.isArray(_id) ? _id[0] : _id;
 
-            dispatch(removeFromFavRedux(_id));
-          } else {
             const res = await addToFav({
               variables: {
                 userId,
-                productId: _id,
+                productId: id,
               },
             });
             console.log(res);
+            setIsFavorited(true);
+
             dispatch(addToFavRedux(_id));
+          } else {
+            if (!Array.isArray(_id)) {
+              const res = await RemoveFromFav({
+                variables: {
+                  userId,
+                  productId: _id,
+                },
+              });
+              console.log(res);
+              dispatch(removeFromFavRedux(_id));
+            } else {
+              for (const id of _id) {
+                const res = await RemoveFromFav({
+                  variables: {
+                    userId,
+                    productId: id,
+                  },
+                });
+                dispatch(removeFromFavRedux(id));
+                console.log(res);
+              }
+              setIsFavorited(false);
+            }
           }
         }}
       >

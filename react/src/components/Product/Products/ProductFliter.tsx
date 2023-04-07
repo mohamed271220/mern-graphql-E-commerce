@@ -8,7 +8,7 @@ interface Props {
   stock: number;
   title: string;
   category: string;
-  images: { productPath: string }[];
+  images: { productPath: string; _id: string }[];
   rating: number[];
 }
 
@@ -46,7 +46,7 @@ const ProductFliter = ({
         <HeartSvg
           isFavoraited={isFavoraited}
           setIsFavorited={setIsFavorited}
-          _id={_id}
+          _id={images.map((e) => e._id)}
         />{" "}
       </span>
       <button className="btn product-btn">add to cart</button>

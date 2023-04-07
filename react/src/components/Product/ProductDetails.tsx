@@ -28,11 +28,22 @@ interface Props {
     rating: number[];
     setShowPop: React.Dispatch<React.SetStateAction<boolean>>;
     _id: string;
+    bigImgId: string;
   };
 }
 
 const ProductDetails = ({
-  data: { _id, rating, title, description, category, price, stock, setShowPop },
+  data: {
+    bigImgId,
+    _id,
+    rating,
+    title,
+    description,
+    category,
+    price,
+    stock,
+    setShowPop,
+  },
 }: Props) => {
   const parentVariant = {
     start: { x: 400, opacity: 0 },
@@ -83,36 +94,11 @@ const ProductDetails = ({
         <div className="title-par">
           <h2 className="title center">
             {title}
-            <span
-              className="center heart-par"
-              // onClick={async () => {
-              //   const userId = Cookies.get("user-id");
-              //   if (isFavoraited) {
-              //     const res = await RemoveFromFav({
-              //       variables: {
-              //         userId,
-              //         productId: _id,
-              //       },
-              //     });
-              //     console.log(res);
-
-              //     dispatch(removeFromFavRedux(_id));
-              //   } else {
-              //     const res = await addToFav({
-              //       variables: {
-              //         userId,
-              //         productId: _id,
-              //       },
-              //     });
-              //     console.log(res);
-              //     dispatch(addToFavRedux(_id));
-              //   }
-              // }}
-            >
+            <span className="center heart-par">
               <HeartSvg
                 isFavoraited={isFavoraited}
                 setIsFavorited={setIsFavorited}
-                _id={_id}
+                _id={bigImgId}
               />
             </span>
           </h2>

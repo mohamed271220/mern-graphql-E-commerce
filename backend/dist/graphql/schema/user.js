@@ -57,7 +57,7 @@ const userType = new graphql_1.GraphQLObjectType({
             resolve(par, arg) {
                 const arrOfIds = par.fav.map((e) => e.productId);
                 console.log(arrOfIds);
-                return product_js_2.default.find({ _id: { $in: arrOfIds } });
+                return product_js_2.default.find({ "images._id": { $in: arrOfIds } });
             },
         },
     }),
