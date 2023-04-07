@@ -18,6 +18,8 @@ const hashPassword_js_1 = require("../../middlewares/hashPassword.js");
 const authenticate_js_1 = require("../../middlewares/authenticate.js");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const config_js_1 = require("../../config.js");
+const product_js_1 = require("./product.js");
+const product_js_2 = __importDefault(require("../../mongoose/schema/product.js"));
 const messageType = new graphql_1.GraphQLObjectType({
     name: "message",
     fields: () => ({
@@ -50,6 +52,14 @@ const userType = new graphql_1.GraphQLObjectType({
         phone: { type: graphql_1.GraphQLInt },
         fav: { type: new graphql_1.GraphQLList(cartType) },
         cart: { type: new graphql_1.GraphQLList(cartType) },
+        favArr: {
+            type: new graphql_1.GraphQLList(product_js_1.productType),
+            resolve(par, arg) {
+                const arrOfIds = par.fav.map((e) => e.productId);
+                console.log(arrOfIds);
+                return product_js_2.default.find({ _id: { $in: arrOfIds } });
+            },
+        },
     }),
 });
 const userMutation = new graphql_1.GraphQLObjectType({

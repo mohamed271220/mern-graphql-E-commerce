@@ -41,6 +41,14 @@ export const GET_USER_DATA = gql`
       fav {
         productId
       }
+      favArr {
+        images {
+          productPath
+        }
+        price
+        title
+        _id
+      }
       cart {
         count
         productId

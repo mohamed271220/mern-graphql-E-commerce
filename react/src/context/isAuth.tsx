@@ -10,11 +10,18 @@ interface Props {
   children: React.ReactNode;
 }
 
+export interface favArrInterface {
+  images: { productId: string }[];
+  price: number;
+  title: string;
+  _id: string;
+}
 interface userDataState {
   email: string;
   name: string;
   fav: favInterface[];
   cart: cartInterface[];
+  favArr: favArrInterface[];
 }
 
 interface authContextInterface extends userDataState {
@@ -31,6 +38,7 @@ const IsAuthContextComponent = ({ children }: Props) => {
     email: "",
     name: "",
     fav: [],
+    favArr: [],
     cart: [],
   } as userDataState);
 
@@ -66,6 +74,7 @@ const IsAuthContextComponent = ({ children }: Props) => {
         email: userData.email,
         name: userData.name,
         setIsAuth,
+        favArr: userData.favArr,
       }}
     >
       {children}

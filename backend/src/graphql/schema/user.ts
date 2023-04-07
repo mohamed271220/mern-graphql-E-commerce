@@ -11,6 +11,8 @@ import { hashPassword } from "../../middlewares/hashPassword.js";
 import { authenticateMiddleware } from "../../middlewares/authenticate.js";
 import jwt from "jsonwebtoken";
 import { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } from "../../config.js";
+import { productType } from "./product.js";
+import productCollection from "../../mongoose/schema/product.js";
 
 const messageType = new GraphQLObjectType({
   name: "message",
@@ -47,6 +49,14 @@ const userType = new GraphQLObjectType({
     phone: { type: GraphQLInt },
     fav: { type: new GraphQLList(cartType) },
     cart: { type: new GraphQLList(cartType) },
+    favArr: {
+      type: new GraphQLList(productType),
+      resolve(par, arg) {
+        const arrOfIds = par.fav.map((e: any) => e.productId);
+        console.log(arrOfIds);
+        return productCollection.find({ _id: { $in: arrOfIds } });
+      },
+    },
   }),
 });
 

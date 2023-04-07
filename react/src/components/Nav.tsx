@@ -1,8 +1,17 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { useScroll, useTransform, motion } from "framer-motion";
+import {
+  useScroll,
+  useTransform,
+  motion,
+  AnimatePresence,
+} from "framer-motion";
 import LogoSvg from "./widgets/LogoSvg";
 import { AiFillHeart } from "react-icons/ai";
+import useHide from "../custom/useHide";
+import Favorite from "./widgets/Favorite";
+import { popVariant } from "../variants/globals";
+import { isAuthContext } from "../context/isAuth";
 
 const linksArr = [
   {
@@ -28,6 +37,10 @@ const linksArr = [
 
 const Nav = () => {
   const navRef = useRef<HTMLElement | null>(null);
+  const [showFav, handleShowFav, handleHideFav, toggleFav] = useHide();
+
+  const { favArr } = useContext(isAuthContext);
+
   const { scrollY } = useScroll({
     target: navRef,
     offset: ["start start"],
@@ -57,9 +70,28 @@ const Nav = () => {
             </motion.li>
           );
         })}
-        <li className="fav-dropdown">
-          <AiFillHeart fontSize={"1.5rem"} />{" "}
-        </li>
+        <motion.li
+          style={{ color: showFav ? "var(--delete)" : LinkClr }}
+          className="fav-par"
+        >
+          <AiFillHeart fontSize={"1.5rem"} onClick={toggleFav} />
+          <AnimatePresence>
+            {showFav && (
+              <motion.div
+                key={"fav-drop"}
+                variants={popVariant}
+                initial="start"
+                animate="end"
+                exit="exit"
+                className="fav-drop"
+              >
+                {favArr.map((arr, index) => {
+                  return <Favorite key={arr._id} {...arr} />;
+                })}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.li>
       </ul>
     </motion.nav>
   );
