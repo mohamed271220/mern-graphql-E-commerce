@@ -9,6 +9,9 @@ const userSchema = new mongoose.Schema({
   fav: [
     {
       productId: mongoose.SchemaTypes.ObjectId,
+      title: String,
+      path: String,
+      price: Number,
     },
   ],
   cart: [

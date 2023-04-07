@@ -18,8 +18,20 @@ export const Add_To_Cart = gql`
 `;
 
 export const Add_To_Fav = gql`
-  mutation ($productId: ID!, $userId: ID!) {
-    addToFav(userId: $userId, productId: $productId) {
+  mutation (
+    $productId: ID!
+    $userId: ID!
+    $price: Int!
+    $path: String!
+    $title: String!
+  ) {
+    addToFav(
+      productId: $productId
+      userId: $userId
+      path: $path
+      title: $title
+      price: $price
+    ) {
       msg
     }
   }
@@ -40,25 +52,22 @@ export const GET_USER_DATA = gql`
       name
       fav {
         productId
-      }
-      favArr {
-        images {
-          productPath
-        }
         price
         title
+        path
         _id
       }
-      cart {
-        count
-        productId
-      }
+
+      # cart {
+      #   count
+      #   productId
+      # }
     }
   }
 `;
 
 export const REMOVE_FROM_FAV = gql`
-  mutation ($productId: ID!, $userId: ID!) {
+  mutation ($productId: [ID!], $userId: ID!) {
     removeFromFav(userId: $userId, productId: $productId) {
       msg
     }

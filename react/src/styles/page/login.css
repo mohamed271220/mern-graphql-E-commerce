@@ -1,0 +1,86 @@
+.log-in {
+  width: 100%;
+  min-height: 100vh;
+  flex-direction: column;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+.log-in form {
+  background: #000;
+  width: 40vw;
+  max-width: 300px;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 40px 0;
+  border-radius: 5px;
+  flex-direction: column;
+  gap: 25px;
+  overflow: hidden;
+}
+.log-in form input {
+  height: 30px;
+}
+.log-in form button {
+  width: 80%;
+  height: 30px;
+  margin: 0 auto;
+}
+.log-in .redirect {
+  color: var(--white);
+  letter-spacing: 1.1px;
+}
+.log-in .redirect a {
+  font-size: 1rem;
+  text-decoration: underline;
+  text-decoration-color: var(--wheat);
+  color: var(--green);
+  margin-left: 6px;
+  transition: 0.3s;
+}
+.log-in .redirect a:hover {
+  color: var(--wheat);
+  text-decoration-color: var(--green);
+  cursor: pointer;
+}
+.log-in .log-with {
+  gap: 10px;
+}
+.log-in .log-with .log-social {
+  width: 2.2rem;
+  height: 2.2rem;
+  background: var(--white);
+  border-radius: 5px;
+  transition: 0.5s;
+}
+.log-in .log-with .log-social svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.or {
+  position: relative;
+  top: 10px;
+}
+
+.inp-parent {
+  position: relative;
+  width: 80%;
+}
+.inp-parent input {
+  width: 100%;
+}
+.inp-parent .placeholder {
+  position: absolute;
+  top: -18px;
+  left: 5px;
+  color: var(--white);
+}
+.inp-parent .x-inp {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: var(--delete);
+  cursor: pointer;
+}/*# sourceMappingURL=login.css.map */

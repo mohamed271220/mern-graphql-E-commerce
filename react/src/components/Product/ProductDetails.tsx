@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { btnHover } from "../../variants/globals";
 import ProductRate from "./ProductRate";
 import useAvg from "../../custom/useAvg";
-import HeartSvg from "../widgets/HeartSvg";
+import HeartSvg from "../widgets/ProductListHeart";
 import { useMutation } from "@apollo/client";
 import {
   Add_To_Cart,
@@ -18,6 +18,7 @@ import { favInterface } from "../interfaces/user";
 import { addToFavRedux, removeFromFavRedux } from "../../redux/cartSlice";
 import Cookies from "js-cookie";
 import { isAuthContext } from "../../context/isAuth";
+import HeartSvgProduct from "./HeartSvgProduct";
 interface Props {
   data: {
     title: string;
@@ -28,22 +29,12 @@ interface Props {
     rating: number[];
     setShowPop: React.Dispatch<React.SetStateAction<boolean>>;
     _id: string;
-    bigImgId: string;
+    // bigImgId: string;
   };
 }
 
 const ProductDetails = ({
-  data: {
-    bigImgId,
-    _id,
-    rating,
-    title,
-    description,
-    category,
-    price,
-    stock,
-    setShowPop,
-  },
+  data: { _id, rating, title, description, category, price, stock, setShowPop },
 }: Props) => {
   const parentVariant = {
     start: { x: 400, opacity: 0 },
@@ -95,10 +86,9 @@ const ProductDetails = ({
           <h2 className="title center">
             {title}
             <span className="center heart-par">
-              <HeartSvg
+              <HeartSvgProduct
                 isFavoraited={isFavoraited}
                 setIsFavorited={setIsFavorited}
-                _id={bigImgId}
               />
             </span>
           </h2>
@@ -145,8 +135,6 @@ const ProductDetails = ({
                   productId: _id,
                 },
               });
-
-              console.log(res);
             }}
           >
             <BsFillCartPlusFill className="icon" color="var(--green)" />

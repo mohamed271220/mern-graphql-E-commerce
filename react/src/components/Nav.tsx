@@ -11,7 +11,7 @@ import { AiFillHeart } from "react-icons/ai";
 import useHide from "../custom/useHide";
 import Favorite from "./widgets/Favorite";
 import { popVariant } from "../variants/globals";
-import { isAuthContext } from "../context/isAuth";
+import { useAppSelector } from "../custom/reduxTypes";
 
 const linksArr = [
   {
@@ -39,8 +39,8 @@ const Nav = () => {
   const navRef = useRef<HTMLElement | null>(null);
   const [showFav, handleShowFav, handleHideFav, toggleFav] = useHide();
 
-  const { favArr } = useContext(isAuthContext);
-
+  const { fav } = useAppSelector((state) => state.fav);
+  console.log(fav);
   const { scrollY } = useScroll({
     target: navRef,
     offset: ["start start"],
@@ -85,8 +85,8 @@ const Nav = () => {
                 exit="exit"
                 className="fav-drop"
               >
-                {favArr.map((arr, index) => {
-                  return <Favorite key={arr._id} {...arr} />;
+                {fav.map((arr, index) => {
+                  return <Favorite key={arr.productId} {...arr} />;
                 })}
               </motion.div>
             )}

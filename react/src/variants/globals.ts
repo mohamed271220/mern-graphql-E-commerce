@@ -52,3 +52,17 @@ export const reviewCounter = {
     transition: { duration: count === rate - 1 ? 0.4 : 0.1 },
   }),
 };
+
+export const heartVariant = {
+  start: (bool: boolean) => ({
+    pathLength: bool ? 0 : 1,
+    pathOffset: bool ? 0 : 0.1,
+    stroke: "black",
+  }),
+  end: (bool: boolean) => ({
+    pathLength: bool ? 1 : 0,
+    pathOffset: bool ? 0.1 : 0,
+    stroke: "red",
+    transition: { duration: 0.8 },
+  }),
+};

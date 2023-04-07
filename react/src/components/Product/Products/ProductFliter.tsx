@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import ProductRate from "../ProductRate";
 import useAvg from "../../../custom/useAvg";
-import HeartSvg from "../../widgets/HeartSvg";
+import ProductListHeart from "../../widgets/ProductListHeart";
+import { imagesInterface } from "../../interfaces/user";
 interface Props {
   _id: string;
   price: number;
   stock: number;
   title: string;
   category: string;
-  images: { productPath: string; _id: string }[];
+  images: imagesInterface[];
   rating: number[];
 }
 
@@ -43,10 +44,12 @@ const ProductFliter = ({
         <button className="btn shadow">reviews</button>
       </div>
       <span className="heart-filter ">
-        <HeartSvg
+        <ProductListHeart
           isFavoraited={isFavoraited}
+          price={price}
+          title={title}
           setIsFavorited={setIsFavorited}
-          _id={images.map((e) => e._id)}
+          images={images}
         />{" "}
       </span>
       <button className="btn product-btn">add to cart</button>

@@ -13,6 +13,9 @@ const userSchema = new mongoose_1.default.Schema({
     fav: [
         {
             productId: mongoose_1.default.SchemaTypes.ObjectId,
+            title: String,
+            path: String,
+            price: Number,
         },
     ],
     cart: [

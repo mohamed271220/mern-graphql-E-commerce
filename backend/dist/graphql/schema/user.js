@@ -38,6 +38,10 @@ const favtType = new graphql_1.GraphQLObjectType({
     name: "fav",
     fields: () => ({
         productId: { type: graphql_1.GraphQLID },
+        _id: { type: graphql_1.GraphQLID },
+        path: { type: graphql_1.GraphQLString },
+        price: { type: graphql_1.GraphQLInt },
+        title: { type: graphql_1.GraphQLString },
         msg: { type: graphql_1.GraphQLString },
     }),
 });
@@ -50,14 +54,14 @@ const userType = new graphql_1.GraphQLObjectType({
         password: { type: graphql_1.GraphQLString },
         msg: { type: graphql_1.GraphQLString },
         phone: { type: graphql_1.GraphQLInt },
-        fav: { type: new graphql_1.GraphQLList(cartType) },
+        fav: { type: new graphql_1.GraphQLList(favtType) },
         cart: { type: new graphql_1.GraphQLList(cartType) },
         favArr: {
             type: new graphql_1.GraphQLList(product_js_1.productType),
             resolve(par, arg) {
                 const arrOfIds = par.fav.map((e) => e.productId);
                 console.log(arrOfIds);
-                return product_js_2.default.find({ "images._id": { $in: arrOfIds } });
+                return product_js_2.default.find({ "images._id": { $in: arrOfIds } }, { "images.$": 1, price: 1, title: 1 });
             },
         },
     }),
@@ -145,13 +149,15 @@ const userMutation = new graphql_1.GraphQLObjectType({
             type: favtType,
             args: {
                 productId: { type: graphql_1.GraphQLID },
+                title: { type: graphql_1.GraphQLString },
+                path: { type: graphql_1.GraphQLString },
+                price: { type: graphql_1.GraphQLInt },
                 userId: { type: graphql_1.GraphQLID },
             },
             resolve: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
                 try {
-                    const obj = { productId: args.productId };
                     const res = yield user_js_1.userCollection.findByIdAndUpdate(args.userId, {
-                        $push: { fav: obj },
+                        $push: { fav: args },
                     }, { new: true });
                     console.log(res);
                     return Object.assign(Object.assign({}, res), { msg: "successfully added to your favorites" });
@@ -164,14 +170,13 @@ const userMutation = new graphql_1.GraphQLObjectType({
         removeFromFav: {
             type: messageType,
             args: {
-                productId: { type: graphql_1.GraphQLID },
+                productId: { type: new graphql_1.GraphQLList(graphql_1.GraphQLID) },
                 userId: { type: graphql_1.GraphQLID },
             },
             resolve: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
                 try {
-                    const obj = { productId: args.productId };
                     yield user_js_1.userCollection.findByIdAndUpdate(args.userId, {
-                        $pull: { fav: obj },
+                        $pull: { fav: { productId: { $in: args.productId } } },
                     }, { new: true });
                     return { msg: "removed from your favorites" };
                 }

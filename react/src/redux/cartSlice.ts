@@ -13,16 +13,17 @@ const favSlice = createSlice({
       console.log("redux");
       console.log(action.payload);
       if (Array.isArray(action.payload)) {
-        state.fav = [...state.fav, ...action.payload];
+        state.fav = [...action.payload, ...state.fav];
       } else {
-        state.fav = [...state.fav, action.payload];
+        state.fav = [action.payload, ...state.fav];
       }
     },
 
     removeFromFavRedux(state, action) {
-      state.fav = state.fav.filter((obj) => {
-        obj.productId !== action.payload;
-      });
+      const arr = action.payload;
+      for (const el of arr) {
+        state.fav = state.fav.filter((obj) => obj.productId !== el);
+      }
     },
   },
 });

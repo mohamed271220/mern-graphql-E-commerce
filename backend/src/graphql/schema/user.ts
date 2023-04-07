@@ -34,6 +34,10 @@ const favtType = new GraphQLObjectType({
   name: "fav",
   fields: () => ({
     productId: { type: GraphQLID },
+    _id: { type: GraphQLID },
+    path: { type: GraphQLString },
+    price: { type: GraphQLInt },
+    title: { type: GraphQLString },
     msg: { type: GraphQLString },
   }),
 });
@@ -47,14 +51,17 @@ const userType = new GraphQLObjectType({
     password: { type: GraphQLString },
     msg: { type: GraphQLString },
     phone: { type: GraphQLInt },
-    fav: { type: new GraphQLList(cartType) },
+    fav: { type: new GraphQLList(favtType) },
     cart: { type: new GraphQLList(cartType) },
     favArr: {
       type: new GraphQLList(productType),
       resolve(par, arg) {
         const arrOfIds = par.fav.map((e: any) => e.productId);
         console.log(arrOfIds);
-        return productCollection.find({ "images._id": { $in: arrOfIds } });
+        return productCollection.find(
+          { "images._id": { $in: arrOfIds } },
+          { "images.$": 1, price: 1, title: 1 }
+        );
       },
     },
   }),
@@ -156,15 +163,17 @@ const userMutation = new GraphQLObjectType({
       type: favtType,
       args: {
         productId: { type: GraphQLID },
+        title: { type: GraphQLString },
+        path: { type: GraphQLString },
+        price: { type: GraphQLInt },
         userId: { type: GraphQLID },
       },
       resolve: async (_, args) => {
         try {
-          const obj = { productId: args.productId };
           const res = await userCollection.findByIdAndUpdate(
             args.userId,
             {
-              $push: { fav: obj },
+              $push: { fav: args },
             },
             { new: true }
           );
@@ -178,16 +187,15 @@ const userMutation = new GraphQLObjectType({
     removeFromFav: {
       type: messageType,
       args: {
-        productId: { type: GraphQLID },
+        productId: { type: new GraphQLList(GraphQLID) },
         userId: { type: GraphQLID },
       },
       resolve: async (_, args) => {
         try {
-          const obj = { productId: args.productId };
           await userCollection.findByIdAndUpdate(
             args.userId,
             {
-              $pull: { fav: obj },
+              $pull: { fav: { productId: { $in: args.productId } } },
             },
             { new: true }
           );

@@ -10,6 +10,10 @@ import { AnimatePresence } from "framer-motion";
 export interface productContextInterface {
   rating: number[];
   reviews: reviewInterface[];
+  bigImgInd: number;
+  images: { productPath: string; _id: string }[];
+  price: number;
+  title: string;
 }
 export const productContext = createContext({} as productContextInterface);
 
@@ -38,14 +42,12 @@ const Product = () => {
       reviews,
     } = data.product;
 
-    console.log({ bigImgId: images });
-    console.log({ bigImgId: images[bigImgInd] });
-    console.log({ bigImgId: images[bigImgInd]._id });
-
     return (
       <>
         {data && (
-          <productContext.Provider value={{ rating, reviews }}>
+          <productContext.Provider
+            value={{ title, rating, reviews, images, bigImgInd, price }}
+          >
             <div className="product-container">
               <section className="product-page">
                 <ProductImages
@@ -68,7 +70,7 @@ const Product = () => {
                     stock,
                     setShowPop,
                     _id,
-                    bigImgId: images[bigImgInd]._id,
+                    // bigImgId: images[bigImgInd]._id,
                   }}
                 />
                 <AnimatePresence mode="wait">

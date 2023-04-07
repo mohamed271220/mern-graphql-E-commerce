@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
 import useIndex from "../custom/useIndex";
+import useCarousel from "../custom/useCarousel";
+import { AnimatePresence, Variants, motion } from "framer-motion";
+import useMeasure from "react-use-measure";
+
+// import toast from "react-hot-toast";
 
 const bannerArr = [
   {
@@ -31,31 +36,43 @@ const Banner = () => {
   useEffect(() => {
     timer = setTimeout(() => {
       setBannerIndex((cur) => convertNegativeToZero(cur + 1, bannerArr.length));
-    }, 3000);
+    }, 4000);
 
     return () => clearTimeout(timer);
   }, [bannerIndex]);
 
+  const [variant, dir] = useCarousel(bannerIndex, bannerArr.length);
+  const [animateRef, { width }] = useMeasure();
+
   return (
-    <section className="banner-par center">
-      {bannerArr.map(({ image, slogan, button, header }, index) => {
-        if (index === bannerIndex) {
-          return (
-            <div className="banner " key={index}>
-              <div className="banner-content center">
-                <h1>{header}</h1>
-                <p>{slogan}</p>
+    <section className="banner-par center" ref={animateRef}>
+      <AnimatePresence custom={{ dir, width }} mode="wait">
+        {bannerArr.reverse().map(({ image, slogan, button, header }, index) => {
+          if (index === bannerIndex) {
+            return (
+              <motion.div
+                variants={variant as Variants}
+                className="banner "
+                key={index}
+                initial="start"
+                exit="exit"
+                animate="end"
+                custom={{ dir, width }}
+              >
+                <div className="banner-content center">
+                  <h1>{header}</h1>
+                  <p>{slogan}</p>
 
-                <button className="btn">{button}</button>
-              </div>
-              <div className="banner-image center ">
-                <img src={image} alt="" />
-              </div>
-            </div>
-          );
-        }
-      })}
-
+                  <button className="btn">{button}</button>
+                </div>
+                <div className="banner-image center ">
+                  <img src={image} alt="" />
+                </div>
+              </motion.div>
+            );
+          }
+        })}
+      </AnimatePresence>
       <div className="banner-dots-par center">
         {[0, 1, 2, 3, 4].map((dot) => {
           return (

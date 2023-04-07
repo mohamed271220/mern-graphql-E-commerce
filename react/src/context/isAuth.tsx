@@ -11,9 +11,10 @@ interface Props {
 }
 
 export interface favArrInterface {
-  images: { productId: string }[];
+  productId: string;
   price: number;
   title: string;
+  path: string;
   _id: string;
 }
 interface userDataState {
@@ -21,7 +22,6 @@ interface userDataState {
   name: string;
   fav: favInterface[];
   cart: cartInterface[];
-  favArr: favArrInterface[];
 }
 
 interface authContextInterface extends userDataState {
@@ -57,8 +57,6 @@ const IsAuthContextComponent = ({ children }: Props) => {
     }
   }, [isAuth]);
 
-  console.log(data);
-  console.log(userData);
   useEffect(() => {
     if (data?.getUserData) {
       setUserData(data?.getUserData);
@@ -74,7 +72,6 @@ const IsAuthContextComponent = ({ children }: Props) => {
         email: userData.email,
         name: userData.name,
         setIsAuth,
-        favArr: userData.favArr,
       }}
     >
       {children}
