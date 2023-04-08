@@ -1,32 +1,42 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { favInitialState } from "../components/interfaces/user.js";
+import { cartInitialState } from "../components/interfaces/user";
 
-const initialState: favInitialState = {
-  fav: [],
+const initialState: cartInitialState = {
+  cart: [],
 };
 
-const favSlice = createSlice({
+const cartSlice = createSlice({
   name: "cart-slice",
   initialState,
   reducers: {
-    addToFavRedux(state, action) {
+    addToCartRedux(state, action) {
       console.log("redux");
       console.log(action.payload);
       if (Array.isArray(action.payload)) {
-        state.fav = [...action.payload, ...state.fav];
+        state.cart = [...action.payload, ...state.cart];
       } else {
-        state.fav = [action.payload, ...state.fav];
+        state.cart = [action.payload, ...state.cart];
       }
     },
 
-    removeFromFavRedux(state, action) {
+    removeFromCartRedux(state, action) {
       const arr = action.payload;
       for (const el of arr) {
-        state.fav = state.fav.filter((obj) => obj.productId !== el);
+        state.cart = state.cart.filter((obj) => obj.productId !== el);
       }
+    },
+
+    changeCartCountRedux(state, action) {
+      console.log({ action: action.payload });
+      state.cart = state.cart.map((obj) =>
+        action.payload.productId === obj.productId
+          ? { ...obj, count: action.payload.count }
+          : obj
+      );
     },
   },
 });
 
-export const { addToFavRedux, removeFromFavRedux } = favSlice.actions;
-export default favSlice.reducer;
+export const { addToCartRedux, removeFromCartRedux, changeCartCountRedux } =
+  cartSlice.actions;
+export default cartSlice.reducer;

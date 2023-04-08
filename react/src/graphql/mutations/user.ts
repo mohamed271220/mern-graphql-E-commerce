@@ -10,8 +10,29 @@ export const ADD_USER = gql`
 `;
 
 export const Add_To_Cart = gql`
-  mutation ($productId: ID!, $userId: ID!) {
-    addToCart(count: 1, userId: $userId, productId: $productId) {
+  mutation (
+    $productId: ID!
+    $userId: ID!
+    $path: String!
+    $title: String!
+    $price: Int!
+  ) {
+    addToCart(
+      count: 1
+      userId: $userId
+      productId: $productId
+      path: $path
+      title: $title
+      price: $price
+    ) {
+      msg
+    }
+  }
+`;
+
+export const Change_Cart_Count = gql`
+  mutation ($productId: ID!, $userId: ID!, $count: Int!) {
+    changeCartCount(count: $count, userId: $userId, productId: $productId) {
       msg
     }
   }
@@ -58,10 +79,14 @@ export const GET_USER_DATA = gql`
         _id
       }
 
-      # cart {
-      #   count
-      #   productId
-      # }
+      cart {
+        count
+        productId
+        price
+        title
+        path
+        _id
+      }
     }
   }
 `;
@@ -69,6 +94,14 @@ export const GET_USER_DATA = gql`
 export const REMOVE_FROM_FAV = gql`
   mutation ($productId: [ID!], $userId: ID!) {
     removeFromFav(userId: $userId, productId: $productId) {
+      msg
+    }
+  }
+`;
+
+export const REMOVE_FROM_Cart = gql`
+  mutation ($productId: [ID!], $userId: ID!) {
+    removeFromCart(userId: $userId, productId: $productId) {
       msg
     }
   }

@@ -7,7 +7,6 @@ export interface favInterface {
 }
 
 export interface cartInterface extends favInterface {
-  userId: string;
   count: number;
 }
 
@@ -15,6 +14,9 @@ export interface favInitialState {
   fav: favInterface[];
 }
 
+export interface cartInitialState {
+  cart: cartInterface[];
+}
 export interface imagesInterface {
   productPath: string;
   _id: string;

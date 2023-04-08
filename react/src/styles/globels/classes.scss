@@ -67,12 +67,19 @@
   }
 }
 
-// .detail {
-//   display: inline-block;
-//   width: 40px;
-//   text-align: start;
-//   white-space: nowrap;
-// }
+.detail {
+  display: inline-block;
+  width: 80px;
+  text-align: end;
+  white-space: nowrap;
+  margin-right: 4px;
+}
+.value {
+  display: inline-block;
+  width: 200px;
+  text-align: start;
+  white-space: nowrap;
+}
 
 // .colon {
 //   // color: var(--green);
@@ -104,4 +111,20 @@
 
 .between {
   justify-content: space-between;
+}
+
+.show-count {
+  position: absolute;
+  top: -2px;
+  right: -4px;
+  width: 1rem;
+  height: 1rem;
+  padding: 5px;
+  background: var(--gmail);
+  color: var(--white);
+  border-radius: 50%;
+}
+
+.remove {
+  background: var(--delete);
 }

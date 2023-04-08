@@ -18,6 +18,9 @@ const userSchema = new mongoose.Schema({
     {
       productId: mongoose.SchemaTypes.ObjectId,
       count: Number,
+      title: String,
+      path: String,
+      price: Number,
     },
   ],
 });

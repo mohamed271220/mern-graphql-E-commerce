@@ -1,0 +1,40 @@
+@import "../variables.scss";
+
+.cart-cont {
+  //   height: calc(100vh - 40px);
+  width: 85%;
+  margin: 0 auto;
+  min-width: 500px;
+  margin-top: 50px;
+  display: flex;
+  gap: 4px;
+  flex-direction: column;
+  padding: 4px;
+  .cart-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    .detail {
+      font-weight: bold;
+      letter-spacing: 1px;
+      color: var(--green);
+      text-transform: capitalize;
+    }
+    .value {
+      letter-spacing: 0.8;
+      color: var(--wheat);
+    }
+  }
+  .cart-item {
+    width: 70%;
+    height: 120px;
+    background: var(--white);
+    box-shadow: 1px 0.5px 2px black;
+    justify-content: space-between;
+    padding: 8px;
+
+    .cart-img {
+      width: 80px;
+    }
+  }
+}

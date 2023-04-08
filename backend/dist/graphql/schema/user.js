@@ -31,6 +31,10 @@ const cartType = new graphql_1.GraphQLObjectType({
     fields: () => ({
         productId: { type: graphql_1.GraphQLID },
         count: { type: graphql_1.GraphQLInt },
+        _id: { type: graphql_1.GraphQLID },
+        path: { type: graphql_1.GraphQLString },
+        price: { type: graphql_1.GraphQLInt },
+        title: { type: graphql_1.GraphQLString },
         msg: { type: graphql_1.GraphQLString },
     }),
 });
@@ -130,12 +134,15 @@ const userMutation = new graphql_1.GraphQLObjectType({
                 userId: { type: graphql_1.GraphQLID },
                 productId: { type: graphql_1.GraphQLID },
                 count: { type: graphql_1.GraphQLInt },
+                title: { type: graphql_1.GraphQLString },
+                path: { type: graphql_1.GraphQLString },
+                price: { type: graphql_1.GraphQLInt },
             },
             resolve: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
                 try {
-                    const cart = { count: args.count, productId: args.productId };
+                    const { price, title, path, count, productId } = args;
                     const res = yield user_js_1.userCollection.findByIdAndUpdate(args.userId, {
-                        $push: { cart },
+                        $push: { cart: { price, title, path, count, productId } },
                     }, { new: true });
                     console.log(res);
                     return Object.assign(Object.assign({}, res), { msg: "successfully added to your cart" });
@@ -179,6 +186,46 @@ const userMutation = new graphql_1.GraphQLObjectType({
                         $pull: { fav: { productId: { $in: args.productId } } },
                     }, { new: true });
                     return { msg: "removed from your favorites" };
+                }
+                catch (err) {
+                    return err.message;
+                }
+            }),
+        },
+        removeFromCart: {
+            type: messageType,
+            args: {
+                productId: { type: new graphql_1.GraphQLList(graphql_1.GraphQLID) },
+                userId: { type: graphql_1.GraphQLID },
+            },
+            resolve: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
+                try {
+                    yield user_js_1.userCollection.findByIdAndUpdate(args.userId, {
+                        $pull: { cart: { productId: { $in: args.productId } } },
+                    }, { new: true });
+                    return { msg: "removed from your cart" };
+                }
+                catch (err) {
+                    return err.message;
+                }
+            }),
+        },
+        changeCartCount: {
+            type: messageType,
+            args: {
+                productId: { type: graphql_1.GraphQLID },
+                userId: { type: graphql_1.GraphQLID },
+                count: { type: graphql_1.GraphQLInt },
+            },
+            resolve: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
+                try {
+                    yield user_js_1.userCollection.findOneAndUpdate({
+                        _id: args.userId,
+                        "cart.productId": args.productId,
+                    }, {
+                        $set: { "cart.$.count": args.count },
+                    }, { new: true });
+                    return { msg: "count successfully changed" };
                 }
                 catch (err) {
                     return err.message;

@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
-import { BsFillCartPlusFill } from "react-icons/bs";
 import { BiPurchaseTagAlt } from "react-icons/bi";
 import { AiOutlineCheck } from "react-icons/ai";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { btnHover } from "../../variants/globals";
 import ProductRate from "./ProductRate";
 import useAvg from "../../custom/useAvg";
@@ -15,10 +14,12 @@ import {
 } from "../../graphql/mutations/user";
 import { useAppDispatch, useAppSelector } from "../../custom/reduxTypes";
 import { favInterface } from "../interfaces/user";
-import { addToFavRedux, removeFromFavRedux } from "../../redux/cartSlice";
-import Cookies from "js-cookie";
-import { isAuthContext } from "../../context/isAuth";
+import { addToFavRedux, removeFromFavRedux } from "../../redux/favSlice";
 import HeartSvgProduct from "./HeartSvgProduct";
+import CartButton from "./CartButton";
+import { productContext } from "./Product";
+import usePathAndId from "../../custom/usePathAndId";
+import Remove_From_Cart_Btn from "./Remove-From-Cart_Btn";
 interface Props {
   data: {
     title: string;
@@ -29,7 +30,6 @@ interface Props {
     rating: number[];
     setShowPop: React.Dispatch<React.SetStateAction<boolean>>;
     _id: string;
-    // bigImgId: string;
   };
 }
 
@@ -41,37 +41,28 @@ const ProductDetails = ({
     end: {
       x: 0,
       opacity: [0, 1],
-      // transition: { delay: 0.7, duration: 0.6, type: "tween", ease: "easeOut" },
       transition: { delay: 0.7, type: "spring", stiffness: 70 },
     },
   };
 
-  // const { fav: favContext } = useContext(isAuthContext);
-
-  // const { fav: favArr } = useAppSelector((state) => state.fav);
   const dispatch = useAppDispatch();
-  // console.log({ favArr });
-
   const handleshowPop = () => setShowPop(true);
   const avgRate = useAvg(rating);
-
-  const [addToCart, { data }] = useMutation(Add_To_Cart);
-  // const [addToFav, { data: addfavData }] = useMutation(Add_To_Fav);
-  // const [RemoveFromFav, { data: removefavData }] = useMutation(REMOVE_FROM_FAV);
-
   const [isFavoraited, setIsFavorited] = useState(false);
+  const { images, bigImgInd } = useContext(productContext);
+  const [id] = usePathAndId(images, bigImgInd);
+  const { cart } = useAppSelector((state) => state.cart);
+  const [onCart, setOnCart] = useState(false);
 
-  // useEffect(() => {
-  //   if (favArr.length > 0) {
-  //     const check = favArr.some((e: favInterface) => _id == e.productId);
-  //     console.log({ check, favArr, _id });
-  //     if (check) {
-  //       setIsFavorited(true);
-  //     } else {
-  //       setIsFavorited(false);
-  //     }
-  //   }
-  // }, [favContext]);
+  useEffect(() => {
+    const check = cart.some((e) => e.productId === id);
+    console.log({ id });
+    if (check) {
+      setOnCart(true);
+    } else {
+      setOnCart(false);
+    }
+  }, [cart, id]);
 
   return (
     <motion.div
@@ -125,21 +116,13 @@ const ProductDetails = ({
             </span>
             Buy Now
           </motion.button>
-          <motion.button
-            className="btn btn-cart center"
-            whileHover={btnHover}
-            onClick={async () => {
-              const res = await addToCart({
-                variables: {
-                  userId: "642eff1eae1b178cacf820c5",
-                  productId: _id,
-                },
-              });
-            }}
-          >
-            <BsFillCartPlusFill className="icon" color="var(--green)" />
-            Add To cart
-          </motion.button>
+          <AnimatePresence mode="wait">
+            {!onCart ? (
+              <CartButton key={"CartButton"} />
+            ) : (
+              <Remove_From_Cart_Btn key={"Remove_From_Cart_Btn"} id={id} />
+            )}
+          </AnimatePresence>
         </div>
       </div>
       <div className="add-rate center">

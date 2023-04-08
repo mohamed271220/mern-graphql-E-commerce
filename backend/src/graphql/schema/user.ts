@@ -26,6 +26,10 @@ const cartType = new GraphQLObjectType({
   fields: () => ({
     productId: { type: GraphQLID },
     count: { type: GraphQLInt },
+    _id: { type: GraphQLID },
+    path: { type: GraphQLString },
+    price: { type: GraphQLInt },
+    title: { type: GraphQLString },
     msg: { type: GraphQLString },
   }),
 });
@@ -141,14 +145,17 @@ const userMutation = new GraphQLObjectType({
         userId: { type: GraphQLID },
         productId: { type: GraphQLID },
         count: { type: GraphQLInt },
+        title: { type: GraphQLString },
+        path: { type: GraphQLString },
+        price: { type: GraphQLInt },
       },
       resolve: async (_, args) => {
         try {
-          const cart = { count: args.count, productId: args.productId };
+          const { price, title, path, count, productId } = args;
           const res = await userCollection.findByIdAndUpdate(
             args.userId,
             {
-              $push: { cart },
+              $push: { cart: { price, title, path, count, productId } },
             },
             { new: true }
           );
@@ -200,6 +207,53 @@ const userMutation = new GraphQLObjectType({
             { new: true }
           );
           return { msg: "removed from your favorites" };
+        } catch (err) {
+          return (err as Error).message;
+        }
+      },
+    },
+
+    removeFromCart: {
+      type: messageType,
+      args: {
+        productId: { type: new GraphQLList(GraphQLID) },
+        userId: { type: GraphQLID },
+      },
+      resolve: async (_, args) => {
+        try {
+          await userCollection.findByIdAndUpdate(
+            args.userId,
+            {
+              $pull: { cart: { productId: { $in: args.productId } } },
+            },
+            { new: true }
+          );
+          return { msg: "removed from your cart" };
+        } catch (err) {
+          return (err as Error).message;
+        }
+      },
+    },
+    changeCartCount: {
+      type: messageType,
+      args: {
+        productId: { type: GraphQLID },
+        userId: { type: GraphQLID },
+        count: { type: GraphQLInt },
+      },
+      resolve: async (_, args) => {
+        try {
+          await userCollection.findOneAndUpdate(
+            {
+              _id: args.userId,
+              "cart.productId": args.productId,
+            },
+            {
+              $set: { "cart.$.count": args.count },
+            },
+            { new: true }
+          );
+          return { msg: "count successfully changed" };
         } catch (err) {
           return (err as Error).message;
         }

@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { favArrInterface } from "../../context/isAuth";
 import { useAppDispatch } from "../../custom/reduxTypes";
-import { removeFromFavRedux } from "../../redux/cartSlice";
+import { removeFromFavRedux } from "../../redux/favSlice";
 import { useMutation } from "@apollo/client";
 import { REMOVE_FROM_FAV } from "../../graphql/mutations/user";
 import Cookies from "js-cookie";

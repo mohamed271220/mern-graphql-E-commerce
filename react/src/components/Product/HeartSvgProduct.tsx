@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../custom/reduxTypes";
 import { favInterface } from "../interfaces/user";
 import { useMutation } from "@apollo/client";
 import Cookies from "js-cookie";
-import { addToFavRedux, removeFromFavRedux } from "../../redux/cartSlice";
+import { addToFavRedux, removeFromFavRedux } from "../../redux/favSlice";
 import { Add_To_Fav, REMOVE_FROM_FAV } from "../../graphql/mutations/user";
 import { heartVariant } from "../../variants/globals";
 import { productContext } from "./Product";
@@ -19,8 +19,6 @@ const HeartSvgProduct = ({ isFavoraited, setIsFavorited }: Props) => {
   const { bigImgInd, images, price, title } = useContext(productContext);
 
   const { fav } = useAppSelector((state) => state.fav);
-  console.log("from heart");
-  console.log(fav);
   const [id, setId] = useState("");
   const [path, setPath] = useState("");
 

@@ -11,6 +11,10 @@ nav {
   box-shadow: var(--nav-shadow);
 
   ul {
+    li#cart-link-par {
+      position: relative;
+    }
+
     li {
       list-style: none;
       position: relative;

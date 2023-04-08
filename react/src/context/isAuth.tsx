@@ -4,7 +4,8 @@ import { useMutation } from "@apollo/client";
 import { GET_USER_DATA } from "../graphql/mutations/user";
 import Cookies from "js-cookie";
 import { useAppDispatch } from "../custom/reduxTypes";
-import { addToFavRedux } from "../redux/cartSlice";
+import { addToFavRedux } from "../redux/favSlice";
+import { addToCartRedux } from "../redux/CartSlice";
 
 interface Props {
   children: React.ReactNode;
@@ -38,7 +39,6 @@ const IsAuthContextComponent = ({ children }: Props) => {
     email: "",
     name: "",
     fav: [],
-    favArr: [],
     cart: [],
   } as userDataState);
 
@@ -56,11 +56,13 @@ const IsAuthContextComponent = ({ children }: Props) => {
       });
     }
   }, [isAuth]);
+  console.log({ cart: data?.getUserData?.cart });
 
   useEffect(() => {
     if (data?.getUserData) {
       setUserData(data?.getUserData);
       dispatch(addToFavRedux(data?.getUserData?.fav));
+      dispatch(addToCartRedux(data?.getUserData?.cart));
     }
   }, [data?.getUserData?.name]);
   return (

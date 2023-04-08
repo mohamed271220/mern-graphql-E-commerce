@@ -12,6 +12,8 @@ import useHide from "../custom/useHide";
 import Favorite from "./widgets/Favorite";
 import { popVariant } from "../variants/globals";
 import { useAppSelector } from "../custom/reduxTypes";
+import ShowCount from "./widgets/Counter";
+import { BsFillCartPlusFill } from "react-icons/bs";
 
 const linksArr = [
   {
@@ -39,8 +41,10 @@ const Nav = () => {
   const navRef = useRef<HTMLElement | null>(null);
   const [showFav, handleShowFav, handleHideFav, toggleFav] = useHide();
 
+  const { cart } = useAppSelector((state) => state.cart);
   const { fav } = useAppSelector((state) => state.fav);
-  console.log(fav);
+
+  console.log({ cart });
   const { scrollY } = useScroll({
     target: navRef,
     offset: ["start start"],
@@ -71,9 +75,21 @@ const Nav = () => {
           );
         })}
         <motion.li
+          id="cart-link-par"
+          style={{ color: showFav ? "var(--delete)" : LinkClr }}
+        >
+          <a href="/cart">
+            {" "}
+            <BsFillCartPlusFill fontSize={"1.2rem"} />
+          </a>
+          <ShowCount length={cart.length} />
+        </motion.li>
+
+        <motion.li
           style={{ color: showFav ? "var(--delete)" : LinkClr }}
           className="fav-par"
         >
+          <ShowCount length={fav.length} />
           <AiFillHeart fontSize={"1.5rem"} onClick={toggleFav} />
           <AnimatePresence>
             {showFav && (

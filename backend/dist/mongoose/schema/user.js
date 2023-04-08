@@ -22,6 +22,9 @@ const userSchema = new mongoose_1.default.Schema({
         {
             productId: mongoose_1.default.SchemaTypes.ObjectId,
             count: Number,
+            title: String,
+            path: String,
+            price: Number,
         },
     ],
 });
