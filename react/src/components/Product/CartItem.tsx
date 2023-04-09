@@ -1,6 +1,8 @@
 import React from "react";
 import { cartInterface } from "../../components/interfaces/user.js";
 import Counter from "./Counter.js";
+import HeartSvgProduct from "./HeartSvgProduct.js";
+import Remove_From_Cart_Btn from "./Remove-From-Cart_Btn.js";
 const CartItem = ({
   _id,
   productId,
@@ -13,6 +15,9 @@ const CartItem = ({
     <div className="cart-item center">
       <img className="cart-img" src={path} alt="" />
       <div className="center cart-content">
+        <div>
+          <Counter count={count} productId={productId} key={_id} />
+        </div>
         <div>
           <span className="shadow detail">product:</span>
           <span className="shadow value">{title}</span>
@@ -29,7 +34,7 @@ const CartItem = ({
         </div>
       </div>
       <div>
-        <Counter count={count} productId={productId} />
+        <Remove_From_Cart_Btn id={productId} content={"remove"} />
       </div>
     </div>
   );

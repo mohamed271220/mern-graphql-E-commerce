@@ -14,7 +14,7 @@ const App = () => {
         <div className="App">
           {/* <Loading /> */}
           <Nav />
-          <Product />
+          {/* <Product /> */}
           <AppRoutes />
         </div>
 

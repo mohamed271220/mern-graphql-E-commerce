@@ -44,12 +44,13 @@ const CartButton = () => {
             path,
             price,
             title,
+            count: 1,
           })
         );
         toast.success(res.data.addToCart.msg);
       }}
     >
-      <BsFillCartPlusFill className="icon" color="var(--green)" />
+      <BsFillCartPlusFill className="icon" />
       Add To cart
     </motion.button>
   );

@@ -8,6 +8,15 @@ export const btnHover = {
   },
 };
 
+export const btnTap = {
+  scale: 0.9,
+  transition: {
+    type: "spring",
+    stiffness: 200,
+    damping: 7,
+  },
+};
+
 export const parentVariant = {
   start: { height: 0 },
   end: {

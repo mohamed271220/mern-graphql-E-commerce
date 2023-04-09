@@ -5,7 +5,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { btnHover } from "../../variants/globals";
 import ProductRate from "./ProductRate";
 import useAvg from "../../custom/useAvg";
-import HeartSvg from "../widgets/ProductListHeart";
 import { useMutation } from "@apollo/client";
 import {
   Add_To_Cart,
@@ -20,6 +19,7 @@ import CartButton from "./CartButton";
 import { productContext } from "./Product";
 import usePathAndId from "../../custom/usePathAndId";
 import Remove_From_Cart_Btn from "./Remove-From-Cart_Btn";
+import ProductListHeart from "../widgets/ProductListHeart";
 interface Props {
   data: {
     title: string;
@@ -120,7 +120,11 @@ const ProductDetails = ({
             {!onCart ? (
               <CartButton key={"CartButton"} />
             ) : (
-              <Remove_From_Cart_Btn key={"Remove_From_Cart_Btn"} id={id} />
+              <Remove_From_Cart_Btn
+                key={"Remove_From_Cart_Btn"}
+                id={id}
+                content={"remove from cart"}
+              />
             )}
           </AnimatePresence>
         </div>
