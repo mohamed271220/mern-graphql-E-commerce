@@ -20,7 +20,7 @@ const StarIcon = ({ avgRate, id }: Props) => {
       }
     }
   }, [avgRate]);
-
+  // console.log({ avgRate });
   return (
     <svg
       width="15"

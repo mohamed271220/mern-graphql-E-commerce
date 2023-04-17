@@ -41,6 +41,7 @@ export const Change_Cart_Count = gql`
 export const Add_To_Fav = gql`
   mutation (
     $productId: ID!
+    $parentId: ID!
     $userId: ID!
     $price: Int!
     $path: String!
@@ -48,6 +49,7 @@ export const Add_To_Fav = gql`
   ) {
     addToFav(
       productId: $productId
+      parentId: $parentId
       userId: $userId
       path: $path
       title: $title
@@ -76,6 +78,7 @@ export const GET_USER_DATA = gql`
         price
         title
         path
+        parentId
         _id
       }
 

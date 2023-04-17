@@ -42,4 +42,15 @@ a {
   :root {
     font-size: 12px;
   }
+}
+*::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px var(--green);
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--wheat);
 }/*# sourceMappingURL=globales.css.map */

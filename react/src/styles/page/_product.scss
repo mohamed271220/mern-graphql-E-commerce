@@ -69,7 +69,9 @@
         display: flex;
         gap: 20px;
         .title {
-          letter-spacing: 1px;
+          letter-spacing: 0.8px;
+          font-size: 1.2rem;
+          font-weight: bold;
         }
       }
       .product-btn {
@@ -208,6 +210,7 @@ p {
 
 .stock-par {
   color: var(--light-text);
+  white-space: nowrap;
   // transform: scale(0.8);
   .stock {
     color: var(--green);

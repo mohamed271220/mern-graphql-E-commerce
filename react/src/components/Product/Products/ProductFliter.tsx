@@ -3,6 +3,9 @@ import ProductRate from "../ProductRate";
 import useAvg from "../../../custom/useAvg";
 import ProductListHeart from "../../widgets/ProductListHeart";
 import { imagesInterface } from "../../interfaces/user";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import { opacityVariant } from "../../../variants/globals";
 interface Props {
   _id: string;
   price: number;
@@ -12,6 +15,7 @@ interface Props {
   category: string;
   images: imagesInterface[];
   rating: number[];
+  index: number;
 }
 
 const ProductFliter = ({
@@ -23,12 +27,27 @@ const ProductFliter = ({
   images,
   rating,
   state,
+  index,
 }: Props) => {
   const avgRate = useAvg(rating);
+  console.log({ rating });
   const [isFavoraited, setIsFavorited] = useState(false);
+  const navigate = useNavigate();
+
+  const productVariant = {
+    start: { opacity: 0, x: 10, y: 5 },
+    end: { opacity: 1, x: 0, y: 0 },
+  };
 
   return (
-    <section className="product-List center">
+    <motion.section
+      className="product-List center"
+      initial="start"
+      exit={"exit"}
+      transition={{ delay: (index + 1) * 0.18, duration: 0.15 }}
+      animate="end"
+      variants={productVariant}
+    >
       <div className="img-par center">
         <img src={images[0].productPath} alt={title} />
       </div>
@@ -43,7 +62,16 @@ const ProductFliter = ({
           avgRate={avgRate}
           ratingLen={rating.length}
         />
-        <button className="btn shadow">reviews</button>
+      </div>
+      <div className="product-links center">
+        <button className="btn shadow product-btn">add to cart</button>
+
+        <button
+          onClick={() => navigate(`/${_id}`)}
+          className="btn shadow details"
+        >
+          details
+        </button>
       </div>
       <span className="heart-filter ">
         <ProductListHeart
@@ -51,12 +79,12 @@ const ProductFliter = ({
           price={price}
           title={title}
           setIsFavorited={setIsFavorited}
+          parentId={_id}
           images={images}
         />{" "}
       </span>
-      <button className="btn product-btn">add to cart</button>
       <span className={`product-state center ${state}`}>{state}</span>
-    </section>
+    </motion.section>
   );
 };
 

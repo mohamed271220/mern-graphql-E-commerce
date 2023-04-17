@@ -5,6 +5,7 @@
 
   margin-top: 60px;
   width: 100%;
+  min-height: 100vh;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -182,13 +183,6 @@ aside {
       margin: 0 auto;
       font-size: 10px;
       width: 90%;
-
-      button {
-        transform: scale(0.9);
-        background: transparent;
-        color: var(--wheat);
-        // margin-left: -12px;
-      }
     }
   }
 }
@@ -214,7 +208,6 @@ svg.svg-star {
 }
 
 .product-btn {
-  transform: scale(0.8);
   display: flex;
   justify-content: space-evenly;
   width: 100%;
@@ -229,6 +222,7 @@ svg.svg-star {
   padding: 0 10px;
   color: white;
   border-end-end-radius: 4px;
+  letter-spacing: 0.8px;
 }
 
 .new {
@@ -255,9 +249,24 @@ svg.svg-star {
   gap: 20px;
   cursor: pointer;
   .page {
-    width: 25px;
-    height: 25px;
+    width: 15px;
+    height: 15px;
     background: var(--green);
     color: white;
+    transition: 0.3s;
+    &.page-active {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.product-links {
+  margin-top: 6px;
+  gap: 20px;
+  button {
+    font-size: 0.8rem;
+    &.details {
+      background: grey;
+    }
   }
 }

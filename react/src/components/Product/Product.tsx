@@ -6,6 +6,7 @@ import { GET_Product_By_Id } from "../../graphql/general.js";
 import Reviews from "./Reviews";
 import { reviewInterface } from "../../interfaces/product";
 import { AnimatePresence } from "framer-motion";
+import { useParams } from "react-router-dom";
 
 export interface productContextInterface {
   rating: number[];
@@ -14,14 +15,16 @@ export interface productContextInterface {
   images: { productPath: string; _id: string }[];
   price: number;
   title: string;
+  _id: string;
 }
 export const productContext = createContext({} as productContextInterface);
 
 const Product = () => {
+  const { id } = useParams();
   const [bigImgInd, setBigImgInd] = useState(0);
 
   const { data, error, loading } = useQuery(GET_Product_By_Id, {
-    variables: { id: "643c8eb1a89b31c77136c039" },
+    variables: { id },
   });
   console.log({ data, error });
   const [showPop, setShowPop] = useState(false);
@@ -47,7 +50,7 @@ const Product = () => {
       <>
         {data && (
           <productContext.Provider
-            value={{ title, rating, reviews, images, bigImgInd, price }}
+            value={{ _id, title, rating, reviews, images, bigImgInd, price }}
           >
             <div className="product-container">
               <section className="product-page">

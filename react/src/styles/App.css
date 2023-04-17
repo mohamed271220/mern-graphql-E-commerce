@@ -151,6 +151,11 @@
   width: 100%;
 }
 
+.col {
+  flex-direction: column;
+  gap: 4px;
+}
+
 :root {
   --green: #367e53;
   --wheat: rgb(202, 170, 109);
@@ -196,6 +201,18 @@ a {
     font-size: 12px;
   }
 }
+*::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px var(--green);
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--wheat);
+}
+
 .log-in {
   width: 100%;
   min-height: 100vh;
@@ -309,6 +326,9 @@ nav ul li a {
   font-weight: bold;
   letter-spacing: 1px;
   text-transform: capitalize;
+}
+nav ul li a.cart-active-link.active {
+  color: var(--green);
 }
 nav ul li a.link::before {
   transition: 0.5s;
@@ -464,7 +484,9 @@ nav ul li a.link.active.active:before, nav ul li a.link.active.active:after {
   gap: 20px;
 }
 .product-container .product-page .details .title-par .title {
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 .product-container .product-page .details .product-btn {
   display: flex;
@@ -593,6 +615,7 @@ p::first-letter {
 
 .stock-par {
   color: var(--light-text);
+  white-space: nowrap;
 }
 .stock-par .stock {
   color: var(--green);
@@ -788,15 +811,15 @@ p.review-user {
 .banner-par {
   height: 100vh;
   width: 100%;
-  margin: 0 auto;
   position: relative;
+  background: linear-gradient(135deg, var(--white), grey);
 }
 .banner-par .banner {
-  width: 90%;
+  width: 95%;
   max-width: 900px;
   margin: 0 auto;
   height: 400px;
-  gap: 20px;
+  gap: 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -813,8 +836,7 @@ p.review-user {
 .banner-par .banner .banner-image img {
   -o-object-fit: cover;
      object-fit: cover;
-  height: 100%;
-  width: 70vw;
+  height: 90%;
   max-width: 300px;
   filter: drop-shadow(4px 10px 5px black);
 }
@@ -832,10 +854,12 @@ p.review-user {
   color: var(--green);
 }
 .banner-content p {
-  letter-spacing: 0.8px;
+  letter-spacing: 0.1rem;
   text-shadow: 0.2px 0.1px 1px black;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  width: 90%;
   padding: 4px;
+  text-align: center;
 }
 .banner-content p::first-letter {
   color: var(--wheat);
@@ -883,6 +907,7 @@ p.review-user {
 .products-par {
   margin-top: 60px;
   width: 100%;
+  min-height: 100vh;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -1053,11 +1078,6 @@ aside .aside-head {
   font-size: 10px;
   width: 90%;
 }
-.product-list-par .product-List .product-rate-filter button {
-  transform: scale(0.9);
-  background: transparent;
-  color: var(--wheat);
-}
 
 .heart-filter {
   position: absolute;
@@ -1080,7 +1100,6 @@ svg.svg-star {
 }
 
 .product-btn {
-  transform: scale(0.8);
   display: flex;
   justify-content: space-evenly;
   width: 100%;
@@ -1096,6 +1115,7 @@ svg.svg-star {
   padding: 0 10px;
   color: white;
   border-end-end-radius: 4px;
+  letter-spacing: 0.8px;
 }
 
 .new {
@@ -1125,10 +1145,25 @@ svg.svg-star {
   cursor: pointer;
 }
 .pages-par .page {
-  width: 25px;
-  height: 25px;
+  width: 15px;
+  height: 15px;
   background: var(--green);
   color: white;
+  transition: 0.3s;
+}
+.pages-par .page.page-active {
+  transform: scale(1.2);
+}
+
+.product-links {
+  margin-top: 6px;
+  gap: 20px;
+}
+.product-links button {
+  font-size: 0.8rem;
+}
+.product-links button.details {
+  background: grey;
 }
 
 :root {
@@ -1156,9 +1191,6 @@ svg.svg-star {
   color: black;
 }
 .fav-par .fav-drop {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
   padding: 4px;
   position: absolute;
   top: 28px;
@@ -1168,6 +1200,7 @@ svg.svg-star {
   background: var(--green);
   box-shadow: var(--nav-shadow);
   border-radius: 5px;
+  overflow: hidden auto;
 }
 .fav-par .fav-drop .fav-product {
   box-shadow: 1px 1px 2px black;
@@ -1175,12 +1208,12 @@ svg.svg-star {
   height: 60px;
   background: white;
   display: flex;
-  justify-content: space-between;
-  padding: 5px;
+  justify-content: center;
 }
 .fav-par .fav-drop .fav-product .fav-content {
   flex-direction: column;
-  margin: 20px;
+  width: 60%;
+  height: 55px;
 }
 .fav-par .fav-drop .fav-product .fav-content .unsave {
   background: transparent;
@@ -1189,21 +1222,29 @@ svg.svg-star {
 .fav-par .fav-drop .fav-product .fav-title {
   color: black;
   white-space: nowrap;
+  overflow: hidden;
+  width: 90%;
+  font-size: 0.9rem;
+  text-align: center;
+  text-overflow: ellipsis;
 }
 .fav-par .fav-drop .fav-product .fav-price {
   color: var(--wheat);
-  margin-top: 6px;
+  position: relative;
+  top: 5px;
 }
 .fav-par .fav-drop .fav-product .fav-img {
   width: 70px;
-  height: 100%;
+  height: 95%;
   overflow: hidden;
 }
 .fav-par .fav-drop .fav-product .fav-img img {
-  width: 70px;
-  -o-object-fit: cover;
-     object-fit: cover;
+  width: 50px;
   filter: drop-shadow(2px 6px 4px black);
+}
+.fav-par .fav-drop .product-links .btn {
+  background: transparent;
+  color: grey;
 }
 
 :root {

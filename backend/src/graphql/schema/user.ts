@@ -38,6 +38,7 @@ const favtType = new GraphQLObjectType({
   name: "fav",
   fields: () => ({
     productId: { type: GraphQLID },
+    parentId: { type: GraphQLID },
     _id: { type: GraphQLID },
     path: { type: GraphQLString },
     price: { type: GraphQLInt },
@@ -170,6 +171,7 @@ const userMutation = new GraphQLObjectType({
       type: favtType,
       args: {
         productId: { type: GraphQLID },
+        parentId: { type: GraphQLID },
         title: { type: GraphQLString },
         path: { type: GraphQLString },
         price: { type: GraphQLInt },

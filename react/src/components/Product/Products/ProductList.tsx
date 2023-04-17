@@ -26,9 +26,20 @@ const ProductList = () => {
     return (
       <div className="product-list-par">
         {dataShown?.map((product: any, index: number) => {
-          return <ProductFliter key={`${product._id}-list`} {...product} />;
+          return (
+            <ProductFliter
+              key={`${product._id}-list`}
+              index={index}
+              {...product}
+            />
+          );
         })}
-        <Pages key={"pages"} numOfPages={numOfPages} setPage={setPage} />
+        <Pages
+          key={"pages"}
+          page={page}
+          numOfPages={numOfPages}
+          setPage={setPage}
+        />
       </div>
     );
   }

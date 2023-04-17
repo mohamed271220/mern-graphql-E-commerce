@@ -13,6 +13,7 @@ interface Props {
 
 export interface favArrInterface {
   productId: string;
+  parentId?: string;
   price: number;
   title: string;
   path: string;

@@ -38,6 +38,10 @@
   font-size: 1rem;
   text-transform: capitalize;
 }
+.btn.btn-about {
+  background: var(--white);
+  color: black;
+}
 
 .inp {
   border: 0;
@@ -144,4 +148,9 @@
 
 .w-100 {
   width: 100%;
+}
+
+.col {
+  flex-direction: column;
+  gap: 4px;
 }/*# sourceMappingURL=classes.css.map */

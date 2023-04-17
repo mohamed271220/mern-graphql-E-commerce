@@ -77,7 +77,7 @@ const Nav = () => {
           );
         })}
         <motion.li id="cart-link-par" style={{ color: LinkClr }}>
-          <NavLink to="/cart">
+          <NavLink to="/cart" className="cart-active-link">
             <BsFillCartPlusFill fontSize={"1.2rem"} />
           </NavLink>
           <ShowCount length={cart.length} />
@@ -99,37 +99,36 @@ const Nav = () => {
                 exit="exit"
                 className="fav-drop"
               >
-                <>
-                  <AnimatePresence mode="wait">
-                    {fav.length >= 1 ? (
-                      <motion.div
-                        variants={opacityVariant}
-                        key={"fav-parent"}
-                        initial="start"
-                        exit={"exit"}
-                        animate="end"
-                      >
-                        <AnimatePresence>
-                          {fav.map((arr, index) => {
-                            return <Favorite key={arr.productId} {...arr} />;
-                          })}
-                        </AnimatePresence>
-                      </motion.div>
-                    ) : (
-                      <motion.div
-                        variants={opacityVariant}
-                        key={"no-data-fav-parent"}
-                        initial="start"
-                        exit={"exit"}
-                        transition={{ duration: 0.4 }}
-                        animate="end"
-                        className="no-data-fav center"
-                      >
-                        nothing on your favorites
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </>
+                <AnimatePresence mode="wait">
+                  {fav.length >= 1 ? (
+                    <motion.div
+                      className="center col"
+                      variants={opacityVariant}
+                      key={"fav-parent"}
+                      initial="start"
+                      exit={"exit"}
+                      animate="end"
+                    >
+                      <AnimatePresence>
+                        {fav.map((arr, index) => {
+                          return <Favorite key={arr.productId} {...arr} />;
+                        })}
+                      </AnimatePresence>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      variants={opacityVariant}
+                      key={"no-data-fav-parent"}
+                      initial="start"
+                      exit={"exit"}
+                      transition={{ duration: 0.4 }}
+                      animate="end"
+                      className="no-data-fav center"
+                    >
+                      nothing on your favorites
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
             )}
           </AnimatePresence>

@@ -17,6 +17,7 @@ interface Props {
   price: number;
   title: string;
   images?: imagesInterface[];
+  parentId: string;
 }
 
 const ProductListHeart = ({
@@ -25,6 +26,7 @@ const ProductListHeart = ({
   images,
   price,
   title,
+  parentId,
 }: Props) => {
   const { fav } = useAppSelector((state) => state.fav);
 
@@ -70,6 +72,7 @@ const ProductListHeart = ({
               price,
               path: (images as imagesInterface[])[0].productPath,
               title,
+              parentId,
             };
             const res = await addToFav({
               variables: obj,

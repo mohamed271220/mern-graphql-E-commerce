@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 interface Props {
   numOfPages: number;
   setPage: React.Dispatch<React.SetStateAction<number>>;
+  page: number;
 }
-const Pages = ({ numOfPages, setPage }: Props) => {
+const Pages = ({ numOfPages, setPage, page }: Props) => {
   const [pageArr, setpageArr] = useState([] as number[]);
 
   useEffect(() => {
@@ -18,7 +19,9 @@ const Pages = ({ numOfPages, setPage }: Props) => {
         {
           return (
             <div
-              className="page center"
+              className={`page center ${
+                page === index + 1 ? "page-active" : ""
+              }`}
               onClick={() => setPage(index + 1)}
               key={index}
             >

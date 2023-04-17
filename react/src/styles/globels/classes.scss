@@ -19,6 +19,10 @@
   letter-spacing: 1px;
   font-size: 1rem;
   text-transform: capitalize;
+  &.btn-about {
+    background: var(--white);
+    color: black;
+  }
 }
 
 .inp {
@@ -132,4 +136,9 @@
 
 .w-100 {
   width: 100%;
+}
+
+.col {
+  flex-direction: column;
+  gap: 4px;
 }

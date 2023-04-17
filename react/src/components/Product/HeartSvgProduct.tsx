@@ -16,8 +16,14 @@ interface Props {
 }
 
 const HeartSvgProduct = ({ isFavoraited, setIsFavorited }: Props) => {
-  const { bigImgInd, images, price, title } = useContext(productContext);
-
+  const {
+    _id: parentId,
+    bigImgInd,
+    images,
+    price,
+    title,
+  } = useContext(productContext);
+  console.log({ parentId });
   const { fav } = useAppSelector((state) => state.fav);
   const [id, setId] = useState("");
   const [path, setPath] = useState("");
@@ -59,7 +65,7 @@ const HeartSvgProduct = ({ isFavoraited, setIsFavorited }: Props) => {
           setIsFavorited(!isFavoraited);
 
           const userId = Cookies.get("user-id");
-          const obj = { userId, productId: id, price, path, title };
+          const obj = { userId, productId: id, price, path, title, parentId };
           if (!isFavoraited) {
             const res = await addToFav({
               variables: obj,

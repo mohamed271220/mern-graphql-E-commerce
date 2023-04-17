@@ -3,10 +3,8 @@
 .fav-par {
   position: relative;
   color: black;
+
   .fav-drop {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
     padding: 4px;
     position: absolute;
     top: 28px;
@@ -14,9 +12,10 @@
     width: 200px;
     height: 200px;
     background: var(--green);
-    // box-shadow: 2px 2px 2px black;
     box-shadow: var(--nav-shadow);
     border-radius: 5px;
+    overflow: hidden auto;
+
     .fav-product {
       box-shadow: 1px 1px 2px black;
 
@@ -24,12 +23,12 @@
       height: 60px;
       background: white;
       display: flex;
-      justify-content: space-between;
-      padding: 5px;
+      justify-content: center;
+
       .fav-content {
         flex-direction: column;
-
-        margin: 20px;
+        width: 60%;
+        height: 55px;
         .unsave {
           background: transparent;
           color: var(--delete);
@@ -38,23 +37,35 @@
       .fav-title {
         color: black;
         white-space: nowrap;
+        overflow: hidden;
+        width: 90%;
+        font-size: 0.9rem;
+        text-align: center;
+        text-overflow: ellipsis;
       }
       .fav-price {
         color: var(--wheat);
-        margin-top: 6px;
+        position: relative;
+        top: 5px;
       }
       .fav-img {
-        // border-radius: 50%;
         width: 70px;
-        height: 100%;
-        // background: #000;
+        height: 95%;
         overflow: hidden;
 
         img {
-          width: 70px;
-          object-fit: cover;
+          width: 50px;
+          // height: 100%;
+          // object-fit: cover;
           filter: drop-shadow(2px 6px 4px black);
         }
+      }
+    }
+
+    .product-links {
+      .btn {
+        background: transparent;
+        color: grey;
       }
     }
   }
