@@ -16,6 +16,7 @@ exports.productType = new graphql_1.GraphQLObjectType({
         price: { type: graphql_1.GraphQLInt },
         stock: { type: graphql_1.GraphQLString },
         category: { type: graphql_1.GraphQLString },
+        state: { type: graphql_1.GraphQLString },
         images: { type: new graphql_1.GraphQLList(types_js_1.imageType) },
         rating: { type: new graphql_1.GraphQLList(graphql_1.GraphQLInt) },
         reviews: { type: new graphql_1.GraphQLList(types_js_1.ReviewType) },

@@ -13,6 +13,9 @@
   --star: #ffd700;
   --star-dark: #d3d3d3;
   --nav-shadow: 0.5px 2px 2px rgba(128, 128, 128, 0.275);
+  --limited: #d7bc25b2;
+  --new: var(--green);
+  --sale: #0e458d;
 }
 
 .center {

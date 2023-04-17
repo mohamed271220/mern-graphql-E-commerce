@@ -18,6 +18,7 @@ export const productType = new GraphQLObjectType({
     price: { type: GraphQLInt },
     stock: { type: GraphQLString },
     category: { type: GraphQLString },
+    state: { type: GraphQLString },
     images: { type: new GraphQLList(imageType) },
     rating: { type: new GraphQLList(GraphQLInt) },
     reviews: { type: new GraphQLList(ReviewType) },

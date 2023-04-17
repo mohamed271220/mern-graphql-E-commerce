@@ -20,15 +20,16 @@ export const productContext = createContext({} as productContextInterface);
 const Product = () => {
   const [bigImgInd, setBigImgInd] = useState(0);
 
-  const id = "642a06258b0a1b45ebf05639";
   const { data, error, loading } = useQuery(GET_Product_By_Id, {
-    variables: { id },
+    variables: { id: "643c8eb1a89b31c77136c039" },
   });
-
+  console.log({ data, error });
   const [showPop, setShowPop] = useState(false);
 
   if (loading) {
     return <>loading</>;
+  } else if (error?.message) {
+    return <div> {error.message} </div>;
   } else {
     const {
       images,

@@ -17,6 +17,7 @@ export const GET_Product_By_Id = gql`
       description
       rating
       category
+
       images {
         productPath
         _id
@@ -32,6 +33,7 @@ export const Get_All_Products = gql`
       price
       stock
       title
+      state
       rating
       category
       images {

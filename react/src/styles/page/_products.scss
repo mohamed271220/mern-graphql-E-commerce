@@ -5,10 +5,10 @@
 
   margin-top: 60px;
   width: 100%;
-  height: 100vh;
   position: relative;
   display: flex;
   justify-content: space-between;
+  padding: 20px 0;
 }
 .head-product.heading {
   width: fit-content;
@@ -110,12 +110,18 @@ aside {
   // min-width: 400px;
   // max-height: 400px;
   width: calc(100% - 200px - 20px);
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  position: relative;
+
   .product-List {
     position: relative;
 
     padding: 5px;
-    width: 150px;
+    width: 200px;
     display: flex;
+    height: 250px;
     flex-direction: column;
     background: var(--white);
     box-shadow: 1px 1px 3px black;
@@ -133,8 +139,14 @@ aside {
       letter-spacing: 0.8px;
     }
     .title-product {
+      display: inline-block;
       letter-spacing: 1px;
       color: rgb(32, 115, 210);
+      text-overflow: ellipsis;
+      overflow: hidden;
+      text-align: center;
+      width: 95%;
+      white-space: nowrap;
     }
     .price-product {
       font-weight: bold;
@@ -148,16 +160,18 @@ aside {
     }
     .img-par {
       width: 100px;
+      height: 120px;
       margin-bottom: 4px;
       overflow: hidden;
       padding: 4px;
       img {
         transition: 0.5s;
-        width: 120%;
+        width: 90%;
         filter: drop-shadow(2px 2px 3px black);
-
-        &:hover {
-          transform: scale(1.3);
+      }
+      &:hover {
+        img {
+          transform: scale(1.1);
         }
       }
     }
@@ -204,4 +218,46 @@ svg.svg-star {
   display: flex;
   justify-content: space-evenly;
   width: 100%;
+}
+
+.product-state {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: fit-content;
+  height: 25px;
+  padding: 0 10px;
+  color: white;
+  border-end-end-radius: 4px;
+}
+
+.new {
+  background: var(--new);
+}
+.sale {
+  background: var(--sale);
+}
+
+.exclusive {
+  font-size: 0.8rem;
+  background: #000;
+}
+.limited {
+  font-size: 0.8rem;
+  background: var(--limited);
+}
+
+.pages-par {
+  position: absolute;
+  top: 105%;
+  left: 0;
+  width: 100%;
+  gap: 20px;
+  cursor: pointer;
+  .page {
+    width: 25px;
+    height: 25px;
+    background: var(--green);
+    color: white;
+  }
 }

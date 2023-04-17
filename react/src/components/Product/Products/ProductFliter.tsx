@@ -8,6 +8,7 @@ interface Props {
   price: number;
   stock: number;
   title: string;
+  state: string;
   category: string;
   images: imagesInterface[];
   rating: number[];
@@ -21,6 +22,7 @@ const ProductFliter = ({
   title,
   images,
   rating,
+  state,
 }: Props) => {
   const avgRate = useAvg(rating);
   const [isFavoraited, setIsFavorited] = useState(false);
@@ -53,6 +55,7 @@ const ProductFliter = ({
         />{" "}
       </span>
       <button className="btn product-btn">add to cart</button>
+      <span className={`product-state center ${state}`}>{state}</span>
     </section>
   );
 };

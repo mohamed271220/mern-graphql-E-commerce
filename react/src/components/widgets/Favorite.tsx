@@ -7,13 +7,22 @@ import { useMutation } from "@apollo/client";
 import { REMOVE_FROM_FAV } from "../../graphql/mutations/user";
 import Cookies from "js-cookie";
 import { toast } from "react-hot-toast";
+import { opacityVariant } from "../../variants/globals";
 
 const Favorite = ({ _id, price, title, productId, path }: favArrInterface) => {
   const dispatch = useAppDispatch();
   const [RemoveFromFav] = useMutation(REMOVE_FROM_FAV);
 
   return (
-    <motion.div className="fav-product center">
+    <motion.div
+      className="fav-product center"
+      variants={opacityVariant}
+      key={_id}
+      initial="start"
+      exit={"exit"}
+      animate="end"
+      transition={{ duration: 0.4 }}
+    >
       <div className="fav-img center ">
         <img src={path} alt="" />
       </div>
@@ -31,7 +40,7 @@ const Favorite = ({ _id, price, title, productId, path }: favArrInterface) => {
                 productId,
               },
             });
-            dispatch(removeFromFavRedux(productId));
+            dispatch(removeFromFavRedux([productId]));
             toast.success(res.data.removeFromFav.msg);
           }}
         >

@@ -20,7 +20,7 @@ export const parentVarient = {
   end: (bool: boolean) => ({
     rotate: bool ? [0, 15, -15, 0] : "",
     transition: {
-      rotate: { delay: 0, when: "beforeChildren", duration: 0.2 },
+      rotate: { delay: 0, when: "beforeChildren", duration: 0.3 },
     },
   }),
   exit: { transition: { when: "afterChildren", duration: 0.2 } },

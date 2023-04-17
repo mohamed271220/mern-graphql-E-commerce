@@ -21,6 +21,7 @@ exports.productSchema = new mongoose_1.default.Schema({
     price: Number,
     stock: { type: Number, min: 0 },
     category: String,
+    state: String,
     images: [imageSchema],
     rating: [Number],
     reviews: [reviewSchema],

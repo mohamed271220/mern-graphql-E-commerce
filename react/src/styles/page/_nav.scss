@@ -25,47 +25,58 @@ nav {
         font-weight: bold;
         letter-spacing: 1px;
         text-transform: capitalize;
+        &.link {
+          &::before {
+            transition: 0.5s;
+            content: "";
+            position: absolute;
+            height: 3px;
+            top: 120%;
+            left: 50%;
+            background: var(--wheat);
+            width: 0;
+          }
 
-        &::before {
-          transition: 0.5s;
-          content: "";
-          position: absolute;
-          height: 3px;
-          top: 120%;
-          left: 50%;
-          background: var(--wheat);
-          width: 0;
-        }
+          &::after {
+            transition: 0.5s;
+            content: "";
+            position: absolute;
+            height: 3px;
+            top: 120%;
+            right: 50%;
+            background: var(--wheat);
+            width: 0;
+          }
 
-        &::after {
-          transition: 0.5s;
-          content: "";
-          position: absolute;
-          height: 3px;
-          top: 120%;
-          right: 50%;
-          background: var(--wheat);
-          width: 0;
-        }
-
-        &:hover:before,
-        &.active:before {
-          border-bottom-right-radius: 3px;
-          width: 50%;
-        }
-        &:hover:after,
-        &.active:after {
-          width: 50%;
-          border-bottom-left-radius: 3px;
-        }
-        &.active {
-          color: var(--green);
-          &.active:before,
+          &:hover:before,
+          &.active:before {
+            border-bottom-right-radius: 3px;
+            width: 50%;
+          }
+          &:hover:after,
           &.active:after {
             width: 50%;
+            border-bottom-left-radius: 3px;
+          }
+          &.active {
+            color: var(--green);
+            &.active:before,
+            &.active:after {
+              width: 50%;
+            }
           }
         }
       }
     }
   }
+}
+
+.no-data-fav {
+  width: 100%;
+  height: 100%;
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 1rem;
+  letter-spacing: 0.8px;
+  color: var(--white);
 }

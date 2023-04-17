@@ -26,9 +26,7 @@ const Review = ({ _id, image, user, rate, review, i }: Props) => {
   const [count, setCount] = useState(0);
 
   const reviewRef = useRef<HTMLDivElement | null>(null);
-
   const inView = useInView(reviewRef);
-  console.log(inView);
   let interval: number | undefined;
   useEffect(() => {
     if (count <= rate && inView) {

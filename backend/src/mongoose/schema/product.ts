@@ -41,6 +41,7 @@ export const productSchema = new mongoose.Schema({
   price: Number,
   stock: { type: Number, min: 0 },
   category: String,
+  state: String,
   images: [imageSchema],
   rating: [Number],
   reviews: [reviewSchema],
