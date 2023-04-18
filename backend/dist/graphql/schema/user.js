@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.userSchema = exports.userMutation = void 0;
 const graphql_1 = require("graphql");
 const user_js_1 = require("../../mongoose/schema/user.js");
 const hashPassword_js_1 = require("../../middlewares/hashPassword.js");
@@ -61,17 +62,20 @@ const userType = new graphql_1.GraphQLObjectType({
         phone: { type: graphql_1.GraphQLInt },
         fav: { type: new graphql_1.GraphQLList(favtType) },
         cart: { type: new graphql_1.GraphQLList(cartType) },
-        favArr: {
-            type: new graphql_1.GraphQLList(product_js_1.productType),
-            resolve(par, arg) {
-                const arrOfIds = par.fav.map((e) => e.productId);
-                console.log(arrOfIds);
-                return product_js_2.default.find({ "images._id": { $in: arrOfIds } }, { "images.$": 1, price: 1, title: 1 });
-            },
-        },
+        // favArr: {
+        //   type: new GraphQLList(productType),
+        //   resolve(par, arg) {
+        //     const arrOfIds = par.fav.map((e: any) => e.productId);
+        //     console.log(arrOfIds);
+        //     return productCollection.find(
+        //       { "images._id": { $in: arrOfIds } },
+        //       { "images.$": 1, price: 1, title: 1 }
+        //     );
+        //   },
+        // },
     }),
 });
-const userMutation = new graphql_1.GraphQLObjectType({
+exports.userMutation = new graphql_1.GraphQLObjectType({
     name: "userMutation",
     fields: {
         addUser: {
@@ -241,10 +245,114 @@ const userMutation = new graphql_1.GraphQLObjectType({
                 return user_js_1.userCollection.findById(args.id);
             },
         },
+        //products
+        filterByPrice: {
+            type: new graphql_1.GraphQLList(product_js_1.productType),
+            args: { price: { type: graphql_1.GraphQLInt } },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    console.log(args);
+                    if (args.price === 1) {
+                        return product_js_2.default.find({}).sort({ price: 1 });
+                    }
+                    else if (args.price === -1) {
+                        return product_js_2.default.find({}).sort({ price: -1 });
+                    }
+                    else {
+                        return product_js_2.default.find({ price: { $lte: args.price } });
+                    }
+                });
+            },
+        },
+        filterByRate: {
+            type: new graphql_1.GraphQLList(product_js_1.productType),
+            args: { rate: { type: graphql_1.GraphQLInt } },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    console.log(args);
+                    if (args.rate === 1) {
+                        return yield product_js_2.default.aggregate([
+                            {
+                                $project: {
+                                    _id: 1,
+                                    title: 1,
+                                    description: 1,
+                                    price: 1,
+                                    stock: 1,
+                                    category: 1,
+                                    state: 1,
+                                    images: 1,
+                                    rating: 1,
+                                    reviews: 1,
+                                    avgRate: { $avg: "$rating" },
+                                },
+                            },
+                            { $sort: { avgRate: 1 } },
+                        ]);
+                    }
+                    else if (args.rate === -1) {
+                        return yield product_js_2.default.aggregate([
+                            {
+                                $project: {
+                                    _id: 1,
+                                    title: 1,
+                                    description: 1,
+                                    price: 1,
+                                    stock: 1,
+                                    category: 1,
+                                    state: 1,
+                                    images: 1,
+                                    rating: 1,
+                                    reviews: 1,
+                                    avgRate: { $avg: "$rating" },
+                                },
+                            },
+                            { $sort: { avgRate: -1 } },
+                        ]);
+                    }
+                    else {
+                        return yield product_js_2.default.aggregate([
+                            {
+                                $project: {
+                                    _id: 1,
+                                    title: 1,
+                                    description: 1,
+                                    price: 1,
+                                    stock: 1,
+                                    category: 1,
+                                    state: 1,
+                                    images: 1,
+                                    rating: 1,
+                                    reviews: 1,
+                                    avgRate: { $avg: "$rating" },
+                                },
+                            },
+                            { $match: { avgRate: { $lte: args.rate } } },
+                        ]);
+                    }
+                });
+            },
+        },
+        filterBycatageory: {
+            type: new graphql_1.GraphQLList(product_js_1.productType),
+            args: { category: { type: graphql_1.GraphQLString } },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    return product_js_2.default.find({ category: args.category });
+                });
+            },
+        },
+        filterByState: {
+            type: new graphql_1.GraphQLList(product_js_1.productType),
+            args: { state: { type: graphql_1.GraphQLString } },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    return product_js_2.default.find({ state: args.state });
+                });
+            },
+        },
     },
 });
-const userSchema = new graphql_1.GraphQLSchema({
-    mutation: userMutation,
+exports.userSchema = new graphql_1.GraphQLSchema({
+    mutation: exports.userMutation,
 });
-console.log(cartType);
-exports.default = userSchema;

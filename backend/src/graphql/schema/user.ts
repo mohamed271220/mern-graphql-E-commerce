@@ -58,21 +58,21 @@ const userType = new GraphQLObjectType({
     phone: { type: GraphQLInt },
     fav: { type: new GraphQLList(favtType) },
     cart: { type: new GraphQLList(cartType) },
-    favArr: {
-      type: new GraphQLList(productType),
-      resolve(par, arg) {
-        const arrOfIds = par.fav.map((e: any) => e.productId);
-        console.log(arrOfIds);
-        return productCollection.find(
-          { "images._id": { $in: arrOfIds } },
-          { "images.$": 1, price: 1, title: 1 }
-        );
-      },
-    },
+    // favArr: {
+    //   type: new GraphQLList(productType),
+    //   resolve(par, arg) {
+    //     const arrOfIds = par.fav.map((e: any) => e.productId);
+    //     console.log(arrOfIds);
+    //     return productCollection.find(
+    //       { "images._id": { $in: arrOfIds } },
+    //       { "images.$": 1, price: 1, title: 1 }
+    //     );
+    //   },
+    // },
   }),
 });
 
-const userMutation = new GraphQLObjectType({
+export const userMutation = new GraphQLObjectType({
   name: "userMutation",
   fields: {
     addUser: {
@@ -268,12 +268,107 @@ const userMutation = new GraphQLObjectType({
         return userCollection.findById(args.id);
       },
     },
+
+    //products
+    filterByPrice: {
+      type: new GraphQLList(productType),
+      args: { price: { type: GraphQLInt } },
+      async resolve(_, args) {
+        console.log(args);
+        if (args.price === 1) {
+          return productCollection.find({}).sort({ price: 1 });
+        } else if (args.price === -1) {
+          return productCollection.find({}).sort({ price: -1 });
+        } else {
+          return productCollection.find({ price: { $lte: args.price } });
+        }
+      },
+    },
+
+    filterByRate: {
+      type: new GraphQLList(productType),
+      args: { rate: { type: GraphQLInt } },
+      async resolve(_, args) {
+        console.log(args);
+        if (args.rate === 1) {
+          return await productCollection.aggregate([
+            {
+              $project: {
+                _id: 1,
+                title: 1,
+                description: 1,
+                price: 1,
+                stock: 1,
+                category: 1,
+                state: 1,
+                images: 1,
+                rating: 1,
+                reviews: 1,
+                avgRate: { $avg: "$rating" },
+              },
+            },
+            { $sort: { avgRate: 1 } },
+          ]);
+        } else if (args.rate === -1) {
+          return await productCollection.aggregate([
+            {
+              $project: {
+                _id: 1,
+                title: 1,
+                description: 1,
+                price: 1,
+                stock: 1,
+                category: 1,
+                state: 1,
+                images: 1,
+                rating: 1,
+                reviews: 1,
+                avgRate: { $avg: "$rating" },
+              },
+            },
+            { $sort: { avgRate: -1 } },
+          ]);
+        } else {
+          return await productCollection.aggregate([
+            {
+              $project: {
+                _id: 1,
+                title: 1,
+                description: 1,
+                price: 1,
+                stock: 1,
+                category: 1,
+                state: 1,
+                images: 1,
+                rating: 1,
+                reviews: 1,
+                avgRate: { $avg: "$rating" },
+              },
+            },
+            { $match: { avgRate: { $lte: args.rate } } },
+          ]);
+        }
+      },
+    },
+
+    filterBycatageory: {
+      type: new GraphQLList(productType),
+      args: { category: { type: GraphQLString } },
+      async resolve(_, args) {
+        return productCollection.find({ category: args.category });
+      },
+    },
+
+    filterByState: {
+      type: new GraphQLList(productType),
+      args: { state: { type: GraphQLString } },
+      async resolve(_, args) {
+        return productCollection.find({ state: args.state });
+      },
+    },
   },
 });
 
-const userSchema = new GraphQLSchema({
+export const userSchema = new GraphQLSchema({
   mutation: userMutation,
 });
-
-console.log(cartType);
-export default userSchema;

@@ -1,13 +1,14 @@
+import { mergeSchemas } from "@graphql-tools/schema";
+import { GraphQLSchema } from "graphql";
+import { GraphQLObjectType } from "graphql";
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import { MongoDB_URL } from "./config";
 import { graphqlHTTP } from "express-graphql";
-import graphQlSchema from "./graphql/schema/product.js";
-import userSchema from "./graphql/schema/user";
-import { mergeSchemas } from "@graphql-tools/schema";
-
+import { userMutation, userSchema } from "./graphql/schema/user.js";
+import { graphQlSchema } from "./graphql/schema/product.js";
 mongoose.connect(MongoDB_URL as unknown as string);
 const app = express();
 app.use(

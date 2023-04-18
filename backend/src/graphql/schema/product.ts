@@ -1,4 +1,5 @@
 import {
+  GraphQLFloat,
   GraphQLID,
   GraphQLInt,
   GraphQLList,
@@ -8,6 +9,7 @@ import {
 } from "graphql";
 import { ReviewType, imageType } from "../types.js";
 import productCollection from "../../mongoose/schema/product.js";
+import { userMutation } from "./user.js";
 
 export const productType = new GraphQLObjectType({
   name: "products",
@@ -22,17 +24,17 @@ export const productType = new GraphQLObjectType({
     images: { type: new GraphQLList(imageType) },
     rating: { type: new GraphQLList(GraphQLInt) },
     reviews: { type: new GraphQLList(ReviewType) },
+    avgRate: { type: GraphQLFloat },
   }),
 });
 
-const query = new GraphQLObjectType({
+export const productQuery = new GraphQLObjectType({
   name: "query",
   fields: {
     product: {
       type: productType,
       args: { id: { type: GraphQLID } },
       resolve(_, args) {
-        console.log(args.id);
         return productCollection.findById(args.id);
       },
     },
@@ -45,7 +47,26 @@ const query = new GraphQLObjectType({
   },
 });
 
-const graphQlSchema = new GraphQLSchema({
-  query,
+// export const productMutation = new GraphQLObjectType({
+//   name: "productMutation",
+//   fields: {
+//     filterByPrice: {
+//       type: productType,
+//       args: { price: { type: GraphQLInt } },
+//       resolve(_, args) {
+//         if (args.price === 1) {
+//           return productCollection.find({}).sort({ price: 1 });
+//         } else if (args.price === -1) {
+//           return productCollection.find({}).sort({ price: -1 });
+//         } else {
+//           return null;
+//         }
+//       },
+//     },
+//   },
+// });
+
+export const graphQlSchema = new GraphQLSchema({
+  query: productQuery,
+  // mutation: productMutation,
 });
-export default graphQlSchema;
