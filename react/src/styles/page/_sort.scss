@@ -1,0 +1,65 @@
+@import "../variables.scss";
+
+.sort-par {
+  position: absolute;
+  top: -20px;
+  gap: 2%;
+  left: 0;
+  width: 100%;
+  padding: 0 20px;
+  white-space: nowrap;
+
+  select {
+    border: 0;
+    outline: 0;
+    background: var(--wheat-light);
+    text-transform: capitalize;
+    border-radius: 4px;
+    color: black;
+    font-size: 1rem;
+    padding: 2px 4px;
+    option {
+      background: #000;
+      color: white;
+    }
+  }
+  .view-opt {
+    gap: 20px;
+    font-weight: bold;
+  }
+  .hide-filter-par {
+    button {
+      border: 0;
+      outline: 0;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      gap: 4px;
+      background: transparent;
+      padding: 4px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+  }
+
+  .view-par {
+    .view-icon {
+      font-weight: bold;
+      font-size: 1.2rem;
+      transition: 0.3s;
+      &.shadow {
+        filter: drop-shadow(0.5px 1.5px 1px grey);
+      }
+    }
+
+    gap: 6px;
+  }
+}
+
+.sort-hr {
+  position: absolute;
+  top: 120%;
+  left: 2%;
+  height: 1px;
+  opacity: 0.5;
+  width: 96%;
+}

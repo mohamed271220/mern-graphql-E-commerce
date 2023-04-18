@@ -289,7 +289,6 @@ export const userMutation = new GraphQLObjectType({
       type: new GraphQLList(productType),
       args: { rate: { type: GraphQLInt } },
       async resolve(_, args) {
-        console.log(args);
         if (args.rate === 1) {
           return await productCollection.aggregate([
             {
@@ -364,6 +363,47 @@ export const userMutation = new GraphQLObjectType({
       args: { state: { type: GraphQLString } },
       async resolve(_, args) {
         return productCollection.find({ state: args.state });
+      },
+    },
+    filterAllTypes: {
+      type: new GraphQLList(productType),
+      args: {
+        state: { type: new GraphQLList(GraphQLString) },
+        category: { type: new GraphQLList(GraphQLString) },
+        price: { type: GraphQLInt },
+        rate: { type: GraphQLInt },
+      },
+      async resolve(_, args) {
+        try {
+          console.log(args);
+          return await productCollection.aggregate([
+            {
+              $project: {
+                _id: 1,
+                title: 1,
+                description: 1,
+                price: 1,
+                stock: 1,
+                category: 1,
+                state: 1,
+                images: 1,
+                rating: 1,
+                reviews: 1,
+                avgRate: { $avg: "$rating" },
+              },
+            },
+            {
+              $match: {
+                avgRate: { $lte: args.rate },
+                price: { $lte: args.price },
+                category: { $in: args.category },
+                state: { $in: args.state },
+              },
+            },
+          ]);
+        } catch (err) {
+          console.log((err as Error).message);
+        }
       },
     },
   },

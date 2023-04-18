@@ -108,19 +108,22 @@ aside {
 }
 
 .product-list-par {
-  // min-width: 400px;
-  // max-height: 400px;
-  width: calc(100% - 200px - 20px);
-  display: flex;
   gap: 5px;
-  flex-wrap: wrap;
+  padding: 10px;
   position: relative;
-
+  margin: 0 auto;
+  &.list {
+    display: flex;
+    flex-direction: column;
+  }
+  &.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
   .product-List {
+    font-size: clamp(14px, 1rem, 16px);
     position: relative;
-
     padding: 5px;
-    width: 200px;
     display: flex;
     height: 250px;
     flex-direction: column;
@@ -223,6 +226,7 @@ svg.svg-star {
   color: white;
   border-end-end-radius: 4px;
   letter-spacing: 0.8px;
+  font-size: 0.8rem;
 }
 
 .new {
@@ -232,13 +236,14 @@ svg.svg-star {
   background: var(--sale);
 }
 
+.trending {
+  background: var(--trending);
+}
 .exclusive {
-  font-size: 0.8rem;
   background: #000;
 }
 .limited {
-  font-size: 0.8rem;
-  background: var(--limited);
+  background: var(--twitter);
 }
 
 .pages-par {
@@ -262,7 +267,7 @@ svg.svg-star {
 
 .product-links {
   margin-top: 6px;
-  gap: 20px;
+  gap: 2rem;
   button {
     font-size: 0.8rem;
     &.details {

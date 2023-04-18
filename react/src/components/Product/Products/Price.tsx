@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import useHide from "../../../custom/useHide";
 import { FcMinus } from "react-icons/fc";
 import { BiPlus } from "react-icons/bi";
 import { AnimatePresence, motion } from "framer-motion";
 import { opacityVariant, parentVariant } from "../../../variants/globals";
+import { viewFilterContext } from "./Products";
 const Price = () => {
-  const [price, setPrice] = useState(0);
+  const { setPriceFilter, priceFilter } = useContext(viewFilterContext);
 
   const handlePrice = (e: React.ChangeEvent<HTMLInputElement>) =>
-    setPrice(Number(e.target.value));
+    setPriceFilter(Number(e.target.value));
 
   const [showPrice, handleShowPrice, handleHidePrice] = useHide();
 
@@ -53,14 +54,14 @@ const Price = () => {
             exit={"exit"}
             className="price-filter"
           >
-            <motion.p variants={opacityVariant}>{price} $</motion.p>
+            <motion.p variants={opacityVariant}>{priceFilter} $</motion.p>
             <motion.input
               variants={opacityVariant}
               type="range"
-              step="4"
+              step="20"
               min={0}
-              max={400}
-              defaultValue={0}
+              max={2000}
+              defaultValue={priceFilter}
               onChange={handlePrice}
             />
           </motion.div>

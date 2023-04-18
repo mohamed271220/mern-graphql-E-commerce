@@ -269,7 +269,6 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
             args: { rate: { type: graphql_1.GraphQLInt } },
             resolve(_, args) {
                 return __awaiter(this, void 0, void 0, function* () {
-                    console.log(args);
                     if (args.rate === 1) {
                         return yield product_js_2.default.aggregate([
                             {
@@ -348,6 +347,50 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
             resolve(_, args) {
                 return __awaiter(this, void 0, void 0, function* () {
                     return product_js_2.default.find({ state: args.state });
+                });
+            },
+        },
+        filterAllTypes: {
+            type: new graphql_1.GraphQLList(product_js_1.productType),
+            args: {
+                state: { type: new graphql_1.GraphQLList(graphql_1.GraphQLString) },
+                category: { type: new graphql_1.GraphQLList(graphql_1.GraphQLString) },
+                price: { type: graphql_1.GraphQLInt },
+                rate: { type: graphql_1.GraphQLInt },
+            },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    try {
+                        console.log(args);
+                        return yield product_js_2.default.aggregate([
+                            {
+                                $project: {
+                                    _id: 1,
+                                    title: 1,
+                                    description: 1,
+                                    price: 1,
+                                    stock: 1,
+                                    category: 1,
+                                    state: 1,
+                                    images: 1,
+                                    rating: 1,
+                                    reviews: 1,
+                                    avgRate: { $avg: "$rating" },
+                                },
+                            },
+                            {
+                                $match: {
+                                    avgRate: { $lte: args.rate },
+                                    price: { $lte: args.price },
+                                    category: { $in: args.category },
+                                    state: { $in: args.state },
+                                },
+                            },
+                        ]);
+                    }
+                    catch (err) {
+                        console.log(err.message);
+                    }
                 });
             },
         },

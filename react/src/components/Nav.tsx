@@ -47,7 +47,6 @@ const Nav = () => {
   console.log({ cart });
   const { scrollY } = useScroll({
     target: navRef,
-    offset: ["start start"],
   });
   const navClr = useTransform(
     scrollY,

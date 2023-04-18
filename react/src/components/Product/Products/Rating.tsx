@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Star from "./Star";
 import Checkbox from "../../../custom/checkbox";
 import { AnimatePresence, motion } from "framer-motion";
@@ -7,8 +7,11 @@ import useHide from "../../../custom/useHide";
 
 import { FcMinus } from "react-icons/fc";
 import { BiPlus } from "react-icons/bi";
+import { viewFilterContext } from "./Products";
 
 const Rating = () => {
+  const { RateChecked, setRateChecked } = useContext(viewFilterContext);
+
   const stars = [];
 
   for (let i = 1; i <= 5; i++) {
@@ -29,7 +32,11 @@ const Rating = () => {
         className="center rate-filter-par"
         key={`group-${i}`}
       >
-        <Checkbox />
+        <Checkbox
+          isChecked={RateChecked}
+          setIsChecked={setRateChecked}
+          filter={6 - i}
+        />
         <span className="rate-filter">{group}</span>
       </motion.div>
     );

@@ -43,6 +43,10 @@
   font-size: 1rem;
   text-transform: capitalize;
 }
+.btn.btn-about {
+  background: var(--white);
+  color: black;
+}
 
 .inp {
   border: 0;
@@ -1157,7 +1161,7 @@ svg.svg-star {
 
 .product-links {
   margin-top: 6px;
-  gap: 20px;
+  gap: 2rem;
 }
 .product-links button {
   font-size: 0.8rem;
@@ -1360,4 +1364,52 @@ svg.svg-star {
   right: 1px;
   transform-origin: 100% 0%;
   transform: rotate(-30deg);
+}
+
+:root {
+  --green: #367e53;
+  --wheat: rgb(202, 170, 109);
+  --wheat-light: #c5af87c9;
+  --wheat-lighter: #dcccaec9;
+  --white: rgb(247, 246, 246);
+  --twitter: #1da1f2;
+  --fb: #1877f2;
+  --gmail: #ea4335;
+  --delete: #751d15;
+  --light-text: rgba(113, 109, 109, 0.738);
+  --overley: rgba(19, 78, 26, 0.423);
+  --star: #ffd700;
+  --star-dark: #d3d3d3;
+  --nav-shadow: 0.5px 2px 2px rgba(128, 128, 128, 0.275);
+  --limited: #d7bc25b2;
+  --new: var(--green);
+  --sale: #0e458d;
+}
+
+.about-par {
+  width: 85%;
+  padding: 2%;
+  height: 100vh;
+  gap: 20px;
+  background: green;
+  margin: 0 auto;
+}
+.about-par .heading::before {
+  top: 110%;
+}
+.about-par p {
+  letter-spacing: 1.2px;
+}
+.about-par p.middle {
+  margin: 0 auto;
+  width: 80%;
+  text-align: center;
+}
+.about-par p.left {
+  align-self: self-start;
+  width: 70%;
+}
+.about-par p.right {
+  align-self: self-end;
+  width: 70%;
 }/*# sourceMappingURL=App.css.map */

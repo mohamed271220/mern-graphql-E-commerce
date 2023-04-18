@@ -15,10 +15,15 @@ export const checkpathVariant = {
   exit: { pathLength: 0, pathOffset: 1, transition: { duration: 0.4 } },
 };
 
+interface parentVarientParam {
+  filter: string;
+  isChecked: string;
+}
+
 export const parentVarient = {
   start: {},
-  end: (bool: boolean) => ({
-    rotate: bool ? [0, 15, -15, 0] : "",
+  end: ({ filter, isChecked }: parentVarientParam) => ({
+    rotate: filter === isChecked ? [0, 15, -15, 0] : "",
     transition: {
       rotate: { delay: 0, when: "beforeChildren", duration: 0.3 },
     },
