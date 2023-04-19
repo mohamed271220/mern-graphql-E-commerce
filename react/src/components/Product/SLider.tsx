@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
@@ -41,6 +41,13 @@ const SLiderComponent = () => {
     autoplay: true,
   };
   const { data } = useQuery(Get_All_Products);
+
+  // const { setroductSearchWord } = useContext(viewFilterContext);
+
+  // useEffect(() => {
+  //   setroductSearchWord("");
+  // }, []);
+
   return (
     <>
       <h1 className="heading heading-slider">you may like </h1>

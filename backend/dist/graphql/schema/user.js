@@ -394,6 +394,21 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                 });
             },
         },
+        searchProducts: {
+            type: new graphql_1.GraphQLList(product_js_1.productType),
+            args: { word: { type: graphql_1.GraphQLString } },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    console.log(args);
+                    return yield product_js_2.default.find({
+                        $or: [
+                            { category: { $regex: args.word, $options: "i" } },
+                            { title: { $regex: args.word, $options: "i" } },
+                        ],
+                    });
+                });
+            },
+        },
     },
 });
 exports.userSchema = new graphql_1.GraphQLSchema({

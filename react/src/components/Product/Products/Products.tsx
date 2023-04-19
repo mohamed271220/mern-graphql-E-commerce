@@ -19,6 +19,8 @@ interface viewFilterContextInterface {
   setPriceFilter: React.Dispatch<React.SetStateAction<number | string>>;
   RateChecked: string | number;
   setRateChecked: React.Dispatch<React.SetStateAction<number | string>>;
+  productSearchWord: string;
+  setroductSearchWord: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const viewFilterContext = createContext(
@@ -34,6 +36,7 @@ const Products = () => {
   const [productFeatured, setProductFeatured] = useState<string | number>("");
   const [priceFilter, setPriceFilter] = useState<string | number>(0);
   const [RateChecked, setRateChecked] = useState<string | number>("");
+  const [productSearchWord, setroductSearchWord] = useState<string>("");
 
   useEffect(() => {
     if (
@@ -65,15 +68,21 @@ const Products = () => {
         setPriceFilter,
         RateChecked,
         setRateChecked,
+        productSearchWord,
+        setroductSearchWord,
       }}
     >
       <section className="products-par">
+        <h1 className="sort-title heading">Our Products</h1>
+
         <Sort />
 
-        <AnimatePresence mode="wait">
-          {showFilter && <Aside startFiltering={startFiltering} />}
-        </AnimatePresence>
-        <ProductList />
+        <div className="center row start between">
+          <AnimatePresence mode="wait">
+            {showFilter && <Aside startFiltering={startFiltering} />}
+          </AnimatePresence>
+          <ProductList />
+        </div>
       </section>
     </viewFilterContext.Provider>
   );

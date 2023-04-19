@@ -6,6 +6,7 @@ import { viewFilterContext } from "./Products";
 import { AnimatePresence, motion } from "framer-motion";
 import { opacityVariant } from "../../../variants/globals";
 import SelectFilter from "./SelectFilter";
+import Search from "../Search";
 
 const Sort = () => {
   const { setShowFilter, showFilter, setGridView, gridView } =
@@ -15,8 +16,7 @@ const Sort = () => {
 
   return (
     <div className="sort-par  center between">
-      <h2>Our Products</h2>
-
+      <Search />
       <div className="center view-opt">
         <div className="hide-filter-par">
           <button className="center">
@@ -51,7 +51,6 @@ const Sort = () => {
             <IoFilter />
           </button>
         </div>
-
         <div className="view-par center ">
           <span className="display">display</span>
           <BsListTask

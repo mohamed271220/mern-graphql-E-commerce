@@ -406,6 +406,19 @@ export const userMutation = new GraphQLObjectType({
         }
       },
     },
+    searchProducts: {
+      type: new GraphQLList(productType),
+      args: { word: { type: GraphQLString } },
+      async resolve(_, args) {
+        console.log(args);
+        return await productCollection.find({
+          $or: [
+            { category: { $regex: args.word, $options: "i" } },
+            { title: { $regex: args.word, $options: "i" } },
+          ],
+        });
+      },
+    },
   },
 });
 

@@ -10,6 +10,7 @@ import { useMutation } from "@apollo/client";
 import { viewFilterContext } from "./Products";
 import { FILTER_All } from "../../../graphql/mutations/product.js";
 import { FeaturedProductsArr, categoriesArr } from "../../../arries.js";
+import Search from "../Search";
 
 const asideVariant = {
   start: { width: 0, opacity: 0 },

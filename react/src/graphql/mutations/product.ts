@@ -117,3 +117,30 @@ export const FILTER_All = gql`
     }
   }
 `;
+
+export const Search_Mutaion = gql`
+  mutation ($word: String!) {
+    searchProducts(word: $word) {
+      reviews {
+        image
+        user
+        review
+        rate
+        _id
+      }
+      _id
+      price
+      stock
+      title
+      description
+      rating
+      category
+      state
+
+      images {
+        productPath
+        _id
+      }
+    }
+  }
+`;

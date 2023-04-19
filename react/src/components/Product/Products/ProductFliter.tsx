@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ProductRate from "../ProductRate";
 import useAvg from "../../../custom/useAvg";
 import ProductListHeart from "../../widgets/ProductListHeart";
 import { imagesInterface } from "../../interfaces/user";
 import { useNavigate } from "react-router-dom";
 import { motion, MotionProps, useAnimate } from "framer-motion";
+import { viewFilterContext } from "./Products";
 type Props = {
   _id: string;
   price: number;
@@ -32,6 +33,7 @@ const ProductFliter = ({
   const avgRate = useAvg(rating);
   const [isFavoraited, setIsFavorited] = useState(false);
   const navigate = useNavigate();
+  const { productSearchWord } = useContext(viewFilterContext);
 
   const [ref, animate] = useAnimate();
   useEffect(() => {
@@ -41,30 +43,49 @@ const ProductFliter = ({
       { delay: index * 0.15, duration: 0.15 }
     );
   }, []);
+
+  console.log({ productSearchWord });
   return (
     <div ref={ref}>
-      <motion.section
-        // ref={ref}
-        // animate={controls}
-        className="product-List center"
-        // initial="start"
-        // exit={"exit"}
-        // transition={{
-        //   delay: (index + 1) * 0.18,
-        //   duration: 0.15,
-        //   type: "tween",
-        //   // type: "spring",
-        //   ease: "easeInOut",
-        // }}
-        // animate="end"
-        // variants={productVariant}
-        {...motionProps}
-      >
+      <motion.section className="product-List center" {...motionProps}>
         <div className="img-par center">
           <img src={images[0].productPath} alt={title} />
         </div>
-        <span className="category-card">{category}</span>
-        <span className="title-product">{title}</span>
+        <span className="category-card">
+          {productSearchWord
+            ? category
+                .split(new RegExp(`(${productSearchWord})`, "gi"))
+                .map((part, index) => {
+                  if (part?.toLowerCase() === productSearchWord.toLowerCase()) {
+                    return (
+                      <span key={index} className="highlight">
+                        {part}
+                      </span>
+                    );
+                  } else {
+                    return <span key={index}>{part}</span>;
+                  }
+                })
+            : category}
+        </span>
+        <span className="title-product">
+          {" "}
+          {productSearchWord
+            ? title
+                .split(new RegExp(`(${productSearchWord})`, "gi"))
+                .map((part, index) => {
+                  if (part?.toLowerCase() === productSearchWord.toLowerCase()) {
+                    return (
+                      <span key={index} className="highlight">
+                        {part}
+                      </span>
+                    );
+                  } else {
+                    return <span key={index}>{part}</span>;
+                  }
+                })
+            : title}
+        </span>
         <span className="price-product">${price.toFixed(2)}</span>
         <span> </span>
 

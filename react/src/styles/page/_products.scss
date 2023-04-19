@@ -3,13 +3,14 @@
 .products-par {
   //-remove margin top
 
-  margin-top: 60px;
+  // margin-top: 60px;
   width: 100%;
   min-height: 100vh;
   position: relative;
   display: flex;
   justify-content: space-between;
   padding: 20px 0;
+  flex-direction: column;
 }
 .head-product.heading {
   width: fit-content;
@@ -24,9 +25,10 @@ aside {
   // left: 0;
   font-size: 1rem;
   padding: 15px;
-  width: 200px;
+  // width: 200px;
   height: 100%;
   // background: wheat;
+
   .aside-head {
     justify-content: space-between;
   }

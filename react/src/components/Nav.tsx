@@ -14,6 +14,7 @@ import { opacityVariant, popVariant } from "../variants/globals";
 import { useAppSelector } from "../custom/reduxTypes";
 import ShowCount from "./widgets/Counter";
 import { BsFillCartPlusFill } from "react-icons/bs";
+import Search from "./Product/Search";
 
 const linksArr = [
   {
