@@ -1519,4 +1519,73 @@ svg.svg-star {
   height: 1px;
   opacity: 0.5;
   width: 96%;
+}
+
+:root {
+  --green: #367e53;
+  --wheat: rgb(202, 170, 109);
+  --wheat-light: #c5af87c9;
+  --wheat-lighter: #dcccaec9;
+  --white: rgb(247, 246, 246);
+  --twitter: #1da1f2;
+  --fb: #1877f2;
+  --gmail: #ea4335;
+  --delete: #751d15;
+  --light-text: rgba(113, 109, 109, 0.738);
+  --overley: rgba(19, 78, 26, 0.423);
+  --star: #ffd700;
+  --star-dark: #d3d3d3;
+  --nav-shadow: 0.5px 2px 2px rgba(128, 128, 128, 0.275);
+  --trending: #d7bc25b2;
+  --new: var(--green);
+  --sale: #0e458d;
+}
+
+.custom-select {
+  width: 130px;
+  height: 25px;
+  background: var(--twitter);
+  border-radius: 5px;
+  position: relative;
+  letter-spacing: 0.7px;
+  text-transform: capitalize;
+  box-shadow: 0.25px 0.25px 2px black;
+}
+
+.select-icon {
+  position: absolute;
+  transform: translateY(-50%);
+  color: var(--white);
+  font-size: 10px;
+  cursor: pointer;
+}
+.select-icon.arrow {
+  right: 5px;
+  top: 50%;
+}
+.select-icon.sort {
+  left: 5px;
+  top: 50%;
+  gap: 5px;
+}
+.select-icon.sort .value {
+  margin-left: -2px;
+  font-size: 10px;
+}
+
+.select-dropdown {
+  list-style: none;
+  background: #000;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  box-shadow: 0.25px 0.25px 2px black;
+  color: var(--white);
+  padding: 4px;
+  align-items: flex-start;
+  padding-left: 10px;
+  cursor: pointer;
+  font-size: 10px;
 }/*# sourceMappingURL=App.css.map */

@@ -7,14 +7,16 @@ import {
   FILTER_BY_STATE,
 } from "../../../graphql/mutations/product";
 import { Get_All_Products } from "../../../graphql/general";
-
+import { MdOutlineSort } from "react-icons/md";
+import { BiDownArrow } from "react-icons/bi";
+import { AnimatePresence, motion } from "framer-motion";
+import { opacityVariant } from "../../../variants/globals";
 const optionsArr = [
   "relevance",
   "highest price",
   "lowest price",
   "highest rate",
   "lowest rate",
-  "bestsellers",
 ];
 
 const SelectFilter = () => {
@@ -28,12 +30,6 @@ const SelectFilter = () => {
   useEffect(() => {
     if (selectValue === "relevance") {
       fnRevlence().then(({ data }) => setProducts(data.products));
-    } else if (selectValue === "bestsellers") {
-      fnTrendy({
-        variables: {
-          state: "trending",
-        },
-      }).then(({ data }) => setProducts(data.filterByState));
     } else if (selectValue === "lowest price") {
       fnPrice({
         variables: {
@@ -60,21 +56,71 @@ const SelectFilter = () => {
       }).then(({ data }) => setProducts(data.filterByRate));
     }
   }, [selectValue]);
+
+  const [isSelectFocus, setIsSelectFocus] = useState(false);
+
+  const selectDropDownVariants = {
+    start: { opacity: 0 },
+    end: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        when: "beforeChildren",
+        staggerChildren: 0.1,
+        duration: 0.1,
+      },
+    },
+    exit: {
+      opacity: 1,
+      transition: {
+        when: "afterChildren",
+        staggerChildren: 0.1,
+        staggerDirection: -1,
+        duration: 0.1,
+        delayChildren: 0.4,
+      },
+    },
+  };
+
   return (
-    <select
-      name=""
-      id=""
-      onChange={(e) => setSelectValue(e.target.value)}
-      defaultValue={"relevance"}
+    <div
+      className="custom-select"
+      onClick={() => setIsSelectFocus(!isSelectFocus)}
     >
-      {optionsArr.map((opt, i) => {
-        return (
-          <option value={opt} key={i}>
-            {opt}
-          </option>
-        );
-      })}
-    </select>
+      <BiDownArrow className="icon select-icon arrow" />
+      <span className="icon select-icon sort center">
+        <MdOutlineSort /> sort: <span className="value"> {selectValue}</span>
+      </span>
+      <AnimatePresence>
+        {isSelectFocus && (
+          <motion.ul
+            className="select-dropdown center col"
+            variants={selectDropDownVariants}
+            initial="start"
+            animate="end"
+            exit="exit"
+          >
+            {optionsArr.map((opt, i) => {
+              return (
+                <motion.li
+                  style={{
+                    color:
+                      opt === selectValue ? "var(--wheat)" : "var(--white)",
+                  }}
+                  variants={opacityVariant}
+                  onClick={() => setIsSelectFocus(false)}
+                  key={i}
+                  whileHover={{ x: 10 }}
+                  onTapStart={() => setSelectValue(opt)}
+                >
+                  {opt}
+                </motion.li>
+              );
+            })}
+          </motion.ul>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };
 

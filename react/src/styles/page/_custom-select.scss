@@ -1,0 +1,53 @@
+@import "../variables.scss";
+
+.custom-select {
+  width: 130px;
+  height: 25px;
+  background: var(--twitter);
+  border-radius: 5px;
+  position: relative;
+  letter-spacing: 0.7px;
+  text-transform: capitalize;
+  box-shadow: 0.25px 0.25px 2px black;
+}
+
+.select-icon {
+  position: absolute;
+
+  transform: translateY(-50%);
+  color: var(--white);
+  font-size: 10px;
+
+  cursor: pointer;
+  &.arrow {
+    right: 5px;
+    top: 50%;
+  }
+  &.sort {
+    left: 5px;
+    top: 50%;
+    gap: 5px;
+    .value {
+      margin-left: -2px;
+      font-size: 10px;
+    }
+  }
+}
+
+.select-dropdown {
+  list-style: none;
+  background: #000;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  box-shadow: 0.25px 0.25px 2px black;
+
+  color: var(--white);
+  padding: 4px;
+  align-items: flex-start;
+  padding-left: 10px;
+  cursor: pointer;
+  font-size: 10px;
+}
