@@ -28,7 +28,7 @@ export const viewFilterContext = createContext(
 const Products = () => {
   const [startFiltering, setStartFiltering] = useState(false);
   const [showFilter, setShowFilter] = useState(true);
-  const [gridView, setGridView] = useState(false);
+  const [gridView, setGridView] = useState(true);
   const [products, setProducts] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState<string | number>("");
   const [productFeatured, setProductFeatured] = useState<string | number>("");

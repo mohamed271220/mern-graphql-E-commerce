@@ -1,12 +1,13 @@
 @import "../variables.scss";
 
 .product-container {
-  margin-top: 40px;
-  height: calc(100vh - 40px);
+  margin: 40px 0;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
   .product-page {
     overflow: hidden;
-
     display: flex;
     height: calc(100vh - 50px);
     justify-content: center;
@@ -231,5 +232,19 @@ p {
   border-radius: 50%;
   svg {
     font-size: 0.8rem;
+  }
+}
+
+.heading-slider {
+  width: fit-content;
+  margin: 20px;
+  margin-top: 30px;
+  font-size: 20px;
+  &.heading {
+    &:before {
+      left: 0;
+      top: 95%;
+      width: 40%;
+    }
   }
 }
