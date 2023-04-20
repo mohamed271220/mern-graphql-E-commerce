@@ -6,51 +6,45 @@
   align-items: center;
 }
 
-.btn {
+.remove-border {
   border: 0;
   outline: 0;
-  background: linear-gradient(30deg, var(--wheat), var(--green));
+}
+
+.shadow {
+  filter: drop-shadow (0.2px 0.5px 0.8px black);
+  text-shadow: 0.2px 0.5px 0.8px black;
+}
+
+.box-shadow {
+  box-shadow: 0.2px 0.5px 1px black;
+}
+.btn {
+  @extend .remove-border;
+  @extend .shadow;
   color: var(--white);
   white-space: nowrap;
   padding: 4px 10px;
-  border-radius: 4px 10px;
-  text-shadow: 0px 1.5px 1.5px black;
   font-weight: bold;
   letter-spacing: 1px;
   font-size: 0.9rem;
+  border-radius: 4px 10px;
   text-transform: capitalize;
-  &.btn-about {
+  &.about {
     background: var(--white);
     color: black;
+  }
+  &.main {
+    background: linear-gradient(30deg, var(--wheat), var(--green));
   }
 }
 
 .inp {
-  border: 0;
-  outline: 0;
+  @extend .remove-border;
   padding: 8px;
   width: 80%;
   margin: 0 auto;
   font-size: 1rem;
-}
-
-.heading {
-  position: relative;
-  height: 30px;
-  letter-spacing: 1px;
-  text-transform: capitalize;
-  font-weight: bold;
-
-  &::before {
-    content: "";
-    position: absolute;
-    top: 75%;
-    height: 2px;
-    left: 20%;
-    width: 60%;
-    background: linear-gradient(210deg, var(--wheat), var(--green));
-    border-radius: 10px;
-  }
 }
 
 .or {
@@ -85,12 +79,6 @@
   white-space: nowrap;
 }
 
-// .colon {
-//   // color: var(--green);
-//   margin-right: 5px;
-//   font-weight: bold;
-// }
-
 .icon {
   filter: drop-shadow(0px 0.5px 0.5px rgba(0, 0, 0, 0.616));
   font-size: 1rem;
@@ -100,7 +88,6 @@
   width: 95%;
   height: 0.3px;
   background: rgba(128, 128, 128, 0.436);
-  // margin-top: 3px;
 }
 
 .overley {
@@ -154,4 +141,56 @@
 
 .start {
   align-items: flex-start;
+}
+
+.header {
+  width: fit-content;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  margin-top: -5px;
+  text-transform: capitalize;
+  letter-spacing: 0.8px;
+}
+.underline {
+  position: relative;
+  &:before {
+    content: "";
+    clip-path: polygon(0 11%, 0 4%, 100% 10%);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: var(--green);
+    background: linear-gradient(60deg, var(--wheat), var(--green));
+  }
+}
+
+.white {
+  color: var(--white);
+}
+
+.wheat-light {
+  background: var(--wheat-light);
+}
+
+.wheat {
+  background: var(--wheat);
+}
+
+.new {
+  background: var(--new);
+}
+.sale {
+  background: var(--sale);
+}
+
+.trending {
+  background: var(--trending);
+}
+.exclusive {
+  background: #000;
+}
+.limited {
+  background: var(--twitter);
 }

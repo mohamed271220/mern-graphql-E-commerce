@@ -6,10 +6,6 @@ const TotalPrice = ({ subTotal }: { subTotal: number }) => {
   const [freeShipping, setFreeShipping] = useState(false);
   const [discount, setDiscount] = useState(false);
 
-  //     { detail: "subtotal", value: subTotal, condition: "" },
-  //     { detail: "Shipping", value: "$ 10", condition: freeShipping },
-  //     { detail: "discount", value: "0" },
-  //   ];
   useEffect(() => {
     if (subTotal >= 800) {
       setFreeShipping(true);
@@ -50,7 +46,8 @@ const TotalPrice = ({ subTotal }: { subTotal: number }) => {
   const lineVariant = {
     start: { width: 0 },
     end: {
-      width: "100%",
+      width: "60%",
+      opacity: 1,
       transition: { delay: 0.4, duration: 0.4 },
     },
     exit: { width: 0, transition: { delay: 0.5, duration: 0.2 } },
@@ -70,30 +67,29 @@ const TotalPrice = ({ subTotal }: { subTotal: number }) => {
   //   };
 
   return (
-    <div
-      className="totel-price center
-  "
-    >
-      <h3 className="heading" style={{ width: "fit-content" }}>
-        order summary
-      </h3>
+    <div className="totel-price center between col box-shadow">
+      <div className="center col" style={{ height: 40 }}>
+        <h3 className="header underline" style={{ marginBottom: 8 }}>
+          order summary
+        </h3>
 
-      <h3>
-        <span style={{ textTransform: "capitalize", fontWeight: "bold" }}>
-          total:
-        </span>
-        <span>
-          <span>$</span>
-          <AnimatePresence mode="wait">
-            <Price num={total} key={"total-$"} />
-          </AnimatePresence>
-        </span>
-      </h3>
-      <div className="order-details  w-100">
-        <div className="center between w-100">
-          <span className="detail">subtotal</span>
-
+        <h3>
+          <span style={{ textTransform: "capitalize", fontWeight: "bold" }}>
+            total:
+          </span>
           <span>
+            <span> $</span>
+            <AnimatePresence mode="wait">
+              <Price num={total} key={"total-$"} />
+            </AnimatePresence>
+          </span>
+        </h3>
+      </div>
+
+      <div className="order-details center col w-100">
+        <div className="center between w-100">
+          <span className="cart-detail">Subtotal :</span>
+          <span className="order-val">
             {" "}
             $
             <AnimatePresence mode="wait">
@@ -103,7 +99,7 @@ const TotalPrice = ({ subTotal }: { subTotal: number }) => {
         </div>
 
         <div className="center between w-100">
-          <span className="detail">shipping</span>
+          <span className="cart-detail">Shipping :</span>
           <span
             className="free-par"
             // variants={parVariant}
@@ -119,8 +115,9 @@ const TotalPrice = ({ subTotal }: { subTotal: number }) => {
               animate="end"
               exit="exit"
               key={"price"}
+              className="order-val"
             >
-              $10
+              $ 10
             </motion.span>
             <AnimatePresence>
               {freeShipping && (
@@ -140,7 +137,7 @@ const TotalPrice = ({ subTotal }: { subTotal: number }) => {
                     initial="start"
                     animate="end"
                     exit="exit"
-                    className="free"
+                    className="free shadow"
                   >
                     {" "}
                     free
@@ -152,8 +149,8 @@ const TotalPrice = ({ subTotal }: { subTotal: number }) => {
         </div>
 
         <div className="center between w-100">
-          <span className="detail">discount</span>
-          <span>
+          <span className="cart-detail ">Discount :</span>
+          <span className="order-val">
             $
             <AnimatePresence>
               <Price key={"discounted"} num={discount ? 0.05 * subTotal : 0} />

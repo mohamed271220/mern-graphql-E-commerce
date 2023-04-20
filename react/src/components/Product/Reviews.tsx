@@ -42,7 +42,9 @@ const Reviews = ({ setShowPop }: Props) => {
           e.stopPropagation();
         }}
       >
-        <h2 className="heading">reviews</h2>
+        <h2 className="underline header" style={{ marginBottom: 20 }}>
+          reviews
+        </h2>
 
         <AnimatePresence custom={{ dir, width }} mode="wait">
           <motion.div

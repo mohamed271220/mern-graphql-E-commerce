@@ -44,7 +44,6 @@ const ProductFliter = ({
     );
   }, []);
 
-  console.log({ productSearchWord });
   return (
     <div ref={ref}>
       <motion.section className="product-List center" {...motionProps}>
@@ -97,7 +96,7 @@ const ProductFliter = ({
           />
         </div>
         <div className="product-links center">
-          <button className="btn shadow product-btn">add to cart</button>
+          <button className="btn shadow product-btn main">add to cart</button>
 
           <button
             onClick={() => navigate(`/${_id}`)}

@@ -19,7 +19,7 @@ const CartButton = () => {
 
   return (
     <motion.button
-      className="btn btn-cart center"
+      className="btn wheat-light center"
       whileHover={btnHover}
       variants={opacityVariant}
       transition={{ duration: 0.4 }}

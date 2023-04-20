@@ -72,9 +72,15 @@ const ProductDetails = ({
       animate="end"
     >
       <div className="details-top">
-        <span className="category">{category}</span> <br />
+        <h3
+          style={{ margin: 0, color: "var(--twitter)" }}
+          className="header underline"
+        >
+          {category}
+        </h3>{" "}
+        <br />
         <div className="title-par">
-          <h2 className="title center">
+          <h2 className="title  center">
             {title}
             <span className="center heart-par">
               <HeartSvgProduct
@@ -109,7 +115,7 @@ const ProductDetails = ({
 
         <div className="hr"></div>
 
-        <div className="product-btn">
+        <div className="product-btn  ">
           <motion.button whileHover={btnHover} className="btn buy center">
             <span className="icon center">
               <BiPurchaseTagAlt className="icon" color="var(--wheat)" />{" "}

@@ -11,7 +11,7 @@ const About = () => {
   const rightP = useTransform(scrollYProgress, [0.8, 0.95], [-150, 0]);
   return (
     <motion.div className="about-par center col" ref={sectionRef}>
-      <h1 className="heading">About Us</h1>
+      <h1 className="underline header">About Us</h1>
 
       <motion.p className="middle" style={{ y: mainP }}>
         Welcome to Zimart, your one-stop shop for all your online shopping

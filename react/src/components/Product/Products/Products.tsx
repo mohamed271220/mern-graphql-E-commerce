@@ -73,7 +73,7 @@ const Products = () => {
       }}
     >
       <section className="products-par">
-        <h1 className="sort-title heading">Our Products</h1>
+        <h1 className="sort-title header underline">Our Products</h1>
 
         <Sort />
 

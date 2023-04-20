@@ -50,7 +50,7 @@ const SLiderComponent = () => {
 
   return (
     <>
-      <h1 className="heading heading-slider">you may like </h1>
+      <h2 className="underline header  heading-slider">you may like </h2>
 
       <Slider {...settings}>
         {data?.products.map((product: any, index: number) => {

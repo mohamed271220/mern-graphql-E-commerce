@@ -2,30 +2,29 @@
 
 .cart-cont {
   width: 100%;
-  margin: 0 auto;
   min-width: 0 auto;
   margin-top: 50px;
-  display: flex;
   gap: 4px;
   padding: 4px;
   .carts-par {
-    width: 60%;
-    display: flex;
-    flex-direction: column;
-    margin: 0 5%;
+    // margin: 0 5%;
+    width: 70%;
     gap: 4px;
-    min-width: 500px;
+    align-self: flex-start;
     .cart-content {
-      display: flex;
-      flex-direction: column;
       gap: 10px;
-      .detail {
+      align-items: flex-start;
+      .cart-detail {
+        display: inline-block;
         font-weight: bold;
         letter-spacing: 1px;
         color: var(--green);
         text-transform: capitalize;
+        width: 60px;
+        margin-right: 4px;
+        text-align: end;
       }
-      .value {
+      .cart-value {
         letter-spacing: 0.8;
         color: var(--wheat);
       }
@@ -35,7 +34,6 @@
       height: 120px;
       background: var(--white);
       box-shadow: 1px 0.5px 2px black;
-      justify-content: space-between;
       padding: 8px;
 
       .cart-img {
@@ -45,21 +43,29 @@
   }
 }
 .totel-price {
-  border: 2px solid var(--green);
-  position: fixed;
+  padding: 25px 0;
+  background: var(--sale);
   width: 25%;
-  height: calc(100vh - 50px);
-  right: 0;
-  top: 50px;
-  flex-direction: column;
+  height: 200px;
+  align-self: flex-start;
+  border-start-start-radius: 5px;
+  color: var(--white);
+  letter-spacing: 0.8px;
+  > * {
+    font-weight: bold;
+  }
 }
 
 .offer-cart {
   width: 100%;
-  text-align: justify;
-  background: var(--wheat-light);
-  border-radius: 4px;
-  padding: 4px 8px;
+  gap: 3px;
+  .head {
+    background: var(--wheat-light);
+    border-radius: 4px;
+    padding: 4px 8px;
+    width: 70%;
+    align-self: flex-start;
+  }
 }
 
 .disable-check {
@@ -67,30 +73,45 @@
 }
 
 .order-details {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   gap: 10px;
-  flex-direction: column;
-  padding: 20px;
+  padding: 2vw;
 }
 
 .free-par {
   position: relative;
+  width: fit-content;
   .free {
     position: absolute;
     bottom: 70%;
-    right: 108%;
+    right: 100%;
+    color: var(--star);
+    text-transform: capitalize;
+    transform: scale(0.75);
   }
   .free-line {
     display: block;
-    width: 100%;
     height: 2px;
     background: var(--delete);
     position: absolute;
-    top: 1px;
-    right: 1px;
+    top: 2px;
+    right: 45%;
     transform-origin: 100% 0%;
-    transform: rotate(-30deg);
+    transform: rotate(-20deg);
+  }
+}
+
+.order-val {
+  display: inline-block;
+  width: 50px;
+  text-align: start;
+}
+@media (max-width: 700px) {
+  .cart-cont {
+    // .carts-par {
+    //   margin: 0;
+    // }
+    .totel-price {
+      width: 28%;
+    }
   }
 }

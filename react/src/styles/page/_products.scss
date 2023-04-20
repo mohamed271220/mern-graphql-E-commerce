@@ -12,23 +12,11 @@
   padding: 20px 0;
   flex-direction: column;
 }
-.head-product.heading {
-  width: fit-content;
-  margin: 30px auto;
-  font-size: 2rem;
-  padding-bottom: 30px;
-}
 
 aside {
-  // position: absolute;
-  // top: 0;
-  // left: 0;
   font-size: 1rem;
   padding: 15px;
-  // width: 200px;
   height: 100%;
-  // background: wheat;
-
   .aside-head {
     justify-content: space-between;
   }
@@ -43,8 +31,6 @@ aside {
 
   .btn-collapse {
     background: transparent;
-    border: 0;
-    outline: 0;
     font-size: 1rem;
   }
 }
@@ -136,15 +122,6 @@ svg.svg-star {
   margin: 0.2px;
 }
 
-.shadow {
-  filter: drop-shadow (0.2px 0.5px 0.8px black);
-  text-shadow: 0.2px 0.5px 0.8px black;
-}
-
-.box-shadow {
-  box-shadow: 0.2px 0.5px 1px black;
-}
-
 .product-btn {
   display: flex;
   justify-content: space-evenly;
@@ -162,23 +139,6 @@ svg.svg-star {
   border-end-end-radius: 4px;
   letter-spacing: 0.8px;
   font-size: 0.8rem;
-}
-
-.new {
-  background: var(--new);
-}
-.sale {
-  background: var(--sale);
-}
-
-.trending {
-  background: var(--trending);
-}
-.exclusive {
-  background: #000;
-}
-.limited {
-  background: var(--twitter);
 }
 
 .pages-par {

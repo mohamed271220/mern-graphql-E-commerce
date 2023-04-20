@@ -3,6 +3,7 @@ import { cartInterface } from "../../components/interfaces/user.js";
 import Counter from "./Counter.js";
 import HeartSvgProduct from "./HeartSvgProduct.js";
 import Remove_From_Cart_Btn from "./Remove-From-Cart_Btn.js";
+
 const CartItem = ({
   _id,
   productId,
@@ -11,27 +12,26 @@ const CartItem = ({
   title,
   count,
 }: cartInterface) => {
+  const detailsArr = [
+    { detail: "product", value: title },
+    { detail: "productId", value: productId },
+    { detail: "price", value: `$ ${price.toFixed(2)}` },
+  ];
   return (
-    <div className="cart-item center">
+    <div className="cart-item center between">
       <img className="cart-img" src={path} alt="" />
-      <div className="center cart-content">
-        <div>
+      <div className="center cart-content col">
+        <div style={{ alignSelf: "center" }}>
           <Counter count={count} productId={productId} key={_id} />
         </div>
-        <div>
-          <span className="shadow detail">product:</span>
-          <span className="shadow value">{title}</span>
-        </div>
-
-        <div>
-          <span className="shadow detail">productId:</span>
-          <span className="shadow value">{productId}</span>
-        </div>
-
-        <div>
-          <span className="shadow detail">price:</span>
-          <span className="shadow value">$ {price.toFixed(2)}</span>
-        </div>
+        {detailsArr.map(({ detail, value }, i) => {
+          return (
+            <div key={i}>
+              <span className="shadow cart-detail">{detail}:</span>
+              <span className="shadow cart-value">{value}</span>
+            </div>
+          );
+        })}
       </div>
       <div>
         <Remove_From_Cart_Btn id={productId} content={"remove"} />

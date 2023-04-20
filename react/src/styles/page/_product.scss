@@ -85,9 +85,7 @@
         button {
           text-shadow: 0px 0.8px 1.5px black;
           gap: 4px;
-          &.btn-cart {
-            background: var(--wheat-light);
-          }
+
           &.buy {
             background: var(--green);
           }
@@ -236,15 +234,6 @@ p {
 }
 
 .heading-slider {
-  width: fit-content;
   margin: 20px;
   margin-top: 30px;
-  font-size: 20px;
-  &.heading {
-    &:before {
-      left: 0;
-      top: 95%;
-      width: 40%;
-    }
-  }
 }

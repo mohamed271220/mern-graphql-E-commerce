@@ -5,6 +5,12 @@ import TotalPrice from "./TotalPrice";
 import Checkbox from "../../custom/checkbox";
 import CircleCheckSvg from "../widgets/CircleCheckSvg";
 import { AnimatePresence } from "framer-motion";
+import SLiderComponent from "./SLider";
+
+const offerArr = [
+  { offer: "Spend $800 or more and get free shipping!", money: 800 },
+  { offer: "Spend $1000 or more and get 5% discount!", money: 1000 },
+];
 
 const Cart = () => {
   const { cart } = useAppSelector((state) => state.cart);
@@ -18,36 +24,41 @@ const Cart = () => {
   }, [cart]);
 
   return (
-    <div className="cart-cont ">
-      <div className="carts-par">
-        <div className="offer-cart center between">
-          <h3>Spend $800 or more and get free shipping!</h3>
-          <AnimatePresence mode="wait">
-            {subTotal >= 800 && (
-              <CircleCheckSvg key={"circle-check1"} check={subTotal >= 800} />
-            )}
-          </AnimatePresence>
+    <>
+      <div className="cart-cont center col">
+        <div className="offer-cart center col">
+          {offerArr.map(({ offer, money }, i) => {
+            return (
+              <h3 className="head center between " key={i}>
+                <span>{offer}</span>
+                <AnimatePresence mode="wait">
+                  {subTotal >= money && (
+                    <CircleCheckSvg
+                      key={"circle-check1"}
+                      check={subTotal >= money}
+                    />
+                  )}
+                </AnimatePresence>
+              </h3>
+            );
+          })}
         </div>
 
-        <div className="offer-cart center between">
-          <h3>Spend $1000 or more and get 5% discount!</h3>
-          <AnimatePresence mode="wait">
-            {subTotal >= 1000 && (
-              <CircleCheckSvg key={"circle-check2"} check={subTotal >= 1000} />
-            )}
-          </AnimatePresence>
+        <div className="center row between w-100">
+          <div className="carts-par center col">
+            {cart.map((item, index) => {
+              return (
+                <>
+                  <CartItem key={item._id} {...item} />
+                </>
+              );
+            })}
+          </div>
+          <TotalPrice subTotal={subTotal} key={"TotalPrice"} />
         </div>
-
-        {cart.map((item, index) => {
-          return (
-            <>
-              <CartItem key={item._id} {...item} />
-            </>
-          );
-        })}
       </div>
-      <TotalPrice subTotal={subTotal} key={"TotalPrice"} />
-    </div>
+      <SLiderComponent key={"cart-slider"} />
+    </>
   );
 };
 

@@ -40,7 +40,6 @@ const SignUp = () => {
   }, []);
 
   const [addUserFn, { data }] = useMutation(ADD_USER);
-  console.log(data);
   return (
     <div className="log-in center">
       <FormProvider {...methods}>
@@ -50,7 +49,7 @@ const SignUp = () => {
           onSubmit={handleSubmit(OnSubmit)}
           ref={formRef}
         >
-          <h4 className="heading"> sign Up</h4>
+          <h3 className="underline header white"> sign Up</h3>
           <Input
             placeholder={"username"}
             err={errors?.username?.message?.toString()}
@@ -74,7 +73,7 @@ const SignUp = () => {
           <motion.button
             whileHover={btnHover}
             type="submit"
-            className="btn"
+            className="btn main"
             onClick={async () => {
               const { username: name, password, email } = getValues();
 

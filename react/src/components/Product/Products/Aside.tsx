@@ -64,19 +64,8 @@ const Aside = ({ startFiltering }: { startFiltering: boolean }) => {
                 initial="start"
                 exit="exit"
                 animate="end"
-                className="btn shadow "
+                className="btn shadow main"
                 onClick={() => {
-                  console.log({
-                    price: priceFilter === 0 ? 10000 : priceFilter,
-                    category:
-                      categoryFilter === "" ? categoriesArr : [categoryFilter],
-                    state:
-                      productFeatured === ""
-                        ? FeaturedProductsArr
-                        : [productFeatured],
-                    rate: RateChecked === "" ? 5 : RateChecked,
-                  });
-
                   filterAllFn({
                     variables: {
                       price: priceFilter === 0 ? 10000 : priceFilter,

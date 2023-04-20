@@ -36,7 +36,7 @@ const Login = () => {
     <div className="log-in center">
       <FormProvider {...methods}>
         <form action="" className="center" onSubmit={handleSubmit(onSubmit)}>
-          <h4 className="heading">log in</h4>
+          <h3 className="underline header white"> log in</h3>
           <Input
             placeholder={"email"}
             err={errors.email?.message?.toString()}
@@ -48,7 +48,7 @@ const Login = () => {
           <motion.button
             whileHover={btnHover}
             type="submit"
-            className="btn"
+            className="btn main"
             onClick={async () => {
               const { email, password } = getValues();
               const res = await authenticate({

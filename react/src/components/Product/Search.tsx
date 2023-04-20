@@ -21,10 +21,21 @@ const Search = () => {
     }).then(({ data }) => setProducts(data.searchProducts));
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    fnSearch({
+      variables: {
+        word: productSearchWord,
+      },
+    }).then(({ data }) => setProducts(data.searchProducts));
+    if (inpRef?.current) {
+      inpRef.current.value = "";
+    }
+  };
   const navigate = useNavigate();
 
   return (
-    <form className="center search">
+    <form className="center search" onSubmit={handleSubmit}>
       <input
         ref={inpRef}
         placeholder="Search By Category Or Title"
@@ -37,6 +48,16 @@ const Search = () => {
         <ul className="dropdown-search col center start">
           {data?.searchProducts.length >= 1 ? (
             <>
+              <li
+                className="search-res hover"
+                onMouseOver={() => {
+                  if (inpRef?.current) {
+                    inpRef.current.value = productSearchWord;
+                  }
+                }}
+              >
+                {productSearchWord}
+              </li>
               {data?.searchProducts
                 .slice(0, 5)
                 .map(
@@ -57,7 +78,6 @@ const Search = () => {
                           if (inpRef?.current) {
                             inpRef.current.value = title;
                           }
-                          setInp(title);
                         }}
                       >
                         {title}
