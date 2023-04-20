@@ -49,8 +49,8 @@ const Search = () => {
           {data?.searchProducts.length >= 1 ? (
             <>
               <li
-                className="search-res hover"
-                onMouseOver={() => {
+                className="search-res hover  center between"
+                onClick={() => {
                   if (inpRef?.current) {
                     inpRef.current.value = productSearchWord;
                   }
@@ -58,6 +58,16 @@ const Search = () => {
               >
                 {productSearchWord}
               </li>
+              <div
+                className="hr "
+                style={{
+                  height: 0.5,
+                  background: "var(--white)",
+                  margin: "0 auto",
+                }}
+              >
+                {" "}
+              </div>
               {data?.searchProducts
                 .slice(0, 5)
                 .map(
@@ -70,18 +80,43 @@ const Search = () => {
                     i: number
                   ) => {
                     return (
-                      <li
-                        className="search-res hover"
-                        key={_id}
-                        onClick={() => navigate(`/${_id}`)}
-                        onMouseOver={() => {
-                          if (inpRef?.current) {
-                            inpRef.current.value = title;
-                          }
-                        }}
-                      >
-                        {title}
-                      </li>
+                      <>
+                        <li
+                          className="search-res hover center between"
+                          key={_id}
+                        >
+                          <span
+                            onClick={() => {
+                              if (inpRef?.current) {
+                                inpRef.current.value = title;
+                              }
+                            }}
+                          >
+                            {title}
+                          </span>
+                          <button
+                            className=" btn list-btn"
+                            style={{ scale: 0.8 }}
+                            onClick={() => navigate(`/${_id}`)}
+                          >
+                            go
+                          </button>
+                        </li>
+                        <div
+                          className="hr "
+                          style={{
+                            height: 0.5,
+                            background: "var(--white)",
+                            margin: "0 auto",
+                            display:
+                              i === data?.searchProducts.length - 1 || i === 4
+                                ? "none"
+                                : "block",
+                          }}
+                        >
+                          {" "}
+                        </div>
+                      </>
                     );
                   }
                 )}

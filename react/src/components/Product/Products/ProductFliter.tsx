@@ -91,6 +91,7 @@ const ProductFliter = ({
         <div className="product-rate-filter center ">
           <ProductRate
             key={`${_id}-rate`}
+            id={_id}
             avgRate={avgRate}
             ratingLen={rating.length}
           />
