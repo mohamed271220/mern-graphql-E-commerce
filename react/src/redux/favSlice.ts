@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { favInitialState } from "../components/interfaces/user.js";
+import { favInitialState } from "../interfaces/user.js";
 
 const initialState: favInitialState = {
   fav: [],

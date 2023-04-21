@@ -6,7 +6,7 @@ import { btnHover, opacityVariant } from "../../variants/globals";
 import { Add_To_Cart } from "../../graphql/mutations/user";
 import { useMutation } from "@apollo/client";
 import Cookies from "js-cookie";
-import { productContext } from "./Product";
+import { productContext } from "../product Route/Product";
 import usePathAndId from "../../custom/usePathAndId";
 import { toast } from "react-hot-toast";
 import { useAppDispatch } from "../../custom/reduxTypes";

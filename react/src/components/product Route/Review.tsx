@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import StarIcon from "../../custom/StarIcon";
+import StarIcon from "../../custom SVGs/StarIcon";
 
 import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 import { AnimatePresence, motion, useInView } from "framer-motion";

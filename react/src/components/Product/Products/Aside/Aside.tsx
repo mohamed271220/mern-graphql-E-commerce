@@ -1,16 +1,16 @@
 import React, { useContext } from "react";
 import { IoFilter } from "react-icons/io5";
-import Category from "./Category";
 import Rating from "./Rating";
 import Price from "./Price";
 import { AnimatePresence, motion } from "framer-motion";
 import FeaturedProducts from "./FeaturedProducts";
-import { opacityVariant } from "../../../variants/globals";
+import { opacityVariant } from "../../../../variants/globals";
 import { useMutation } from "@apollo/client";
-import { viewFilterContext } from "./Products";
-import { FILTER_All } from "../../../graphql/mutations/product.js";
-import { FeaturedProductsArr, categoriesArr } from "../../../arries.js";
-import Search from "../Search";
+import { viewFilterContext } from "../Products";
+import { FILTER_All } from "../../../../graphql/mutations/product.js";
+import { FeaturedProductsArr, categoriesArr } from "../../../../arries.js";
+import Search from "../../viewOptions/Search";
+import Category from "./Category";
 
 const asideVariant = {
   start: { width: 0, opacity: 0 },

@@ -7,8 +7,8 @@ import Reviews from "./Reviews";
 import { reviewInterface } from "../../interfaces/product";
 import { AnimatePresence } from "framer-motion";
 import { useParams } from "react-router-dom";
-import SLider from "./SLider";
-import SLiderComponent from "./SLider";
+import SLider from "../widgets/SLider";
+import SLiderComponent from "../widgets/SLider";
 
 export interface productContextInterface {
   rating: number[];

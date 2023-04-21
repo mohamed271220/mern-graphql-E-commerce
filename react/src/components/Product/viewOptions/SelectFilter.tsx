@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { viewFilterContext } from "./Products";
+import { viewFilterContext } from "../Products/Products";
 import {
   FILTER_BY_PRICE,
   FILTER_BY_Rate,

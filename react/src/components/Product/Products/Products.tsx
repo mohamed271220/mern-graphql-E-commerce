@@ -1,8 +1,8 @@
 import React, { createContext, useEffect, useState } from "react";
-import Aside from "./Aside";
-import ProductList from "./ProductList";
+import Aside from "./Aside/Aside";
+import ProductList from "./AllProducts/ProductList";
 import { AnimatePresence } from "framer-motion";
-import Sort from "./Sort";
+import Sort from "../viewOptions/Sort";
 
 interface viewFilterContextInterface {
   setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;

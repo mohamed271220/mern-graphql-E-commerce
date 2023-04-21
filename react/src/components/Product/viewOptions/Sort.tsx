@@ -2,11 +2,11 @@ import React, { useContext } from "react";
 import { BsListTask } from "react-icons/bs";
 import { HiOutlineViewGrid } from "react-icons/hi";
 import { IoFilter } from "react-icons/io5";
-import { viewFilterContext } from "./Products";
+import { viewFilterContext } from "../Products/Products";
 import { AnimatePresence, motion } from "framer-motion";
 import { opacityVariant } from "../../../variants/globals";
 import SelectFilter from "./SelectFilter";
-import Search from "../Search";
+import Search from "./Search";
 
 const Sort = () => {
   const { setShowFilter, showFilter, setGridView, gridView } =
@@ -31,7 +31,7 @@ const Sort = () => {
                   transition={{ duration: 0.4 }}
                   key={"show-filter"}
                 >
-                  hide filters
+                  Hide Filters
                 </motion.span>
               ) : (
                 <motion.span
@@ -44,7 +44,7 @@ const Sort = () => {
                   animate="end"
                   transition={{ duration: 0.4 }}
                 >
-                  show filters
+                  Show Filters
                 </motion.span>
               )}
             </AnimatePresence>
@@ -52,7 +52,7 @@ const Sort = () => {
           </button>
         </div>
         <div className="view-par center ">
-          <span className="display">display</span>
+          <span className="display">Display</span>
           <BsListTask
             onClick={() => setGridView(false)}
             style={{ color: gridView ? "black" : "var(--green)" }}

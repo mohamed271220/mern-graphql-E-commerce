@@ -104,6 +104,9 @@ aside {
   &.list {
     display: flex;
     flex-direction: column;
+    .list-between {
+      display: flex;
+    }
   }
   &.grid {
     display: grid;
@@ -175,9 +178,7 @@ svg.svg-star {
   font-size: clamp(14px, 1rem, 16px);
   position: relative;
   padding: 5px;
-  display: flex;
   height: 260px;
-  flex-direction: column;
   background: var(--white);
   box-shadow: 1px 1px 3px black;
   gap: 1px;
@@ -189,10 +190,6 @@ svg.svg-star {
     box-shadow: 2px 2px 5px black;
   }
 
-  .category-card {
-    color: var(--green);
-    letter-spacing: 0.8px;
-  }
   .title-product {
     display: inline-block;
     letter-spacing: 1px;
@@ -214,14 +211,20 @@ svg.svg-star {
     margin-top: 4px;
   }
   .img-par {
-    width: 100px;
-    height: 120px;
+    &.grid {
+      width: 100px;
+      height: 120px;
+    }
+    &.list {
+      width: 400px;
+      height: 90%;
+    }
     margin-bottom: 4px;
     overflow: hidden;
     padding: 4px;
     img {
       transition: 0.5s;
-      width: 90%;
+      width: 100%;
       filter: drop-shadow(2px 2px 3px black);
     }
     &:hover {
@@ -237,5 +240,18 @@ svg.svg-star {
     margin: 0 auto;
     font-size: 10px;
     width: 90%;
+  }
+}
+
+.product-head-underline {
+  color: var(--green);
+  margin: 0;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  &.underline {
+    &:before {
+      width: 70%;
+      background: var(--wheat);
+    }
   }
 }

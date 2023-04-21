@@ -2,8 +2,8 @@ import React, { useEffect, useContext } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { viewFilterContext } from "./Products/Products";
-import ProductFliter from "./Products/ProductFliter";
+import { viewFilterContext } from "../Product/Products/Products";
+import ProductFliter from "../Product/Products/AllProducts/ProductFliter";
 import { useLazyQuery, useQuery } from "@apollo/client";
 import { Get_All_Products } from "../../graphql/general";
 

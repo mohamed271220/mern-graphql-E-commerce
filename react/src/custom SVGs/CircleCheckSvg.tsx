@@ -4,7 +4,7 @@ import {
   checkSvgVariant,
   checkpathVariant,
   parentVarient,
-} from "../../variants/CheckSvg.js";
+} from "../variants/CheckSvg.js";
 
 const CircleCheckSvg = ({ check }: { check: boolean }) => {
   return (

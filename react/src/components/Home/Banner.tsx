@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import useIndex from "../custom/useIndex";
-import useCarousel from "../custom/useCarousel";
+import useIndex from "../../custom/useIndex";
+import useCarousel from "../../custom/useCarousel";
 import { AnimatePresence, Variants, motion } from "framer-motion";
 import useMeasure from "react-use-measure";
-import { bannerArr } from "../arries";
+import { bannerArr } from "../../arries";
 
 // import toast from "react-hot-toast";
 

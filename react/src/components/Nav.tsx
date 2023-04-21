@@ -12,9 +12,9 @@ import useHide from "../custom/useHide";
 import Favorite from "./widgets/Favorite";
 import { opacityVariant, popVariant } from "../variants/globals";
 import { useAppSelector } from "../custom/reduxTypes";
-import ShowCount from "./widgets/Counter";
+import ShowCount from "./widgets/showCounter";
 import { BsFillCartPlusFill } from "react-icons/bs";
-import Search from "./Product/Search";
+import Search from "./Product/viewOptions/Search";
 
 const linksArr = [
   {

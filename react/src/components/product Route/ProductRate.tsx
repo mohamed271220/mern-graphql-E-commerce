@@ -1,13 +1,13 @@
-import StarIcon from "../../custom/StarIcon";
+import StarIcon from "../../custom SVGs/StarIcon";
 import React from "react";
 const ProductRate = ({
   avgRate,
   ratingLen,
-  id,
+  id = "",
 }: {
   ratingLen: number;
   avgRate: number;
-  id: string;
+  id?: string;
 }) => {
   return (
     <div className="product-rate">

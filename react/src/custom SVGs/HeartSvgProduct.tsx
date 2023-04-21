@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 import React, { useContext, useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../custom/reduxTypes";
+import { useAppDispatch, useAppSelector } from "../custom/reduxTypes";
 import { favInterface } from "../interfaces/user";
 import { useMutation } from "@apollo/client";
 import Cookies from "js-cookie";
-import { addToFavRedux, removeFromFavRedux } from "../../redux/favSlice";
-import { Add_To_Fav, REMOVE_FROM_FAV } from "../../graphql/mutations/user";
-import { heartVariant } from "../../variants/globals";
-import { productContext } from "./Product";
+import { addToFavRedux, removeFromFavRedux } from "../redux/favSlice";
+import { Add_To_Fav, REMOVE_FROM_FAV } from "../graphql/mutations/user";
+import { heartVariant } from "../variants/globals";
+import { productContext } from "../components/product Route/Product";
 import { toast } from "react-hot-toast";
 
 interface Props {

@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import useHide from "../../../custom/useHide";
+import useHide from "../../../../custom/useHide";
 import { FcMinus } from "react-icons/fc";
 import { BiPlus } from "react-icons/bi";
 import { AnimatePresence, motion } from "framer-motion";
-import { opacityVariant, parentVariant } from "../../../variants/globals";
-import { viewFilterContext } from "./Products";
+import { opacityVariant, parentVariant } from "../../../../variants/globals";
+import { viewFilterContext } from "../Products";
 const Price = () => {
   const { setPriceFilter, priceFilter } = useContext(viewFilterContext);
 

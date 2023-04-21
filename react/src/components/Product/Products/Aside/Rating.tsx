@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
-import Star from "./Star";
-import Checkbox from "../../../custom/checkbox";
+import Checkbox from "../../../../custom SVGs/checkbox";
 import { AnimatePresence, motion } from "framer-motion";
-import { opacityVariant, parentVariant } from "../../../variants/globals";
-import useHide from "../../../custom/useHide";
+import { opacityVariant, parentVariant } from "../../../../variants/globals";
+import useHide from "../../../../custom/useHide";
 
 import { FcMinus } from "react-icons/fc";
 import { BiPlus } from "react-icons/bi";
-import { viewFilterContext } from "./Products";
+import { viewFilterContext } from "../Products";
+import Star from "./Star";
 
 const Rating = () => {
   const { RateChecked, setRateChecked } = useContext(viewFilterContext);

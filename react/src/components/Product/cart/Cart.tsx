@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useAppSelector } from "../../custom/reduxTypes";
+import { useAppSelector } from "../../../custom/reduxTypes";
 import CartItem from "./CartItem";
 import TotalPrice from "./TotalPrice";
-import Checkbox from "../../custom/checkbox";
-import CircleCheckSvg from "../widgets/CircleCheckSvg";
+import CircleCheckSvg from "../../../custom SVGs/CircleCheckSvg";
 import { AnimatePresence } from "framer-motion";
-import SLiderComponent from "./SLider";
+import SLiderComponent from "../../widgets/SLider";
 
 const offerArr = [
   { offer: "Spend $800 or more and get free shipping!", money: 800 },

@@ -1,8 +1,8 @@
 import { useMutation } from "@apollo/client";
 import React, { useContext, useRef, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import { Search_Mutaion } from "../../graphql/mutations/product";
-import { viewFilterContext } from "./Products/Products";
+import { Search_Mutaion } from "../../../graphql/mutations/product";
+import { viewFilterContext } from "../Products/Products";
 import { useNavigate } from "react-router-dom";
 
 const Search = () => {

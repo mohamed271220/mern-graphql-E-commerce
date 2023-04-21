@@ -1,8 +1,8 @@
 import React from "react";
-import { cartInterface } from "../../components/interfaces/user.js";
+import { cartInterface } from "../../../interfaces/user.js";
 import Counter from "./Counter.js";
-import HeartSvgProduct from "./HeartSvgProduct.js";
-import Remove_From_Cart_Btn from "./Remove-From-Cart_Btn.js";
+import HeartSvgProduct from "../../../custom SVGs/HeartSvgProduct.js";
+import Remove_From_Cart_Btn from "../../widgets/Remove-From-Cart_Btn.js";
 
 const CartItem = ({
   _id,

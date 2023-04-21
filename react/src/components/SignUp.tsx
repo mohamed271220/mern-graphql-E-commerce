@@ -6,7 +6,7 @@ import { motion, stagger, useAnimate } from "framer-motion";
 import { btnHover } from "../variants/globals";
 import { useForm, FormProvider, FieldValues } from "react-hook-form";
 import { useMutation } from "@apollo/client";
-import Input from "./Input";
+import Input from "./widgets/Input";
 import { ADD_USER } from "../graphql/mutations/user";
 const socialMediaArr = [
   { id: "1", icon: <FaFacebookF color="" />, clr: "var(--fb)" },

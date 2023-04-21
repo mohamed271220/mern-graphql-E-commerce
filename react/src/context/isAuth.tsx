@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import { cartInterface, favInterface } from "../components/interfaces/user";
+import { cartInterface, favInterface } from "../interfaces/user";
 import { useMutation } from "@apollo/client";
 import { GET_USER_DATA } from "../graphql/mutations/user";
 import Cookies from "js-cookie";

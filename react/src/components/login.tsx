@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { btnHover } from "../variants/globals";
 import { useForm, FormProvider, FieldValues } from "react-hook-form";
 
-import Input from "./Input";
+import Input from "./widgets/Input";
 import { useMutation } from "@apollo/client";
 import { Authenticate_Query } from "../graphql/mutations/user";
 

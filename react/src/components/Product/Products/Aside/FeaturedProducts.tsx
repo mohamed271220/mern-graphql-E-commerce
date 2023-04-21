@@ -1,21 +1,21 @@
-import React, { useContext, useState } from "react";
-import Checkbox from "../../../custom/checkbox";
-import useHide from "../../../custom/useHide";
+import React, { useContext } from "react";
+import Checkbox from "../../../../custom SVGs/checkbox";
+import useHide from "../../../../custom/useHide";
 import { AnimatePresence, motion } from "framer-motion";
-import { opacityVariant, parentVariant } from "../../../variants/globals";
+import { opacityVariant, parentVariant } from "../../../../variants/globals";
 import { FcMinus } from "react-icons/fc";
 import { BiPlus } from "react-icons/bi";
-import { viewFilterContext } from "./Products";
-import { categoriesArr } from "../../../arries.js";
+import { viewFilterContext } from "../Products";
+import { FeaturedProductsArr } from "../../../../arries.js";
 
-const Category = () => {
+const FeaturedProducts = () => {
   const [showCategory, handleShowCategory, handleHideCategory] = useHide();
-  const { categoryFilter, setCategoryFilter } = useContext(viewFilterContext);
+  const { productFeatured, setProductFeatured } = useContext(viewFilterContext);
 
   return (
     <div className="category-par center ">
       <h4 className="filter-head  ">
-        categoty
+        Featured Products
         <AnimatePresence mode="wait">
           {showCategory ? (
             <motion.span
@@ -55,7 +55,7 @@ const Category = () => {
               className="   category-par"
             >
               <>
-                {categoriesArr.map((category, i) => {
+                {FeaturedProductsArr.map((category, i) => {
                   return (
                     <motion.span
                       className="center category"
@@ -64,8 +64,8 @@ const Category = () => {
                     >
                       <Checkbox
                         filter={category}
-                        isChecked={categoryFilter}
-                        setIsChecked={setCategoryFilter}
+                        isChecked={productFeatured}
+                        setIsChecked={setProductFeatured}
                       />{" "}
                       {category}
                     </motion.span>
@@ -81,4 +81,4 @@ const Category = () => {
   );
 };
 
-export default Category;
+export default FeaturedProducts;

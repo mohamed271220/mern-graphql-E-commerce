@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { opacityVariant } from "../../variants/globals";
+import { opacityVariant } from "../../../variants/globals";
 const Price = ({ num }: { num: number }) => {
   return (
     <motion.span

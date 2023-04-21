@@ -3,7 +3,6 @@ import { BiPurchaseTagAlt } from "react-icons/bi";
 import { AiOutlineCheck } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
 import { btnHover } from "../../variants/globals";
-import ProductRate from "./ProductRate";
 import useAvg from "../../custom/useAvg";
 import { useMutation } from "@apollo/client";
 import {
@@ -12,14 +11,15 @@ import {
   REMOVE_FROM_FAV,
 } from "../../graphql/mutations/user";
 import { useAppDispatch, useAppSelector } from "../../custom/reduxTypes";
-import { favInterface } from "../interfaces/user";
+import { favInterface } from "../../interfaces/user";
 import { addToFavRedux, removeFromFavRedux } from "../../redux/favSlice";
-import HeartSvgProduct from "./HeartSvgProduct";
-import CartButton from "./CartButton";
+import HeartSvgProduct from "../../custom SVGs/HeartSvgProduct";
+import CartButton from "../widgets/CartButton";
 import { productContext } from "./Product";
 import usePathAndId from "../../custom/usePathAndId";
-import Remove_From_Cart_Btn from "./Remove-From-Cart_Btn";
+import Remove_From_Cart_Btn from "../widgets/Remove-From-Cart_Btn";
 import ProductListHeart from "../widgets/ProductListHeart";
+import ProductRate from "./ProductRate";
 interface Props {
   data: {
     title: string;
@@ -74,7 +74,7 @@ const ProductDetails = ({
       <div className="details-top">
         <h3
           style={{ margin: 0, color: "var(--twitter)" }}
-          className="header underline"
+          className="header underline "
         >
           {category}
         </h3>{" "}

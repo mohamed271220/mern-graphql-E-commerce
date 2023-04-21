@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import ProductFliter from "./ProductFliter";
-import Pages from "./Pages";
-import { viewFilterContext } from "./Products";
+import Pages from "../Pages";
+import { viewFilterContext } from "../Products";
 import { motion } from "framer-motion";
 
 const ProductList = () => {
@@ -21,6 +21,7 @@ const ProductList = () => {
     }
   }, [page, products]);
 
+  console.log({ dataShown });
   return (
     <motion.div
       className={`product-list-par ${!gridView ? "list" : "grid"} `}
@@ -41,6 +42,7 @@ const ProductList = () => {
             category={product.category}
             images={product.images}
             rating={product.rating}
+            description={product.description}
             layout
             transition={{
               type: "tween",
