@@ -4,11 +4,10 @@ import ProductList from "./AllProducts/ProductList";
 import { AnimatePresence } from "framer-motion";
 import Sort from "../viewOptions/Sort";
 
-interface viewFilterContextInterface {
+interface productListContextInterface {
   setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
   showFilter: boolean;
-  setGridView: React.Dispatch<React.SetStateAction<boolean>>;
-  gridView: boolean;
+
   setProducts: React.Dispatch<React.SetStateAction<never[]>>;
   products: any[];
   categoryFilter: string | number;
@@ -23,14 +22,13 @@ interface viewFilterContextInterface {
   setroductSearchWord: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const viewFilterContext = createContext(
-  {} as viewFilterContextInterface
+export const productListContext = createContext(
+  {} as productListContextInterface
 );
 
 const Products = () => {
   const [startFiltering, setStartFiltering] = useState(false);
   const [showFilter, setShowFilter] = useState(true);
-  const [gridView, setGridView] = useState(true);
   const [products, setProducts] = useState([]);
   const [categoryFilter, setCategoryFilter] = useState<string | number>("");
   const [productFeatured, setProductFeatured] = useState<string | number>("");
@@ -52,12 +50,11 @@ const Products = () => {
   }, [RateChecked, priceFilter, categoryFilter, productFeatured]);
 
   return (
-    <viewFilterContext.Provider
+    <productListContext.Provider
       value={{
         setShowFilter,
         showFilter,
-        gridView,
-        setGridView,
+
         products,
         setProducts,
         categoryFilter,
@@ -84,7 +81,7 @@ const Products = () => {
           <ProductList />
         </div>
       </section>
-    </viewFilterContext.Provider>
+    </productListContext.Provider>
   );
 };
 

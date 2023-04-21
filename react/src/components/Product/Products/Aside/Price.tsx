@@ -1,17 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useEffect } from "react";
 import useHide from "../../../../custom/useHide";
 import { FcMinus } from "react-icons/fc";
 import { BiPlus } from "react-icons/bi";
 import { AnimatePresence, motion } from "framer-motion";
 import { opacityVariant, parentVariant } from "../../../../variants/globals";
-import { viewFilterContext } from "../Products";
+import { productListContext } from "../Products";
 const Price = () => {
-  const { setPriceFilter, priceFilter } = useContext(viewFilterContext);
+  const { setPriceFilter, priceFilter } = useContext(productListContext);
 
   const handlePrice = (e: React.ChangeEvent<HTMLInputElement>) =>
     setPriceFilter(Number(e.target.value));
 
   const [showPrice, handleShowPrice, handleHidePrice] = useHide();
+  const priceRef = useRef<HTMLInputElement | null>(null);
+  useEffect(() => {
+    if (priceRef?.current) {
+      priceRef.current.value = String(priceFilter);
+    }
+  }, [priceFilter]);
 
   return (
     <div>
@@ -61,8 +67,9 @@ const Price = () => {
               step="20"
               min={0}
               max={2000}
-              defaultValue={priceFilter}
               onChange={handlePrice}
+              ref={priceRef}
+              defaultValue={"0"}
             />
           </motion.div>
         )}

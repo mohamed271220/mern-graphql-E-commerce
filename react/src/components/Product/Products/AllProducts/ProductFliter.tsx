@@ -5,8 +5,9 @@ import ProductListHeart from "../../../widgets/ProductListHeart";
 import { imagesInterface } from "../../../../interfaces/user";
 import { useNavigate } from "react-router-dom";
 import { motion, MotionProps, useAnimate } from "framer-motion";
-import { viewFilterContext } from "../Products";
+import { productListContext } from "../Products";
 import useMeasure from "react-use-measure";
+import { viewContext } from "../../../../context/gridView";
 
 type Props = {
   _id: string;
@@ -37,8 +38,8 @@ const ProductFliter = ({
   const avgRate = useAvg(rating);
   const [isFavoraited, setIsFavorited] = useState(false);
   const navigate = useNavigate();
-  const { productSearchWord } = useContext(viewFilterContext);
-  const { gridView } = useContext(viewFilterContext);
+  const { productSearchWord } = useContext(productListContext);
+  const { gridView } = useContext(viewContext);
   const [sectionRef, { width: sectionWidth }] = useMeasure();
 
   const [ref, animate] = useAnimate();
@@ -54,7 +55,7 @@ const ProductFliter = ({
     <div ref={ref}>
       <motion.section
         className={`product-List center ${
-          gridView ? " col" : "list-between  between "
+          gridView ? "grid col" : "list between "
         }`}
         {...motionProps}
         ref={sectionRef}

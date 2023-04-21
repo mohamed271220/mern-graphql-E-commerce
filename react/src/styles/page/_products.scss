@@ -104,9 +104,6 @@ aside {
   &.list {
     display: flex;
     flex-direction: column;
-    .list-between {
-      display: flex;
-    }
   }
   &.grid {
     display: grid;
@@ -175,10 +172,9 @@ svg.svg-star {
 }
 
 .product-List {
-  font-size: clamp(14px, 1rem, 16px);
+  font-size: clamp(12px, 1rem, 1rem);
   position: relative;
   padding: 5px;
-  height: 260px;
   background: var(--white);
   box-shadow: 1px 1px 3px black;
   gap: 1px;
@@ -186,6 +182,17 @@ svg.svg-star {
   text-transform: capitalize;
   text-shadow: 0.2px 0.5px 0.8px black;
   transition: 0.3s;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  &.grid {
+    height: 260px;
+  }
+
+  &.list {
+    height: 220px;
+  }
+
   &:hover {
     box-shadow: 2px 2px 5px black;
   }
@@ -211,8 +218,9 @@ svg.svg-star {
     margin-top: 4px;
   }
   .img-par {
+    max-width: 100px;
     &.grid {
-      width: 100px;
+      width: 100%;
       height: 120px;
     }
     &.list {
@@ -224,7 +232,7 @@ svg.svg-star {
     padding: 4px;
     img {
       transition: 0.5s;
-      width: 100%;
+      width: 90%;
       filter: drop-shadow(2px 2px 3px black);
     }
     &:hover {

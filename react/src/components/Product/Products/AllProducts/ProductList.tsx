@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import ProductFliter from "./ProductFliter";
 import Pages from "../Pages";
-import { viewFilterContext } from "../Products";
+import { productListContext } from "../Products";
 import { motion } from "framer-motion";
+import { viewContext } from "../../../../context/gridView";
 
 const ProductList = () => {
-  const { showFilter, gridView, products } = useContext(viewFilterContext);
-
+  const { showFilter, products } = useContext(productListContext);
+  const { gridView } = useContext(viewContext);
   const [page, setPage] = useState(1);
   const [numOfPages, setNumOfPage] = useState(0);
   const [dataShown, setDataShown] = useState([] as any);
@@ -21,7 +22,6 @@ const ProductList = () => {
     }
   }, [page, products]);
 
-  console.log({ dataShown });
   return (
     <motion.div
       className={`product-list-par ${!gridView ? "list" : "grid"} `}

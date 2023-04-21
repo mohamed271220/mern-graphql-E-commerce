@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { viewFilterContext } from "../Products/Products";
+import { productListContext } from "../Products/Products";
 import {
   FILTER_BY_PRICE,
   FILTER_BY_Rate,
@@ -20,7 +20,7 @@ const optionsArr = [
 ];
 
 const SelectFilter = () => {
-  const { setProducts } = useContext(viewFilterContext);
+  const { setProducts } = useContext(productListContext);
   const [selectValue, setSelectValue] = useState("relevance");
   const [fnRevlence] = useLazyQuery(Get_All_Products);
   const [fnTrendy] = useMutation(FILTER_BY_STATE);

@@ -194,3 +194,8 @@
 .limited {
   background: var(--twitter);
 }
+
+.reset-filter {
+  margin-top: 20px;
+  background: linear-gradient(30deg, var(--delete), var(--wheat));
+}

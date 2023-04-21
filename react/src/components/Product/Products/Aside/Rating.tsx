@@ -6,11 +6,11 @@ import useHide from "../../../../custom/useHide";
 
 import { FcMinus } from "react-icons/fc";
 import { BiPlus } from "react-icons/bi";
-import { viewFilterContext } from "../Products";
+import { productListContext } from "../Products";
 import Star from "./Star";
 
 const Rating = () => {
-  const { RateChecked, setRateChecked } = useContext(viewFilterContext);
+  const { RateChecked, setRateChecked } = useContext(productListContext);
 
   const stars = [];
 

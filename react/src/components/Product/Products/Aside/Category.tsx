@@ -5,12 +5,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import { opacityVariant, parentVariant } from "../../../../variants/globals";
 import { FcMinus } from "react-icons/fc";
 import { BiPlus } from "react-icons/bi";
-import { viewFilterContext } from "../Products";
+import { productListContext } from "../Products";
 import { categoriesArr } from "../../../../arries.js";
 
 const Category = () => {
   const [showCategory, handleShowCategory, handleHideCategory] = useHide();
-  const { categoryFilter, setCategoryFilter } = useContext(viewFilterContext);
+  const { categoryFilter, setCategoryFilter } = useContext(productListContext);
 
   return (
     <div className="category-par center ">

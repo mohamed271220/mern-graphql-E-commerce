@@ -4,13 +4,14 @@ import Rating from "./Rating";
 import Price from "./Price";
 import { AnimatePresence, motion } from "framer-motion";
 import FeaturedProducts from "./FeaturedProducts";
-import { opacityVariant } from "../../../../variants/globals";
+import { btnHover, btnTap, opacityVariant } from "../../../../variants/globals";
 import { useMutation } from "@apollo/client";
-import { viewFilterContext } from "../Products";
+import { productListContext } from "../Products";
 import { FILTER_All } from "../../../../graphql/mutations/product.js";
 import { FeaturedProductsArr, categoriesArr } from "../../../../arries.js";
 import Search from "../../viewOptions/Search";
 import Category from "./Category";
+import AsideBtn from "./AsideBtn";
 
 const asideVariant = {
   start: { width: 0, opacity: 0 },
@@ -34,13 +35,35 @@ const asideVariant = {
 const Aside = ({ startFiltering }: { startFiltering: boolean }) => {
   const {
     categoryFilter,
+    setCategoryFilter,
     priceFilter,
+    setPriceFilter,
     RateChecked,
+    setRateChecked,
     productFeatured,
+    setProductFeatured,
     setProducts,
-  } = useContext(viewFilterContext);
+  } = useContext(productListContext);
+
   const [filterAllFn] = useMutation(FILTER_All);
 
+  const handleFiltering = () => {
+    filterAllFn({
+      variables: {
+        price: priceFilter === 0 ? 10000 : priceFilter,
+        category: categoryFilter === "" ? categoriesArr : [categoryFilter],
+        state: productFeatured === "" ? FeaturedProductsArr : [productFeatured],
+        rate: RateChecked === "" ? 5 : RateChecked,
+      },
+    }).then(({ data }) => setProducts(data.filterAllTypes));
+  };
+
+  const handleResetFiltering = () => {
+    setCategoryFilter("");
+    setRateChecked("");
+    setPriceFilter(0);
+    setProductFeatured("");
+  };
   return (
     <motion.aside
       variants={asideVariant}
@@ -55,37 +78,13 @@ const Aside = ({ startFiltering }: { startFiltering: boolean }) => {
           <span className="filter-head">filter</span>
         </div>
         <div className="collapse-par center">
-          <AnimatePresence>
-            {startFiltering && (
-              <motion.button
-                key={"apply-btn"}
-                variants={opacityVariant}
-                transition={{ duration: 0.4 }}
-                initial="start"
-                exit="exit"
-                animate="end"
-                className="btn shadow main"
-                onClick={() => {
-                  filterAllFn({
-                    variables: {
-                      price: priceFilter === 0 ? 10000 : priceFilter,
-                      category:
-                        categoryFilter === ""
-                          ? categoriesArr
-                          : [categoryFilter],
-                      state:
-                        productFeatured === ""
-                          ? FeaturedProductsArr
-                          : [productFeatured],
-                      rate: RateChecked === "" ? 5 : RateChecked,
-                    },
-                  }).then(({ data }) => setProducts(data.filterAllTypes));
-                }}
-              >
-                apply
-              </motion.button>
-            )}
-          </AnimatePresence>
+          <AsideBtn
+            key={"apply-btn"}
+            cls={"btn shadow main"}
+            btn={"apply"}
+            fn={handleFiltering}
+            startFiltering={startFiltering}
+          />
         </div>
       </div>
       <div className="hr"></div>
@@ -94,6 +93,14 @@ const Aside = ({ startFiltering }: { startFiltering: boolean }) => {
       <Category />
       <Rating />
       <Price />
+
+      <AsideBtn
+        key={"reset-filter-btn"}
+        cls={"btn w-100 reset-filter"}
+        btn={"            reset filters"}
+        fn={handleResetFiltering}
+        startFiltering={startFiltering}
+      />
     </motion.aside>
   );
 };

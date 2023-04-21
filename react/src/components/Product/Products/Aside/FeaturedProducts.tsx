@@ -5,12 +5,13 @@ import { AnimatePresence, motion } from "framer-motion";
 import { opacityVariant, parentVariant } from "../../../../variants/globals";
 import { FcMinus } from "react-icons/fc";
 import { BiPlus } from "react-icons/bi";
-import { viewFilterContext } from "../Products";
+import { productListContext } from "../Products";
 import { FeaturedProductsArr } from "../../../../arries.js";
 
 const FeaturedProducts = () => {
   const [showCategory, handleShowCategory, handleHideCategory] = useHide();
-  const { productFeatured, setProductFeatured } = useContext(viewFilterContext);
+  const { productFeatured, setProductFeatured } =
+    useContext(productListContext);
 
   return (
     <div className="category-par center ">

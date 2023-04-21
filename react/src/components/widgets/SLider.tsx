@@ -2,10 +2,11 @@ import React, { useEffect, useContext } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { viewFilterContext } from "../Product/Products/Products";
+import { productListContext } from "../Product/Products/Products";
 import ProductFliter from "../Product/Products/AllProducts/ProductFliter";
 import { useLazyQuery, useQuery } from "@apollo/client";
 import { Get_All_Products } from "../../graphql/general";
+import { viewContext } from "../../context/gridView";
 
 const SLiderComponent = () => {
   const settings = {
@@ -13,18 +14,11 @@ const SLiderComponent = () => {
     infinite: true,
     speed: 500,
     slidesToScroll: 1,
-    slidesToShow: 5,
+    slidesToShow: 4,
     ease: "esaeInOut",
     responsive: [
       {
         breakpoint: 900,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 1,
-        },
-      },
-      {
-        breakpoint: 700,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
@@ -41,13 +35,11 @@ const SLiderComponent = () => {
     autoplay: true,
   };
   const { data } = useQuery(Get_All_Products);
+  const { setGridView } = useContext(viewContext);
 
-  // const { setroductSearchWord } = useContext(viewFilterContext);
-
-  // useEffect(() => {
-  //   setroductSearchWord("");
-  // }, []);
-
+  useEffect(() => {
+    setGridView(true);
+  }, []);
   return (
     <>
       <h2 className="underline header  heading-slider">you may like </h2>
@@ -67,6 +59,7 @@ const SLiderComponent = () => {
               category={product.category}
               images={product.images}
               rating={product.rating}
+              description={product.description}
               //   layout
             />
           );

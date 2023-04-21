@@ -2,12 +2,12 @@ import { useMutation } from "@apollo/client";
 import React, { useContext, useRef, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { Search_Mutaion } from "../../../graphql/mutations/product";
-import { viewFilterContext } from "../Products/Products";
+import { productListContext } from "../Products/Products";
 import { useNavigate } from "react-router-dom";
 
 const Search = () => {
   const { setProducts, setroductSearchWord, productSearchWord } =
-    useContext(viewFilterContext);
+    useContext(productListContext);
 
   const inpRef = useRef<HTMLInputElement>(null);
   const [inp, setInp] = useState("");

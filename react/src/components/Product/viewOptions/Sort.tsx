@@ -2,16 +2,17 @@ import React, { useContext } from "react";
 import { BsListTask } from "react-icons/bs";
 import { HiOutlineViewGrid } from "react-icons/hi";
 import { IoFilter } from "react-icons/io5";
-import { viewFilterContext } from "../Products/Products";
+import { productListContext } from "../Products/Products";
 import { AnimatePresence, motion } from "framer-motion";
 import { opacityVariant } from "../../../variants/globals";
 import SelectFilter from "./SelectFilter";
 import Search from "./Search";
+import { viewContext } from "../../../context/gridView";
 
 const Sort = () => {
-  const { setShowFilter, showFilter, setGridView, gridView } =
-    useContext(viewFilterContext);
+  const { setShowFilter, showFilter } = useContext(productListContext);
 
+  const { setGridView, gridView } = useContext(viewContext);
   const toggleShowFilter = () => setShowFilter(!showFilter);
 
   return (

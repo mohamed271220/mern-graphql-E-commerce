@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useAppSelector } from "../../../custom/reduxTypes";
 import CartItem from "./CartItem";
 import TotalPrice from "./TotalPrice";
 import CircleCheckSvg from "../../../custom SVGs/CircleCheckSvg";
 import { AnimatePresence } from "framer-motion";
 import SLiderComponent from "../../widgets/SLider";
+import { viewContext } from "../../../context/gridView";
 
 const offerArr = [
   { offer: "Spend $800 or more and get free shipping!", money: 800 },
@@ -21,6 +22,11 @@ const Cart = () => {
       setSubTotal(cart.reduce((acc, cur) => acc + cur.price * cur.count, 0));
     }
   }, [cart]);
+
+  const { setGridView } = useContext(viewContext);
+  useEffect(() => {
+    setGridView(true);
+  }, []);
 
   return (
     <>
