@@ -152,9 +152,8 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
             },
             resolve: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
                 try {
-                    const { price, title, path, count, productId } = args;
                     const res = yield user_js_1.userCollection.findByIdAndUpdate(args.userId, {
-                        $push: { cart: { price, title, path, count, productId } },
+                        $push: { cart: args },
                     }, { new: true });
                     console.log(res);
                     return Object.assign(Object.assign({}, res), { msg: "successfully added to your cart" });

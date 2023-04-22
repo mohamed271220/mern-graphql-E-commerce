@@ -19,7 +19,6 @@ const userSchema = new mongoose.Schema({
     {
       productId: mongoose.SchemaTypes.ObjectId,
       parentId: mongoose.SchemaTypes.ObjectId,
-
       count: Number,
       title: String,
       path: String,

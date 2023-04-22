@@ -3,13 +3,17 @@ import ProductRate from "../../../product Route/ProductRate";
 import useAvg from "../../../../custom/useAvg";
 import ProductListHeart from "../../../widgets/ProductListHeart";
 import { imagesInterface } from "../../../../interfaces/user";
-import { useNavigate } from "react-router-dom";
-import { motion, MotionProps, useAnimate } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  MotionProps,
+  useAnimate,
+} from "framer-motion";
 import useMeasure from "react-use-measure";
 import { viewContext } from "../../../../context/gridView";
 import { productListContext } from "../../../../context/FilterData";
-import OpacityBtn from "../../../widgets/OpacityBtn";
 import ListCartBtn from "./ListCartBtn";
+import DetailsBtn from "../../../widgets/DetailsBtn";
 
 type Props = {
   _id: string;
@@ -40,7 +44,6 @@ const ProductFliter = ({
   const avgRate = useAvg(rating);
   const [isFavoraited, setIsFavorited] = useState(false);
   const [onCart, setOnCart] = useState(false);
-  const navigate = useNavigate();
   const { productSearchWord } = useContext(productListContext);
   const { gridView } = useContext(viewContext);
   const [sectionRef, { width: sectionWidth }] = useMeasure();
@@ -55,7 +58,6 @@ const ProductFliter = ({
     );
   }, []);
 
-  const handleDetailsFn = () => navigate(`/${_id}`);
   return (
     <div ref={ref}>
       <motion.section
@@ -123,33 +125,31 @@ const ProductFliter = ({
             />
           </div>
           <div className="product-links center">
-            {!onCart ? (
-              <ListCartBtn
-                key={"ListCartBtn"}
-                setOnCart={setOnCart}
-                price={price}
-                title={title}
-                parentId={_id}
-                images={images}
-                btn="add to cart"
-              />
-            ) : (
-              <ListCartBtn
-                key={"ListCartBtn"}
-                setOnCart={setOnCart}
-                price={price}
-                title={title}
-                parentId={_id}
-                images={images}
-                btn="remove from cart"
-              />
-            )}
+            <AnimatePresence mode="wait">
+              {!onCart ? (
+                <ListCartBtn
+                  key={"ListCartBtn"}
+                  setOnCart={setOnCart}
+                  price={price}
+                  title={title}
+                  parentId={_id}
+                  images={images}
+                  btn="add to cart"
+                />
+              ) : (
+                <ListCartBtn
+                  key={"removeListCartBtn"}
+                  setOnCart={setOnCart}
+                  price={price}
+                  title={title}
+                  parentId={_id}
+                  images={images}
+                  btn="remove from cart"
+                />
+              )}
+            </AnimatePresence>
 
-            <OpacityBtn
-              cls="btn shadow details"
-              fn={handleDetailsFn}
-              btn="details"
-            />
+            <DetailsBtn btn="details" cls="btn details shadow" _id={_id} />
           </div>
           <span className="heart-filter ">
             <ProductListHeart

@@ -2,12 +2,14 @@ export interface favInterface {
   title: string;
   price: number;
   productId: string;
+
   path: string;
   _id: string;
 }
 
 export interface cartInterface extends favInterface {
   count: number;
+  parentId: string;
 }
 
 export interface favInitialState {

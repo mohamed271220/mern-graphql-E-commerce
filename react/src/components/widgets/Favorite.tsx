@@ -1,14 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { motion } from "framer-motion";
-import { favArrInterface } from "../../context/isAuth";
-import { useAppDispatch } from "../../custom/reduxTypes";
-import { removeFromFavRedux } from "../../redux/favSlice";
-import { useMutation } from "@apollo/client";
-import { REMOVE_FROM_FAV } from "../../graphql/mutations/user";
-import Cookies from "js-cookie";
-import { toast } from "react-hot-toast";
+import { favArrInterface, isAuthContext } from "../../context/isAuth";
 import { opacityVariant } from "../../variants/globals";
 import { useNavigate } from "react-router-dom";
+import useRemoveFromFav from "../../custom/useRemoveFeomFav";
 
 const Favorite = ({
   _id,
@@ -18,10 +13,12 @@ const Favorite = ({
   path,
   parentId,
 }: favArrInterface) => {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [RemoveFromFav] = useMutation(REMOVE_FROM_FAV);
-
+  const { userId } = useContext(isAuthContext);
+  const { handleRemoveFromFav } = useRemoveFromFav({
+    userId,
+    productId: [productId as string],
+  });
   return (
     <motion.div
       className="fav-product center"
@@ -40,20 +37,7 @@ const Favorite = ({
         <h3 className="fav-title ">{title}</h3>
         <span className="fav-price">$ {price}</span>
         <div className="product-links">
-          <button
-            className="btn unsave shadow"
-            onClick={async () => {
-              const userId = Cookies.get("user-id");
-              const res = await RemoveFromFav({
-                variables: {
-                  userId,
-                  productId,
-                },
-              });
-              dispatch(removeFromFavRedux([productId]));
-              toast.success(res.data.removeFromFav.msg);
-            }}
-          >
+          <button className="btn unsave shadow" onClick={handleRemoveFromFav}>
             unsave
           </button>
           <button

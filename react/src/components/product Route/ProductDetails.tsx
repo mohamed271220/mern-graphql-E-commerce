@@ -25,7 +25,7 @@ interface Props {
 }
 
 const ProductDetails = ({
-  data: { rating, title, description, category, price, stock, setShowPop },
+  data: { _id, rating, title, description, category, price, stock, setShowPop },
 }: Props) => {
   const parentVariant = {
     start: { x: 400, opacity: 0 },
@@ -116,9 +116,13 @@ const ProductDetails = ({
 
           <AnimatePresence mode="wait">
             {!onCart ? (
-              <CartBtn key={"add-to-cart"} btn="add to cart" />
+              <CartBtn id={_id} key={"add-to-cart"} btn="add to cart" />
             ) : (
-              <CartBtn btn="remove from cart" key={"remove-from-cart"} />
+              <CartBtn
+                id={_id}
+                btn="remove from cart"
+                key={"remove-from-cart"}
+              />
             )}
           </AnimatePresence>
         </div>

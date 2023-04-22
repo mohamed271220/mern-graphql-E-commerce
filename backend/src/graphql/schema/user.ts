@@ -159,11 +159,10 @@ export const userMutation = new GraphQLObjectType({
       },
       resolve: async (_, args) => {
         try {
-          const { price, title, path, count, productId } = args;
           const res = await userCollection.findByIdAndUpdate(
             args.userId,
             {
-              $push: { cart: { price, title, path, count, productId } },
+              $push: { cart: args },
             },
             { new: true }
           );

@@ -7,19 +7,19 @@ import useAddToCart from "../../custom/useAddToCart";
 import { isAuthContext } from "../../context/isAuth";
 import useRemoveFromCart from "../../custom/useRemoveFromCart";
 
-const CartBtn = ({ btn }: { btn: string }) => {
+const CartBtn = ({ btn, id }: { btn: string; id: string }) => {
   const { userId } = useContext(isAuthContext);
 
-  const { _id, images, bigImgInd, price, title } = useContext(productContext);
+  const { images, bigImgInd, price, title } = useContext(productContext);
 
   const [productId, path] = usePathAndId(images, bigImgInd);
   const addToCartObj = {
     userId,
     productId,
+    parentId: id,
     path,
     price,
     title,
-    parentId: _id,
   };
   const { handleAddToCart } = useAddToCart(addToCartObj);
   const { handleRemoveFromCart } = useRemoveFromCart({

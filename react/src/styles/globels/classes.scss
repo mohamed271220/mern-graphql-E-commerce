@@ -30,6 +30,9 @@
   font-size: 0.9rem;
   border-radius: 4px 10px;
   text-transform: capitalize;
+  &.details {
+    background: linear-gradient(270deg, var(--wheat-lighter), grey);
+  }
   svg {
     path {
       filter: drop-shadow(0.5px 1px 1px black);
@@ -125,7 +128,6 @@
 .remove {
   background: var(--delete);
   gap: 4px;
-  font-size: 0.7rem;
 }
 
 .w-100 {
