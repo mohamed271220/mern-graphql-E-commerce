@@ -5,6 +5,7 @@ export const ADD_USER = gql`
     addUser(name: $name, email: $email, password: $password) {
       name
       msg
+      status
     }
   }
 `;
@@ -12,6 +13,7 @@ export const ADD_USER = gql`
 export const Add_To_Cart = gql`
   mutation (
     $productId: ID!
+    $parentId: ID!
     $userId: ID!
     $path: String!
     $title: String!
@@ -21,6 +23,7 @@ export const Add_To_Cart = gql`
       count: 1
       userId: $userId
       productId: $productId
+      parentId: $parentId
       path: $path
       title: $title
       price: $price
@@ -87,6 +90,8 @@ export const GET_USER_DATA = gql`
         productId
         price
         title
+        parentId
+
         path
         _id
       }

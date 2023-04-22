@@ -1,25 +1,16 @@
 import React, { useEffect, useState, useContext } from "react";
 import { BiPurchaseTagAlt } from "react-icons/bi";
+
 import { AiOutlineCheck } from "react-icons/ai";
 import { AnimatePresence, motion } from "framer-motion";
 import { btnHover } from "../../variants/globals";
 import useAvg from "../../custom/useAvg";
-import { useMutation } from "@apollo/client";
-import {
-  Add_To_Cart,
-  Add_To_Fav,
-  REMOVE_FROM_FAV,
-} from "../../graphql/mutations/user";
-import { useAppDispatch, useAppSelector } from "../../custom/reduxTypes";
-import { favInterface } from "../../interfaces/user";
-import { addToFavRedux, removeFromFavRedux } from "../../redux/favSlice";
+import { useAppSelector } from "../../custom/reduxTypes";
 import HeartSvgProduct from "../../custom SVGs/HeartSvgProduct";
-import CartButton from "../widgets/CartButton";
 import { productContext } from "./Product";
 import usePathAndId from "../../custom/usePathAndId";
-import Remove_From_Cart_Btn from "../widgets/Remove-From-Cart_Btn";
-import ProductListHeart from "../widgets/ProductListHeart";
 import ProductRate from "./ProductRate";
+import CartBtn from "../widgets/CartBtn";
 interface Props {
   data: {
     title: string;
@@ -34,7 +25,7 @@ interface Props {
 }
 
 const ProductDetails = ({
-  data: { _id, rating, title, description, category, price, stock, setShowPop },
+  data: { rating, title, description, category, price, stock, setShowPop },
 }: Props) => {
   const parentVariant = {
     start: { x: 400, opacity: 0 },
@@ -45,11 +36,11 @@ const ProductDetails = ({
     },
   };
 
-  const dispatch = useAppDispatch();
   const handleshowPop = () => setShowPop(true);
   const avgRate = useAvg(rating);
   const [isFavoraited, setIsFavorited] = useState(false);
   const { images, bigImgInd } = useContext(productContext);
+
   const [id] = usePathAndId(images, bigImgInd);
   const { cart } = useAppSelector((state) => state.cart);
   const [onCart, setOnCart] = useState(false);
@@ -122,15 +113,12 @@ const ProductDetails = ({
             </span>
             Buy Now
           </motion.button>
+
           <AnimatePresence mode="wait">
             {!onCart ? (
-              <CartButton key={"CartButton"} />
+              <CartBtn key={"add-to-cart"} btn="add to cart" />
             ) : (
-              <Remove_From_Cart_Btn
-                key={"Remove_From_Cart_Btn"}
-                id={id}
-                content={"remove from cart"}
-              />
+              <CartBtn btn="remove from cart" key={"remove-from-cart"} />
             )}
           </AnimatePresence>
         </div>

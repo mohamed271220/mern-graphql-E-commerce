@@ -25,6 +25,7 @@ const cartType = new GraphQLObjectType({
   name: "carts",
   fields: () => ({
     productId: { type: GraphQLID },
+    parentId: { type: GraphQLID },
     count: { type: GraphQLInt },
     _id: { type: GraphQLID },
     path: { type: GraphQLString },
@@ -56,6 +57,7 @@ const userType = new GraphQLObjectType({
     password: { type: GraphQLString },
     msg: { type: GraphQLString },
     phone: { type: GraphQLInt },
+    status: { type: GraphQLInt },
     fav: { type: new GraphQLList(favtType) },
     cart: { type: new GraphQLList(cartType) },
     // favArr: {
@@ -81,18 +83,22 @@ export const userMutation = new GraphQLObjectType({
         name: { type: GraphQLString },
         email: { type: GraphQLString },
         password: { type: GraphQLString },
-        msg: { type: GraphQLString },
+        // msg: { type: GraphQLString },
       },
       resolve: async (_, args) => {
         const check = await userCollection.find({ email: args.email });
         if (check.length > 0) {
-          return { email: args.email, msg: "this email has registered" };
+          return {
+            status: 401,
+            email: args.email,
+            msg: "this email has registered",
+          };
         } else {
           const res = await userCollection.create({
             ...args,
             password: hashPassword(args.password),
           });
-          return { ...res, msg: "user created successfully" };
+          return { ...res, status: 200, msg: "user created successfully" };
         }
       },
     },
@@ -128,7 +134,7 @@ export const userMutation = new GraphQLObjectType({
               res.cookie("user-id", id as unknown as string);
               res.cookie("access-token", accessToken);
               res.cookie("refresh-token", refToken);
-              return { msg: "you successfully loggedIn" };
+              return { msg: "you successfully logged in" };
             }
           } else if (!result) {
             return { msg: "password is wrong" };
@@ -145,6 +151,7 @@ export const userMutation = new GraphQLObjectType({
       args: {
         userId: { type: GraphQLID },
         productId: { type: GraphQLID },
+        parentId: { type: GraphQLID },
         count: { type: GraphQLInt },
         title: { type: GraphQLString },
         path: { type: GraphQLString },

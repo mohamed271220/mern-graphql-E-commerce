@@ -7,31 +7,34 @@ import AppRoutes from "./components/routes";
 import IsAuthContextComponent from "./context/isAuth";
 import { Toaster } from "react-hot-toast";
 import GridViewContext from "./context/gridView";
+import FilterDataContext from "./context/FilterData";
 const App = () => {
   return (
     <IsAuthContextComponent>
       <GridViewContext>
-        <BrowserRouter>
-          <div className="App">
-            {/* <Loading /> */}
-            <Nav />
-            <AppRoutes />
-          </div>
+        <FilterDataContext>
+          <BrowserRouter>
+            <div className="App">
+              {/* <Loading /> */}
+              <Nav />
+              <AppRoutes />
+            </div>
 
-          <Toaster
-            position="bottom-left"
-            reverseOrder={false}
-            containerClassName=""
-            toastOptions={{
-              style: {
-                background: "black",
-                color: "white",
-                width: "240px",
-                whiteSpace: "nowrap",
-              },
-            }}
-          />
-        </BrowserRouter>
+            <Toaster
+              position="bottom-left"
+              reverseOrder={false}
+              containerClassName=""
+              toastOptions={{
+                style: {
+                  background: "black",
+                  color: "white",
+                  width: "240px",
+                  whiteSpace: "nowrap",
+                },
+              }}
+            />
+          </BrowserRouter>
+        </FilterDataContext>
       </GridViewContext>
     </IsAuthContextComponent>
   );

@@ -13,7 +13,6 @@ const Pages = ({ numOfPages, setPage, page }: Props) => {
       setpageArr((pageArr) => [...pageArr, i]);
     }
   }, [numOfPages]);
-  console.log({ pageArr, numOfPages });
   return (
     <div className="pages-par center">
       {pageArr?.map((num, index) => {

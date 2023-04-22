@@ -31,6 +31,7 @@ const cartType = new graphql_1.GraphQLObjectType({
     name: "carts",
     fields: () => ({
         productId: { type: graphql_1.GraphQLID },
+        parentId: { type: graphql_1.GraphQLID },
         count: { type: graphql_1.GraphQLInt },
         _id: { type: graphql_1.GraphQLID },
         path: { type: graphql_1.GraphQLString },
@@ -60,6 +61,7 @@ const userType = new graphql_1.GraphQLObjectType({
         password: { type: graphql_1.GraphQLString },
         msg: { type: graphql_1.GraphQLString },
         phone: { type: graphql_1.GraphQLInt },
+        status: { type: graphql_1.GraphQLInt },
         fav: { type: new graphql_1.GraphQLList(favtType) },
         cart: { type: new graphql_1.GraphQLList(cartType) },
         // favArr: {
@@ -84,16 +86,20 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                 name: { type: graphql_1.GraphQLString },
                 email: { type: graphql_1.GraphQLString },
                 password: { type: graphql_1.GraphQLString },
-                msg: { type: graphql_1.GraphQLString },
+                // msg: { type: GraphQLString },
             },
             resolve: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
                 const check = yield user_js_1.userCollection.find({ email: args.email });
                 if (check.length > 0) {
-                    return { email: args.email, msg: "this email has registered" };
+                    return {
+                        status: 401,
+                        email: args.email,
+                        msg: "this email has registered",
+                    };
                 }
                 else {
                     const res = yield user_js_1.userCollection.create(Object.assign(Object.assign({}, args), { password: (0, hashPassword_js_1.hashPassword)(args.password) }));
-                    return Object.assign(Object.assign({}, res), { msg: "user created successfully" });
+                    return Object.assign(Object.assign({}, res), { status: 200, msg: "user created successfully" });
                 }
             }),
         },
@@ -118,7 +124,7 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                             res.cookie("user-id", id);
                             res.cookie("access-token", accessToken);
                             res.cookie("refresh-token", refToken);
-                            return { msg: "you successfully loggedIn" };
+                            return { msg: "you successfully logged in" };
                         }
                     }
                     else if (!result) {
@@ -138,6 +144,7 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
             args: {
                 userId: { type: graphql_1.GraphQLID },
                 productId: { type: graphql_1.GraphQLID },
+                parentId: { type: graphql_1.GraphQLID },
                 count: { type: graphql_1.GraphQLInt },
                 title: { type: graphql_1.GraphQLString },
                 path: { type: graphql_1.GraphQLString },

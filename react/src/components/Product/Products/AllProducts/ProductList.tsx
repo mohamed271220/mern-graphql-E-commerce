@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import ProductFliter from "./ProductFliter";
 import Pages from "../Pages";
-import { productListContext } from "../Products";
 import { motion } from "framer-motion";
 import { viewContext } from "../../../../context/gridView";
+import { productListContext } from "../../../../context/FilterData";
 
 const ProductList = () => {
   const { showFilter, products } = useContext(productListContext);

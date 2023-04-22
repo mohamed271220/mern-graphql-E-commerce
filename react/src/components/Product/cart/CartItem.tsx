@@ -2,7 +2,7 @@ import React from "react";
 import { cartInterface } from "../../../interfaces/user.js";
 import Counter from "./Counter.js";
 import HeartSvgProduct from "../../../custom SVGs/HeartSvgProduct.js";
-import Remove_From_Cart_Btn from "../../widgets/Remove-From-Cart_Btn.js";
+import RemoveFromCart from "../../widgets/RemoveFromCart.js";
 
 const CartItem = ({
   _id,
@@ -34,7 +34,7 @@ const CartItem = ({
         })}
       </div>
       <div>
-        <Remove_From_Cart_Btn id={productId} content={"remove"} />
+        <RemoveFromCart id={productId} />
       </div>
     </div>
   );

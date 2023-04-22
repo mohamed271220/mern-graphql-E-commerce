@@ -5,9 +5,11 @@ import ProductListHeart from "../../../widgets/ProductListHeart";
 import { imagesInterface } from "../../../../interfaces/user";
 import { useNavigate } from "react-router-dom";
 import { motion, MotionProps, useAnimate } from "framer-motion";
-import { productListContext } from "../Products";
 import useMeasure from "react-use-measure";
 import { viewContext } from "../../../../context/gridView";
+import { productListContext } from "../../../../context/FilterData";
+import OpacityBtn from "../../../widgets/OpacityBtn";
+import ListCartBtn from "./ListCartBtn";
 
 type Props = {
   _id: string;
@@ -37,12 +39,14 @@ const ProductFliter = ({
 }: Props) => {
   const avgRate = useAvg(rating);
   const [isFavoraited, setIsFavorited] = useState(false);
+  const [onCart, setOnCart] = useState(false);
   const navigate = useNavigate();
   const { productSearchWord } = useContext(productListContext);
   const { gridView } = useContext(viewContext);
   const [sectionRef, { width: sectionWidth }] = useMeasure();
 
   const [ref, animate] = useAnimate();
+
   useEffect(() => {
     animate(
       ".product-List",
@@ -51,6 +55,7 @@ const ProductFliter = ({
     );
   }, []);
 
+  const handleDetailsFn = () => navigate(`/${_id}`);
   return (
     <div ref={ref}>
       <motion.section
@@ -118,14 +123,33 @@ const ProductFliter = ({
             />
           </div>
           <div className="product-links center">
-            <button className="btn shadow product-btn main">add to cart</button>
+            {!onCart ? (
+              <ListCartBtn
+                key={"ListCartBtn"}
+                setOnCart={setOnCart}
+                price={price}
+                title={title}
+                parentId={_id}
+                images={images}
+                btn="add to cart"
+              />
+            ) : (
+              <ListCartBtn
+                key={"ListCartBtn"}
+                setOnCart={setOnCart}
+                price={price}
+                title={title}
+                parentId={_id}
+                images={images}
+                btn="remove from cart"
+              />
+            )}
 
-            <button
-              onClick={() => navigate(`/${_id}`)}
-              className="btn shadow details"
-            >
-              details
-            </button>
+            <OpacityBtn
+              cls="btn shadow details"
+              fn={handleDetailsFn}
+              btn="details"
+            />
           </div>
           <span className="heart-filter ">
             <ProductListHeart

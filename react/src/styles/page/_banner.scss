@@ -6,20 +6,28 @@
   position: relative;
   background: linear-gradient(135deg, var(--white), grey);
   .banner {
-    width: 95%;
-    max-width: 900px;
+    width: 100%;
+    // max-width: 900px;
     margin: 0 auto;
-    height: 400px;
+    height: 100%;
     gap: 2rem;
     display: flex;
     justify-content: space-between;
-
     align-items: center;
+    .background {
+      position: absolute;
+      top: 0;
+      right: 0;
+      clip-path: polygon(24% 0, 100% 0, 100% 100%, 0% 100%);
+
+      height: 100%;
+      width: 50%;
+    }
 
     .banner-image {
       display: flex;
-      max-width: 400px;
-      width: 40vw;
+      max-width: 500px;
+      width: 45vw;
       justify-content: center;
       height: 100%;
       margin-left: 20px;
@@ -27,7 +35,7 @@
 
       img {
         object-fit: cover;
-        height: 90%;
+        height: 80%;
         max-width: 300px;
         filter: drop-shadow(4px 10px 5px black);
       }
@@ -39,13 +47,14 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  width: 50%;
+  margin-left: 10px;
 
   h1 {
     letter-spacing: 1px;
     white-space: nowrap;
     text-shadow: 0.4px 0.5px 1px black;
     font-size: 1.8rem;
-
     color: var(--green);
   }
   p {
@@ -80,5 +89,11 @@
     &.active {
       opacity: 1;
     }
+  }
+}
+
+@media (max-width: 700px) {
+  .banner-par .banner .background {
+    clip-path: polygon(24% 0, 100% 0, 100% 100%, 0% 100%);
   }
 }

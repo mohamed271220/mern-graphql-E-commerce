@@ -6,10 +6,7 @@ import Cookies from "js-cookie";
 import { useAppDispatch } from "../custom/reduxTypes";
 import { addToFavRedux } from "../redux/favSlice";
 import { addToCartRedux } from "../redux/CartSlice";
-
-interface Props {
-  children: React.ReactNode;
-}
+import { ChildrenInterFace } from "../interfaces/general.js";
 
 export interface favArrInterface {
   productId: string;
@@ -29,12 +26,14 @@ interface userDataState {
 interface authContextInterface extends userDataState {
   isAuth: boolean;
   setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
+  userId: string;
 }
 
 export const isAuthContext = createContext({} as authContextInterface);
 
-const IsAuthContextComponent = ({ children }: Props) => {
+const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
   const [isAuth, setIsAuth] = useState(false);
+  const [userId, setUserId] = useState<string>("");
 
   const [userData, setUserData] = useState({
     email: "",
@@ -48,7 +47,10 @@ const IsAuthContextComponent = ({ children }: Props) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const userId = Cookies.get("user-id");
+    setUserId(Cookies.get("user-id") as unknown as string);
+  }, [isAuth]);
+
+  useEffect(() => {
     if (userId) {
       getData({
         variables: {
@@ -56,8 +58,7 @@ const IsAuthContextComponent = ({ children }: Props) => {
         },
       });
     }
-  }, [isAuth]);
-  console.log({ cart: data?.getUserData?.cart });
+  }, [userId]);
 
   useEffect(() => {
     if (data?.getUserData) {
@@ -75,6 +76,7 @@ const IsAuthContextComponent = ({ children }: Props) => {
         email: userData.email,
         name: userData.name,
         setIsAuth,
+        userId,
       }}
     >
       {children}

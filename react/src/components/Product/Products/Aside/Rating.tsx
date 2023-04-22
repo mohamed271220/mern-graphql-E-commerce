@@ -6,8 +6,8 @@ import useHide from "../../../../custom/useHide";
 
 import { FcMinus } from "react-icons/fc";
 import { BiPlus } from "react-icons/bi";
-import { productListContext } from "../Products";
 import Star from "./Star";
+import { productListContext } from "../../../../context/FilterData";
 
 const Rating = () => {
   const { RateChecked, setRateChecked } = useContext(productListContext);

@@ -1,16 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useLazyQuery, useMutation } from "@apollo/client";
-import { productListContext } from "../Products/Products";
 import {
   FILTER_BY_PRICE,
   FILTER_BY_Rate,
-  FILTER_BY_STATE,
 } from "../../../graphql/mutations/product";
 import { Get_All_Products } from "../../../graphql/general";
 import { MdOutlineSort } from "react-icons/md";
 import { BiDownArrow } from "react-icons/bi";
 import { AnimatePresence, motion } from "framer-motion";
 import { opacityVariant } from "../../../variants/globals";
+import { productListContext } from "../../../context/FilterData";
 const optionsArr = [
   "relevance",
   "highest price",
@@ -23,7 +22,6 @@ const SelectFilter = () => {
   const { setProducts } = useContext(productListContext);
   const [selectValue, setSelectValue] = useState("relevance");
   const [fnRevlence] = useLazyQuery(Get_All_Products);
-  const [fnTrendy] = useMutation(FILTER_BY_STATE);
   const [fnPrice] = useMutation(FILTER_BY_PRICE);
   const [fnRate] = useMutation(FILTER_BY_Rate);
 

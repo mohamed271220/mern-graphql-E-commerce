@@ -5,8 +5,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { opacityVariant, parentVariant } from "../../../../variants/globals";
 import { FcMinus } from "react-icons/fc";
 import { BiPlus } from "react-icons/bi";
-import { productListContext } from "../Products";
 import { categoriesArr } from "../../../../arries.js";
+import { productListContext } from "../../../../context/FilterData";
 
 const Category = () => {
   const [showCategory, handleShowCategory, handleHideCategory] = useHide();

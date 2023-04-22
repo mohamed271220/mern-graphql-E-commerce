@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import { ChildrenInterFace } from "../interfaces/general.js";
 
 interface viewConntext {
   setGridView: React.Dispatch<React.SetStateAction<boolean>>;
@@ -7,10 +8,7 @@ interface viewConntext {
 
 export const viewContext = createContext({} as viewConntext);
 
-interface Props {
-  children: React.ReactNode;
-}
-const GridViewContext = ({ children }: Props) => {
+const GridViewContext = ({ children }: ChildrenInterFace) => {
   const [gridView, setGridView] = useState(true);
 
   return (

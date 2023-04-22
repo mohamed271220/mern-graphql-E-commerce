@@ -15,27 +15,7 @@ import { useAppSelector } from "../custom/reduxTypes";
 import ShowCount from "./widgets/showCounter";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import GridViewContext from "../context/gridView";
-const linksArr = [
-  {
-    to: "/",
-    link: "Home",
-  },
-
-  {
-    to: "/login",
-    link: "login",
-  },
-
-  {
-    to: "/signup",
-    link: "sign up",
-  },
-
-  {
-    to: "/about",
-    link: "about",
-  },
-];
+import { linksArr } from "../arries.js";
 
 const Nav = () => {
   const navRef = useRef<HTMLElement | null>(null);

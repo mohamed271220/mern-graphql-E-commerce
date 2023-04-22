@@ -30,6 +30,11 @@
   font-size: 0.9rem;
   border-radius: 4px 10px;
   text-transform: capitalize;
+  svg {
+    path {
+      filter: drop-shadow(0.5px 1px 1px black);
+    }
+  }
   &.about {
     background: var(--white);
     color: black;
@@ -111,6 +116,7 @@
   width: 1rem;
   height: 1rem;
   padding: 5px;
+  font-size: 0.8rem;
   background: var(--gmail);
   color: var(--white);
   border-radius: 50%;
@@ -119,6 +125,7 @@
 .remove {
   background: var(--delete);
   gap: 4px;
+  font-size: 0.7rem;
 }
 
 .w-100 {
@@ -198,4 +205,8 @@
 .reset-filter {
   margin-top: 20px;
   background: linear-gradient(30deg, var(--delete), var(--wheat));
+}
+
+.gap {
+  gap: 5px;
 }

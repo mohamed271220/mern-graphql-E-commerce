@@ -4,14 +4,14 @@ import Rating from "./Rating";
 import Price from "./Price";
 import { AnimatePresence, motion } from "framer-motion";
 import FeaturedProducts from "./FeaturedProducts";
-import { btnHover, btnTap, opacityVariant } from "../../../../variants/globals";
 import { useMutation } from "@apollo/client";
-import { productListContext } from "../Products";
 import { FILTER_All } from "../../../../graphql/mutations/product.js";
 import { FeaturedProductsArr, categoriesArr } from "../../../../arries.js";
-import Search from "../../viewOptions/Search";
 import Category from "./Category";
-import AsideBtn from "./AsideBtn";
+import OpacityBtn from "../../../widgets/OpacityBtn";
+import { MdFilterListAlt } from "react-icons/md";
+import { FiRefreshCcw } from "react-icons/fi";
+import { productListContext } from "../../../../context/FilterData";
 
 const asideVariant = {
   start: { width: 0, opacity: 0 },
@@ -77,14 +77,19 @@ const Aside = ({ startFiltering }: { startFiltering: boolean }) => {
           <IoFilter />
           <span className="filter-head">filter</span>
         </div>
+
         <div className="collapse-par center">
-          <AsideBtn
-            key={"apply-btn"}
-            cls={"btn shadow main"}
-            btn={"apply"}
-            fn={handleFiltering}
-            startFiltering={startFiltering}
-          />
+          <AnimatePresence>
+            {startFiltering && (
+              <OpacityBtn
+                key={"apply-btn"}
+                cls={"btn shadow main center  gap"}
+                btn={"apply"}
+                fn={handleFiltering}
+                Icon={MdFilterListAlt}
+              />
+            )}
+          </AnimatePresence>
         </div>
       </div>
       <div className="hr"></div>
@@ -93,14 +98,17 @@ const Aside = ({ startFiltering }: { startFiltering: boolean }) => {
       <Category />
       <Rating />
       <Price />
-
-      <AsideBtn
-        key={"reset-filter-btn"}
-        cls={"btn w-100 reset-filter"}
-        btn={"            reset filters"}
-        fn={handleResetFiltering}
-        startFiltering={startFiltering}
-      />
+      <AnimatePresence>
+        {startFiltering && (
+          <OpacityBtn
+            key={"reset-filter-btn"}
+            cls={"btn w-100 reset-filter center  gap"}
+            btn={"            reset filters"}
+            fn={handleResetFiltering}
+            Icon={FiRefreshCcw}
+          />
+        )}
+      </AnimatePresence>
     </motion.aside>
   );
 };

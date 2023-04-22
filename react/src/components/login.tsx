@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaFacebookF } from "react-icons/fa";
 import { AiOutlineTwitter } from "react-icons/ai";
 import { SiGmail } from "react-icons/si";
 import { motion } from "framer-motion";
-import { btnHover } from "../variants/globals";
 import { useForm, FormProvider, FieldValues } from "react-hook-form";
 
 import Input from "./widgets/Input";
 import { useMutation } from "@apollo/client";
 import { Authenticate_Query } from "../graphql/mutations/user";
+import OpacityBtn from "./widgets/OpacityBtn";
+import { toast } from "react-hot-toast";
+import { isAuthContext } from "../context/isAuth";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const socialMediaArr = [
   { id: "1", icon: <FaFacebookF color="" />, clr: "var(--fb)" },
@@ -27,16 +30,33 @@ const Login = () => {
     getValues,
   } = methods;
 
+  const { setIsAuth } = useContext(isAuthContext);
   const onSubmit = (data: FieldValues) => {
     console.log(data);
   };
 
-  const [authenticate, { data }] = useMutation(Authenticate_Query);
+  const [authenticate] = useMutation(Authenticate_Query);
+  const handleLogIn = async () => {
+    const { email, password } = getValues();
+    const res = await authenticate({
+      variables: {
+        email,
+        password,
+      },
+      context: {
+        credentials: "include",
+      },
+    });
+    if (res.data.authenticate.msg) {
+      toast.success(res.data.authenticate.msg);
+      setIsAuth(true);
+    }
+  };
   return (
     <div className="log-in center">
       <FormProvider {...methods}>
         <form action="" className="center" onSubmit={handleSubmit(onSubmit)}>
-          <h3 className="underline header white"> log in</h3>
+          <h2 className="underline header white"> log in</h2>
           <Input
             placeholder={"email"}
             err={errors.email?.message?.toString()}
@@ -45,30 +65,12 @@ const Login = () => {
             placeholder={"password"}
             err={errors.password?.message?.toString()}
           />
-          <motion.button
-            whileHover={btnHover}
-            type="submit"
-            className="btn main"
-            onClick={async () => {
-              const { email, password } = getValues();
-              const res = await authenticate({
-                variables: {
-                  email,
-                  password,
-                },
-                context: {
-                  credentials: "include",
-                },
-              });
-              console.log(res);
-            }}
-          >
-            log in
-          </motion.button>
+
+          <OpacityBtn cls="btn main" fn={handleLogIn} btn="log In" />
 
           <div className="redirect">
             <span> don&#39;t have an account</span>
-            <a>sign up</a>
+            <NavLink to="/signup">sign up</NavLink>
           </div>
 
           <div className="or center">

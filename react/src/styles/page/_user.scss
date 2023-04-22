@@ -1,0 +1,87 @@
+@import "../variables.scss";
+
+.user-page {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: calc(100vh - 40px);
+  max-width: 950px;
+  margin: 0 auto;
+  margin-top: 40px;
+  .user-image {
+    padding: 10px;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background: var(--sale);
+    flex-direction: column;
+    gap: 10px;
+    .user-img-par {
+      height: 200px;
+      width: 200px;
+      border-radius: 50%;
+      border: 0.5px white solid;
+    }
+    .user-img-btn {
+      background: linear-gradient(30deg, var(--wheat), var(--gmail));
+    }
+  }
+
+  .user-details {
+    width: 70%;
+    height: 100%;
+    padding: 20px;
+    background: var(--wheat-light);
+
+    .user-detail-par {
+      padding: 10px 20px;
+      letter-spacing: 0.8px;
+      .user-detail {
+        text-transform: capitalize;
+        margin-right: 10px;
+        font-weight: bold;
+      }
+      .user-value {
+        width: 55%;
+      }
+    }
+    .update-user {
+      background: linear-gradient(120deg, var(--green), black);
+      font-size: 0.8rem;
+    }
+    .user-head {
+      width: fit-content;
+      margin: 10px 5px;
+      &.underline {
+        &::before {
+          background: var(--white);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  .user-page {
+    flex-direction: column;
+    width: 100%;
+    height: 130vh;
+    .user-image {
+      width: 100%;
+      height: 40vh;
+      background: var(--sale);
+      .user-img-par {
+        height: 150px;
+        width: 150px;
+      }
+    }
+
+    .user-details {
+      width: 100%;
+      height: 100vh;
+      background: var(--wheat-light);
+    }
+  }
+}

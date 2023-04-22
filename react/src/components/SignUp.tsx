@@ -3,11 +3,14 @@ import { FaFacebookF } from "react-icons/fa";
 import { AiOutlineTwitter } from "react-icons/ai";
 import { SiGmail } from "react-icons/si";
 import { motion, stagger, useAnimate } from "framer-motion";
-import { btnHover } from "../variants/globals";
 import { useForm, FormProvider, FieldValues } from "react-hook-form";
 import { useMutation } from "@apollo/client";
 import Input from "./widgets/Input";
 import { ADD_USER } from "../graphql/mutations/user";
+import { NavLink, useNavigate } from "react-router-dom";
+import OpacityBtn from "./widgets/OpacityBtn";
+import { toast } from "react-hot-toast";
+import { AiFillWarning } from "react-icons/ai";
 const socialMediaArr = [
   { id: "1", icon: <FaFacebookF color="" />, clr: "var(--fb)" },
   { id: "2", icon: <AiOutlineTwitter />, clr: "var(--twitter)" },
@@ -38,8 +41,25 @@ const SignUp = () => {
       { delay: stagger(0.2) }
     );
   }, []);
+  const navigate = useNavigate();
+  const [addUserFn] = useMutation(ADD_USER);
+  const handleSignUp = async () => {
+    const { username: name, password, email } = getValues();
 
-  const [addUserFn, { data }] = useMutation(ADD_USER);
+    const { data } = await addUserFn({
+      variables: { name, password, email },
+    });
+    console.log(data);
+    if (data.addUser.status === 200) {
+      navigate("/login");
+      console.log("why not weork");
+      toast.success(data.addUser.msg);
+    } else {
+      toast(data.addUser.msg, {
+        icon: <AiFillWarning fontSize={18} color="var(--star)" />,
+      });
+    }
+  };
   return (
     <div className="log-in center">
       <FormProvider {...methods}>
@@ -49,7 +69,7 @@ const SignUp = () => {
           onSubmit={handleSubmit(OnSubmit)}
           ref={formRef}
         >
-          <h3 className="underline header white"> sign Up</h3>
+          <h2 className="underline header white"> sign Up</h2>
           <Input
             placeholder={"username"}
             err={errors?.username?.message?.toString()}
@@ -66,29 +86,18 @@ const SignUp = () => {
             placeholder={"confirm"}
             err={errors?.confirm?.message?.toString()}
           />{" "}
-          {/* <Input
-            placeholder={"phone"}
-            err={errors?.phone?.message?.toString()}
-          /> */}
-          <motion.button
+          {/* <motion.button
             whileHover={btnHover}
             type="submit"
             className="btn main"
-            onClick={async () => {
-              const { username: name, password, email } = getValues();
-
-              const res = await addUserFn({
-                variables: { name, password, email },
-              });
-
-              console.log(res);
-            }}
+            onClick={}
           >
             sign Up
-          </motion.button>
+          </motion.button> */}
+          <OpacityBtn btn="sign up" cls="btn main" fn={handleSignUp} />
           <div className="redirect">
             <span> have an account</span>
-            <a>log in</a>
+            <NavLink to="/login">log in</NavLink>
           </div>
           <div className="or center">
             <span>or sign Up with</span>

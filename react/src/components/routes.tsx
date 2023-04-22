@@ -6,6 +6,7 @@ import Login from "./login";
 import SignUp from "./SignUp";
 import Cart from "./Product/cart/Cart";
 import Product from "./product Route/Product";
+import User from "./user/User";
 
 const AppRoutes = () => {
   return (
@@ -15,6 +16,7 @@ const AppRoutes = () => {
       <Route path="/signup" element={<SignUp />} />
       <Route path="/about" element={<About />} />
       <Route path="/cart" element={<Cart />} />
+      <Route path="/user" element={<User />} />
       <Route path="/:id" element={<Product />} />
     </Routes>
   );

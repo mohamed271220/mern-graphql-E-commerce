@@ -54,6 +54,33 @@ export const FILTER_BY_STATE = gql`
   }
 `;
 
+export const FILTER_BY_Catagroy = gql`
+  mutation ($category: String!) {
+    filterBycatageory(category: $category) {
+      reviews {
+        image
+        user
+        review
+        rate
+        _id
+      }
+      _id
+      price
+      stock
+      title
+      description
+      rating
+      category
+      state
+
+      images {
+        productPath
+        _id
+      }
+    }
+  }
+`;
+
 export const FILTER_BY_Rate = gql`
   mutation ($rate: Int!) {
     filterByRate(rate: $rate) {

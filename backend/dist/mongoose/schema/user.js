@@ -22,6 +22,7 @@ const userSchema = new mongoose_1.default.Schema({
     cart: [
         {
             productId: mongoose_1.default.SchemaTypes.ObjectId,
+            parentId: mongoose_1.default.SchemaTypes.ObjectId,
             count: Number,
             title: String,
             path: String,

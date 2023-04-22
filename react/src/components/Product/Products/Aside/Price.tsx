@@ -4,7 +4,7 @@ import { FcMinus } from "react-icons/fc";
 import { BiPlus } from "react-icons/bi";
 import { AnimatePresence, motion } from "framer-motion";
 import { opacityVariant, parentVariant } from "../../../../variants/globals";
-import { productListContext } from "../Products";
+import { productListContext } from "../../../../context/FilterData";
 const Price = () => {
   const { setPriceFilter, priceFilter } = useContext(productListContext);
 
