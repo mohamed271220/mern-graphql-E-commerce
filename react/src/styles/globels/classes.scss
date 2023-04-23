@@ -22,6 +22,7 @@
 .btn {
   @extend .remove-border;
   @extend .shadow;
+
   color: var(--white);
   white-space: nowrap;
   padding: 4px 10px;
@@ -152,6 +153,17 @@
   align-items: flex-start;
 }
 
+.counter {
+  padding: 0;
+
+  &.green {
+    color: var(--green);
+  }
+
+  &.red {
+    color: var(--red);
+  }
+}
 .header {
   width: fit-content;
   margin: 0 auto;
@@ -211,4 +223,33 @@
 
 .gap {
   gap: 5px;
+}
+
+.relative {
+  position: relative;
+}
+
+.title-par {
+  display: block;
+  .custom-title {
+    @extend .shadow;
+    font-weight: bold;
+    text-transform: lowercase;
+    position: absolute;
+    top: 115%;
+    width: fit-content;
+    padding: 4px 6px;
+    background: var(--wheat-title);
+    color: var(--white);
+    z-index: 1000;
+    white-space: nowrap;
+    border-radius: 4px;
+    letter-spacing: 0.8px;
+    &.right {
+      right: 0;
+    }
+    &.left {
+      left: 0;
+    }
+  }
 }

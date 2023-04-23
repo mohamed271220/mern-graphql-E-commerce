@@ -41,6 +41,11 @@ aside {
   letter-spacing: 0.8px;
   margin-top: 6px;
   margin-bottom: 10px;
+  &.underline {
+    &:before {
+      width: 2rem;
+    }
+  }
 }
 
 .category-par {

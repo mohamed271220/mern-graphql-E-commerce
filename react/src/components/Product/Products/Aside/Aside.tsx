@@ -7,11 +7,12 @@ import FeaturedProducts from "./FeaturedProducts";
 import { useMutation } from "@apollo/client";
 import { FILTER_All } from "../../../../graphql/mutations/product.js";
 import { FeaturedProductsArr, categoriesArr } from "../../../../arries.js";
-import Category from "./Category";
 import OpacityBtn from "../../../widgets/OpacityBtn";
 import { MdFilterListAlt } from "react-icons/md";
 import { FiRefreshCcw } from "react-icons/fi";
 import { productListContext } from "../../../../context/FilterData";
+import Category2 from "./Category";
+import Category from "./Category";
 
 const asideVariant = {
   start: { width: 0, opacity: 0 },

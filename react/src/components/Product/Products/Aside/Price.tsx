@@ -5,6 +5,8 @@ import { BiPlus } from "react-icons/bi";
 import { AnimatePresence, motion } from "framer-motion";
 import { opacityVariant, parentVariant } from "../../../../variants/globals";
 import { productListContext } from "../../../../context/FilterData";
+import useShowTitle from "../../../../custom/useShowTitle";
+import Title from "../../../widgets/Title";
 const Price = () => {
   const { setPriceFilter, priceFilter } = useContext(productListContext);
 
@@ -18,12 +20,12 @@ const Price = () => {
       priceRef.current.value = String(priceFilter);
     }
   }, [priceFilter]);
+  const [bool, show, hide] = useShowTitle();
 
   return (
-    <div>
-      <div className="filter-head center between">
-        <h4>Price </h4>
-
+    <div className="center category-par">
+      <h4 className="filter-head  header underline">
+        Price
         <AnimatePresence mode="wait">
           {showPrice ? (
             <motion.span
@@ -49,7 +51,7 @@ const Price = () => {
             </motion.span>
           )}
         </AnimatePresence>
-      </div>
+      </h4>
       <AnimatePresence mode="wait">
         {showPrice && (
           <motion.div
@@ -61,16 +63,23 @@ const Price = () => {
             className="price-filter"
           >
             <motion.p variants={opacityVariant}>{priceFilter} $</motion.p>
-            <motion.input
-              variants={opacityVariant}
-              type="range"
-              step="20"
-              min={0}
-              max={2000}
-              onChange={handlePrice}
-              ref={priceRef}
-              defaultValue={"0"}
-            />
+            <motion.span
+              onHoverStart={show}
+              onHoverEnd={hide}
+              className="title-par relative"
+            >
+              <motion.input
+                variants={opacityVariant}
+                type="range"
+                step="20"
+                min={0}
+                max={2000}
+                onChange={handlePrice}
+                ref={priceRef}
+                defaultValue={"0"}
+              />
+              <Title bool={bool} title="select max price" />
+            </motion.span>
           </motion.div>
         )}
       </AnimatePresence>

@@ -16,10 +16,15 @@ import ShowCount from "./widgets/showCounter";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import GridViewContext from "../context/gridView";
 import { linksArr } from "../arries.js";
+import Title from "./widgets/Title";
+import useShowTitle from "../custom/useShowTitle";
 
 const Nav = () => {
   const navRef = useRef<HTMLElement | null>(null);
   const [showFav, handleShowFav, handleHideFav, toggleFav] = useHide();
+
+  const [showCartTitle, ShowCartFn, hideCartFn] = useShowTitle();
+  const [showFavTitle, ShowFavFn, hideFavFn] = useShowTitle();
 
   const { cart } = useAppSelector((state) => state.cart);
   const { fav } = useAppSelector((state) => state.fav);
@@ -55,19 +60,33 @@ const Nav = () => {
             </motion.li>
           );
         })}
-        <motion.li id="cart-link-par" style={{ color: LinkClr }}>
-          <NavLink to="/cart" className="cart-active-link">
+        <motion.li
+          id="cart-link-par"
+          style={{ color: LinkClr }}
+          onHoverStart={ShowCartFn}
+          onHoverEnd={hideCartFn}
+        >
+          <NavLink to="/cart" className="cart-active-link title-par">
             <BsFillCartPlusFill fontSize={"1.2rem"} />
+            <Title title="go to your cart" bool={showCartTitle} />
           </NavLink>
           <ShowCount length={cart.length} />
         </motion.li>
 
         <motion.li
           style={{ color: showFav ? "var(--delete)" : LinkClr }}
-          className="fav-par"
+          className="fav-par title-par"
         >
           <ShowCount length={fav.length} />
-          <AiFillHeart fontSize={"1.5rem"} onClick={toggleFav} />
+          <motion.span
+            className="title-par"
+            onHoverStart={ShowFavFn}
+            onHoverEnd={hideFavFn}
+          >
+            <AiFillHeart fontSize={"1.5rem"} onClick={toggleFav} />
+            <Title bool={showFavTitle} title="show your wishlist" />
+          </motion.span>
+
           <AnimatePresence mode="wait">
             {showFav && (
               <motion.div

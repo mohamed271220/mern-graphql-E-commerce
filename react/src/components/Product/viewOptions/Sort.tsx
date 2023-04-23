@@ -8,6 +8,8 @@ import SelectFilter from "./SelectFilter";
 import Search from "./Search";
 import { viewContext } from "../../../context/gridView";
 import { productListContext } from "../../../context/FilterData";
+import Title from "../../widgets/Title";
+import useShowTitle from "../../../custom/useShowTitle";
 
 const Sort = () => {
   const { setShowFilter, showFilter } = useContext(productListContext);
@@ -15,6 +17,8 @@ const Sort = () => {
   const { setGridView, gridView } = useContext(viewContext);
   const toggleShowFilter = () => setShowFilter(!showFilter);
 
+  const [gridTitle, showGridTitle, hideGridTitle] = useShowTitle();
+  const [listTitle, showListTitle, hideListTitle] = useShowTitle();
   return (
     <div className="sort-par  center between">
       <Search />
@@ -54,16 +58,33 @@ const Sort = () => {
         </div>
         <div className="view-par center ">
           <span className="display">Display</span>
-          <BsListTask
-            onClick={() => setGridView(false)}
-            style={{ color: gridView ? "black" : "var(--green)" }}
-            className={`view-icon  ${!gridView ? "shadow" : ""} `}
-          />
-          <HiOutlineViewGrid
-            onClick={() => setGridView(true)}
-            style={{ color: gridView ? "var(--green)" : "black" }}
-            className={`view-icon  ${gridView ? "shadow" : ""} `}
-          />
+
+          <motion.span
+            className="title-par relative"
+            onHoverStart={showListTitle}
+            onHoverEnd={hideListTitle}
+          >
+            <BsListTask
+              onClick={() => setGridView(false)}
+              style={{ color: gridView ? "black" : "var(--green)" }}
+              className={`view-icon  ${!gridView ? "shadow" : ""} `}
+            />
+            <Title title="list view" bool={listTitle} />
+          </motion.span>
+          <span className="title-par relative">
+            <motion.span
+              className="title-par relative"
+              onHoverStart={showGridTitle}
+              onHoverEnd={hideGridTitle}
+            >
+              <HiOutlineViewGrid
+                onClick={() => setGridView(true)}
+                style={{ color: gridView ? "var(--green)" : "black" }}
+                className={`view-icon  ${gridView ? "shadow" : ""} `}
+              />
+              <Title bool={gridTitle} title="grid view" />
+            </motion.span>
+          </span>
         </div>
         <SelectFilter />
       </div>

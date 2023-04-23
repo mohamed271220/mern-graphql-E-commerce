@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import ProductImages from "./images";
 import ProductDetails from "./ProductDetails";
 import { useQuery } from "@apollo/client";
@@ -28,9 +28,13 @@ const Product = () => {
   const { data, error, loading } = useQuery(GET_Product_By_Id, {
     variables: { id },
   });
-  console.log({ data, error });
   const [showPop, setShowPop] = useState(false);
 
+  useEffect(() => {
+    if (data?.product?.title) {
+      document.title = data.product.title;
+    }
+  }, [loading, data?.product?.title]);
   if (loading) {
     return <>loading</>;
   } else if (error?.message) {

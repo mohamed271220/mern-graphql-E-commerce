@@ -8,6 +8,7 @@ import { FcMinus } from "react-icons/fc";
 import { BiPlus } from "react-icons/bi";
 import Star from "./Star";
 import { productListContext } from "../../../../context/FilterData";
+import FIlter from "./FIlter";
 
 const Rating = () => {
   const { RateChecked, setRateChecked } = useContext(productListContext);
@@ -30,7 +31,9 @@ const Rating = () => {
       <motion.div
         variants={opacityVariant}
         className="center rate-filter-par"
+        style={{ width: "fit-content" }}
         key={`group-${i}`}
+        onClick={() => setRateChecked(6 - i === RateChecked ? "" : 6 - i)}
       >
         <Checkbox
           isChecked={RateChecked}
@@ -42,55 +45,18 @@ const Rating = () => {
     );
   }
 
-  const [showRating, handleShowRating, handleHideRating] = useHide();
   return (
-    <div>
-      <div className="filter-head center between">
-        <h4>Rating </h4>
-
-        <AnimatePresence mode="wait">
-          {showRating ? (
-            <motion.span
-              variants={opacityVariant}
-              initial="start"
-              animate="end"
-              exit="exit"
-              key={"plus"}
-              transition={{ duration: 0.4 }}
-            >
-              <FcMinus onClick={handleHideRating} />
-            </motion.span>
-          ) : (
-            <motion.span
-              variants={opacityVariant}
-              initial="start"
-              animate="end"
-              exit={"exit"}
-              key={"minus"}
-              transition={{ duration: 0.4 }}
-            >
-              <BiPlus onClick={handleShowRating} />
-            </motion.span>
-          )}
-        </AnimatePresence>
-      </div>
-
-      <AnimatePresence mode="wait">
-        {showRating && (
-          <motion.div
-            variants={parentVariant}
-            key={"rating-parent"}
-            initial="start"
-            animate="end"
-            exit={"exit"}
-          >
-            {stars}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <div className="hr"></div>
-    </div>
+    <FIlter head="rating">
+      <motion.div
+        variants={parentVariant}
+        key={"rating-parent"}
+        initial="start"
+        animate="end"
+        exit={"exit"}
+      >
+        {stars}
+      </motion.div>
+    </FIlter>
   );
 };
 

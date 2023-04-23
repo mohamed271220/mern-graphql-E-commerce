@@ -31,9 +31,11 @@ const CartBtn = ({ btn, id }: { btn: string; id: string }) => {
     <>
       <OpacityBtn
         key={btn === "add to cart" ? "add-to-cart" : "remove from cart"}
-        cls={
-          btn === "add to cart" ? "btn wheat-light center" : "btn remove center"
-        }
+        cls={`${
+          btn === "add to cart"
+            ? "btn wheat-light center gap"
+            : "btn remove center gap"
+        }`}
         btn={btn}
         fn={btn === "add to cart" ? handleAddToCart : handleRemoveFromCart}
         Icon={btn === "add to cart" ? BsFillCartPlusFill : BsFillCartXFill}

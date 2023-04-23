@@ -5,6 +5,7 @@ import { changeCartCountRedux } from "../../../redux/CartSlice";
 import { useMutation } from "@apollo/client";
 import { Change_Cart_Count } from "../../../graphql/mutations/user";
 import Cookies from "js-cookie";
+import OpacityBtn from "../../widgets/OpacityBtn";
 
 const Counter = ({
   count: defaultCount,
@@ -30,55 +31,57 @@ const Counter = ({
   const handleDecrease = () => setCount((cur): number => handleCount(cur - 1));
 
   const [countRef, animateCount] = useAnimate();
+  const handleIncreaseFn = () => {
+    handleIncrease();
+
+    if (count != 20) {
+      dispatch(changeCartCountRedux({ count: count + 1, productId }));
+      animateCount("small", { y: [-40, 5, 0] }, { duration: 0.4 });
+      changeCartCuntDB({
+        variables: {
+          userId,
+          productId,
+          count: count + 1,
+        },
+      });
+    }
+  };
+
+  const handleDecreaseCount = () => {
+    handleDecrease();
+    if (count != 1) {
+      dispatch(changeCartCountRedux({ count: count - 1, productId }));
+
+      animateCount("small", { y: [40, -5, 0] }, { duration: 0.4 });
+
+      changeCartCuntDB({
+        variables: {
+          userId,
+          productId,
+          count: count - 1,
+        },
+      });
+    }
+  };
 
   return (
     <div className="counter center" ref={countRef}>
-      <button
-        style={{ color: "var(--delete)", fontSize: "1.2rem" }}
-        onClick={() => {
-          handleDecrease();
-          if (count != 1) {
-            dispatch(changeCartCountRedux({ count: count - 1, productId }));
-
-            animateCount("small", { y: [40, -5, 0] }, { duration: 0.4 });
-
-            changeCartCuntDB({
-              variables: {
-                userId,
-                productId,
-                count: count - 1,
-              },
-            });
-          }
-        }}
-        className="center btn counter-span"
-      >
-        -
-      </button>
-      <span className="count">
+      <OpacityBtn
+        btn="-"
+        cls="btn counter center red "
+        fn={handleDecreaseCount}
+        title={"decrease"}
+      />
+      <span className="count ">
         <small>{count}</small>
       </span>
-      <button
-        style={{ color: "var(--green)", fontSize: "1.2rem" }}
-        onClick={() => {
-          handleIncrease();
 
-          if (count != 20) {
-            dispatch(changeCartCountRedux({ count: count + 1, productId }));
-            animateCount("small", { y: [-40, 5, 0] }, { duration: 0.4 });
-            changeCartCuntDB({
-              variables: {
-                userId,
-                productId,
-                count: count + 1,
-              },
-            });
-          }
-        }}
-        className="center btn counter-span"
-      >
-        +
-      </button>
+      <OpacityBtn
+        btn="+"
+        cls="btn counter center green relative"
+        fn={handleIncreaseFn}
+        title={"increase"}
+      />
     </div>
   );
 };

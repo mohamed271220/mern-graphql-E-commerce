@@ -1,14 +1,12 @@
 import React, { useContext } from "react";
 import { cartInterface } from "../../../interfaces/user.js";
 import Counter from "./Counter.js";
-import HeartSvgProduct from "../../../custom SVGs/HeartSvgProduct.js";
-import CartBtn from "../../widgets/CartBtn.js";
 import OpacityBtn from "../../widgets/OpacityBtn.js";
 import useRemoveFromCart from "../../../custom/useRemoveFromCart.js";
 import { isAuthContext } from "../../../context/isAuth.js";
-import { BsFillCartXFill } from "react-icons/bs";
+import { BsFillCartXFill, BsInfoLg } from "react-icons/bs";
 import DetailsBtn from "../../widgets/DetailsBtn.js";
-
+import useShowTitle from "../../../custom/useShowTitle.js";
 const CartItem = ({
   _id,
   productId,
@@ -28,7 +26,8 @@ const CartItem = ({
     userId,
     productId: [productId],
   });
-  console.log({ parentId });
+  const [removeTitle, showRmvTitle, hideRmvTitle] = useShowTitle();
+
   return (
     <div className="cart-item center between">
       <img className="cart-img" src={path} alt="" />
@@ -44,18 +43,24 @@ const CartItem = ({
             </div>
           );
         })}
+      </div>
+      <div className="cart-btns center gap ">
+        <OpacityBtn
+          cls="btn remove "
+          fn={handleRemoveFromCart}
+          btn={""}
+          Icon={BsFillCartXFill}
+          title="remove from your cart list"
+        />
+
         <DetailsBtn
           _id={parentId}
-          btn="more details"
-          cls="btn more-details details"
+          btn=""
+          cls="btn details"
+          Icon={BsInfoLg}
+          title="more details"
         />
       </div>
-      <OpacityBtn
-        cls="btn remove remove-cart"
-        fn={handleRemoveFromCart}
-        btn={""}
-        Icon={BsFillCartXFill}
-      />
       <div>
         <OpacityBtn
           btn="purchase"

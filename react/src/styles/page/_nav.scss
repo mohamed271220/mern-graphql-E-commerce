@@ -83,3 +83,23 @@ nav {
   letter-spacing: 0.8px;
   color: var(--white);
 }
+
+// #logo-svg {
+//   position: relative;
+//   z-index: 5;
+//   padding: 3px 0;
+//   &:before {
+//     content: "";
+//     position: absolute;
+//     width: 124%;
+//     height: 100%;
+//     left: -12%;
+//     top: 0;
+//     background: rgba(0, 0, 0, 0.736);
+//     transform: skew(20deg);
+//   }
+//   svg {
+//     position: relative;
+//     z-index: 6;
+//   }
+// }

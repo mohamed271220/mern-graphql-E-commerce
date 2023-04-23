@@ -32,7 +32,7 @@
     }
     .cart-item {
       width: 100%;
-      height: 180px;
+      height: 130px;
       background: var(--white);
       box-shadow: 1px 0.5px 2px black;
       padding: 8px;
@@ -40,7 +40,7 @@
       .remove-cart {
         position: absolute;
         top: 5px;
-        right: 8px;
+        left: 8px;
         font-size: 0.7rem;
         padding: 4px 6px;
       }
@@ -120,6 +120,17 @@
   display: inline-block;
   width: 50px;
   text-align: start;
+}
+
+.cart-btns {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  font-size: 0.7rem;
+  > * {
+    padding: 4px 6px;
+    font-size: 0.6rem;
+  }
 }
 @media (max-width: 700px) {
   .cart-cont {
