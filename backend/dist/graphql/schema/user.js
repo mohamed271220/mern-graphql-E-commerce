@@ -21,6 +21,7 @@ const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const config_js_1 = require("../../config.js");
 const product_js_1 = require("./product.js");
 const product_js_2 = __importDefault(require("../../mongoose/schema/product.js"));
+const types_js_1 = require("../types.js");
 const messageType = new graphql_1.GraphQLObjectType({
     name: "message",
     fields: () => ({
@@ -138,6 +139,63 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                     return err.message;
                 }
             }),
+        },
+        updateUserName: {
+            type: userType,
+            args: { name: { type: graphql_1.GraphQLString }, _id: { type: graphql_1.GraphQLID } },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield user_js_1.userCollection.findByIdAndUpdate(args._id, { name: args.name });
+                });
+            },
+        },
+        updateUserPhone: {
+            type: userType,
+            args: { phone: { type: graphql_1.GraphQLString }, _id: { type: graphql_1.GraphQLID } },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield user_js_1.userCollection.findByIdAndUpdate(args._id, { phone: args.phone });
+                });
+            },
+        },
+        checkOldPassword: {
+            type: messageType,
+            args: { _id: { type: graphql_1.GraphQLID }, password: { type: graphql_1.GraphQLString } },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    const result = yield (0, authenticate_js_1.checkOldPass)(args._id, args.password);
+                    return { msg: result };
+                });
+            },
+        },
+        updatePassword: {
+            type: userType,
+            args: { password: { type: graphql_1.GraphQLString }, _id: { type: graphql_1.GraphQLID } },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield user_js_1.userCollection.findByIdAndUpdate(args._id, {
+                        password: (0, hashPassword_js_1.hashPassword)(args.password),
+                    });
+                });
+            },
+        },
+        updateEmail: {
+            type: userType,
+            args: { email: { type: graphql_1.GraphQLString }, _id: { type: graphql_1.GraphQLID } },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    const check = yield user_js_1.userCollection.find({ email: args.email });
+                    if (check.length) {
+                        return { msg: "this email already used" };
+                    }
+                    else {
+                        yield user_js_1.userCollection.findByIdAndUpdate(args._id, {
+                            email: args.email,
+                        });
+                        return { msg: "your email is updated successfully" };
+                    }
+                });
+            },
         },
         addToCart: {
             type: cartType,
@@ -412,6 +470,78 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                             { title: { $regex: args.word, $options: "i" } },
                         ],
                     });
+                });
+            },
+        },
+        addReview: {
+            type: types_js_1.ReviewType,
+            args: {
+                userId: { type: graphql_1.GraphQLID },
+                _id: { type: graphql_1.GraphQLID },
+                rate: { type: graphql_1.GraphQLInt },
+                review: { type: graphql_1.GraphQLString },
+                image: { type: graphql_1.GraphQLString },
+            },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    try {
+                        const { userId, rate, review, image } = args;
+                        return yield product_js_2.default.findByIdAndUpdate(args._id, {
+                            $push: { reviews: { userId, rate, review, image } },
+                        }, { "reviews.$": 1 });
+                        // console.log("data");
+                        // console.log({ data });
+                        // return { ...data, msg: "your rate added" };
+                    }
+                    catch (err) {
+                        return err.message;
+                    }
+                });
+            },
+        },
+        updateReview: {
+            type: types_js_1.ReviewType,
+            args: {
+                _id: { type: graphql_1.GraphQLID },
+                productId: { type: graphql_1.GraphQLID },
+                rate: { type: graphql_1.GraphQLInt },
+                review: { type: graphql_1.GraphQLString },
+                image: { type: graphql_1.GraphQLString },
+            },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    try {
+                        const { rate, review, image } = args;
+                        return yield product_js_2.default.findOneAndUpdate({
+                            _id: args.productId,
+                            "reviews._id": args._id,
+                        }, {
+                            $set: {
+                                "reviews.$.rate": args.rate,
+                            },
+                        });
+                    }
+                    catch (err) {
+                        return err.message;
+                    }
+                });
+            },
+        },
+        deleteReview: {
+            type: types_js_1.ReviewType,
+            args: {
+                _id: { type: graphql_1.GraphQLID },
+            },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    try {
+                        return yield product_js_2.default.findOneAndDelete({
+                            "reviews._id": args._id,
+                        });
+                    }
+                    catch (err) {
+                        return err.message;
+                    }
                 });
             },
         },

@@ -43,6 +43,7 @@ const ProductList = () => {
             images={product.images}
             rating={product.rating}
             description={product.description}
+            reviews={product.reviews}
             layout
             transition={{
               type: "tween",

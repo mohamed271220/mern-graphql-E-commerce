@@ -13,6 +13,7 @@ interface imageInterface {
 interface reviewInterface {
   image: string;
   user: string;
+  userId: string;
   review: string;
   rate: number;
 }
@@ -32,6 +33,7 @@ const reviewSchema = new mongoose.Schema({
   image: String,
   user: String,
   review: String,
+  userId: mongoose.Types.ObjectId,
   rate: Number,
 });
 

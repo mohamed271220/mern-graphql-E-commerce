@@ -4,4 +4,5 @@ export interface reviewInterface {
   review: string;
   _id: string;
   rate: number;
+  userId?: string;
 }

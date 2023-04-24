@@ -9,6 +9,7 @@ export const GET_Product_By_Id = gql`
         review
         rate
         _id
+        userId
       }
       _id
       price
@@ -36,6 +37,13 @@ export const Get_All_Products = gql`
       state
       rating
       category
+      reviews {
+        image
+        user
+        review
+        rate
+        _id
+      }
       description
       images {
         productPath

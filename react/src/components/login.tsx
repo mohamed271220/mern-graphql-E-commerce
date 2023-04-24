@@ -64,9 +64,10 @@ const Login = () => {
           <Input
             placeholder={"password"}
             err={errors.password?.message?.toString()}
+            password={true}
           />
 
-          <OpacityBtn cls="btn main" fn={handleLogIn} btn="log In" />
+          <OpacityBtn cls="btn main w-100" fn={handleLogIn} btn="log In" />
 
           <div className="redirect">
             <span> don&#39;t have an account</span>

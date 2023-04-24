@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 interface Props {
   id: number;
   avgRate: number;
-  optional: string;
+  optional?: string;
 }
 
 const StarIcon = ({ avgRate, id, optional }: Props) => {

@@ -8,11 +8,15 @@ import {
 } from "graphql";
 import { userCollection } from "../../mongoose/schema/user.js";
 import { hashPassword } from "../../middlewares/hashPassword.js";
-import { authenticateMiddleware } from "../../middlewares/authenticate.js";
+import {
+  authenticateMiddleware,
+  checkOldPass,
+} from "../../middlewares/authenticate.js";
 import jwt from "jsonwebtoken";
 import { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } from "../../config.js";
 import { productType } from "./product.js";
 import productCollection from "../../mongoose/schema/product.js";
+import { ReviewType } from "../types.js";
 
 const messageType = new GraphQLObjectType({
   name: "message",
@@ -143,6 +147,52 @@ export const userMutation = new GraphQLObjectType({
           }
         } catch (err) {
           return (err as Error).message;
+        }
+      },
+    },
+    updateUserName: {
+      type: userType,
+      args: { name: { type: GraphQLString }, _id: { type: GraphQLID } },
+      async resolve(_, args) {
+        await userCollection.findByIdAndUpdate(args._id, { name: args.name });
+      },
+    },
+    updateUserPhone: {
+      type: userType,
+      args: { phone: { type: GraphQLString }, _id: { type: GraphQLID } },
+      async resolve(_, args) {
+        await userCollection.findByIdAndUpdate(args._id, { phone: args.phone });
+      },
+    },
+    checkOldPassword: {
+      type: messageType,
+      args: { _id: { type: GraphQLID }, password: { type: GraphQLString } },
+      async resolve(_, args) {
+        const result = await checkOldPass(args._id, args.password);
+        return { msg: result };
+      },
+    },
+    updatePassword: {
+      type: userType,
+      args: { password: { type: GraphQLString }, _id: { type: GraphQLID } },
+      async resolve(_, args) {
+        await userCollection.findByIdAndUpdate(args._id, {
+          password: hashPassword(args.password),
+        });
+      },
+    },
+    updateEmail: {
+      type: userType,
+      args: { email: { type: GraphQLString }, _id: { type: GraphQLID } },
+      async resolve(_, args) {
+        const check = await userCollection.find({ email: args.email });
+        if (check.length) {
+          return { msg: "this email already used" };
+        } else {
+          await userCollection.findByIdAndUpdate(args._id, {
+            email: args.email,
+          });
+          return { msg: "your email is updated successfully" };
         }
       },
     },
@@ -423,6 +473,76 @@ export const userMutation = new GraphQLObjectType({
             { title: { $regex: args.word, $options: "i" } },
           ],
         });
+      },
+    },
+    addReview: {
+      type: ReviewType,
+      args: {
+        userId: { type: GraphQLID },
+        _id: { type: GraphQLID },
+        rate: { type: GraphQLInt },
+        review: { type: GraphQLString },
+        image: { type: GraphQLString },
+      },
+      async resolve(_, args) {
+        try {
+          const { userId, rate, review, image } = args;
+          return await productCollection.findByIdAndUpdate(
+            args._id,
+            {
+              $push: { reviews: { userId, rate, review, image } },
+            },
+            { "reviews.$": 1 }
+          );
+          // console.log("data");
+          // console.log({ data });
+          // return { ...data, msg: "your rate added" };
+        } catch (err) {
+          return (err as Error).message;
+        }
+      },
+    },
+    updateReview: {
+      type: ReviewType,
+      args: {
+        _id: { type: GraphQLID },
+        productId: { type: GraphQLID },
+        rate: { type: GraphQLInt },
+        review: { type: GraphQLString },
+        image: { type: GraphQLString },
+      },
+      async resolve(_, args) {
+        try {
+          const { rate, review, image } = args;
+          return await productCollection.findOneAndUpdate(
+            {
+              _id: args.productId,
+              "reviews._id": args._id,
+            },
+            {
+              $set: {
+                "reviews.$.rate": args.rate,
+              },
+            }
+          );
+        } catch (err) {
+          return (err as Error).message;
+        }
+      },
+    },
+    deleteReview: {
+      type: ReviewType,
+      args: {
+        _id: { type: GraphQLID },
+      },
+      async resolve(_, args) {
+        try {
+          return await productCollection.findOneAndDelete({
+            "reviews._id": args._id,
+          });
+        } catch (err) {
+          return (err as Error).message;
+        }
       },
     },
   },

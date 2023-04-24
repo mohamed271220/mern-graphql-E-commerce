@@ -21,7 +21,6 @@
       padding-right: 20px;
     }
     button {
-      width: 80%;
       height: 30px;
 
       margin: 0 auto;
@@ -75,9 +74,27 @@
   }
   .placeholder {
     position: absolute;
-    top: -18px;
-    left: 5px;
     color: var(--white);
+    text-transform: capitalize;
+    letter-spacing: 0.8px;
+    transform: translateY(-50%);
+    padding: 1px 4px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    &.placeholder-center {
+      left: 5px;
+      color: var(--green);
+    }
+    &.placeholder-top {
+      left: 5px;
+      color: var(--white);
+      text-shadow: 1px 0.5px 1px black;
+      transform: translateY(-50%);
+      background: var(--wheat);
+      border-radius: 2px;
+      border-right: 2px solid var(--sale);
+      border-left: 2px solid var(--sale);
+    }
   }
   .x-inp {
     position: absolute;

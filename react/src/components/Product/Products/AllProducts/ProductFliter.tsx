@@ -14,6 +14,7 @@ import { viewContext } from "../../../../context/gridView";
 import { productListContext } from "../../../../context/FilterData";
 import ListCartBtn from "./ListCartBtn";
 import DetailsBtn from "../../../widgets/DetailsBtn";
+import { AiFillPlusSquare } from "react-icons/ai";
 
 type Props = {
   _id: string;

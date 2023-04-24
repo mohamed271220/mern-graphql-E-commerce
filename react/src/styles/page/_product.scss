@@ -69,6 +69,7 @@
       .title-par {
         display: flex;
         gap: 20px;
+
         .title {
           letter-spacing: 0.8px;
           font-size: 1.2rem;
@@ -82,6 +83,7 @@
         align-self: center;
         gap: 10px;
         width: 240px;
+        // margin: 15px 0;
         button {
           text-shadow: 0px 0.8px 1.5px black;
           gap: 4px;
@@ -159,11 +161,14 @@ p {
 
 .add-rate {
   justify-content: space-between;
+  width: 90%;
+  margin: 0 auto;
   button {
     background: transparent;
     border: 0;
     outline: 0;
     font-size: 1rem;
+    white-space: nowrap;
   }
 }
 
@@ -185,7 +190,7 @@ p {
 .product-rate {
   display: flex;
   height: 30px;
-  width: 110px;
+  width: 120px;
   justify-content: flex-start;
   align-items: center;
 }

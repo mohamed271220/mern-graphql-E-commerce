@@ -26,16 +26,14 @@ const FIlter = ({ head, children }: Props) => {
             exit="exit"
             key={"plus"}
             transition={{ duration: 0.4 }}
-            className="relative title-par"
-            onHoverStart={show}
-            onHoverEnd={hide}
           >
-            <Title bool={bool} title={showCategory ? "collapse" : "expand"} />
-            {showCategory ? (
-              <FcMinus onClick={handleHideCategory} />
-            ) : (
-              <BiPlus onClick={handleShowCategory} />
-            )}
+            <Title title={showCategory ? "collapse" : "expand"}>
+              {showCategory ? (
+                <FcMinus onClick={handleHideCategory} />
+              ) : (
+                <BiPlus onClick={handleShowCategory} />
+              )}
+            </Title>
           </motion.span>
         </AnimatePresence>
       </h4>

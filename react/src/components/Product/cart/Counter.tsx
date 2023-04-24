@@ -65,10 +65,10 @@ const Counter = ({
   };
 
   return (
-    <div className="counter center" ref={countRef}>
+    <div className="counter-par center " ref={countRef}>
       <OpacityBtn
         btn="-"
-        cls="btn counter center red "
+        cls="btn  center counter red "
         fn={handleDecreaseCount}
         title={"decrease"}
       />
@@ -78,7 +78,7 @@ const Counter = ({
 
       <OpacityBtn
         btn="+"
-        cls="btn counter center green relative"
+        cls="btn  center green counter relative"
         fn={handleIncreaseFn}
         title={"increase"}
       />

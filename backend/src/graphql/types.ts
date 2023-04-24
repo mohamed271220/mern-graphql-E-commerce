@@ -21,6 +21,8 @@ export const ReviewType = new GraphQLObjectType({
     user: { type: GraphQLString },
     review: { type: GraphQLString },
     rate: { type: GraphQLInt },
+    msg: { type: GraphQLString },
+    userId: { type: GraphQLID },
     _id: { type: GraphQLID },
   }),
 });

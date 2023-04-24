@@ -5,8 +5,6 @@ import {
   checkpathVariant,
   parentVarient,
 } from "../variants/CheckSvg";
-import useShowTitle from "../custom/useShowTitle";
-import Title from "../components/widgets/Title";
 
 interface Props {
   isChecked: string | number;
@@ -15,51 +13,46 @@ interface Props {
 }
 
 const Checkbox = ({ isChecked, filter, setIsChecked }: Props) => {
-  const [bool, show, hide] = useShowTitle();
   return (
-    <motion.span className=" relative title-par">
-      <motion.div
-        className="custom-check-parent center "
-        variants={parentVarient}
-        initial="start"
-        animate="end"
-        exit={"exit"}
-        custom={{ filter, isChecked }}
-        onClick={() => {
-          if (filter === isChecked) {
-            setIsChecked("");
-          } else {
-            setIsChecked(filter);
-          }
-        }}
-        onHoverStart={show}
-        onHoverEnd={hide}
-      >
-        <AnimatePresence mode="wait">
-          {isChecked === filter && (
-            <motion.svg
-              viewBox="0 0 24 24"
-              width="12px"
-              height="12px"
-              className="center custom-check"
-              variants={checkSvgVariant}
-              initial="start"
-              animate="end"
-              exit={"exit"}
-            >
-              <motion.path
-                fill="none"
-                stroke="var(--wheat-light)"
-                strokeMiterlimit="10"
-                strokeWidth="3"
-                d="M21 6L9 18 4 13"
-                variants={checkpathVariant}
-              />
-            </motion.svg>
-          )}
-        </AnimatePresence>
-      </motion.div>
-    </motion.span>
+    <motion.div
+      className="custom-check-parent center "
+      variants={parentVarient}
+      initial="start"
+      animate="end"
+      exit={"exit"}
+      custom={{ filter, isChecked }}
+      onClick={() => {
+        if (filter === isChecked) {
+          setIsChecked("");
+        } else {
+          setIsChecked(filter);
+        }
+      }}
+    >
+      <AnimatePresence mode="wait">
+        {isChecked === filter && (
+          <motion.svg
+            viewBox="0 0 24 24"
+            width="12px"
+            height="12px"
+            className="center custom-check"
+            variants={checkSvgVariant}
+            initial="start"
+            animate="end"
+            exit={"exit"}
+          >
+            <motion.path
+              fill="none"
+              stroke="var(--wheat-light)"
+              strokeMiterlimit="10"
+              strokeWidth="3"
+              d="M21 6L9 18 4 13"
+              variants={checkpathVariant}
+            />
+          </motion.svg>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 };
 

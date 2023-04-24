@@ -114,3 +114,27 @@ export const REMOVE_FROM_Cart = gql`
     }
   }
 `;
+
+export const addReview = gql`
+  mutation (
+    $_id: ID!
+    $userId: ID!
+    $rate: Int!
+    $review: String!
+    $image: String!
+  ) {
+    addReview(
+      userId: $userId
+      _id: $_id
+      rate: $rate
+      review: $review
+      image: $image
+    ) {
+      msg
+      review
+      rate
+      userId
+      _id
+    }
+  }
+`;

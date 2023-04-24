@@ -1,0 +1,61 @@
+@import "../variables.scss";
+.slide-bottom {
+  background: var(--white);
+  width: 350px;
+  align-self: flex-end;
+}
+.clear-all {
+  height: 120px;
+}
+.pop-head {
+  margin: 10px;
+  color: black;
+}
+.slide-par {
+  width: 240px;
+  height: 40px;
+  border-radius: 20px;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+  position: relative;
+}
+.slide {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  // margin-left: 2px;
+  font-size: 20px;
+  background: #000;
+  position: relative;
+  z-index: 100;
+}
+.slide-text {
+  color: var(--white);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.confirmed {
+  transform: scale(1.5);
+}
+
+.add-rate-pop {
+  width: 350px;
+  height: 200px;
+  background: var(--white);
+}
+
+.rate-form {
+  width: 80%;
+  margin: 0 auto;
+  height: 40px;
+  .rate-inp {
+    border-radius: 10px;
+    width: 100%;
+    background: #000;
+    color: white;
+    padding: 5px;
+    letter-spacing: 0.8px;
+  }
+}

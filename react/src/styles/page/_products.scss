@@ -198,6 +198,15 @@ svg.svg-star {
   &:hover {
     box-shadow: 2px 2px 5px black;
   }
+  p {
+    overflow: hidden;
+    display: -webkit-box;
+    height: 50px;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+  }
 
   .title-product {
     display: inline-block;
@@ -206,7 +215,7 @@ svg.svg-star {
     text-overflow: ellipsis;
     overflow: hidden;
     text-align: center;
-    width: 95%;
+    max-width: 90%;
     white-space: nowrap;
   }
   .price-product {

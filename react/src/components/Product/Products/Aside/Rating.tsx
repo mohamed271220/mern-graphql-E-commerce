@@ -1,10 +1,8 @@
 import React, { useContext } from "react";
 import Checkbox from "../../../../custom SVGs/checkbox";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { opacityVariant, parentVariant } from "../../../../variants/globals";
-import useHide from "../../../../custom/useHide";
 
-import { FcMinus } from "react-icons/fc";
 import { BiPlus } from "react-icons/bi";
 import Star from "./Star";
 import { productListContext } from "../../../../context/FilterData";

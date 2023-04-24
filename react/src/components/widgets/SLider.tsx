@@ -2,9 +2,8 @@ import React, { useEffect, useContext } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { productListContext } from "../Product/Products/Products";
 import ProductFliter from "../Product/Products/AllProducts/ProductFliter";
-import { useLazyQuery, useQuery } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { Get_All_Products } from "../../graphql/general";
 import { viewContext } from "../../context/gridView";
 
@@ -20,14 +19,14 @@ const SLiderComponent = () => {
       {
         breakpoint: 900,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
       {
         breakpoint: 400,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 1,
         },
       },
@@ -60,6 +59,7 @@ const SLiderComponent = () => {
               images={product.images}
               rating={product.rating}
               description={product.description}
+
               //   layout
             />
           );

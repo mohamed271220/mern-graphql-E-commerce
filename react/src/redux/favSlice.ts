@@ -25,8 +25,12 @@ const favSlice = createSlice({
         state.fav = state.fav.filter((obj) => obj.productId !== el);
       }
     },
+    clearAllFav(state) {
+      state.fav = [];
+    },
   },
 });
 
-export const { addToFavRedux, removeFromFavRedux } = favSlice.actions;
+export const { addToFavRedux, removeFromFavRedux, clearAllFav } =
+  favSlice.actions;
 export default favSlice.reducer;

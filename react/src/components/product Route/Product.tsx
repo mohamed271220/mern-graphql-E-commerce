@@ -7,7 +7,6 @@ import Reviews from "./Reviews";
 import { reviewInterface } from "../../interfaces/product";
 import { AnimatePresence } from "framer-motion";
 import { useParams } from "react-router-dom";
-import SLider from "../widgets/SLider";
 import SLiderComponent from "../widgets/SLider";
 
 export interface productContextInterface {
@@ -18,6 +17,11 @@ export interface productContextInterface {
   price: number;
   title: string;
   _id: string;
+  description: string;
+  category: string;
+  stock: string;
+  setAddReviews: React.Dispatch<React.SetStateAction<reviewInterface[]>>;
+  addReview: reviewInterface[];
 }
 export const productContext = createContext({} as productContextInterface);
 
@@ -29,12 +33,20 @@ const Product = () => {
     variables: { id },
   });
   const [showPop, setShowPop] = useState(false);
+  const [addReview, setAddReviews] = useState<reviewInterface[]>([]);
 
   useEffect(() => {
     if (data?.product?.title) {
       document.title = data.product.title;
     }
   }, [loading, data?.product?.title]);
+
+  useEffect(() => {
+    if (data?.product?.reviews) {
+      setAddReviews(data?.product?.reviews);
+    }
+  }, [data?.product?.reviews]);
+
   if (loading) {
     return <>loading</>;
   } else if (error?.message) {
@@ -46,9 +58,9 @@ const Product = () => {
       title,
       description,
       category,
+      stock,
       price,
       rating,
-      stock,
       reviews,
     } = data.product;
 
@@ -56,7 +68,20 @@ const Product = () => {
       <>
         {data && (
           <productContext.Provider
-            value={{ _id, title, rating, reviews, images, bigImgInd, price }}
+            value={{
+              _id,
+              title,
+              rating,
+              reviews,
+              images,
+              bigImgInd,
+              price,
+              description,
+              category,
+              stock,
+              setAddReviews,
+              addReview,
+            }}
           >
             <div className="product-container">
               <section className="product-page">
@@ -71,17 +96,7 @@ const Product = () => {
 
                 <ProductDetails
                   key={`product-${_id}`}
-                  data={{
-                    title,
-                    description,
-                    category,
-                    price,
-                    rating,
-                    stock,
-                    setShowPop,
-                    _id,
-                    // bigImgId: images[bigImgInd]._id,
-                  }}
+                  setShowPop={setShowPop}
                 />
                 <AnimatePresence mode="wait">
                   {showPop && (
