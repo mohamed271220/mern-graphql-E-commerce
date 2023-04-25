@@ -140,3 +140,12 @@ export const addReview = gql`
     }
   }
 `;
+
+export const Update_user_name = gql`
+  mutation ($_id: ID!, $name: String!) {
+    updateUserName(name: $name, _id: $_id) {
+      msg
+      status
+    }
+  }
+`;

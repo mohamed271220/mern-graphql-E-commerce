@@ -1,24 +1,21 @@
-import React, { useContext, useState } from "react";
-import { isAuthContext } from "../../context/isAuth";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { NavLink } from "react-router-dom";
 import Title from "./Title";
 import UserDropDown from "./userDropDown";
+import ProfileImg from "../ProfileImg";
 const NavImg = () => {
-  const { profile } = useContext(isAuthContext);
   const [showUserDrop, setShowUserDrop] = useState(false);
 
-  const toggleSHowUser = () => setShowUserDrop(!toggleSHowUser);
+  const toggleSHowUser = () => setShowUserDrop(!showUserDrop);
   return (
     <>
-      <motion.li className="" onClick={toggleSHowUser}>
-        <NavLink to={"/user"}>
-          <Title title={"go to your profile"}>
-            <img src={profile} alt="" className="img-nav" />
-          </Title>
-        </NavLink>
+      <motion.li onClick={toggleSHowUser}>
+        <Title title={"go to your profile"}>
+          <ProfileImg dimension={30} />
+          {/* <img src={profile} alt="" className="img-nav " /> */}
+        </Title>
+        <UserDropDown bool={showUserDrop} />
       </motion.li>
-      <UserDropDown bool={showUserDrop} />
     </>
   );
 };

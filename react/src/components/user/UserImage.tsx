@@ -4,6 +4,7 @@ import Avatar from "../Avatar";
 import Overley from "../widgets/Overley";
 import OpacityBtn from "../widgets/OpacityBtn";
 import { isAuthContext } from "../../context/isAuth";
+import ProfileImg from "../ProfileImg";
 const UserImage = () => {
   const inpFile = useRef<HTMLInputElement | null>(null);
 
@@ -29,7 +30,7 @@ const UserImage = () => {
   return (
     <div className="user-image ">
       <div className="user-img-par ">
-        <img src={profile} alt="" />
+        <ProfileImg dimension={150} />
       </div>
       <form onSubmit={(e) => e.preventDefault()}>
         <input

@@ -20,12 +20,16 @@ const DropDown = ({ bool, head, cls, children }: Props) => {
             initial="start"
             animate="end"
             exit="exit"
-            className={cls}
+            className={`dropdown ${cls}`}
           >
             {head && (
               <h3
-                className="underline header white"
-                style={{ width: "fit-content", margin: "10px 0 10px 5px" }}
+                className="underline header "
+                style={{
+                  color: "black",
+                  width: "fit-content",
+                  margin: "10px 0 10px 5px",
+                }}
               >
                 {head}
               </h3>

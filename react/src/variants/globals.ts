@@ -87,3 +87,26 @@ export const heartVariant = {
     transition: { duration: 0.8 },
   }),
 };
+
+export const selectDropDownVariants = {
+  start: { opacity: 0 },
+  end: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.1,
+      duration: 0.1,
+    },
+  },
+  exit: {
+    opacity: 1,
+    transition: {
+      when: "afterChildren",
+      staggerChildren: 0.1,
+      staggerDirection: -1,
+      duration: 0.1,
+      delayChildren: 0.4,
+    },
+  },
+};

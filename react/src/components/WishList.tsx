@@ -18,11 +18,11 @@ const WishList = ({ showFav }: { showFav: boolean }) => {
           style={{ justifyContent: "flex-end", padding: "0 5px" }}
         >
           <button
-            className="remove btn"
+            className=" btn"
             style={{
               background: "transparent",
-              fontSize: ".6rem",
               color: "var(--delete)",
+              fontSize: ".7rem",
             }}
             onClick={() => setShowClearFav(true)}
           >

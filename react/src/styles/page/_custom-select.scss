@@ -51,3 +51,30 @@
   cursor: pointer;
   font-size: 10px;
 }
+
+.select-country-par {
+  height: 30px;
+  width: 80%;
+  margin: 0 auto;
+  background: var(--wheat-light);
+  flex-direction: column;
+  padding: 10px;
+  text-transform: capitalize;
+
+  .drop-country {
+    background: var(--green);
+    height: 200px;
+
+    overflow: auto;
+  }
+  .select-country {
+    display: flex;
+    justify-content: flex-start;
+    height: 20px;
+
+    img {
+      width: 10px;
+      height: 10px;
+    }
+  }
+}

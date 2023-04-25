@@ -22,6 +22,7 @@ const messageType = new GraphQLObjectType({
   name: "message",
   fields: () => ({
     msg: { type: GraphQLString },
+    status: { type: GraphQLInt },
   }),
 });
 
@@ -155,10 +156,11 @@ export const userMutation = new GraphQLObjectType({
     },
 
     updateUserName: {
-      type: userType,
+      type: messageType,
       args: { name: { type: GraphQLString }, _id: { type: GraphQLID } },
       async resolve(_, args) {
         await userCollection.findByIdAndUpdate(args._id, { name: args.name });
+        return { status: 200, msg: "username is successfully updated  " };
       },
     },
     updateUserPhone: {

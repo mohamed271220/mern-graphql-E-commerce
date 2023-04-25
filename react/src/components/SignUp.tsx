@@ -11,6 +11,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import OpacityBtn from "./widgets/OpacityBtn";
 import { toast } from "react-hot-toast";
 import { AiFillWarning } from "react-icons/ai";
+import SelectCOuntry from "./user/SelectCOuntry";
 const socialMediaArr = [
   { id: "1", icon: <FaFacebookF color="" />, clr: "var(--fb)" },
   { id: "2", icon: <AiOutlineTwitter />, clr: "var(--twitter)" },
@@ -52,7 +53,6 @@ const SignUp = () => {
     console.log(data);
     if (data.addUser.status === 200) {
       navigate("/login");
-      console.log("why not weork");
       toast.success(data.addUser.msg);
     } else {
       toast(data.addUser.msg, {
@@ -81,19 +81,12 @@ const SignUp = () => {
           <Input
             placeholder={"password"}
             err={errors?.password?.message?.toString()}
-          />{" "}
+          />
+          <SelectCOuntry />
           <Input
             placeholder={"confirm"}
             err={errors?.confirm?.message?.toString()}
-          />{" "}
-          {/* <motion.button
-            whileHover={btnHover}
-            type="submit"
-            className="btn main"
-            onClick={}
-          >
-            sign Up
-          </motion.button> */}
+          />
           <OpacityBtn btn="sign up" cls="btn main" fn={handleSignUp} />
           <div className="redirect">
             <span> have an account</span>

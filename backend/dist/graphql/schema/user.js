@@ -26,6 +26,7 @@ const messageType = new graphql_1.GraphQLObjectType({
     name: "message",
     fields: () => ({
         msg: { type: graphql_1.GraphQLString },
+        status: { type: graphql_1.GraphQLInt },
     }),
 });
 const cartType = new graphql_1.GraphQLObjectType({
@@ -142,11 +143,12 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
             }),
         },
         updateUserName: {
-            type: userType,
+            type: messageType,
             args: { name: { type: graphql_1.GraphQLString }, _id: { type: graphql_1.GraphQLID } },
             resolve(_, args) {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield user_js_1.userCollection.findByIdAndUpdate(args._id, { name: args.name });
+                    return { status: 200, msg: "username is successfully updated  " };
                 });
             },
         },

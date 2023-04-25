@@ -8,7 +8,10 @@ import { Get_All_Products } from "../../../graphql/general";
 import { MdOutlineSort } from "react-icons/md";
 import { BiDownArrow } from "react-icons/bi";
 import { AnimatePresence, motion } from "framer-motion";
-import { opacityVariant } from "../../../variants/globals";
+import {
+  opacityVariant,
+  selectDropDownVariants,
+} from "../../../variants/globals";
 import { productListContext } from "../../../context/FilterData";
 const optionsArr = [
   "relevance",
@@ -56,29 +59,6 @@ const SelectFilter = () => {
   }, [selectValue]);
 
   const [isSelectFocus, setIsSelectFocus] = useState(false);
-
-  const selectDropDownVariants = {
-    start: { opacity: 0 },
-    end: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        when: "beforeChildren",
-        staggerChildren: 0.1,
-        duration: 0.1,
-      },
-    },
-    exit: {
-      opacity: 1,
-      transition: {
-        when: "afterChildren",
-        staggerChildren: 0.1,
-        staggerDirection: -1,
-        duration: 0.1,
-        delayChildren: 0.4,
-      },
-    },
-  };
 
   return (
     <div
