@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
   email: String,
   password: String,
   phone: Number,
+  image: String,
   fav: [
     {
       productId: mongoose.SchemaTypes.ObjectId,

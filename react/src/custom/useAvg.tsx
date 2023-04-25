@@ -1,7 +1,24 @@
 import { useState, useEffect } from "react";
+import { reviewInterface } from "../interfaces/product";
 
-const useAvg = (rating: number[]) => {
+const useAvg = (rating: number[], reviews: reviewInterface[]) => {
   const [avgRate, setAvgRate] = useState(-1);
+  const [reviewLength, setReviewLength] = useState(-1);
+
+  const [arr, setArr] = useState<number[]>([]);
+
+  useEffect(() => {
+    if (reviews?.length >= 1) {
+      setArr([...rating, ...reviews.map((e) => e.rate)]);
+    }
+  }, [reviews]);
+
+  useEffect(() => {
+    if (arr.length >= 1) {
+      setAvgRate(getAvg(arr));
+      setReviewLength(arr.length);
+    }
+  }, [arr]);
 
   const getAvg = (arr: number[]) => {
     let result = 0;
@@ -14,11 +31,7 @@ const useAvg = (rating: number[]) => {
     return result / len;
   };
 
-  useEffect(() => {
-    setAvgRate(getAvg(rating));
-  }, []);
-
-  return avgRate;
+  return { avgRate, reviewLength };
 };
 
 export default useAvg;

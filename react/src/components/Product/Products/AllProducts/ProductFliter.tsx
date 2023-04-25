@@ -15,6 +15,7 @@ import { productListContext } from "../../../../context/FilterData";
 import ListCartBtn from "./ListCartBtn";
 import DetailsBtn from "../../../widgets/DetailsBtn";
 import { AiFillPlusSquare } from "react-icons/ai";
+import { reviewInterface } from "../../../../interfaces/product";
 
 type Props = {
   _id: string;
@@ -27,6 +28,7 @@ type Props = {
   description: string;
   rating: number[];
   index: number;
+  reviews: reviewInterface[];
 } & MotionProps;
 
 const ProductFliter = ({
@@ -40,9 +42,10 @@ const ProductFliter = ({
   state,
   index,
   description,
+  reviews,
   ...motionProps
 }: Props) => {
-  const avgRate = useAvg(rating);
+  const { avgRate, reviewLength } = useAvg(rating, reviews);
   const [isFavoraited, setIsFavorited] = useState(false);
   const [onCart, setOnCart] = useState(false);
   const { productSearchWord } = useContext(productListContext);
@@ -122,7 +125,7 @@ const ProductFliter = ({
               key={`${_id}-rate`}
               id={_id}
               avgRate={avgRate}
-              ratingLen={rating.length}
+              ratingLen={reviewLength}
             />
           </div>
           <div className="product-links center">

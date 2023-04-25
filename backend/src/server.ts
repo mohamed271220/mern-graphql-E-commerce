@@ -5,11 +5,14 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
-import { MongoDB_URL } from "./config";
+import { MongoDB_URL } from "./config.js";
 import { graphqlHTTP } from "express-graphql";
 import { userMutation, userSchema } from "./graphql/schema/user.js";
 import { graphQlSchema } from "./graphql/schema/product.js";
+import { uploadRoute } from "./Upload/uploudRoute.js";
+
 mongoose.connect(MongoDB_URL as unknown as string);
+
 const app = express();
 app.use(
   cors({
@@ -17,6 +20,7 @@ app.use(
     origin: "http://localhost:5173",
   })
 );
+
 app.use(express.json());
 app.use(cookieParser());
 const schema = mergeSchemas({
@@ -30,6 +34,8 @@ app.use(
     schema,
   })
 );
+
+app.use("/", uploadRoute);
 
 app.listen(3000, () => {
   console.log("server-runs");

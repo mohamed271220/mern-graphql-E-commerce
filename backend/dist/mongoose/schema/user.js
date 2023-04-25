@@ -10,6 +10,7 @@ const userSchema = new mongoose_1.default.Schema({
     email: String,
     password: String,
     phone: Number,
+    image: String,
     fav: [
         {
             productId: mongoose_1.default.SchemaTypes.ObjectId,

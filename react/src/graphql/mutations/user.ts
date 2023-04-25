@@ -76,6 +76,7 @@ export const GET_USER_DATA = gql`
     getUserData(id: $id) {
       email
       name
+      image
       fav {
         productId
         price
@@ -134,6 +135,7 @@ export const addReview = gql`
       review
       rate
       userId
+      status
       _id
     }
   }

@@ -46,11 +46,11 @@ interface popInterface {
 }
 export const popVariant = {
   start: ({ dir, height }: popInterface) => ({
-    y: dir === "bottom" ? height : -400,
+    y: dir === "bottom" ? height : -450,
   }),
   end: { y: 0, transition: { duration: 0.5, delay: 0.4 } },
   exit: ({ dir, height }: popInterface) => ({
-    y: dir === "bottom" ? height : -400,
+    y: dir === "bottom" ? height : -450,
     transition: { duration: 0.5 },
   }),
 };

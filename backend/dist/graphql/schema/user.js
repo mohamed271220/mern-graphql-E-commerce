@@ -58,6 +58,7 @@ const userType = new graphql_1.GraphQLObjectType({
     fields: () => ({
         _id: { type: graphql_1.GraphQLID },
         name: { type: graphql_1.GraphQLString },
+        image: { type: graphql_1.GraphQLString },
         email: { type: graphql_1.GraphQLString },
         password: { type: graphql_1.GraphQLString },
         msg: { type: graphql_1.GraphQLString },
@@ -99,7 +100,7 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                     };
                 }
                 else {
-                    const res = yield user_js_1.userCollection.create(Object.assign(Object.assign({}, args), { password: (0, hashPassword_js_1.hashPassword)(args.password) }));
+                    const res = yield user_js_1.userCollection.create(Object.assign(Object.assign({}, args), { image: "https://res.cloudinary.com/domobky11/image/upload/v1682383659/download_d2onbx.png", password: (0, hashPassword_js_1.hashPassword)(args.password) }));
                     return Object.assign(Object.assign({}, res), { status: 200, msg: "user created successfully" });
                 }
             }),
@@ -486,12 +487,14 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                 return __awaiter(this, void 0, void 0, function* () {
                     try {
                         const { userId, rate, review, image } = args;
-                        return yield product_js_2.default.findByIdAndUpdate(args._id, {
+                        const data = yield product_js_2.default.findByIdAndUpdate(args._id, {
                             $push: { reviews: { userId, rate, review, image } },
-                        }, { "reviews.$": 1 });
-                        // console.log("data");
-                        // console.log({ data });
-                        // return { ...data, msg: "your rate added" };
+                        }, { new: true });
+                        const addedReview = data.reviews[data.reviews.length - 1];
+                        addedReview.msg = "review added";
+                        addedReview.status = 200;
+                        console.log(addedReview);
+                        return addedReview;
                     }
                     catch (err) {
                         return err.message;

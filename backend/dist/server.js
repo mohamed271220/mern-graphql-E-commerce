@@ -8,11 +8,12 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const mongoose_1 = __importDefault(require("mongoose"));
-const config_1 = require("./config");
+const config_js_1 = require("./config.js");
 const express_graphql_1 = require("express-graphql");
 const user_js_1 = require("./graphql/schema/user.js");
 const product_js_1 = require("./graphql/schema/product.js");
-mongoose_1.default.connect(config_1.MongoDB_URL);
+const uploudRoute_js_1 = require("./Upload/uploudRoute.js");
+mongoose_1.default.connect(config_js_1.MongoDB_URL);
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
     credentials: true,
@@ -27,6 +28,7 @@ app.use("/graphql", (0, express_graphql_1.graphqlHTTP)({
     graphiql: true,
     schema,
 }));
+app.use("/", uploudRoute_js_1.uploadRoute);
 app.listen(3000, () => {
     console.log("server-runs");
 });

@@ -16,6 +16,8 @@ interface reviewInterface {
   userId: string;
   review: string;
   rate: number;
+  status?: number;
+  msg?: string;
 }
 
 export interface productInterface {

@@ -27,9 +27,4 @@ export const linksArr = [
     to: "/about",
     link: "about",
   },
-
-  {
-    to: "/user",
-    link: "user",
-  },
 ];

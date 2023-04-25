@@ -27,6 +27,8 @@ interface authContextInterface extends userDataState {
   isAuth: boolean;
   setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
   userId: string;
+  profile: string;
+  setProfile: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const isAuthContext = createContext({} as authContextInterface);
@@ -34,6 +36,7 @@ export const isAuthContext = createContext({} as authContextInterface);
 const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
   const [isAuth, setIsAuth] = useState(false);
   const [userId, setUserId] = useState<string>("");
+  const [profile, setProfile] = useState<string>("");
 
   const [userData, setUserData] = useState({
     email: "",
@@ -45,7 +48,7 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
   const [getData, { data, loading }] = useMutation(GET_USER_DATA);
 
   const dispatch = useAppDispatch();
-
+  console.log(data);
   useEffect(() => {
     setUserId(Cookies.get("user-id") as unknown as string);
   }, [isAuth]);
@@ -65,6 +68,7 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
       setUserData(data?.getUserData);
       dispatch(addToFavRedux(data?.getUserData?.fav));
       dispatch(addToCartRedux(data?.getUserData?.cart));
+      setProfile(data?.getUserData?.image);
     }
   }, [data?.getUserData?.name]);
   return (
@@ -77,6 +81,8 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
         name: userData.name,
         setIsAuth,
         userId,
+        profile,
+        setProfile,
       }}
     >
       {children}

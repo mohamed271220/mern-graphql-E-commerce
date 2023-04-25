@@ -23,6 +23,11 @@
       width: 200px;
       border-radius: 50%;
       border: 0.5px white solid;
+      overflow: hidden;
+      img {
+        height: 200px;
+        width: 200px;
+      }
     }
     .user-img-btn {
       background: linear-gradient(30deg, var(--wheat), var(--gmail));

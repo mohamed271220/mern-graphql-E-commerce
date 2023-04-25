@@ -58,6 +58,7 @@ const SLiderComponent = () => {
               category={product.category}
               images={product.images}
               rating={product.rating}
+              reviews={product.reviews}
               description={product.description}
 
               //   layout

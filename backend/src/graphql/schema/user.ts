@@ -57,6 +57,7 @@ const userType = new GraphQLObjectType({
   fields: () => ({
     _id: { type: GraphQLID },
     name: { type: GraphQLString },
+    image: { type: GraphQLString },
     email: { type: GraphQLString },
     password: { type: GraphQLString },
     msg: { type: GraphQLString },
@@ -100,6 +101,8 @@ export const userMutation = new GraphQLObjectType({
         } else {
           const res = await userCollection.create({
             ...args,
+            image:
+              "https://res.cloudinary.com/domobky11/image/upload/v1682383659/download_d2onbx.png",
             password: hashPassword(args.password),
           });
           return { ...res, status: 200, msg: "user created successfully" };
@@ -150,6 +153,7 @@ export const userMutation = new GraphQLObjectType({
         }
       },
     },
+
     updateUserName: {
       type: userType,
       args: { name: { type: GraphQLString }, _id: { type: GraphQLID } },
@@ -487,16 +491,18 @@ export const userMutation = new GraphQLObjectType({
       async resolve(_, args) {
         try {
           const { userId, rate, review, image } = args;
-          return await productCollection.findByIdAndUpdate(
+          const data = await productCollection.findByIdAndUpdate(
             args._id,
             {
               $push: { reviews: { userId, rate, review, image } },
             },
-            { "reviews.$": 1 }
+            { new: true }
           );
-          // console.log("data");
-          // console.log({ data });
-          // return { ...data, msg: "your rate added" };
+          const addedReview = data!.reviews[data!.reviews.length - 1];
+          addedReview.msg = "review added";
+          addedReview.status = 200;
+          console.log(addedReview);
+          return addedReview;
         } catch (err) {
           return (err as Error).message;
         }

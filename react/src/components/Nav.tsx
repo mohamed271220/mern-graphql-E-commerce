@@ -10,11 +10,12 @@ import { BsFillCartPlusFill } from "react-icons/bs";
 import { linksArr } from "../arries.js";
 import Title from "./widgets/Title";
 import WishList from "./WishList";
+import { isAuthContext } from "../context/isAuth";
+import NavImg from "./widgets/NavImg";
 
 const Nav = () => {
   const navRef = useRef<HTMLElement | null>(null);
   const [showFav, handleShowFav, handleHideFav, toggleFav] = useHide();
-
   const { cart } = useAppSelector((state) => state.cart);
   const { fav } = useAppSelector((state) => state.fav);
 
@@ -48,14 +49,14 @@ const Nav = () => {
             </motion.li>
           );
         })}
-        <motion.li id="cart-link-par" style={{ color: LinkClr }}>
-          {/* <Title title="go to your cart"> */}
-          <NavLink to="/cart" className="cart-active-link ">
-            <ShowCount length={cart.length} />
-            <BsFillCartPlusFill fontSize={"1.2rem"} />
-          </NavLink>
-          {/* </Title> */}
-        </motion.li>
+        <NavLink to="/cart" className="cart-active-link ">
+          <motion.li id="cart-link-par" style={{ color: LinkClr }}>
+            <Title title="go to your cart">
+              <ShowCount length={cart.length} />
+              <BsFillCartPlusFill fontSize={"1.2rem"} />
+            </Title>
+          </motion.li>
+        </NavLink>
 
         <motion.li
           style={{ color: showFav ? "var(--delete)" : LinkClr }}
@@ -68,6 +69,7 @@ const Nav = () => {
             <AiFillHeart fontSize={"1.5rem"} onClick={toggleFav} />
           </Title>
         </motion.li>
+        <NavImg />
       </ul>
     </motion.nav>
   );

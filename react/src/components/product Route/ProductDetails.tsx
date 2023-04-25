@@ -41,8 +41,9 @@ const ProductDetails = ({ setShowPop }: Props) => {
     },
   };
 
+  const { avgRate, reviewLength } = useAvg(rating, addReview);
+
   const handleshowPop = () => setShowPop(true);
-  const avgRate = useAvg([...rating, ...addReview.map((e) => e.rate)]);
   const [isFavoraited, setIsFavorited] = useState(false);
 
   const [id] = usePathAndId(images, bigImgInd);
@@ -73,7 +74,6 @@ const ProductDetails = ({ setShowPop }: Props) => {
       setHasReview(false);
     }
   }, [addReview]);
-  console.log({ addReview });
   return (
     <motion.div
       className="details"
@@ -111,7 +111,7 @@ const ProductDetails = ({ setShowPop }: Props) => {
           <ProductRate
             key={`${description}-rate`}
             avgRate={avgRate}
-            ratingLen={rating.length + addReview.map((e) => e.rate).length}
+            ratingLen={reviewLength}
           />
           <Title title="show all reviews">
             <BiShow fontSize={12} color="black" onClick={handleshowPop} />
