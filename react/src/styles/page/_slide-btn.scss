@@ -1,4 +1,5 @@
 @import "../variables.scss";
+@import "../globels/classes.scss";
 .slide-bottom {
   background: var(--white);
   width: 350px;
@@ -32,12 +33,11 @@
 .slide-text {
   color: var(--white);
   position: absolute;
+  text-transform: capitalize;
+  font-weight: bold;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-.confirmed {
-  transform: scale(1.5);
 }
 
 .add-rate-pop {
@@ -57,5 +57,46 @@
     color: white;
     padding: 5px;
     letter-spacing: 0.8px;
+  }
+}
+
+.update-user-slide {
+  background: var(--white);
+  height: 200px;
+
+  form {
+    width: 100%;
+    margin: 0 auto;
+    margin-bottom: 12px;
+  }
+  .inp-parent {
+    margin: 10px auto;
+  }
+  & input {
+    margin: 0 auto;
+    color: white;
+
+    background: black;
+  }
+}
+
+.confirmed {
+  // transform: scale(1.5);
+  color: var(--green);
+  letter-spacing: 1px;
+  font-weight: bold;
+  font-size: 1.4rem;
+  text-transform: capitalize;
+}
+
+.scale {
+  transform: scale(1.4);
+  margin-bottom: 5px;
+}
+
+.password {
+  height: 280px !important;
+  .err-form {
+    transform: scale(0.9);
   }
 }

@@ -5,10 +5,18 @@ import { opacityVariant, selectDropDownVariants } from "../../variants/globals";
 interface Props {
   setCountry: React.Dispatch<React.SetStateAction<string>>;
   country: string;
+  bottom?: boolean;
 }
-const SelectCOuntry = ({ setCountry, country }: Props) => {
+
+interface countryInterface {
+  name: { common: string };
+  flags: { png: string };
+}
+
+const SelectCOuntry = ({ setCountry, country, bottom }: Props) => {
   const [countries, setCountries] = useState([]);
   const [flag, setFlag] = useState("https://flagcdn.com/w320/eg.png");
+  // const [flag, setFlag] = useState("");
   const [showDropSelect, setShowSelectDrop] = useState(false);
 
   useEffect(() => {
@@ -17,6 +25,18 @@ const SelectCOuntry = ({ setCountry, country }: Props) => {
       .then((data) => data.json())
       .then((data) => setCountries(data));
   }, []);
+
+  useEffect(() => {
+    if (country !== "") {
+      const obj = countries.find(
+        (e: countryInterface) => e.name.common === country
+      ) as unknown as countryInterface;
+      console.log(obj);
+      if (obj?.flags) {
+        setFlag((obj as { flags: { png: string } }).flags.png);
+      }
+    }
+  }, [country, countries]);
 
   const toggleShowSelectDrop = () => {
     setShowSelectDrop(!showDropSelect);
@@ -63,8 +83,13 @@ const SelectCOuntry = ({ setCountry, country }: Props) => {
       <BiDownArrow className="icon select-icon arrow" />
       <AnimatePresence>
         {showDropSelect && (
-          <motion.div className="select-dropdown gap drop-country">
-            {countries.map((obj: any, i) => {
+          <motion.div
+            className={`select-dropdown gap drop-country ${
+              bottom ? "bottom" : ""
+            }`}
+            // style={{ bottom: bottom ? "100%" : "", top: bottom ? "" : "100%" }}
+          >
+            {countries.map((obj: countryInterface, i) => {
               const flag = obj.flags.png;
               const country = obj.name.common;
               return (

@@ -19,9 +19,9 @@
 }
 .log-in form input {
   height: 30px;
+  padding-right: 20px;
 }
 .log-in form button {
-  width: 80%;
   height: 30px;
   margin: 0 auto;
 }
@@ -30,12 +30,15 @@
   letter-spacing: 1.1px;
 }
 .log-in .redirect a {
+  display: inline-block;
   font-size: 1rem;
   text-decoration: underline;
   text-decoration-color: var(--wheat);
   color: var(--green);
   margin-left: 6px;
   transition: 0.3s;
+  text-transform: capitalize;
+  font-weight: bold;
 }
 .log-in .redirect a:hover {
   color: var(--wheat);
@@ -71,9 +74,27 @@
 }
 .inp-parent .placeholder {
   position: absolute;
-  top: -18px;
+  color: var(--white);
+  text-transform: capitalize;
+  letter-spacing: 0.8px;
+  transform: translateY(-50%);
+  padding: 1px 4px;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+.inp-parent .placeholder.placeholder-center {
+  left: 5px;
+  color: var(--sale);
+}
+.inp-parent .placeholder.placeholder-top {
   left: 5px;
   color: var(--white);
+  text-shadow: 1px 0.5px 1px black;
+  transform: translateY(-50%);
+  background: var(--trending);
+  border-radius: 2px;
+  border-right: 2px solid var(--sale);
+  border-left: 2px solid var(--sale);
 }
 .inp-parent .x-inp {
   position: absolute;
@@ -83,4 +104,15 @@
   font-size: 1.2rem;
   color: var(--delete);
   cursor: pointer;
+}
+
+.err-form {
+  display: inline-block;
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  top: 105%;
+  left: 0;
+  color: var(--gmail);
+  font-weight: bold;
 }/*# sourceMappingURL=login.css.map */

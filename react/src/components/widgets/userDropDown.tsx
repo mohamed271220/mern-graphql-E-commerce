@@ -22,7 +22,7 @@ const UserDropDown = ({ bool }: Props) => {
   ];
 
   return (
-    <DropDown cls="user-drop center col" bool={bool}>
+    <DropDown cls="user-drop" bool={bool}>
       <div className="w-100">
         <div className="user-drop-img center gap">
           <ProfileImg dimension={30} />
@@ -34,10 +34,11 @@ const UserDropDown = ({ bool }: Props) => {
       {dropArr.map(({ icon: Icon, link, to }, i) => {
         return (
           <div key={i} className="w-100 ">
-            <div className="center gap user-drop-link">
-              <Icon fontSize={15} className="shadow user-icon" />
-              <NavLink to={`${to}`}> {link}</NavLink>
-            </div>
+            <NavLink className={"gap user-drop-link"} to={`${to}`}>
+              {" "}
+              <Icon fontSize={15} className="shadow  user-icon" />
+              {link}
+            </NavLink>
             {link !== "logout" && <div key={link} className="hr"></div>}
           </div>
         );

@@ -16,6 +16,7 @@ interface Props extends ChildrenInterFace {
   doneMsg: string;
   height: number;
   fn: () => void;
+  isVaild?: boolean;
 }
 const SlideButton = ({
   height,
@@ -24,6 +25,7 @@ const SlideButton = ({
   head,
   cls,
   children,
+  isVaild,
   fn,
 }: Props) => {
   const offset = useMotionValue(0);
@@ -62,6 +64,7 @@ const SlideButton = ({
             style={{ background }}
           >
             <motion.button
+              type="submit"
               style={{ x: offset }}
               drag="x"
               dragConstraints={{
@@ -79,7 +82,7 @@ const SlideButton = ({
                 }
               }}
               onPanEnd={(e, info) => {
-                if (info.offset.x >= 200) {
+                if (info.offset.x >= 200 && isVaild) {
                   setIsConfirmed(true);
                   fn();
                 } else {
@@ -97,8 +100,10 @@ const SlideButton = ({
           </motion.div>
         </>
       ) : (
-        <div className="confirmed center col gap">
-          <CircleCheckSvg check={true} />
+        <div className={`${cls} confirmed center col gap`}>
+          <div className="scale">
+            <CircleCheckSvg check={true} />
+          </div>
           <motion.span
             variants={textVariant}
             initial="start"

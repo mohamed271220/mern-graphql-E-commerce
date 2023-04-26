@@ -88,6 +88,7 @@ export const GET_USER_DATA = gql`
       name
       image
       country
+      phone
       fav {
         productId
         price
@@ -160,9 +161,45 @@ export const Update_user_name = gql`
     }
   }
 `;
-export const Update_Country_name = gql`
+export const Update_Country = gql`
   mutation ($_id: ID!, $country: String!) {
     updateUserCountry(country: $country, _id: $_id) {
+      msg
+      status
+    }
+  }
+`;
+
+export const Update_User_Phone = gql`
+  mutation ($_id: ID!, $phone: String!) {
+    updateUserPhone(phone: $phone, _id: $_id) {
+      msg
+      status
+    }
+  }
+`;
+
+export const Update_User_Email = gql`
+  mutation ($_id: ID!, $email: String!) {
+    updateEmail(email: $email, _id: $_id) {
+      msg
+      status
+    }
+  }
+`;
+
+export const Check_Old_Pass = gql`
+  mutation ($_id: ID!, $password: String!) {
+    checkOldPassword(password: $password, _id: $_id) {
+      msg
+      status
+    }
+  }
+`;
+
+export const Update_Pass = gql`
+  mutation ($_id: ID!, $password: String!) {
+    updatePassword(password: $password, _id: $_id) {
       msg
       status
     }

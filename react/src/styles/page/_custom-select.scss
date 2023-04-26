@@ -59,11 +59,11 @@
   flex-direction: column;
   padding: 10px;
   text-transform: capitalize;
+  font-weight: bold;
 
   .drop-country {
     background: var(--green);
     height: 200px;
-
     overflow-y: auto;
     overflow-x: hidden;
   }
@@ -77,4 +77,9 @@
       height: 10px;
     }
   }
+}
+
+.bottom {
+  bottom: 100% !important;
+  top: auto;
 }

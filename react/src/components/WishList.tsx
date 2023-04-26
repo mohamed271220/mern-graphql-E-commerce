@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
-import { opacityVariant, popVariant } from "../variants/globals";
+import { opacityVariant } from "../variants/globals";
 import Favorite from "./widgets/Favorite";
 import { useAppSelector } from "../custom/reduxTypes";
 import SlideButton from "./widgets/SlideButton";

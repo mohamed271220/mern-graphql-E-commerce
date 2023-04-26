@@ -64,6 +64,7 @@ const userType = new graphql_1.GraphQLObjectType({
         password: { type: graphql_1.GraphQLString },
         msg: { type: graphql_1.GraphQLString },
         country: { type: graphql_1.GraphQLString },
+        phone: { type: graphql_1.GraphQLString },
         status: { type: graphql_1.GraphQLInt },
         fav: { type: new graphql_1.GraphQLList(favtType) },
         cart: { type: new graphql_1.GraphQLList(cartType) },
@@ -179,7 +180,7 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
             resolve(_, args) {
                 return __awaiter(this, void 0, void 0, function* () {
                     const result = yield (0, authenticate_js_1.checkOldPass)(args._id, args.password);
-                    return { msg: result };
+                    return { msg: result, status: 200 };
                 });
             },
         },
@@ -191,6 +192,7 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                     yield user_js_1.userCollection.findByIdAndUpdate(args._id, {
                         password: (0, hashPassword_js_1.hashPassword)(args.password),
                     });
+                    return { msg: "your password successfully updated", status: 200 };
                 });
             },
         },

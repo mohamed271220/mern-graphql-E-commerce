@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { motion, AnimatePresence } from "framer-motion";
 import { opacityVariant } from "../../variants/globals";
@@ -6,10 +6,11 @@ import Title from "./Title";
 interface Props {
   placeholder: string;
   err?: string;
+  defaultVal?: string;
   password?: boolean;
 }
-const Input = ({ placeholder, err, password }: Props) => {
-  const { watch, register, resetField } = useFormContext();
+const Input = ({ placeholder, err, password, defaultVal }: Props) => {
+  const { watch, register, resetField, setValue } = useFormContext();
   const inpVal = watch(placeholder);
 
   const [isFocus, setIsFocus] = useState(false);
@@ -17,6 +18,12 @@ const Input = ({ placeholder, err, password }: Props) => {
     start: { top: inpVal || isFocus ? "50%" : "0" },
     end: { top: inpVal || isFocus ? "0" : "50%" },
   };
+
+  useEffect(() => {
+    if (defaultVal !== "") {
+      setValue(placeholder, defaultVal);
+    }
+  }, [defaultVal]);
   return (
     <div className="inp-parent">
       <input
@@ -29,6 +36,20 @@ const Input = ({ placeholder, err, password }: Props) => {
           },
         })}
       />
+      <AnimatePresence>
+        {err && (
+          <motion.span
+            className="err-form"
+            variants={opacityVariant}
+            transition={{ duration: 0.4 }}
+            initial="start"
+            animate="end"
+            exit="exit"
+          >
+            {err}
+          </motion.span>
+        )}
+      </AnimatePresence>
 
       <motion.span
         variants={placeholderVariant}
@@ -38,7 +59,11 @@ const Input = ({ placeholder, err, password }: Props) => {
           inpVal || isFocus ? "placeholder-top" : "placeholder-center"
         }`}
       >
-        {placeholder}
+        {placeholder === "new" ||
+        placeholder === "old" ||
+        placeholder === "confirm"
+          ? `${placeholder} password`
+          : placeholder}
       </motion.span>
       <AnimatePresence>
         {inpVal && (

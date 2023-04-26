@@ -63,6 +63,7 @@ const userType = new GraphQLObjectType({
     password: { type: GraphQLString },
     msg: { type: GraphQLString },
     country: { type: GraphQLString },
+    phone: { type: GraphQLString },
     status: { type: GraphQLInt },
     fav: { type: new GraphQLList(favtType) },
     cart: { type: new GraphQLList(cartType) },
@@ -185,7 +186,7 @@ export const userMutation = new GraphQLObjectType({
       args: { _id: { type: GraphQLID }, password: { type: GraphQLString } },
       async resolve(_, args) {
         const result = await checkOldPass(args._id, args.password);
-        return { msg: result };
+        return { msg: result, status: 200 };
       },
     },
     updatePassword: {
@@ -195,6 +196,7 @@ export const userMutation = new GraphQLObjectType({
         await userCollection.findByIdAndUpdate(args._id, {
           password: hashPassword(args.password),
         });
+        return { msg: "your password successfully updated", status: 200 };
       },
     },
     updateEmail: {

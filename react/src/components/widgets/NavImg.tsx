@@ -14,12 +14,13 @@ const NavImg = () => {
   };
   return (
     <>
-      <motion.li onClick={toggleSHowUser}>
-        <Title title={"go to your profile"}>
+      <motion.span onClick={toggleSHowUser}>
+        <Title title={!showUserDrop ? "go to your profile" : ""}>
           <ProfileImg dimension={30} />
         </Title>
+
         <UserDropDown bool={showUserDrop} />
-      </motion.li>
+      </motion.span>
     </>
   );
 };

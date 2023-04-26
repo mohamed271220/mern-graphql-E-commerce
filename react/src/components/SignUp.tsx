@@ -12,6 +12,8 @@ import OpacityBtn from "./widgets/OpacityBtn";
 import { toast } from "react-hot-toast";
 import { AiFillWarning } from "react-icons/ai";
 import SelectCOuntry from "./user/SelectCOuntry";
+import { yupResolver } from "@hookform/resolvers/yup";
+import useFormSchema from "../custom/useFormSchema";
 const socialMediaArr = [
   { id: "1", icon: <FaFacebookF color="" />, clr: "var(--fb)" },
   { id: "2", icon: <AiOutlineTwitter />, clr: "var(--twitter)" },
@@ -23,7 +25,8 @@ const socialMediaArr = [
 ];
 
 const SignUp = () => {
-  const methods = useForm();
+  const { schema } = useFormSchema();
+  const methods = useForm({ resolver: yupResolver(schema) });
   const {
     handleSubmit,
     getValues,
@@ -31,6 +34,7 @@ const SignUp = () => {
   } = methods;
   const OnSubmit = (data: FieldValues) => {
     console.log(data);
+    handleSignUp();
   };
 
   const [formRef, animateForm] = useAnimate();
@@ -47,7 +51,7 @@ const SignUp = () => {
   const [country, setCountry] = useState("egypt");
 
   const handleSignUp = async () => {
-    const { username: name, password, email } = getValues();
+    const { name, password, email } = getValues();
 
     const { data } = await addUserFn({
       variables: { name, password, email, country },
@@ -72,10 +76,7 @@ const SignUp = () => {
           ref={formRef}
         >
           <h2 className="underline header white"> sign Up</h2>
-          <Input
-            placeholder={"username"}
-            err={errors?.username?.message?.toString()}
-          />
+          <Input placeholder={"name"} err={errors?.name?.message?.toString()} />
           <Input
             placeholder={"email"}
             err={errors?.email?.message?.toString()}
@@ -84,12 +85,12 @@ const SignUp = () => {
             placeholder={"password"}
             err={errors?.password?.message?.toString()}
           />
-          <SelectCOuntry setCountry={setCountry} country={country} />
           <Input
             placeholder={"confirm"}
             err={errors?.confirm?.message?.toString()}
           />
-          <OpacityBtn btn="sign up" cls="btn main" fn={handleSignUp} />
+          <SelectCOuntry setCountry={setCountry} country={country} />
+          <OpacityBtn btn="sign up" cls="btn main" fn={() => null} />
           <div className="redirect">
             <span> have an account</span>
             <NavLink to="/login">log in</NavLink>

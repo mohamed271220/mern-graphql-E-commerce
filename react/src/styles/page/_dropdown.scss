@@ -82,8 +82,8 @@
 .user-drop {
   background: var(--white);
   width: 130px;
-  height: 120px;
-  padding: 8px;
+  display: flex;
+  flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
   font-size: 0.8rem;
@@ -91,7 +91,7 @@
 
   .user-icon {
     background-color: var(--wheat-light);
-    border-radius: 2px;
+    border-radius: 4px;
     transition: 0.3s;
   }
   svg {
@@ -105,14 +105,18 @@
     font-size: 0.9rem;
     justify-content: flex-start;
     margin-bottom: 4px;
+    padding: 0 8px;
   }
 }
 
 .user-drop-link {
   height: 25px;
   width: 100%;
+  display: flex;
   justify-content: flex-start;
+  align-items: center;
   transition: 0.3s;
+  padding: 0 8px;
 
   &:hover {
     background: var(--wheat-lighter);

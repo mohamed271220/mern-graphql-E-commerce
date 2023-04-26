@@ -20,23 +20,28 @@ interface userDataState {
   email: string;
   name: string;
   country: string;
-  // phone?: string;
+  phone: string;
   fav: favInterface[];
   cart: cartInterface[];
+  //-imp to use braket notation wuth variables
+  [key: string]: any;
 }
 
 interface authContextInterface extends userDataState {
   isAuth: boolean;
   setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsUpdated: React.Dispatch<React.SetStateAction<boolean>>;
   userId: string;
   profile: string;
   setProfile: React.Dispatch<React.SetStateAction<string>>;
+  userData: userDataState;
 }
 
 export const isAuthContext = createContext({} as authContextInterface);
 
 const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
   const [isAuth, setIsAuth] = useState(false);
+  const [isIsUpdated, setIsUpdated] = useState(false);
   const [userId, setUserId] = useState<string>("");
   const [profile, setProfile] = useState<string>("");
   console.log({ isAuth });
@@ -48,7 +53,6 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
     country: "",
     phone: "",
   } as userDataState);
-  console.log(userData);
   const [getData, { data, loading }] = useMutation(GET_USER_DATA);
 
   const dispatch = useAppDispatch();
@@ -70,7 +74,15 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
         },
       });
     }
-  }, [userId]);
+  }, [userId, isIsUpdated]);
+
+  useEffect(() => {
+    if (isIsUpdated) {
+      setTimeout(() => {
+        setIsUpdated(false);
+      }, 1000);
+    }
+  }, [isIsUpdated]);
 
   useEffect(() => {
     if (data?.getUserData) {
@@ -83,16 +95,19 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
   return (
     <isAuthContext.Provider
       value={{
+        userData,
         isAuth,
         fav: userData.fav,
         cart: userData.cart,
         email: userData.email,
         name: userData.name,
         country: userData.country,
+        phone: userData.phone,
         setIsAuth,
         userId,
         profile,
         setProfile,
+        setIsUpdated,
       }}
     >
       {children}

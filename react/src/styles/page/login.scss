@@ -31,12 +31,15 @@
     color: var(--white);
     letter-spacing: 1.1px;
     a {
+      display: inline-block;
       font-size: 1rem;
       text-decoration: underline;
       text-decoration-color: var(--wheat);
       color: var(--green);
       margin-left: 6px;
       transition: 0.3s;
+      text-transform: capitalize;
+      font-weight: bold;
       &:hover {
         color: var(--wheat);
         text-decoration-color: var(--green);
@@ -83,14 +86,14 @@
     font-size: 0.8rem;
     &.placeholder-center {
       left: 5px;
-      color: var(--green);
+      color: var(--sale);
     }
     &.placeholder-top {
       left: 5px;
       color: var(--white);
       text-shadow: 1px 0.5px 1px black;
       transform: translateY(-50%);
-      background: var(--wheat);
+      background: var(--trending);
       border-radius: 2px;
       border-right: 2px solid var(--sale);
       border-left: 2px solid var(--sale);
@@ -105,4 +108,15 @@
     color: var(--delete);
     cursor: pointer;
   }
+}
+
+.err-form {
+  display: inline-block;
+  width: 100%;
+  position: absolute;
+  text-align: center;
+  top: 105%;
+  left: 0;
+  color: var(--gmail);
+  font-weight: bold;
 }
