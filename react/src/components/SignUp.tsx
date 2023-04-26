@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { FaFacebookF } from "react-icons/fa";
 import { AiOutlineTwitter } from "react-icons/ai";
 import { SiGmail } from "react-icons/si";
@@ -44,11 +44,13 @@ const SignUp = () => {
   }, []);
   const navigate = useNavigate();
   const [addUserFn] = useMutation(ADD_USER);
+  const [country, setCountry] = useState("egypt");
+
   const handleSignUp = async () => {
     const { username: name, password, email } = getValues();
 
     const { data } = await addUserFn({
-      variables: { name, password, email },
+      variables: { name, password, email, country },
     });
     console.log(data);
     if (data.addUser.status === 200) {
@@ -82,7 +84,7 @@ const SignUp = () => {
             placeholder={"password"}
             err={errors?.password?.message?.toString()}
           />
-          <SelectCOuntry />
+          <SelectCOuntry setCountry={setCountry} country={country} />
           <Input
             placeholder={"confirm"}
             err={errors?.confirm?.message?.toString()}

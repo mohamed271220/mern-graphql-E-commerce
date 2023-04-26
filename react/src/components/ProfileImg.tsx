@@ -5,12 +5,15 @@ interface Props {
   dimension: number;
 }
 const ProfileImg = ({ dimension }: Props) => {
-  const { profile, name } = useContext(isAuthContext);
+  const { profile, name = "guest", isAuth } = useContext(isAuthContext);
 
   return (
     <>
       <img
-        src={profile}
+        src={
+          profile ||
+          "https://res.cloudinary.com/domobky11/image/upload/v1682383659/download_d2onbx.png"
+        }
         alt={`${name} proile`}
         style={{
           height: dimension,

@@ -2,11 +2,16 @@ import React, { useState, useContext } from "react";
 import Detail from "./Detail";
 import { isAuthContext } from "../../context/isAuth";
 import { useMutation } from "@apollo/client";
-import { Update_user_name } from "../../graphql/mutations/user.js";
+import {
+  Update_Country_name,
+  Update_user_name,
+} from "../../graphql/mutations/user.js";
 const UserInfo = () => {
-  const { name, email, userId } = useContext(isAuthContext);
+  const { name, email, userId, country } = useContext(isAuthContext);
   const [updateName, setUpdateName] = useState(false);
+  const [updateCountry, setUpdateCountry] = useState(false);
   const [updateNameFn] = useMutation(Update_user_name);
+  const [updateCountryFn] = useMutation(Update_Country_name);
 
   const userArr = [
     {
@@ -19,7 +24,13 @@ const UserInfo = () => {
     // { detail: "email", value: email },
     // { detail: "password", value: "****************" },
     // { detail: "phone", value: "no phone numbers added" },
-    // { detail: "country", value: "no Country added" },
+    {
+      detail: "country",
+      value: country,
+      setter: setUpdateCountry,
+      bool: updateCountry,
+      fn: updateCountryFn,
+    },
   ];
   return (
     <div>

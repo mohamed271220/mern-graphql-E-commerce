@@ -43,7 +43,6 @@
   width: 100%;
   z-index: 100;
   box-shadow: 0.25px 0.25px 2px black;
-
   color: var(--white);
   padding: 4px;
   align-items: flex-start;
@@ -65,7 +64,8 @@
     background: var(--green);
     height: 200px;
 
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
   .select-country {
     display: flex;

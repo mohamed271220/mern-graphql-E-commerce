@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import Title from "./Title";
 import UserDropDown from "./userDropDown";
 import ProfileImg from "../ProfileImg";
+import { isAuthContext } from "../../context/isAuth";
 const NavImg = () => {
   const [showUserDrop, setShowUserDrop] = useState(false);
-
-  const toggleSHowUser = () => setShowUserDrop(!showUserDrop);
+  const { isAuth } = useContext(isAuthContext);
+  const toggleSHowUser = () => {
+    if (isAuth) {
+      setShowUserDrop(!showUserDrop);
+    }
+  };
   return (
     <>
       <motion.li onClick={toggleSHowUser}>
         <Title title={"go to your profile"}>
           <ProfileImg dimension={30} />
-          {/* <img src={profile} alt="" className="img-nav " /> */}
         </Title>
         <UserDropDown bool={showUserDrop} />
       </motion.li>

@@ -80,7 +80,18 @@
     }
   }
 }
+.zoom {
+  margin-left: 10px;
+  margin-top: 8px;
+  margin-bottom: -2px;
+  font-weight: bold;
+  font-size: 1.4rem;
+  text-transform: capitalize;
+}
 
+input[type="range"] {
+  accent-color: var(--wheat-light);
+}
 // .update-user{
 //   width: ;
 // }

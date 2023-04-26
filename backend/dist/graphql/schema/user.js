@@ -63,7 +63,7 @@ const userType = new graphql_1.GraphQLObjectType({
         email: { type: graphql_1.GraphQLString },
         password: { type: graphql_1.GraphQLString },
         msg: { type: graphql_1.GraphQLString },
-        phone: { type: graphql_1.GraphQLInt },
+        country: { type: graphql_1.GraphQLString },
         status: { type: graphql_1.GraphQLInt },
         fav: { type: new graphql_1.GraphQLList(favtType) },
         cart: { type: new graphql_1.GraphQLList(cartType) },
@@ -89,7 +89,7 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                 name: { type: graphql_1.GraphQLString },
                 email: { type: graphql_1.GraphQLString },
                 password: { type: graphql_1.GraphQLString },
-                // msg: { type: GraphQLString },
+                country: { type: graphql_1.GraphQLString },
             },
             resolve: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
                 const check = yield user_js_1.userCollection.find({ email: args.email });
@@ -149,6 +149,18 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                 return __awaiter(this, void 0, void 0, function* () {
                     yield user_js_1.userCollection.findByIdAndUpdate(args._id, { name: args.name });
                     return { status: 200, msg: "username is successfully updated  " };
+                });
+            },
+        },
+        updateUserCountry: {
+            type: messageType,
+            args: { country: { type: graphql_1.GraphQLString }, _id: { type: graphql_1.GraphQLID } },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield user_js_1.userCollection.findByIdAndUpdate(args._id, {
+                        country: args.country,
+                    });
+                    return { status: 200, msg: "your country  is successfully updated  " };
                 });
             },
         },

@@ -4,6 +4,7 @@ import axios from "axios";
 
 import AvatarEditor from "react-avatar-editor";
 import { isAuthContext } from "../context/isAuth";
+import OpacityBtn from "./widgets/OpacityBtn";
 interface Props {
   setEdit: React.Dispatch<React.SetStateAction<boolean>>;
   setnewImg: React.Dispatch<React.SetStateAction<File | undefined>>;
@@ -75,8 +76,11 @@ const Avatar = ({ setEdit, newImg, handleCancel }: Props) => {
         onPositionChange={handlePositionChange}
         scale={1 + scale}
       />
-      <div className="zoom-cont">
-        <label htmlFor="zoom"> zoom</label>
+      <div className="zoom-cont col center start w-100">
+        <label htmlFor="zoom" className="zoom">
+          {" "}
+          zoom
+        </label>
         <input
           type="range"
           id="zoom"
@@ -85,11 +89,12 @@ const Avatar = ({ setEdit, newImg, handleCancel }: Props) => {
           max="1"
           step=".01"
           defaultValue={0.01}
+          className="w-100"
         />
       </div>
-      <div className="btn-container">
-        <motion.button onClick={handleSaveButtonClick}>Save</motion.button>
-        <motion.button onClick={handleCancel}>cancel</motion.button>
+      <div className=" center gap " style={{ gap: 30, marginTop: 6 }}>
+        <OpacityBtn fn={handleSaveButtonClick} btn="Save" cls="btn main" />
+        <OpacityBtn fn={handleCancel} btn="cancel" cls="btn details" />
       </div>
     </>
   );

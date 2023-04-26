@@ -9,6 +9,7 @@ const userSchema = new mongoose_1.default.Schema({
     name: String,
     email: String,
     password: String,
+    country: String,
     phone: Number,
     image: String,
     fav: [

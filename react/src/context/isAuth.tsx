@@ -19,6 +19,8 @@ export interface favArrInterface {
 interface userDataState {
   email: string;
   name: string;
+  country: string;
+  // phone?: string;
   fav: favInterface[];
   cart: cartInterface[];
 }
@@ -37,21 +39,28 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
   const [isAuth, setIsAuth] = useState(false);
   const [userId, setUserId] = useState<string>("");
   const [profile, setProfile] = useState<string>("");
-
+  console.log({ isAuth });
   const [userData, setUserData] = useState({
     email: "",
     name: "",
     fav: [],
     cart: [],
+    country: "",
+    phone: "",
   } as userDataState);
-
+  console.log(userData);
   const [getData, { data, loading }] = useMutation(GET_USER_DATA);
 
   const dispatch = useAppDispatch();
-  console.log(data);
   useEffect(() => {
     setUserId(Cookies.get("user-id") as unknown as string);
   }, [isAuth]);
+
+  useEffect(() => {
+    if (userId) {
+      setIsAuth(true);
+    }
+  }, [userId]);
 
   useEffect(() => {
     if (userId) {
@@ -79,6 +88,7 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
         cart: userData.cart,
         email: userData.email,
         name: userData.name,
+        country: userData.country,
         setIsAuth,
         userId,
         profile,

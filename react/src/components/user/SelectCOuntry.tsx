@@ -2,9 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { BiDownArrow } from "react-icons/bi";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import { opacityVariant, selectDropDownVariants } from "../../variants/globals";
-const SelectCOuntry = () => {
+interface Props {
+  setCountry: React.Dispatch<React.SetStateAction<string>>;
+  country: string;
+}
+const SelectCOuntry = ({ setCountry, country }: Props) => {
   const [countries, setCountries] = useState([]);
-  const [country, setCountry] = useState("egypt");
   const [flag, setFlag] = useState("https://flagcdn.com/w320/eg.png");
   const [showDropSelect, setShowSelectDrop] = useState(false);
 
@@ -74,6 +77,7 @@ const SelectCOuntry = () => {
                   exit="exit"
                   key={i}
                   className="select-country center gap"
+                  whileHover={{ x: 4 }}
                   onClick={() => {
                     setFlag(flag);
                     setCountry(country);

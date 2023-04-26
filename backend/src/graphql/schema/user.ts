@@ -62,7 +62,7 @@ const userType = new GraphQLObjectType({
     email: { type: GraphQLString },
     password: { type: GraphQLString },
     msg: { type: GraphQLString },
-    phone: { type: GraphQLInt },
+    country: { type: GraphQLString },
     status: { type: GraphQLInt },
     fav: { type: new GraphQLList(favtType) },
     cart: { type: new GraphQLList(cartType) },
@@ -89,7 +89,7 @@ export const userMutation = new GraphQLObjectType({
         name: { type: GraphQLString },
         email: { type: GraphQLString },
         password: { type: GraphQLString },
-        // msg: { type: GraphQLString },
+        country: { type: GraphQLString },
       },
       resolve: async (_, args) => {
         const check = await userCollection.find({ email: args.email });
@@ -161,6 +161,16 @@ export const userMutation = new GraphQLObjectType({
       async resolve(_, args) {
         await userCollection.findByIdAndUpdate(args._id, { name: args.name });
         return { status: 200, msg: "username is successfully updated  " };
+      },
+    },
+    updateUserCountry: {
+      type: messageType,
+      args: { country: { type: GraphQLString }, _id: { type: GraphQLID } },
+      async resolve(_, args) {
+        await userCollection.findByIdAndUpdate(args._id, {
+          country: args.country,
+        });
+        return { status: 200, msg: "your country  is successfully updated  " };
       },
     },
     updateUserPhone: {

@@ -14,16 +14,6 @@ export const linksArr = [
   },
 
   {
-    to: "/login",
-    link: "login",
-  },
-
-  {
-    to: "/signup",
-    link: "sign up",
-  },
-
-  {
     to: "/about",
     link: "about",
   },

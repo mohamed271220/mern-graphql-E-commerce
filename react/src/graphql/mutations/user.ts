@@ -1,8 +1,18 @@
 import { gql } from "@apollo/client";
 
 export const ADD_USER = gql`
-  mutation ($name: String!, $email: String!, $password: String!) {
-    addUser(name: $name, email: $email, password: $password) {
+  mutation (
+    $name: String!
+    $email: String!
+    $password: String!
+    $country: String!
+  ) {
+    addUser(
+      name: $name
+      email: $email
+      password: $password
+      country: $country
+    ) {
       name
       msg
       status
@@ -77,6 +87,7 @@ export const GET_USER_DATA = gql`
       email
       name
       image
+      country
       fav {
         productId
         price
@@ -144,6 +155,14 @@ export const addReview = gql`
 export const Update_user_name = gql`
   mutation ($_id: ID!, $name: String!) {
     updateUserName(name: $name, _id: $_id) {
+      msg
+      status
+    }
+  }
+`;
+export const Update_Country_name = gql`
+  mutation ($_id: ID!, $country: String!) {
+    updateUserCountry(country: $country, _id: $_id) {
       msg
       status
     }
