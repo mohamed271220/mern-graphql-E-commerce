@@ -28,7 +28,6 @@ const Detail = ({ detail, value, setter, fn, bool, placeholder }: Props) => {
       setUpdatedCountry(userData.country);
     }
   }, [userData?.country]);
-  // const { schema } = useFormSchema();
   const schema: { [key: string]: any } = {
     name: yup.object().shape({
       name: yup.string().min(6).max(12).required("insert a name"),

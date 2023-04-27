@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-
+import { productContext } from "./Product";
+import { SideBySideMagnifier } from "react-image-magnifiers";
+import { opacityVariant } from "../../variants/globals";
 interface Props {
   data: {
     images: {
@@ -18,7 +20,10 @@ type Tuple = [number | null, number];
 const ProductImages = ({
   data: { setBigImgInd, bigImgInd, images },
 }: Props) => {
+  const { startHover, setStartHover } = useContext(productContext);
+
   const [tuple, setTuple] = useState<Tuple>([null, bigImgInd]);
+  const [changeImage, setChangeImage] = useState(false);
 
   if (tuple[1] !== bigImgInd) {
     setTuple([tuple[1], bigImgInd]);
@@ -62,30 +67,76 @@ const ProductImages = ({
     }),
   };
 
+  const ref = useRef<HTMLDivElement | null>(null);
+
   return (
     <motion.div
-      className="images center"
+      ref={ref}
+      className="images center "
       variants={parentVariant}
       initial="start"
       animate="end"
     >
-      <motion.div
-        className="big-img-par"
+      <motion.span
+        style={{ overflow: startHover ? "" : "hidden" }}
         variants={bigImageParVariant}
-        // initial="start"
-        // animate="end"
+        initial="start"
+        animate="end"
       >
+        {/* here  */}
+
         <AnimatePresence mode="wait" custom={direction}>
-          <motion.img
+          <motion.div
+            className="big-img-par"
             key={images[bigImgInd].productPath}
-            src={images[bigImgInd].productPath}
-            className="big-img"
-            variants={bigImageVariant}
             custom={direction}
-            exit="exit"
-          />
+            variants={bigImageVariant}
+            // exit="exit"
+
+            onAnimationStart={() => setChangeImage(true)}
+            onAnimationComplete={() => setChangeImage(false)}
+          >
+            <>
+              <SideBySideMagnifier
+                imageSrc={images[bigImgInd].productPath}
+                style={{
+                  height: "fit-content",
+                  width: 250,
+                  // padding: 2,
+                  objectFit: "contain",
+                  filter: " drop-shadow(5px 10px 2px rgb(73, 71, 71))",
+                }}
+                alwaysInPlace={false}
+                fillAvailableSpace
+                fillGapTop={40}
+                fillGapRight={ref?.current ? ref?.current?.offsetLeft - 10 : 0}
+                overlayBoxOpacity={1}
+                overlayOpacity={0.1}
+                cursorStyle="crosshair"
+                fillGapLeft={30}
+                overlayBoxColor="yellow"
+                className="zoom"
+                onZoomStart={() => setStartHover(true)}
+                onZoomEnd={() => setStartHover(false)}
+              />
+            </>
+            <AnimatePresence>
+              {!startHover && !changeImage && (
+                <motion.div
+                  variants={opacityVariant}
+                  initial="start"
+                  animate="end"
+                  exit={"exit"}
+                  transition={{ duration: 0.4 }}
+                  className="hint"
+                >
+                  Hover to zoom
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
         </AnimatePresence>
-      </motion.div>
+      </motion.span>
       <div className="small-img-par center">
         {images.map(({ productPath }, index) => {
           return (

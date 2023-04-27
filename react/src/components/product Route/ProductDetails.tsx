@@ -31,6 +31,7 @@ const ProductDetails = ({ setShowPop }: Props) => {
     price,
     stock,
     addReview,
+    startHover,
   } = useContext(productContext);
   const parentVariant = {
     start: { x: 400, opacity: 0 },
@@ -80,6 +81,7 @@ const ProductDetails = ({ setShowPop }: Props) => {
       variants={parentVariant}
       initial="start"
       animate="end"
+      style={{ position: "relative", zIndex: startHover ? -1 : 1 }}
     >
       <div className="details-top">
         <h3

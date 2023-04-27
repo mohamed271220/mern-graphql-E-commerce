@@ -254,3 +254,10 @@
     left: 0;
   }
 }
+.MagnifierContainer {
+  z-index: 100;
+}
+
+.MagnifierPreview {
+  z-index: 2;
+}

@@ -41,7 +41,12 @@ const SLiderComponent = () => {
   }, []);
   return (
     <>
-      <h2 className="underline header  heading-slider">you may like </h2>
+      <h2
+        className="underline header  heading-slider"
+        style={{ margin: "12px  " }}
+      >
+        you may like{" "}
+      </h2>
 
       <Slider {...settings}>
         {data?.products.map((product: any, index: number) => {

@@ -21,6 +21,8 @@ export interface productContextInterface {
   category: string;
   stock: string;
   setAddReviews: React.Dispatch<React.SetStateAction<reviewInterface[]>>;
+  startHover: boolean;
+  setStartHover: React.Dispatch<React.SetStateAction<boolean>>;
   addReview: reviewInterface[];
 }
 export const productContext = createContext({} as productContextInterface);
@@ -28,6 +30,7 @@ export const productContext = createContext({} as productContextInterface);
 const Product = () => {
   const { id } = useParams();
   const [bigImgInd, setBigImgInd] = useState(0);
+  const [startHover, setStartHover] = useState(false);
 
   const { data, error, loading } = useQuery(GET_Product_By_Id, {
     variables: { id },
@@ -81,9 +84,11 @@ const Product = () => {
               stock,
               setAddReviews,
               addReview,
+              startHover,
+              setStartHover,
             }}
           >
-            <div className="product-container">
+            <div className="product-container box-shadow">
               <section className="product-page">
                 <ProductImages
                   key={_id}
@@ -104,7 +109,7 @@ const Product = () => {
                   )}
                 </AnimatePresence>
               </section>
-              <SLiderComponent />
+              {/* <SLiderComponent /> */}
             </div>
           </productContext.Provider>
         )}

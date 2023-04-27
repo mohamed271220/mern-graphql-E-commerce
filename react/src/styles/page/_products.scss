@@ -17,6 +17,7 @@ aside {
   font-size: 1rem;
   padding: 15px;
   height: 100%;
+
   .aside-head {
     justify-content: space-between;
   }
@@ -39,19 +40,25 @@ aside {
   font-weight: bold;
   text-transform: capitalize;
   letter-spacing: 0.8px;
+
   margin-top: 6px;
   margin-bottom: 10px;
-  &.underline {
-    &:before {
-      width: 2rem;
+  &.header {
+    margin: 10px 0;
+    &.underline {
+      &:before {
+        width: 2rem;
+      }
     }
   }
 }
 
 .category-par {
-  gap: 5px;
-  flex-direction: column;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 20px;
   h4 {
     display: flex;
     justify-content: space-between;

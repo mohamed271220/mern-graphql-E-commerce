@@ -1,10 +1,11 @@
 @import "../variables.scss";
 
 .product-container {
-  margin: 40px 0;
+  margin-top: 40px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  height: calc(100vh - 40px);
 
   .product-page {
     overflow: hidden;
@@ -15,27 +16,34 @@
     width: 90%;
     max-width: 800px;
     margin: 0 auto;
-    background: rgba(128, 128, 128, 0.091);
+    background: var(--white);
+
+    gap: 20px;
     .images {
       width: 45%;
-      height: 85%;
+      height: 100%;
       align-self: flex-end;
       flex-direction: column;
       justify-content: space-evenly;
-      gap: 10px;
+      gap: 20px;
+
       .big-img-par {
-        width: calc(40vw);
-        max-width: calc(300px);
+        // width: calc(50vw);
+        width: 280px;
         height: 300px;
-        overflow: hidden;
-        .big-img {
-          width: calc(40vw);
-          max-width: calc(300px);
-          height: 300px;
-          object-fit: contain;
-          filter: drop-shadow(5px 10px 2px rgb(73, 71, 71));
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        // overflow: hidden;
+        padding-bottom: 20px;
+        .zoom {
+          div:nth-child(2) {
+            background: rgba(128, 128, 128, 0.091);
+            background-color: var(--white);
+            min-height: 100vh;
+            bottom: 0;
+          }
           // background: rgba(128, 128, 128, 0.2);
-          padding: 15px;
         }
       }
 
@@ -137,7 +145,7 @@
       width: 100%;
       .images {
         width: 50%;
-        img {
+        .small-img {
           height: 50px;
           width: 50px;
           object-fit: contain;
@@ -241,4 +249,16 @@ p {
 .heading-slider {
   margin: 20px;
   margin-top: 30px;
+}
+
+.hint {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-style: 12px;
+  transform: translateX(-50%);
+  background: var(--wheat-lighter);
 }

@@ -15,47 +15,49 @@ const FIlter = ({ head, children }: Props) => {
   const [showCategory, handleShowCategory, handleHideCategory] = useHide();
   const [bool, show, hide] = useShowTitle();
   return (
-    <div className="category-par center ">
-      <h4 className="filter-head  header  header underline">
-        {head}
-        <AnimatePresence mode="wait">
-          <motion.span
-            variants={opacityVariant}
-            initial="start"
-            animate="end"
-            exit="exit"
-            key={"plus"}
-            transition={{ duration: 0.4 }}
-          >
-            <Title title={showCategory ? "collapse" : "expand"}>
-              {showCategory ? (
-                <FcMinus onClick={handleHideCategory} />
-              ) : (
-                <BiPlus onClick={handleShowCategory} />
-              )}
-            </Title>
-          </motion.span>
-        </AnimatePresence>
-      </h4>
-
-      <>
-        <AnimatePresence mode="wait">
-          {showCategory && (
-            <motion.div
-              variants={parentVariant}
+    <>
+      <div className="category-par  ">
+        <h4 className="filter-head  header   underline">
+          {head}
+          <AnimatePresence mode="wait">
+            <motion.span
+              variants={opacityVariant}
               initial="start"
               animate="end"
-              exit={"exit"}
-              key={"category"}
-              className="   category-par"
+              exit="exit"
+              key={"plus"}
+              transition={{ duration: 0.4 }}
             >
-              {children}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </>
+              <Title title={showCategory ? "collapse" : "expand"}>
+                {showCategory ? (
+                  <FcMinus onClick={handleHideCategory} />
+                ) : (
+                  <BiPlus onClick={handleShowCategory} />
+                )}
+              </Title>
+            </motion.span>
+          </AnimatePresence>
+        </h4>
+
+        <>
+          <AnimatePresence mode="wait">
+            {showCategory && (
+              <motion.div
+                variants={parentVariant}
+                initial="start"
+                animate="end"
+                exit={"exit"}
+                key={"category"}
+                className="   category-par"
+              >
+                {children}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </>
+      </div>
       <div className="hr"></div>
-    </div>
+    </>
   );
 };
 
