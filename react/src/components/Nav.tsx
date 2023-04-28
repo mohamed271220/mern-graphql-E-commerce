@@ -98,6 +98,7 @@ const Nav = () => {
                 initial="start"
                 animate="end"
                 exit="exit"
+                style={{ color: LinkClr }}
               >
                 <NavLink to={"/login"}>log in</NavLink>
               </motion.span>

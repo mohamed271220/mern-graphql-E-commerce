@@ -12,6 +12,7 @@ import OpacityBtn from "./widgets/OpacityBtn";
 import { toast } from "react-hot-toast";
 import { isAuthContext } from "../context/isAuth";
 import { NavLink, useNavigate } from "react-router-dom";
+import Transition from "./widgets/Transition";
 
 const socialMediaArr = [
   { id: "1", icon: <FaFacebookF color="" />, clr: "var(--fb)" },
@@ -54,6 +55,8 @@ const Login = () => {
   };
   return (
     <div className="log-in center">
+      <Transition />
+
       <FormProvider {...methods}>
         <form action="" className="center" onSubmit={handleSubmit(onSubmit)}>
           <h2 className="underline header white"> log in</h2>

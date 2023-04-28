@@ -12,7 +12,12 @@ const GridViewContext = ({ children }: ChildrenInterFace) => {
   const [gridView, setGridView] = useState(true);
 
   return (
-    <viewContext.Provider value={{ gridView, setGridView }}>
+    <viewContext.Provider
+      value={{
+        gridView,
+        setGridView,
+      }}
+    >
       {children}
     </viewContext.Provider>
   );

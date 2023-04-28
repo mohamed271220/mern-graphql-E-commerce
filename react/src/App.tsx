@@ -8,6 +8,7 @@ import IsAuthContextComponent from "./context/isAuth";
 import { Toaster } from "react-hot-toast";
 import GridViewContext from "./context/gridView";
 import FilterDataContext from "./context/FilterData";
+import Transition from "./components/widgets/Transition";
 const App = () => {
   return (
     <IsAuthContextComponent>
@@ -16,6 +17,7 @@ const App = () => {
           <BrowserRouter>
             <div className="App">
               {/* <Loading /> */}
+
               <Nav />
               <AppRoutes />
             </div>

@@ -276,4 +276,12 @@
 }
 .custom-title.left {
   left: 0;
+}
+
+.MagnifierContainer {
+  z-index: 100;
+}
+
+.MagnifierPreview {
+  z-index: 2;
 }/*# sourceMappingURL=classes.css.map */

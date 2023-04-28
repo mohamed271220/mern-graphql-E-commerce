@@ -1,0 +1,7 @@
+@import "../variables.scss";
+.transirion-div {
+  position: fixed;
+  top: 40px;
+  width: 100%;
+  height: calc(100vh - 40px);
+}

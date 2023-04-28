@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
+import Transition from "./widgets/Transition";
 const About = () => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
@@ -9,8 +10,10 @@ const About = () => {
   const mainP = useTransform(scrollYProgress, [0.15, 0.4], [150, 0]);
   const leftP = useTransform(scrollYProgress, [0.45, 0.65], [150, 0]);
   const rightP = useTransform(scrollYProgress, [0.8, 0.95], [-150, 0]);
+
   return (
     <motion.div className="about-par center col" ref={sectionRef}>
+      <Transition />
       <h1 className="underline header">About Us</h1>
 
       <motion.p className="middle" style={{ y: mainP }}>
