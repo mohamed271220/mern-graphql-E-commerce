@@ -171,3 +171,28 @@ export const Search_Mutaion = gql`
     }
   }
 `;
+
+export const update_Product = gql`
+  mutation (
+    $title: String!
+    $state: String!
+    $category: String!
+    $description: String!
+    $_id: ID!
+    $stock: Int!
+    $price: Int!
+  ) {
+    updateProduct(
+      title: $title
+      state: $state
+      category: $category
+      description: $description
+      _id: $_id
+      stock: $stock
+      price: $price
+    ) {
+      msg
+      # status
+    }
+  }
+`;

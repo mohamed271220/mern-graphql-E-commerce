@@ -7,9 +7,9 @@ interface Props {
   placeholder: string;
   err?: string;
   defaultVal?: string;
-  password?: boolean;
+  type?: string;
 }
-const Input = ({ placeholder, err, password, defaultVal }: Props) => {
+const Input = ({ placeholder, err, type, defaultVal }: Props) => {
   const { watch, register, resetField, setValue } = useFormContext();
   const inpVal = watch(placeholder);
 
@@ -28,13 +28,14 @@ const Input = ({ placeholder, err, password, defaultVal }: Props) => {
     <div className="inp-parent">
       <input
         className="inp"
-        type={password ? "password" : "text"}
+        type={type || "text"}
         onFocus={() => setIsFocus(true)}
         {...register(placeholder, {
           onBlur() {
             setIsFocus(false);
           },
         })}
+        defaultValue={defaultVal}
       />
       <AnimatePresence>
         {err && (

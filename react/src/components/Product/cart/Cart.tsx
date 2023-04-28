@@ -6,6 +6,7 @@ import CircleCheckSvg from "../../../custom SVGs/CircleCheckSvg";
 import { AnimatePresence } from "framer-motion";
 import SLiderComponent from "../../widgets/SLider";
 import { viewContext } from "../../../context/gridView";
+import Transition from "../../widgets/Transition";
 
 const offerArr = [
   { offer: "Spend $800 or more and get free shipping!", money: 800 },
@@ -48,6 +49,7 @@ const Cart = () => {
             );
           })}
         </div>
+        <Transition />
 
         <div className="center row between w-100">
           <div className="carts-par center col">

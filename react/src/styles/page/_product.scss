@@ -30,12 +30,12 @@
       .big-img-par {
         // width: calc(50vw);
         width: 280px;
-        height: 300px;
+        height: 340px;
         position: relative;
         display: flex;
         align-items: flex-end;
-        // overflow: hidden;
         padding-bottom: 20px;
+        overflow-y: none;
         .zoom {
           div:nth-child(2) {
             background: rgba(128, 128, 128, 0.091);
@@ -220,6 +220,22 @@ p {
   padding: 0 10px;
 }
 
+.heading-slider {
+  margin: 20px;
+  margin-top: 30px;
+}
+
+.hint {
+  position: absolute;
+  left: 50%;
+  bottom: 0px;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-style: 12px;
+  transform: translateX(-50%);
+  background: var(--wheat-lighter);
+}
 .stock-par {
   color: var(--light-text);
   white-space: nowrap;
@@ -244,21 +260,4 @@ p {
   svg {
     font-size: 0.8rem;
   }
-}
-
-.heading-slider {
-  margin: 20px;
-  margin-top: 30px;
-}
-
-.hint {
-  position: absolute;
-  left: 50%;
-  bottom: 0px;
-  padding: 10px;
-  border-radius: 5px;
-  font-weight: bold;
-  font-style: 12px;
-  transform: translateX(-50%);
-  background: var(--wheat-lighter);
 }

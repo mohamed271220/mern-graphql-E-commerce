@@ -8,6 +8,7 @@ import { reviewInterface } from "../../interfaces/product";
 import { AnimatePresence } from "framer-motion";
 import { useParams } from "react-router-dom";
 import SLiderComponent from "../widgets/SLider";
+import Transition from "../widgets/Transition";
 
 export interface productContextInterface {
   rating: number[];
@@ -88,6 +89,7 @@ const Product = () => {
               setStartHover,
             }}
           >
+            <Transition />
             <div className="product-container box-shadow">
               <section className="product-page">
                 <ProductImages

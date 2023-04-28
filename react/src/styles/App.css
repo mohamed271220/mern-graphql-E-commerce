@@ -613,11 +613,12 @@ nav ul li a.link.active.active:before, nav ul li a.link.active.active:after {
 }
 .product-container .product-page .images .big-img-par {
   width: 280px;
-  height: 300px;
+  height: 340px;
   position: relative;
   display: flex;
   align-items: flex-end;
   padding-bottom: 20px;
+  overflow-y: none;
 }
 .product-container .product-page .images .big-img-par .zoom div:nth-child(2) {
   background: rgba(128, 128, 128, 0.091);
@@ -763,6 +764,23 @@ p::first-letter {
   padding: 0 10px;
 }
 
+.heading-slider {
+  margin: 20px;
+  margin-top: 30px;
+}
+
+.hint {
+  position: absolute;
+  left: 50%;
+  bottom: 0px;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-style: 12px;
+  transform: translateX(-50%);
+  background: var(--wheat-lighter);
+}
+
 .stock-par {
   color: var(--light-text);
   white-space: nowrap;
@@ -787,23 +805,6 @@ p::first-letter {
 }
 .stock-icon svg {
   font-size: 0.8rem;
-}
-
-.heading-slider {
-  margin: 20px;
-  margin-top: 30px;
-}
-
-.hint {
-  position: absolute;
-  left: 50%;
-  bottom: 0px;
-  padding: 10px;
-  border-radius: 5px;
-  font-weight: bold;
-  font-style: 12px;
-  transform: translateX(-50%);
-  background: var(--wheat-lighter);
 }
 
 .counter-par {
@@ -2398,6 +2399,105 @@ input[type=range] {
   opacity: 0;
   position: absolute;
   z-index: -10;
+}
+
+:root {
+  --green: #367e53;
+  --wheat: rgb(202, 170, 109);
+  --wheat-light: #c5af87c9;
+  --wheat-lighter: #dcccaec9;
+  --wheat-title: #dcccae;
+  --white: rgb(247, 246, 246);
+  --twitter: #1da1f2;
+  --fb: #1877f2;
+  --gmail: #ea4335;
+  --delete: #751d15;
+  --light-text: rgba(113, 109, 109, 0.738);
+  --overley: rgba(19, 78, 26, 0.423);
+  --star: #ffd700;
+  --star-dark: #d3d3d3;
+  --nav-shadow: 0.5px 2px 2px rgba(128, 128, 128, 0.275);
+  --trending: #d7bc25b2;
+  --new: var(--green);
+  --sale: #0e458d;
+  --clr-banner: rgb(102, 98, 96);
+}
+
+.dashboard-par {
+  width: 100%;
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#dash-aside {
+  box-shadow: 2px 2px 5px black;
+  position: relative;
+  height: calc(100vh - 40px);
+  height: 100vh;
+  background: var(--wheat-lighter);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+#dash-aside .dash-close {
+  position: absolute;
+  top: 15px;
+  right: 5px;
+  color: var(--delete);
+}
+#dash-aside .dash-close svg {
+  font-size: 2rem;
+}
+#dash-aside .underline:before {
+  background: var(--green);
+}
+#dash-aside a {
+  text-decoration: none;
+  color: grey;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+  padding: 10px;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#dash-aside a.active, #dash-aside a:hover {
+  background: var(--green);
+  color: var(--white);
+  font-weight: bold;
+}
+
+.dash-product {
+  padding: 10px;
+}
+
+.dash-show {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  color: var(--delete);
+}
+.dash-show svg {
+  font-size: 2rem;
+}
+
+form.update-product-form {
+  width: 80%;
+  max-width: 600px;
+  background: #000;
+  margin: 0 auto;
+  padding: 20px;
+  gap: 30px;
+}
+form.update-product-form input {
+  padding-right: 20px;
+}
+
+textarea.update-product {
+  width: 100%;
+  height: 80px;
 }
 
 :root {

@@ -11,28 +11,9 @@ import OpacityBtn from "../../../widgets/OpacityBtn";
 import { MdFilterListAlt } from "react-icons/md";
 import { FiRefreshCcw } from "react-icons/fi";
 import { productListContext } from "../../../../context/FilterData";
-import Category2 from "./Category";
 import Category from "./Category";
+import { asideVariant } from "../../../../variants/globals";
 
-const asideVariant = {
-  start: { width: 0, opacity: 0 },
-  end: {
-    width: "30%",
-    opacity: 1,
-    transition: {
-      opacity: { delay: 0.4, duration: 0.4 },
-      width: { delay: 0, duration: 0.4 },
-    },
-  },
-  exit: {
-    width: 0,
-    opacity: 0,
-    transition: {
-      opacity: { delay: 0, duration: 0.1 },
-      width: { delay: 0.2, duration: 0.2 },
-    },
-  },
-};
 const Aside = ({ startFiltering }: { startFiltering: boolean }) => {
   const {
     categoryFilter,

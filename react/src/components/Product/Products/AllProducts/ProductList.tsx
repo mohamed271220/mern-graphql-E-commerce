@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { viewContext } from "../../../../context/gridView";
 import { productListContext } from "../../../../context/FilterData";
 
-const ProductList = () => {
+const ProductList = ({ isDash }: { isDash?: boolean }) => {
   const { showFilter, products } = useContext(productListContext);
   const { gridView } = useContext(viewContext);
   const [page, setPage] = useState(1);
@@ -32,6 +32,7 @@ const ProductList = () => {
         return (
           <ProductFliter
             key={`${product._id}-list`}
+            isDash={isDash}
             index={index}
             // {...product}
             _id={product._id}

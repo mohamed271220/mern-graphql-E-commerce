@@ -1,0 +1,85 @@
+@import "../variables.scss";
+
+.dashboard-par {
+  width: 100%;
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+#dash-aside {
+  box-shadow: 2px 2px 5px black;
+  position: relative;
+  height: calc(100vh - 40px);
+  height: 100vh;
+  background: var(--wheat-lighter);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  .dash-close {
+    position: absolute;
+    top: 15px;
+    right: 5px;
+    color: var(--delete);
+    svg {
+      font-size: 2rem;
+    }
+  }
+
+  .underline {
+    &:before {
+      background: var(--green);
+    }
+  }
+  a {
+    text-decoration: none;
+    color: grey;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    padding: 10px;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    &.active,
+    &:hover {
+      background: var(--green);
+      color: var(--white);
+      font-weight: bold;
+    }
+  }
+}
+
+.dash-product {
+  padding: 10px;
+  //   .header {
+  //     width: fit-content;
+  //     margin: 0;
+  //   }
+}
+
+.dash-show {
+  position: absolute;
+  top: 50px;
+  right: 10px;
+  color: var(--delete);
+  svg {
+    font-size: 2rem;
+  }
+}
+
+form.update-product-form {
+  width: 80%;
+  max-width: 600px;
+  background: #000;
+  margin: 0 auto;
+  padding: 20px;
+  gap: 30px;
+  input {
+    padding-right: 20px;
+  }
+}
+
+textarea.update-product {
+  width: 100%;
+  height: 80px;
+}

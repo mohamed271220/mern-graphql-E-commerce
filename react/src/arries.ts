@@ -12,7 +12,10 @@ export const linksArr = [
     to: "/",
     link: "Home",
   },
-
+  {
+    to: "/dashboard",
+    link: "dashboard",
+  },
   {
     to: "/about",
     link: "about",

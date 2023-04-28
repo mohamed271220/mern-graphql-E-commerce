@@ -67,7 +67,7 @@ const Login = () => {
           <Input
             placeholder={"password"}
             err={errors.password?.message?.toString()}
-            password={true}
+            type={"password"}
           />
 
           <OpacityBtn cls="btn main w-100" fn={handleLogIn} btn="log In" />

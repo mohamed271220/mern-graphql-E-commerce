@@ -6,7 +6,6 @@ import useRemoveFromCart from "../../../custom/useRemoveFromCart.js";
 import { isAuthContext } from "../../../context/isAuth.js";
 import { BsFillCartXFill, BsInfoLg } from "react-icons/bs";
 import DetailsBtn from "../../widgets/DetailsBtn.js";
-import useShowTitle from "../../../custom/useShowTitle.js";
 const CartItem = ({
   _id,
   productId,
@@ -26,7 +25,6 @@ const CartItem = ({
     userId,
     productId: [productId],
   });
-  const [removeTitle, showRmvTitle, hideRmvTitle] = useShowTitle();
 
   return (
     <div className="cart-item center between">

@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 
 const Transition = () => {
   const clrArr = [
-    { clr: "var(--wheat-title)", z: 130 },
-    { clr: "var(--sale)", z: 120 },
+    { clr: "var(--clr-banner)", z: 130 },
+    { clr: "var(--wheat-title)", z: 120 },
     { clr: "var(--green)", z: 110 },
   ];
 

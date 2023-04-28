@@ -564,6 +564,24 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                 });
             },
         },
+        updateProduct: {
+            type: messageType,
+            args: {
+                title: { type: graphql_1.GraphQLString },
+                state: { type: graphql_1.GraphQLString },
+                _id: { type: graphql_1.GraphQLID },
+                stock: { type: graphql_1.GraphQLInt },
+                price: { type: graphql_1.GraphQLInt },
+                description: { type: graphql_1.GraphQLString },
+                category: { type: graphql_1.GraphQLString },
+            },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield product_js_2.default.findByIdAndUpdate(args._id, args);
+                    return { msg: "product updated successfully", status: 200 };
+                });
+            },
+        },
     },
 });
 exports.userSchema = new graphql_1.GraphQLSchema({

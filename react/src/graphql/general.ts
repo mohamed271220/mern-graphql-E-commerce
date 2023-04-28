@@ -18,6 +18,7 @@ export const GET_Product_By_Id = gql`
       description
       rating
       category
+      state
 
       images {
         productPath

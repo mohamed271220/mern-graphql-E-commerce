@@ -110,3 +110,25 @@ export const selectDropDownVariants = {
     },
   },
 };
+
+export const asideVariant = {
+  start: { width: 0, opacity: 0 },
+  end: {
+    width: 200,
+    opacity: 1,
+    transition: {
+      opacity: { delay: 0.4, duration: 0.4 },
+      width: { delay: 0, duration: 0.4 },
+      when: "beforeChildren",
+    },
+  },
+  exit: {
+    width: 0,
+    opacity: 0,
+    transition: {
+      opacity: { delay: 0, duration: 0.1 },
+      width: { delay: 0.2, duration: 0.2 },
+      when: "afterChildren",
+    },
+  },
+};
