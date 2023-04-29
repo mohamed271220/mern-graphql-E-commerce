@@ -577,8 +577,24 @@ export const userMutation = new GraphQLObjectType({
         category: { type: GraphQLString },
       },
       async resolve(_, args) {
+        console.log(args);
         await productCollection.findByIdAndUpdate(args._id, args);
         return { msg: "product updated successfully", status: 200 };
+      },
+    },
+    addProduct: {
+      type: productType,
+      args: {
+        title: { type: GraphQLString },
+        state: { type: GraphQLString },
+        stock: { type: GraphQLInt },
+        price: { type: GraphQLInt },
+        description: { type: GraphQLString },
+        category: { type: GraphQLString },
+      },
+      async resolve(_, args) {
+        console.log(args);
+        return productCollection.create(args);
       },
     },
   },

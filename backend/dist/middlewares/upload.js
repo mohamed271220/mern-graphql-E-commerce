@@ -16,8 +16,7 @@ cloudinary_1.default.v2.config({
 const storage = new multer_storage_cloudinary_1.CloudinaryStorage({
     cloudinary: cloudinary_1.default.v2,
     params: (req, file) => {
-        console.log("first");
-        console.log(file);
+        console.log("started");
         return {
             folder: "data",
             public_id: file.originalname,

@@ -37,7 +37,7 @@ const UserImage = () => {
           key={fileKey}
           type="file"
           name=""
-          id=""
+          id="user-upload"
           ref={inpFile}
           className="file-inp"
           onChange={changeImg}

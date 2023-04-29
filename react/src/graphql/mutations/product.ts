@@ -196,3 +196,25 @@ export const update_Product = gql`
     }
   }
 `;
+
+export const Add_Product = gql`
+  mutation (
+    $title: String!
+    $state: String!
+    $category: String!
+    $description: String!
+    $stock: Int!
+    $price: Int!
+  ) {
+    addProduct(
+      title: $title
+      state: $state
+      category: $category
+      description: $description
+      stock: $stock
+      price: $price
+    ) {
+      _id
+    }
+  }
+`;

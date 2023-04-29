@@ -33,6 +33,9 @@
   text-transform: capitalize;
   &.details {
     background: linear-gradient(270deg, var(--wheat-lighter), grey);
+    &.details-cart {
+      padding: 4px;
+    }
   }
   svg {
     path {
@@ -130,6 +133,10 @@
 .remove {
   background: var(--delete);
   gap: 4px;
+  padding: 4px;
+  svg {
+    font-size: 8px;
+  }
 }
 
 .w-100 {
@@ -155,8 +162,8 @@
 }
 
 .counter {
-  padding: 0;
-
+  // padding: 0;
+  height: 30px !important;
   &.green {
     color: var(--green);
   }

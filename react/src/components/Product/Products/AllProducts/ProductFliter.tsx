@@ -20,6 +20,7 @@ import UpdateProduct from "../../../dashboard/UpdateProduct";
 import Title from "../../../widgets/Title";
 import { RiEditLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
+import { BsInfoCircleFill, BsInfoLg } from "react-icons/bs";
 
 type Props = {
   _id: string;
@@ -169,7 +170,12 @@ const ProductFliter = ({
                 )}
               </AnimatePresence>
 
-              <DetailsBtn btn="details" cls="btn details shadow" _id={_id} />
+              <DetailsBtn
+                btn="details"
+                cls="btn details center shadow gap"
+                _id={_id}
+                Icon={BsInfoCircleFill}
+              />
             </div>
           )}
           <span className="heart-filter ">

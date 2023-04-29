@@ -152,6 +152,10 @@
 .remove {
   background: var(--delete);
   gap: 4px;
+  padding: 4px;
+}
+.remove svg {
+  font-size: 8px;
 }
 
 .w-100 {
@@ -177,7 +181,7 @@
 }
 
 .counter {
-  padding: 0;
+  height: 30px !important;
 }
 .counter.green {
   color: var(--green);
@@ -2124,6 +2128,10 @@ input[type=range] {
 .remove {
   background: var(--delete);
   gap: 4px;
+  padding: 4px;
+}
+.remove svg {
+  font-size: 8px;
 }
 
 .w-100 {
@@ -2149,7 +2157,7 @@ input[type=range] {
 }
 
 .counter {
-  padding: 0;
+  height: 30px !important;
 }
 .counter.green {
   color: var(--green);

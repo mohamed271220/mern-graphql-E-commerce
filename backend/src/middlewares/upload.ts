@@ -12,8 +12,8 @@ cloudinary.v2.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary.v2,
   params: (req, file) => {
-    console.log("first");
-    console.log(file);
+    console.log("started");
+
     return {
       folder: "data",
       public_id: file.originalname,

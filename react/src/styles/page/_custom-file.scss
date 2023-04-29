@@ -1,0 +1,29 @@
+@import "../variables.scss";
+
+.custom-file {
+  height: 30px;
+  background: var(--white);
+  input {
+    opacity: 0;
+    transform: translateX(1000px);
+  }
+  .custon-file-pos {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.6rem;
+    font-weight: bold;
+  }
+
+  .btn-file {
+    @extend .custon-file-pos;
+    right: 10px;
+  }
+  .span-file {
+    @extend .custon-file-pos;
+    font-size: 0.8rem;
+    letter-spacing: 0.8px;
+    text-transform: capitalize;
+    left: 10px;
+  }
+}

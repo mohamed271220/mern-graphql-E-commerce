@@ -53,6 +53,9 @@
 .btn.details {
   background: linear-gradient(270deg, var(--wheat-lighter), grey);
 }
+.btn.details.details-cart {
+  padding: 4px;
+}
 .btn svg path {
   filter: drop-shadow(0.5px 1px 1px black);
 }
@@ -147,6 +150,10 @@
 .remove {
   background: var(--delete);
   gap: 4px;
+  padding: 4px;
+}
+.remove svg {
+  font-size: 8px;
 }
 
 .w-100 {
@@ -172,7 +179,7 @@
 }
 
 .counter {
-  padding: 0;
+  height: 30px !important;
 }
 .counter.green {
   color: var(--green);

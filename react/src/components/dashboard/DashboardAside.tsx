@@ -47,6 +47,10 @@ const DashboardAside = () => {
             <GrProductHunt />
             <span>products</span>
           </NavLink>
+          <NavLink to={"/dashboard/addproduct"}>
+            <GrProductHunt />
+            <span>add</span>
+          </NavLink>
         </motion.aside>
       )}
     </AnimatePresence>

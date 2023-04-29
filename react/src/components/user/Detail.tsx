@@ -9,7 +9,6 @@ import { AnimatePresence } from "framer-motion";
 import UpdateCountry from "./UpdateCountry";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import useFormSchema from "../../custom/useFormSchema";
 interface Props {
   value: string;
   detail: string;

@@ -577,8 +577,26 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
             },
             resolve(_, args) {
                 return __awaiter(this, void 0, void 0, function* () {
+                    console.log(args);
                     yield product_js_2.default.findByIdAndUpdate(args._id, args);
                     return { msg: "product updated successfully", status: 200 };
+                });
+            },
+        },
+        addProduct: {
+            type: product_js_1.productType,
+            args: {
+                title: { type: graphql_1.GraphQLString },
+                state: { type: graphql_1.GraphQLString },
+                stock: { type: graphql_1.GraphQLInt },
+                price: { type: graphql_1.GraphQLInt },
+                description: { type: graphql_1.GraphQLString },
+                category: { type: graphql_1.GraphQLString },
+            },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    console.log(args);
+                    return product_js_2.default.create(args);
                 });
             },
         },

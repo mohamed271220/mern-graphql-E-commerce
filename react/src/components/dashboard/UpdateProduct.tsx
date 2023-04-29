@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Title from "../widgets/Title";
 import { RiEditLine } from "react-icons/ri";
 import DashMain from "./DashMain";
@@ -26,7 +26,7 @@ const UpdateProduct = () => {
     title: yup.string().min(12).max(30).required(),
     stock: yup.number().min(1).max(100).required(),
     price: yup.number().min(1).max(1000).required(),
-    description: yup.string().trim().min(50).required(),
+    description: yup.string().min(50).required(),
   });
 
   const methods = useForm({ resolver: yupResolver(schema) });
@@ -34,14 +34,16 @@ const UpdateProduct = () => {
     handleSubmit,
     register,
     getValues,
-    formState: { errors, isValid },
+    setValue,
+    formState: { errors },
   } = methods;
   const { data, error, loading } = useQuery(GET_Product_By_Id, {
     variables: { id },
   });
   const [updateProductFn] = useMutation(update_Product);
+
   if (data?.product) {
-    const { title, description, stock, category, state, price } = data.product;
+    const { title, stock, category, state, price, description } = data.product;
     const inpArr = [
       { type: "text", placeholder: "title", value: title },
       { type: "text", placeholder: "category", value: category },
@@ -50,14 +52,25 @@ const UpdateProduct = () => {
       { type: "number", placeholder: "price", value: price },
     ];
 
-    const formData = getValues();
-    console.log(formData);
     const onSubmit = async (data: FieldValues) => {
-      console.log(data);
+      const formData = getValues();
+      // console.log(data);
       const obj = { ...formData, _id: id };
-      console.log(obj);
+      console.log({
+        ...formData,
+        _id: id,
+        stock: Number(formData.stock),
+        price: Number(formData.price),
+        description: formData.description,
+      });
       const { data: res } = await updateProductFn({
-        variables: { ...formData, _id: id, stock: Number(stock) },
+        variables: {
+          ...formData,
+          _id: id,
+          stock: Number(formData.stock),
+          price: Number(formData.price),
+          description: formData.description,
+        },
       });
       toast.success(res.updateProduct.msg);
     };
@@ -94,8 +107,6 @@ const UpdateProduct = () => {
               <textarea
                 {...register("description")}
                 className="update-product  inp relative"
-                name=""
-                id=""
                 defaultValue={description}
               />
             </div>

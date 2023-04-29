@@ -44,7 +44,7 @@ const CartItem = ({
       </div>
       <div className="cart-btns center gap ">
         <OpacityBtn
-          cls="btn remove "
+          cls="btn remove"
           fn={handleRemoveFromCart}
           btn={""}
           Icon={BsFillCartXFill}
@@ -54,7 +54,7 @@ const CartItem = ({
         <DetailsBtn
           _id={parentId}
           btn=""
-          cls="btn details"
+          cls="btn details details-cart"
           Icon={BsInfoLg}
           title="more details"
         />

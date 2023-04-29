@@ -17,6 +17,12 @@ const Cart = () => {
   const { cart } = useAppSelector((state) => state.cart);
 
   const [subTotal, setSubTotal] = useState(0);
+  const [showSlider, setShowSLider] = useState(false);
+  useEffect(() => {
+    setTimeout(() => {
+      setShowSLider(true);
+    }, 1000);
+  });
 
   useEffect(() => {
     if (Array.isArray(cart)) {
@@ -64,7 +70,7 @@ const Cart = () => {
           <TotalPrice subTotal={subTotal} key={"TotalPrice"} />
         </div>
       </div>
-      <SLiderComponent key={"cart-slider"} />
+      {showSlider && <SLiderComponent key={"cart-slider"} />}
     </>
   );
 };

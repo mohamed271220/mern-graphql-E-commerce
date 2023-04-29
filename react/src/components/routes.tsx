@@ -11,6 +11,8 @@ import { AnimatePresence } from "framer-motion";
 import Dashboard from "./dashboard/Dashboard";
 import DashProducts from "./dashboard/DashProducts";
 import UpdateProduct from "./dashboard/UpdateProduct";
+import DashUpdateProduct from "./dashboard/DashUpdateProduct";
+import DashAddProduct from "./dashboard/DashAddProduct";
 
 const AppRoutes = () => {
   const location = useLocation();
@@ -25,7 +27,8 @@ const AppRoutes = () => {
         <Route path="/user" element={<User />} />
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="products" element={<DashProducts />} />
-          <Route path="update/:id" element={<UpdateProduct />} />
+          <Route path="addproduct" element={<DashAddProduct />} />
+          <Route path="update/:id" element={<DashUpdateProduct />} />
         </Route>
         <Route path="/:id" element={<Product />} />
       </Routes>
