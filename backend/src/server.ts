@@ -10,6 +10,7 @@ import { graphqlHTTP } from "express-graphql";
 import { userMutation, userSchema } from "./graphql/schema/user.js";
 import { graphQlSchema } from "./graphql/schema/product.js";
 import { uploadRoute } from "./Upload/uploudRoute.js";
+import stripeRoutes from "./stripe/strips.js";
 
 mongoose.connect(MongoDB_URL as unknown as string);
 
@@ -36,6 +37,7 @@ app.use(
 );
 
 app.use("/", uploadRoute);
+app.use("/", stripeRoutes);
 
 app.listen(3000, () => {
   console.log("server-runs");

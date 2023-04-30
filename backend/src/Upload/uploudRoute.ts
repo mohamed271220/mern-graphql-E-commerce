@@ -29,6 +29,7 @@ const uploadProductImgs = async (req: Request, res: Response) => {
       images.push({ productPath: fil.path, ProductName: fil.originalname });
     });
   }
+
   console.log(images);
   const result = await productCollection.findByIdAndUpdate(id, { images });
 

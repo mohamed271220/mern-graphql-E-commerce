@@ -17,7 +17,7 @@ const BannerText = ({ fn, header, clr, button, to, slogan }: Props) => {
       className="banner-content center"
       initial="start"
       animate="end"
-      transition={{ duration: 0.6, delay: 0.2 }}
+      transition={{ duration: 0.6, delay: 0.4 }}
       variants={opacityVariant}
       //   style={{ background: "green" }}
     >
