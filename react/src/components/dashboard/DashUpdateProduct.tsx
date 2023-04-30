@@ -4,6 +4,8 @@ import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_Product_By_Id } from "../../graphql/general";
 import { update_Product } from "../../graphql/mutations/product";
+import { AiOutlineEdit } from "react-icons/ai";
+import { FaEdit } from "react-icons/fa";
 
 const DashUpdateProduct = () => {
   const { id } = useParams();
@@ -24,6 +26,7 @@ const DashUpdateProduct = () => {
           type="update"
           obj={data.product}
           fn={updateProductFn}
+          Icon={FaEdit}
         />
       </>
     );

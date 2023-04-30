@@ -6,6 +6,10 @@ import useRemoveFromCart from "../../../custom/useRemoveFromCart.js";
 import { isAuthContext } from "../../../context/isAuth.js";
 import { BsFillCartXFill, BsInfoLg } from "react-icons/bs";
 import DetailsBtn from "../../widgets/DetailsBtn.js";
+import axios from "axios";
+import { useAppSelector } from "../../../custom/reduxTypes.js";
+import useBuy from "../../../custom/useBuy.js";
+
 const CartItem = ({
   _id,
   productId,
@@ -21,10 +25,13 @@ const CartItem = ({
     { detail: "price", value: `$ ${price.toFixed(2)}` },
   ];
   const { userId } = useContext(isAuthContext);
+  const { cart } = useAppSelector((state) => state.cart);
   const { handleRemoveFromCart } = useRemoveFromCart({
     userId,
     productId: [productId],
   });
+  const obj = cart.find((item) => item._id === _id);
+  const { handlePurchase } = useBuy([obj] as unknown as cartInterface[]);
 
   return (
     <div className="cart-item center between">
@@ -60,11 +67,7 @@ const CartItem = ({
         />
       </div>
       <div>
-        <OpacityBtn
-          btn="purchase"
-          fn={() => console.log("first")}
-          cls="btn purchase"
-        />
+        <OpacityBtn btn="purchase" fn={handlePurchase} cls="btn purchase" />
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FieldValues, FormProvider, useForm } from "react-hook-form";
 import Input from "../widgets/Input";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -8,6 +8,12 @@ import InpErr from "../widgets/InpErr";
 import { ProductInterface } from "../../interfaces/product";
 import CustomFIleInput from "./CustomFIleInput";
 import axios from "axios";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import { motion, AnimatePresence } from "framer-motion";
+import { opacityVariant } from "../../variants/globals";
+import OpacityBtn from "../widgets/OpacityBtn";
+import { GrAddCircle } from "react-icons/gr";
 
 interface keyedProduct extends ProductInterface {
   [key: string]: any;
@@ -20,9 +26,29 @@ interface Props {
   obj?: keyedProduct;
   head: string;
   btn: string;
+  Icon: React.ComponentType;
 }
 
-const DashForm = ({ type, fn, id, obj, head, btn }: Props) => {
+const DashForm = ({ type, Icon, fn, id, obj, head, btn }: Props) => {
+  const [percentage, setPercentage] = useState(-1);
+  useEffect(() => {
+    if (percentage >= 100) {
+      setTimeout(() => {
+        setPercentage(-1);
+      }, 2000);
+    }
+  }, [percentage]);
+
+  useEffect(() => {
+    let interval: number;
+    if (percentage < 100 && percentage != -1) {
+      interval = setInterval(() => {
+        setPercentage((cur) => cur + 10);
+      }, 400);
+    }
+    return () => clearInterval(interval);
+  }, [percentage]);
+
   const fileSchema = yup
     .mixed()
     .test("fileList", "you must upload 4 png images", (value) => {
@@ -33,6 +59,7 @@ const DashForm = ({ type, fn, id, obj, head, btn }: Props) => {
       );
     });
 
+  const notRequired = yup.mixed().notRequired();
   const schema = yup.object().shape({
     state: yup.string().min(3).max(10).required(),
     category: yup.string().min(3).max(10).required(),
@@ -40,7 +67,7 @@ const DashForm = ({ type, fn, id, obj, head, btn }: Props) => {
     stock: yup.number().min(1).max(100).required(),
     price: yup.number().min(1).max(1000).required(),
     description: yup.string().trim().min(50).required(),
-    images: fileSchema,
+    images: type === "update" ? notRequired : fileSchema,
   });
   const methods = useForm({ resolver: yupResolver(schema) });
   const {
@@ -79,15 +106,21 @@ const DashForm = ({ type, fn, id, obj, head, btn }: Props) => {
         variables: obj,
       });
       if (res.addProduct._id) {
+        setPercentage(0);
         const formData = new FormData();
         console.log(values.images);
         for (const file of values.images) {
           formData.append("images", file);
+          console.log(res.addProduct._id);
         }
-        console.log(res.addProduct._id);
         axios.patch(
           `http://localhost:3000/products/images/upload/${res.addProduct._id}`,
-          formData
+          formData,
+          {
+            onUploadProgress: (data: any) => {
+              // (Math.round(data.total / data.loaded) * 100);
+            },
+          }
         );
       }
 
@@ -132,8 +165,31 @@ const DashForm = ({ type, fn, id, obj, head, btn }: Props) => {
           />
         </div>
 
-        <button className="main btn">{btn}</button>
+        <OpacityBtn
+          btn={btn}
+          cls="main btn center gap "
+          fn={() => null}
+          Icon={Icon}
+        />
       </form>
+      <AnimatePresence>
+        <motion.span
+          variants={opacityVariant}
+          transition={{ duration: 0.4 }}
+          initial="start"
+          animate="end"
+          exit="exit"
+          key={"prograssbar"}
+        >
+          {percentage > -1 && (
+            <CircularProgressbar
+              text={String(percentage)}
+              value={percentage}
+              className="progressbar"
+            />
+          )}
+        </motion.span>
+      </AnimatePresence>
     </FormProvider>
   );
 };

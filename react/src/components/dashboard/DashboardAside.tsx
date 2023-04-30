@@ -21,12 +21,24 @@ const DashboardAside = () => {
           animate="end"
           key={"dash-aside"}
         >
-          <h2
-            className="underline header"
-            style={{ width: "fit-content", margin: "15px 5px" }}
+          <div
+            style={{
+              width: "100%",
+              height: 60,
+              background: "var(--sale)",
+            }}
           >
-            dashboard
-          </h2>
+            <h2
+              className="underline header"
+              style={{
+                // width: "fit-content",
+                color: "white",
+                margin: "15px auto",
+              }}
+            >
+              dashboard
+            </h2>
+          </div>
           <AnimatePresence mode="wait">
             {showAsideDash && (
               <motion.span
@@ -37,7 +49,7 @@ const DashboardAside = () => {
                 className="dash-close"
               >
                 <Title title="hide dashboard nav">
-                  <AiFillCloseCircle />
+                  <AiFillCloseCircle className="shadow" />
                 </Title>
               </motion.span>
             )}

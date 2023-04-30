@@ -5,11 +5,10 @@ import { AnimatePresence, Variants, motion } from "framer-motion";
 import useMeasure from "react-use-measure";
 import useFilterCategory from "../../custom/useFilterCategory";
 import { productListContext } from "../../context/FilterData";
-import { Link } from "react-scroll";
 import useFilterState from "../../custom/useFIlterState";
 import { useLazyQuery } from "@apollo/client";
 import { Get_All_Products } from "../../graphql/general";
-import { btnHover, btnTap } from "../../variants/globals";
+import BannerText from "./BannerText";
 const arrClrs = ["darkblue", "var(--green)", "var(--delete)", "var(--sale)"];
 
 const Banner = () => {
@@ -115,40 +114,24 @@ const Banner = () => {
                   animate="end"
                   custom={{ dir, width }}
                 >
-                  <div className="banner-content center">
-                    <h1 style={{ color: `${arrClrs[index]}` }}>{header}</h1>
-                    <div
-                      className="background"
-                      style={{
-                        background: arrClrs[bannerIndex],
-                        opacity: 0.5,
-                      }}
-                    ></div>
-                    <p>{slogan}</p>
+                  {/* here */}
+                  <BannerText
+                    header={header}
+                    clr={arrClrs[index]}
+                    button={button}
+                    slogan={slogan}
+                    to={to}
+                    fn={fn}
+                    key={header}
+                  />
+                  <div
+                    className="background"
+                    style={{
+                      background: arrClrs[bannerIndex],
+                      opacity: 0.5,
+                    }}
+                  ></div>
 
-                    <div className="product-links center">
-                      <motion.div
-                        className="btn"
-                        whileHover={btnHover}
-                        whileTap={btnTap}
-                        style={{ padding: "4px 0" }}
-                      >
-                        <Link
-                          to={to}
-                          smooth
-                          style={{
-                            background: `linear-gradient(30deg, var(--wheat), ${arrClrs[index]})`,
-                            cursor: "pointer",
-                          }}
-                          className="btn "
-                          onClick={fn}
-                        >
-                          {button}
-                        </Link>
-                      </motion.div>
-                      <button className="btn  about">About us</button>
-                    </div>
-                  </div>
                   <div className="banner-image center ">
                     <img src={image} alt="" />
                   </div>

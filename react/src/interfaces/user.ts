@@ -2,7 +2,6 @@ export interface favInterface {
   title: string;
   price: number;
   productId: string;
-
   path: string;
   _id: string;
 }

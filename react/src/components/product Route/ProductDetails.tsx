@@ -14,6 +14,8 @@ import CartBtn from "../widgets/CartBtn";
 import AddReview from "./AddReview";
 import Title from "../widgets/Title";
 import { isAuthContext } from "../../context/isAuth";
+import useBuy from "../../custom/useBuy";
+import OpacityBtn from "../widgets/OpacityBtn";
 
 interface Props {
   setShowPop: React.Dispatch<React.SetStateAction<boolean>>;
@@ -75,6 +77,11 @@ const ProductDetails = ({ setShowPop }: Props) => {
       setHasReview(false);
     }
   }, [addReview]);
+
+  const { handlePurchase } = useBuy([
+    { _id, productId: _id, parentId: "", price, path: "", title, count: 1 },
+  ]);
+
   return (
     <motion.div
       className="details"
@@ -150,12 +157,12 @@ const ProductDetails = ({ setShowPop }: Props) => {
         <div className="hr"></div>
 
         <div className="product-btn  ">
-          <motion.button whileHover={btnHover} className="btn buy center">
-            <span className="icon center">
-              <BiPurchaseTagAlt className="icon" color="var(--wheat)" />{" "}
-            </span>
-            Buy Now
-          </motion.button>
+          <OpacityBtn
+            cls="btn checkout center"
+            fn={handlePurchase}
+            Icon={BiPurchaseTagAlt}
+            btn="Buy Now"
+          />
 
           <AnimatePresence mode="wait">
             {!onCart ? (
