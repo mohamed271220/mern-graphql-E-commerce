@@ -17,6 +17,7 @@ import { isAuthContext } from "../../context/isAuth";
 import useBuy from "../../custom/useBuy";
 import OpacityBtn from "../widgets/OpacityBtn";
 import CompareIcons from "../widgets/CompareIcons";
+import StyledPrice from "../widgets/StyledPrice";
 
 interface Props {
   setShowPop: React.Dispatch<React.SetStateAction<boolean>>;
@@ -150,10 +151,8 @@ const ProductDetails = ({ setShowPop }: Props) => {
       </div>
 
       <div className="details-bottom">
-        <span className="value price">
-          <span style={{ marginRight: 6, color: "var(--green)" }}>$</span>
-          {price.toFixed(2)}
-        </span>
+        <StyledPrice price={price} />
+
         <p>{description}</p>
 
         <div className="hr"></div>

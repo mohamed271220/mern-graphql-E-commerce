@@ -215,26 +215,6 @@ svg.svg-star {
     white-space: pre-wrap;
   }
 
-  .title-product {
-    display: inline-block;
-    letter-spacing: 1px;
-    color: rgb(32, 115, 210);
-    text-overflow: ellipsis;
-    overflow: hidden;
-    text-align: center;
-    max-width: 90%;
-    white-space: nowrap;
-  }
-  .price-product {
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: var(--wheat);
-    background: #12882e2a;
-    display: inline-block;
-    padding: 2px;
-    border-radius: 4px;
-    margin-top: 4px;
-  }
   .img-par {
     max-width: 100px;
     &.grid {
@@ -279,5 +259,51 @@ svg.svg-star {
       width: 70%;
       background: var(--wheat);
     }
+  }
+}
+.title-product {
+  display: inline-block;
+  letter-spacing: 1px;
+  color: rgb(32, 115, 210);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-align: center;
+  max-width: 90%;
+  white-space: nowrap;
+}
+.price-product {
+  width: fit-content;
+  font-weight: bold;
+  font-size: 1.6rem;
+  color: var(--wheat);
+  display: inline-block;
+  border-radius: 4px;
+  margin-top: 4px;
+  position: relative;
+  text-shadow: 0.2px 0.5px 0.8px black;
+
+  &::before {
+    content: "";
+    background: var(--green);
+    opacity: 0.2;
+    border-radius: 4px;
+    position: absolute;
+    top: 0;
+    left: -40%;
+    height: 100%;
+    width: 200%;
+  }
+  .price-top {
+    position: absolute;
+    top: 3px;
+    font-size: 0.8rem;
+    // color: var(--green);
+  }
+  .dollar {
+    right: 105%;
+  }
+
+  .float {
+    left: 105%;
   }
 }

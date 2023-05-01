@@ -180,7 +180,7 @@ export const update_Product = gql`
     $description: String!
     $_id: ID!
     $stock: Int!
-    $price: Int!
+    $price: Float!
   ) {
     updateProduct(
       title: $title

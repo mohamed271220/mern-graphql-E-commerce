@@ -24,7 +24,7 @@ exports.productType = new graphql_1.GraphQLObjectType({
         _id: { type: graphql_1.GraphQLString },
         title: { type: graphql_1.GraphQLString },
         description: { type: graphql_1.GraphQLString },
-        price: { type: graphql_1.GraphQLInt },
+        price: { type: graphql_1.GraphQLFloat },
         stock: { type: graphql_1.GraphQLString },
         category: { type: graphql_1.GraphQLString },
         state: { type: graphql_1.GraphQLString },

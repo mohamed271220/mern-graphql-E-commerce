@@ -31,19 +31,22 @@ const ProductSelect = ({ product, setProduct }: Props) => {
   return (
     <div
       className="select-country-par relative center   w-100"
-      style={{ margin: "100px 0px 10px 0px" }}
+      style={{ margin: "85px 0px 10px 0px" }}
       onClick={toggleShowSelectDrop}
     >
       <AnimatePresence mode="wait">
         <motion.div
           style={{ overflow: "hidden" }}
-          className="select-country center gap"
+          className="select-country center gap w-100"
           variants={parent}
           initial="start"
           animate="end"
           exit="exit"
         >
-          <motion.span variants={opacityVariant}> {product}</motion.span>
+          <motion.span variants={opacityVariant} className="select-text">
+            {" "}
+            {product}
+          </motion.span>
         </motion.div>
       </AnimatePresence>
       <BiDownArrow className="icon select-icon arrow" />
@@ -72,7 +75,7 @@ const ProductSelect = ({ product, setProduct }: Props) => {
                           setProduct(title);
                         }}
                       >
-                        <span> {title}</span>
+                        <span className="select-text"> {title}</span>
                       </motion.div>
                     );
                   })}{" "}
@@ -87,7 +90,7 @@ const ProductSelect = ({ product, setProduct }: Props) => {
                     animate="end"
                     exit="exit"
                   >
-                    no products at your product list
+                    no products at your product compare list
                   </motion.span>
                 </AnimatePresence>
               )}
@@ -95,7 +98,6 @@ const ProductSelect = ({ product, setProduct }: Props) => {
           </motion.div>
         )}
       </AnimatePresence>
-      <AnimatePresence>{showDropSelect && <></>}</AnimatePresence>
     </div>
   );
 };

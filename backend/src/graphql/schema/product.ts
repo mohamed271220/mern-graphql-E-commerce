@@ -19,7 +19,7 @@ export const productType = new GraphQLObjectType({
     _id: { type: GraphQLString },
     title: { type: GraphQLString },
     description: { type: GraphQLString },
-    price: { type: GraphQLInt },
+    price: { type: GraphQLFloat },
     stock: { type: GraphQLString },
     category: { type: GraphQLString },
     state: { type: GraphQLString },

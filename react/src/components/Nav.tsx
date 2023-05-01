@@ -19,6 +19,7 @@ import { isAuthContext } from "../context/isAuth";
 import NavImg from "./widgets/NavImg";
 import { opacityVariant } from "../variants/globals";
 import { IoGitCompareSharp } from "react-icons/io5";
+import FadeElement from "./widgets/FadeElement";
 
 const Nav = () => {
   const { isAuth } = useContext(isAuthContext);
@@ -90,16 +91,9 @@ const Nav = () => {
         <motion.li>
           <AnimatePresence mode="wait">
             {isAuth ? (
-              <motion.span
-                key={"profile-image"}
-                variants={opacityVariant}
-                transition={{ duration: 0.4 }}
-                initial="start"
-                animate="end"
-                exit="exit"
-              >
+              <FadeElement cls="" key={"profile-image"}>
                 <NavImg />
-              </motion.span>
+              </FadeElement>
             ) : (
               <motion.span
                 key={"login"}

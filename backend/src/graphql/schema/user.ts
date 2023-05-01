@@ -1,4 +1,5 @@
 import {
+  GraphQLFloat,
   GraphQLID,
   GraphQLInt,
   GraphQLList,
@@ -225,7 +226,7 @@ export const userMutation = new GraphQLObjectType({
         count: { type: GraphQLInt },
         title: { type: GraphQLString },
         path: { type: GraphQLString },
-        price: { type: GraphQLInt },
+        price: { type: GraphQLFloat },
       },
       resolve: async (_, args) => {
         try {
@@ -250,7 +251,7 @@ export const userMutation = new GraphQLObjectType({
         parentId: { type: GraphQLID },
         title: { type: GraphQLString },
         path: { type: GraphQLString },
-        price: { type: GraphQLInt },
+        price: { type: GraphQLFloat },
         userId: { type: GraphQLID },
       },
       resolve: async (_, args) => {
@@ -617,7 +618,7 @@ export const userMutation = new GraphQLObjectType({
         state: { type: GraphQLString },
         _id: { type: GraphQLID },
         stock: { type: GraphQLInt },
-        price: { type: GraphQLInt },
+        price: { type: GraphQLFloat },
         description: { type: GraphQLString },
         category: { type: GraphQLString },
       },

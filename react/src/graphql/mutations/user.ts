@@ -27,7 +27,7 @@ export const Add_To_Cart = gql`
     $userId: ID!
     $path: String!
     $title: String!
-    $price: Int!
+    $price: Float!
   ) {
     addToCart(
       count: 1
@@ -74,7 +74,7 @@ export const Add_To_Fav = gql`
     $productId: ID!
     $parentId: ID!
     $userId: ID!
-    $price: Int!
+    $price: Float!
     $path: String!
     $title: String!
   ) {

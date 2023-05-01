@@ -10,12 +10,9 @@ import {
   remove_From_Compare,
 } from "../../graphql/mutations/user";
 import { useAppDispatch, useAppSelector } from "../../custom/reduxTypes";
-import {
-  addToCompareRedux,
-  removeFromCompareRedux,
-} from "../../redux/compareSlice";
+import { addToCompareRedux } from "../../redux/compareSlice";
 import { toast } from "react-hot-toast";
-import { removeFromCartRedux } from "../../redux/CartSlice";
+import useRemoveFromCompareList from "../../custom/useRemoveFromCompareList";
 
 interface Props {
   id: string;
@@ -37,7 +34,6 @@ const CompareIcons = ({ id, title }: Props) => {
   }, [compare]);
 
   const [addToCompare] = useMutation(AddTo_Compare);
-  const [removeFromCompare] = useMutation(remove_From_Compare);
 
   const handleAddToCompare = async () => {
     const obj = { userId, productId: id, title };
@@ -48,13 +44,10 @@ const CompareIcons = ({ id, title }: Props) => {
     toast.success(data?.addToCompare?.msg);
   };
 
-  const handleRemoveFromCompare = async () => {
-    const obj = { userId, productId: id };
-    const { data } = await removeFromCompare({ variables: obj });
-    console.log({ data });
-    if (data?.removeFromCompare?.msg) dispatch(removeFromCompareRedux(id));
-    toast.success(data?.removeFromCompare?.msg);
-  };
+  const { handleRemoveFromCompare } = useRemoveFromCompareList({
+    userId,
+    productId: id,
+  });
   return (
     <div style={{ marginRight: -10, marginTop: -10, marginBottom: -10 }}>
       <AnimatePresence mode="wait">

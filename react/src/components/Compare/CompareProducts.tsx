@@ -4,17 +4,21 @@ import ProductSelect from "./ProductSelect";
 import SeletedProduct from "./SeletedProduct";
 
 const CompareProducts = () => {
-  const [firstproduct, setFirstProduct] = useState(
-    "-- select first product --"
-  );
-  const [secondproduct, setSecondProduct] = useState(
-    "-- select second product --"
-  );
+  const [firstproduct, setFirstProduct] = useState("");
+  const [secondproduct, setSecondProduct] = useState("");
   return (
     <div className="select-compare">
       <Transition />
-      <SeletedProduct product={firstproduct} setProduct={setFirstProduct} />
-      <SeletedProduct product={secondproduct} setProduct={setSecondProduct} />
+      <SeletedProduct
+        order="first"
+        product={firstproduct}
+        setProduct={setFirstProduct}
+      />
+      <SeletedProduct
+        order="second"
+        product={secondproduct}
+        setProduct={setSecondProduct}
+      />
     </div>
   );
 };

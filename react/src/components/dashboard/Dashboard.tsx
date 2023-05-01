@@ -34,7 +34,7 @@ const Dashboard = () => {
               onClick={() => setShowAsideDash(true)}
             >
               <Title title="show dashboard aside nav">
-                <RxDashboard />
+                <RxDashboard className="icon" />
               </Title>
             </motion.span>
           )}

@@ -36,6 +36,7 @@ const Input = ({ placeholder, err, type, defaultVal }: Props) => {
           },
         })}
         defaultValue={defaultVal}
+        step={type === "number" ? ".01" : "any"}
       />
       <AnimatePresence>
         {err && (

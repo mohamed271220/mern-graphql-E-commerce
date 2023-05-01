@@ -77,12 +77,6 @@
       .title-par {
         display: flex;
         gap: 20px;
-
-        .title {
-          letter-spacing: 0.8px;
-          font-size: 1.2rem;
-          font-weight: bold;
-        }
       }
       .product-btn {
         display: flex;
@@ -260,4 +254,10 @@ p {
   svg {
     font-size: 0.8rem;
   }
+}
+
+.title {
+  letter-spacing: 0.8px;
+  font-size: 1.2rem;
+  font-weight: bold;
 }

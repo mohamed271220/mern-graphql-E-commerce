@@ -26,6 +26,7 @@ import { BsInfoCircleFill, BsInfoLg } from "react-icons/bs";
 import useCarousel from "../../../../custom/useCarousel";
 import useIndex from "../../../../custom/useIndex";
 import CompareIcons from "../../../widgets/CompareIcons";
+import StyledPrice from "../../../widgets/StyledPrice";
 
 type Props = {
   _id: string;
@@ -165,7 +166,7 @@ const ProductFliter = ({
           {!gridView && sectionWidth >= 400 && (
             <p style={{ fontWeight: "normal" }}>{description}</p>
           )}
-          <span className="price-product">${price.toFixed(2)}</span>
+          <StyledPrice price={price} />
           <span> </span>
 
           <div className="product-rate-filter center ">

@@ -5,6 +5,7 @@ import Favorite from "./widgets/Favorite";
 import { useAppSelector } from "../custom/reduxTypes";
 import SlideButton from "./widgets/SlideButton";
 import DropDown from "./widgets/DropDown";
+import FadeElement from "./widgets/FadeElement";
 
 const WishList = ({ showFav }: { showFav: boolean }) => {
   const { fav } = useAppSelector((state) => state.fav);
@@ -31,30 +32,17 @@ const WishList = ({ showFav }: { showFav: boolean }) => {
         </div>
         <AnimatePresence mode="wait">
           {fav.length >= 1 ? (
-            <motion.div
-              className="center col"
-              variants={opacityVariant}
-              key={"fav-parent"}
-              initial="start"
-              exit={"exit"}
-              animate="end"
-            >
+            <FadeElement key={"fav-parent"} cls="center col">
               <AnimatePresence>
                 {fav.map((arr) => {
                   return <Favorite key={arr.productId} {...arr} />;
                 })}
               </AnimatePresence>
-            </motion.div>
+            </FadeElement>
           ) : (
-            <motion.div
-              variants={opacityVariant}
-              key={"no-data-fav-parent"}
-              initial="start"
-              exit={"exit"}
-              transition={{ duration: 0.4 }}
-              animate="end"
-              className="no-data-fav center"
-            ></motion.div>
+            <FadeElement key={"no-data-fav"} cls="shadow no-data-fav center">
+              no data in your wishlist
+            </FadeElement>
           )}
         </AnimatePresence>
         <AnimatePresence>

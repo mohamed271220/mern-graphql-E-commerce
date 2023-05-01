@@ -110,7 +110,7 @@ const SelectCOuntry = ({ setCountry, country, bottom }: Props) => {
                 >
                   <img src={flag} alt={"flag"} />
 
-                  <span> {country}</span>
+                  <span className="select-text"> {country}</span>
                 </motion.div>
               );
             })}

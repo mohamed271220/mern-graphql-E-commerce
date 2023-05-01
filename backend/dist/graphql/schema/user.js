@@ -225,7 +225,7 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                 count: { type: graphql_1.GraphQLInt },
                 title: { type: graphql_1.GraphQLString },
                 path: { type: graphql_1.GraphQLString },
-                price: { type: graphql_1.GraphQLInt },
+                price: { type: graphql_1.GraphQLFloat },
             },
             resolve: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
                 try {
@@ -247,7 +247,7 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                 parentId: { type: graphql_1.GraphQLID },
                 title: { type: graphql_1.GraphQLString },
                 path: { type: graphql_1.GraphQLString },
-                price: { type: graphql_1.GraphQLInt },
+                price: { type: graphql_1.GraphQLFloat },
                 userId: { type: graphql_1.GraphQLID },
             },
             resolve: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
@@ -608,7 +608,7 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                 state: { type: graphql_1.GraphQLString },
                 _id: { type: graphql_1.GraphQLID },
                 stock: { type: graphql_1.GraphQLInt },
-                price: { type: graphql_1.GraphQLInt },
+                price: { type: graphql_1.GraphQLFloat },
                 description: { type: graphql_1.GraphQLString },
                 category: { type: graphql_1.GraphQLString },
             },

@@ -50,7 +50,7 @@ const DashboardAside = () => {
                 className="dash-close"
               >
                 <Title title="hide dashboard nav">
-                  <AiFillCloseCircle className="shadow" />
+                  <AiFillCloseCircle className="icon" />
                 </Title>
               </motion.span>
             )}
