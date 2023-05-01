@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import GridViewContext from "./context/gridView";
 import FilterDataContext from "./context/FilterData";
 import Transition from "./components/widgets/Transition";
+import StripeSuccess from "./components/StripeSuccess";
 const App = () => {
   return (
     <IsAuthContextComponent>

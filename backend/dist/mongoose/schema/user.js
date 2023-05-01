@@ -31,5 +31,11 @@ const userSchema = new mongoose_1.default.Schema({
             price: Number,
         },
     ],
+    compare: [
+        {
+            productId: mongoose_1.default.SchemaTypes.ObjectId,
+            title: String,
+        },
+    ],
 });
 exports.userCollection = mongoose_1.default.model("users", userSchema);

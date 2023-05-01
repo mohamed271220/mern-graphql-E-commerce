@@ -8,6 +8,8 @@ import {
   motion,
   MotionProps,
   useAnimate,
+  Variant,
+  Variants,
 } from "framer-motion";
 import useMeasure from "react-use-measure";
 import { viewContext } from "../../../../context/gridView";
@@ -21,6 +23,9 @@ import Title from "../../../widgets/Title";
 import { RiEditLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { BsInfoCircleFill, BsInfoLg } from "react-icons/bs";
+import useCarousel from "../../../../custom/useCarousel";
+import useIndex from "../../../../custom/useIndex";
+import CompareIcons from "../../../widgets/CompareIcons";
 
 type Props = {
   _id: string;
@@ -52,6 +57,8 @@ const ProductFliter = ({
   reviews,
   ...motionProps
 }: Props) => {
+  const [imgInd, setimgInd] = useState(0);
+  const [changeImgOnHover, setChnageImgOnHover] = useState(false);
   const { avgRate, reviewLength } = useAvg(rating, reviews);
   const [isFavoraited, setIsFavorited] = useState(false);
   const [onCart, setOnCart] = useState(false);
@@ -60,7 +67,7 @@ const ProductFliter = ({
   const [sectionRef, { width: sectionWidth }] = useMeasure();
 
   const [ref, animate] = useAnimate();
-
+  const [imgVariant, dir] = useCarousel(imgInd, images.length);
   useEffect(() => {
     animate(
       ".product-List",
@@ -69,9 +76,23 @@ const ProductFliter = ({
     );
   }, []);
   const navigat = useNavigate();
+  const [convertNegativeToZero] = useIndex();
 
+  let timer: number;
+  useEffect(() => {
+    if (!changeImgOnHover) return;
+    timer = setTimeout(() => {
+      setimgInd((cur) => convertNegativeToZero(cur + 1, images.length));
+    }, 1500);
+
+    return () => clearTimeout(timer);
+  }, [changeImgOnHover, imgInd]);
   return (
-    <div ref={ref}>
+    <motion.div
+      ref={ref}
+      onHoverStart={() => setChnageImgOnHover(true)}
+      onHoverEnd={() => setChnageImgOnHover(false)}
+    >
       <motion.section
         className={`product-List center ${
           gridView ? "grid col" : "list between "
@@ -80,7 +101,18 @@ const ProductFliter = ({
         ref={sectionRef}
       >
         <div className={` img-par center ${gridView ? "grid" : "list"}`}>
-          <img src={images[0].productPath} alt={title} />
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={images[imgInd].productPath}
+              src={images[imgInd].productPath}
+              alt={title}
+              variants={imgVariant as Variants}
+              animate="end"
+              initial="start"
+              exit={"exit"}
+              custom={{ dir, width: 100 }}
+            />
+          </AnimatePresence>
         </div>
         <div className="center col">
           <h5 className="header underline product-head-underline">
@@ -180,14 +212,17 @@ const ProductFliter = ({
           )}
           <span className="heart-filter ">
             {!isDash ? (
-              <ProductListHeart
-                isFavoraited={isFavoraited}
-                price={price}
-                title={title}
-                setIsFavorited={setIsFavorited}
-                parentId={_id}
-                images={images}
-              />
+              <span className="center col">
+                <ProductListHeart
+                  isFavoraited={isFavoraited}
+                  price={price}
+                  title={title}
+                  setIsFavorited={setIsFavorited}
+                  parentId={_id}
+                  images={images}
+                />
+                <CompareIcons id={_id} title={title} />
+              </span>
             ) : (
               <span onClick={() => navigat(`/dashboard/update/${_id}`)}>
                 <Title title="edit product">
@@ -199,7 +234,7 @@ const ProductFliter = ({
           <span className={`product-state center ${state}`}>{state}</span>
         </div>
       </motion.section>
-    </div>
+    </motion.div>
   );
 };
 

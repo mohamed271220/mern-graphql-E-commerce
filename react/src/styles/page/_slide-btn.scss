@@ -101,3 +101,13 @@
     transform: scale(0.9);
   }
 }
+
+.order-success {
+  height: 200px;
+  background: var(--white);
+  width: 300px;
+  border-radius: 10px;
+  white-space: nowrap;
+  position: relative;
+  align-self: flex-end;
+}

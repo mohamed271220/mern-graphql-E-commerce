@@ -34,7 +34,6 @@ const stripeFn = async (req: Request, res: Response) => {
       customer_email: email,
     });
 
-    console.log(session);
     res.json(session);
   } catch (err) {
     console.log(err);

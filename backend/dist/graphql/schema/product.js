@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -7,6 +16,8 @@ exports.graphQlSchema = exports.productQuery = exports.productType = void 0;
 const graphql_1 = require("graphql");
 const types_js_1 = require("../types.js");
 const product_js_1 = __importDefault(require("../../mongoose/schema/product.js"));
+const order_js_1 = require("./order.js");
+const order_js_2 = require("../../mongoose/schema/order.js");
 exports.productType = new graphql_1.GraphQLObjectType({
     name: "products",
     fields: () => ({
@@ -39,6 +50,14 @@ exports.productQuery = new graphql_1.GraphQLObjectType({
                 return product_js_1.default.find({});
             },
         },
+        orders: {
+            type: new graphql_1.GraphQLList(order_js_1.orderType),
+            resolve(_, _args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    return yield order_js_2.OrderCollection.find();
+                });
+            },
+        },
     },
 });
 // export const productMutation = new GraphQLObjectType({
@@ -55,7 +74,7 @@ exports.productQuery = new graphql_1.GraphQLObjectType({
 //         } else {
 //           return null;
 //         }
-//       },
+//       },Property 'fields' does not exist on type 'GraphQLObjectType<any, any>'.ts(2339)
 //     },
 //   },
 // });

@@ -7,6 +7,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { RxDashboard } from "react-icons/rx";
 import Title from "../widgets/Title";
 import { showAsideContext } from "./Dashboard";
+import { FaClipboardList } from "react-icons/fa";
 
 const DashboardAside = () => {
   const { showAsideDash, setShowAsideDash } = useContext(showAsideContext);
@@ -62,6 +63,10 @@ const DashboardAside = () => {
           <NavLink to={"/dashboard/addproduct"}>
             <GrProductHunt />
             <span>add</span>
+          </NavLink>
+          <NavLink to={"/dashboard/orders"}>
+            <FaClipboardList />
+            <span>orders</span>
           </NavLink>
         </motion.aside>
       )}

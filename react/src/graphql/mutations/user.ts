@@ -51,6 +51,24 @@ export const Change_Cart_Count = gql`
   }
 `;
 
+export const AddTo_Compare = gql`
+  mutation ($productId: ID!, $userId: ID!, $title: String!) {
+    addToCompare(title: $title, userId: $userId, productId: $productId) {
+      msg
+      _id
+    }
+  }
+`;
+
+export const remove_From_Compare = gql`
+  mutation ($productId: ID!, $userId: ID!) {
+    removeFromCompare(userId: $userId, productId: $productId) {
+      msg
+      _id
+    }
+  }
+`;
+
 export const Add_To_Fav = gql`
   mutation (
     $productId: ID!
@@ -107,6 +125,10 @@ export const GET_USER_DATA = gql`
 
         path
         _id
+      }
+      compare {
+        productId
+        title
       }
     }
   }

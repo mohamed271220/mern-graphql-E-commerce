@@ -132,3 +132,12 @@ export const asideVariant = {
     },
   },
 };
+
+export const textVariant = {
+  start: { y: 20, opacity: 0 },
+  end: {
+    y: 0,
+    opacity: 1,
+    transition: { delay: 0.8, repeatDelay: 1, duration: 0.4 },
+  },
+};

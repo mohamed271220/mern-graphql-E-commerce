@@ -10,6 +10,8 @@ import {
 import { ReviewType, imageType } from "../types.js";
 import productCollection from "../../mongoose/schema/product.js";
 import { userMutation } from "./user.js";
+import { orderType } from "./order.js";
+import { OrderCollection } from "../../mongoose/schema/order.js";
 
 export const productType = new GraphQLObjectType({
   name: "products",
@@ -44,6 +46,12 @@ export const productQuery = new GraphQLObjectType({
         return productCollection.find({});
       },
     },
+    orders: {
+      type: new GraphQLList(orderType),
+      async resolve(_, _args) {
+        return await OrderCollection.find();
+      },
+    },
   },
 });
 
@@ -61,7 +69,8 @@ export const productQuery = new GraphQLObjectType({
 //         } else {
 //           return null;
 //         }
-//       },
+//       },Property 'fields' does not exist on type 'GraphQLObjectType<any, any>'.ts(2339)
+
 //     },
 //   },
 // });

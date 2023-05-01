@@ -10,8 +10,6 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCartRedux(state, action) {
-      console.log("redux");
-      console.log(action.payload);
       if (Array.isArray(action.payload)) {
         state.cart = [...action.payload, ...state.cart];
       } else {

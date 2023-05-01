@@ -25,6 +25,12 @@ const CircleCheckSvg = ({ check }: { check: boolean }) => {
         initial="start"
         animate="end"
         exit={"exit"}
+        transition={{
+          delay: 0.4,
+          duration: 0.4,
+          staggerChildren: 0.4,
+          when: "beforeChildren",
+        }}
       >
         <motion.path
           fill="none"

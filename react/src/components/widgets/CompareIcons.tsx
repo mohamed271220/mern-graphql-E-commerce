@@ -1,0 +1,95 @@
+import React, { useContext, useEffect, useState } from "react";
+import { isAuthContext } from "../../context/isAuth";
+import { AnimatePresence, motion } from "framer-motion";
+import Title from "./Title";
+import { MdPlaylistAdd, MdPlaylistRemove } from "react-icons/md";
+import { opacityVariant } from "../../variants/globals";
+import { useMutation } from "@apollo/client";
+import {
+  AddTo_Compare,
+  remove_From_Compare,
+} from "../../graphql/mutations/user";
+import { useAppDispatch, useAppSelector } from "../../custom/reduxTypes";
+import {
+  addToCompareRedux,
+  removeFromCompareRedux,
+} from "../../redux/compareSlice";
+import { toast } from "react-hot-toast";
+import { removeFromCartRedux } from "../../redux/CartSlice";
+
+interface Props {
+  id: string;
+  title: string;
+}
+const CompareIcons = ({ id, title }: Props) => {
+  const { compare } = useAppSelector((state) => state.compare);
+  const { userId } = useContext(isAuthContext);
+  const [atCompare, setAtCompare] = useState(false);
+
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    const check = compare.some((obj) => obj.productId === id);
+    if (check) {
+      setAtCompare(true);
+    } else {
+      setAtCompare(false);
+    }
+  }, [compare]);
+
+  const [addToCompare] = useMutation(AddTo_Compare);
+  const [removeFromCompare] = useMutation(remove_From_Compare);
+
+  const handleAddToCompare = async () => {
+    const obj = { userId, productId: id, title };
+    const { data } = await addToCompare({ variables: obj });
+    console.log({ data });
+    if (data?.addToCompare?.msg)
+      dispatch(addToCompareRedux({ _id: data?.addToCompare, ...obj }));
+    toast.success(data?.addToCompare?.msg);
+  };
+
+  const handleRemoveFromCompare = async () => {
+    const obj = { userId, productId: id };
+    const { data } = await removeFromCompare({ variables: obj });
+    console.log({ data });
+    if (data?.removeFromCompare?.msg) dispatch(removeFromCompareRedux(id));
+    toast.success(data?.removeFromCompare?.msg);
+  };
+  return (
+    <div style={{ marginRight: -10, marginTop: -10, marginBottom: -10 }}>
+      <AnimatePresence mode="wait">
+        {atCompare ? (
+          <motion.span
+            key={"remove-from-compare"}
+            variants={opacityVariant}
+            transition={{ duration: 0.8 }}
+            initial="start"
+            animate="end"
+            exit={"exit"}
+            onClick={handleRemoveFromCompare}
+          >
+            <Title title="remove from compareList">
+              <MdPlaylistRemove fontSize={16} />
+            </Title>
+          </motion.span>
+        ) : (
+          <motion.span
+            key={"add-to-compare"}
+            variants={opacityVariant}
+            transition={{ duration: 0.8 }}
+            initial="start"
+            animate="end"
+            exit={"exit"}
+            onClick={handleAddToCompare}
+          >
+            <Title title="add to compareList">
+              <MdPlaylistAdd fontSize={16} />
+            </Title>
+          </motion.span>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
+export default CompareIcons;

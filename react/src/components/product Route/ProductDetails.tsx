@@ -16,6 +16,7 @@ import Title from "../widgets/Title";
 import { isAuthContext } from "../../context/isAuth";
 import useBuy from "../../custom/useBuy";
 import OpacityBtn from "../widgets/OpacityBtn";
+import CompareIcons from "../widgets/CompareIcons";
 
 interface Props {
   setShowPop: React.Dispatch<React.SetStateAction<boolean>>;
@@ -106,6 +107,7 @@ const ProductDetails = ({ setShowPop }: Props) => {
                 isFavoraited={isFavoraited}
                 setIsFavorited={setIsFavorited}
               />
+              <CompareIcons id={_id} title={title} />
             </span>
           </h2>
 

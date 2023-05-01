@@ -38,7 +38,6 @@ const stripeFn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             payment_method_types: ["card"],
             customer_email: email,
         });
-        console.log(session);
         res.json(session);
     }
     catch (err) {

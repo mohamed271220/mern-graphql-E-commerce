@@ -17,6 +17,8 @@ import { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } from "../../config.js";
 import { productType } from "./product.js";
 import productCollection from "../../mongoose/schema/product.js";
 import { ReviewType } from "../types.js";
+import { orderType } from "./order.js";
+import { OrderCollection } from "../../mongoose/schema/order.js";
 
 const messageType = new GraphQLObjectType({
   name: "message",
@@ -53,6 +55,16 @@ const favtType = new GraphQLObjectType({
   }),
 });
 
+const compareType = new GraphQLObjectType({
+  name: "compare",
+  fields: () => ({
+    productId: { type: GraphQLID },
+    _id: { type: GraphQLID },
+    title: { type: GraphQLString },
+    msg: { type: GraphQLString },
+    state: { type: GraphQLString },
+  }),
+});
 const userType = new GraphQLObjectType({
   name: "users",
   fields: () => ({
@@ -67,17 +79,7 @@ const userType = new GraphQLObjectType({
     status: { type: GraphQLInt },
     fav: { type: new GraphQLList(favtType) },
     cart: { type: new GraphQLList(cartType) },
-    // favArr: {
-    //   type: new GraphQLList(productType),
-    //   resolve(par, arg) {
-    //     const arrOfIds = par.fav.map((e: any) => e.productId);
-    //     console.log(arrOfIds);
-    //     return productCollection.find(
-    //       { "images._id": { $in: arrOfIds } },
-    //       { "images.$": 1, price: 1, title: 1 }
-    //     );
-    //   },
-    // },
+    compare: { type: new GraphQLList(compareType) },
   }),
 });
 
@@ -335,6 +337,48 @@ export const userMutation = new GraphQLObjectType({
         }
       },
     },
+    addToCompare: {
+      type: compareType,
+      args: {
+        userId: { type: GraphQLID },
+        productId: { type: GraphQLID },
+        title: { type: GraphQLString },
+      },
+      async resolve(_, args) {
+        const { productId, title } = args;
+        const res = await userCollection.findByIdAndUpdate(
+          args.userId,
+          {
+            $push: { compare: { productId, title } },
+          },
+          { new: true }
+        );
+
+        const newCompared = res!.compare[res!.compare.length - 1] as any;
+        newCompared.msg = "successfully added to your comparelist";
+        return newCompared;
+      },
+    },
+
+    removeFromCompare: {
+      type: compareType,
+      args: {
+        userId: { type: GraphQLID },
+        productId: { type: GraphQLID },
+      },
+      async resolve(_, args) {
+        const { productId } = args;
+        const res = await userCollection.findByIdAndUpdate(
+          args.userId,
+          {
+            $pull: { compare: { productId } },
+          },
+          { new: true }
+        );
+
+        return { msg: "successfully removed from your comparelist" };
+      },
+    },
     getUserData: {
       type: userType,
       args: { id: { type: GraphQLID } },
@@ -522,6 +566,7 @@ export const userMutation = new GraphQLObjectType({
         }
       },
     },
+
     updateReview: {
       type: ReviewType,
       args: {
@@ -595,6 +640,49 @@ export const userMutation = new GraphQLObjectType({
       async resolve(_, args) {
         console.log(args);
         return productCollection.create(args);
+      },
+    },
+
+    //order
+    addOrder: {
+      type: orderType,
+      args: {
+        userId: { type: GraphQLID },
+        state: { type: GraphQLString },
+        productId: { type: GraphQLID },
+        count: { type: GraphQLInt },
+        cost: { type: GraphQLInt },
+      },
+      async resolve(_, args) {
+        return await OrderCollection.create(args);
+
+        // return { res, msg: "order is submitted" };
+      },
+    },
+    deleteOrder: {
+      type: orderType,
+      args: {
+        _id: { type: new GraphQLList(GraphQLID) },
+      },
+      async resolve(_, args) {
+        await OrderCollection.deleteMany({ _id: { $in: args._id } });
+
+        return { msg: "order is successfully deleted" };
+      },
+    },
+
+    updateOrder: {
+      type: orderType,
+      args: {
+        _id: { type: GraphQLID },
+        state: { type: GraphQLString },
+      },
+      async resolve(_, args) {
+        const res = await OrderCollection.findByIdAndUpdate(args._id, {
+          state: args.state,
+        });
+
+        return { msg: "order is successfully updated" };
       },
     },
   },

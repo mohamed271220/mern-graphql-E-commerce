@@ -22,6 +22,8 @@ const config_js_1 = require("../../config.js");
 const product_js_1 = require("./product.js");
 const product_js_2 = __importDefault(require("../../mongoose/schema/product.js"));
 const types_js_1 = require("../types.js");
+const order_js_1 = require("./order.js");
+const order_js_2 = require("../../mongoose/schema/order.js");
 const messageType = new graphql_1.GraphQLObjectType({
     name: "message",
     fields: () => ({
@@ -54,6 +56,16 @@ const favtType = new graphql_1.GraphQLObjectType({
         msg: { type: graphql_1.GraphQLString },
     }),
 });
+const compareType = new graphql_1.GraphQLObjectType({
+    name: "compare",
+    fields: () => ({
+        productId: { type: graphql_1.GraphQLID },
+        _id: { type: graphql_1.GraphQLID },
+        title: { type: graphql_1.GraphQLString },
+        msg: { type: graphql_1.GraphQLString },
+        state: { type: graphql_1.GraphQLString },
+    }),
+});
 const userType = new graphql_1.GraphQLObjectType({
     name: "users",
     fields: () => ({
@@ -68,17 +80,7 @@ const userType = new graphql_1.GraphQLObjectType({
         status: { type: graphql_1.GraphQLInt },
         fav: { type: new graphql_1.GraphQLList(favtType) },
         cart: { type: new graphql_1.GraphQLList(cartType) },
-        // favArr: {
-        //   type: new GraphQLList(productType),
-        //   resolve(par, arg) {
-        //     const arrOfIds = par.fav.map((e: any) => e.productId);
-        //     console.log(arrOfIds);
-        //     return productCollection.find(
-        //       { "images._id": { $in: arrOfIds } },
-        //       { "images.$": 1, price: 1, title: 1 }
-        //     );
-        //   },
-        // },
+        compare: { type: new graphql_1.GraphQLList(compareType) },
     }),
 });
 exports.userMutation = new graphql_1.GraphQLObjectType({
@@ -318,6 +320,41 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                     return err.message;
                 }
             }),
+        },
+        addToCompare: {
+            type: compareType,
+            args: {
+                userId: { type: graphql_1.GraphQLID },
+                productId: { type: graphql_1.GraphQLID },
+                title: { type: graphql_1.GraphQLString },
+            },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    const { productId, title } = args;
+                    const res = yield user_js_1.userCollection.findByIdAndUpdate(args.userId, {
+                        $push: { compare: { productId, title } },
+                    }, { new: true });
+                    const newCompared = res.compare[res.compare.length - 1];
+                    newCompared.msg = "successfully added to your comparelist";
+                    return newCompared;
+                });
+            },
+        },
+        removeFromCompare: {
+            type: compareType,
+            args: {
+                userId: { type: graphql_1.GraphQLID },
+                productId: { type: graphql_1.GraphQLID },
+            },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    const { productId } = args;
+                    const res = yield user_js_1.userCollection.findByIdAndUpdate(args.userId, {
+                        $pull: { compare: { productId } },
+                    }, { new: true });
+                    return { msg: "successfully removed from your comparelist" };
+                });
+            },
         },
         getUserData: {
             type: userType,
@@ -597,6 +634,50 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                 return __awaiter(this, void 0, void 0, function* () {
                     console.log(args);
                     return product_js_2.default.create(args);
+                });
+            },
+        },
+        //order
+        addOrder: {
+            type: order_js_1.orderType,
+            args: {
+                userId: { type: graphql_1.GraphQLID },
+                state: { type: graphql_1.GraphQLString },
+                productId: { type: graphql_1.GraphQLID },
+                count: { type: graphql_1.GraphQLInt },
+                cost: { type: graphql_1.GraphQLInt },
+            },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    return yield order_js_2.OrderCollection.create(args);
+                    // return { res, msg: "order is submitted" };
+                });
+            },
+        },
+        deleteOrder: {
+            type: order_js_1.orderType,
+            args: {
+                _id: { type: new graphql_1.GraphQLList(graphql_1.GraphQLID) },
+            },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    yield order_js_2.OrderCollection.deleteMany({ _id: { $in: args._id } });
+                    return { msg: "order is successfully deleted" };
+                });
+            },
+        },
+        updateOrder: {
+            type: order_js_1.orderType,
+            args: {
+                _id: { type: graphql_1.GraphQLID },
+                state: { type: graphql_1.GraphQLString },
+            },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    const res = yield order_js_2.OrderCollection.findByIdAndUpdate(args._id, {
+                        state: args.state,
+                    });
+                    return { msg: "order is successfully updated" };
                 });
             },
         },

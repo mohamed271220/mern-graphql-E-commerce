@@ -7,6 +7,7 @@ import { useAppDispatch } from "../custom/reduxTypes";
 import { addToFavRedux } from "../redux/favSlice";
 import { addToCartRedux } from "../redux/CartSlice";
 import { ChildrenInterFace } from "../interfaces/general.js";
+import { addToCompareRedux } from "../redux/compareSlice";
 
 export interface favArrInterface {
   productId: string;
@@ -16,6 +17,10 @@ export interface favArrInterface {
   path: string;
   _id: string;
 }
+export interface compareInterface {
+  productId: string;
+  title: string;
+}
 interface userDataState {
   email: string;
   name: string;
@@ -23,6 +28,7 @@ interface userDataState {
   phone: string;
   fav: favInterface[];
   cart: cartInterface[];
+  compare: compareInterface[];
   //-imp to use braket notation wuth variables
   [key: string]: any;
 }
@@ -50,6 +56,7 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
     name: "",
     fav: [],
     cart: [],
+    compare: [],
     country: "",
     phone: "",
   } as userDataState);
@@ -89,6 +96,7 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
       setUserData(data?.getUserData);
       dispatch(addToFavRedux(data?.getUserData?.fav));
       dispatch(addToCartRedux(data?.getUserData?.cart));
+      dispatch(addToCompareRedux(data?.getUserData?.compare));
       setProfile(data?.getUserData?.image);
     }
   }, [data?.getUserData?.name]);
@@ -99,6 +107,7 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
         isAuth,
         fav: userData.fav,
         cart: userData.cart,
+        compare: userData.compare,
         email: userData.email,
         name: userData.name,
         country: userData.country,

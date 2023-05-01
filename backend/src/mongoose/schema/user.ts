@@ -27,6 +27,13 @@ const userSchema = new mongoose.Schema({
       price: Number,
     },
   ],
+
+  compare: [
+    {
+      productId: mongoose.SchemaTypes.ObjectId,
+      title: String,
+    },
+  ],
 });
 
 export const userCollection = mongoose.model("users", userSchema);

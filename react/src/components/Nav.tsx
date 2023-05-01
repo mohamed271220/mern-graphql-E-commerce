@@ -18,12 +18,14 @@ import WishList from "./WishList";
 import { isAuthContext } from "../context/isAuth";
 import NavImg from "./widgets/NavImg";
 import { opacityVariant } from "../variants/globals";
+import { IoGitCompareSharp } from "react-icons/io5";
 
 const Nav = () => {
   const { isAuth } = useContext(isAuthContext);
   const navRef = useRef<HTMLElement | null>(null);
   const [showFav, handleShowFav, handleHideFav, toggleFav] = useHide();
   const { cart } = useAppSelector((state) => state.cart);
+  const { compare } = useAppSelector((state) => state.compare);
   const { fav } = useAppSelector((state) => state.fav);
 
   const { scrollY } = useScroll({
@@ -62,6 +64,14 @@ const Nav = () => {
             <Title title="go to your cart">
               <ShowCount length={cart.length} />
               <BsFillCartPlusFill fontSize={"1.2rem"} />
+            </Title>
+          </motion.li>
+        </NavLink>
+        <NavLink to="/compare" className="cart-active-link ">
+          <motion.li id="cart-link-par" style={{ color: LinkClr }}>
+            <Title title="compare products list">
+              <ShowCount length={compare.length} />
+              <IoGitCompareSharp fontSize={"1.2rem"} />
             </Title>
           </motion.li>
         </NavLink>
