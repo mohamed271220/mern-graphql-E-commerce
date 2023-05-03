@@ -55,4 +55,10 @@ a {
 
 *::-webkit-scrollbar-thumb {
   background: var(--wheat);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }/*# sourceMappingURL=globales.css.map */

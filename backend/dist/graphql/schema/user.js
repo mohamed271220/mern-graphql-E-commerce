@@ -24,6 +24,7 @@ const product_js_2 = __importDefault(require("../../mongoose/schema/product.js")
 const types_js_1 = require("../types.js");
 const order_js_1 = require("./order.js");
 const order_js_2 = require("../../mongoose/schema/order.js");
+const date_js_1 = require("./types/date.js");
 const messageType = new graphql_1.GraphQLObjectType({
     name: "message",
     fields: () => ({
@@ -39,7 +40,7 @@ const cartType = new graphql_1.GraphQLObjectType({
         count: { type: graphql_1.GraphQLInt },
         _id: { type: graphql_1.GraphQLID },
         path: { type: graphql_1.GraphQLString },
-        price: { type: graphql_1.GraphQLInt },
+        price: { type: graphql_1.GraphQLFloat },
         title: { type: graphql_1.GraphQLString },
         msg: { type: graphql_1.GraphQLString },
     }),
@@ -382,6 +383,20 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                 });
             },
         },
+        filterByDate: {
+            type: new graphql_1.GraphQLList(product_js_1.productType),
+            args: { date: { type: graphql_1.GraphQLInt } },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    if (args.date === 1) {
+                        return product_js_2.default.find({}).sort({ createdAt: 1 });
+                    }
+                    else if (args.date === -1) {
+                        return product_js_2.default.find({}).sort({ createdAt: -1 });
+                    }
+                });
+            },
+        },
         filterByRate: {
             type: new graphql_1.GraphQLList(product_js_1.productType),
             args: { rate: { type: graphql_1.GraphQLInt } },
@@ -629,31 +644,35 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                 price: { type: graphql_1.GraphQLInt },
                 description: { type: graphql_1.GraphQLString },
                 category: { type: graphql_1.GraphQLString },
+                createdAt: { type: date_js_1.DateType },
             },
             resolve(_, args) {
                 return __awaiter(this, void 0, void 0, function* () {
                     console.log(args);
-                    return product_js_2.default.create(args);
+                    return product_js_2.default.create(Object.assign(Object.assign({}, args), { deliveredAt: null }));
                 });
             },
         },
         //order
-        addOrder: {
-            type: order_js_1.orderType,
-            args: {
-                userId: { type: graphql_1.GraphQLID },
-                state: { type: graphql_1.GraphQLString },
-                productId: { type: graphql_1.GraphQLID },
-                count: { type: graphql_1.GraphQLInt },
-                cost: { type: graphql_1.GraphQLInt },
-            },
-            resolve(_, args) {
-                return __awaiter(this, void 0, void 0, function* () {
-                    return yield order_js_2.OrderCollection.create(args);
-                    // return { res, msg: "order is submitted" };
-                });
-            },
-        },
+        // addOrder: {
+        //   type: orderType,
+        //   args: {
+        //     userId: { type: GraphQLID },
+        //     state: { type: GraphQLString },
+        //     productId: { type: new GraphQLList(orderProduct) },
+        //     count: { type: GraphQLInt },
+        //     cost: { type: GraphQLFloat },
+        //     createdAt: { type: DateType },
+        //   },
+        //   async resolve(_, args) {
+        //     try {
+        //       return await OrderCollection.create(args);
+        //     } catch (err) {
+        //       console.log(err);
+        //     }
+        //     // return { res, msg: "order is submitted" };
+        //   },
+        // },
         deleteOrder: {
             type: order_js_1.orderType,
             args: {
@@ -661,8 +680,11 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
             },
             resolve(_, args) {
                 return __awaiter(this, void 0, void 0, function* () {
+                    const length = args._id.length;
                     yield order_js_2.OrderCollection.deleteMany({ _id: { $in: args._id } });
-                    return { msg: "order is successfully deleted" };
+                    return {
+                        msg: `${length} ${length >= 2 ? "orders" : "order"} ${length >= 2 ? "are" : "is"} successfully deleted`,
+                    };
                 });
             },
         },

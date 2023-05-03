@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import {
+  FILTER_BY_Date,
   FILTER_BY_PRICE,
   FILTER_BY_Rate,
 } from "../../../graphql/mutations/product";
@@ -13,12 +14,15 @@ import {
   selectDropDownVariants,
 } from "../../../variants/globals";
 import { productListContext } from "../../../context/FilterData";
+import FadeElement from "../../widgets/FadeElement";
 const optionsArr = [
   "relevance",
   "highest price",
   "lowest price",
   "highest rate",
   "lowest rate",
+  "newest",
+  "oldest",
 ];
 
 const SelectFilter = () => {
@@ -27,6 +31,7 @@ const SelectFilter = () => {
   const [fnRevlence] = useLazyQuery(Get_All_Products);
   const [fnPrice] = useMutation(FILTER_BY_PRICE);
   const [fnRate] = useMutation(FILTER_BY_Rate);
+  const [fnDate] = useMutation(FILTER_BY_Date);
 
   useEffect(() => {
     if (selectValue === "relevance") {
@@ -55,6 +60,18 @@ const SelectFilter = () => {
           rate: -1,
         },
       }).then(({ data }) => setProducts(data.filterByRate));
+    } else if (selectValue === "newest") {
+      fnDate({
+        variables: {
+          date: -1,
+        },
+      }).then(({ data }) => setProducts(data.filterByDate));
+    } else if (selectValue === "oldest") {
+      fnDate({
+        variables: {
+          date: 1,
+        },
+      }).then(({ data }) => setProducts(data.filterByDate));
     }
   }, [selectValue]);
 
@@ -67,7 +84,12 @@ const SelectFilter = () => {
     >
       <BiDownArrow className="icon select-icon arrow" />
       <span className="icon select-icon sort center">
-        <MdOutlineSort /> sort: <span className="value"> {selectValue}</span>
+        <MdOutlineSort /> sort:
+        <AnimatePresence mode="wait">
+          <FadeElement key={selectValue} cls="value" transition={0.3}>
+            {selectValue}
+          </FadeElement>
+        </AnimatePresence>
       </span>
       <AnimatePresence>
         {isSelectFocus && (

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Overley from "./widgets/Overley";
 import CircleCheckSvg from "../custom SVGs/CircleCheckSvg";
 import { motion, AnimatePresence, useInView } from "framer-motion";
@@ -20,6 +20,7 @@ const StripeSuccess = () => {
     start: {},
     end: { transition: { staggerChildren: 0.4 } },
   };
+  const navigate = useNavigate();
   return (
     <AnimatePresence>
       {show && (
@@ -41,6 +42,7 @@ const StripeSuccess = () => {
               onAnimationComplete={() =>
                 setTimeout(() => {
                   setShow(false);
+                  navigate("/");
                 }, 2000)
               }
             >

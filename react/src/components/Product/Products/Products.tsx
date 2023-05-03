@@ -26,6 +26,7 @@ const Products = () => {
       setStartFiltering(true);
     }
   }, [RateChecked, priceFilter, categoryFilter, productFeatured]);
+
   return (
     <section id="products" className="products-par">
       <h1 className="sort-title header underline">Our Products</h1>

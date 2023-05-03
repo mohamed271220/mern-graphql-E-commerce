@@ -3,6 +3,7 @@ import {
   GraphQLID,
   GraphQLInt,
   GraphQLList,
+  GraphQLInputType,
   GraphQLObjectType,
   GraphQLSchema,
   GraphQLString,
@@ -18,8 +19,9 @@ import { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } from "../../config.js";
 import { productType } from "./product.js";
 import productCollection from "../../mongoose/schema/product.js";
 import { ReviewType } from "../types.js";
-import { orderType } from "./order.js";
+import { orderProduct, orderType } from "./order.js";
 import { OrderCollection } from "../../mongoose/schema/order.js";
+import { DateType } from "./types/date.js";
 
 const messageType = new GraphQLObjectType({
   name: "message",
@@ -37,7 +39,7 @@ const cartType = new GraphQLObjectType({
     count: { type: GraphQLInt },
     _id: { type: GraphQLID },
     path: { type: GraphQLString },
-    price: { type: GraphQLInt },
+    price: { type: GraphQLFloat },
     title: { type: GraphQLString },
     msg: { type: GraphQLString },
   }),
@@ -403,6 +405,17 @@ export const userMutation = new GraphQLObjectType({
         }
       },
     },
+    filterByDate: {
+      type: new GraphQLList(productType),
+      args: { date: { type: GraphQLInt } },
+      async resolve(_, args) {
+        if (args.date === 1) {
+          return productCollection.find({}).sort({ createdAt: 1 });
+        } else if (args.date === -1) {
+          return productCollection.find({}).sort({ createdAt: -1 });
+        }
+      },
+    },
 
     filterByRate: {
       type: new GraphQLList(productType),
@@ -637,38 +650,49 @@ export const userMutation = new GraphQLObjectType({
         price: { type: GraphQLInt },
         description: { type: GraphQLString },
         category: { type: GraphQLString },
+        createdAt: { type: DateType },
       },
       async resolve(_, args) {
         console.log(args);
-        return productCollection.create(args);
+        return productCollection.create({ ...args, deliveredAt: null });
       },
     },
 
     //order
-    addOrder: {
-      type: orderType,
-      args: {
-        userId: { type: GraphQLID },
-        state: { type: GraphQLString },
-        productId: { type: GraphQLID },
-        count: { type: GraphQLInt },
-        cost: { type: GraphQLInt },
-      },
-      async resolve(_, args) {
-        return await OrderCollection.create(args);
+    // addOrder: {
+    //   type: orderType,
+    //   args: {
+    //     userId: { type: GraphQLID },
+    //     state: { type: GraphQLString },
+    //     productId: { type: new GraphQLList(orderProduct) },
+    //     count: { type: GraphQLInt },
+    //     cost: { type: GraphQLFloat },
+    //     createdAt: { type: DateType },
+    //   },
+    //   async resolve(_, args) {
+    //     try {
+    //       return await OrderCollection.create(args);
+    //     } catch (err) {
+    //       console.log(err);
+    //     }
 
-        // return { res, msg: "order is submitted" };
-      },
-    },
+    //     // return { res, msg: "order is submitted" };
+    //   },
+    // },
     deleteOrder: {
       type: orderType,
       args: {
         _id: { type: new GraphQLList(GraphQLID) },
       },
       async resolve(_, args) {
+        const length = args._id.length;
         await OrderCollection.deleteMany({ _id: { $in: args._id } });
 
-        return { msg: "order is successfully deleted" };
+        return {
+          msg: `${length} ${length >= 2 ? "orders" : "order"} ${
+            length >= 2 ? "are" : "is"
+          } successfully deleted`,
+        };
       },
     },
 

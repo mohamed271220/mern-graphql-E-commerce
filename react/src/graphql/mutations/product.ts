@@ -27,6 +27,33 @@ export const FILTER_BY_PRICE = gql`
   }
 `;
 
+export const FILTER_BY_Date = gql`
+  mutation ($date: Int!) {
+    filterByDate(date: $date) {
+      reviews {
+        image
+        user
+        review
+        rate
+        _id
+      }
+      _id
+      price
+      stock
+      title
+      description
+      rating
+      category
+      state
+
+      images {
+        productPath
+        _id
+      }
+    }
+  }
+`;
+
 export const FILTER_BY_STATE = gql`
   mutation ($state: String!) {
     filterByState(state: $state) {
@@ -199,6 +226,7 @@ export const update_Product = gql`
 
 export const Add_Product = gql`
   mutation (
+    $createdAt: Date!
     $title: String!
     $state: String!
     $category: String!
@@ -207,6 +235,7 @@ export const Add_Product = gql`
     $price: Int!
   ) {
     addProduct(
+      createdAt: $createdAt
       title: $title
       state: $state
       category: $category

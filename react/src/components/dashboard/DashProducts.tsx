@@ -23,7 +23,7 @@ const DashProducts = () => {
   }, []);
   return (
     <DashMain head="products">
-      <div className="center row start between">
+      <div className=" dash-products">
         <ProductList isDash />
       </div>
     </DashMain>

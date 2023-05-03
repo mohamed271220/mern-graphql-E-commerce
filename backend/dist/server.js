@@ -13,7 +13,7 @@ const express_graphql_1 = require("express-graphql");
 const user_js_1 = require("./graphql/schema/user.js");
 const product_js_1 = require("./graphql/schema/product.js");
 const uploudRoute_js_1 = require("./Upload/uploudRoute.js");
-const strips_js_1 = __importDefault(require("./stripe/strips.js"));
+const stripe_js_1 = __importDefault(require("./stripe/stripe.js"));
 mongoose_1.default.connect(config_js_1.MongoDB_URL);
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)({
@@ -30,7 +30,7 @@ app.use("/graphql", (0, express_graphql_1.graphqlHTTP)({
     schema,
 }));
 app.use("/", uploudRoute_js_1.uploadRoute);
-app.use("/", strips_js_1.default);
+app.use("/", stripe_js_1.default);
 app.listen(3000, () => {
     console.log("server-runs");
 });

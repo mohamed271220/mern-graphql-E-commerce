@@ -43,8 +43,8 @@ const SelectedProductData = ({
     <>
       <img src={images[0]?.productPath} alt={title} />
       <span
-        className="ti
-      tle-product title"
+        className=" select-text"
+        style={{ fontWeight: "bold", fontSize: "1.2rem", textAlign: "center" }}
       >
         {title}
       </span>

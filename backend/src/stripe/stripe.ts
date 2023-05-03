@@ -1,15 +1,17 @@
+import { productInterface } from "./../mongoose/schema/product";
 import * as stripe from "stripe";
 import { Client_Url, Stripe_Public, Stripe_key } from "../config.js";
 import { Request, Response, Router } from "express";
+import { OrderCollection } from "../mongoose/schema/order.js";
 
 // const process = new stripe(Stripe_key);
 const stripeData = require("stripe")(Stripe_key);
 
 const stripeFn = async (req: Request, res: Response) => {
+  const date = () => new Date();
   try {
+    const userId = req.params.userid;
     const { products, email } = req.body;
-    console.log(req.body);
-    console.log(products);
     const lineItems = await Promise.all(
       products.map((item: any) => {
         return {
@@ -33,8 +35,17 @@ const stripeFn = async (req: Request, res: Response) => {
       payment_method_types: ["card"],
       customer_email: email,
     });
-
     res.json(session);
+    console.log(session);
+
+    await OrderCollection.create({
+      createdAt: date(),
+      cost: session.amount_total / 100,
+      userId,
+      productId: products.map((e: any) => ({ id: e._id, count: e.count })),
+      state: "pending",
+      count: products.length,
+    });
   } catch (err) {
     console.log(err);
   }
@@ -50,7 +61,7 @@ const getStripeublicKey = async (req: Request, res: Response) => {
 
 const stripeRoutes = Router();
 
-stripeRoutes.route("/stripe").post(stripeFn);
+stripeRoutes.route("/stripe/:userid").post(stripeFn);
 stripeRoutes.route("/getkey/stripe").get(getStripeublicKey);
 
 export default stripeRoutes;

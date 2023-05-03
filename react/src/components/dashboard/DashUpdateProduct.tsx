@@ -16,7 +16,6 @@ const DashUpdateProduct = () => {
   const [updateProductFn] = useMutation(update_Product);
 
   if (data?.product) {
-    console.log("sucesseed");
     return (
       <>
         <DashForm

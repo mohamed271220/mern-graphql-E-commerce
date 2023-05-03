@@ -100,13 +100,13 @@ export const selectDropDownVariants = {
     },
   },
   exit: {
-    opacity: 1,
+    opacity: 0,
     transition: {
       when: "afterChildren",
       staggerChildren: 0.1,
       staggerDirection: -1,
       duration: 0.1,
-      delayChildren: 0.4,
+      delayChildren: 0.3,
     },
   },
 };

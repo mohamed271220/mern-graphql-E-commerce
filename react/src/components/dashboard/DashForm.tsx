@@ -14,6 +14,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { opacityVariant } from "../../variants/globals";
 import OpacityBtn from "../widgets/OpacityBtn";
 import { GrAddCircle } from "react-icons/gr";
+import DashMain from "./DashMain";
 
 interface keyedProduct extends ProductInterface {
   [key: string]: any;
@@ -30,6 +31,7 @@ interface Props {
 }
 
 const DashForm = ({ type, Icon, fn, id, obj, head, btn }: Props) => {
+  const date = () => new Date();
   const [percentage, setPercentage] = useState(-1);
   useEffect(() => {
     if (percentage >= 100) {
@@ -103,9 +105,9 @@ const DashForm = ({ type, Icon, fn, id, obj, head, btn }: Props) => {
       toast.success(res.updateProduct.msg);
     } else {
       const { data: res } = await fn({
-        variables: obj,
+        variables: { ...obj, createdAt: date() },
       });
-      if (res.addProduct._id) {
+      if (res?.addProduct?._id) {
         setPercentage(0);
         const formData = new FormData();
         console.log(values.images);
@@ -122,75 +124,76 @@ const DashForm = ({ type, Icon, fn, id, obj, head, btn }: Props) => {
             },
           }
         );
+        toast.success(res.addProduct._id);
       }
-
-      // toast.success(res.addProduct._id);
     }
   };
 
   return (
-    <FormProvider {...methods}>
-      <form
-        className="update-product-form center  col"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <h2 className="underline header " style={{ color: "var(--white)" }}>
-          {head}
-        </h2>
-        {inpArr.map(({ placeholder, type: inptype }, i) => {
-          return (
-            <>
-              <Input
-                key={i}
-                placeholder={placeholder}
-                defaultVal={obj?.category ? obj[placeholder] : ""}
-                type={inptype}
-                err={(errors as { [key: string]: any })[placeholder]?.message}
-              />
-              {placeholder === "title" && type !== "update" && (
-                <CustomFIleInput err="" />
-              )}
-            </>
-          );
-        })}
-        <div className="inp-parent">
-          <InpErr
-            key={"description"}
-            err={errors.description?.message?.toString()}
-          />
-          <textarea
-            {...register("description")}
-            className="update-product  inp relative"
-            defaultValue={obj?.category ? obj.description : ""}
-          />
-        </div>
-
-        <OpacityBtn
-          btn={btn}
-          cls="main btn center gap "
-          fn={() => null}
-          Icon={Icon}
-        />
-      </form>
-      <AnimatePresence>
-        <motion.span
-          variants={opacityVariant}
-          transition={{ duration: 0.4 }}
-          initial="start"
-          animate="end"
-          exit="exit"
-          key={"prograssbar"}
+    <DashMain head="">
+      <FormProvider {...methods}>
+        <form
+          className="update-product-form center  col"
+          onSubmit={handleSubmit(onSubmit)}
         >
-          {percentage > -1 && (
-            <CircularProgressbar
-              text={String(percentage)}
-              value={percentage}
-              className="progressbar"
+          <h2 className="underline header " style={{ color: "var(--white)" }}>
+            {head}
+          </h2>
+          {inpArr.map(({ placeholder, type: inptype }, i) => {
+            return (
+              <>
+                <Input
+                  key={i}
+                  placeholder={placeholder}
+                  defaultVal={obj?.category ? obj[placeholder] : ""}
+                  type={inptype}
+                  err={(errors as { [key: string]: any })[placeholder]?.message}
+                />
+                {placeholder === "title" && type !== "update" && (
+                  <CustomFIleInput err="" />
+                )}
+              </>
+            );
+          })}
+          <div className="inp-parent">
+            <InpErr
+              key={"description"}
+              err={errors.description?.message?.toString()}
             />
-          )}
-        </motion.span>
-      </AnimatePresence>
-    </FormProvider>
+            <textarea
+              {...register("description")}
+              className="update-product  inp relative"
+              defaultValue={obj?.category ? obj.description : ""}
+            />
+          </div>
+
+          <OpacityBtn
+            btn={btn}
+            cls="main btn center gap "
+            fn={() => null}
+            Icon={Icon}
+          />
+        </form>
+        <AnimatePresence>
+          <motion.span
+            variants={opacityVariant}
+            transition={{ duration: 0.4 }}
+            initial="start"
+            animate="end"
+            exit="exit"
+            key={"prograssbar"}
+          >
+            {percentage > -1 && (
+              <CircularProgressbar
+                text={String(percentage)}
+                value={percentage}
+                className="progressbar"
+              />
+            )}
+          </motion.span>
+        </AnimatePresence>
+      </FormProvider>
+    </DashMain>
   );
 };
 

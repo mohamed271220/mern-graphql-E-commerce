@@ -155,10 +155,12 @@ svg.svg-star {
 
 .pages-par {
   position: absolute;
-  top: 105%;
+  top: 100%;
   left: 0;
   width: 100%;
   gap: 20px;
+  height: 20px;
+
   cursor: pointer;
   .page {
     width: 15px;

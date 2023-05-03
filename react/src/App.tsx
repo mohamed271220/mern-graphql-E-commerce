@@ -1,4 +1,4 @@
-import React from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import Loading from "./components/Loading";
 import "./styles/App.scss";
 import Nav from "./components/Nav";
@@ -8,8 +8,8 @@ import IsAuthContextComponent from "./context/isAuth";
 import { Toaster } from "react-hot-toast";
 import GridViewContext from "./context/gridView";
 import FilterDataContext from "./context/FilterData";
-import Transition from "./components/widgets/Transition";
-import StripeSuccess from "./components/StripeSuccess";
+import useMeasure from "react-use-measure";
+
 const App = () => {
   return (
     <IsAuthContextComponent>

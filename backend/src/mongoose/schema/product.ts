@@ -49,6 +49,7 @@ export const productSchema = new mongoose.Schema({
   images: [imageSchema],
   rating: [Number],
   reviews: [reviewSchema],
+  createdAt: Date,
 });
 
 const productCollection: Model<productInterface> =

@@ -149,11 +149,6 @@
 
 .remove {
   background: var(--delete);
-  gap: 4px;
-  padding: 4px;
-}
-.remove svg {
-  font-size: 8px;
 }
 
 .w-100 {
@@ -291,4 +286,8 @@
 
 .MagnifierPreview {
   z-index: 2;
+}
+
+.icon {
+  filter: drop-shadow(0.5px 1.2px 0.4px black);
 }/*# sourceMappingURL=classes.css.map */

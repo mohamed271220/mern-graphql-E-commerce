@@ -26,6 +26,7 @@ exports.productSchema = new mongoose_1.default.Schema({
     images: [imageSchema],
     rating: [Number],
     reviews: [reviewSchema],
+    createdAt: Date,
 });
 const productCollection = mongoose_1.default.model("products", exports.productSchema);
 exports.default = productCollection;

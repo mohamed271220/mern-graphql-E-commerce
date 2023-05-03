@@ -9,13 +9,13 @@ import {
 } from "../components/RestfulRoutes.js";
 import { cartInterface } from "../interfaces/user";
 const useBuy = (arrProducts: cartInterface[]) => {
-  const { email } = useContext(isAuthContext);
+  const { email, userId } = useContext(isAuthContext);
 
   const handlePurchase = async () => {
     const { data: key } = await axios.get(getStripePublicKeyRoute());
     if (key) {
       const stripePromise = await loadStripe(key);
-      const res = await axios.post(StripeRoute(), {
+      const res = await axios.post(StripeRoute(userId), {
         products: arrProducts,
         email,
       });

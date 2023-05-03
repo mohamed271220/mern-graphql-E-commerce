@@ -2,21 +2,36 @@ import {
   GraphQLID,
   GraphQLInt,
   GraphQLObjectType,
+  GraphQLFloat,
   GraphQLString,
+  GraphQLList,
+  GraphQLInputType,
+  GraphQLInputObjectType,
 } from "graphql";
 import { OrderCollection } from "../../mongoose/schema/order";
+import { DateType } from "./types/date";
+
+export const orderProduct = new GraphQLObjectType({
+  name: "productorder",
+  fields: () => ({
+    id: { type: GraphQLString },
+    count: { type: GraphQLInt },
+  }),
+});
 
 export const orderType = new GraphQLObjectType({
   name: "orders",
+
   fields: () => ({
     _id: { type: GraphQLID },
-
     userId: { type: GraphQLID },
     state: { type: GraphQLString },
     msg: { type: GraphQLString },
-    productId: { type: GraphQLID },
+    productId: { type: new GraphQLList(orderProduct) },
     count: { type: GraphQLInt },
-    cost: { type: GraphQLInt },
+    cost: { type: GraphQLFloat },
+    createdAt: { type: DateType },
+    deliveredAt: { type: DateType },
   }),
 });
 

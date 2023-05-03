@@ -8,8 +8,10 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const orderSchema = new mongoose_1.default.Schema({
     userId: mongoose_1.default.Types.ObjectId,
     state: String,
-    productId: mongoose_1.default.Types.ObjectId,
+    productId: [{ id: mongoose_1.default.Types.ObjectId, count: Number }],
     count: Number,
     cost: Number,
+    createdAt: Date,
+    deliveredAt: Date,
 });
 exports.OrderCollection = mongoose_1.default.model("orders", orderSchema);

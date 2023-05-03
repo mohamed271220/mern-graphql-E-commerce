@@ -6,9 +6,14 @@ export const GET_ALL_ORDERS = gql`
       _id
       state
       cost
-      productId
+      productId {
+        id
+        count
+      }
       userId
       count
+      createdAt
+      deliveredAt
     }
   }
 `;

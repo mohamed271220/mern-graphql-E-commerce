@@ -13,7 +13,7 @@ import DashProducts from "./dashboard/DashProducts";
 import UpdateProduct from "./dashboard/UpdateProduct";
 import DashUpdateProduct from "./dashboard/DashUpdateProduct";
 import DashAddProduct from "./dashboard/DashAddProduct";
-import Orders from "./dashboard/Orders";
+import Orders from "./dashboard/Order/Orders";
 import CompareProducts from "./Compare/CompareProducts";
 
 const AppRoutes = () => {

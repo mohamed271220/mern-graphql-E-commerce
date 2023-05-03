@@ -1,0 +1,147 @@
+@import "../variables.scss";
+
+.table-par {
+  width: 90%;
+  overflow-y: auto;
+  margin: 0 auto;
+
+  min-height: 60vh;
+}
+table.order {
+  position: relative;
+  width: 100%;
+  min-width: 600px;
+  max-width: 800px;
+  border-spacing: 0.4px;
+  > * {
+    font-weight: bold;
+  }
+  th {
+    height: 40px;
+    background: var(--sale);
+    color: var(--white);
+    text-transform: capitalize;
+    font-size: 1.2rem;
+  }
+  tr {
+    height: 20px;
+    text-align: center;
+    &:nth-child(odd) {
+      background: rgba(0, 0, 0, 0.08);
+    }
+  }
+  td {
+  }
+}
+
+.delete-order {
+  position: absolute;
+  top: -1.5rem;
+  color: var(--delete);
+  svg {
+    font-size: 1.4rem !important;
+  }
+  left: 20px;
+}
+
+.mobile-order-par {
+  display: flex;
+  flex-direction: column;
+  gap: 40px !important;
+  margin: 10px;
+
+  .order-mobile {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    background: var(--white);
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 4px;
+    box-shadow: 1px 1px 3px grey;
+    position: relative;
+    padding: 20px;
+    .mobile-order-title {
+      position: absolute;
+      top: 6px;
+      left: 8px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      .mobile-order-id {
+        font-weight: normal;
+        color: var(--twitter);
+      }
+    }
+  }
+}
+
+.order-state {
+  padding: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 0.8px;
+  color: var(--white);
+  border-radius: 4px;
+  text-transform: capitalize;
+}
+
+.order-date {
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-transform: capitalize;
+  margin-left: -12px;
+  .date {
+    font-weight: bold;
+
+    color: rgb(75, 74, 74);
+  }
+}
+
+.order-delete-mobile {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  color: var(--delete);
+}
+
+.order-drop {
+  position: absolute;
+  top: 20px;
+  right: -3px;
+  width: 80px;
+  height: 100px;
+  background: var(--white);
+  z-index: 100;
+  &:before {
+    content: "";
+    position: absolute;
+    top: -15px;
+    right: 0;
+    border-style: solid;
+    border-width: 8px;
+    border-color: transparent transparent var(--wheat) transparent;
+  }
+}
+
+.order-link {
+  padding: 2px 20%;
+  font-weight: bold;
+  text-transform: capitalize;
+  letter-spacing: 0.7px;
+  span :not(:last-child) {
+    display: inline-block;
+    border-bottom: 0.4px solid black;
+  }
+}
+
+.order-state-par {
+  width: 70px;
+  display: flex;
+  justify-content: flex-end !important;
+  margin-left: -8px;
+}
