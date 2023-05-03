@@ -8,7 +8,15 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const orderSchema = new mongoose_1.default.Schema({
     userId: mongoose_1.default.Types.ObjectId,
     state: String,
-    productId: [{ id: mongoose_1.default.Types.ObjectId, count: Number }],
+    productId: [
+        {
+            id: mongoose_1.default.Types.ObjectId,
+            count: Number,
+            image: String,
+            price: Number,
+            title: String,
+        },
+    ],
     count: Number,
     cost: Number,
     createdAt: Date,

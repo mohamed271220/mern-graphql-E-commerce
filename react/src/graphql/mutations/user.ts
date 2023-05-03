@@ -6,12 +6,14 @@ export const ADD_USER = gql`
     $email: String!
     $password: String!
     $country: String!
+    $image: String
   ) {
     addUser(
       name: $name
       email: $email
       password: $password
       country: $country
+      image: $image
     ) {
       name
       msg

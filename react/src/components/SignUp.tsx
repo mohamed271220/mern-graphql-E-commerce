@@ -24,6 +24,12 @@ const socialMediaArr = [
   },
 ];
 
+interface oAuthInterface {
+  email: string;
+  image: string;
+  name: string;
+}
+
 const SignUp = () => {
   const { schema } = useFormSchema();
   const methods = useForm({ resolver: yupResolver(schema) });
@@ -36,6 +42,21 @@ const SignUp = () => {
     console.log(data);
     handleSignUp();
   };
+
+  const [userObj, setUserObj] = useState({} as oAuthInterface);
+
+  useEffect(() => {
+    const url = window.location.href;
+    const urlObj = new URL(url);
+    const searchParams = new URLSearchParams(urlObj.search);
+    const userString = searchParams.get("user");
+    const userObj = userString
+      ? JSON.parse(decodeURIComponent(userString))
+      : null;
+    setUserObj(userObj);
+  }, []);
+
+  console.log(userObj);
 
   const [formRef, animateForm] = useAnimate();
 
@@ -54,7 +75,13 @@ const SignUp = () => {
     const { name, password, email } = getValues();
 
     const { data } = await addUserFn({
-      variables: { name, password, email, country },
+      variables: {
+        name,
+        password,
+        email,
+        country,
+        image: userObj?.image || "",
+      },
     });
     console.log(data);
     if (data.addUser.status === 200) {
@@ -76,9 +103,14 @@ const SignUp = () => {
           ref={formRef}
         >
           <h2 className="underline header white"> sign Up</h2>
-          <Input placeholder={"name"} err={errors?.name?.message?.toString()} />
+          <Input
+            placeholder={"name"}
+            err={errors?.name?.message?.toString()}
+            defaultVal={userObj?.name || ""}
+          />
           <Input
             placeholder={"email"}
+            defaultVal={userObj?.email || ""}
             err={errors?.email?.message?.toString()}
           />{" "}
           <Input
@@ -108,6 +140,12 @@ const SignUp = () => {
                   whileHover={{
                     color: "white",
                     background: clr,
+                  }}
+                  onClick={() => {
+                    window.open(
+                      "http://localhost:3000/auth/google?mode=signup",
+                      "_self"
+                    );
                   }}
                 >
                   {icon}

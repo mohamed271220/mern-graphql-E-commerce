@@ -45,7 +45,13 @@ const stripeFn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             createdAt: date(),
             cost: session.amount_total / 100,
             userId,
-            productId: products.map((e) => ({ id: e._id, count: e.count })),
+            productId: products.map((e) => ({
+                id: e._id,
+                count: e.count,
+                title: e.title,
+                price: e.price,
+                image: e.path,
+            })),
             state: "pending",
             count: products.length,
         });

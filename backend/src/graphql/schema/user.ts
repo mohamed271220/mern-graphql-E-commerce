@@ -96,6 +96,7 @@ export const userMutation = new GraphQLObjectType({
         email: { type: GraphQLString },
         password: { type: GraphQLString },
         country: { type: GraphQLString },
+        image: { type: GraphQLString },
       },
       resolve: async (_, args) => {
         const check = await userCollection.find({ email: args.email });
@@ -106,9 +107,11 @@ export const userMutation = new GraphQLObjectType({
             msg: "this email has registered",
           };
         } else {
+          console.log(args);
           const res = await userCollection.create({
             ...args,
             image:
+              args.image ||
               "https://res.cloudinary.com/domobky11/image/upload/v1682383659/download_d2onbx.png",
             password: hashPassword(args.password),
           });
@@ -701,10 +704,13 @@ export const userMutation = new GraphQLObjectType({
       args: {
         _id: { type: GraphQLID },
         state: { type: GraphQLString },
+        deliveredAt: { type: DateType },
       },
       async resolve(_, args) {
+        console.log(args);
         const res = await OrderCollection.findByIdAndUpdate(args._id, {
           state: args.state,
+          deliveredAt: args.deliveredAt,
         });
 
         return { msg: "order is successfully updated" };

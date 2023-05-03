@@ -94,6 +94,7 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                 email: { type: graphql_1.GraphQLString },
                 password: { type: graphql_1.GraphQLString },
                 country: { type: graphql_1.GraphQLString },
+                image: { type: graphql_1.GraphQLString },
             },
             resolve: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
                 const check = yield user_js_1.userCollection.find({ email: args.email });
@@ -105,7 +106,9 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                     };
                 }
                 else {
-                    const res = yield user_js_1.userCollection.create(Object.assign(Object.assign({}, args), { image: "https://res.cloudinary.com/domobky11/image/upload/v1682383659/download_d2onbx.png", password: (0, hashPassword_js_1.hashPassword)(args.password) }));
+                    console.log(args);
+                    const res = yield user_js_1.userCollection.create(Object.assign(Object.assign({}, args), { image: args.image ||
+                            "https://res.cloudinary.com/domobky11/image/upload/v1682383659/download_d2onbx.png", password: (0, hashPassword_js_1.hashPassword)(args.password) }));
                     return Object.assign(Object.assign({}, res), { status: 200, msg: "user created successfully" });
                 }
             }),
@@ -693,11 +696,14 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
             args: {
                 _id: { type: graphql_1.GraphQLID },
                 state: { type: graphql_1.GraphQLString },
+                deliveredAt: { type: date_js_1.DateType },
             },
             resolve(_, args) {
                 return __awaiter(this, void 0, void 0, function* () {
+                    console.log(args);
                     const res = yield order_js_2.OrderCollection.findByIdAndUpdate(args._id, {
                         state: args.state,
+                        deliveredAt: args.deliveredAt,
                     });
                     return { msg: "order is successfully updated" };
                 });

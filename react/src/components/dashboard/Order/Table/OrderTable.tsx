@@ -30,30 +30,10 @@ const OrderTable = () => {
                 <span
                   onClick={() => {
                     handleDeleteOrder();
-                    // setarrOfOrders([]);
+                    setarrOfOrders([]);
                   }}
                 >
                   <AiTwotoneDelete className="icon " />
-                </span>
-              </Title>
-
-              <Title
-                title={`update ${arrOfOrders.length}order${
-                  arrOfOrders.length >= 2 ? "s" : ""
-                }`}
-                abs
-              >
-                <span
-                // onClick={async () => {
-                //   const res = deleteOrder({
-                //     variables: { _id: arrOfOrders },
-                //   });
-                //   dispatch(removeFromOrderRedux(arrOfOrders));
-                //   toast.success((await res).data.deleteOrder.msg);
-                //   setarrOfOrders([]);
-                // }}
-                >
-                  <GrUpgrade className="icon " color="var(--green)" />
                 </span>
               </Title>
             </div>

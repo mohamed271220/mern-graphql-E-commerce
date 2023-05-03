@@ -14,8 +14,26 @@ const user_js_1 = require("./graphql/schema/user.js");
 const product_js_1 = require("./graphql/schema/product.js");
 const uploudRoute_js_1 = require("./Upload/uploudRoute.js");
 const stripe_js_1 = __importDefault(require("./stripe/stripe.js"));
+const passport_1 = __importDefault(require("passport"));
+require("./oAuth/google.js");
+const googleAuth_js_1 = require("./routes/googleAuth.js");
+const cookieSession = require("cookie-session");
 mongoose_1.default.connect(config_js_1.MongoDB_URL);
 const app = (0, express_1.default)();
+// app.use(
+//   session({
+//     secret: "your-secret-key",
+//     resave: false,
+//     saveUninitialized: true,
+//   })
+// );
+app.use(cookieSession({
+    name: "session",
+    keys: [config_js_1.SeSSion_Secret],
+    maxAge: 24 * 60 * 60 * 100,
+}));
+app.use(passport_1.default.initialize());
+app.use(passport_1.default.session());
 app.use((0, cors_1.default)({
     credentials: true,
     origin: "http://localhost:5173",
@@ -31,6 +49,8 @@ app.use("/graphql", (0, express_graphql_1.graphqlHTTP)({
 }));
 app.use("/", uploudRoute_js_1.uploadRoute);
 app.use("/", stripe_js_1.default);
+app.use("/", googleAuth_js_1.oAuthRouter);
 app.listen(3000, () => {
     console.log("server-runs");
 });
+//http://localhost:3000/auth/google/callback

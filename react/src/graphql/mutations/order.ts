@@ -9,8 +9,8 @@ export const Remove_Order = gql`
 `;
 
 export const update_Order = gql`
-  mutation ($_id: ID!, $state: String!) {
-    updateOrder(_id: $_id, state: $state) {
+  mutation ($_id: ID!, $state: String!, $deliveredAt: Date) {
+    updateOrder(_id: $_id, state: $state, deliveredAt: $deliveredAt) {
       msg
     }
   }

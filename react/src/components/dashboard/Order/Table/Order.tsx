@@ -47,12 +47,14 @@ const Order = ({
       <td>
         <AnimatePresence mode="wait">
           {deliveredAt ? (
-            <FadeElement cls="">
+            <FadeElement cls="" key={`order${deliveredAt}`}>
               {new Date(deliveredAt).toLocaleDateString()} -
               {new Date(deliveredAt).toLocaleTimeString()}
             </FadeElement>
           ) : (
-            <FadeElement cls="">&#95;</FadeElement>
+            <FadeElement cls="" key={"underscore" + deliveredAt}>
+              &#95;
+            </FadeElement>
           )}
         </AnimatePresence>
       </td>

@@ -35,7 +35,7 @@ const MobileOrder = ({
     useContext(checkContext);
   const { handleDeleteOrder } = useDeleteOrder([_id]);
   const [orderState, setOrderState] = useState(state);
-
+  console.log({ deliveredAt });
   return (
     <div className="order-mobile box-shadow">
       <span
@@ -78,12 +78,23 @@ const MobileOrder = ({
           />
         </div>
       </div>
-      <span className="date">
+      <span className="date" style={{ marginTop: 6 }}>
         <span className="order-date">created at : </span>
-        {new Date(createdAt).toLocaleDateString()} -{" "}
+        &#160; {new Date(createdAt).toLocaleDateString()} -{" "}
         {new Date(createdAt).toLocaleTimeString()}
       </span>
-      <span></span>
+      <span className="date " style={{ display: "flex" }}>
+        <span className="order-date">delivred at : </span>
+        <AnimatePresence mode="wait">
+          <FadeElement cls="" key={deliveredAt}>
+            &#160;{" "}
+            {deliveredAt
+              ? `${new Date(deliveredAt).toLocaleDateString()} -
+          ${new Date(deliveredAt).toLocaleTimeString()}`
+              : "not delvired yet"}
+          </FadeElement>
+        </AnimatePresence>
+      </span>
       <StyledPrice price={cost} />
     </div>
   );

@@ -14,7 +14,10 @@ import { DateType } from "./types/date";
 export const orderProduct = new GraphQLObjectType({
   name: "productorder",
   fields: () => ({
-    id: { type: GraphQLString },
+    id: { type: GraphQLID },
+    image: { type: GraphQLString },
+    price: { type: GraphQLFloat },
+    title: { type: GraphQLString },
     count: { type: GraphQLInt },
   }),
 });

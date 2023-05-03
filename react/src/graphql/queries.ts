@@ -9,6 +9,9 @@ export const GET_ALL_ORDERS = gql`
       productId {
         id
         count
+        image
+        title
+        price
       }
       userId
       count

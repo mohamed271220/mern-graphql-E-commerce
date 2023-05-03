@@ -42,7 +42,13 @@ const stripeFn = async (req: Request, res: Response) => {
       createdAt: date(),
       cost: session.amount_total / 100,
       userId,
-      productId: products.map((e: any) => ({ id: e._id, count: e.count })),
+      productId: products.map((e: any) => ({
+        id: e._id,
+        count: e.count,
+        title: e.title,
+        price: e.price,
+        image: e.path,
+      })),
       state: "pending",
       count: products.length,
     });

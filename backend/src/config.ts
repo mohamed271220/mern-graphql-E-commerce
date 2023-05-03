@@ -14,6 +14,9 @@ const {
   Stripe_key,
   Client_Url,
   Stripe_Public,
+  Google_Client_ID,
+  GooGle_Secret,
+  SeSSion_Secret,
 } = process.env;
 
 export {
@@ -28,4 +31,7 @@ export {
   Stripe_key,
   Client_Url,
   Stripe_Public,
+  Google_Client_ID,
+  GooGle_Secret,
+  SeSSion_Secret,
 };

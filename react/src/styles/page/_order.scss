@@ -95,11 +95,12 @@ table.order {
   font-size: 1.1rem;
   text-transform: capitalize;
   margin-left: -12px;
-  .date {
-    font-weight: bold;
-
-    color: rgb(75, 74, 74);
-  }
+}
+.date {
+  display: inline-block;
+  font-weight: bold;
+  margin-top: 3px;
+  color: rgb(75, 74, 74);
 }
 
 .order-delete-mobile {

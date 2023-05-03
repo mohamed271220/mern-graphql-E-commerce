@@ -39,7 +39,7 @@ const Orders = () => {
   const { data } = useQuery(GET_ALL_ORDERS);
   const [selectALl, setSlectALl] = useState<string | number>("");
   const [arrOfOrders, setarrOfOrders] = useState<string[]>([]);
-
+  console.log(data);
   const [page, setPage] = useState(1);
   const { order } = useAppSelector((st) => st.order);
 

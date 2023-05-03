@@ -6,7 +6,10 @@ const date_1 = require("./types/date");
 exports.orderProduct = new graphql_1.GraphQLObjectType({
     name: "productorder",
     fields: () => ({
-        id: { type: graphql_1.GraphQLString },
+        id: { type: graphql_1.GraphQLID },
+        image: { type: graphql_1.GraphQLString },
+        price: { type: graphql_1.GraphQLFloat },
+        title: { type: graphql_1.GraphQLString },
         count: { type: graphql_1.GraphQLInt },
     }),
 });

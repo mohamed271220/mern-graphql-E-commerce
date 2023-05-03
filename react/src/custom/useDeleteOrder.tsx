@@ -6,7 +6,6 @@ import { useMutation } from "@apollo/client";
 
 const useDeleteOrder = (arr: string[]) => {
   const dispatch = useAppDispatch();
-  console.log(arr);
   const [deleteOrder] = useMutation(Remove_Order);
   const handleDeleteOrder = async () => {
     const res = deleteOrder({

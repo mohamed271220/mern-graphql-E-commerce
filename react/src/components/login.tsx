@@ -92,6 +92,9 @@ const Login = () => {
                     color: "white",
                     background: clr,
                   }}
+                  onClick={() => {
+                    window.open("http://localhost:3000/auth/google", "_self");
+                  }}
                 >
                   {icon}
                 </motion.div>

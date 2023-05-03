@@ -26,7 +26,11 @@ const orderSlice = createSlice({
     updateOrderRedux(state, action) {
       state.order = state.order.map((order: any) =>
         action.payload.id === order._id
-          ? { ...order, state: action.payload.state }
+          ? {
+              ...order,
+              state: action.payload.state,
+              deliveredAt: action.payload.deliveredAt,
+            }
           : order
       );
     },
