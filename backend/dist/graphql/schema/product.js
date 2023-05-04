@@ -58,6 +58,15 @@ exports.productQuery = new graphql_1.GraphQLObjectType({
                 });
             },
         },
+        order: {
+            type: order_js_1.orderType,
+            args: { id: { type: graphql_1.GraphQLID } },
+            resolve(_, args) {
+                return __awaiter(this, void 0, void 0, function* () {
+                    return yield order_js_2.OrderCollection.findById(args.id);
+                });
+            },
+        },
     },
 });
 // export const productMutation = new GraphQLObjectType({

@@ -20,3 +20,24 @@ export const GET_ALL_ORDERS = gql`
     }
   }
 `;
+
+export const GET_ORDER = gql`
+  query ($id: ID!) {
+    order(id: $id) {
+      _id
+      state
+      cost
+      productId {
+        id
+        count
+        image
+        title
+        price
+      }
+      userId
+      count
+      createdAt
+      deliveredAt
+    }
+  }
+`;

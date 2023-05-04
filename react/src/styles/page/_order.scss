@@ -146,3 +146,63 @@ table.order {
   justify-content: flex-end !important;
   margin-left: -8px;
 }
+
+.mobile-order-details {
+  &.underline {
+    &:before {
+      background: var(--sale);
+    }
+  }
+}
+.table-order-detail {
+  background-color: var(--white);
+  margin-top: 20px;
+  text-align: center;
+  vertical-align: middle;
+  border-spacing: 0;
+  th {
+    color: var(--white);
+    background: #000;
+    height: 40px;
+    text-transform: capitalize;
+  }
+  td {
+    height: 30px;
+    font-weight: 600;
+    &:first-child {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 8px;
+      padding: 10px;
+
+      .table-order {
+        width: 20vw !important;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: start;
+      }
+    }
+  }
+}
+
+.customer {
+  margin-top: 12px;
+  background: var(--white);
+  padding: 12px;
+
+  h2 + .hr {
+    margin-top: 6px;
+  }
+  h2 {
+    text-transform: capitalize;
+  }
+}
+.order-detail {
+  height: 30px;
+  span:first-child {
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+}

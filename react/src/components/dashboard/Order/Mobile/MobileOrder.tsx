@@ -13,6 +13,7 @@ import useDeleteOrder from "../../../../custom/useDeleteOrder";
 import { HiDotsVertical } from "react-icons/hi";
 import OrderDropDown from "../OrderDropDown";
 import useUpdateOrder from "../../../../custom/useUpdateOrder";
+import { useNavigate } from "react-router-dom";
 interface Props {
   state: string;
   _id: string;
@@ -35,21 +36,27 @@ const MobileOrder = ({
     useContext(checkContext);
   const { handleDeleteOrder } = useDeleteOrder([_id]);
   const [orderState, setOrderState] = useState(state);
-  console.log({ deliveredAt });
+  const navigate = useNavigate();
   return (
     <div className="order-mobile box-shadow">
-      <span
-        className="order-delete-mobile center gap "
-        onClick={() => {
-          handleDeleteOrder();
-          setarrOfOrders([]);
-        }}
-      >
+      <span className="order-delete-mobile center gap ">
         <Title title={`delete this order`}>
-          <AiTwotoneDelete fontSize={15} className="icon" />
+          <AiTwotoneDelete
+            fontSize={15}
+            className="icon"
+            onClick={() => {
+              handleDeleteOrder();
+              setarrOfOrders([]);
+            }}
+          />
         </Title>
         <Title title={`see order details`}>
-          <BsInfoCircleFill className="icon " color="grey" fontSize={14} />
+          <BsInfoCircleFill
+            className="icon "
+            color="grey"
+            fontSize={14}
+            onClick={() => navigate(`/dashboard/order/${_id}`)}
+          />
         </Title>
       </span>
 

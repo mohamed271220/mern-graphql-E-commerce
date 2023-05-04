@@ -23,6 +23,11 @@
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
+  --pending: rgba(128, 128, 128, 0.493);
+  --canceled: rgba(137, 29, 29, 0.543);
+  --hold: rgba(243, 165, 20, 0.591);
+  --shipped: rgba(4, 81, 4, 0.446);
+  --delivered: rgba(44, 44, 171, 0.528);
 }
 
 .center {
@@ -295,6 +300,7 @@
 
 .icon {
   filter: drop-shadow(0.5px 1.2px 0.4px black);
+  filter: drop-shadow(0.5px 1px 0.4px black);
 }
 
 :root {
@@ -317,6 +323,11 @@
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
+  --pending: rgba(128, 128, 128, 0.493);
+  --canceled: rgba(137, 29, 29, 0.543);
+  --hold: rgba(243, 165, 20, 0.591);
+  --shipped: rgba(4, 81, 4, 0.446);
+  --delivered: rgba(44, 44, 171, 0.528);
 }
 
 * {
@@ -594,6 +605,11 @@ nav ul li a.link.active.active:before, nav ul li a.link.active.active:after {
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
+  --pending: rgba(128, 128, 128, 0.493);
+  --canceled: rgba(137, 29, 29, 0.543);
+  --hold: rgba(243, 165, 20, 0.591);
+  --shipped: rgba(4, 81, 4, 0.446);
+  --delivered: rgba(44, 44, 171, 0.528);
 }
 
 .product-container {
@@ -865,6 +881,11 @@ p::first-letter {
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
+  --pending: rgba(128, 128, 128, 0.493);
+  --canceled: rgba(137, 29, 29, 0.543);
+  --hold: rgba(243, 165, 20, 0.591);
+  --shipped: rgba(4, 81, 4, 0.446);
+  --delivered: rgba(44, 44, 171, 0.528);
 }
 
 .pop-up {
@@ -991,6 +1012,11 @@ p.review-user {
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
+  --pending: rgba(128, 128, 128, 0.493);
+  --canceled: rgba(137, 29, 29, 0.543);
+  --hold: rgba(243, 165, 20, 0.591);
+  --shipped: rgba(4, 81, 4, 0.446);
+  --delivered: rgba(44, 44, 171, 0.528);
 }
 
 .banner-par {
@@ -1105,6 +1131,11 @@ p.review-user {
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
+  --pending: rgba(128, 128, 128, 0.493);
+  --canceled: rgba(137, 29, 29, 0.543);
+  --hold: rgba(243, 165, 20, 0.591);
+  --shipped: rgba(4, 81, 4, 0.446);
+  --delivered: rgba(44, 44, 171, 0.528);
 }
 
 .products-par {
@@ -1254,10 +1285,11 @@ svg.svg-star {
 
 .pages-par {
   position: absolute;
-  top: 105%;
+  top: 100%;
   left: 0;
   width: 100%;
   gap: 20px;
+  height: 20px;
   cursor: pointer;
 }
 .pages-par .page {
@@ -1420,6 +1452,11 @@ svg.svg-star {
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
+  --pending: rgba(128, 128, 128, 0.493);
+  --canceled: rgba(137, 29, 29, 0.543);
+  --hold: rgba(243, 165, 20, 0.591);
+  --shipped: rgba(4, 81, 4, 0.446);
+  --delivered: rgba(44, 44, 171, 0.528);
 }
 
 .fav-par {
@@ -1555,6 +1592,11 @@ svg.svg-star {
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
+  --pending: rgba(128, 128, 128, 0.493);
+  --canceled: rgba(137, 29, 29, 0.543);
+  --hold: rgba(243, 165, 20, 0.591);
+  --shipped: rgba(4, 81, 4, 0.446);
+  --delivered: rgba(44, 44, 171, 0.528);
 }
 
 .cart-cont {
@@ -1719,6 +1761,11 @@ svg.svg-star {
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
+  --pending: rgba(128, 128, 128, 0.493);
+  --canceled: rgba(137, 29, 29, 0.543);
+  --hold: rgba(243, 165, 20, 0.591);
+  --shipped: rgba(4, 81, 4, 0.446);
+  --delivered: rgba(44, 44, 171, 0.528);
 }
 
 .table-par {
@@ -1762,10 +1809,157 @@ table.order tr:nth-child(odd) {
   font-size: 1.4rem !important;
 }
 
-.order-mobile {
+.mobile-order-par {
+  display: flex;
+  flex-direction: column;
+  gap: 40px !important;
+  margin: 10px;
+}
+.mobile-order-par .order-mobile {
   width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
   background: var(--white);
-  height: 80px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 4px;
+  box-shadow: 1px 1px 3px grey;
+  position: relative;
+  padding: 20px;
+}
+.mobile-order-par .order-mobile .mobile-order-title {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.mobile-order-par .order-mobile .mobile-order-title .mobile-order-id {
+  font-weight: normal;
+  color: var(--twitter);
+}
+
+.order-state {
+  padding: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 0.8px;
+  color: var(--white);
+  border-radius: 4px;
+  text-transform: capitalize;
+}
+
+.order-date {
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-transform: capitalize;
+  margin-left: -12px;
+}
+
+.date {
+  display: inline-block;
+  font-weight: bold;
+  margin-top: 3px;
+  color: rgb(75, 74, 74);
+}
+
+.order-delete-mobile {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  color: var(--delete);
+}
+
+.order-drop {
+  position: absolute;
+  top: 20px;
+  right: -3px;
+  width: 80px;
+  height: 100px;
+  background: var(--white);
+  z-index: 100;
+}
+.order-drop:before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  right: 0;
+  border-style: solid;
+  border-width: 8px;
+  border-color: transparent transparent var(--wheat) transparent;
+}
+
+.order-link {
+  padding: 2px 20%;
+  font-weight: bold;
+  text-transform: capitalize;
+  letter-spacing: 0.7px;
+}
+.order-link span :not(:last-child) {
+  display: inline-block;
+  border-bottom: 0.4px solid black;
+}
+
+.order-state-par {
+  width: 70px;
+  display: flex;
+  justify-content: flex-end !important;
+  margin-left: -8px;
+}
+
+.mobile-order-details.underline:before {
+  background: var(--sale);
+}
+
+.table-order-detail {
+  background-color: var(--white);
+  margin-top: 20px;
+  text-align: center;
+  vertical-align: middle;
+  border-spacing: 0;
+}
+.table-order-detail th {
+  color: var(--white);
+  background: #000;
+  height: 40px;
+  text-transform: capitalize;
+}
+.table-order-detail td {
+  height: 30px;
+}
+.table-order-detail td:first-child {
+  display: flex;
+  justify-content: flex-start;
+  padding: 10px;
+  width: 30vw !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.customer {
+  margin-top: 12px;
+  background: var(--white);
+  padding: 12px;
+}
+.customer h2 + .hr {
+  margin-top: 6px;
+}
+.customer h2 {
+  text-transform: capitalize;
+}
+
+.order-detail {
+  height: 30px;
+}
+.order-detail span:first-child {
+  font-weight: bold;
+  text-transform: capitalize;
 }
 
 :root {
@@ -1788,6 +1982,11 @@ table.order tr:nth-child(odd) {
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
+  --pending: rgba(128, 128, 128, 0.493);
+  --canceled: rgba(137, 29, 29, 0.543);
+  --hold: rgba(243, 165, 20, 0.591);
+  --shipped: rgba(4, 81, 4, 0.446);
+  --delivered: rgba(44, 44, 171, 0.528);
 }
 
 .about-par {
@@ -1838,6 +2037,11 @@ table.order tr:nth-child(odd) {
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
+  --pending: rgba(128, 128, 128, 0.493);
+  --canceled: rgba(137, 29, 29, 0.543);
+  --hold: rgba(243, 165, 20, 0.591);
+  --shipped: rgba(4, 81, 4, 0.446);
+  --delivered: rgba(44, 44, 171, 0.528);
 }
 
 .sort-par {
@@ -1975,6 +2179,11 @@ table.order tr:nth-child(odd) {
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
+  --pending: rgba(128, 128, 128, 0.493);
+  --canceled: rgba(137, 29, 29, 0.543);
+  --hold: rgba(243, 165, 20, 0.591);
+  --shipped: rgba(4, 81, 4, 0.446);
+  --delivered: rgba(44, 44, 171, 0.528);
 }
 
 .user-page {
@@ -2085,6 +2294,11 @@ input[type=range] {
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
+  --pending: rgba(128, 128, 128, 0.493);
+  --canceled: rgba(137, 29, 29, 0.543);
+  --hold: rgba(243, 165, 20, 0.591);
+  --shipped: rgba(4, 81, 4, 0.446);
+  --delivered: rgba(44, 44, 171, 0.528);
 }
 
 :root {
@@ -2107,6 +2321,11 @@ input[type=range] {
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
+  --pending: rgba(128, 128, 128, 0.493);
+  --canceled: rgba(137, 29, 29, 0.543);
+  --hold: rgba(243, 165, 20, 0.591);
+  --shipped: rgba(4, 81, 4, 0.446);
+  --delivered: rgba(44, 44, 171, 0.528);
 }
 
 .center {
@@ -2379,6 +2598,7 @@ input[type=range] {
 
 .icon {
   filter: drop-shadow(0.5px 1.2px 0.4px black);
+  filter: drop-shadow(0.5px 1px 0.4px black);
 }
 
 .slide-bottom {
@@ -2514,6 +2734,11 @@ input[type=range] {
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
+  --pending: rgba(128, 128, 128, 0.493);
+  --canceled: rgba(137, 29, 29, 0.543);
+  --hold: rgba(243, 165, 20, 0.591);
+  --shipped: rgba(4, 81, 4, 0.446);
+  --delivered: rgba(44, 44, 171, 0.528);
 }
 
 .avatar-par {
@@ -2549,6 +2774,11 @@ input[type=range] {
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
+  --pending: rgba(128, 128, 128, 0.493);
+  --canceled: rgba(137, 29, 29, 0.543);
+  --hold: rgba(243, 165, 20, 0.591);
+  --shipped: rgba(4, 81, 4, 0.446);
+  --delivered: rgba(44, 44, 171, 0.528);
 }
 
 .dashboard-par {
@@ -2601,6 +2831,8 @@ input[type=range] {
 
 .dash-product {
   width: 90%;
+  min-height: calc(100vh - 100px);
+  position: relative;
 }
 
 .dash-show {
@@ -2672,6 +2904,11 @@ textarea.update-product {
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
+  --pending: rgba(128, 128, 128, 0.493);
+  --canceled: rgba(137, 29, 29, 0.543);
+  --hold: rgba(243, 165, 20, 0.591);
+  --shipped: rgba(4, 81, 4, 0.446);
+  --delivered: rgba(44, 44, 171, 0.528);
 }
 
 .custom-select {
@@ -2838,6 +3075,11 @@ textarea.update-product {
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
+  --pending: rgba(128, 128, 128, 0.493);
+  --canceled: rgba(137, 29, 29, 0.543);
+  --hold: rgba(243, 165, 20, 0.591);
+  --shipped: rgba(4, 81, 4, 0.446);
+  --delivered: rgba(44, 44, 171, 0.528);
 }
 
 .transirion-div {
@@ -2867,6 +3109,11 @@ textarea.update-product {
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
+  --pending: rgba(128, 128, 128, 0.493);
+  --canceled: rgba(137, 29, 29, 0.543);
+  --hold: rgba(243, 165, 20, 0.591);
+  --shipped: rgba(4, 81, 4, 0.446);
+  --delivered: rgba(44, 44, 171, 0.528);
 }
 
 .custom-file {

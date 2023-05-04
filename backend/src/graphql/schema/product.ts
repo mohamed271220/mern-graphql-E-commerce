@@ -52,6 +52,13 @@ export const productQuery = new GraphQLObjectType({
         return await OrderCollection.find();
       },
     },
+    order: {
+      type: orderType,
+      args: { id: { type: GraphQLID } },
+      async resolve(_, args) {
+        return await OrderCollection.findById(args.id);
+      },
+    },
   },
 });
 

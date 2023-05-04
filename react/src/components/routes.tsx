@@ -15,6 +15,7 @@ import DashUpdateProduct from "./dashboard/DashUpdateProduct";
 import DashAddProduct from "./dashboard/DashAddProduct";
 import Orders from "./dashboard/Order/Orders";
 import CompareProducts from "./Compare/CompareProducts";
+import OrderDetails from "./dashboard/Order/OrderDetails/OrderDetails";
 
 const AppRoutes = () => {
   const location = useLocation();
@@ -30,6 +31,7 @@ const AppRoutes = () => {
         <Route path="/compare" element={<CompareProducts />} />
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="products" element={<DashProducts />} />
+          <Route path="order/:id" element={<OrderDetails />} />
           <Route path="orders" element={<Orders />} />
           <Route path="addproduct" element={<DashAddProduct />} />
           <Route path="update/:id" element={<DashUpdateProduct />} />

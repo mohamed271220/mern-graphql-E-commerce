@@ -18,6 +18,11 @@
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
+  --pending: rgba(128, 128, 128, 0.493);
+  --canceled: rgba(137, 29, 29, 0.543);
+  --hold: rgba(243, 165, 20, 0.591);
+  --shipped: rgba(4, 81, 4, 0.446);
+  --delivered: rgba(44, 44, 171, 0.528);
 }
 
 * {

@@ -14,7 +14,6 @@ import stripeRoutes from "./stripe/stripe.js";
 import passport from "passport";
 import "./oAuth/google.js";
 import { oAuthRouter } from "./routes/googleAuth.js";
-import session from "express-session";
 import cookieSession = require("cookie-session");
 mongoose.connect(MongoDB_URL as unknown as string);
 
