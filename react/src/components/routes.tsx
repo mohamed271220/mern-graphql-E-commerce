@@ -94,11 +94,16 @@ const AppRoutes = () => {
         <Route path="/user" element={<User />} />
         <Route path="/compare" element={<CompareProducts />} />
         <Route path="/dashboard" element={<Dashboard />}>
-          <Route path="products" element={<DashProducts />} />
-          <Route path="order/:id" element={<OrderDetails />} />
-          <Route path="orders" element={<Orders />} />
-          <Route path="addproduct" element={<DashAddProduct />} />
-          <Route path="update/:id" element={<DashUpdateProduct />} />
+          <Route path="products">
+            <Route path="add" element={<DashAddProduct />} />
+            <Route path=":id" element={<DashUpdateProduct />} />
+            <Route path="" element={<DashProducts />} />
+          </Route>
+          <Route path="orders">
+            <Route path="" element={<Orders />} />
+
+            <Route path=":id" element={<OrderDetails />} />
+          </Route>
         </Route>
         <Route path="/:id" element={<Product />} />
       </Routes>

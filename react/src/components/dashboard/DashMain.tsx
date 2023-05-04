@@ -3,6 +3,7 @@ import { showAsideContext } from "./Dashboard";
 import { motion } from "framer-motion";
 import { ChildrenInterFace } from "../../interfaces/general";
 import Transition from "../widgets/Transition";
+import BeardCrumbs from "./BeardCrumbs";
 
 interface Props extends ChildrenInterFace {
   head: string;
@@ -10,7 +11,6 @@ interface Props extends ChildrenInterFace {
 
 const DashMain = ({ head, children }: Props) => {
   const { showAsideDash } = useContext(showAsideContext);
-  console.log(showAsideDash);
   return (
     <motion.section
       className="dash-product"
@@ -20,6 +20,7 @@ const DashMain = ({ head, children }: Props) => {
       }}
       transition={{ delay: showAsideDash ? 0.2 : 0.7 }}
     >
+      <BeardCrumbs />
       <Transition />
       <h2 className="underline header">{head}</h2>
       {children}

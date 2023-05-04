@@ -2890,6 +2890,23 @@ textarea.update-product {
   width: 100% !important;
 }
 
+.crumbs {
+  display: flex;
+  gap: 6px;
+  margin-left: 10px;
+  margin-top: -4px;
+}
+
+a.crumb-link {
+  display: inline-block;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 4px;
+  color: var(--green);
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
 :root {
   --green: #367e53;
   --wheat: rgb(202, 170, 109);

@@ -4,6 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { opacityVariant } from "../../../../variants/globals";
 import useDeleteOrder from "../../../../custom/useDeleteOrder";
 import MobileOrder from "./MobileOrder";
+import { Outlet } from "react-router-dom";
 const MobileOrders = () => {
   const { arrOfOrders, setarrOfOrders, selectALl, setSlectALl, dataShown } =
     useContext(checkContext);
@@ -33,6 +34,7 @@ const MobileOrders = () => {
           );
         })}
       </AnimatePresence>
+      <Outlet />
     </div>
   );
 };

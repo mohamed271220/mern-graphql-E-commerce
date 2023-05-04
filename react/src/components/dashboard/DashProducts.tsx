@@ -5,6 +5,7 @@ import DashMain from "./DashMain";
 import { useLazyQuery } from "@apollo/client";
 import { Get_All_Products } from "../../graphql/general";
 import { productListContext } from "../../context/FilterData";
+import { Outlet } from "react-router-dom";
 
 const DashProducts = () => {
   const { setGridView } = useContext(viewContext);
@@ -25,6 +26,7 @@ const DashProducts = () => {
     <DashMain head="products">
       <div className=" dash-products">
         <ProductList isDash />
+        <Outlet />
       </div>
     </DashMain>
   );

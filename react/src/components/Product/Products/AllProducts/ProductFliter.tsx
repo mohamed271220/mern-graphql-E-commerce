@@ -225,7 +225,7 @@ const ProductFliter = ({
                 <CompareIcons id={_id} title={title} />
               </span>
             ) : (
-              <span onClick={() => navigat(`/dashboard/update/${_id}`)}>
+              <span onClick={() => navigat(`/dashboard/products/${_id}`)}>
                 <Title title="edit product">
                   <RiEditLine fontSize={16} />
                 </Title>

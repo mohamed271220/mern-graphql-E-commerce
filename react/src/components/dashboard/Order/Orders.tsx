@@ -22,6 +22,7 @@ import { toast } from "react-hot-toast";
 import { GrUpgrade } from "react-icons/gr";
 import useIsMobile from "../../../custom/useIsMobile";
 import OrderTable from "./Table/OrderTable";
+import { Outlet } from "react-router-dom";
 
 interface contextInterface {
   setarrOfOrders: React.Dispatch<React.SetStateAction<string[]>>;
@@ -66,6 +67,7 @@ const Orders = () => {
           numOfPages={numberOfPages}
           setPage={setPage}
         />
+        <Outlet />
       </DashMain>
     </checkContext.Provider>
   );

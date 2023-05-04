@@ -1,6 +1,6 @@
 import React from "react";
 import DashForm from "./DashForm";
-import { useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@apollo/client";
 import { GET_Product_By_Id } from "../../graphql/general";
 import { update_Product } from "../../graphql/mutations/product";
@@ -27,6 +27,7 @@ const DashUpdateProduct = () => {
           fn={updateProductFn}
           Icon={FaEdit}
         />
+        <Outlet />
       </>
     );
   } else return <></>;

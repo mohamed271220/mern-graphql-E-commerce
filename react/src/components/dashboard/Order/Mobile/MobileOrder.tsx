@@ -55,7 +55,7 @@ const MobileOrder = ({
             className="icon "
             color="grey"
             fontSize={14}
-            onClick={() => navigate(`/dashboard/order/${_id}`)}
+            onClick={() => navigate(`/dashboard/orders/${_id}`)}
           />
         </Title>
       </span>

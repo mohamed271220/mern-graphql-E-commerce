@@ -60,7 +60,7 @@ const DashboardAside = () => {
             <GrProductHunt />
             <span>products</span>
           </NavLink>
-          <NavLink to={"/dashboard/addproduct"}>
+          <NavLink to={"/dashboard/products/add"}>
             <GrProductHunt />
             <span>add</span>
           </NavLink>
