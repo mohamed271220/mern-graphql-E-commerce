@@ -1931,15 +1931,21 @@ table.order tr:nth-child(odd) {
 }
 .table-order-detail td {
   height: 30px;
+  font-weight: 600;
 }
 .table-order-detail td:first-child {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
   padding: 10px;
-  width: 30vw !important;
+}
+.table-order-detail td:first-child .table-order {
+  width: 20vw !important;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  text-align: start;
 }
 
 .customer {

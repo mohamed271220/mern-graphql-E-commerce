@@ -143,7 +143,7 @@ const SignUp = () => {
                   }}
                   onClick={() => {
                     window.open(
-                      "http://localhost:3000/auth/google?mode=signup",
+                      "http://localhost:3000/auth/signup/google",
                       "_self"
                     );
                   }}

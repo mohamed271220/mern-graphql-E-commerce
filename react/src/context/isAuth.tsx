@@ -63,6 +63,7 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
   const [getData, { data, loading }] = useMutation(GET_USER_DATA);
 
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     setUserId(Cookies.get("user-id") as unknown as string);
   }, [isAuth]);

@@ -3,10 +3,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SeSSion_Secret = exports.GooGle_Secret = exports.Google_Client_ID = exports.Stripe_Public = exports.Client_Url = exports.Stripe_key = exports.API_SECRET = exports.API_KEY = exports.CLOUD_ACCESS = exports.ACCESS_TOKEN_SECRET = exports.REFRESH_TOKEN_SECRET = exports.BCRYPT_SALT_ROUNDS = exports.BCRYPT_SECRET = exports.MongoDB_URL = void 0;
+exports.SeSSion_Secret = exports.FB_Secret = exports.FB_ID = exports.GooGle_Secret = exports.Google_Client_ID = exports.Stripe_Public = exports.Client_Url = exports.Stripe_key = exports.API_SECRET = exports.API_KEY = exports.CLOUD_ACCESS = exports.ACCESS_TOKEN_SECRET = exports.REFRESH_TOKEN_SECRET = exports.BCRYPT_SALT_ROUNDS = exports.BCRYPT_SECRET = exports.MongoDB_URL = void 0;
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
-const { MongoDB_URL, BCRYPT_SECRET, BCRYPT_SALT_ROUNDS, REFRESH_TOKEN_SECRET, ACCESS_TOKEN_SECRET, CLOUD_ACCESS, API_KEY, API_SECRET, Stripe_key, Client_Url, Stripe_Public, Google_Client_ID, GooGle_Secret, SeSSion_Secret, } = process.env;
+const { MongoDB_URL, BCRYPT_SECRET, BCRYPT_SALT_ROUNDS, REFRESH_TOKEN_SECRET, ACCESS_TOKEN_SECRET, CLOUD_ACCESS, API_KEY, API_SECRET, Stripe_key, Client_Url, Stripe_Public, Google_Client_ID, GooGle_Secret, SeSSion_Secret, FB_ID, FB_Secret, } = process.env;
 exports.MongoDB_URL = MongoDB_URL;
 exports.BCRYPT_SECRET = BCRYPT_SECRET;
 exports.BCRYPT_SALT_ROUNDS = BCRYPT_SALT_ROUNDS;
@@ -21,3 +21,5 @@ exports.Stripe_Public = Stripe_Public;
 exports.Google_Client_ID = Google_Client_ID;
 exports.GooGle_Secret = GooGle_Secret;
 exports.SeSSion_Secret = SeSSion_Secret;
+exports.FB_ID = FB_ID;
+exports.FB_Secret = FB_Secret;

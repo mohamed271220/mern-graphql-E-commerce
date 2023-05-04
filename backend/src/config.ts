@@ -17,6 +17,8 @@ const {
   Google_Client_ID,
   GooGle_Secret,
   SeSSion_Secret,
+  FB_ID,
+  FB_Secret,
 } = process.env;
 
 export {
@@ -33,5 +35,7 @@ export {
   Stripe_Public,
   Google_Client_ID,
   GooGle_Secret,
+  FB_ID,
+  FB_Secret,
   SeSSion_Secret,
 };

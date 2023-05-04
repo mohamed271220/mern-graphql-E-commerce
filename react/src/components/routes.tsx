@@ -1,5 +1,5 @@
-import React from "react";
-import { Routes, Route, useLocation } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import Home from "./Home/Home";
 import About from "./About";
 import Login from "./login";
@@ -16,9 +16,73 @@ import DashAddProduct from "./dashboard/DashAddProduct";
 import Orders from "./dashboard/Order/Orders";
 import CompareProducts from "./Compare/CompareProducts";
 import OrderDetails from "./dashboard/Order/OrderDetails/OrderDetails";
+import { toast } from "react-hot-toast";
+import { isAuthContext } from "../context/isAuth";
 
 const AppRoutes = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+
+  // Check isLogged and do something
+  const [islog, setIslog] = useState("");
+  const [isRegistered, setIsRegistered] = useState("");
+  const { setIsAuth } = useContext(isAuthContext);
+  const handleShowToastLogIn = () => {
+    const query = new URLSearchParams(location.search);
+    const isLoggedvalue = query.get("isLogged");
+    if (isLoggedvalue === "true") {
+      setIslog("true");
+    } else if (isLoggedvalue === "false") {
+      setIslog("false");
+    }
+  };
+
+  const handleShowToastSignUp = () => {
+    const query = new URLSearchParams(location.search);
+    const isRegisteredVal = query.get("isRegistered");
+    if (isRegisteredVal === "true") {
+      setIsRegistered("true");
+    } else if (isRegisteredVal === "false") {
+      setIsRegistered("false");
+    }
+  };
+  useEffect(() => {
+    handleShowToastLogIn();
+    handleShowToastSignUp();
+  }, []);
+
+  useEffect(() => {
+    if (islog === "") return;
+    if (islog === "true") {
+      toast.success("successfully logged in");
+      setIsAuth(true);
+    } else if (islog === "false") {
+      toast.success("this email is not registered");
+    }
+    navigate(location.pathname.replace("?isLogged=true", ""), {
+      replace: true,
+    });
+
+    const timer = setTimeout(() => {
+      setIslog("");
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [islog]);
+
+  useEffect(() => {
+    if (isRegistered === "") return;
+    if (isRegistered === "true") {
+      toast.success("this email is registered");
+    }
+    navigate(location.pathname.replace("?isRegistered=true", ""), {
+      replace: true,
+    });
+    const timer = setTimeout(() => {
+      setIsRegistered("");
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [isRegistered]);
+
   return (
     <AnimatePresence initial={false} mode="wait">
       <Routes location={location} key={location.pathname}>

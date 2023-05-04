@@ -16,17 +16,12 @@ const uploudRoute_js_1 = require("./Upload/uploudRoute.js");
 const stripe_js_1 = __importDefault(require("./stripe/stripe.js"));
 const passport_1 = __importDefault(require("passport"));
 require("./oAuth/google.js");
+require("./oAuth/fb.js");
 const googleAuth_js_1 = require("./routes/googleAuth.js");
+const fbRoutes_js_1 = require("./routes/fbRoutes.js");
 const cookieSession = require("cookie-session");
 mongoose_1.default.connect(config_js_1.MongoDB_URL);
 const app = (0, express_1.default)();
-// app.use(
-//   session({
-//     secret: "your-secret-key",
-//     resave: false,
-//     saveUninitialized: true,
-//   })
-// );
 app.use(cookieSession({
     name: "session",
     keys: [config_js_1.SeSSion_Secret],
@@ -50,7 +45,7 @@ app.use("/graphql", (0, express_graphql_1.graphqlHTTP)({
 app.use("/", uploudRoute_js_1.uploadRoute);
 app.use("/", stripe_js_1.default);
 app.use("/", googleAuth_js_1.oAuthRouter);
+app.use("/", fbRoutes_js_1.fbOAuthRouter);
 app.listen(3000, () => {
     console.log("server-runs");
 });
-//http://localhost:3000/auth/google/callback

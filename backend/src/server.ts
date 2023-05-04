@@ -13,18 +13,13 @@ import { uploadRoute } from "./Upload/uploudRoute.js";
 import stripeRoutes from "./stripe/stripe.js";
 import passport from "passport";
 import "./oAuth/google.js";
+import "./oAuth/fb.js";
 import { oAuthRouter } from "./routes/googleAuth.js";
+import { fbOAuthRouter } from "./routes/fbRoutes.js";
 import cookieSession = require("cookie-session");
 mongoose.connect(MongoDB_URL as unknown as string);
 
 const app = express();
-// app.use(
-//   session({
-//     secret: "your-secret-key",
-//     resave: false,
-//     saveUninitialized: true,
-//   })
-// );
 
 app.use(
   cookieSession({
@@ -60,8 +55,8 @@ app.use(
 app.use("/", uploadRoute);
 app.use("/", stripeRoutes);
 app.use("/", oAuthRouter);
+app.use("/", fbOAuthRouter);
+
 app.listen(3000, () => {
   console.log("server-runs");
 });
-
-//http://localhost:3000/auth/google/callback

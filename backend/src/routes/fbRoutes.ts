@@ -8,8 +8,9 @@ import {
 } from "../config";
 import { userCollection } from "../mongoose/schema/user";
 
-const successLogin = async (req: Request, res: Response) => {
+const fbSuccessLogin = async (req: Request, res: Response) => {
   const user: any = req.user;
+  console.log("user");
   const location = req.query.location;
   const email = user?.emails[0]?.value;
   if (email) {
@@ -60,35 +61,38 @@ const successSignup = async (req: Request, res: Response) => {
   }
 };
 
-export const oAuthRouter = Router();
+export const fbOAuthRouter = Router();
 
-oAuthRouter.route("/auth/login/google").get((req, res, next) => {
-  passport.authenticate("google", {
+fbOAuthRouter.route("/auth/login/facebook").get((req, res, next) => {
+  passport.authenticate("facebook", {
     scope: ["profile", "email"],
     state: `login?location=${req.query.location}`,
   })(req, res, next);
 });
 
-oAuthRouter.route("/auth/signup/google").get((req, res, next) => {
-  passport.authenticate("google", {
+fbOAuthRouter.route("/auth/signup/google").get((req, res, next) => {
+  passport.authenticate("facebook", {
     scope: ["profile", "email"],
     state: "signup",
   })(req, res, next);
 });
 
-oAuthRouter.route("/auth/google/callback").get((req: any, res: any, next) => {
-  const { state } = req.query;
-  const str = state?.split("?");
-  const login = str[0];
-  const location = str[1]?.replace("location=", "");
-  passport.authenticate("google", {
-    successRedirect: `/auth/success/${login}${
-      login === "login" ? `?location=${location}` : ""
-    }`,
-    failureRedirect: `/auth/failure/${state}`,
-  })(req, res, next);
-});
+fbOAuthRouter
+  .route("/auth/facebook/callback")
+  .get((req: any, res: any, next) => {
+    console.log("1");
+    const { state } = req.query;
+    const str = state?.split("?");
+    const login = str[0];
+    const location = str[1]?.replace("location=", "");
+    passport.authenticate("facebook", {
+      successRedirect: `/auth/fb/success/${login}${
+        login === "login" ? `?location=${location}` : ""
+      }`,
+      failureRedirect: `/auth/failure/${state}`,
+    })(req, res, next);
+  });
 
-oAuthRouter.route("/auth/success/login").get(successLogin);
-// oAuthRouter.route("/auth/failure/login").get(failLogin);
-oAuthRouter.route("/auth/success/signup").get(successSignup);
+fbOAuthRouter.route("/auth/fb/success/login").get(fbSuccessLogin);
+// fbOAuthRouter.route("/auth/failure/login").get(failLogin);
+fbOAuthRouter.route("/auth/success/signup").get(successSignup);

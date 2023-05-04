@@ -11,7 +11,7 @@ import { Authenticate_Query } from "../graphql/mutations/user";
 import OpacityBtn from "./widgets/OpacityBtn";
 import { toast } from "react-hot-toast";
 import { isAuthContext } from "../context/isAuth";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import Transition from "./widgets/Transition";
 
 const socialMediaArr = [
@@ -53,6 +53,10 @@ const Login = () => {
       setIsAuth(true);
     }
   };
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
   return (
     <div className="log-in center">
       <Transition />
@@ -93,7 +97,18 @@ const Login = () => {
                     background: clr,
                   }}
                   onClick={() => {
-                    window.open("http://localhost:3000/auth/google", "_self");
+                    // const prev = navigate(-1);
+                    // console.log(prev);
+
+                    //google
+                    // window.open(
+                    //   `http://localhost:3000/auth/login/google?location=about`,
+                    //   "_self"
+                    // );
+                    window.open(
+                      `http://localhost:3000/auth/login/facebook?location=about`,
+                      "_self"
+                    );
                   }}
                 >
                   {icon}
