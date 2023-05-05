@@ -1141,6 +1141,8 @@ p.review-user {
 .products-par {
   width: 100%;
   min-height: 100vh;
+  height: auto;
+  margin-bottom: 10px;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -1292,15 +1294,22 @@ svg.svg-star {
   height: 20px;
   cursor: pointer;
 }
+.pages-par .center-pages-par {
+  min-width: 70px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+}
 .pages-par .page {
-  width: 15px;
-  height: 15px;
+  width: 14px;
+  height: 14px;
   background: var(--green);
   color: white;
   transition: 0.3s;
 }
 .pages-par .page.page-active {
-  transform: scale(1.2);
+  transform: scale(1.3);
 }
 
 .product-links {
@@ -1537,14 +1546,11 @@ svg.svg-star {
   justify-content: flex-start;
   font-size: 0.8rem;
   gap: 0;
+  padding-top: 4px;
 }
 .user-drop .user-icon {
-  background-color: var(--wheat-light);
   border-radius: 4px;
   transition: 0.3s;
-}
-.user-drop svg {
-  color: green;
 }
 .user-drop .user-drop-img {
   text-transform: capitalize;
@@ -1567,9 +1573,6 @@ svg.svg-star {
 }
 .user-drop-link:hover {
   background: var(--wheat-lighter);
-}
-.user-drop-link:hover .user-icon {
-  background: var(--white);
 }
 
 :root {

@@ -5,7 +5,9 @@
 
   // margin-top: 60px;
   width: 100%;
-  min-height: 100vh;
+  height: auto;
+  min-height: auto;
+  margin-bottom: 10px;
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -161,15 +163,24 @@ svg.svg-star {
   gap: 20px;
   height: 20px;
 
+  .center-pages-par {
+    min-width: 70px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-start;
+  }
   cursor: pointer;
   .page {
-    width: 15px;
-    height: 15px;
+    width: 14px;
+    height: 14px;
     background: var(--green);
+    border: 0;
+    outline: 0;
     color: white;
     transition: 0.3s;
     &.page-active {
-      transform: scale(1.2);
+      transform: scale(1.3);
     }
   }
 }

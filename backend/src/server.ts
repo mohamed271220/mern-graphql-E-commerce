@@ -54,8 +54,8 @@ app.use(
 
 app.use("/", uploadRoute);
 app.use("/", stripeRoutes);
-app.use("/", oAuthRouter);
 app.use("/", fbOAuthRouter);
+app.use("/", oAuthRouter);
 
 app.listen(3000, () => {
   console.log("server-runs");

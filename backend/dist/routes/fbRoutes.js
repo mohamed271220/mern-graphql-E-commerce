@@ -63,16 +63,17 @@ const successSignup = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.fbOAuthRouter = (0, express_1.Router)();
-exports.fbOAuthRouter.route("/auth/login/facebook").get((req, res, next) => {
-    passport_1.default.authenticate("facebook", {
-        scope: ["profile", "email"],
-        state: `login?location=${req.query.location}`,
-    })(req, res, next);
-});
-exports.fbOAuthRouter.route("/auth/signup/google").get((req, res, next) => {
+exports.fbOAuthRouter.route("/auth/signup/facebook").get((req, res, next) => {
     passport_1.default.authenticate("facebook", {
         scope: ["profile", "email"],
         state: "signup",
+    })(req, res, next);
+});
+exports.fbOAuthRouter.route("/auth/login/facebook").get((req, res, next) => {
+    console.log("fb-login");
+    passport_1.default.authenticate("facebook", {
+        scope: ["profile"],
+        // state: `login?location=${req.query.location}`,
     })(req, res, next);
 });
 exports.fbOAuthRouter

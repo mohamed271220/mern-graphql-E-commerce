@@ -44,8 +44,8 @@ app.use("/graphql", (0, express_graphql_1.graphqlHTTP)({
 }));
 app.use("/", uploudRoute_js_1.uploadRoute);
 app.use("/", stripe_js_1.default);
-app.use("/", googleAuth_js_1.oAuthRouter);
 app.use("/", fbRoutes_js_1.fbOAuthRouter);
+app.use("/", googleAuth_js_1.oAuthRouter);
 app.listen(3000, () => {
     console.log("server-runs");
 });

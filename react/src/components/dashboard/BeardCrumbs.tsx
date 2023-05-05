@@ -18,7 +18,13 @@ const BeardCrumbs = () => {
           <NavLink className={"crumb-link"} to={to}>
             {crumb}
           </NavLink>
-          {i !== arr.length - 1 && <FaGreaterThan className="crumb-icon" />}
+          {i !== arr.length - 1 && (
+            <FaGreaterThan
+              fontSize={".8rem"}
+              color="var(--wheat-light)"
+              className="crumb-icon"
+            />
+          )}
         </div>
       );
     });

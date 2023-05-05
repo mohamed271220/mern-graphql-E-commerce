@@ -19,60 +19,68 @@ const Pages = ({ numOfPages, setPage, page }: Props) => {
   }, [numOfPages]);
   return (
     <div className="pages-par center">
-      <AnimatePresence>
-        {page > 1 && (
-          <Title title="prev page">
-            <motion.div
-              className="page center"
-              variants={opacityVariant}
-              initial="start"
-              animate="end"
-              exit="exit"
-              transition={{ duration: 0.4 }}
-              key={"prev-page"}
-              onClick={() => setPage(page - 1)}
-            >
-              <BiLeftArrowAlt />
-            </motion.div>
-          </Title>
-        )}
-      </AnimatePresence>
-      {pageArr?.map((num, index) => {
-        {
-          return (
-            <>
-              <div
-                className={`page center ${
-                  page === index + 1 ? "page-active" : ""
-                }`}
-                onClick={() => setPage(index + 1)}
-                key={index}
-              >
-                {" "}
-                {num}
-              </div>
-            </>
-          );
-        }
-      })}
-      <AnimatePresence>
-        {page < numOfPages && (
-          <Title title="next page">
-            <motion.div
-              className="page center"
-              variants={opacityVariant}
-              initial="start"
-              animate="end"
-              exit="exit"
-              transition={{ duration: 0.4 }}
-              key={"next-page"}
-              onClick={() => setPage(page + 1)}
-            >
-              <BiRightArrowAlt />
-            </motion.div>
-          </Title>
-        )}
-      </AnimatePresence>
+      {/* <AnimatePresence>
+        {page > 1 && ( */}
+      <Title title="prev page">
+        <motion.button
+          className="page center"
+          variants={opacityVariant}
+          style={{
+            background: page > 1 ? "var(--wheat)" : "var(--wheat-lighter)",
+          }}
+          disabled={page < 2 ? true : false}
+          initial="start"
+          animate="end"
+          exit="exit"
+          transition={{ duration: 0.4 }}
+          key={"prev-page"}
+          onClick={() => setPage(page - 1)}
+        >
+          <BiLeftArrowAlt />
+        </motion.button>
+      </Title>
+      {/* )}
+      </AnimatePresence> */}
+      <div className="center-pages-par">
+        {pageArr?.map((num, index) => {
+          {
+            return (
+              <>
+                <div
+                  className={`page center ${
+                    page === index + 1 ? "page-active" : ""
+                  }`}
+                  onClick={() => setPage(index + 1)}
+                  key={index}
+                >
+                  {" "}
+                  {num}
+                </div>
+              </>
+            );
+          }
+        })}
+      </div>
+
+      <Title title="next page">
+        <motion.button
+          className="page center"
+          variants={opacityVariant}
+          initial="start"
+          animate="end"
+          exit="exit"
+          transition={{ duration: 0.4 }}
+          key={"next-page"}
+          onClick={() => setPage(page + 1)}
+          style={{
+            background:
+              page < numOfPages ? "var(--wheat)" : "var(--wheat-lighter)",
+          }}
+          disabled={page > numOfPages - 1 ? true : false}
+        >
+          <BiRightArrowAlt />
+        </motion.button>
+      </Title>
     </div>
   );
 };

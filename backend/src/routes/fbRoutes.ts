@@ -63,17 +63,18 @@ const successSignup = async (req: Request, res: Response) => {
 
 export const fbOAuthRouter = Router();
 
-fbOAuthRouter.route("/auth/login/facebook").get((req, res, next) => {
-  passport.authenticate("facebook", {
-    scope: ["profile", "email"],
-    state: `login?location=${req.query.location}`,
-  })(req, res, next);
-});
-
-fbOAuthRouter.route("/auth/signup/google").get((req, res, next) => {
+fbOAuthRouter.route("/auth/signup/facebook").get((req, res, next) => {
   passport.authenticate("facebook", {
     scope: ["profile", "email"],
     state: "signup",
+  })(req, res, next);
+});
+
+fbOAuthRouter.route("/auth/login/facebook").get((req, res, next) => {
+  console.log("fb-login");
+  passport.authenticate("facebook", {
+    scope: ["profile"],
+    // state: `login?location=${req.query.location}`,
   })(req, res, next);
 });
 
