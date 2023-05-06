@@ -23,7 +23,10 @@ const ProductRate = ({
         })}
       </>
 
-      <span className="shadow rate center"> {avgRate.toFixed(1)}</span>
+      <span className="shadow rate center">
+        {" "}
+        {avgRate >= 0 ? avgRate.toFixed(1) : "0"}
+      </span>
       <span
         style={{
           color: "var(--green)",
@@ -32,7 +35,7 @@ const ProductRate = ({
         }}
         className="shadow"
       >
-        ({ratingLen})
+        ({ratingLen >= 0 ? ratingLen : 0})
       </span>
     </div>
   );

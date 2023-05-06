@@ -438,7 +438,15 @@ export const userMutation = new GraphQLObjectType({
                 images: 1,
                 rating: 1,
                 reviews: 1,
-                avgRate: { $avg: "$rating" },
+                rateAvg: { $avg: "$rating" },
+                avgReviewRating: { $avg: "$reviews.rate" },
+              },
+            },
+            {
+              $addFields: {
+                overallAvg: {
+                  $divide: [{ $add: ["$rateAvg", "$avgReviewRating"] }, 2],
+                },
               },
             },
             { $sort: { avgRate: 1 } },

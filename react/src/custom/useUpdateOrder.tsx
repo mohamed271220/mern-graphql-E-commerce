@@ -11,9 +11,11 @@ const useUpdateOrder = (id: string, state: string) => {
   const handleUpdateOrder = async () => {
     const res = updateOrder({
       variables: {
-        _id: id,
-        state,
-        deliveredAt: state === "delivered" ? date() : null,
+        input: {
+          _id: id,
+          state,
+          deliveredAt: state === "delivered" ? date() : null,
+        },
       },
     });
     dispatch(

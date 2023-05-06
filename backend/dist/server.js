@@ -1,17 +1,22 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const schema_1 = require("@graphql-tools/schema");
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const config_js_1 = require("./config.js");
-const express_graphql_1 = require("express-graphql");
-const user_js_1 = require("./graphql/schema/user.js");
-const product_js_1 = require("./graphql/schema/product.js");
 const uploudRoute_js_1 = require("./Upload/uploudRoute.js");
 const stripe_js_1 = __importDefault(require("./stripe/stripe.js"));
 const passport_1 = __importDefault(require("passport"));
@@ -20,6 +25,13 @@ require("./oAuth/fb.js");
 const googleAuth_js_1 = require("./routes/googleAuth.js");
 const fbRoutes_js_1 = require("./routes/fbRoutes.js");
 const cookieSession = require("cookie-session");
+const apollo_server_express_1 = require("apollo-server-express");
+const ProductDefTypes_js_1 = require("./new Grapgql/typeDefs/ProductDefTypes.js");
+const productResolver_js_1 = require("./new Grapgql/Resolvers/productResolver.js");
+const orderType_js_1 = require("./new Grapgql/typeDefs/orderType.js");
+const orderResolver_js_1 = require("./new Grapgql/Resolvers/orderResolver.js");
+const userTypeDefs_js_1 = require("./new Grapgql/typeDefs/userTypeDefs.js");
+const userResolver_js_1 = require("./new Grapgql/Resolvers/userResolver.js");
 mongoose_1.default.connect(config_js_1.MongoDB_URL);
 const app = (0, express_1.default)();
 app.use(cookieSession({
@@ -35,17 +47,40 @@ app.use((0, cors_1.default)({
 }));
 app.use(express_1.default.json());
 app.use((0, cookie_parser_1.default)());
-const schema = (0, schema_1.mergeSchemas)({
-    schemas: [product_js_1.graphQlSchema, user_js_1.userSchema],
+// server.applyMiddleware({ app });
+const server = new apollo_server_express_1.ApolloServer({
+    typeDefs: [ProductDefTypes_js_1.productTypeDefs, orderType_js_1.orderDefType, userTypeDefs_js_1.userTypeDefs],
+    resolvers: [productResolver_js_1.productResolver, orderResolver_js_1.orderResolver, userResolver_js_1.userResolver],
+    context: ({ req, res }) => ({ req, res }),
 });
-app.use("/graphql", (0, express_graphql_1.graphqlHTTP)({
-    graphiql: true,
-    schema,
-}));
+//old graphql
+// const schema = mergeSchemas({
+//   schemas: [graphQlSchema, userSchema],
+// });
+// app.use(
+//   "/graphql",
+//   graphqlHTTP({
+//     graphiql: true,
+//     schema,
+//   })
+// );
 app.use("/", uploudRoute_js_1.uploadRoute);
 app.use("/", stripe_js_1.default);
 app.use("/", fbRoutes_js_1.fbOAuthRouter);
 app.use("/", googleAuth_js_1.oAuthRouter);
-app.listen(3000, () => {
-    console.log("server-runs");
-});
+// app.listen(3000, () => {
+//   console.log("server-runs");
+// });
+(() => __awaiter(void 0, void 0, void 0, function* () {
+    yield server.start();
+    server.applyMiddleware({
+        app,
+        cors: {
+            credentials: true,
+            origin: "http://localhost:5173",
+        },
+    });
+    app.listen({ port: 3000 }, () => {
+        console.log("server-runs");
+    });
+}))();

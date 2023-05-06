@@ -9,8 +9,10 @@ import FIlter from "./FIlter";
 const Price = () => {
   const { setPriceFilter, priceFilter } = useContext(productListContext);
 
-  const handlePrice = (e: React.ChangeEvent<HTMLInputElement>) =>
+  const handlePrice = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
     setPriceFilter(Number(e.target.value));
+  };
 
   const priceRef = useRef<HTMLInputElement | null>(null);
   useEffect(() => {

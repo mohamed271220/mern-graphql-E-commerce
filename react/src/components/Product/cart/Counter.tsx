@@ -39,9 +39,11 @@ const Counter = ({
       animateCount("small", { y: [-40, 5, 0] }, { duration: 0.4 });
       changeCartCuntDB({
         variables: {
-          userId,
-          productId,
-          count: count + 1,
+          input: {
+            userId,
+            productId,
+            count: count + 1,
+          },
         },
       });
     }

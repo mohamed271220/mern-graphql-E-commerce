@@ -32,12 +32,15 @@ const Aside = ({ startFiltering }: { startFiltering: boolean }) => {
   const handleFiltering = () => {
     filterAllFn({
       variables: {
-        price: priceFilter === 0 ? 10000 : priceFilter,
-        category: categoryFilter === "" ? categoriesArr : [categoryFilter],
-        state: productFeatured === "" ? FeaturedProductsArr : [productFeatured],
-        rate: RateChecked === "" ? 5 : RateChecked,
+        input: {
+          price: priceFilter === 0 ? 10000 : priceFilter,
+          category: categoryFilter === "" ? categoriesArr : [categoryFilter],
+          state:
+            productFeatured === "" ? FeaturedProductsArr : [productFeatured],
+          rate: RateChecked === "" ? 5 : Number(RateChecked),
+        },
       },
-    }).then(({ data }) => setProducts(data.filterAllTypes));
+    }).then(({ data }) => setProducts(data?.filterAllTypes));
   };
 
   const handleResetFiltering = () => {

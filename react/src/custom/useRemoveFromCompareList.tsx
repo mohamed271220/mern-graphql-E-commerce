@@ -13,7 +13,7 @@ const useRemoveFromCompareList = ({ userId, productId }: Props) => {
   const dispatch = useAppDispatch();
   const handleRemoveFromCompare = async () => {
     const obj = { userId, productId };
-    const { data } = await removeFromCompare({ variables: obj });
+    const { data } = await removeFromCompare({ variables: { input: obj } });
     if (data?.removeFromCompare?.msg)
       dispatch(removeFromCompareRedux(productId));
     toast.success(data?.removeFromCompare?.msg);

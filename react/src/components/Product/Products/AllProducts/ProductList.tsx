@@ -11,18 +11,6 @@ const ProductList = ({ isDash }: { isDash?: boolean }) => {
   const { showFilter, products } = useContext(productListContext);
   const { gridView } = useContext(viewContext);
   const [page, setPage] = useState(1);
-  // const [numOfPages, setNumOfPage] = useState(0);
-  // const [dataShown, setDataShown] = useState([] as any);
-  // const numberOfProducts = 8;
-  // const firstProduct = page * numberOfProducts - 8;
-  // const lastProduct = page * numberOfProducts;
-
-  // useEffect(() => {
-  //   if (products.length >= 0) {
-  //     setDataShown(products?.slice(firstProduct, lastProduct));
-  //     setNumOfPage(Math.ceil(products?.length / 8));
-  //   }
-  // }, [page, products]);
 
   const [dataShown, numberOfPages] = usePagination(8, page, products);
 

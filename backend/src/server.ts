@@ -17,10 +17,16 @@ import "./oAuth/fb.js";
 import { oAuthRouter } from "./routes/googleAuth.js";
 import { fbOAuthRouter } from "./routes/fbRoutes.js";
 import cookieSession = require("cookie-session");
+import { ApolloServer } from "apollo-server-express";
+import { productTypeDefs } from "./new Grapgql/typeDefs/ProductDefTypes.js";
+import { productResolver } from "./new Grapgql/Resolvers/productResolver.js";
+import { orderDefType } from "./new Grapgql/typeDefs/orderType.js";
+import { orderResolver } from "./new Grapgql/Resolvers/orderResolver.js";
+import { userTypeDefs } from "./new Grapgql/typeDefs/userTypeDefs.js";
+import { userResolver } from "./new Grapgql/Resolvers/userResolver.js";
 mongoose.connect(MongoDB_URL as unknown as string);
 
 const app = express();
-
 app.use(
   cookieSession({
     name: "session",
@@ -40,23 +46,46 @@ app.use(
 
 app.use(express.json());
 app.use(cookieParser());
-const schema = mergeSchemas({
-  schemas: [graphQlSchema, userSchema],
+// server.applyMiddleware({ app });
+
+const server = new ApolloServer({
+  typeDefs: [productTypeDefs, orderDefType, userTypeDefs],
+  resolvers: [productResolver, orderResolver, userResolver],
+  context: ({ req, res }) => ({ req, res }),
 });
 
-app.use(
-  "/graphql",
-  graphqlHTTP({
-    graphiql: true,
-    schema,
-  })
-);
+//old graphql
+// const schema = mergeSchemas({
+//   schemas: [graphQlSchema, userSchema],
+// });
+
+// app.use(
+//   "/graphql",
+//   graphqlHTTP({
+//     graphiql: true,
+//     schema,
+//   })
+// );
 
 app.use("/", uploadRoute);
 app.use("/", stripeRoutes);
 app.use("/", fbOAuthRouter);
 app.use("/", oAuthRouter);
 
-app.listen(3000, () => {
-  console.log("server-runs");
-});
+// app.listen(3000, () => {
+//   console.log("server-runs");
+// });
+
+(async () => {
+  await server.start();
+  server.applyMiddleware({
+    app,
+    cors: {
+      credentials: true,
+      origin: "http://localhost:5173",
+    },
+  });
+  app.listen({ port: 3000 }, () => {
+    console.log("server-runs");
+  });
+})();

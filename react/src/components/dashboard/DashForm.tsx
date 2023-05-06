@@ -87,25 +87,32 @@ const DashForm = ({ type, Icon, fn, id, obj, head, btn }: Props) => {
     { type: "number", placeholder: "price" },
   ];
 
-  const values = getValues();
-  console.log(values);
   const onSubmit = async (data: FieldValues) => {
     const values = getValues();
-    console.log(values);
     const obj = {
       ...values,
       stock: Number(values.stock),
       price: Number(values.price),
     };
-    console.log(obj);
     if (type === "update") {
       const { data: res } = await fn({
-        variables: { ...obj, _id: id },
+        variables: {
+          input: {
+            ...obj,
+            _id: id,
+          },
+        },
       });
       toast.success(res.updateProduct.msg);
     } else {
+      console.log(obj);
       const { data: res } = await fn({
-        variables: { ...obj, createdAt: date() },
+        variables: {
+          input: {
+            ...obj,
+            createdAt: date(),
+          },
+        },
       });
       if (res?.addProduct?._id) {
         setPercentage(0);

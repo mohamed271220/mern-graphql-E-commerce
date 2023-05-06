@@ -15,8 +15,10 @@ interface Props {
 const useAddToCart = (obj: Props) => {
   const [addToCart] = useMutation(Add_To_Cart, {
     variables: {
-      ...obj,
-      count: 1,
+      input: {
+        ...obj,
+        count: 1,
+      },
     },
   });
 

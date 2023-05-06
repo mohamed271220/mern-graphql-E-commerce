@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
 export const FILTER_BY_PRICE = gql`
-  mutation ($price: Int!) {
+  mutation ($price: Float!) {
     filterByPrice(price: $price) {
       reviews {
         image
@@ -135,43 +135,6 @@ export const FILTER_BY_Rate = gql`
   }
 `;
 
-export const FILTER_All = gql`
-  mutation (
-    $rate: Int!
-    $price: Int!
-    $category: [String!]
-    $state: [String!]
-  ) {
-    filterAllTypes(
-      rate: $rate
-      price: $price
-      category: $category
-      state: $state
-    ) {
-      reviews {
-        image
-        user
-        review
-        rate
-        _id
-      }
-      _id
-      price
-      stock
-      state
-      title
-      description
-      rating
-      category
-
-      images {
-        productPath
-        _id
-      }
-    }
-  }
-`;
-
 export const Search_Mutaion = gql`
   mutation ($word: String!) {
     searchProducts(word: $word) {
@@ -200,24 +163,8 @@ export const Search_Mutaion = gql`
 `;
 
 export const update_Product = gql`
-  mutation (
-    $title: String!
-    $state: String!
-    $category: String!
-    $description: String!
-    $_id: ID!
-    $stock: Int!
-    $price: Float!
-  ) {
-    updateProduct(
-      title: $title
-      state: $state
-      category: $category
-      description: $description
-      _id: $_id
-      stock: $stock
-      price: $price
-    ) {
+  mutation ($input: productInput) {
+    updateProduct(input: $input) {
       msg
       # status
     }
@@ -225,25 +172,36 @@ export const update_Product = gql`
 `;
 
 export const Add_Product = gql`
-  mutation (
-    $createdAt: Date!
-    $title: String!
-    $state: String!
-    $category: String!
-    $description: String!
-    $stock: Int!
-    $price: Int!
-  ) {
-    addProduct(
-      createdAt: $createdAt
-      title: $title
-      state: $state
-      category: $category
-      description: $description
-      stock: $stock
-      price: $price
-    ) {
+  mutation ($createInput: productInput) {
+    addProduct(input: $createInput) {
       _id
+    }
+  }
+`;
+
+export const FILTER_All = gql`
+  mutation ($input: filterAllInput) {
+    filterAllTypes(input: $input) {
+      reviews {
+        image
+        user
+        review
+        rate
+        _id
+      }
+      _id
+      price
+      stock
+      state
+      title
+      description
+      rating
+      category
+
+      images {
+        productPath
+        _id
+      }
     }
   }
 `;

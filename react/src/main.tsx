@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 const client = new ApolloClient({
   uri: "http://localhost:3000/graphql",
   cache: new InMemoryCache(),
+  credentials: "include",
 });
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

@@ -37,7 +37,7 @@ const CompareIcons = ({ id, title }: Props) => {
 
   const handleAddToCompare = async () => {
     const obj = { userId, productId: id, title };
-    const { data } = await addToCompare({ variables: obj });
+    const { data } = await addToCompare({ variables: { input: obj } });
     console.log({ data });
     if (data?.addToCompare?.msg)
       dispatch(addToCompareRedux({ _id: data?.addToCompare, ...obj }));

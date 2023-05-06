@@ -76,11 +76,13 @@ const SignUp = () => {
 
     const { data } = await addUserFn({
       variables: {
-        name,
-        password,
-        email,
-        country,
-        image: userObj?.image || "",
+        input: {
+          name,
+          password,
+          email,
+          country,
+          image: userObj?.image || "",
+        },
       },
     });
     console.log(data);

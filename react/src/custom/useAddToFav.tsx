@@ -18,7 +18,7 @@ const useAddToFav = (obj: Props) => {
   const dispatch = useAppDispatch();
   const handleAddToFav = async () => {
     const res = await addToFav({
-      variables: obj,
+      variables: { input: obj },
     });
     toast.success(res.data.addToFav.msg);
     dispatch(addToFavRedux(obj));
