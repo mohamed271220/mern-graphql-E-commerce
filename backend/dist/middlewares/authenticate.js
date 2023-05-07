@@ -21,6 +21,7 @@ const authenticateMiddleware = (email, password) => __awaiter(void 0, void 0, vo
     if (check.length > 0) {
         const isPasswordCorrect = yield bcrypt_1.default.compare(password + config_1.BCRYPT_SECRET, check[0].password);
         if (isPasswordCorrect) {
+            console.log(check);
             return check;
         }
         else {

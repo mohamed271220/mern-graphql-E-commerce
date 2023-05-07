@@ -1,14 +1,9 @@
-import { mergeSchemas } from "@graphql-tools/schema";
-import { GraphQLSchema } from "graphql";
-import { GraphQLObjectType } from "graphql";
+import { auth } from "./middlewares/auth";
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
 import { MongoDB_URL, SeSSion_Secret } from "./config.js";
-import { graphqlHTTP } from "express-graphql";
-import { userMutation, userSchema } from "./graphql/schema/user.js";
-import { graphQlSchema } from "./graphql/schema/product.js";
 import { uploadRoute } from "./Upload/uploudRoute.js";
 import stripeRoutes from "./stripe/stripe.js";
 import passport from "passport";
@@ -24,6 +19,11 @@ import { orderDefType } from "./new Grapgql/typeDefs/orderType.js";
 import { orderResolver } from "./new Grapgql/Resolvers/orderResolver.js";
 import { userTypeDefs } from "./new Grapgql/typeDefs/userTypeDefs.js";
 import { userResolver } from "./new Grapgql/Resolvers/userResolver.js";
+import { applyMiddleware } from "graphql-middleware";
+import { allow, rule, shield } from "graphql-shield";
+import { AuthRouter } from "./routes/tokensRoutes.js";
+const { makeExecutableSchema } = require("@graphql-tools/schema");
+
 mongoose.connect(MongoDB_URL as unknown as string);
 
 const app = express();
@@ -36,6 +36,7 @@ app.use(
 );
 
 app.use(passport.initialize());
+app.use(cookieParser());
 app.use(passport.session());
 app.use(
   cors({
@@ -44,14 +45,41 @@ app.use(
   })
 );
 
+const schema = makeExecutableSchema({
+  typeDefs: [productTypeDefs, orderDefType, userTypeDefs],
+  resolvers: [productResolver, orderResolver, userResolver],
+});
+
+const isUser = rule()(async (par: any, args: any, ctx: any) => {
+  const accessToken = ctx.req?.headers?.authorization;
+
+  const isAuthenticated = auth(accessToken);
+  if (isAuthenticated) {
+    return true;
+  } else {
+    return false;
+  }
+
+});
+
+const permissions = shield({
+  Query: {},
+  Mutation: {
+    addToFav: isUser,
+    removeFromFav: isUser,
+  },
+});
+
+const schemaWithPermissions = applyMiddleware(schema, permissions);
+
 app.use(express.json());
-app.use(cookieParser());
 // server.applyMiddleware({ app });
 
 const server = new ApolloServer({
-  typeDefs: [productTypeDefs, orderDefType, userTypeDefs],
-  resolvers: [productResolver, orderResolver, userResolver],
-  context: ({ req, res }) => ({ req, res }),
+  schema: schemaWithPermissions,
+  context: ({ req, res }) => {
+    return { req, res };
+  },
 });
 
 //old graphql
@@ -69,12 +97,10 @@ const server = new ApolloServer({
 
 app.use("/", uploadRoute);
 app.use("/", stripeRoutes);
+
 app.use("/", fbOAuthRouter);
 app.use("/", oAuthRouter);
-
-// app.listen(3000, () => {
-//   console.log("server-runs");
-// });
+app.use("/token", AuthRouter);
 
 (async () => {
   await server.start();

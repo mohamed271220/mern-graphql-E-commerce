@@ -17,11 +17,22 @@ const useAddToFav = (obj: Props) => {
   const [addToFav] = useMutation(Add_To_Fav);
   const dispatch = useAppDispatch();
   const handleAddToFav = async () => {
-    const res = await addToFav({
-      variables: { input: obj },
-    });
-    toast.success(res.data.addToFav.msg);
-    dispatch(addToFavRedux(obj));
+    try {
+      const res = await addToFav({
+        variables: { input: obj },
+      });
+      console.log(res);
+      if ((res as any).status === 401) {
+        toast.error("unauth");
+      } else {
+        toast.success(res.data.addToFav.msg);
+        dispatch(addToFavRedux(obj));
+      }
+    } catch (err: unknown) {
+      if ((err as Error).message === "Not Authorised!") {
+        toast.error((err as Error).message);
+      }
+    }
   };
 
   return { handleAddToFav };

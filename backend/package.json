@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@graphql-tools/schema": "^9.0.19",
     "apollo-server-express": "^3.12.0",
     "bcrypt": "^5.1.0",
     "cloudinary": "^1.36.2",
@@ -22,6 +23,8 @@
     "express": "^4.18.2",
     "express-graphql": "^0.12.0",
     "graphql": "^15.8.0",
+    "graphql-middleware": "^6.1.33",
+    "graphql-shield": "^7.6.5",
     "graphql-tools": "^8.3.19",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.3",

@@ -12,6 +12,7 @@ export const authenticateMiddleware = async (
       check[0].password as any
     );
     if (isPasswordCorrect) {
+      console.log(check);
       return check;
     } else {
       return isPasswordCorrect;

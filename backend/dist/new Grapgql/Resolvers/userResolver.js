@@ -36,23 +36,20 @@ exports.userResolver = {
                 return Object.assign(Object.assign({}, res), { status: 200, msg: "user created successfully" });
             }
         }),
-        authenticate: (_, args, 
-        //   { res }: { res: Response }
-        context) => __awaiter(void 0, void 0, void 0, function* () {
+        authenticate: (_, args, { res }) => __awaiter(void 0, void 0, void 0, function* () {
             try {
                 const result = yield (0, authenticate_js_1.authenticateMiddleware)(args.email, args.password);
-                console.log("result");
                 if (Array.isArray(result)) {
                     if (result.length > 0) {
-                        const expire = { expiresIn: "100h" };
+                        const expire = { expiresIn: "15s" };
                         const accessToken = jsonwebtoken_1.default.sign({ result }, config_js_1.ACCESS_TOKEN_SECRET, expire);
-                        const refToken = jsonwebtoken_1.default.sign({ result }, config_js_1.REFRESH_TOKEN_SECRET, expire);
+                        const refToken = jsonwebtoken_1.default.sign({ result }, config_js_1.REFRESH_TOKEN_SECRET);
                         const id = result[0]._id.toString();
                         console.log({ id });
-                        context.res.cookie("user-email", result[0].email);
-                        context.res.cookie("user-id", id);
-                        context.res.cookie("access-token", accessToken);
-                        context.res.cookie("refresh-token", refToken);
+                        res.cookie("user-email", result[0].email);
+                        res.cookie("user-id", id);
+                        res.cookie("access-token", accessToken);
+                        res.cookie("refresh-token", refToken);
                         return { msg: "you successfully logged in" };
                     }
                 }
@@ -134,7 +131,6 @@ exports.userResolver = {
                 const res = yield user_js_1.userCollection.findByIdAndUpdate(input.userId, {
                     $push: { fav: input },
                 }, { new: true });
-                console.log(res);
                 return Object.assign(Object.assign({}, res), { msg: "successfully added to your favorites" });
             }
             catch (err) {

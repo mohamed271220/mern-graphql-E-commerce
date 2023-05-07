@@ -50,45 +50,44 @@ export const userResolver = {
     authenticate: async (
       _: any,
       args: { password: string; email: string },
-      //   { res }: { res: Response }
-      context: any
-    ) => {
-      try {
-        const result = await authenticateMiddleware(args.email, args.password);
-        console.log("result");
-        if (Array.isArray(result)) {
-          if (result.length > 0) {
-            const expire = { expiresIn: "100h" };
-            const accessToken = jwt.sign(
-              { result },
-              ACCESS_TOKEN_SECRET as unknown as string,
-              expire
-            );
-            const refToken = jwt.sign(
-              { result },
-              REFRESH_TOKEN_SECRET as unknown as string,
-              expire
-            );
-            const id = result[0]._id.toString();
-            console.log({ id });
-            context.res.cookie(
-              "user-email",
-              result[0].email as unknown as string
-            );
-            context.res.cookie("user-id", id as unknown as string);
-            context.res.cookie("access-token", accessToken);
-            context.res.cookie("refresh-token", refToken);
-            return { msg: "you successfully logged in" };
+      { res }: { res: Response }
+    ) =>
+      // context: any
+      {
+        try {
+          const result = await authenticateMiddleware(
+            args.email,
+            args.password
+          );
+          if (Array.isArray(result)) {
+            if (result.length > 0) {
+              const expire = { expiresIn: "15s" };
+              const accessToken = jwt.sign(
+                { result },
+                ACCESS_TOKEN_SECRET as unknown as string,
+                expire
+              );
+              const refToken = jwt.sign(
+                { result },
+                REFRESH_TOKEN_SECRET as unknown as string
+              );
+              const id = result[0]._id.toString();
+              console.log({ id });
+              res.cookie("user-email", result[0].email as unknown as string);
+              res.cookie("user-id", id as unknown as string);
+              res.cookie("access-token", accessToken);
+              res.cookie("refresh-token", refToken);
+              return { msg: "you successfully logged in" };
+            }
+          } else if (!result) {
+            return { msg: "password is wrong" };
+          } else {
+            return { msg: result };
           }
-        } else if (!result) {
-          return { msg: "password is wrong" };
-        } else {
-          return { msg: result };
+        } catch (err) {
+          return (err as Error).message;
         }
-      } catch (err) {
-        return (err as Error).message;
-      }
-    },
+      },
 
     async getUserData(par: any, args: IdInterface) {
       return await userCollection.findById(args.id);
@@ -190,7 +189,6 @@ export const userResolver = {
           },
           { new: true }
         );
-        console.log(res);
         return { ...res, msg: "successfully added to your favorites" };
       } catch (err) {
         return (err as Error).message;
