@@ -142,10 +142,53 @@ exports.productResolver = {
                 return { msg: "product updated successfully", status: 200 };
             });
         },
-        addProduct(_, { input }) {
+        addProduct(_, { createInput }) {
+            return __awaiter(this, void 0, void 0, function* () {
+                try {
+                    return yield product_js_1.default.create(createInput);
+                }
+                catch (err) {
+                    console.log(err);
+                }
+            });
+        },
+        //reviews
+        addReview(_, { input }) {
+            return __awaiter(this, void 0, void 0, function* () {
+                try {
+                    const { userId, rate, review, image, user } = input;
+                    const data = yield product_js_1.default.findByIdAndUpdate(input._id, {
+                        $push: { reviews: { user, userId, rate, review, image } },
+                    }, { new: true });
+                    const addedReview = data.reviews[data.reviews.length - 1];
+                    addedReview.msg = "review added";
+                    addedReview.status = 200;
+                    return addedReview;
+                }
+                catch (err) {
+                    return err.message;
+                }
+            });
+        },
+        updateReview(_, { input }) {
             return __awaiter(this, void 0, void 0, function* () {
                 console.log(input);
-                return product_js_1.default.create(Object.assign(Object.assign({}, input), { deliveredAt: null }));
+                try {
+                    const { rate, review } = input;
+                    const data = yield product_js_1.default.findOneAndUpdate({
+                        _id: input.productId,
+                        "reviews.userId": input.userId,
+                    }, {
+                        $set: {
+                            "reviews.$.rate": rate,
+                            "reviews.$.review": review,
+                        },
+                    });
+                    return { msg: "review updated successfully" };
+                }
+                catch (err) {
+                    return err.message;
+                }
             });
         },
     },

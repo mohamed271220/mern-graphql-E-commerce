@@ -112,26 +112,18 @@ export const REMOVE_FROM_Cart = gql`
 `;
 
 export const addReview = gql`
-  mutation (
-    $_id: ID!
-    $userId: ID!
-    $rate: Int!
-    $review: String!
-    $image: String!
-  ) {
-    addReview(
-      userId: $userId
-      _id: $_id
-      rate: $rate
-      review: $review
-      image: $image
-    ) {
+  mutation ($input: CreateReviewInput) {
+    addReview(input: $input) {
       msg
-      review
-      rate
-      userId
-      status
       _id
+    }
+  }
+`;
+
+export const update_Review = gql`
+  mutation ($input: updateReviewInput) {
+    updateReview(input: $input) {
+      msg
     }
   }
 `;

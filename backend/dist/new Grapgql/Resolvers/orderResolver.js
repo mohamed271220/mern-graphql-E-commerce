@@ -34,7 +34,7 @@ exports.orderResolver = {
                     state: args.input.state,
                     deliveredAt: args.input.deliveredAt,
                 });
-                return { msg: `order is  ${args.input.state} successfully` };
+                return { msg: `order is at  ${args.input.state} mode` };
             });
         },
         deleteOrder(_, args) {

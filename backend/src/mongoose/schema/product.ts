@@ -15,6 +15,7 @@ interface reviewInterface {
   user: string;
   userId: string;
   review: string;
+
   rate: number;
   status?: number;
   msg?: string;

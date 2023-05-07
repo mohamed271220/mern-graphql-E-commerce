@@ -3,7 +3,7 @@ import { addReview } from "../graphql/mutations/user";
 import { reviewInterface } from "../interfaces/product";
 
 const useAddReview = (obj: reviewInterface) => {
-  const [fn] = useMutation(addReview, { variables: obj });
+  const [fn] = useMutation(addReview, { variables: { input: obj } });
 
   return [fn];
 };

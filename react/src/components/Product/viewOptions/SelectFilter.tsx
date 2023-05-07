@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useLazyQuery, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import {
   FILTER_BY_Date,
   FILTER_BY_PRICE,
   FILTER_BY_Rate,
 } from "../../../graphql/mutations/product";
-import { Get_All_Products } from "../../../graphql/general";
 import { MdOutlineSort } from "react-icons/md";
 import { BiDownArrow } from "react-icons/bi";
 import { AnimatePresence, motion } from "framer-motion";
@@ -15,6 +14,7 @@ import {
 } from "../../../variants/globals";
 import { productListContext } from "../../../context/FilterData";
 import FadeElement from "../../widgets/FadeElement";
+import { useAppSelector } from "../../../custom/reduxTypes";
 const optionsArr = [
   "relevance",
   "highest price",
@@ -26,16 +26,17 @@ const optionsArr = [
 ];
 
 const SelectFilter = () => {
+  const { Allproducts } = useAppSelector((st) => st.Allproducts);
+
   const { setProducts } = useContext(productListContext);
   const [selectValue, setSelectValue] = useState("relevance");
-  const [fnRevlence] = useLazyQuery(Get_All_Products);
   const [fnPrice] = useMutation(FILTER_BY_PRICE);
   const [fnRate] = useMutation(FILTER_BY_Rate);
   const [fnDate] = useMutation(FILTER_BY_Date);
 
   useEffect(() => {
     if (selectValue === "relevance") {
-      fnRevlence().then(({ data }) => setProducts(data.products));
+      setProducts(Allproducts);
     } else if (selectValue === "lowest price") {
       fnPrice({
         variables: {

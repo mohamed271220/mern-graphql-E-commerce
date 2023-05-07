@@ -88,11 +88,10 @@ const DashForm = ({ type, Icon, fn, id, obj, head, btn }: Props) => {
   ];
 
   const onSubmit = async (data: FieldValues) => {
-    const values = getValues();
     const obj = {
-      ...values,
-      stock: Number(values.stock),
-      price: Number(values.price),
+      ...data,
+      stock: Number(data.stock),
+      price: Number(data.price),
     };
     if (type === "update") {
       const { data: res } = await fn({
@@ -105,22 +104,18 @@ const DashForm = ({ type, Icon, fn, id, obj, head, btn }: Props) => {
       });
       toast.success(res.updateProduct.msg);
     } else {
-      console.log(obj);
+      const addObj = { ...obj, createdAt: date() };
+      console.log({ addObj });
       const { data: res } = await fn({
         variables: {
-          input: {
-            ...obj,
-            createdAt: date(),
-          },
+          createInput: { ...addObj, images: null },
         },
       });
       if (res?.addProduct?._id) {
         setPercentage(0);
         const formData = new FormData();
-        console.log(values.images);
-        for (const file of values.images) {
+        for (const file of data.images) {
           formData.append("images", file);
-          console.log(res.addProduct._id);
         }
         axios.patch(
           `http://localhost:3000/products/images/upload/${res.addProduct._id}`,

@@ -1,8 +1,8 @@
 import React from "react";
 
 import DashForm from "./DashForm";
-import { useMutation, useQuery } from "@apollo/client";
-import { Add_Product } from "../../graphql/mutations/product";
+import { useMutation } from "@apollo/client";
+import { Add_Product } from "../../graphql/mutations/product.js";
 import { GrAddCircle } from "react-icons/gr";
 
 const DashAddProduct = () => {
@@ -14,6 +14,7 @@ const DashAddProduct = () => {
         head="add product"
         fn={addProductFn}
         btn="add"
+        type="add"
       />
     </>
   );

@@ -1,30 +1,19 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import ProductImages from "./images";
 import ProductDetails from "./ProductDetails";
-import { useQuery } from "@apollo/client";
-import { GET_Product_By_Id } from "../../graphql/general.js";
 import Reviews from "./Reviews";
-import { reviewInterface } from "../../interfaces/product";
+import { ProductInterface, reviewInterface } from "../../interfaces/product";
 import { AnimatePresence } from "framer-motion";
 import { useParams } from "react-router-dom";
-import SLiderComponent from "../widgets/SLider";
 import Transition from "../widgets/Transition";
+import { useAppSelector } from "../../custom/reduxTypes";
+import { isAuthContext } from "../../context/isAuth";
 
-export interface productContextInterface {
-  rating: number[];
+export interface productContextInterface extends ProductInterface {
   reviews: reviewInterface[];
   bigImgInd: number;
-  images: { productPath: string; _id: string }[];
-  price: number;
-  title: string;
-  _id: string;
-  description: string;
-  category: string;
-  stock: string;
-  setAddReviews: React.Dispatch<React.SetStateAction<reviewInterface[]>>;
   startHover: boolean;
   setStartHover: React.Dispatch<React.SetStateAction<boolean>>;
-  addReview: reviewInterface[];
 }
 export const productContext = createContext({} as productContextInterface);
 
@@ -33,29 +22,28 @@ const Product = () => {
   const [bigImgInd, setBigImgInd] = useState(0);
   const [startHover, setStartHover] = useState(false);
 
-  const { data, error, loading } = useQuery(GET_Product_By_Id, {
-    variables: { id },
-  });
+  // const { data, error, loading } = useQuery(GET_Product_By_Id, {
+  //   variables: { id },
+  // });
+
+  const [singleProduct, setSingleProduct] = useState<any>({ _id: "" });
+  const { Allproducts } = useAppSelector((st) => st.Allproducts);
+
+  useEffect(() => {
+    console.log("useeffect of product outside");
+
+    if (Allproducts?.length >= 1) {
+      console.log("useeffect of product");
+      const pro = Allproducts.find((product: any) => product._id === id);
+      console.log({ pro });
+
+      setSingleProduct(pro);
+    }
+  }, [Allproducts]);
+
   const [showPop, setShowPop] = useState(false);
-  const [addReview, setAddReviews] = useState<reviewInterface[]>([]);
 
-  useEffect(() => {
-    if (data?.product?.title) {
-      document.title = data.product.title;
-    }
-  }, [loading, data?.product?.title]);
-
-  useEffect(() => {
-    if (data?.product?.reviews) {
-      setAddReviews(data?.product?.reviews);
-    }
-  }, [data?.product?.reviews]);
-
-  if (loading) {
-    return <>loading</>;
-  } else if (error?.message) {
-    return <div> {error.message} </div>;
-  } else {
+  if (singleProduct?._id !== "") {
     const {
       images,
       _id,
@@ -66,11 +54,11 @@ const Product = () => {
       price,
       rating,
       reviews,
-    } = data.product;
+    } = singleProduct;
 
     return (
       <>
-        {data && (
+        {singleProduct && (
           <productContext.Provider
             value={{
               _id,
@@ -83,8 +71,6 @@ const Product = () => {
               description,
               category,
               stock,
-              setAddReviews,
-              addReview,
               startHover,
               setStartHover,
             }}
@@ -104,6 +90,9 @@ const Product = () => {
                 <ProductDetails
                   key={`product-${_id}`}
                   setShowPop={setShowPop}
+                  // rateIndex={rateIndex}
+                  // setRateIndex={setRateIndex}
+                  // hasReview={hasReview}
                 />
                 <AnimatePresence mode="wait">
                   {showPop && (
@@ -117,6 +106,8 @@ const Product = () => {
         )}
       </>
     );
+  } else {
+    return <> loading</>;
   }
 };
 

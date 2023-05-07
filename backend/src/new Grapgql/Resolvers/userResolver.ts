@@ -27,7 +27,6 @@ interface removeFromFavInterface {
 export const userResolver = {
   Mutation: {
     addUser: async (_: any, { input }: any) => {
-      console.log("signup");
       const check = await userCollection.find({ email: input.email });
       if (check.length > 0) {
         return {

@@ -172,8 +172,8 @@ export const update_Product = gql`
 `;
 
 export const Add_Product = gql`
-  mutation ($createInput: productInput) {
-    addProduct(input: $createInput) {
+  mutation ($createInput: createProductInput) {
+    addProduct(createInput: $createInput) {
       _id
     }
   }

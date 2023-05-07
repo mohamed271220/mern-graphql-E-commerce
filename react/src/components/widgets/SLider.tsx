@@ -3,11 +3,12 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import ProductFliter from "../Product/Products/AllProducts/ProductFliter";
-import { useQuery } from "@apollo/client";
-import { Get_All_Products } from "../../graphql/general";
 import { viewContext } from "../../context/gridView";
+import { useAppSelector } from "../../custom/reduxTypes";
 
 const SLiderComponent = () => {
+  const { Allproducts } = useAppSelector((st) => st.Allproducts);
+
   const settings = {
     // dots: true,
     infinite: true,
@@ -33,7 +34,6 @@ const SLiderComponent = () => {
     ],
     autoplay: true,
   };
-  const { data } = useQuery(Get_All_Products);
   const { setGridView } = useContext(viewContext);
 
   useEffect(() => {
@@ -49,7 +49,7 @@ const SLiderComponent = () => {
       </h2>
 
       <Slider {...settings}>
-        {data?.products.map((product: any, index: number) => {
+        {Allproducts?.map((product: any, index: number) => {
           return (
             <ProductFliter
               key={`${product._id}-list`}

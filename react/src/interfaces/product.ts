@@ -17,5 +17,6 @@ export interface ProductInterface {
   category: string;
   images: imagesInterface[];
   rating: number[];
+  _id: string;
   reviews: reviewInterface[];
 }

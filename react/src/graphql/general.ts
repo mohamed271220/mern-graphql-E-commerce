@@ -41,6 +41,7 @@ export const Get_All_Products = gql`
       reviews {
         image
         user
+        userId
         review
         rate
         _id

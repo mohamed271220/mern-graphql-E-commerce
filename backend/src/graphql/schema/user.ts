@@ -584,7 +584,6 @@ export const userMutation = new GraphQLObjectType({
           const addedReview = data!.reviews[data!.reviews.length - 1];
           addedReview.msg = "review added";
           addedReview.status = 200;
-          console.log(addedReview);
           return addedReview;
         } catch (err) {
           return (err as Error).message;
@@ -599,11 +598,10 @@ export const userMutation = new GraphQLObjectType({
         productId: { type: GraphQLID },
         rate: { type: GraphQLInt },
         review: { type: GraphQLString },
-        image: { type: GraphQLString },
       },
       async resolve(_, args) {
         try {
-          const { rate, review, image } = args;
+          const { rate, review } = args;
           return await productCollection.findOneAndUpdate(
             {
               _id: args.productId,

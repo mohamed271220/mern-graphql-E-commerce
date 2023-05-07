@@ -15,11 +15,11 @@ interface Props {
 }
 
 const Reviews = ({ setShowPop }: Props) => {
-  const { addReview } = useContext(productContext);
+  const { reviews } = useContext(productContext);
 
   const [reviewIndex, setRviewIndex] = useState(0);
 
-  const [variant, dir] = useCarousel(reviewIndex, addReview.length);
+  const [variant, dir] = useCarousel(reviewIndex, reviews.length);
 
   const [animateRef, { width }] = useMeasure();
   const [handleIndex] = useIndex();
@@ -39,7 +39,7 @@ const Reviews = ({ setShowPop }: Props) => {
           animate="end"
           custom={{ dir, width }}
         >
-          {addReview.map((review, i) => {
+          {reviews.map((review, i) => {
             {
               if (i === reviewIndex) {
                 return <Review key={review._id} {...review} i={i} />;
@@ -54,7 +54,7 @@ const Reviews = ({ setShowPop }: Props) => {
           className="center "
           style={{ background: "var(--delete)" }}
           onClick={() =>
-            setRviewIndex(handleIndex(reviewIndex - 1, addReview.length))
+            setRviewIndex(handleIndex(reviewIndex - 1, reviews.length))
           }
         >
           <FaLessThan />
@@ -64,7 +64,7 @@ const Reviews = ({ setShowPop }: Props) => {
           className="center "
           style={{ background: "var(--green)" }}
           onClick={() =>
-            setRviewIndex(handleIndex(reviewIndex + 1, addReview.length))
+            setRviewIndex(handleIndex(reviewIndex + 1, reviews.length))
           }
         >
           <FaGreaterThan />

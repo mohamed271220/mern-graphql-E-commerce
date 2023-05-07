@@ -572,7 +572,6 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                         const addedReview = data.reviews[data.reviews.length - 1];
                         addedReview.msg = "review added";
                         addedReview.status = 200;
-                        console.log(addedReview);
                         return addedReview;
                     }
                     catch (err) {
@@ -588,12 +587,11 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                 productId: { type: graphql_1.GraphQLID },
                 rate: { type: graphql_1.GraphQLInt },
                 review: { type: graphql_1.GraphQLString },
-                image: { type: graphql_1.GraphQLString },
             },
             resolve(_, args) {
                 return __awaiter(this, void 0, void 0, function* () {
                     try {
-                        const { rate, review, image } = args;
+                        const { rate, review } = args;
                         return yield product_js_2.default.findOneAndUpdate({
                             _id: args.productId,
                             "reviews._id": args._id,

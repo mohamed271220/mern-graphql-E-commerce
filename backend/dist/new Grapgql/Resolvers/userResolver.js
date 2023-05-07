@@ -21,7 +21,6 @@ const user_js_1 = require("../../mongoose/schema/user.js");
 exports.userResolver = {
     Mutation: {
         addUser: (_, { input }) => __awaiter(void 0, void 0, void 0, function* () {
-            console.log("signup");
             const check = yield user_js_1.userCollection.find({ email: input.email });
             if (check.length > 0) {
                 return {

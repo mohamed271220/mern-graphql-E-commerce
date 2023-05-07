@@ -6,15 +6,14 @@ import useMeasure from "react-use-measure";
 import useFilterCategory from "../../custom/useFilterCategory";
 import { productListContext } from "../../context/FilterData";
 import useFilterState from "../../custom/useFIlterState";
-import { useLazyQuery } from "@apollo/client";
-import { Get_All_Products } from "../../graphql/general";
 import BannerText from "./BannerText";
+import { useAppSelector } from "../../custom/reduxTypes";
 const arrClrs = ["darkblue", "var(--green)", "var(--delete)", "var(--sale)"];
 
 const Banner = () => {
+  const { Allproducts } = useAppSelector((st) => st.Allproducts);
   const categoryfn = useFilterCategory();
   const { setProducts, setCategoryFilter } = useContext(productListContext);
-  const [getAll] = useLazyQuery(Get_All_Products);
 
   const filterStateFn = useFilterState();
 
@@ -31,9 +30,8 @@ const Banner = () => {
       setCategoryFilter(state);
     });
   };
-
   const handleGetAllProducts = () => {
-    getAll().then(({ data }) => setProducts(data.products));
+    setProducts(Allproducts);
   };
 
   const bannerArr = [

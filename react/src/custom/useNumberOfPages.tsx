@@ -8,7 +8,7 @@ const usePagination = (num: number, page: number, arr: any[]) => {
   const lastProduct = page * numberOfProducts;
 
   useEffect(() => {
-    if (arr.length >= 0) {
+    if (arr?.length >= 0) {
       setDataShown(arr?.slice(firstProduct, lastProduct));
       setNumOfPage(Math.ceil(arr?.length / num));
     }

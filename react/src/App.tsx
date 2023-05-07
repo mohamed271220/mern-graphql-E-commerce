@@ -1,14 +1,13 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Loading from "./components/Loading";
 import "./styles/App.scss";
 import Nav from "./components/Nav";
-import { BrowserRouter, useLocation, useNavigate } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import AppRoutes from "./components/routes";
 import IsAuthContextComponent from "./context/isAuth";
-import { Toaster, toast } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 import GridViewContext from "./context/gridView";
 import FilterDataContext from "./context/FilterData";
-import useMeasure from "react-use-measure";
 
 const App = () => {
   return (

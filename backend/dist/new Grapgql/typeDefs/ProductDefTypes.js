@@ -61,6 +61,43 @@ exports.productTypeDefs = (0, apollo_server_express_1.gql) `
     createdAt: Date
   }
 
+  input createProductInput {
+    title: String
+    state: String
+    _id: ID
+    stock: Int
+    price: Float
+    description: String
+    category: String
+    createdAt: Date
+    images: String
+  }
+
+  input createProductInput {
+    title: String
+    state: String
+    _id: ID
+    stock: Int
+    price: Float
+    description: String
+    category: String
+    createdAt: Date
+  }
+  input CreateReviewInput {
+    userId: ID
+    _id: ID
+    rate: Int
+    review: String
+    image: String
+    user: String
+  }
+
+  input updateReviewInput {
+    userId: ID
+    productId: ID
+    rate: Int
+    review: String
+  }
   type Mutation {
     filterByPrice(price: Float!): [Product]
     filterByDate(date: Int!): [Product]
@@ -70,6 +107,8 @@ exports.productTypeDefs = (0, apollo_server_express_1.gql) `
     filterAllTypes(input: filterAllInput): [Product]
     searchProducts(word: String!): [Product]
     updateProduct(input: productInput): StatusMsg
-    addProduct(input: productInput): Product
+    addProduct(createInput: createProductInput): Product
+    addReview(input: CreateReviewInput): Review
+    updateReview(input: updateReviewInput): StatusMsg
   }
 `;

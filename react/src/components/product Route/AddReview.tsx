@@ -3,47 +3,100 @@ import SlideButton from "../widgets/SlideButton";
 import AddRate from "./AddRate";
 import useAddReview from "../../custom/useAddReview";
 import { isAuthContext } from "../../context/isAuth";
-import { productContext } from "./Product";
+import { useAppDispatch } from "../../custom/reduxTypes";
+import { addReviewRedux, updateReviewRedux } from "../../redux/productSlice";
+import { useMutation } from "@apollo/client";
+import { update_Review } from "../../graphql/mutations/user";
 
 interface Props {
   setShowAddRate: React.Dispatch<React.SetStateAction<boolean>>;
   _id: string;
   rateIndex: number;
   setRateIndex: React.Dispatch<React.SetStateAction<number>>;
+  defaultVal: string;
+  hasReview: boolean;
 }
 
-const AddReview = ({ setShowAddRate, _id, rateIndex, setRateIndex }: Props) => {
-  const { userId } = useContext(isAuthContext);
-  const { setAddReviews } = useContext(productContext);
+const AddReview = ({
+  setShowAddRate,
+  _id,
+  rateIndex,
+  setRateIndex,
+  hasReview,
+  defaultVal,
+}: Props) => {
+  const dispatch = useAppDispatch();
+  const {
+    userId,
+    name,
+    userData: { image },
+  } = useContext(isAuthContext);
   const [inpVal, setInpVal] = useState("");
   const obj = {
     userId,
-    image: "",
+    image: image,
     _id,
     rate: rateIndex + 1,
     review: inpVal,
-    user: "",
+    user: name,
   };
   const [addReviewFn] = useAddReview(obj);
   const handleCHange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInpVal(e.target.value);
   };
+
+  const updateReviewObj = {
+    userId,
+    productId: _id,
+    review: inpVal || defaultVal,
+    rate: rateIndex + 1,
+  };
+
+  console.log({ updateReviewObj });
+
+  const [updateReviewFn] = useMutation(update_Review, {
+    variables: {
+      input: updateReviewObj,
+    },
+  });
+
+  const handleAddReview = async () => {
+    const { data } = await addReviewFn();
+    if (data?.addReview?._id) {
+      dispatch(
+        addReviewRedux({
+          reviewObj: { ...obj, _id: data?.addReview?._id },
+          _id,
+        })
+      );
+    }
+  };
+
+  const updateReview = async () => {
+    await updateReviewFn();
+    dispatch(updateReviewRedux(updateReviewObj));
+  };
+
   return (
     <SlideButton
-      doneMsg="rate added"
+      doneMsg={hasReview ? "rate updated" : "rate added"}
       head="add rate"
       sethide={setShowAddRate}
       cls="add-rate-pop"
       height={200}
-      fn={async () => {
-        const { data } = await addReviewFn();
-        console.log({ data });
-        setAddReviews((cur) => [...cur, data.addReview]);
-      }}
+      isVaild
+      fn={hasReview ? updateReview : handleAddReview}
     >
       <AddRate setRateIndex={setRateIndex} rateIndex={rateIndex} />
       <form className="rate-form">
-        <input type="text" className="inp rate-inp" onChange={handleCHange} />
+        <input
+          placeholder="add review"
+          style={{ paddingLeft: 8 }}
+          type="text"
+          className="inp rate-inp"
+          onChange={handleCHange}
+          defaultValue={defaultVal}
+        />
       </form>
     </SlideButton>
   );

@@ -21,9 +21,18 @@ import StyledPrice from "../widgets/StyledPrice";
 
 interface Props {
   setShowPop: React.Dispatch<React.SetStateAction<boolean>>;
+  // hasReview: boolean;
+  // setRateIndex: React.Dispatch<React.SetStateAction<number>>;
+
+  // rateIndex: number;
 }
 
-const ProductDetails = ({ setShowPop }: Props) => {
+const ProductDetails = ({
+  setShowPop,
+}: // hasReview,
+// rateIndex,
+// setRateIndex,
+Props) => {
   const {
     images,
     bigImgInd,
@@ -34,7 +43,7 @@ const ProductDetails = ({ setShowPop }: Props) => {
     category,
     price,
     stock,
-    addReview,
+    reviews,
     startHover,
   } = useContext(productContext);
   const parentVariant = {
@@ -46,7 +55,7 @@ const ProductDetails = ({ setShowPop }: Props) => {
     },
   };
 
-  const { avgRate, reviewLength } = useAvg(rating, addReview);
+  const { avgRate, reviewLength } = useAvg(rating, reviews);
 
   const handleshowPop = () => setShowPop(true);
   const [isFavoraited, setIsFavorited] = useState(false);
@@ -54,11 +63,8 @@ const ProductDetails = ({ setShowPop }: Props) => {
   const [id] = usePathAndId(images, bigImgInd);
   const { cart } = useAppSelector((state) => state.cart);
   const [onCart, setOnCart] = useState(false);
-  const [hasReview, setHasReview] = useState(false);
   const [showAddRate, setShowAddRate] = useState(false);
-  const { userId } = useContext(isAuthContext);
-  const [rateIndex, setRateIndex] = useState(-1);
-
+  const [userReview, setUserReview] = useState("");
   const toggleSHowAddRate = () => setShowAddRate(!showAddRate);
   useEffect(() => {
     const check = cart.some((e) => e.productId === id);
@@ -69,21 +75,24 @@ const ProductDetails = ({ setShowPop }: Props) => {
     }
   }, [cart, id]);
 
-  useEffect(() => {
-    const check = addReview.find((e) => e.userId === userId);
-    if (check) {
-      setHasReview(true);
-
-      setRateIndex(check.rate - 1);
-    } else {
-      setHasReview(false);
-    }
-  }, [addReview]);
-
   const { handlePurchase } = useBuy([
     { _id, productId: _id, parentId: "", price, path: "", title, count: 1 },
   ]);
 
+  const [hasReview, setHasReview] = useState(false);
+  const { userId } = useContext(isAuthContext);
+  const [rateIndex, setRateIndex] = useState(-1);
+
+  useEffect(() => {
+    const check = reviews?.find((e: any) => e.userId === userId);
+    if (check) {
+      setHasReview(true);
+      setUserReview(check.review);
+      setRateIndex(check.rate - 1);
+    } else {
+      setHasReview(false);
+    }
+  }, [reviews]);
   return (
     <motion.div
       className="details"
@@ -119,15 +128,18 @@ const ProductDetails = ({ setShowPop }: Props) => {
             <span className="stock"> {stock}</span>in stock
           </span>
         </div>
+
         <div className="center gap" style={{ justifyContent: "flex-start" }}>
           <ProductRate
             key={`${description}-rate`}
             avgRate={avgRate}
             ratingLen={reviewLength}
           />
-          <Title title="show all reviews">
-            <BiShow fontSize={12} color="black" onClick={handleshowPop} />
-          </Title>
+          {reviews.length >= 1 && (
+            <Title title="show all reviews">
+              <BiShow fontSize={12} color="black" onClick={handleshowPop} />
+            </Title>
+          )}
           <AnimatePresence>
             {!hasReview ? (
               <Title title="add review" key={"add-review"}>
@@ -187,6 +199,8 @@ const ProductDetails = ({ setShowPop }: Props) => {
             _id={_id}
             rateIndex={rateIndex}
             setRateIndex={setRateIndex}
+            defaultVal={userReview}
+            hasReview={hasReview}
           />
         )}
       </AnimatePresence>

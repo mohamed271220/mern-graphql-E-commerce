@@ -10,6 +10,7 @@ import { isAuthContext } from "../../context/isAuth";
 import { FiMinusSquare } from "react-icons/fi";
 import { AiFillCloseCircle } from "react-icons/ai";
 import Title from "../widgets/Title";
+import { useAppSelector } from "../../custom/reduxTypes";
 
 interface Props {
   setProduct: React.Dispatch<React.SetStateAction<string>>;

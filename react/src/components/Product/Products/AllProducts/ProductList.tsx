@@ -1,18 +1,20 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import ProductFliter from "./ProductFliter";
 import Pages from "../Pages";
 import { motion } from "framer-motion";
 import { viewContext } from "../../../../context/gridView";
 import { productListContext } from "../../../../context/FilterData";
-import useNumberOfPages from "../../../../custom/useNumberOfPages";
 import usePagination from "../../../../custom/useNumberOfPages";
+import { useAppSelector } from "../../../../custom/reduxTypes";
 
 const ProductList = ({ isDash }: { isDash?: boolean }) => {
+  const { Allproducts } = useAppSelector((st) => st.Allproducts);
   const { showFilter, products } = useContext(productListContext);
   const { gridView } = useContext(viewContext);
   const [page, setPage] = useState(1);
 
-  const [dataShown, numberOfPages] = usePagination(8, page, products);
+  const arr = isDash ? Allproducts || [] : products || [];
+  const [dataShown, numberOfPages] = usePagination(8, page, arr);
 
   return (
     <motion.div

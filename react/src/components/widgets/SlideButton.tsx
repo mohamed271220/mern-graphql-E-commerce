@@ -83,6 +83,7 @@ const SlideButton = ({
               }}
               onPanEnd={(e, info) => {
                 if (info.offset.x >= 200 && isVaild) {
+                  console.log("slide btn runs");
                   setIsConfirmed(true);
                   fn();
                 } else {

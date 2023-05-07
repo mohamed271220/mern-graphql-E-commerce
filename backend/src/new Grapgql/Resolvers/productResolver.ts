@@ -10,16 +10,23 @@ interface filterAllInterface {
 }
 
 interface productInterface {
-  input: {
-    title: string;
-    state: string;
-    _id: string;
-    stock: number;
-    price: number;
-    description: string;
-    category: string;
-    createdAt?: string;
-  };
+  title: string;
+  state: string;
+  _id: string;
+  stock: number;
+  price: number;
+  description: string;
+  category: string;
+  createdAt?: string;
+}
+
+interface reviewInterface {
+  image: string;
+  _id: string;
+  user: string;
+  userId: string;
+  review: string;
+  rate: number;
 }
 
 export const productResolver = {
@@ -126,13 +133,61 @@ export const productResolver = {
       });
     },
 
-    async updateProduct(_: any, { input }: productInterface) {
+    async updateProduct(_: any, { input }: { input: productInterface }) {
       await productCollection.findByIdAndUpdate(input._id, input);
       return { msg: "product updated successfully", status: 200 };
     },
-    async addProduct(_: any, { input }: productInterface) {
+    async addProduct(
+      _: any,
+      { createInput }: { createInput: productInterface }
+    ) {
+      try {
+        return await productCollection.create(createInput);
+      } catch (err) {
+        console.log(err);
+      }
+    },
+
+    //reviews
+
+    async addReview(_: any, { input }: { input: reviewInterface }) {
+      try {
+        const { userId, rate, review, image, user } = input;
+        const data = await productCollection.findByIdAndUpdate(
+          input._id,
+          {
+            $push: { reviews: { user, userId, rate, review, image } },
+          },
+          { new: true }
+        );
+        const addedReview = data!.reviews[data!.reviews.length - 1];
+        addedReview.msg = "review added";
+        addedReview.status = 200;
+        return addedReview;
+      } catch (err) {
+        return (err as Error).message;
+      }
+    },
+    async updateReview(_: any, { input }: any) {
       console.log(input);
-      return productCollection.create({ ...input, deliveredAt: null });
+      try {
+        const { rate, review } = input;
+        const data = await productCollection.findOneAndUpdate(
+          {
+            _id: input.productId,
+            "reviews.userId": input.userId,
+          },
+          {
+            $set: {
+              "reviews.$.rate": rate,
+              "reviews.$.review": review,
+            },
+          }
+        );
+        return { msg: "review updated successfully" };
+      } catch (err) {
+        return (err as Error).message;
+      }
     },
   },
 };

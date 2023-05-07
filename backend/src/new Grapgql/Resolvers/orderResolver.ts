@@ -29,7 +29,7 @@ export const orderResolver = {
         state: args.input.state,
         deliveredAt: args.input.deliveredAt,
       });
-      return { msg: `order is  ${args.input.state} successfully` };
+      return { msg: `order is at  ${args.input.state} mode` };
     },
     async deleteOrder(_: any, args: delInterfaceOrder) {
       const length = args._id.length;
