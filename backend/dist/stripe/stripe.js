@@ -40,7 +40,6 @@ const stripeFn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             customer_email: email,
         });
         res.json(session);
-        console.log(session);
         yield order_js_1.OrderCollection.create({
             createdAt: date(),
             cost: session.amount_total / 100,

@@ -26,15 +26,14 @@ const OrderDropDown = ({ orderState, setOrderState, _id }: Props) => {
   return (
     <div className="relative">
       <Title title={isSClicked ? "update order state" : ""}>
-        <HiDotsVertical className="icon" onClick={handleToggle} />
+        <HiDotsVertical
+          className="icon"
+          onClick={handleToggle}
+          color="var(--secondary)"
+        />
       </Title>
       <AnimatePresence>
         {isSClicked && (
-          // <FadeElement
-          //   key={"order-drop"}
-          //   transition={0.8}
-          //   cls="order-drop box-shadow"
-          // >
           <motion.div
             className="order-drop box-shadow"
             variants={selectDropDownVariants}
@@ -67,7 +66,6 @@ const OrderDropDown = ({ orderState, setOrderState, _id }: Props) => {
               })}
             </>
           </motion.div>
-          // </FadeElement>
         )}
       </AnimatePresence>
     </div>

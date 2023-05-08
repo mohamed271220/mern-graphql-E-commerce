@@ -10,11 +10,11 @@ interface Props extends ChildrenInterFace {
 const Title = ({ title, dir, children, abs }: Props) => {
   const variant = {
     start: { opacity: 0, y: 10 },
-    end: { opacity: 1, y: 0, transition: { delay: 0.3, duration: 0.6 } },
+    end: { opacity: 1, y: 0, transition: { duration: 0.6 } },
     exit: {
       opacity: 0,
       y: 10,
-      transition: { duration: 0.6, opacity: { delay: 0.2 } },
+      transition: { duration: 0.2, opacity: { delay: 0.2 } },
     },
   };
 
@@ -25,6 +25,7 @@ const Title = ({ title, dir, children, abs }: Props) => {
       className={`title-par ${abs ? "" : "relative"}`}
       onHoverStart={show}
       onHoverEnd={hide}
+      onTapStart={hide}
     >
       {children}
       <AnimatePresence mode="wait">

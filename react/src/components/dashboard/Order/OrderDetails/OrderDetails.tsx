@@ -5,6 +5,7 @@ import { GET_ORDER } from "../../../../graphql/queries";
 import DashMain from "../../DashMain";
 import OrderDetailTr from "./OrderDetialTr";
 import Customer from "./Customer";
+import OrderSummery from "./OrderSummery";
 
 const OrderDetails = () => {
   const { id } = useParams();
@@ -21,7 +22,7 @@ const OrderDetails = () => {
           className="shadow  mobile-order-details 
             underline header
           "
-          style={{ margin: 6, marginTop: -30, color: "var(--green)" }}
+          style={{ margin: 6, marginTop: -10, color: "var(--secondary)" }}
         >
           <span style={{ color: "var(--wheat-light)" }} className="shadow">
             order{" "}
@@ -29,23 +30,30 @@ const OrderDetails = () => {
           #{_id}
         </h2>
 
-        <table
-          className="table-order-detail box-shadow"
-          style={{ width: "100%" }}
-        >
-          <th>items summary</th>
-          <th>QTY</th>
-          <th>Price</th>
-          <th>total price</th>
-          {productId.map((ob: any, i: number) => {
-            return (
-              <>
-                <OrderDetailTr OrderDetailTr key={ob._id} {...ob} />
-              </>
-            );
-          })}
-        </table>
-        <Customer state={state} userId={userId} cost={cost} />
+        <div className="order-details-grid">
+          <table
+            className="table-order-detail box-shadow"
+            style={{ width: "100%" }}
+          >
+            <th>items summary</th>
+            <th>QTY</th>
+            <th>Price</th>
+            <th>total price</th>
+            {productId.map((ob: any, i: number) => {
+              return (
+                <>
+                  <OrderDetailTr OrderDetailTr key={ob._id} {...ob} />
+                </>
+              );
+            })}
+          </table>
+          <Customer state={state} userId={userId} cost={cost} />
+          <OrderSummery
+            created={createdAt}
+            delivered={deliveredAt}
+            total={cost}
+          />
+        </div>
       </DashMain>
     );
   } else {

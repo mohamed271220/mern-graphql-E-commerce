@@ -13,13 +13,15 @@ table.order {
   min-width: 600px;
   max-width: 800px;
   border-spacing: 0.4px;
+  color: var(--secondary);
   > * {
     font-weight: bold;
   }
   th {
     height: 40px;
     background: var(--sale);
-    color: var(--main);
+    color: var(--white);
+
     text-transform: capitalize;
     font-size: 1.2rem;
   }
@@ -29,8 +31,6 @@ table.order {
     &:nth-child(odd) {
       background: rgba(0, 0, 0, 0.08);
     }
-  }
-  td {
   }
 }
 
@@ -85,7 +85,7 @@ table.order {
   font-size: 1rem;
   font-weight: bold;
   letter-spacing: 0.8px;
-  color: var(--main);
+  color: var(--white);
   border-radius: 4px;
   text-transform: capitalize;
 }
@@ -100,7 +100,7 @@ table.order {
   display: inline-block;
   font-weight: bold;
   margin-top: 3px;
-  color: rgb(75, 74, 74);
+  color: var(--secondary);
 }
 
 .order-delete-mobile {
@@ -155,6 +155,8 @@ table.order {
   }
 }
 .table-order-detail {
+  grid-area: table;
+
   background-color: var(--main);
   margin-top: 20px;
   text-align: center;
@@ -162,11 +164,12 @@ table.order {
   border-spacing: 0;
   th {
     color: var(--main);
-    background: #000;
+    background: var(--secondary);
     height: 40px;
     text-transform: capitalize;
   }
   td {
+    color: var(--secondary);
     height: 30px;
     font-weight: 600;
     &:first-child {
@@ -188,15 +191,19 @@ table.order {
 }
 
 .customer {
+  grid-area: customer;
   margin-top: 12px;
   background: var(--main);
   padding: 12px;
+  color: var(--secondary);
 
   h2 + .hr {
     margin-top: 6px;
   }
   h2 {
     text-transform: capitalize;
+    color: var(--sale);
+    text-shadow: 0.5px 0.5px 1px #000;
   }
 }
 .order-detail {
@@ -205,4 +212,29 @@ table.order {
     font-weight: bold;
     text-transform: capitalize;
   }
+}
+
+.order-detail-par {
+  svg {
+    fill: var(--white);
+    margin-left: 30px;
+  }
+}
+
+.order-summery {
+  grid-area: summery;
+  padding: 10px;
+  height: fit-content;
+  align-self: center;
+  color: var(--secondary);
+}
+
+.order-details-grid {
+  display: grid;
+  gap: 4px 8px;
+  grid-template-columns: repeat(3, 1fr);
+
+  grid-template-areas:
+    "table table summery "
+    "customer customer summery";
 }

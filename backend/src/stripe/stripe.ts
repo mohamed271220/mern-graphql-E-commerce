@@ -36,7 +36,6 @@ const stripeFn = async (req: Request, res: Response) => {
       customer_email: email,
     });
     res.json(session);
-    console.log(session);
 
     await OrderCollection.create({
       createdAt: date(),

@@ -20,11 +20,12 @@ import NavImg from "./widgets/NavImg";
 import { opacityVariant } from "../variants/globals";
 import { IoGitCompareSharp } from "react-icons/io5";
 import FadeElement from "./widgets/FadeElement";
-import ThemContext, { themeContext } from "../context/ThemContext";
+import ThemeToggle from "./ThemeToggle";
+import { themeContext } from "../context/ThemContext";
 
 const Nav = () => {
   const { isAuth } = useContext(isAuthContext);
-  const { toggleTheme, theme } = useContext(themeContext);
+  const { theme } = useContext(themeContext);
   const navRef = useRef<HTMLElement | null>(null);
   const [showFav, handleShowFav, handleHideFav, toggleFav] = useHide();
   const { cart } = useAppSelector((state) => state.cart);
@@ -37,13 +38,13 @@ const Nav = () => {
   const navClr = useTransform(
     scrollY,
     [0, 0.5],
-    ["var(--main)", theme === "dark" ? "#fff" : "#000"]
+    [theme === "light" ? "#fff" : "#000", theme === "dark" ? "#fff" : "#000"]
   );
 
   const LinkClr = useTransform(
     scrollY,
     [0, 0.5],
-    ["var(--secondary)", theme === "light" ? "#fff" : "#000"]
+    [theme === "dark" ? "#fff" : "#000", theme === "light" ? "#fff" : "#000"]
   );
   return (
     <motion.nav ref={navRef} style={{ background: navClr }}>
@@ -110,7 +111,7 @@ const Nav = () => {
             )}
           </AnimatePresence>
         </motion.li>
-        <button onClick={toggleTheme}>toggle</button>
+        <ThemeToggle navClr={navClr} linkClr={LinkClr} />
       </ul>
     </motion.nav>
   );

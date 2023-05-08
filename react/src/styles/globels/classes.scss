@@ -235,9 +235,13 @@
 }
 
 .title-par {
-  display: block;
+  display: inline-flex;
 }
 .custom-title {
+  display: inline-flex;
+
+  justify-content: center;
+  align-items: center;
   @extend .shadow;
   font-weight: bold;
   text-transform: lowercase;
@@ -251,6 +255,8 @@
   white-space: nowrap;
   border-radius: 4px;
   letter-spacing: 0.8px;
+  height: 20px;
+  font-size: 1rem;
   &.right {
     right: 0;
   }

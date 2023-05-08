@@ -21,7 +21,7 @@ const HeartSvgProduct = ({ isFavoraited, setIsFavorited }: Props) => {
     title,
   } = useContext(productContext);
 
-  const { userId } = useContext(isAuthContext);
+  const { userId, isAuth } = useContext(isAuthContext);
   const { fav } = useAppSelector((state) => state.fav);
   const [id, setId] = useState("");
   const [path, setPath] = useState("");
@@ -58,7 +58,9 @@ const HeartSvgProduct = ({ isFavoraited, setIsFavorited }: Props) => {
   const { handleAddToFav } = useAddToFav(addToFavObj);
 
   const handleHeartFns = async () => {
-    setIsFavorited(!isFavoraited);
+    if (isAuth) {
+      setIsFavorited(!isFavoraited);
+    }
 
     if (!isFavoraited) {
       handleAddToFav();

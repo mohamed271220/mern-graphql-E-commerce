@@ -8,7 +8,8 @@ interface themeContextInterface {
 export const themeContext = createContext({} as themeContextInterface);
 
 const ThemContext = ({ children }: ChildrenInterFace) => {
-  const [theme, setTheme] = useState("light");
+  const localstorageTheme = localStorage.getItem("zimart-theme");
+  const [theme, setTheme] = useState(localstorageTheme || "light");
 
   useEffect(() => {
     if (theme == "light") {
@@ -17,12 +18,14 @@ const ThemContext = ({ children }: ChildrenInterFace) => {
         "rgb(247, 246, 246)"
       );
       document.documentElement.style.setProperty("--secondary", "#222222");
+      localStorage.setItem("zimart-theme", "light");
     } else {
       document.documentElement.style.setProperty(
         "--secondary",
         "rgb(247, 246, 246)"
       );
       document.documentElement.style.setProperty("--main", "#222222");
+      localStorage.setItem("zimart-theme", "dark");
     }
   }, [theme]);
   const toggleTheme = () =>

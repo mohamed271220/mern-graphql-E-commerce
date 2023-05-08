@@ -82,11 +82,13 @@ export const heartVariant = {
   start: (bool: boolean) => ({
     pathLength: bool ? 0 : 1,
     pathOffset: bool ? 0 : 0.1,
-    stroke: "var(--main)",
+    // strokeWidth: 4,
+    stroke: bool ? "var(--main)" : "red",
+    fill: "red",
   }),
   end: (bool: boolean) => ({
     pathLength: bool ? 1 : 0,
-    pathOffset: bool ? 0.1 : 0,
+    pathOffset: bool ? 0.15 : 0,
     stroke: bool ? "red" : "var(--main)",
     transition: { duration: 0.8 },
   }),

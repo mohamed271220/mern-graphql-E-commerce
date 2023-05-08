@@ -24,7 +24,7 @@ const ProductListHeart = ({
   parentId,
 }: Props) => {
   const { fav } = useAppSelector((state) => state.fav);
-  const { userId } = useContext(isAuthContext);
+  const { userId, isAuth } = useContext(isAuthContext);
 
   useEffect(() => {
     if (fav?.length === 0) {
@@ -59,7 +59,9 @@ const ProductListHeart = ({
   });
 
   const handleHeartFns = async () => {
-    setIsFavorited(!isFavoraited);
+    if (isAuth) {
+      setIsFavorited(!isFavoraited);
+    }
 
     if (!isFavoraited) {
       handleAddToFav();

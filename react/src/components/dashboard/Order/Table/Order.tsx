@@ -6,6 +6,7 @@ import { opacityVariant } from "../../../../variants/globals";
 import FadeElement from "../../../widgets/FadeElement";
 import OrderDropDown from "../OrderDropDown";
 import useUpdateOrder from "../../../../custom/useUpdateOrder";
+import OrderDetailsIcon from "../OrderDetailsIcon";
 
 interface Props {
   state: string;
@@ -60,24 +61,28 @@ const Order = ({
       </td>
       <td>{cost} $</td>
       <div className=" center gap`">
-        <AnimatePresence mode="wait">
-          <FadeElement cls="" key={state}>
-            <td
-              className="order-state"
-              style={{
-                width: 80,
-                color: `var(--${state.split(" ").slice(-1)})`,
-              }}
-            >
-              {state}
-            </td>
-          </FadeElement>
-        </AnimatePresence>
-        <OrderDropDown
-          _id={_id}
-          setOrderState={setOrderState}
-          orderState={orderState}
-        />
+        <td
+          className="order-state center"
+          style={{
+            width: "100%",
+            color: `white`,
+            background: `var(--${state.split(" ").slice(-1)})`,
+          }}
+        >
+          <AnimatePresence mode="wait">
+            <FadeElement cls="" key={state}>
+              <div style={{ width: 70 }}>{state}</div>
+            </FadeElement>
+          </AnimatePresence>
+          <OrderDropDown
+            _id={_id}
+            setOrderState={setOrderState}
+            orderState={orderState}
+          />
+          <div className="order-detail-par">
+            <OrderDetailsIcon _id={_id} />
+          </div>
+        </td>
       </div>
     </>
   );

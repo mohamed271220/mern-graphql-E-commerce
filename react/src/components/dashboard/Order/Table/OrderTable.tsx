@@ -57,7 +57,7 @@ const OrderTable = () => {
         <th> created At</th>
         <th>delivered At</th>
         <th> total </th>
-        <th> order state </th>
+        <th style={{ width: 150 }}> order state </th>
       </thead>
 
       <AnimatePresence>
