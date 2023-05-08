@@ -23,7 +23,7 @@
   @extend .remove-border;
   @extend .shadow;
 
-  color: var(--white);
+  color: rgb(247, 246, 246);
   white-space: nowrap;
   padding: 4px 10px;
   font-weight: bold;
@@ -43,8 +43,8 @@
     }
   }
   &.about {
-    background: var(--white);
-    color: black;
+    background: var(--main);
+    color: var(--secondary);
   }
   &.main {
     background: linear-gradient(30deg, var(--wheat), var(--green));
@@ -99,7 +99,7 @@
 .hr {
   width: 95%;
   height: 0.3px;
-  background: rgba(128, 128, 128, 0.436);
+  background: var(--secondary);
   margin: 0 auto;
 }
 
@@ -119,14 +119,15 @@
 
 .show-count {
   position: absolute;
-  top: -2px;
-  right: -4px;
+  top: -4px;
+  right: -6px;
   width: 1rem;
   height: 1rem;
-  padding: 5px;
+  padding: 6px;
+  font-weight: bold;
   font-size: 0.8rem;
   background: var(--gmail);
-  color: var(--white);
+  color: var(--main);
   border-radius: 50%;
 }
 
@@ -177,6 +178,7 @@
 }
 .underline {
   position: relative;
+  color: var(--secondary);
   &:before {
     content: "";
     clip-path: polygon(0 11%, 0 4%, 100% 10%);
@@ -191,7 +193,7 @@
 }
 
 .white {
-  color: var(--white);
+  color: var(--main);
 }
 
 .wheat-light {

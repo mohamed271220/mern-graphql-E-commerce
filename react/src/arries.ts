@@ -1,4 +1,4 @@
-export const categoriesArr = ["fashion", "laptops", "mobiles"];
+export const categoriesArr = ["fashion", "laptops", "phone"];
 export const FeaturedProductsArr = [
   "new",
   "sale",

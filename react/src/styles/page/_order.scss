@@ -19,7 +19,7 @@ table.order {
   th {
     height: 40px;
     background: var(--sale);
-    color: var(--white);
+    color: var(--main);
     text-transform: capitalize;
     font-size: 1.2rem;
   }
@@ -54,7 +54,7 @@ table.order {
     width: 100%;
     max-width: 400px;
     margin: 0 auto;
-    background: var(--white);
+    background: var(--main);
     height: 100px;
     display: flex;
     flex-direction: column;
@@ -85,7 +85,7 @@ table.order {
   font-size: 1rem;
   font-weight: bold;
   letter-spacing: 0.8px;
-  color: var(--white);
+  color: var(--main);
   border-radius: 4px;
   text-transform: capitalize;
 }
@@ -116,7 +116,7 @@ table.order {
   right: -3px;
   width: 80px;
   height: 100px;
-  background: var(--white);
+  background: var(--main);
   z-index: 100;
   &:before {
     content: "";
@@ -136,7 +136,7 @@ table.order {
   letter-spacing: 0.7px;
   span :not(:last-child) {
     display: inline-block;
-    border-bottom: 0.4px solid black;
+    border-bottom: 0.4px solid var(--secondary);
   }
 }
 
@@ -155,13 +155,13 @@ table.order {
   }
 }
 .table-order-detail {
-  background-color: var(--white);
+  background-color: var(--main);
   margin-top: 20px;
   text-align: center;
   vertical-align: middle;
   border-spacing: 0;
   th {
-    color: var(--white);
+    color: var(--main);
     background: #000;
     height: 40px;
     text-transform: capitalize;
@@ -189,7 +189,7 @@ table.order {
 
 .customer {
   margin-top: 12px;
-  background: var(--white);
+  background: var(--main);
   padding: 12px;
 
   h2 + .hr {

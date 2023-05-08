@@ -8,7 +8,7 @@ import { productListContext } from "../../context/FilterData";
 import useFilterState from "../../custom/useFIlterState";
 import BannerText from "./BannerText";
 import { useAppSelector } from "../../custom/reduxTypes";
-const arrClrs = ["darkblue", "var(--green)", "var(--delete)", "var(--sale)"];
+const arrClrs = ["var(--fb)", "var(--green)", "var(--delete)", "var(--sale)"];
 
 const Banner = () => {
   const { Allproducts } = useAppSelector((st) => st.Allproducts);
@@ -138,7 +138,7 @@ const Banner = () => {
             }
           })}
       </AnimatePresence>
-      <div className="banner-dots-par center">
+      <div className=" banner-dots-par center">
         {[0, 1, 2, 3].map((dot) => {
           return (
             <span
@@ -146,7 +146,9 @@ const Banner = () => {
                 setBannerIndex(dot);
               }}
               key={dot}
-              className={`banner-dot ${dot === bannerIndex ? "active" : ""}`}
+              className={`box-shadow banner-dot ${
+                dot === bannerIndex ? "active" : ""
+              }`}
             ></span>
           );
         })}

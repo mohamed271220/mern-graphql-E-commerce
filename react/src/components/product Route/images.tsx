@@ -102,9 +102,8 @@ const ProductImages = ({
                 style={{
                   height: "fit-content",
                   width: 250,
-                  // padding: 2,
                   objectFit: "contain",
-                  filter: " drop-shadow(5px 10px 2px rgb(73, 71, 71))",
+                  filter: " drop-shadow(5px 10px 2px black)",
                 }}
                 alwaysInPlace={false}
                 fillAvailableSpace

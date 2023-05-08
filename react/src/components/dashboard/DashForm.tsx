@@ -15,6 +15,8 @@ import { opacityVariant } from "../../variants/globals";
 import OpacityBtn from "../widgets/OpacityBtn";
 import { GrAddCircle } from "react-icons/gr";
 import DashMain from "./DashMain";
+import { updateProductRedux } from "../../redux/productSlice";
+import { useAppDispatch } from "../../custom/reduxTypes";
 
 interface keyedProduct extends ProductInterface {
   [key: string]: any;
@@ -31,6 +33,8 @@ interface Props {
 }
 
 const DashForm = ({ type, Icon, fn, id, obj, head, btn }: Props) => {
+  const dispatch = useAppDispatch();
+
   const date = () => new Date();
   const [percentage, setPercentage] = useState(-1);
   useEffect(() => {
@@ -103,9 +107,19 @@ const DashForm = ({ type, Icon, fn, id, obj, head, btn }: Props) => {
         },
       });
       toast.success(res.updateProduct.msg);
+      dispatch(
+        updateProductRedux({
+          _id: id,
+          obj: {
+            ...data,
+            stock: Number(data.stock),
+            price: Number(data.price),
+            description: data.description,
+          },
+        })
+      );
     } else {
       const addObj = { ...obj, createdAt: date() };
-      console.log({ addObj });
       const { data: res } = await fn({
         variables: {
           createInput: { ...addObj, images: null },
@@ -138,7 +152,7 @@ const DashForm = ({ type, Icon, fn, id, obj, head, btn }: Props) => {
           className="update-product-form center  col"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <h2 className="underline header " style={{ color: "var(--white)" }}>
+          <h2 className="underline header " style={{ color: "var(--main)" }}>
             {head}
           </h2>
           {inpArr.map(({ placeholder, type: inptype }, i) => {

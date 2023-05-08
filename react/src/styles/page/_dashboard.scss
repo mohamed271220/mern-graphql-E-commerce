@@ -9,10 +9,10 @@
 #dash-aside {
   // position: relative;
   position: fixed;
-  box-shadow: 2px 2px 5px black;
+  box-shadow: 2px 2px 5px var(--secondary);
   height: calc(100vh - 40px);
   background: var(--wheat-lighter);
-  background: var(--white);
+  background: var(--main);
   display: flex;
   flex-direction: column;
   border-top-right-radius: 20px;
@@ -47,7 +47,7 @@
     &.active,
     &:hover {
       background: var(--green);
-      color: var(--white);
+      color: var(--main);
       font-weight: bold;
     }
   }

@@ -1,7 +1,7 @@
 @import "../variables.scss";
 
 .pop-up {
-  background: var(--white);
+  background: var(--main);
   filter: drop-shadow(4px 5px 5px black);
   overflow: hidden;
   position: relative;
@@ -104,7 +104,7 @@ p.review-user {
     border: 0;
     font-size: 0.8rem;
     padding: 5px;
-    color: var(--white);
+    color: var(--main);
     border-radius: 4px;
   }
 }

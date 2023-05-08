@@ -12,7 +12,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const auth_1 = require("./middlewares/auth");
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
@@ -34,8 +33,8 @@ const orderResolver_js_1 = require("./new Grapgql/Resolvers/orderResolver.js");
 const userTypeDefs_js_1 = require("./new Grapgql/typeDefs/userTypeDefs.js");
 const userResolver_js_1 = require("./new Grapgql/Resolvers/userResolver.js");
 const graphql_middleware_1 = require("graphql-middleware");
-const graphql_shield_1 = require("graphql-shield");
 const tokensRoutes_js_1 = require("./routes/tokensRoutes.js");
+const permissions_js_1 = require("./new Grapgql/shield/permissions.js");
 const { makeExecutableSchema } = require("@graphql-tools/schema");
 mongoose_1.default.connect(config_js_1.MongoDB_URL);
 const app = (0, express_1.default)();
@@ -55,25 +54,7 @@ const schema = makeExecutableSchema({
     typeDefs: [ProductDefTypes_js_1.productTypeDefs, orderType_js_1.orderDefType, userTypeDefs_js_1.userTypeDefs],
     resolvers: [productResolver_js_1.productResolver, orderResolver_js_1.orderResolver, userResolver_js_1.userResolver],
 });
-const isUser = (0, graphql_shield_1.rule)()((par, args, ctx) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b;
-    const accessToken = (_b = (_a = ctx.req) === null || _a === void 0 ? void 0 : _a.headers) === null || _b === void 0 ? void 0 : _b.authorization;
-    const isAuthenticated = (0, auth_1.auth)(accessToken);
-    if (isAuthenticated) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}));
-const permissions = (0, graphql_shield_1.shield)({
-    Query: {},
-    Mutation: {
-        addToFav: isUser,
-        removeFromFav: isUser,
-    },
-});
-const schemaWithPermissions = (0, graphql_middleware_1.applyMiddleware)(schema, permissions);
+const schemaWithPermissions = (0, graphql_middleware_1.applyMiddleware)(schema, permissions_js_1.permissions);
 app.use(express_1.default.json());
 // server.applyMiddleware({ app });
 const server = new apollo_server_express_1.ApolloServer({

@@ -6,10 +6,9 @@ import {
   ApolloProvider,
   InMemoryCache,
   HttpLink,
-  ApolloLink,
-  concat,
-  execute,
   from,
+  ApolloLink,
+  RequestHandler,
 } from "@apollo/client";
 
 import { store } from "./redux/store.js";
@@ -34,27 +33,7 @@ const getnewAccess = async () => {
 
 const httpLink = new HttpLink({ uri: "http://localhost:3000/graphql" });
 
-const authMiddleware = new ApolloLink((operation, forward) => {
-  const accessToken = (async () => {
-    return await getnewAccess();
-  })();
-  console.log(accessToken);
-  operation.setContext(async ({ headers = {} }) => {
-    const token = await getnewAccess();
-    console.log(headers);
-    console.log(token);
-    return () => ({
-      headers: {
-        ...headers,
-        authorization: `${"token"}` || null,
-      },
-    });
-  });
-
-  return forward(operation);
-});
-
-const middleware: any = setContext(async (_, { headers }) => {
+const middleware: unknown = setContext(async (_, { headers }) => {
   const token = await getnewAccess();
   console.log(token);
   return {
@@ -67,8 +46,7 @@ const middleware: any = setContext(async (_, { headers }) => {
 
 const client = new ApolloClient({
   uri: "http://localhost:3000/graphql",
-  // link: concat(authMiddleware, httpLink),
-  link: from([middleware, httpLink]),
+  link: from([middleware as ApolloLink, httpLink]),
 
   cache: new InMemoryCache(),
   credentials: "include",

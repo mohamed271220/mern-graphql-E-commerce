@@ -21,7 +21,11 @@ export const parentVariant = {
   start: { height: 0 },
   end: {
     height: "auto",
-    transition: { when: "beforeChildren", staggerChildren: 0.1, duration: 0.4 },
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.1,
+      duration: 0.4,
+    },
   },
   exit: {
     height: 0,
@@ -78,12 +82,12 @@ export const heartVariant = {
   start: (bool: boolean) => ({
     pathLength: bool ? 0 : 1,
     pathOffset: bool ? 0 : 0.1,
-    stroke: "black",
+    stroke: "var(--main)",
   }),
   end: (bool: boolean) => ({
     pathLength: bool ? 1 : 0,
     pathOffset: bool ? 0.1 : 0,
-    stroke: "red",
+    stroke: bool ? "red" : "var(--main)",
     transition: { duration: 0.8 },
   }),
 };

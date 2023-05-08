@@ -52,7 +52,7 @@ const Reviews = ({ setShowPop }: Props) => {
         <motion.button
           whileHover={btnHover}
           className="center "
-          style={{ background: "var(--delete)" }}
+          style={{ background: "var(--delete)", color: "var(--white)" }}
           onClick={() =>
             setRviewIndex(handleIndex(reviewIndex - 1, reviews.length))
           }
@@ -62,7 +62,7 @@ const Reviews = ({ setShowPop }: Props) => {
         <motion.button
           whileHover={btnHover}
           className="center "
-          style={{ background: "var(--green)" }}
+          style={{ background: "var(--green)", color: "var(--white)" }}
           onClick={() =>
             setRviewIndex(handleIndex(reviewIndex + 1, reviews.length))
           }

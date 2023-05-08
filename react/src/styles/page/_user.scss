@@ -43,7 +43,7 @@
       }
     }
     .update-user {
-      background: linear-gradient(120deg, var(--green), black);
+      background: linear-gradient(120deg, var(--green), var(--secondary));
       font-size: 0.8rem;
     }
     .user-head {
@@ -51,7 +51,7 @@
       margin: 10px 5px;
       &.underline {
         &::before {
-          background: var(--white);
+          background: var(--main);
         }
       }
     }

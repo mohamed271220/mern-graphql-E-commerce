@@ -3,6 +3,7 @@
   height: 30px;
   justify-content: flex-start;
   background: rgba(128, 128, 128, 0.162);
+  box-shadow: 0.2px 0.1px 1px black;
   button {
     background: inherit;
     height: 100%;
@@ -16,9 +17,9 @@
     justify-content: center;
     align-items: center;
     width: 40px;
-    color: black;
+    color: var(--secondary);
     height: 100%;
-    background: white;
+    background: var(--main);
     overflow: hidden;
   }
 }

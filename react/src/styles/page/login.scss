@@ -28,7 +28,7 @@
   }
 
   .redirect {
-    color: var(--white);
+    color: var(--main);
     letter-spacing: 1.1px;
     a {
       display: inline-block;
@@ -53,7 +53,7 @@
     .log-social {
       width: 2.2rem;
       height: 2.2rem;
-      background: var(--white);
+      background: var(--main);
       border-radius: 5px;
       transition: 0.5s;
       svg {
@@ -77,7 +77,7 @@
   }
   .placeholder {
     position: absolute;
-    color: var(--white);
+    color: var(--main);
     text-transform: capitalize;
     letter-spacing: 0.8px;
     transform: translateY(-50%);
@@ -90,7 +90,7 @@
     }
     &.placeholder-top {
       left: 5px;
-      color: var(--white);
+      color: var(--main);
       text-shadow: 1px 0.5px 1px black;
       transform: translateY(-50%);
       background: var(--trending);

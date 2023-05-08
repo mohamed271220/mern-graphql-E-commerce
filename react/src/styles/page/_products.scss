@@ -42,6 +42,7 @@ aside {
   font-weight: bold;
   text-transform: capitalize;
   letter-spacing: 0.8px;
+  color: var(--secondary);
 
   margin-top: 6px;
   margin-bottom: 10px;
@@ -61,6 +62,7 @@ aside {
   flex-direction: column;
   justify-content: center;
   min-height: 20px;
+
   h4 {
     display: flex;
     justify-content: space-between;
@@ -77,6 +79,7 @@ aside {
     gap: 8px;
     font-size: 1rem;
     padding-left: 10px;
+    color: var(--secondary);
   }
 }
 .rate-filter-par {
@@ -196,7 +199,7 @@ svg.svg-star {
   font-size: clamp(12px, 1rem, 1rem);
   position: relative;
   padding: 5px;
-  background: var(--white);
+  background: var(--secondary);
   box-shadow: 1px 1px 3px black;
   gap: 1px;
   font-weight: bold;
@@ -215,7 +218,7 @@ svg.svg-star {
   }
 
   &:hover {
-    box-shadow: 2px 2px 5px black;
+    box-shadow: 2px 2px 5px var(--green);
   }
   p {
     overflow: hidden;
@@ -320,5 +323,34 @@ svg.svg-star {
 
   .float {
     left: 105%;
+  }
+}
+
+.products-animation-par {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.products-animate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 2px 2px 10px black;
+  width: 18vw;
+  height: 60%;
+  max-width: 100px;
+  background: var(--secondary);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+    filter: drop-shadow(2px 5px 5px black);
   }
 }

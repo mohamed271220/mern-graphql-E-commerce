@@ -16,7 +16,7 @@
     width: 90%;
     max-width: 800px;
     margin: 0 auto;
-    background: var(--white);
+    background: var(--main);
 
     gap: 20px;
     .images {
@@ -28,7 +28,6 @@
       gap: 20px;
 
       .big-img-par {
-        // width: calc(50vw);
         width: 280px;
         height: 310px;
         position: relative;
@@ -39,11 +38,10 @@
         .zoom {
           div:nth-child(2) {
             background: rgba(128, 128, 128, 0.091);
-            background-color: var(--white);
+            background-color: var(--main);
             min-height: 100vh;
             bottom: 0;
           }
-          // background: rgba(128, 128, 128, 0.2);
         }
       }
 
@@ -58,7 +56,7 @@
           max-width: 70px;
           object-fit: contain;
           padding: 5px;
-          filter: drop-shadow(1.5px 4px 1.5px rgb(73, 71, 71));
+          filter: drop-shadow(1.5px 4px 1.5px black);
 
           // background: rgba(128, 128, 128, 0.079);
         }
@@ -153,6 +151,7 @@ p {
   width: 90%;
   text-align: justify;
   letter-spacing: 0.8px;
+  color: var(--secondary);
   &::first-letter {
     color: var(--green);
     font-size: 1.2rem;
@@ -179,8 +178,7 @@ p {
   justify-content: center;
   align-items: center;
   font-size: 0.8rem;
-  color: var(--light-text);
-  // height: 20px;
+  color: var(--main);
 
   svg {
     transform: scale(0.4);
@@ -260,4 +258,5 @@ p {
   letter-spacing: 0.8px;
   font-size: 1.2rem;
   font-weight: bold;
+  color: var(--secondary);
 }

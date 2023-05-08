@@ -32,6 +32,7 @@ const Sort = () => {
                   animate="end"
                   transition={{ duration: 0.4 }}
                   key={"show-filter"}
+                  style={{ color: "var(--secondary)" }}
                 >
                   Hide Filters
                 </motion.span>
@@ -45,21 +46,24 @@ const Sort = () => {
                   exit="exit"
                   animate="end"
                   transition={{ duration: 0.4 }}
+                  style={{ color: "var(--secondary)" }}
                 >
                   Show Filters
                 </motion.span>
               )}
             </AnimatePresence>
-            <IoFilter />
+            <IoFilter color="var(--secondary)" />
           </button>
         </div>
         <div className="view-par center ">
-          <span className="display">Display</span>
+          <span className="display" style={{ color: "var(--secondary)" }}>
+            Display
+          </span>
 
           <Title title="list view">
             <BsListTask
               onClick={() => setGridView(false)}
-              style={{ color: gridView ? "black" : "var(--green)" }}
+              style={{ color: gridView ? "var(--secondary)" : "var(--green)" }}
               className={`view-icon  ${!gridView ? "shadow" : ""} `}
             />
           </Title>
@@ -67,7 +71,7 @@ const Sort = () => {
           <Title title="grid view">
             <HiOutlineViewGrid
               onClick={() => setGridView(true)}
-              style={{ color: gridView ? "var(--green)" : "black" }}
+              style={{ color: gridView ? "var(--green)" : "var(--secondary)" }}
               className={`view-icon  ${gridView ? "shadow" : ""} `}
             />
           </Title>

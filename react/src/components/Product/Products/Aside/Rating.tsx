@@ -45,13 +45,7 @@ const Rating = () => {
 
   return (
     <FIlter head="rating">
-      <motion.div
-        variants={parentVariant}
-        key={"rating-parent"}
-        initial="start"
-        animate="end"
-        exit={"exit"}
-      >
+      <motion.div variants={parentVariant} key={"rating-parent"}>
         {stars}
       </motion.div>
     </FIlter>

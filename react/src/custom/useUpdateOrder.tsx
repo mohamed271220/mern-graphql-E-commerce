@@ -9,23 +9,29 @@ const useUpdateOrder = (id: string, state: string) => {
   const dispatch = useAppDispatch();
   const [updateOrder] = useMutation(update_Order);
   const handleUpdateOrder = async () => {
-    const res = updateOrder({
-      variables: {
-        input: {
-          _id: id,
+    try {
+      const res = updateOrder({
+        variables: {
+          input: {
+            _id: id,
+            state,
+            deliveredAt: state === "delivered" ? date() : null,
+          },
+        },
+      });
+      dispatch(
+        updateOrderRedux({
+          id,
           state,
           deliveredAt: state === "delivered" ? date() : null,
-        },
-      },
-    });
-    dispatch(
-      updateOrderRedux({
-        id,
-        state,
-        deliveredAt: state === "delivered" ? date() : null,
-      })
-    );
-    toast.success((await res).data.updateOrder.msg);
+        })
+      );
+      toast.success((await res).data.updateOrder.msg);
+    } catch (err: unknown) {
+      if ((err as Error).message === "Not Authorised!") {
+        toast.error((err as Error).message);
+      }
+    }
   };
 
   return { handleUpdateOrder };

@@ -160,7 +160,10 @@ const TotalPrice = ({ subTotal }: { subTotal: number }) => {
           <span className="order-val">
             $
             <AnimatePresence>
-              <Price key={"discounted"} num={discount ? 0.05 * subTotal : 0} />
+              <Price
+                key={"discounted"}
+                num={discount ? Number((0.05 * subTotal).toFixed(2)) : 0}
+              />
             </AnimatePresence>
           </span>
         </div>

@@ -24,14 +24,21 @@ const useAddToCart = (obj: Props) => {
 
   const dispatch = useAppDispatch();
   const handleAddToCart = async () => {
-    const { data } = await addToCart();
-    dispatch(
-      addToCartRedux({
-        ...obj,
-        count: 1,
-      })
-    );
-    toast.success(data.addToCart.msg);
+    try {
+      const { data } = await addToCart();
+      dispatch(
+        addToCartRedux({
+          ...obj,
+          count: 1,
+        })
+      );
+
+      toast.success(data.addToCart.msg);
+    } catch (err: unknown) {
+      if ((err as Error).message === "Not Authorised!") {
+        toast.error((err as Error).message);
+      }
+    }
   };
   return { handleAddToCart };
 };

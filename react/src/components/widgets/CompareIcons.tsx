@@ -36,12 +36,18 @@ const CompareIcons = ({ id, title }: Props) => {
   const [addToCompare] = useMutation(AddTo_Compare);
 
   const handleAddToCompare = async () => {
-    const obj = { userId, productId: id, title };
-    const { data } = await addToCompare({ variables: { input: obj } });
-    console.log({ data });
-    if (data?.addToCompare?.msg)
-      dispatch(addToCompareRedux({ _id: data?.addToCompare, ...obj }));
-    toast.success(data?.addToCompare?.msg);
+    try {
+      const obj = { userId, productId: id, title };
+      const { data } = await addToCompare({ variables: { input: obj } });
+      console.log({ data });
+      if (data?.addToCompare?.msg)
+        dispatch(addToCompareRedux({ _id: data?.addToCompare, ...obj }));
+      toast.success(data?.addToCompare?.msg);
+    } catch (err: unknown) {
+      if ((err as Error).message === "Not Authorised!") {
+        toast.error((err as Error).message);
+      }
+    }
   };
 
   const { handleRemoveFromCompare } = useRemoveFromCompareList({
@@ -49,7 +55,14 @@ const CompareIcons = ({ id, title }: Props) => {
     productId: id,
   });
   return (
-    <div style={{ marginRight: -10, marginTop: -10, marginBottom: -10 }}>
+    <div
+      style={{
+        marginRight: -10,
+        marginTop: -10,
+        marginBottom: -10,
+        color: "var(--main)",
+      }}
+    >
       <AnimatePresence mode="wait">
         {atCompare ? (
           <motion.span

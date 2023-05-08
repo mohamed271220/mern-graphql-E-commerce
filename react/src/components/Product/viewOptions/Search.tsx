@@ -62,7 +62,7 @@ const Search = () => {
                 className="hr "
                 style={{
                   height: 0.5,
-                  background: "var(--white)",
+                  background: "var(--main)",
                   margin: "0 auto",
                 }}
               >
@@ -106,7 +106,7 @@ const Search = () => {
                           className="hr "
                           style={{
                             height: 0.5,
-                            background: "var(--white)",
+                            background: "var(--main)",
                             margin: "0 auto",
                             display:
                               i === data?.searchProducts.length - 1 || i === 4

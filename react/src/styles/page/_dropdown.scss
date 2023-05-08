@@ -2,7 +2,7 @@
 
 .fav-par {
   position: relative;
-  color: black;
+  color: var(--secondary);
   z-index: 8;
 
   .fav-drop {
@@ -11,13 +11,13 @@
     width: 200px;
     height: 200px;
     background: var(--green);
-    background: var(--white);
+    background: var(--main);
     box-shadow: var(--nav-shadow);
     border-radius: 5px;
     overflow: hidden auto;
 
     .fav-product {
-      box-shadow: 1px 1px 2px black;
+      box-shadow: 1px 1px 2px var(--secondary);
 
       width: 100%;
       height: 60px;
@@ -36,7 +36,7 @@
         }
       }
       .fav-title {
-        color: var(--white);
+        color: var(--main);
         white-space: nowrap;
         overflow: hidden;
         width: 90%;
@@ -76,11 +76,11 @@
   top: 35px;
   right: -4px;
   border-radius: 5px;
-  box-shadow: 0.8px 2px 2px black;
+  box-shadow: 0.8px 2px 2px var(--secondary);
 }
 
 .user-drop {
-  background: var(--white);
+  background: var(--main);
   width: 130px;
   display: flex;
   flex-direction: column;

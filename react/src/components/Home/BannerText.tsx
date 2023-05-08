@@ -39,13 +39,13 @@ const BannerText = ({ fn, header, clr, button, to, slogan }: Props) => {
               background: `linear-gradient(30deg, var(--wheat), ${clr})`,
               cursor: "pointer",
             }}
-            className="btn "
+            className="btn banner-btn"
             onClick={fn}
           >
             {button}
           </Link>
         </motion.div>
-        <button className="btn  about">About us</button>
+        <button className="btn banner-btn  about">About us</button>
       </div>
     </motion.div>
   );

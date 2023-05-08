@@ -11,7 +11,6 @@ const Price = ({ num }: { num: number }) => {
       exit="exit"
       key={Math.random()}
     >
-      {" "}
       {num}
     </motion.span>
   );

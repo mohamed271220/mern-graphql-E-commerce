@@ -22,10 +22,6 @@ const Product = () => {
   const [bigImgInd, setBigImgInd] = useState(0);
   const [startHover, setStartHover] = useState(false);
 
-  // const { data, error, loading } = useQuery(GET_Product_By_Id, {
-  //   variables: { id },
-  // });
-
   const [singleProduct, setSingleProduct] = useState<any>({ _id: "" });
   const { Allproducts } = useAppSelector((st) => st.Allproducts);
 
@@ -90,9 +86,6 @@ const Product = () => {
                 <ProductDetails
                   key={`product-${_id}`}
                   setShowPop={setShowPop}
-                  // rateIndex={rateIndex}
-                  // setRateIndex={setRateIndex}
-                  // hasReview={hasReview}
                 />
                 <AnimatePresence mode="wait">
                   {showPop && (

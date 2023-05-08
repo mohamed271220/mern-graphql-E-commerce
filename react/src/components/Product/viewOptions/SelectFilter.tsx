@@ -83,7 +83,10 @@ const SelectFilter = () => {
       className="custom-select"
       onClick={() => setIsSelectFocus(!isSelectFocus)}
     >
-      <BiDownArrow className="icon select-icon arrow" />
+      <BiDownArrow
+        className="  box-shadow: 0.25px 0.25px 2px black;
+ select-icon arrow"
+      />
       <span className="icon select-icon sort center">
         <MdOutlineSort /> sort:
         <AnimatePresence mode="wait">
@@ -105,8 +108,7 @@ const SelectFilter = () => {
               return (
                 <motion.li
                   style={{
-                    color:
-                      opt === selectValue ? "var(--wheat)" : "var(--white)",
+                    color: opt === selectValue ? "var(--wheat)" : "var(--main)",
                   }}
                   variants={opacityVariant}
                   onClick={() => setIsSelectFocus(false)}

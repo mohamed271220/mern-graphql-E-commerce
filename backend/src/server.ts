@@ -1,4 +1,3 @@
-import { auth } from "./middlewares/auth";
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
@@ -20,8 +19,8 @@ import { orderResolver } from "./new Grapgql/Resolvers/orderResolver.js";
 import { userTypeDefs } from "./new Grapgql/typeDefs/userTypeDefs.js";
 import { userResolver } from "./new Grapgql/Resolvers/userResolver.js";
 import { applyMiddleware } from "graphql-middleware";
-import { allow, rule, shield } from "graphql-shield";
 import { AuthRouter } from "./routes/tokensRoutes.js";
+import { permissions } from "./new Grapgql/shield/permissions.js";
 const { makeExecutableSchema } = require("@graphql-tools/schema");
 
 mongoose.connect(MongoDB_URL as unknown as string);
@@ -48,26 +47,6 @@ app.use(
 const schema = makeExecutableSchema({
   typeDefs: [productTypeDefs, orderDefType, userTypeDefs],
   resolvers: [productResolver, orderResolver, userResolver],
-});
-
-const isUser = rule()(async (par: any, args: any, ctx: any) => {
-  const accessToken = ctx.req?.headers?.authorization;
-
-  const isAuthenticated = auth(accessToken);
-  if (isAuthenticated) {
-    return true;
-  } else {
-    return false;
-  }
-
-});
-
-const permissions = shield({
-  Query: {},
-  Mutation: {
-    addToFav: isUser,
-    removeFromFav: isUser,
-  },
 });
 
 const schemaWithPermissions = applyMiddleware(schema, permissions);

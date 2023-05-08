@@ -15,7 +15,7 @@ const ProductList = ({ isDash }: { isDash?: boolean }) => {
 
   const arr = isDash ? Allproducts || [] : products || [];
   const [dataShown, numberOfPages] = usePagination(8, page, arr);
-
+  console.log(Allproducts);
   return (
     <motion.div
       className={`product-list-par ${!gridView ? "list" : "grid"} `}

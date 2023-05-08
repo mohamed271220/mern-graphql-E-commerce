@@ -13,15 +13,15 @@
 
 .select-icon {
   position: absolute;
-
   transform: translateY(-50%);
-  color: var(--white);
+  color: var(--main);
   font-size: 10px;
 
   cursor: pointer;
   &.arrow {
     right: 5px;
     top: 50%;
+    filter: drop-shadow(0.25px 1px 0.5px black);
   }
   &.sort {
     left: 5px;
@@ -36,14 +36,14 @@
 
 .select-dropdown {
   list-style: none;
-  background: #000;
+  background: var(--secondary);
   position: absolute;
   top: 100%;
   left: 0;
   width: 100%;
-  z-index: 100;
+  z-index: 2;
   box-shadow: 0.25px 0.25px 2px black;
-  color: var(--white);
+  color: var(--main);
   padding: 4px;
   align-items: flex-start;
   padding-left: 10px;
@@ -92,6 +92,7 @@
   align-items: flex-start;
   gap: 20px;
   margin: 0 auto;
+  color: var(--secondary);
 }
 
 .selected-pro-data {

@@ -9,7 +9,7 @@ const clrsArr = [
   "var(--green)",
   "var(--delete)",
   "var(--twitter)",
-  "black",
+  "var(--secondary)",
   "var(--fb)",
 ];
 
@@ -60,13 +60,13 @@ const Review = ({ _id, image, user, rate, review, i }: Props) => {
               {count}
             </motion.span>
           </AnimatePresence>
-          <span className="five center">
+          <span className="five center" style={{ color: "var(--secondary)" }}>
             <span>/</span>5
           </span>
         </span>
       </div>
 
-      <div className="user-review center">
+      <div className="user-review center" style={{ color: "var(--secondary)" }}>
         <span>
           <FaQuoteLeft className="icon" fill={clrsArr[i]} />
         </span>

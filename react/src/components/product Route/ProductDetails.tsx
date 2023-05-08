@@ -18,21 +18,12 @@ import useBuy from "../../custom/useBuy";
 import OpacityBtn from "../widgets/OpacityBtn";
 import CompareIcons from "../widgets/CompareIcons";
 import StyledPrice from "../widgets/StyledPrice";
+import { toast } from "react-hot-toast";
 
 interface Props {
   setShowPop: React.Dispatch<React.SetStateAction<boolean>>;
-  // hasReview: boolean;
-  // setRateIndex: React.Dispatch<React.SetStateAction<number>>;
-
-  // rateIndex: number;
 }
-
-const ProductDetails = ({
-  setShowPop,
-}: // hasReview,
-// rateIndex,
-// setRateIndex,
-Props) => {
+const ProductDetails = ({ setShowPop }: Props) => {
   const {
     images,
     bigImgInd,
@@ -54,6 +45,7 @@ Props) => {
       transition: { delay: 0.7, type: "spring", stiffness: 70 },
     },
   };
+  const { isAuth } = useContext(isAuthContext);
 
   const { avgRate, reviewLength } = useAvg(rating, reviews);
 
@@ -137,16 +129,25 @@ Props) => {
           />
           {reviews.length >= 1 && (
             <Title title="show all reviews">
-              <BiShow fontSize={12} color="black" onClick={handleshowPop} />
+              <BiShow
+                fontSize={12}
+                color="var(--secondary)"
+                onClick={handleshowPop}
+              />
             </Title>
           )}
+
           <AnimatePresence>
             {!hasReview ? (
               <Title title="add review" key={"add-review"}>
                 <AiFillPlusSquare
                   color="var(--green)"
                   fontSize={12}
-                  onClick={toggleSHowAddRate}
+                  onClick={() => {
+                    isAuth
+                      ? toggleSHowAddRate()
+                      : toast.error("you must log in to add review");
+                  }}
                 />
               </Title>
             ) : (

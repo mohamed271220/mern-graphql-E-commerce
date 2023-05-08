@@ -1,7 +1,7 @@
 @import "../variables.scss";
 @import "../globels/classes.scss";
 .slide-bottom {
-  background: var(--white);
+  background: var(--main);
   width: 350px;
   align-self: flex-end;
 }
@@ -10,7 +10,7 @@
 }
 .pop-head {
   margin: 10px;
-  color: black;
+  color: var(--secondary);
 }
 .slide-par {
   width: 240px;
@@ -31,7 +31,7 @@
   z-index: 100;
 }
 .slide-text {
-  color: var(--white);
+  color: var(--main);
   position: absolute;
   text-transform: capitalize;
   font-weight: bold;
@@ -43,7 +43,7 @@
 .add-rate-pop {
   width: 350px;
   height: 200px;
-  background: var(--white);
+  background: var(--main);
 }
 
 .rate-form {
@@ -61,7 +61,7 @@
 }
 
 .update-user-slide {
-  background: var(--white);
+  background: var(--main);
   height: 200px;
 
   form {
@@ -76,7 +76,7 @@
     margin: 0 auto;
     color: white;
 
-    background: black;
+    background: var(--secondary);
   }
 }
 
@@ -104,7 +104,7 @@
 
 .order-success {
   height: 200px;
-  background: var(--white);
+  background: var(--main);
   width: 300px;
   border-radius: 10px;
   white-space: nowrap;

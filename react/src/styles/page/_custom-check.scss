@@ -1,13 +1,15 @@
+@import "../variables.scss";
+
 .custom-check-parent {
   background: rgba(93, 92, 92, 0.424);
-  border: var(--wheat) 1px solid;
   border-radius: 2px;
   width: 12px;
   height: 12px;
 
   .custom-check {
     width: fit-content;
-    background: var(--green);
+    // background: var(--green);
+    background: var(--secondary);
     border-radius: 2px;
   }
 }

@@ -59,7 +59,7 @@ const Aside = ({ startFiltering }: { startFiltering: boolean }) => {
     >
       <div className="aside-head center">
         <div className="filter-icon center">
-          <IoFilter />
+          <IoFilter className="icon" color="var(--secondary)" />
           <span className="filter-head">filter</span>
         </div>
 

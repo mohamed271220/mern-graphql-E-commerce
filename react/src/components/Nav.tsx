@@ -20,9 +20,11 @@ import NavImg from "./widgets/NavImg";
 import { opacityVariant } from "../variants/globals";
 import { IoGitCompareSharp } from "react-icons/io5";
 import FadeElement from "./widgets/FadeElement";
+import ThemContext, { themeContext } from "../context/ThemContext";
 
 const Nav = () => {
   const { isAuth } = useContext(isAuthContext);
+  const { toggleTheme, theme } = useContext(themeContext);
   const navRef = useRef<HTMLElement | null>(null);
   const [showFav, handleShowFav, handleHideFav, toggleFav] = useHide();
   const { cart } = useAppSelector((state) => state.cart);
@@ -34,16 +36,15 @@ const Nav = () => {
   });
   const navClr = useTransform(
     scrollY,
-    [0, 0.1, 0.4],
-    ["var(--white)", "rgb(1,5,5)", "#000"]
+    [0, 0.5],
+    ["var(--main)", theme === "dark" ? "#fff" : "#000"]
   );
 
   const LinkClr = useTransform(
     scrollY,
-    [0, 0.1],
-    ["#000", "rgb(247, 246, 246)"]
+    [0, 0.5],
+    ["var(--secondary)", theme === "light" ? "#fff" : "#000"]
   );
-  console.log({ isAuth });
   return (
     <motion.nav ref={navRef} style={{ background: navClr }}>
       <Link to="/" className="logo">
@@ -85,7 +86,7 @@ const Nav = () => {
           <Title title={!showFav ? "show your wishlist" : "hide your wishList"}>
             <ShowCount length={fav.length} />
 
-            <AiFillHeart fontSize={"1.5rem"} onClick={toggleFav} />
+            <AiFillHeart fontSize={"1.2rem"} onClick={toggleFav} />
           </Title>
         </motion.li>
         <motion.li>
@@ -109,6 +110,7 @@ const Nav = () => {
             )}
           </AnimatePresence>
         </motion.li>
+        <button onClick={toggleTheme}>toggle</button>
       </ul>
     </motion.nav>
   );

@@ -62,24 +62,3 @@ const FIlter = ({ head, children }: Props) => {
 };
 
 export default FIlter;
-
-{
-  /* <>
-{categoriesArr.map((category, i) => {
-  return (
-    <motion.span
-      className="center category"
-      key={i}
-      variants={opacityVariant}
-    >
-      <Checkbox
-        filter={category}
-        isChecked={categoryFilter}
-        setIsChecked={setCategoryFilter}
-      />{" "}
-      {category}
-    </motion.span>
-  );
-})}
-</> */
-}

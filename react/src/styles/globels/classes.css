@@ -31,22 +31,26 @@
   align-items: center;
 }
 
-.remove-border, .inp, .btn {
+.remove-border,
+.inp,
+.btn {
   border: 0;
   outline: 0;
 }
 
-.shadow, .custom-title, .btn {
-  filter: drop-shadow 0.2px 0.5px 0.8px black;
-  text-shadow: 0.2px 0.5px 0.8px black;
+.shadow,
+.custom-title,
+.btn {
+  filter: drop-shadow 0.2px 0.5px 0.8px var(--secondary);
+  text-shadow: 0.2px 0.5px 0.8px var(--secondary);
 }
 
 .box-shadow {
-  box-shadow: 0.2px 0.5px 1px black;
+  box-shadow: 0.2px 0.5px 1px var(--secondary);
 }
 
 .btn {
-  color: var(--white);
+  color: var(--main);
   white-space: nowrap;
   padding: 4px 10px;
   font-weight: bold;
@@ -62,11 +66,11 @@
   padding: 4px;
 }
 .btn svg path {
-  filter: drop-shadow(0.5px 1px 1px black);
+  filter: drop-shadow(0.5px 1px 1px var(--secondary));
 }
 .btn.about {
-  background: var(--white);
-  color: black;
+  background: var(--main);
+  color: var(--secondary);
 }
 .btn.main {
   background: linear-gradient(30deg, var(--wheat), var(--green));
@@ -148,7 +152,7 @@
   padding: 5px;
   font-size: 0.8rem;
   background: var(--gmail);
-  color: var(--white);
+  color: var(--main);
   border-radius: 50%;
 }
 
@@ -204,7 +208,7 @@
 .underline:before {
   content: "";
   -webkit-clip-path: polygon(0 11%, 0 4%, 100% 10%);
-          clip-path: polygon(0 11%, 0 4%, 100% 10%);
+  clip-path: polygon(0 11%, 0 4%, 100% 10%);
   position: absolute;
   top: 100%;
   left: 0;
@@ -215,7 +219,7 @@
 }
 
 .white {
-  color: var(--white);
+  color: var(--main);
 }
 
 .wheat-light {
@@ -272,7 +276,7 @@
   width: fit-content;
   padding: 4px 6px;
   background: var(--wheat-title);
-  color: var(--white);
+  color: var(--main);
   z-index: 1000;
   white-space: nowrap;
   border-radius: 4px;
@@ -294,6 +298,6 @@
 }
 
 .icon {
-  filter: drop-shadow(0.5px 1.2px 0.4px black);
-  filter: drop-shadow(0.5px 1px 0.4px black);
-}/*# sourceMappingURL=classes.css.map */
+  filter: drop-shadow(0.5px 1.2px 0.4px var(--secondary));
+  filter: drop-shadow(0.5px 1px 0.4px var(--secondary));
+} /*# sourceMappingURL=classes.css.map */

@@ -8,7 +8,6 @@ import {
   motion,
   MotionProps,
   useAnimate,
-  Variant,
   Variants,
 } from "framer-motion";
 import useMeasure from "react-use-measure";
@@ -16,13 +15,12 @@ import { viewContext } from "../../../../context/gridView";
 import { productListContext } from "../../../../context/FilterData";
 import ListCartBtn from "./ListCartBtn";
 import DetailsBtn from "../../../widgets/DetailsBtn";
-import { AiFillPlusSquare, AiOutlineCheck } from "react-icons/ai";
+import { AiOutlineCheck } from "react-icons/ai";
 import { reviewInterface } from "../../../../interfaces/product";
-import UpdateProduct from "../../../dashboard/UpdateProduct";
 import Title from "../../../widgets/Title";
 import { RiEditLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import { BsInfoCircleFill, BsInfoLg } from "react-icons/bs";
+import { BsInfoCircleFill } from "react-icons/bs";
 import useCarousel from "../../../../custom/useCarousel";
 import useIndex from "../../../../custom/useIndex";
 import CompareIcons from "../../../widgets/CompareIcons";
@@ -116,7 +114,10 @@ const ProductFliter = ({
           </AnimatePresence>
         </div>
         <div className="center col">
-          <h5 className="header underline product-head-underline">
+          <h5
+            className="header underline product-head-underline"
+            style={{ color: "var(--main)" }}
+          >
             {productSearchWord
               ? category
                   .split(new RegExp(`(${productSearchWord})`, "gi"))

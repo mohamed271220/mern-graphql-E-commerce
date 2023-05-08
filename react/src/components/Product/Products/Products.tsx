@@ -4,6 +4,7 @@ import ProductList from "./AllProducts/ProductList";
 import { AnimatePresence } from "framer-motion";
 import Sort from "../viewOptions/Sort";
 import { productListContext } from "../../../context/FilterData";
+import MainProductAnimation from "./MainProductAnimation";
 
 const Products = () => {
   const [startFiltering, setStartFiltering] = useState(false);
@@ -30,7 +31,7 @@ const Products = () => {
   return (
     <section id="products" className="products-par">
       <h1 className="sort-title header underline">Our Products</h1>
-
+      <MainProductAnimation />
       <Sort />
 
       <div className="center row start between">

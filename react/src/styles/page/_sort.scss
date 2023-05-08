@@ -6,20 +6,20 @@
   padding: 0 20px;
   position: relative;
 
-  select {
-    border: 0;
-    outline: 0;
-    background: var(--wheat-light);
-    text-transform: capitalize;
-    border-radius: 4px;
-    color: black;
-    font-size: 1rem;
-    padding: 2px 4px;
-    option {
-      background: #000;
-      color: white;
-    }
-  }
+  // select {
+  //   border: 0;
+  //   outline: 0;
+  //   background: var(--wheat-light);
+  //   text-transform: capitalize;
+  //   border-radius: 4px;
+  //   color: var(--secondary);
+  //   font-size: 1rem;
+  //   padding: 2px 4px;
+  //   option {
+  //     background: #000;
+  //     color: white;
+  //   }
+  // }
   .view-opt {
     gap: 1.5vw;
     font-weight: bold;
@@ -43,8 +43,9 @@
       font-weight: bold;
       font-size: 1.2rem;
       transition: 0.3s;
+      color: var(--secondary);
       &.shadow {
-        filter: drop-shadow(0.5px 1.5px 1px grey);
+        filter: drop-shadow(0.5px 1.5px 1px black);
       }
     }
 
@@ -68,15 +69,17 @@
   position: relative;
   input {
     background: var(--wheat-light);
+    background: var(--secondary);
     border: 0;
     outline: 0;
     width: 100%;
     height: 25px;
     border-radius: 5px;
-    padding: 0 5px;
-    color: black;
+    padding: 0 8px;
+    color: var(--main);
     letter-spacing: 0.8px;
-    font-size: 0.8rem;
+    font-size: 0.9em;
+    font-weight: 700;
   }
   .search-icon {
     position: absolute;
@@ -84,6 +87,7 @@
     transform: translateY(-50%);
     right: 5px;
     font-size: 12px;
+    color: var(--main);
   }
 
   .dropdown-search {
@@ -95,7 +99,7 @@
     z-index: 100;
     list-style: none;
     gap: 2px;
-    color: var(--white);
+    color: var(--secondary);
     padding: 2px 0;
     .search-res {
       padding: 5px;
