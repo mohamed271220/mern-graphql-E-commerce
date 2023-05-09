@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { asideVariant, opacityVariant } from "../../variants/globals";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { GrProductHunt } from "react-icons/gr";
-import { AiFillCloseCircle } from "react-icons/ai";
-import { RxDashboard } from "react-icons/rx";
+import { AiFillCloseCircle, AiFillDashboard } from "react-icons/ai";
 import Title from "../widgets/Title";
 import { showAsideContext } from "./Dashboard";
 import { FaClipboardList } from "react-icons/fa";
+import LogoSvg from "../widgets/LogoSvg";
 
 const DashboardAside = () => {
   const { showAsideDash, setShowAsideDash } = useContext(showAsideContext);
@@ -26,19 +26,12 @@ const DashboardAside = () => {
             style={{
               width: "100%",
               height: 60,
-              background: "var(--sale)",
             }}
+            className="center dash-aside-head"
           >
-            <h2
-              className="underline header"
-              style={{
-                // width: "fit-content",
-                color: "white",
-                margin: "15px auto",
-              }}
-            >
-              dashboard
-            </h2>
+            <Link to={"/"}>
+              <LogoSvg />
+            </Link>
           </div>
           <AnimatePresence mode="wait">
             {showAsideDash && (
@@ -56,18 +49,52 @@ const DashboardAside = () => {
             )}
           </AnimatePresence>
 
-          <NavLink to={"/dashboard/products"}>
-            <GrProductHunt />
-            <span>products</span>
-          </NavLink>
-          <NavLink to={"/dashboard/products/add"}>
-            <GrProductHunt />
-            <span>add</span>
-          </NavLink>
+          <h4 className="aside-dash-label">main</h4>
+
+          <Link
+            className={
+              location.pathname.split("/").slice(-1)[0] === "dashboard"
+                ? "active"
+                : ""
+            }
+            to={"/dashboard"}
+          >
+            <AiFillDashboard className="icon" color="var(--twitter)" />
+            <span>dashboard</span>
+          </Link>
+          <h4 className="aside-dash-label">products</h4>
+
+          <Link
+            to={"/dashboard/products"}
+            className={
+              location.pathname.split("/").slice(-1)[0] === "products"
+                ? "active"
+                : ""
+            }
+          >
+            <GrProductHunt className="icon" color="var(--twitter)" />
+            <span>all products</span>
+          </Link>
+          <Link
+            className={
+              location.pathname.split("/").slice(-1)[0] === "add"
+                ? "active"
+                : ""
+            }
+            to={"/dashboard/products/add"}
+          >
+            <GrProductHunt className="icon" color="var(--twitter)" />
+            <span>add product</span>
+          </Link>
+
+          <h4 className="aside-dash-label">main</h4>
+
           <NavLink to={"/dashboard/orders"}>
-            <FaClipboardList />
+            <FaClipboardList className="icon" color="var(--twitter)" />
             <span>orders</span>
           </NavLink>
+
+          <h4 className="aside-dash-label">users</h4>
         </motion.aside>
       )}
     </AnimatePresence>

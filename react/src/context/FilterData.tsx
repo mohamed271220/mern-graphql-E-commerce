@@ -5,6 +5,8 @@ import { Get_All_Products } from "../graphql/general.js";
 import { addToProductRedux } from "../redux/productSlice.js";
 import { useAppDispatch } from "../custom/reduxTypes.js";
 import { ProductInterface } from "../interfaces/product.js";
+import { GET_ALL_ORDERS } from "../graphql/queries.js";
+import { addToOrderRedux } from "../redux/OrderSlice.js";
 
 interface productListContextInterface {
   setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
@@ -46,7 +48,12 @@ const FilterDataContext = ({ children }: ChildrenInterFace) => {
   const [priceFilter, setPriceFilter] = useState<string | number>(0);
   const [RateChecked, setRateChecked] = useState<string | number>("");
   const [productSearchWord, setroductSearchWord] = useState<string>("");
-
+  const { data: orderData } = useQuery(GET_ALL_ORDERS);
+  useEffect(() => {
+    if (orderData?.orders) {
+      dispatch(addToOrderRedux(orderData?.orders));
+    }
+  }, [orderData?.orders]);
   return (
     <productListContext.Provider
       value={{

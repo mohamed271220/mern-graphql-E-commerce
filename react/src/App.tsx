@@ -31,7 +31,7 @@ const App = () => {
                 toastOptions={{
                   style: {
                     background: "var(--secondary)",
-                    color: "white",
+                    color: "var(--main)",
                     width: "240px",
                     whiteSpace: "nowrap",
                   },

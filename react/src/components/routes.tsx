@@ -10,7 +10,7 @@ import User from "./user/User";
 import { AnimatePresence } from "framer-motion";
 import Dashboard from "./dashboard/Dashboard";
 import DashProducts from "./dashboard/DashProducts";
-import UpdateProduct from "./dashboard/UpdateProduct";
+// import UpdateProduct from "./dashboard/UpdateProduct";
 import DashUpdateProduct from "./dashboard/DashUpdateProduct";
 import DashAddProduct from "./dashboard/DashAddProduct";
 import Orders from "./dashboard/Order/Orders";
@@ -18,6 +18,7 @@ import CompareProducts from "./Compare/CompareProducts";
 import OrderDetails from "./dashboard/Order/OrderDetails/OrderDetails";
 import { toast } from "react-hot-toast";
 import { isAuthContext } from "../context/isAuth";
+import Recap from "./dashboard/recap/Recap";
 
 const AppRoutes = () => {
   const location = useLocation();
@@ -94,6 +95,7 @@ const AppRoutes = () => {
         <Route path="/user" element={<User />} />
         <Route path="/compare" element={<CompareProducts />} />
         <Route path="/dashboard" element={<Dashboard />}>
+          <Route path="" element={<Recap />} />
           <Route path="products">
             <Route path="add" element={<DashAddProduct />} />
             <Route path=":id" element={<DashUpdateProduct />} />

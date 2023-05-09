@@ -238,3 +238,22 @@ table.order {
     "table table summery "
     "customer customer summery";
 }
+
+@media (max-width: 600px) {
+  .order-details-grid {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-areas:
+      "table"
+      "customer"
+      "summery";
+    gap: 10px;
+    .table-order-detail {
+      font-size: 0.7rem;
+      td {
+        .table-order {
+          width: 10vw !important;
+        }
+      }
+    }
+  }
+}

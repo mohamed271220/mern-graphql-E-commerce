@@ -19,4 +19,5 @@ export interface ProductInterface {
   rating: number[];
   _id: string;
   reviews: reviewInterface[];
+  createdAt: string;
 }

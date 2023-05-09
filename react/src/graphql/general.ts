@@ -38,6 +38,7 @@ export const Get_All_Products = gql`
       state
       rating
       category
+      createdAt
       reviews {
         image
         user

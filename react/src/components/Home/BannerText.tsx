@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { btnHover, btnTap, opacityVariant } from "../../variants/globals";
 import { Link } from "react-scroll";
+import OpacityBtn from "../widgets/OpacityBtn";
 
 interface Props {
   header: string;
@@ -26,25 +27,24 @@ const BannerText = ({ fn, header, clr, button, to, slogan }: Props) => {
       <p>{slogan}</p>
 
       <div className="product-links center">
-        <motion.div
-          className="btn"
-          whileHover={btnHover}
-          whileTap={btnTap}
-          style={{ padding: "4px 0" }}
+        <Link
+          to={to}
+          smooth
+          className="btn banner-btn"
+          // onClick={fn}
+          style={{ padding: 0 }}
         >
-          <Link
-            to={to}
-            smooth
+          <motion.span
             style={{
               background: `linear-gradient(30deg, var(--wheat), ${clr})`,
               cursor: "pointer",
+              borderRadius: "4px 10px",
             }}
-            className="btn banner-btn"
-            onClick={fn}
           >
-            {button}
-          </Link>
-        </motion.div>
+            <OpacityBtn fn={fn} btn={button} cls="btn banner-btn transparent" />
+            {/* {button} */}
+          </motion.span>
+        </Link>
         <button className="btn banner-btn  about">About us</button>
       </div>
     </motion.div>

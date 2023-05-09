@@ -27,6 +27,10 @@ const OrderSummery = ({ total, created, delivered }: Props) => {
       span: "subTotal",
       value: "$ " + String(total.toFixed(2)),
     },
+    {
+      span: "delivery fees",
+      value: "$ 0.00",
+    },
   ];
   return (
     <div className="box-shadow order-summery">

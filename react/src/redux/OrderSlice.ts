@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: { order: string[] } = {
+const initialState: { order: { createdAt: string }[] } = {
   order: [],
 };
 

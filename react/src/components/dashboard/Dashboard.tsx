@@ -6,6 +6,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { opacityVariant } from "../../variants/globals";
 import { RxDashboard } from "react-icons/rx";
 import Title from "../widgets/Title";
+import Recap from "./recap/Recap";
+import Charts from "./recap/Charts";
 
 interface contextInterface {
   showAsideDash: boolean;
@@ -21,6 +23,7 @@ const Dashboard = () => {
     <showAsideContext.Provider value={{ showAsideDash, setShowAsideDash }}>
       <div className="dashboard-par ">
         <Transition />
+
         <AnimatePresence mode="wait">
           {!showAsideDash && (
             <motion.span

@@ -1,4 +1,4 @@
-import React, { useRef, useContext, useEffect } from "react";
+import React, { useRef, useContext, useEffect, useState } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import {
   useScroll,
@@ -46,74 +46,96 @@ const Nav = () => {
     [0, 0.5],
     [theme === "dark" ? "#fff" : "#000", theme === "light" ? "#fff" : "#000"]
   );
+
+  const location = useLocation();
+
+  const [showNav, setShowNav] = useState(true);
+  useEffect(() => {
+    if (location.pathname.startsWith("/dashboard")) {
+      setShowNav(false);
+    } else {
+      setShowNav(true);
+    }
+  }, [location]);
+
   return (
-    <motion.nav ref={navRef} style={{ background: navClr }}>
-      <Link to="/" className="logo">
-        <LogoSvg />
-      </Link>
+    <>
+      {showNav && (
+        <motion.nav ref={navRef} style={{ background: navClr }}>
+          <Link to="/" className="logo">
+            <LogoSvg />
+          </Link>
 
-      <ul className="links center">
-        {linksArr.map(({ to, link }, i) => {
-          return (
-            <motion.li className="center" key={i} style={{ color: LinkClr }}>
-              <NavLink className="link" to={to}>
-                {link}{" "}
-              </NavLink>
-            </motion.li>
-          );
-        })}
-        <NavLink to="/cart" className="cart-active-link ">
-          <motion.li id="cart-link-par" style={{ color: LinkClr }}>
-            <Title title="go to your cart">
-              <ShowCount length={cart.length} />
-              <BsFillCartPlusFill fontSize={"1.2rem"} />
-            </Title>
-          </motion.li>
-        </NavLink>
-        <NavLink to="/compare" className="cart-active-link ">
-          <motion.li id="cart-link-par" style={{ color: LinkClr }}>
-            <Title title="compare products list">
-              <ShowCount length={compare.length} />
-              <IoGitCompareSharp fontSize={"1.2rem"} />
-            </Title>
-          </motion.li>
-        </NavLink>
+          <ul className="links center">
+            {linksArr.map(({ to, link }, i) => {
+              return (
+                <motion.li
+                  className="center"
+                  key={i}
+                  style={{ color: LinkClr }}
+                >
+                  <NavLink className="link" to={to}>
+                    {link}{" "}
+                  </NavLink>
+                </motion.li>
+              );
+            })}
+            <NavLink to="/cart" className="cart-active-link ">
+              <motion.li id="cart-link-par" style={{ color: LinkClr }}>
+                <Title title="go to your cart">
+                  <ShowCount length={cart.length} />
+                  <BsFillCartPlusFill fontSize={"1.2rem"} />
+                </Title>
+              </motion.li>
+            </NavLink>
+            <NavLink to="/compare" className="cart-active-link ">
+              <motion.li id="cart-link-par" style={{ color: LinkClr }}>
+                <Title title="compare products list">
+                  <ShowCount length={compare.length} />
+                  <IoGitCompareSharp fontSize={"1.2rem"} />
+                </Title>
+              </motion.li>
+            </NavLink>
 
-        <motion.li
-          style={{ color: showFav ? "var(--delete)" : LinkClr }}
-          className="fav-par"
-        >
-          <WishList showFav={showFav} />
-          <Title title={!showFav ? "show your wishlist" : "hide your wishList"}>
-            <ShowCount length={fav.length} />
-
-            <AiFillHeart fontSize={"1.2rem"} onClick={toggleFav} />
-          </Title>
-        </motion.li>
-        <motion.li>
-          <AnimatePresence mode="wait">
-            {isAuth ? (
-              <FadeElement cls="" key={"profile-image"}>
-                <NavImg />
-              </FadeElement>
-            ) : (
-              <motion.span
-                key={"login"}
-                variants={opacityVariant}
-                transition={{ duration: 0.4 }}
-                initial="start"
-                animate="end"
-                exit="exit"
-                style={{ color: LinkClr }}
+            <motion.li
+              style={{ color: showFav ? "var(--delete)" : LinkClr }}
+              className="fav-par"
+            >
+              <WishList showFav={showFav} />
+              <Title
+                title={!showFav ? "show your wishlist" : "hide your wishList"}
               >
-                <NavLink to={"/login"}>log in</NavLink>
-              </motion.span>
-            )}
-          </AnimatePresence>
-        </motion.li>
-        <ThemeToggle navClr={navClr} linkClr={LinkClr} />
-      </ul>
-    </motion.nav>
+                <ShowCount length={fav.length} />
+
+                <AiFillHeart fontSize={"1.2rem"} onClick={toggleFav} />
+              </Title>
+            </motion.li>
+            <motion.li>
+              <AnimatePresence mode="wait">
+                {isAuth ? (
+                  <FadeElement cls="" key={"profile-image"}>
+                    <NavImg />
+                  </FadeElement>
+                ) : (
+                  <motion.span
+                    key={"login"}
+                    variants={opacityVariant}
+                    transition={{ duration: 0.4 }}
+                    initial="start"
+                    animate="end"
+                    exit="exit"
+                    style={{ color: LinkClr }}
+                  >
+                    <NavLink to={"/login"}>log in</NavLink>
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </motion.li>
+            <ThemeToggle navClr={navClr} linkClr={LinkClr} />
+          </ul>
+        </motion.nav>
+      )}
+    </>
   );
 };
 

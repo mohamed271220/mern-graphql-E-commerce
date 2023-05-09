@@ -2,15 +2,13 @@
 
 .dashboard-par {
   width: 100%;
-  margin-top: 40px;
+  // margin-top: 40px;
   display: flex;
 }
 #dash-aside {
-  // position: relative;
   position: fixed;
   box-shadow: 2px 2px 5px black;
-  height: calc(100vh - 40px);
-  background: var(--wheat-lighter);
+  height: 100vh;
   background: var(--main);
   display: flex;
   flex-direction: column;
@@ -35,7 +33,7 @@
   }
   a {
     text-decoration: none;
-    color: grey;
+    color: var(--secondary);
     letter-spacing: 1px;
     text-transform: capitalize;
     padding: 10px;
@@ -46,7 +44,6 @@
     &.active,
     &:hover {
       background: var(--green);
-      color: var(--main);
       font-weight: bold;
     }
   }
@@ -60,7 +57,7 @@
 
 .dash-show {
   position: absolute;
-  top: 50px;
+  top: 10px;
   right: 10px;
   color: var(--green);
   svg {
@@ -121,4 +118,96 @@ a.crumb-link {
   color: var(--green);
   font-weight: bold;
   text-transform: capitalize;
+}
+
+.dash-recap {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 5px;
+  .recap {
+    background-color: var(--secondary);
+    height: 100px;
+    padding: 8px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .head-recap {
+      scroll-padding-block: 6px;
+      h3 {
+        color: gray;
+        letter-spacing: 0.8px;
+        text-transform: capitalize;
+      }
+      .percent-negative {
+        color: var(--gmail);
+        font-weight: bold;
+      }
+      .percent-pos {
+        color: var(--green);
+        font-weight: bold;
+      }
+    }
+    .analytics {
+      font-weight: bold;
+      font-size: 18px;
+      color: var(--main);
+    }
+    .links-recap {
+      a {
+        text-transform: capitalize;
+        color: var(--twitter);
+        font-weight: bold;
+        font-size: 10px;
+        text-decoration: underline;
+        text-decoration-color: var(--main) !important
+        ;
+      }
+      svg {
+        font-size: 1.5rem;
+        color: var(--main);
+      }
+    }
+  }
+}
+
+.dash-main-charts {
+  padding: 20px;
+  display: grid;
+  margin-top: 20px;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  .chart-par {
+    background-color: var(--secondary);
+    padding: 10px;
+    width: 100%;
+    // height: 350px;
+    h3 {
+      color: var(--main);
+      margin-bottom: 4px;
+    }
+  }
+}
+
+.recap-items-par {
+  > * {
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+.dash-aside-head {
+  background-color: var(--secondary);
+  a:hover {
+    background: transparent !important;
+  }
+}
+
+.aside-dash-label {
+  color: var(--wheat-light);
+  font-size: 1.2rem;
+  padding: 6px;
+  margin-left: 10px;
+  margin-top: 15px;
+  text-transform: capitalize;
+  letter-spacing: 1px;
 }

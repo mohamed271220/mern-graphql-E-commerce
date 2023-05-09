@@ -22,7 +22,12 @@ const OrderDetails = () => {
           className="shadow  mobile-order-details 
             underline header
           "
-          style={{ margin: 6, marginTop: -10, color: "var(--secondary)" }}
+          style={{
+            margin: 6,
+
+            color: "var(--secondary)",
+            fontSize: "1.1rem",
+          }}
         >
           <span style={{ color: "var(--wheat-light)" }} className="shadow">
             order{" "}

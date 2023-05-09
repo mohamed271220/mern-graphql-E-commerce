@@ -49,6 +49,9 @@
   &.main {
     background: linear-gradient(30deg, var(--wheat), var(--green));
   }
+  &.transparent {
+    background: transparent;
+  }
 }
 
 .inp {
