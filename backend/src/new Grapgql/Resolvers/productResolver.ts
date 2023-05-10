@@ -94,7 +94,9 @@ export const productResolver = {
     },
     async filterAllTypes(_: any, args: filterAllInterface) {
       try {
-        return await productCollection.aggregate([
+        console.log(args);
+
+        const data = await productCollection.aggregate([
           {
             $project: {
               _id: 1,
@@ -107,18 +109,21 @@ export const productResolver = {
               images: 1,
               rating: 1,
               reviews: 1,
-              avgRate: { $avg: "$rating" },
+              avgRate: { $avg: "$rating" || 1 },
             },
           },
           {
             $match: {
-              avgRate: { $lte: args.input.rate },
+              $or: [{ avgRate: { $lte: args.input.rate } }, { avgRate: null }],
               price: { $lte: args.input.price },
               category: { $in: args.input.category },
               state: { $in: args.input.state },
             },
           },
         ]);
+
+        console.log(data);
+        return data;
       } catch (err) {
         console.log((err as Error).message);
       }

@@ -3,22 +3,27 @@ import DropDown from "./DropDown";
 import ProfileImg from "../ProfileImg";
 import { isAuthContext } from "../../context/isAuth";
 import { NavLink } from "react-router-dom";
-import { GrLogout } from "react-icons/gr";
 import { FiEdit } from "react-icons/fi";
-import { IoLogOut } from "react-icons/io5";
-import { RiLogoutBoxRFill, RiLogoutCircleRFill } from "react-icons/ri";
+import { RiLogoutCircleRFill } from "react-icons/ri";
 import { FcSettings } from "react-icons/fc";
+import useLogOut from "../../custom/useLogOut";
 
 interface Props {
   bool: boolean;
 }
 const UserDropDown = ({ bool }: Props) => {
   const { name } = useContext(isAuthContext);
+  const { handleLogOut } = useLogOut();
   const dropArr = [
     { link: "update your data", icon: FiEdit, to: "/user" },
     { link: "settings", icon: FcSettings, to: "/setting" },
 
-    { link: "logout", icon: RiLogoutCircleRFill, to: "/login" },
+    {
+      link: "logout",
+      icon: RiLogoutCircleRFill,
+      to: "/login",
+      fn: handleLogOut,
+    },
   ];
 
   return (
@@ -31,10 +36,10 @@ const UserDropDown = ({ bool }: Props) => {
         <div className="hr"></div>
       </div>
 
-      {dropArr.map(({ icon: Icon, link, to }, i) => {
+      {dropArr.map(({ icon: Icon, link, to, fn }, i) => {
         return (
           <div key={i} className="w-100 ">
-            <NavLink className={"gap user-drop-link"} to={`${to}`}>
+            <NavLink className={"gap user-drop-link"} to={`${to}`} onClick={fn}>
               {" "}
               <Icon fontSize={15} className="shadow  user-icon" />
               {link}

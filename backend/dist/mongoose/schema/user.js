@@ -11,7 +11,10 @@ const userSchema = new mongoose_1.default.Schema({
     password: String,
     country: String,
     phone: String,
+    role: String,
     image: String,
+    createdAt: Date,
+    lastLogIn: Date,
     fav: [
         {
             productId: mongoose_1.default.SchemaTypes.ObjectId,

@@ -94,7 +94,8 @@ exports.productResolver = {
         filterAllTypes(_, args) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
-                    return yield product_js_1.default.aggregate([
+                    console.log(args);
+                    const data = yield product_js_1.default.aggregate([
                         {
                             $project: {
                                 _id: 1,
@@ -107,18 +108,20 @@ exports.productResolver = {
                                 images: 1,
                                 rating: 1,
                                 reviews: 1,
-                                avgRate: { $avg: "$rating" },
+                                avgRate: { $avg: "$rating" || 1 },
                             },
                         },
                         {
                             $match: {
-                                avgRate: { $lte: args.input.rate },
+                                $or: [{ avgRate: { $lte: args.input.rate } }, { avgRate: null }],
                                 price: { $lte: args.input.price },
                                 category: { $in: args.input.category },
                                 state: { $in: args.input.state },
                             },
                         },
                     ]);
+                    console.log(data);
+                    return data;
                 }
                 catch (err) {
                     console.log(err.message);

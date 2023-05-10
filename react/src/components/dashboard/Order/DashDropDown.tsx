@@ -1,28 +1,30 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { HiDotsVertical } from "react-icons/hi";
 import Title from "../../widgets/Title";
 import { AnimatePresence, motion } from "framer-motion";
-import FadeElement from "../../widgets/FadeElement";
 import {
   opacityVariant,
   selectDropDownVariants,
 } from "../../../variants/globals";
 import useUpdateOrder from "../../../custom/useUpdateOrder";
-
-const stateArr = ["pending", "shipped", "delivered", "canceled", "on hold"];
+import { isAuthContext } from "../../../context/isAuth";
+import useUpdateUserRole from "../../../custom/useUpdateUserRole";
 
 interface Props {
-  orderState: string;
-  setOrderState: React.Dispatch<React.SetStateAction<string>>;
+  state: string;
+  setter: React.Dispatch<React.SetStateAction<string>>;
   _id: string;
+  arr: string[];
+  type?: string;
 }
 
-const OrderDropDown = ({ orderState, setOrderState, _id }: Props) => {
+const DashDropDown = ({ type, state, setter, _id, arr }: Props) => {
+  const { isAuth } = useContext(isAuthContext);
   const [isSClicked, setIsCLicked] = useState(false);
 
   const handleToggle = () => setIsCLicked(!isSClicked);
-  const { handleUpdateOrder } = useUpdateOrder(_id, orderState);
-
+  const { handleUpdateOrder } = useUpdateOrder(_id, state);
+  const { handleUpdateUserRole } = useUpdateUserRole(_id, state);
   return (
     <div className="relative">
       <Title title={isSClicked ? "update order state" : ""}>
@@ -42,22 +44,29 @@ const OrderDropDown = ({ orderState, setOrderState, _id }: Props) => {
             exit="exit"
           >
             <>
-              {stateArr.map((st, i) => {
+              {arr.map((st, i) => {
                 return (
                   <motion.div
                     style={{
-                      color:
-                        st === orderState ? `var(--${st})` : "var(--wheat)",
+                      color: st === state ? `var(--${st})` : "var(--wheat)",
                       cursor: "pointer",
                     }}
                     variants={opacityVariant}
                     onClick={() => {
                       setIsCLicked(false);
-                      handleUpdateOrder();
+                      if (type === "user") {
+                        handleUpdateUserRole();
+                      } else {
+                        handleUpdateOrder();
+                      }
                     }}
                     key={i}
                     whileHover={{ x: 4 }}
-                    onTapStart={() => setOrderState(st)}
+                    onTapStart={() => {
+                      if (isAuth) {
+                        setter(st);
+                      }
+                    }}
                     className="order-link"
                   >
                     {st}
@@ -72,4 +81,4 @@ const OrderDropDown = ({ orderState, setOrderState, _id }: Props) => {
   );
 };
 
-export default OrderDropDown;
+export default DashDropDown;

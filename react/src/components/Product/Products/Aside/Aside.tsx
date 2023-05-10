@@ -43,6 +43,12 @@ const Aside = ({ startFiltering }: { startFiltering: boolean }) => {
     }).then(({ data }) => setProducts(data?.filterAllTypes));
   };
 
+  console.log({
+    price: priceFilter === 0 ? 10000 : priceFilter,
+    category: categoryFilter === "" ? categoriesArr : [categoryFilter],
+    state: productFeatured === "" ? FeaturedProductsArr : [productFeatured],
+    rate: RateChecked === "" ? 5 : Number(RateChecked),
+  });
   const handleResetFiltering = () => {
     setCategoryFilter("");
     setRateChecked("");

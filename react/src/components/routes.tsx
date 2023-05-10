@@ -19,6 +19,8 @@ import OrderDetails from "./dashboard/Order/OrderDetails/OrderDetails";
 import { toast } from "react-hot-toast";
 import { isAuthContext } from "../context/isAuth";
 import Recap from "./dashboard/recap/Recap";
+import DashBoardUsers from "./dashboard/User/DashBoardUsersTable";
+import UsersDashboard from "./dashboard/User/UsersDashboard";
 
 const AppRoutes = () => {
   const location = useLocation();
@@ -96,6 +98,7 @@ const AppRoutes = () => {
         <Route path="/compare" element={<CompareProducts />} />
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="" element={<Recap />} />
+          <Route path="users" element={<UsersDashboard />} />
           <Route path="products">
             <Route path="add" element={<DashAddProduct />} />
             <Route path=":id" element={<DashUpdateProduct />} />

@@ -115,9 +115,9 @@ table.order {
   top: 20px;
   right: -3px;
   width: 80px;
-  height: 100px;
   background: var(--main);
   z-index: 100;
+  padding: 5px 0;
   &:before {
     content: "";
     position: absolute;

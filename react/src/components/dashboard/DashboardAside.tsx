@@ -6,7 +6,7 @@ import { GrProductHunt } from "react-icons/gr";
 import { AiFillCloseCircle, AiFillDashboard } from "react-icons/ai";
 import Title from "../widgets/Title";
 import { showAsideContext } from "./Dashboard";
-import { FaClipboardList } from "react-icons/fa";
+import { FaClipboardList, FaUserAlt } from "react-icons/fa";
 import LogoSvg from "../widgets/LogoSvg";
 
 const DashboardAside = () => {
@@ -95,6 +95,17 @@ const DashboardAside = () => {
           </NavLink>
 
           <h4 className="aside-dash-label">users</h4>
+          <Link
+            className={
+              location.pathname.split("/").slice(-1)[0] === "add"
+                ? "active"
+                : ""
+            }
+            to={"/dashboard/users"}
+          >
+            <FaUserAlt className="icon" color="var(--twitter)" />
+            <span>users</span>
+          </Link>
         </motion.aside>
       )}
     </AnimatePresence>

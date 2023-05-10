@@ -51,11 +51,17 @@ const Nav = () => {
 
   const [showNav, setShowNav] = useState(true);
   useEffect(() => {
+    let counter: number;
     if (location.pathname.startsWith("/dashboard")) {
-      setShowNav(false);
+      counter = setTimeout(() => {
+        setShowNav(false);
+      }, 800);
     } else {
-      setShowNav(true);
+      counter = setTimeout(() => {
+        setShowNav(true);
+      }, 800);
     }
+    return () => clearTimeout(counter);
   }, [location]);
 
   return (
@@ -99,7 +105,7 @@ const Nav = () => {
 
             <motion.li
               style={{ color: showFav ? "var(--delete)" : LinkClr }}
-              className="fav-par"
+              className="fav-par center"
             >
               <WishList showFav={showFav} />
               <Title

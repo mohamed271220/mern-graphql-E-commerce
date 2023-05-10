@@ -31,9 +31,12 @@ const uploadProductImgs = async (req: Request, res: Response) => {
   }
 
   console.log(images);
-  const result = await productCollection.findByIdAndUpdate(id, { images });
-
-  // console.log(result);
+  const result = await productCollection.findByIdAndUpdate(
+    id,
+    { images },
+    { returnDocument: "after" }
+  );
+  res.json({ data: result, msg: "product added successfully" });
 };
 
 export const uploadRoute = Router();

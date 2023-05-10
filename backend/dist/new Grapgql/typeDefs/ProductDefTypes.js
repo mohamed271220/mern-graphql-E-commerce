@@ -36,6 +36,7 @@ exports.productTypeDefs = (0, apollo_server_express_1.gql) `
     rating: [Int]
     reviews: [Review]
     avgRate: Float
+    createdAt: Date
   }
 
   type Query {

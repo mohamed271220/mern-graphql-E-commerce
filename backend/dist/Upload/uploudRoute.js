@@ -47,8 +47,8 @@ const uploadProductImgs = (req, res) => __awaiter(void 0, void 0, void 0, functi
         });
     }
     console.log(images);
-    const result = yield product_js_1.default.findByIdAndUpdate(id, { images });
-    // console.log(result);
+    const result = yield product_js_1.default.findByIdAndUpdate(id, { images }, { returnDocument: "after" });
+    res.json({ data: result, msg: "product added successfully" });
 });
 exports.uploadRoute = (0, express_1.Router)();
 exports.uploadRoute.route("/upload/:id").patch(upload_js_1.upload.single("image"), updateUserImgFn);

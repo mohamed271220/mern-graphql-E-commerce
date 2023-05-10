@@ -7,6 +7,8 @@ import { useAppDispatch } from "../custom/reduxTypes.js";
 import { ProductInterface } from "../interfaces/product.js";
 import { GET_ALL_ORDERS } from "../graphql/queries.js";
 import { addToOrderRedux } from "../redux/OrderSlice.js";
+import { GET_ALL_USERS } from "../graphql/mutations/user.js";
+import { addToUserRedux } from "../redux/UserSlice.js";
 
 interface productListContextInterface {
   setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
@@ -54,6 +56,14 @@ const FilterDataContext = ({ children }: ChildrenInterFace) => {
       dispatch(addToOrderRedux(orderData?.orders));
     }
   }, [orderData?.orders]);
+
+  const { data: userData, loading: usersLoading } = useQuery(GET_ALL_USERS);
+  useEffect(() => {
+    if (userData?.users && !usersLoading) {
+      dispatch(addToUserRedux(userData?.users));
+    }
+  }, [usersLoading]);
+
   return (
     <productListContext.Provider
       value={{

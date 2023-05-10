@@ -25,6 +25,7 @@ import useCarousel from "../../../../custom/useCarousel";
 import useIndex from "../../../../custom/useIndex";
 import CompareIcons from "../../../widgets/CompareIcons";
 import StyledPrice from "../../../widgets/StyledPrice";
+import RatingDetails from "../../RateDetails";
 
 type Props = {
   _id: string;
@@ -176,6 +177,9 @@ const ProductFliter = ({
               id={_id}
               avgRate={avgRate}
               ratingLen={reviewLength}
+              reviews={reviews}
+              rating={rating}
+              pos={"bottom"}
             />
           </div>
           {!isDash && (

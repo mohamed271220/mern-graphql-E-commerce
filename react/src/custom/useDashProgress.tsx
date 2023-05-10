@@ -5,17 +5,17 @@ const useDashProgress = (
   const thisMonth = new Date().getMonth();
   const lastMonth = new Date().getMonth() - 1;
 
-  const lastMonthArr = arr.filter((obj) => {
+  const lastMonthArr = arr?.filter((obj) => {
     return new Date(obj.createdAt).getMonth() === lastMonth;
   });
 
-  const thisMonthArr = arr.filter((obj) => {
+  const thisMonthArr = arr?.filter((obj) => {
     return new Date(obj.createdAt).getMonth() === thisMonth;
   });
 
   const progress =
-    ((thisMonthArr.length - lastMonthArr.length) /
-      (lastMonthArr.length === 0 ? 1 : lastMonthArr.length)) *
+    ((thisMonthArr?.length - lastMonthArr?.length) /
+      (lastMonthArr?.length === 0 ? 1 : lastMonthArr?.length)) *
     100;
   let earningProgress = 0;
   let earnings = 0;

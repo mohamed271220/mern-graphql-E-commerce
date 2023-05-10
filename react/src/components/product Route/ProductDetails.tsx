@@ -19,6 +19,7 @@ import OpacityBtn from "../widgets/OpacityBtn";
 import CompareIcons from "../widgets/CompareIcons";
 import StyledPrice from "../widgets/StyledPrice";
 import { toast } from "react-hot-toast";
+import RatingDetails from "../Product/RateDetails";
 
 interface Props {
   setShowPop: React.Dispatch<React.SetStateAction<boolean>>;
@@ -122,11 +123,15 @@ const ProductDetails = ({ setShowPop }: Props) => {
         </div>
 
         <div className="center gap" style={{ justifyContent: "flex-start" }}>
-          <ProductRate
-            key={`${description}-rate`}
-            avgRate={avgRate}
-            ratingLen={reviewLength}
-          />
+          <div className="center">
+            <ProductRate
+              key={`${description}-rate`}
+              avgRate={avgRate}
+              ratingLen={reviewLength}
+              rating={rating}
+              reviews={reviews}
+            />
+          </div>
           {reviews.length >= 1 && (
             <Title title="show all reviews">
               <BiShow

@@ -21,11 +21,7 @@ export const getNewRefToken = async (req: Request, res: Response) => {
     res.json({});
   } else {
     let { result } = (await verfiyRefToken(refToken)) as any;
-    console.log("result");
     if (result[0]._id) {
-      console.log("condition applied");
-      //   const accessTokenExpiration = { expiresIn: "15s" };
-
       const accessToken = Jwt.sign(
         { result },
         ACCESS_TOKEN_SECRET as unknown as string
@@ -36,7 +32,6 @@ export const getNewRefToken = async (req: Request, res: Response) => {
       );
       res.cookie("access-token", accessToken);
       res.cookie("refresh-token", refreshToken);
-      res.cookie("refresh", refreshToken as string);
       res.json({ accessToken });
       return true;
     } else {

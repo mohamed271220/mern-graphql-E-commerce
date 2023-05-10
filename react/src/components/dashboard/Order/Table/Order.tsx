@@ -4,9 +4,9 @@ import Title from "../../../widgets/Title";
 import { AnimatePresence, motion } from "framer-motion";
 import { opacityVariant } from "../../../../variants/globals";
 import FadeElement from "../../../widgets/FadeElement";
-import OrderDropDown from "../OrderDropDown";
 import useUpdateOrder from "../../../../custom/useUpdateOrder";
 import OrderDetailsIcon from "../OrderDetailsIcon";
+import DashDropDown from "../DashDropDown";
 
 interface Props {
   state: string;
@@ -74,10 +74,11 @@ const Order = ({
               <div style={{ width: 70 }}>{state}</div>
             </FadeElement>
           </AnimatePresence>
-          <OrderDropDown
+          <DashDropDown
+            arr={["pending", "shipped", "delivered", "canceled", "on hold"]}
             _id={_id}
-            setOrderState={setOrderState}
-            orderState={orderState}
+            setter={setOrderState}
+            state={orderState}
           />
           <div className="order-detail-par">
             <OrderDetailsIcon _id={_id} />

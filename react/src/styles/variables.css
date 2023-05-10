@@ -1,10 +1,10 @@
 :root {
   --green: #367e53;
   --wheat: rgb(202, 170, 109);
+  --white: rgb(247, 246, 246);
   --wheat-light: #c5af87c9;
   --wheat-lighter: #dcccaec9;
   --wheat-title: #dcccae;
-  --white: rgb(247, 246, 246);
   --twitter: #1da1f2;
   --fb: #1877f2;
   --gmail: #ea4335;
@@ -13,14 +13,18 @@
   --overley: rgba(19, 78, 26, 0.423);
   --star: #ffd700;
   --star-dark: #d3d3d3;
-  --nav-shadow: 0.5px 2px 2px rgba(128, 128, 128, 0.275);
+  --nav-shadow: 0.5px 2px 2pxblack;
   --trending: #d7bc25b2;
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
   --pending: rgba(128, 128, 128, 0.493);
+  --user: rgba(128, 128, 128, 0.493);
   --canceled: rgba(137, 29, 29, 0.543);
   --hold: rgba(243, 165, 20, 0.591);
+  --owner: rgba(243, 165, 20, 0.591);
   --shipped: rgba(4, 81, 4, 0.446);
+  --admin: rgba(4, 81, 4, 0.446);
   --delivered: rgba(44, 44, 171, 0.528);
+  --moderator: rgba(44, 44, 171, 0.528);
 }/*# sourceMappingURL=variables.css.map */

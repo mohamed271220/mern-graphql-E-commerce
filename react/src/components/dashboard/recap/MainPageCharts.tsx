@@ -6,12 +6,13 @@ import { CategoryScale } from "chart.js";
 import { PolarArea, Bar, Pie, Line } from "react-chartjs-2";
 import useChartData from "./useChartData";
 import { themeContext } from "../../../context/ThemContext";
-const MainPageCharts = () => {
+const MainPageCharts = ({ userData }: { userData: any[] }) => {
   const { Allproducts } = useAppSelector((st) => st.Allproducts);
   const { order } = useAppSelector((st) => st.order);
   const productChartData = useChartData(Allproducts, "products");
   const orderChartData = useChartData(order, "Orders");
   const EarningChartData = useChartData(order, "Earnings", "earn");
+  const userChartData = useChartData(userData, "users");
   const { theme } = useContext(themeContext);
   ChartJS.register(CategoryScale);
   const options = {
@@ -42,7 +43,7 @@ const MainPageCharts = () => {
           style={{ marginTop: 10 }}
         >
           <h3>Orders Per Time</h3>
-          <Bar data={EarningChartData} options={options} />
+          <Bar data={EarningChartData || []} options={options} />
         </div>
         <div
           className="box-shadow center w-100 chart-par col between"
@@ -50,14 +51,22 @@ const MainPageCharts = () => {
         >
           <h3>Earnings Per Time</h3>
 
-          <Pie data={orderChartData} options={options} />
+          <Pie data={orderChartData || []} options={options} />
         </div>
         <div
           className="box-shadow center w-100 chart-par col between"
           style={{ marginTop: 10 }}
         >
           <h3>Added Products Per Time</h3>
-          <Line data={productChartData} options={options} />
+          <Line data={productChartData || []} options={options} />
+        </div>
+
+        <div
+          className="box-shadow center w-100 chart-par col between"
+          style={{ marginTop: 10 }}
+        >
+          <h3>Users Per Time</h3>
+          <PolarArea data={userChartData || []} options={options} />
         </div>
       </div>
     </>

@@ -34,6 +34,7 @@ export const productTypeDefs = gql`
     rating: [Int]
     reviews: [Review]
     avgRate: Float
+    createdAt: Date
   }
 
   type Query {

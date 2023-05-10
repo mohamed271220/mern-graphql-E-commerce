@@ -19,6 +19,13 @@ const authenticate_js_1 = require("../../middlewares/authenticate.js");
 const hashPassword_js_1 = require("../../middlewares/hashPassword.js");
 const user_js_1 = require("../../mongoose/schema/user.js");
 exports.userResolver = {
+    Query: {
+        users() {
+            return __awaiter(this, void 0, void 0, function* () {
+                return yield user_js_1.userCollection.find();
+            });
+        },
+    },
     Mutation: {
         addUser: (_, { input }) => __awaiter(void 0, void 0, void 0, function* () {
             const check = yield user_js_1.userCollection.find({ email: input.email });
@@ -31,7 +38,7 @@ exports.userResolver = {
             }
             else {
                 console.log(input);
-                const res = yield user_js_1.userCollection.create(Object.assign(Object.assign({}, input), { image: input.image ||
+                const res = yield user_js_1.userCollection.create(Object.assign(Object.assign({}, input), { createdAt: new Date().toISOString(), image: input.image ||
                         "https://res.cloudinary.com/domobky11/image/upload/v1682383659/download_d2onbx.png", password: (0, hashPassword_js_1.hashPassword)(input.password) }));
                 return Object.assign(Object.assign({}, res), { status: 200, msg: "user created successfully" });
             }
@@ -148,5 +155,28 @@ exports.userResolver = {
                 return err.message;
             }
         }),
+        updateUserRole: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
+            console.log(args);
+            try {
+                yield user_js_1.userCollection.findByIdAndUpdate(args._id, { role: args.role });
+                return { msg: `now ,user role is ${args.role}` };
+            }
+            catch (err) {
+                return err.message;
+            }
+        }),
+        logOut(_par, args, ctx) {
+            return __awaiter(this, void 0, void 0, function* () {
+                yield user_js_1.userCollection.findByIdAndUpdate(args._id, {
+                    lastLogIn: args.lastLogIn,
+                });
+                ctx.res.clearCookie("access-token");
+                ctx.res.clearCookie("user-id");
+                ctx.res.clearCookie("refresh-token");
+                ctx.res.clearCookie("user-email");
+                ctx.res.cookie("user", "mahmoud");
+                return { msg: "you successfully signed out", status: 200 };
+            });
+        },
     },
 };

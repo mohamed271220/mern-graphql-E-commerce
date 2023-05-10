@@ -89,7 +89,7 @@
 .inp-parent .placeholder.placeholder-top {
   left: 5px;
   color: var(--main);
-  text-shadow: 1px 0.5px 1px var(--secondary);
+  text-shadow: 1px 0.5px 1px black;
   transform: translateY(-50%);
   background: var(--trending);
   border-radius: 2px;
@@ -115,4 +115,4 @@
   left: 0;
   color: var(--gmail);
   font-weight: bold;
-} /*# sourceMappingURL=login.css.map */
+}/*# sourceMappingURL=login.css.map */

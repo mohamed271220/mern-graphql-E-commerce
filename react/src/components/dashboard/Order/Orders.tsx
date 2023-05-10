@@ -1,12 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useState } from "react";
 import DashMain from "../DashMain";
-import { useQuery } from "@apollo/client";
-import { GET_ALL_ORDERS } from "../../../graphql/queries.js";
+
 import Pages from "../../Product/Products/Pages";
 import usePagination from "../../../custom/useNumberOfPages";
-import { useAppDispatch, useAppSelector } from "../../../custom/reduxTypes";
+import { useAppSelector } from "../../../custom/reduxTypes";
 import MobileOrders from "./Mobile/MobileOrders";
-import { addToOrderRedux } from "../../../redux/OrderSlice";
 
 import useIsMobile from "../../../custom/useIsMobile";
 import OrderTable from "./Table/OrderTable";
@@ -22,7 +20,6 @@ interface contextInterface {
 }
 export const checkContext = createContext({} as contextInterface);
 const Orders = () => {
-  const dispatch = useAppDispatch();
   const { isMobile } = useIsMobile();
 
   const [selectALl, setSlectALl] = useState<string | number>("");

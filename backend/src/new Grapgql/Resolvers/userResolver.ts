@@ -25,6 +25,11 @@ interface removeFromFavInterface {
 }
 
 export const userResolver = {
+  Query: {
+    async users() {
+      return await userCollection.find();
+    },
+  },
   Mutation: {
     addUser: async (_: any, { input }: any) => {
       const check = await userCollection.find({ email: input.email });
@@ -38,6 +43,7 @@ export const userResolver = {
         console.log(input);
         const res = await userCollection.create({
           ...input,
+          createdAt: new Date().toISOString(),
           image:
             input.image ||
             "https://res.cloudinary.com/domobky11/image/upload/v1682383659/download_d2onbx.png",
@@ -208,6 +214,31 @@ export const userResolver = {
       } catch (err) {
         return (err as Error).message;
       }
+    },
+
+    updateUserRole: async (_: any, args: { _id: string; role: string }) => {
+      console.log(args);
+      try {
+        await userCollection.findByIdAndUpdate(args._id, { role: args.role });
+        return { msg: `now ,user role is ${args.role}` };
+      } catch (err) {
+        return (err as Error).message;
+      }
+    },
+    async logOut(
+      _par: any,
+      args: { _id: string; lastLogIn: string },
+      ctx: { res: Response }
+    ) {
+      await userCollection.findByIdAndUpdate(args._id, {
+        lastLogIn: args.lastLogIn,
+      });
+      ctx.res.clearCookie("access-token");
+      ctx.res.clearCookie("user-id");
+      ctx.res.clearCookie("refresh-token");
+      ctx.res.clearCookie("user-email");
+      ctx.res.cookie("user", "mahmoud");
+      return { msg: "you successfully signed out", status: 200 };
     },
   },
 };

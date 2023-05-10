@@ -14,7 +14,11 @@ const NavImg = () => {
   };
   return (
     <>
-      <motion.span onClick={toggleSHowUser}>
+      <motion.span
+        onClick={toggleSHowUser}
+        className="relative"
+        style={{ display: "inline-block", height: "100%" }}
+      >
         <Title title={!showUserDrop ? "go to your profile" : ""}>
           <ProfileImg dimension={30} />
         </Title>

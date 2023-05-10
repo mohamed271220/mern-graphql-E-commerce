@@ -3,9 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.userTypeDefs = void 0;
 const statusMsg_1 = require("./../types/statusMsg");
 const apollo_server_express_1 = require("apollo-server-express");
+require("../types/Date.js");
 exports.userTypeDefs = (0, apollo_server_express_1.gql) `
   ${statusMsg_1.StatusMsg}
-
+  scalar Date
   type Fav {
     productId: ID
     parentId: ID
@@ -43,13 +44,15 @@ exports.userTypeDefs = (0, apollo_server_express_1.gql) `
     password: String
     msg: String
     country: String
+    role: String
     phone: String
     status: Int
     fav: [Fav]
     cart: [Cart]
     compare: [Compare]
+    createdAt: Date
+    lastLogIn: Date
   }
-
   input AddUserInput {
     name: String!
     email: String!
@@ -103,6 +106,9 @@ exports.userTypeDefs = (0, apollo_server_express_1.gql) `
     userId: ID!
   }
 
+  type Query {
+    users: [User]
+  }
   type Mutation {
     addUser(input: AddUserInput): User
     authenticate(password: String!, email: String!): StatusMsg
@@ -114,5 +120,7 @@ exports.userTypeDefs = (0, apollo_server_express_1.gql) `
     removeFromCompare(input: removeFromCompareInput): Compare
     addToFav(input: AddToFavInput): Fav
     removeFromFav(input: RemoveFromFavInput): StatusMsg
+    updateUserRole(_id: ID!, role: String!): StatusMsg
+    logOut(lastLogIn: Date, _id: ID): StatusMsg
   }
 `;

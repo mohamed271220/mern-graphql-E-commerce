@@ -10,6 +10,29 @@ export const ADD_USER = gql`
   }
 `;
 
+export const GET_ALL_USERS = gql`
+  query {
+    users {
+      _id
+      email
+      name
+      image
+      country
+      phone
+      createdAt
+      lastLogIn
+      role
+      fav {
+        productId
+      }
+
+      cart {
+        productId
+      }
+    }
+  }
+`;
+
 export const Add_To_Cart = gql`
   mutation ($input: AddToCartInput) {
     addToCart(input: $input) {
@@ -55,6 +78,14 @@ export const Add_To_Fav = gql`
 export const Authenticate_Query = gql`
   mutation ($email: String!, $password: String!) {
     authenticate(email: $email, password: $password) {
+      msg
+    }
+  }
+`;
+
+export const Update_User_ROle = gql`
+  mutation ($_id: ID!, $role: String!) {
+    updateUserRole(_id: $_id, role: $role) {
       msg
     }
   }
@@ -177,6 +208,14 @@ export const Update_Pass = gql`
     updatePassword(password: $password, _id: $_id) {
       msg
       status
+    }
+  }
+`;
+
+export const LogOut_Mutation = gql`
+  mutation ($lastLogIn: Date, $_id: ID) {
+    logOut(lastLogIn: $lastLogIn, _id: $_id) {
+      msg
     }
   }
 `;

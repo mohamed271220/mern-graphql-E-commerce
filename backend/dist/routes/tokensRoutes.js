@@ -34,15 +34,11 @@ const getNewRefToken = (req, res) => __awaiter(void 0, void 0, void 0, function*
     }
     else {
         let { result } = (yield (0, exports.verfiyRefToken)(refToken));
-        console.log("result");
         if (result[0]._id) {
-            console.log("condition applied");
-            //   const accessTokenExpiration = { expiresIn: "15s" };
             const accessToken = jsonwebtoken_1.default.sign({ result }, config_1.ACCESS_TOKEN_SECRET);
             const refreshToken = jsonwebtoken_1.default.sign({ result }, config_1.REFRESH_TOKEN_SECRET);
             res.cookie("access-token", accessToken);
             res.cookie("refresh-token", refreshToken);
-            res.cookie("refresh", refreshToken);
             res.json({ accessToken });
             return true;
         }

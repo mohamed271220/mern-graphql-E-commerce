@@ -15,7 +15,10 @@ import { opacityVariant } from "../../variants/globals";
 import OpacityBtn from "../widgets/OpacityBtn";
 import { GrAddCircle } from "react-icons/gr";
 import DashMain from "./DashMain";
-import { updateProductRedux } from "../../redux/productSlice";
+import {
+  addToProductRedux,
+  updateProductRedux,
+} from "../../redux/productSlice";
 import { useAppDispatch } from "../../custom/reduxTypes";
 
 interface keyedProduct extends ProductInterface {
@@ -131,7 +134,7 @@ const DashForm = ({ type, Icon, fn, id, obj, head, btn }: Props) => {
         for (const file of data.images) {
           formData.append("images", file);
         }
-        axios.patch(
+        const { data: addedDocument } = await axios.patch(
           `http://localhost:3000/products/images/upload/${res.addProduct._id}`,
           formData,
           {
@@ -140,7 +143,9 @@ const DashForm = ({ type, Icon, fn, id, obj, head, btn }: Props) => {
             },
           }
         );
-        toast.success(res.addProduct._id);
+        console.log(addedDocument);
+        dispatch(addToProductRedux(addedDocument.data));
+        toast.success(addedDocument.msg);
       }
     }
   };

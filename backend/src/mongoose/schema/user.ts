@@ -7,7 +7,10 @@ const userSchema = new mongoose.Schema({
   password: String,
   country: String,
   phone: String,
+  role: String,
   image: String,
+  createdAt: Date,
+  lastLogIn: Date,
   fav: [
     {
       productId: mongoose.SchemaTypes.ObjectId,

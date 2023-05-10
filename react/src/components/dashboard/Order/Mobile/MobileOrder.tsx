@@ -1,20 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
-import Checkbox from "../../../../custom SVGs/checkbox";
+import React, { useContext, useState } from "react";
 import Title from "../../../widgets/Title";
-import { AnimatePresence, motion } from "framer-motion";
-import { opacityVariant } from "../../../../variants/globals";
+import { AnimatePresence } from "framer-motion";
 import FadeElement from "../../../widgets/FadeElement";
 import StyledPrice from "../../../widgets/StyledPrice";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { checkContext } from "../Orders";
-import OpacityBtn from "../../../widgets/OpacityBtn";
-import { BsInfoCircleFill } from "react-icons/bs";
 import useDeleteOrder from "../../../../custom/useDeleteOrder";
-import { HiDotsVertical } from "react-icons/hi";
-import OrderDropDown from "../OrderDropDown";
-import useUpdateOrder from "../../../../custom/useUpdateOrder";
-import { useNavigate } from "react-router-dom";
 import OrderDetailsIcon from "../OrderDetailsIcon";
+import DashDropDown from "../DashDropDown";
 interface Props {
   state: string;
   _id: string;
@@ -33,11 +26,9 @@ const MobileOrder = ({
   index,
   createdAt,
 }: Props) => {
-  const { arrOfOrders, setarrOfOrders, selectALl, setSlectALl, dataShown } =
-    useContext(checkContext);
+  const { setarrOfOrders } = useContext(checkContext);
   const { handleDeleteOrder } = useDeleteOrder([_id]);
   const [orderState, setOrderState] = useState(state);
-  console.log(_id);
   return (
     <div className="order-mobile box-shadow">
       <span className="order-delete-mobile center gap ">
@@ -72,10 +63,11 @@ const MobileOrder = ({
               </span>
             </FadeElement>
           </AnimatePresence>
-          <OrderDropDown
+          <DashDropDown
+            arr={["pending", "shipped", "delivered", "canceled", "on hold"]}
             _id={_id}
-            setOrderState={setOrderState}
-            orderState={orderState}
+            setter={setOrderState}
+            state={orderState}
           />
         </div>
       </div>

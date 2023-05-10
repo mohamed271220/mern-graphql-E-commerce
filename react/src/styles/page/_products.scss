@@ -84,6 +84,8 @@ aside {
 }
 .rate-filter-par {
   padding-left: 10px;
+  position: relative;
+  z-index: 100000 !important;
 
   .rate-filter {
     display: inline-flex;
@@ -209,6 +211,7 @@ svg.svg-star {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
+
   &.grid {
     height: 260px;
   }
@@ -353,4 +356,19 @@ svg.svg-star {
     object-fit: contain;
     filter: drop-shadow(2px 5px 5px black);
   }
+}
+
+#star-details {
+  position: absolute;
+  right: 10px;
+  border-radius: 2px;
+  background-color: var(--main);
+  color: var(--secondary);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 5px 2px;
+  padding-right: 14px;
+  box-shadow: 0.5px 0.5px 2.5px black;
+  z-index: 10;
 }

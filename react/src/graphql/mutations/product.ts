@@ -175,6 +175,26 @@ export const Add_Product = gql`
   mutation ($createInput: createProductInput) {
     addProduct(createInput: $createInput) {
       _id
+      price
+      stock
+      title
+      state
+      rating
+      category
+      createdAt
+      reviews {
+        image
+        user
+        userId
+        review
+        rate
+        _id
+      }
+      description
+      images {
+        productPath
+        _id
+      }
     }
   }
 `;

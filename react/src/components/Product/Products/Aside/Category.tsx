@@ -8,7 +8,6 @@ import FIlter from "./FIlter";
 const Category = () => {
   const { categoryFilter, setCategoryFilter } = useContext(productListContext);
 
-  console.log(categoryFilter);
   return (
     <FIlter head="category">
       {categoriesArr.map((category, i) => {
