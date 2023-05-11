@@ -8,14 +8,17 @@ import Cookies from "js-cookie";
 const useLogOut = () => {
   const { setIsAuth, userId } = useContext(isAuthContext);
 
-  const [fn, { data }] = useMutation(LogOut_Mutation);
-  const handleLogOut = () => {
-    fn({
+  const [fn] = useMutation(LogOut_Mutation);
+  const handleLogOut = async () => {
+    console.log("runs");
+    console.log({ setIsAuth, userId });
+    const { data } = await fn({
       variables: {
         lastLogIn: new Date().toISOString(),
         _id: userId,
       },
     });
+    console.log(data);
     if (data?.logOut.msg) {
       toast.success(data?.logOut.msg);
       setIsAuth(false);

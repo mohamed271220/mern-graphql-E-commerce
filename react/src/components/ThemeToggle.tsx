@@ -13,15 +13,15 @@ interface Props {
 const ThemeToggle = ({ linkClr, navClr }: Props) => {
   const { toggleTheme, theme } = useContext(themeContext);
   const variant = {
-    start: { x: theme === "light" ? 0 : 26 },
+    start: { x: theme === "light" ? 0 : 10 },
     end: {
-      x: theme === "dark" ? 0 : 26,
+      x: theme === "dark" ? 0 : 10,
       rotate: theme === "light" ? 360 : -360,
     },
   };
   return (
     <motion.div
-      style={{ background: linkClr }}
+      // style={{ background: linkClr }}
       onClick={toggleTheme}
       className="theme"
     >

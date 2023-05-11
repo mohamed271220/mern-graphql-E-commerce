@@ -15,8 +15,8 @@ const UserDropDown = ({ bool }: Props) => {
   const { name } = useContext(isAuthContext);
   const { handleLogOut } = useLogOut();
   const dropArr = [
-    { link: "update your data", icon: FiEdit, to: "/user" },
-    { link: "settings", icon: FcSettings, to: "/setting" },
+    { link: "update your data", icon: FiEdit, to: "/user", fn: () => null },
+    { link: "settings", icon: FcSettings, to: "/setting", fn: () => null },
 
     {
       link: "logout",
@@ -38,8 +38,8 @@ const UserDropDown = ({ bool }: Props) => {
 
       {dropArr.map(({ icon: Icon, link, to, fn }, i) => {
         return (
-          <div key={i} className="w-100 ">
-            <NavLink className={"gap user-drop-link"} to={`${to}`} onClick={fn}>
+          <div key={i} className="w-100 " onClick={fn}>
+            <NavLink className={"gap user-drop-link"} to={`${to}`}>
               {" "}
               <Icon fontSize={15} className="shadow  user-icon" />
               {link}

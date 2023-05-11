@@ -1,11 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
-import { opacityVariant } from "../variants/globals";
-import Favorite from "./widgets/Favorite";
-import { useAppSelector } from "../custom/reduxTypes";
-import SlideButton from "./widgets/SlideButton";
-import DropDown from "./widgets/DropDown";
-import FadeElement from "./widgets/FadeElement";
+import { opacityVariant } from "../../variants/globals";
+import Favorite from "../widgets/Favorite";
+import { useAppSelector } from "../../custom/reduxTypes";
+import SlideButton from "../widgets/SlideButton";
+import DropDown from "../widgets/DropDown";
+import FadeElement from "../widgets/FadeElement";
 
 const WishList = ({ showFav }: { showFav: boolean }) => {
   const { fav } = useAppSelector((state) => state.fav);

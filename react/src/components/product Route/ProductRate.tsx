@@ -1,6 +1,6 @@
 import StarIcon from "../../custom SVGs/StarIcon";
 import React from "react";
-import RatingDetails from "../Product/RateDetails";
+import RatingDetails from "../Product/Products/RateDetails";
 import { reviewInterface } from "../../interfaces/product";
 
 const ProductRate = ({

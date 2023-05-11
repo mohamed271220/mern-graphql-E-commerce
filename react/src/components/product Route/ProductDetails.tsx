@@ -19,7 +19,7 @@ import OpacityBtn from "../widgets/OpacityBtn";
 import CompareIcons from "../widgets/CompareIcons";
 import StyledPrice from "../widgets/StyledPrice";
 import { toast } from "react-hot-toast";
-import RatingDetails from "../Product/RateDetails";
+import RatingDetails from "../Product/Products/RateDetails";
 
 interface Props {
   setShowPop: React.Dispatch<React.SetStateAction<boolean>>;

@@ -37,7 +37,6 @@ exports.userResolver = {
                 };
             }
             else {
-                console.log(input);
                 const res = yield user_js_1.userCollection.create(Object.assign(Object.assign({}, input), { createdAt: new Date().toISOString(), image: input.image ||
                         "https://res.cloudinary.com/domobky11/image/upload/v1682383659/download_d2onbx.png", password: (0, hashPassword_js_1.hashPassword)(input.password) }));
                 return Object.assign(Object.assign({}, res), { status: 200, msg: "user created successfully" });
@@ -52,7 +51,6 @@ exports.userResolver = {
                         const accessToken = jsonwebtoken_1.default.sign({ result }, config_js_1.ACCESS_TOKEN_SECRET, expire);
                         const refToken = jsonwebtoken_1.default.sign({ result }, config_js_1.REFRESH_TOKEN_SECRET);
                         const id = result[0]._id.toString();
-                        console.log({ id });
                         res.cookie("user-email", result[0].email);
                         res.cookie("user-id", id);
                         res.cookie("access-token", accessToken);
@@ -81,7 +79,6 @@ exports.userResolver = {
                 const res = yield user_js_1.userCollection.findByIdAndUpdate(input.userId, {
                     $push: { cart: input },
                 }, { new: true });
-                console.log(res);
                 return Object.assign(Object.assign({}, res), { msg: "successfully added to your cart" });
             }
             catch (err) {
@@ -167,14 +164,14 @@ exports.userResolver = {
         }),
         logOut(_par, args, ctx) {
             return __awaiter(this, void 0, void 0, function* () {
+                console.log(args);
                 yield user_js_1.userCollection.findByIdAndUpdate(args._id, {
                     lastLogIn: args.lastLogIn,
                 });
-                ctx.res.clearCookie("access-token");
-                ctx.res.clearCookie("user-id");
-                ctx.res.clearCookie("refresh-token");
-                ctx.res.clearCookie("user-email");
-                ctx.res.cookie("user", "mahmoud");
+                // ctx.res.clearCookie("access-token");
+                // ctx.res.clearCookie("user-id");
+                // ctx.res.clearCookie("refresh-token");
+                // ctx.res.clearCookie("user-email");
                 return { msg: "you successfully signed out", status: 200 };
             });
         },

@@ -2,8 +2,8 @@ import React, { useContext, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 import { BiPlus } from "react-icons/bi";
-import { opacityVariant, parentVariant } from "../../variants/globals";
-import Star from "./Products/Aside/Star";
+import { opacityVariant, parentVariant } from "../../../variants/globals";
+import Star from "./Aside/Star";
 import { IoIosArrowDown } from "react-icons/io";
 
 const RatingDetails = ({ arr, pos }: { pos: string; arr: number[] }) => {

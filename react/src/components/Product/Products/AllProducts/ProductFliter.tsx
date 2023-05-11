@@ -25,7 +25,7 @@ import useCarousel from "../../../../custom/useCarousel";
 import useIndex from "../../../../custom/useIndex";
 import CompareIcons from "../../../widgets/CompareIcons";
 import StyledPrice from "../../../widgets/StyledPrice";
-import RatingDetails from "../../RateDetails";
+import RatingDetails from "../RateDetails";
 
 type Props = {
   _id: string;

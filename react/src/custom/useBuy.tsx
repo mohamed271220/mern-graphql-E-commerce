@@ -3,32 +3,44 @@ import axios from "axios";
 import { useContext } from "react";
 import { isAuthContext } from "../context/isAuth";
 import { ProductInterface } from "../interfaces/product";
-import {
-  StripeRoute,
-  getStripePublicKeyRoute,
-} from "../components/RestfulRoutes.js";
+import { StripeRoute, getStripePublicKeyRoute } from "../RestfulRoutes.js";
 import { cartInterface } from "../interfaces/user";
 import { toast } from "react-hot-toast";
+import { getnewAccess } from "../main";
 const useBuy = (arrProducts: cartInterface[]) => {
   const { email, userId } = useContext(isAuthContext);
 
   const handlePurchase = async () => {
     try {
-      const { data: key } = await axios.get(getStripePublicKeyRoute());
+      const newAccessToken = await getnewAccess();
+      const { data: key } = await axios.get(getStripePublicKeyRoute(), {
+        headers: {
+          Authorization: `Bearer ${newAccessToken}`,
+        },
+      });
+      console.log(newAccessToken);
       if (key) {
         const stripePromise = await loadStripe(key);
-        const res = await axios.post(StripeRoute(userId), {
-          products: arrProducts,
-          email,
-        });
-        console.log(res.data);
+        const res = await axios.post(
+          StripeRoute(userId),
+          {
+            products: arrProducts,
+            email,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${newAccessToken}`,
+            },
+          }
+        );
         await stripePromise?.redirectToCheckout({
           sessionId: res.data.id,
         });
       }
     } catch (err: unknown) {
-      if ((err as Error).message === "Not Authorised!") {
-        toast.error((err as Error).message);
+      console.log(err);
+      if ((err as Error).message === "Request failed with status code 401") {
+        toast.error("Unauthorized access. Please login");
       }
     }
   };

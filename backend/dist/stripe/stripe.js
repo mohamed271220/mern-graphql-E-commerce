@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const config_js_1 = require("../config.js");
 const express_1 = require("express");
 const order_js_1 = require("../mongoose/schema/order.js");
+const auth_js_1 = require("../middlewares/auth.js");
 // const process = new stripe(Stripe_key);
 const stripeData = require("stripe")(config_js_1.Stripe_key);
 const stripeFn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -59,7 +60,7 @@ const stripeFn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         console.log(err);
     }
 });
-const getStripeublicKey = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getStripeublicKey = (_, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         res.json(config_js_1.Stripe_Public);
     }
@@ -68,6 +69,6 @@ const getStripeublicKey = (req, res) => __awaiter(void 0, void 0, void 0, functi
     }
 });
 const stripeRoutes = (0, express_1.Router)();
-stripeRoutes.route("/stripe/:userid").post(stripeFn);
-stripeRoutes.route("/getkey/stripe").get(getStripeublicKey);
+stripeRoutes.route("/stripe/:userid").post(auth_js_1.RestfullAuth, stripeFn);
+stripeRoutes.route("/getkey/stripe").get(auth_js_1.RestfullAuth, getStripeublicKey);
 exports.default = stripeRoutes;

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { opacityVariant } from "../../variants/globals";
+import { isAuthContext } from "../../context/isAuth";
 const ShowCount = ({ length }: { length: number }) => {
+  const { isAuth } = useContext(isAuthContext);
   return (
     <AnimatePresence mode="wait">
       <motion.div
@@ -13,7 +15,7 @@ const ShowCount = ({ length }: { length: number }) => {
         animate="end"
         exit="exit"
       >
-        {length}
+        {isAuth ? length : 0}
       </motion.div>
     </AnimatePresence>
   );

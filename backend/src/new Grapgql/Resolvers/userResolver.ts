@@ -40,7 +40,6 @@ export const userResolver = {
           msg: "this email has registered",
         };
       } else {
-        console.log(input);
         const res = await userCollection.create({
           ...input,
           createdAt: new Date().toISOString(),
@@ -78,7 +77,6 @@ export const userResolver = {
                 REFRESH_TOKEN_SECRET as unknown as string
               );
               const id = result[0]._id.toString();
-              console.log({ id });
               res.cookie("user-email", result[0].email as unknown as string);
               res.cookie("user-id", id as unknown as string);
               res.cookie("access-token", accessToken);
@@ -107,7 +105,6 @@ export const userResolver = {
           },
           { new: true }
         );
-        console.log(res);
         return { ...res, msg: "successfully added to your cart" };
       } catch (err) {
         return (err as Error).message;
@@ -230,14 +227,14 @@ export const userResolver = {
       args: { _id: string; lastLogIn: string },
       ctx: { res: Response }
     ) {
+      console.log(args);
       await userCollection.findByIdAndUpdate(args._id, {
         lastLogIn: args.lastLogIn,
       });
-      ctx.res.clearCookie("access-token");
-      ctx.res.clearCookie("user-id");
-      ctx.res.clearCookie("refresh-token");
-      ctx.res.clearCookie("user-email");
-      ctx.res.cookie("user", "mahmoud");
+      // ctx.res.clearCookie("access-token");
+      // ctx.res.clearCookie("user-id");
+      // ctx.res.clearCookie("refresh-token");
+      // ctx.res.clearCookie("user-email");
       return { msg: "you successfully signed out", status: 200 };
     },
   },

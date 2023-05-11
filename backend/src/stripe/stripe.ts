@@ -1,8 +1,7 @@
-import { productInterface } from "./../mongoose/schema/product";
-import * as stripe from "stripe";
 import { Client_Url, Stripe_Public, Stripe_key } from "../config.js";
 import { Request, Response, Router } from "express";
 import { OrderCollection } from "../mongoose/schema/order.js";
+import { RestfullAuth } from "../middlewares/auth.js";
 
 // const process = new stripe(Stripe_key);
 const stripeData = require("stripe")(Stripe_key);
@@ -56,7 +55,7 @@ const stripeFn = async (req: Request, res: Response) => {
   }
 };
 
-const getStripeublicKey = async (req: Request, res: Response) => {
+const getStripeublicKey = async (_: Request, res: Response) => {
   try {
     res.json(Stripe_Public);
   } catch (err) {
@@ -66,7 +65,7 @@ const getStripeublicKey = async (req: Request, res: Response) => {
 
 const stripeRoutes = Router();
 
-stripeRoutes.route("/stripe/:userid").post(stripeFn);
-stripeRoutes.route("/getkey/stripe").get(getStripeublicKey);
+stripeRoutes.route("/stripe/:userid").post(RestfullAuth, stripeFn);
+stripeRoutes.route("/getkey/stripe").get(RestfullAuth, getStripeublicKey);
 
 export default stripeRoutes;

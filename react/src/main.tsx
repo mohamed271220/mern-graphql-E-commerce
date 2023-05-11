@@ -17,7 +17,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import { setContext } from "apollo-link-context";
 
-const getnewAccess = async () => {
+export const getnewAccess = async () => {
   const refToken = Cookies.get("refresh-token");
 
   const res = await axios.post(
@@ -27,7 +27,6 @@ const getnewAccess = async () => {
     },
     { withCredentials: true }
   );
-  console.log(res.data.accessToken);
   return res.data.accessToken;
 };
 

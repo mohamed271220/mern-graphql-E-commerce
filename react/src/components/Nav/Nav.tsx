@@ -6,22 +6,22 @@ import {
   motion,
   AnimatePresence,
 } from "framer-motion";
-import LogoSvg from "./widgets/LogoSvg";
+import LogoSvg from "../widgets/LogoSvg";
 import { AiFillHeart } from "react-icons/ai";
-import useHide from "../custom/useHide";
-import { useAppSelector } from "../custom/reduxTypes";
-import ShowCount from "./widgets/showCounter";
+import useHide from "../../custom/useHide";
+import { useAppSelector } from "../../custom/reduxTypes";
+import ShowCount from "../widgets/showCounter";
 import { BsFillCartPlusFill } from "react-icons/bs";
-import { linksArr } from "../arries.js";
-import Title from "./widgets/Title";
+import { linksArr } from "../../arries.js";
+import Title from "../widgets/Title";
 import WishList from "./WishList";
-import { isAuthContext } from "../context/isAuth";
-import NavImg from "./widgets/NavImg";
-import { opacityVariant } from "../variants/globals";
+import { isAuthContext } from "../../context/isAuth";
+import NavImg from "../widgets/NavImg";
+import { opacityVariant } from "../../variants/globals";
 import { IoGitCompareSharp } from "react-icons/io5";
-import FadeElement from "./widgets/FadeElement";
-import ThemeToggle from "./ThemeToggle";
-import { themeContext } from "../context/ThemContext";
+import FadeElement from "../widgets/FadeElement";
+import ThemeToggle from "../ThemeToggle";
+import { themeContext } from "../../context/ThemContext";
 
 const Nav = () => {
   const { isAuth } = useContext(isAuthContext);

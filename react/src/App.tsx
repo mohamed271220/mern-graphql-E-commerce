@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import Loading from "./components/Loading";
 import "./styles/App.scss";
-import Nav from "./components/Nav";
+import Nav from "./components/Nav/Nav";
 import { BrowserRouter } from "react-router-dom";
-import AppRoutes from "./components/routes";
+import AppRoutes from "./components/Nav/routes";
 import IsAuthContextComponent from "./context/isAuth";
 import { Toaster } from "react-hot-toast";
 import GridViewContext from "./context/gridView";
