@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { TbMoonFilled } from "react-icons/tb";
 import { CiSun } from "react-icons/ci";
-import { themeContext } from "../context/ThemContext";
-import Title from "./widgets/Title";
+import { themeContext } from "../../context/ThemContext";
+import Title from "./Title";
 import { AnimatePresence, MotionValue, motion } from "framer-motion";
 import { FaSun } from "react-icons/fa";
 

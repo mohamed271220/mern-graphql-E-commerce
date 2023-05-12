@@ -93,7 +93,7 @@ export const userResolver = {
         }
       },
 
-    async getUserData(par: any, args: IdInterface) {
+    async getUserData(_: any, args: IdInterface) {
       return await userCollection.findById(args.id);
     },
     addToCart: async (_: any, { input }: any) => {
@@ -236,6 +236,46 @@ export const userResolver = {
       // ctx.res.clearCookie("refresh-token");
       // ctx.res.clearCookie("user-email");
       return { msg: "you successfully signed out", status: 200 };
+    },
+
+    async resetNotificationCount(_: any, args: IdInterface) {
+      await userCollection.findByIdAndUpdate(args.id, {
+        notificationsCount: 0,
+      });
+      return { msg: "done" };
+    },
+
+    async deleteNotification(_: any, args: { id: string; userId: string }) {
+      await userCollection.findByIdAndUpdate(args.userId, {
+        $pull: {
+          notifications: { _id: args.id },
+        },
+      });
+      return { msg: "notification is successfully deleted" };
+    },
+
+    async toggleReadNotification(
+      _: any,
+      args: { id: string; userId: string; isRead: boolean }
+    ) {
+      await userCollection.findOneAndUpdate(
+        { _id: args.userId, "notifications._id": args.id },
+        { $set: { "notifications.$.isRead": args.isRead } }
+      );
+      return { status: 200 };
+    },
+    async ClearNotification(_: any, args: { userId: string }) {
+      await userCollection.findByIdAndUpdate(args.userId, {
+        notifications: [],
+      });
+      return { msg: "Notifications are successfull cleared " };
+    },
+    async MarkAllAsReadNotification(_: any, args: { userId: string }) {
+      console.log(args);
+      await userCollection.findByIdAndUpdate(args.userId, {
+        "notifications.$[].isRead": true,
+      });
+      return { status: 200 };
     },
   },
 };

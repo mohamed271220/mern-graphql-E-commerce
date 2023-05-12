@@ -19,9 +19,7 @@ import OrderDetails from "../dashboard/Order/OrderDetails/OrderDetails";
 import { toast } from "react-hot-toast";
 import { isAuthContext } from "../../context/isAuth";
 import Recap from "../dashboard/recap/Recap";
-import DashBoardUsers from "../dashboard/User/DashBoardUsersTable";
 import UsersDashboard from "../dashboard/User/UsersDashboard";
-import RedirectToLogin from "../widgets/RedirectToLogin";
 
 const AppRoutes = () => {
   const location = useLocation();
@@ -30,7 +28,7 @@ const AppRoutes = () => {
   // Check isLogged and do something
   const [islog, setIslog] = useState("");
   const [isRegistered, setIsRegistered] = useState("");
-  const { setIsAuth } = useContext(isAuthContext);
+  const { setIsAuth, isAuth } = useContext(isAuthContext);
   const handleShowToastLogIn = () => {
     const query = new URLSearchParams(location.search);
     const isLoggedvalue = query.get("isLogged");
@@ -94,38 +92,13 @@ const AppRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/about" element={<About />} />
-        <Route
-          path="/cart"
-          element={
-            <RedirectToLogin>
-              <Cart />
-            </RedirectToLogin>
-          }
-        />
-        <Route
-          path="/user"
-          element={
-            <RedirectToLogin>
-              <User />
-            </RedirectToLogin>
-          }
-        />
+        <Route path="/cart" element={isAuth ? <Cart /> : <Login />} />
+        <Route path="/user" element={isAuth ? <User /> : <Login />} />
         <Route
           path="/compare"
-          element={
-            <RedirectToLogin>
-              <CompareProducts />
-            </RedirectToLogin>
-          }
+          element={isAuth ? <CompareProducts /> : <Login />}
         />
-        <Route
-          path="/dashboard"
-          element={
-            <RedirectToLogin>
-              <Dashboard />
-            </RedirectToLogin>
-          }
-        >
+        <Route path="/dashboard" element={isAuth ? <Dashboard /> : <Login />}>
           <Route path="" element={<Recap />} />
           <Route path="users" element={<UsersDashboard />} />
           <Route path="products">

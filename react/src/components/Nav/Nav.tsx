@@ -20,7 +20,7 @@ import NavImg from "../widgets/NavImg";
 import { opacityVariant } from "../../variants/globals";
 import { IoGitCompareSharp } from "react-icons/io5";
 import FadeElement from "../widgets/FadeElement";
-import ThemeToggle from "../ThemeToggle";
+import ThemeToggle from "../widgets/ThemeToggle";
 import { themeContext } from "../../context/ThemContext";
 
 const Nav = () => {
@@ -52,17 +52,17 @@ const Nav = () => {
   const [showNav, setShowNav] = useState(true);
   useEffect(() => {
     let counter: number;
-    if (location.pathname.startsWith("/dashboard")) {
+    if (location.pathname.startsWith("/dashboard") && isAuth) {
       counter = setTimeout(() => {
         setShowNav(false);
-      }, 800);
+      }, 430);
     } else {
       counter = setTimeout(() => {
         setShowNav(true);
-      }, 800);
+      }, 430);
     }
     return () => clearTimeout(counter);
-  }, [location]);
+  }, [location, isAuth]);
 
   return (
     <>

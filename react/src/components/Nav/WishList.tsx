@@ -6,6 +6,7 @@ import { useAppSelector } from "../../custom/reduxTypes";
 import SlideButton from "../widgets/SlideButton";
 import DropDown from "../widgets/DropDown";
 import FadeElement from "../widgets/FadeElement";
+import NoData from "../widgets/NoData";
 
 const WishList = ({ showFav }: { showFav: boolean }) => {
   const { fav } = useAppSelector((state) => state.fav);
@@ -14,52 +15,54 @@ const WishList = ({ showFav }: { showFav: boolean }) => {
   return (
     <>
       <DropDown cls="fav-drop" head=" your wishlist" bool={showFav}>
-        <div
-          className="center"
-          style={{ justifyContent: "flex-end", padding: "0 5px" }}
-        >
-          <button
-            className=" btn"
-            style={{
-              background: "transparent",
-              color: "var(--delete)",
-              fontSize: ".7rem",
-            }}
-            onClick={() => setShowClearFav(true)}
+        <NoData length={fav.length} message="your wishlist is empty">
+          <div
+            className="center"
+            style={{ justifyContent: "flex-end", padding: "0 5px" }}
           >
-            clear All
-          </button>
-        </div>
-        <AnimatePresence mode="wait">
-          {fav.length >= 1 ? (
-            <FadeElement key={"fav-parent"} cls="center col">
-              <AnimatePresence>
-                {fav.map((arr) => {
-                  return <Favorite key={arr.productId} {...arr} />;
-                })}
-              </AnimatePresence>
-            </FadeElement>
-          ) : (
-            <FadeElement key={"no-data-fav"} cls="shadow no-data-fav center">
-              no data in your wishlist
-            </FadeElement>
-          )}
-        </AnimatePresence>
-        <AnimatePresence>
-          {showClearFav && (
-            <SlideButton
-              key={"slide-button"}
-              sethide={setShowClearFav}
-              cls="clear-all"
-              doneMsg="All CLeared"
-              head="are you sure you want to clear ALl?"
-              height={120}
-              fn={() => null}
+            <button
+              className=" btn"
+              style={{
+                background: "transparent",
+                color: "var(--delete)",
+                fontSize: ".7rem",
+              }}
+              onClick={() => setShowClearFav(true)}
             >
-              {" "}
-            </SlideButton>
-          )}
-        </AnimatePresence>
+              clear All
+            </button>
+          </div>
+          <AnimatePresence mode="wait">
+            {fav.length >= 1 ? (
+              <FadeElement key={"fav-parent"} cls="center col">
+                <AnimatePresence>
+                  {fav.map((arr) => {
+                    return <Favorite key={arr.productId} {...arr} />;
+                  })}
+                </AnimatePresence>
+              </FadeElement>
+            ) : (
+              <FadeElement key={"no-data-fav"} cls="shadow no-data-fav center">
+                no data in your wishlist
+              </FadeElement>
+            )}
+          </AnimatePresence>
+          <AnimatePresence>
+            {showClearFav && (
+              <SlideButton
+                key={"slide-button"}
+                sethide={setShowClearFav}
+                cls="clear-all"
+                doneMsg="All CLeared"
+                head="are you sure you want to clear ALl?"
+                height={120}
+                fn={() => null}
+              >
+                {" "}
+              </SlideButton>
+            )}
+          </AnimatePresence>
+        </NoData>
       </DropDown>
     </>
   );

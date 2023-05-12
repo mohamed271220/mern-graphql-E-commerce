@@ -99,6 +99,14 @@ export const GET_USER_DATA = gql`
       image
       country
       phone
+      role
+      notificationsCount
+      notifications {
+        isRead
+        createdAt
+        content
+        _id
+      }
       fav {
         productId
         price
@@ -216,6 +224,46 @@ export const LogOut_Mutation = gql`
   mutation ($lastLogIn: Date, $_id: ID) {
     logOut(lastLogIn: $lastLogIn, _id: $_id) {
       msg
+    }
+  }
+`;
+
+export const Reset_Notification = gql`
+  mutation ($id: ID!) {
+    resetNotificationCount(id: $id) {
+      msg
+    }
+  }
+`;
+
+export const Delete_Notification = gql`
+  mutation ($id: ID!, $userId: ID!) {
+    deleteNotification(userId: $userId, id: $id) {
+      msg
+    }
+  }
+`;
+
+export const Toggle_Read_Notification = gql`
+  mutation ($id: ID!, $userId: ID!, $isRead: Boolean) {
+    toggleReadNotification(userId: $userId, id: $id, isRead: $isRead) {
+      status
+    }
+  }
+`;
+
+export const Clear_Notification = gql`
+  mutation ($userId: ID!) {
+    ClearNotification(userId: $userId) {
+      msg
+    }
+  }
+`;
+
+export const Mark_All_as_Notification = gql`
+  mutation ($userId: ID!) {
+    MarkAllAsReadNotification(userId: $userId) {
+      status
     }
   }
 `;

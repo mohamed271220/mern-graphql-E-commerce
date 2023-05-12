@@ -87,7 +87,10 @@ const TotalPrice = ({ subTotal }: { subTotal: number }) => {
           <span>
             <span> $</span>
             <AnimatePresence mode="wait">
-              <Price num={total} key={"total-$"} />
+              <Price
+                num={cart.length ? Number(total.toFixed(2)) : 0}
+                key={"total-$"}
+              />
             </AnimatePresence>
           </span>
         </h3>
@@ -100,7 +103,7 @@ const TotalPrice = ({ subTotal }: { subTotal: number }) => {
             {" "}
             $
             <AnimatePresence mode="wait">
-              <Price num={subTotal} key={"subtotal"} />
+              <Price num={Number(subTotal.toFixed(2))} key={"subtotal"} />
             </AnimatePresence>
           </span>
         </div>
@@ -124,7 +127,7 @@ const TotalPrice = ({ subTotal }: { subTotal: number }) => {
               key={"price"}
               className="order-val"
             >
-              $ 10
+              $ {cart.length ? 10 : 0}
             </motion.span>
             <AnimatePresence>
               {freeShipping && (

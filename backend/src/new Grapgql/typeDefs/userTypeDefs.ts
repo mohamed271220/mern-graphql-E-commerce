@@ -33,6 +33,13 @@ export const userTypeDefs = gql`
     state: String
   }
 
+  type Notification {
+    _id: ID
+    isRead: Boolean
+    content: String
+    createdAt: Date
+  }
+
   type User {
     _id: ID
     name: String
@@ -49,6 +56,8 @@ export const userTypeDefs = gql`
     compare: [Compare]
     createdAt: Date
     lastLogIn: Date
+    notificationsCount: Int
+    notifications: [Notification]
   }
   input AddUserInput {
     name: String!
@@ -119,5 +128,10 @@ export const userTypeDefs = gql`
     removeFromFav(input: RemoveFromFavInput): StatusMsg
     updateUserRole(_id: ID!, role: String!): StatusMsg
     logOut(lastLogIn: Date, _id: ID): StatusMsg
+    resetNotificationCount(id: ID!): StatusMsg
+    deleteNotification(id: ID!, userId: ID!): StatusMsg
+    toggleReadNotification(id: ID!, userId: ID!, isRead: Boolean): StatusMsg
+    ClearNotification(userId: ID!): StatusMsg
+    MarkAllAsReadNotification(userId: ID!): StatusMsg
   }
 `;

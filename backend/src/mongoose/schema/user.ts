@@ -11,6 +11,8 @@ const userSchema = new mongoose.Schema({
   image: String,
   createdAt: Date,
   lastLogIn: Date,
+  notificationsCount: Number,
+
   fav: [
     {
       productId: mongoose.SchemaTypes.ObjectId,
@@ -35,6 +37,13 @@ const userSchema = new mongoose.Schema({
     {
       productId: mongoose.SchemaTypes.ObjectId,
       title: String,
+    },
+  ],
+  notifications: [
+    {
+      isRead: Boolean,
+      content: String,
+      createdAt: Date,
     },
   ],
 });

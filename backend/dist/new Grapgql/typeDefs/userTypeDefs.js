@@ -36,6 +36,13 @@ exports.userTypeDefs = (0, apollo_server_express_1.gql) `
     state: String
   }
 
+  type Notification {
+    _id: ID
+    isRead: Boolean
+    content: String
+    createdAt: Date
+  }
+
   type User {
     _id: ID
     name: String
@@ -52,6 +59,8 @@ exports.userTypeDefs = (0, apollo_server_express_1.gql) `
     compare: [Compare]
     createdAt: Date
     lastLogIn: Date
+    notificationsCount: Int
+    notifications: [Notification]
   }
   input AddUserInput {
     name: String!
@@ -122,5 +131,10 @@ exports.userTypeDefs = (0, apollo_server_express_1.gql) `
     removeFromFav(input: RemoveFromFavInput): StatusMsg
     updateUserRole(_id: ID!, role: String!): StatusMsg
     logOut(lastLogIn: Date, _id: ID): StatusMsg
+    resetNotificationCount(id: ID!): StatusMsg
+    deleteNotification(id: ID!, userId: ID!): StatusMsg
+    toggleReadNotification(id: ID!, userId: ID!, isRead: Boolean): StatusMsg
+    ClearNotification(userId: ID!): StatusMsg
+    MarkAllAsReadNotification(userId: ID!): StatusMsg
   }
 `;

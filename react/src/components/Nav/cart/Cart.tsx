@@ -7,6 +7,7 @@ import { AnimatePresence } from "framer-motion";
 import SLiderComponent from "../../widgets/SLider";
 import { viewContext } from "../../../context/gridView";
 import Transition from "../../widgets/Transition";
+import NoData from "../../widgets/NoData";
 
 const offerArr = [
   { offer: "Spend $800 or more and get free shipping!", money: 800 },
@@ -58,15 +59,17 @@ const Cart = () => {
         <Transition />
 
         <div className="center row between w-100">
-          <div className="carts-par center col">
-            {cart.map((item, index) => {
-              return (
-                <>
-                  <CartItem key={item._id} {...item} />
-                </>
-              );
-            })}
-          </div>
+          <NoData length={cart.length} message="No products at your cart">
+            <div className="carts-par center col">
+              {cart.map((item, index) => {
+                return (
+                  <>
+                    <CartItem key={item._id} {...item} />
+                  </>
+                );
+              })}
+            </div>
+          </NoData>
           <TotalPrice subTotal={subTotal} key={"TotalPrice"} />
         </div>
       </div>

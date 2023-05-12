@@ -8,9 +8,13 @@ import Title from "../widgets/Title";
 import { showAsideContext } from "./Dashboard";
 import { FaClipboardList, FaUserAlt } from "react-icons/fa";
 import LogoSvg from "../widgets/LogoSvg";
+import { RiLogoutCircleRFill } from "react-icons/ri";
+import useLogOut from "../../custom/useLogOut";
 
 const DashboardAside = () => {
   const { showAsideDash, setShowAsideDash } = useContext(showAsideContext);
+  const { handleLogOut } = useLogOut();
+
   return (
     <AnimatePresence mode="wait">
       {showAsideDash && (
@@ -105,6 +109,19 @@ const DashboardAside = () => {
           >
             <FaUserAlt className="icon" color="var(--twitter)" />
             <span>users</span>
+          </Link>
+
+          <Link
+            className={
+              location.pathname.split("/").slice(-1)[0] === "add"
+                ? "active"
+                : ""
+            }
+            to={"/login"}
+            onClick={handleLogOut}
+          >
+            <RiLogoutCircleRFill className="icon" color="var(--twitter)" />
+            <span>logout</span>
           </Link>
         </motion.aside>
       )}

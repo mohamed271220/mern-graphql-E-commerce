@@ -117,11 +117,18 @@ table.order {
   width: 80px;
   background: var(--main);
   z-index: 100;
-  padding: 5px 0;
+  padding: 5px;
+  &.notification-actions {
+    width: 160px !important;
+    font-size: 10px;
+    .order-link {
+      padding: 2px;
+    }
+  }
   &:before {
     content: "";
     position: absolute;
-    top: -15px;
+    top: -16px;
     right: 0;
     border-style: solid;
     border-width: 8px;

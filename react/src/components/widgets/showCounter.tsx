@@ -6,17 +6,19 @@ const ShowCount = ({ length }: { length: number }) => {
   const { isAuth } = useContext(isAuthContext);
   return (
     <AnimatePresence mode="wait">
-      <motion.div
-        key={length}
-        className="show-count center"
-        variants={opacityVariant}
-        transition={{ duration: 0.2 }}
-        initial="start"
-        animate="end"
-        exit="exit"
-      >
-        {isAuth ? length : 0}
-      </motion.div>
+      {isAuth && length >= 1 && (
+        <motion.div
+          key={length}
+          className="show-count center"
+          variants={opacityVariant}
+          transition={{ duration: 0.2 }}
+          initial="start"
+          animate="end"
+          exit="exit"
+        >
+          {length}
+        </motion.div>
+      )}
     </AnimatePresence>
   );
 };

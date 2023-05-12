@@ -220,3 +220,61 @@ div.dash-nav {
   top: 4px;
   right: 4px;
 }
+
+.notifications {
+  height: 200px;
+  width: 180px;
+  z-index: 10;
+  top: 25px;
+  background: var(--main);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  .notification {
+    background: var(--secondary);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2px 4px;
+    height: 40px;
+    color: var(--main);
+    .content {
+      width: 90%;
+      align-self: flex-start;
+      font-size: 0.75rem;
+      line-height: 0.8rem;
+      letter-spacing: 0.8px;
+    }
+    .time {
+      font-size: 0.6rem;
+      color: var(--twitter);
+      font-weight: bold;
+    }
+    .dots {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      color: var(--wheat-light);
+    }
+    .is-read {
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      background-color: var(--twitter);
+      border-radius: 50%;
+      position: absolute;
+      right: 4px;
+      bottom: 10%;
+    }
+  }
+}
+
+.notification-btns {
+  button {
+    background-color: transparent;
+    padding: 0px 4px;
+    font-size: 8px;
+    border: 0;
+  }
+}

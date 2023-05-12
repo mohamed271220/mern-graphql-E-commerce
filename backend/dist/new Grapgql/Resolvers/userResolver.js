@@ -69,7 +69,7 @@ exports.userResolver = {
                 return err.message;
             }
         }),
-        getUserData(par, args) {
+        getUserData(_, args) {
             return __awaiter(this, void 0, void 0, function* () {
                 return yield user_js_1.userCollection.findById(args.id);
             });
@@ -173,6 +173,47 @@ exports.userResolver = {
                 // ctx.res.clearCookie("refresh-token");
                 // ctx.res.clearCookie("user-email");
                 return { msg: "you successfully signed out", status: 200 };
+            });
+        },
+        resetNotificationCount(_, args) {
+            return __awaiter(this, void 0, void 0, function* () {
+                yield user_js_1.userCollection.findByIdAndUpdate(args.id, {
+                    notificationsCount: 0,
+                });
+                return { msg: "done" };
+            });
+        },
+        deleteNotification(_, args) {
+            return __awaiter(this, void 0, void 0, function* () {
+                yield user_js_1.userCollection.findByIdAndUpdate(args.userId, {
+                    $pull: {
+                        notifications: { _id: args.id },
+                    },
+                });
+                return { msg: "notification is successfully deleted" };
+            });
+        },
+        toggleReadNotification(_, args) {
+            return __awaiter(this, void 0, void 0, function* () {
+                yield user_js_1.userCollection.findOneAndUpdate({ _id: args.userId, "notifications._id": args.id }, { $set: { "notifications.$.isRead": args.isRead } });
+                return { status: 200 };
+            });
+        },
+        ClearNotification(_, args) {
+            return __awaiter(this, void 0, void 0, function* () {
+                yield user_js_1.userCollection.findByIdAndUpdate(args.userId, {
+                    notifications: [],
+                });
+                return { msg: "Notifications are successfull cleared " };
+            });
+        },
+        MarkAllAsReadNotification(_, args) {
+            return __awaiter(this, void 0, void 0, function* () {
+                console.log(args);
+                yield user_js_1.userCollection.findByIdAndUpdate(args.userId, {
+                    "notifications.$[].isRead": true,
+                });
+                return { status: 200 };
             });
         },
     },

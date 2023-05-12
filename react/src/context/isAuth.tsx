@@ -5,9 +5,13 @@ import { GET_USER_DATA } from "../graphql/mutations/user";
 import Cookies from "js-cookie";
 import { useAppDispatch } from "../custom/reduxTypes";
 import { addToFavRedux } from "../redux/favSlice";
-import { addToCartRedux } from "../redux/CartSlice";
+import { addToCartRedux, changeCartCountRedux } from "../redux/CartSlice";
 import { ChildrenInterFace } from "../interfaces/general.js";
 import { addToCompareRedux } from "../redux/compareSlice";
+import {
+  addToNotificatinsRedux,
+  changeNotificationCount,
+} from "../redux/notificationsSlice";
 
 export interface favArrInterface {
   productId: string;
@@ -36,6 +40,8 @@ interface userDataState {
 interface authContextInterface extends userDataState {
   isAuth: boolean;
   setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
+  isAdmin: boolean;
+  setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>;
   setIsUpdated: React.Dispatch<React.SetStateAction<boolean>>;
   userId: string;
   profile: string;
@@ -47,10 +53,12 @@ export const isAuthContext = createContext({} as authContextInterface);
 
 const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
   const [isAuth, setIsAuth] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isowner, setIsowner] = useState(false);
+  const [isModerator, setIsModerator] = useState(false);
   const [isIsUpdated, setIsUpdated] = useState(false);
   const [userId, setUserId] = useState<string>("");
   const [profile, setProfile] = useState<string>("");
-  console.log({ isAuth });
   const [userData, setUserData] = useState({
     email: "",
     name: "",
@@ -59,6 +67,7 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
     compare: [],
     country: "",
     phone: "",
+    role: "",
   } as userDataState);
   const [getData, { data, loading }] = useMutation(GET_USER_DATA);
 
@@ -71,6 +80,11 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
   useEffect(() => {
     if (userId) {
       setIsAuth(true);
+    } else {
+      setIsAuth(false);
+      setIsAdmin(false);
+      setIsModerator(false);
+      setIsowner(false);
     }
   }, [userId]);
 
@@ -98,9 +112,23 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
       dispatch(addToFavRedux(data?.getUserData?.fav));
       dispatch(addToCartRedux(data?.getUserData?.cart));
       dispatch(addToCompareRedux(data?.getUserData?.compare));
+      dispatch(addToNotificatinsRedux(data?.getUserData?.notifications));
+      dispatch(changeNotificationCount(data?.getUserData?.notificationsCount));
       setProfile(data?.getUserData?.image);
     }
+    if (data?.getUserData?.role === "admin") {
+      setIsAdmin(true);
+    } else if (data?.getUserData?.role === "moderator") {
+      setIsModerator(true);
+    } else if (data?.getUserData?.role === "owner") {
+      setIsowner(true);
+    }
   }, [data?.getUserData?.name]);
+
+  console.log({
+    count: data?.getUserData?.notificationsCount,
+    user: data?.getUserData,
+  });
   return (
     <isAuthContext.Provider
       value={{
@@ -118,6 +146,8 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
         profile,
         setProfile,
         setIsUpdated,
+        isAdmin,
+        setIsAdmin,
       }}
     >
       {children}

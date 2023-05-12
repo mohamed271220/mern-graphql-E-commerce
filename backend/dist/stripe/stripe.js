@@ -13,6 +13,7 @@ const config_js_1 = require("../config.js");
 const express_1 = require("express");
 const order_js_1 = require("../mongoose/schema/order.js");
 const auth_js_1 = require("../middlewares/auth.js");
+const user_js_1 = require("../mongoose/schema/user.js");
 // const process = new stripe(Stripe_key);
 const stripeData = require("stripe")(config_js_1.Stripe_key);
 const stripeFn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -54,6 +55,20 @@ const stripeFn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             })),
             state: "pending",
             count: products.length,
+        });
+        const notificationObj = {
+            isRead: false,
+            content: `${email} created a new order`,
+            createdAt: new Date().toISOString(),
+        };
+        console.log(notificationObj);
+        yield user_js_1.userCollection.updateMany({ role: { $in: ["admin", "moderator", "owner"] } }, {
+            $push: {
+                notifications: notificationObj,
+            },
+            $inc: {
+                notificationsCount: +1,
+            },
         });
     }
     catch (err) {

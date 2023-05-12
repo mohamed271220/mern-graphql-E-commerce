@@ -2,6 +2,7 @@ import { Client_Url, Stripe_Public, Stripe_key } from "../config.js";
 import { Request, Response, Router } from "express";
 import { OrderCollection } from "../mongoose/schema/order.js";
 import { RestfullAuth } from "../middlewares/auth.js";
+import { userCollection } from "../mongoose/schema/user.js";
 
 // const process = new stripe(Stripe_key);
 const stripeData = require("stripe")(Stripe_key);
@@ -50,6 +51,24 @@ const stripeFn = async (req: Request, res: Response) => {
       state: "pending",
       count: products.length,
     });
+
+    const notificationObj = {
+      isRead: false,
+      content: `${email} created a new order`,
+      createdAt: new Date().toISOString(),
+    };
+    console.log(notificationObj);
+    await userCollection.updateMany(
+      { role: { $in: ["admin", "moderator", "owner"] } },
+      {
+        $push: {
+          notifications: notificationObj,
+        },
+        $inc: {
+          notificationsCount: +1,
+        },
+      }
+    );
   } catch (err) {
     console.log(err);
   }

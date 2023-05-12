@@ -34,7 +34,6 @@ const httpLink = new HttpLink({ uri: "http://localhost:3000/graphql" });
 
 const middleware: unknown = setContext(async (_, { headers }) => {
   const token = await getnewAccess();
-  console.log(token);
   return {
     headers: {
       ...headers,
