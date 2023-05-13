@@ -9,7 +9,7 @@ const OrderDetailsIcon = ({ _id }: { _id: string }) => {
   return (
     <Title title={`see order details`}>
       <BsInfoCircleFill
-        className="icon "
+        className="icon"
         color="grey"
         fontSize={14}
         onClick={() => navigate(`/dashboard/orders/${_id}`)}

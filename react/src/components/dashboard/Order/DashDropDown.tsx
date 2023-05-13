@@ -31,7 +31,7 @@ const DashDropDown = ({ type, state, setter, _id, arr }: Props) => {
         <HiDotsVertical
           className="icon"
           onClick={handleToggle}
-          color="var(--secondary)"
+          color="var(--white)"
         />
       </Title>
       <AnimatePresence>

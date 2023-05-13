@@ -114,7 +114,6 @@ nav {
 .theme {
   width: 30px;
   height: 22px;
-  // background-color: var(--main);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -126,6 +125,8 @@ nav {
     border-radius: 50%;
     svg {
       font-size: 16px;
+      position: relative;
+      z-index: 15;
       &.sun {
         color: #fdb813;
       }

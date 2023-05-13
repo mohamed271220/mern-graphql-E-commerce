@@ -16,7 +16,7 @@ const DashMain = ({ head, children }: Props) => {
       className="dash-product"
       animate={{
         width: showAsideDash ? "calc(100% - 210px )" : "95%",
-        margin: showAsideDash ? "20px 0 20px 210px" : "20px auto",
+        margin: showAsideDash ? "20px 10px 10px 210px" : "20px auto",
       }}
       transition={{ delay: showAsideDash ? 0.2 : 0.7 }}
     >

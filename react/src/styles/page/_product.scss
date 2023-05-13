@@ -75,6 +75,9 @@
       .title-par {
         display: flex;
         gap: 20px;
+        > * {
+          color: var(--third);
+        }
       }
       .product-btn {
         display: flex;
@@ -107,29 +110,6 @@
         }
       }
     }
-
-    //   .category {
-    //     font-size: 1.4rem;
-    //     font-weight: bold;
-    //     display: inline-block;
-    //     text-transform: capitalize;
-    //     letter-spacing: 0.8px;
-    //     margin-bottom: 8px;
-    //     color: var(--green);
-    //     position: relative;
-    //     &:before {
-    //       content: "";
-    //       position: absolute;
-    //       top: 100%;
-    //       left: 0;
-    //       width: 40%;
-    //       height: 3px;
-    //       border-radius: 4px;
-    //       background: var(--wheat);
-
-    //       // border: 10px solid green;
-    //     }
-    // }
   }
 
   @media (max-width: 800px) {
@@ -178,7 +158,6 @@ p {
   justify-content: center;
   align-items: center;
   font-size: 0.8rem;
-  color: var(--main);
 
   svg {
     transform: scale(0.4);

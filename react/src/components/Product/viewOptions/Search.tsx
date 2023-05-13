@@ -122,7 +122,7 @@ const Search = () => {
                 )}
             </>
           ) : (
-            <li className="search-res ">no results</li>
+            <li className="search-res center">No Results</li>
           )}
         </ul>
       )}

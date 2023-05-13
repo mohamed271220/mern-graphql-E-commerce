@@ -10,9 +10,10 @@ import { FaClipboardList, FaUserAlt } from "react-icons/fa";
 import LogoSvg from "../widgets/LogoSvg";
 import { RiLogoutCircleRFill } from "react-icons/ri";
 import useLogOut from "../../custom/useLogOut";
+import { TbSquareRoundedPlusFilled } from "react-icons/tb";
 
 const DashboardAside = () => {
-  const { showAsideDash, setShowAsideDash } = useContext(showAsideContext);
+  const { showAsideDash } = useContext(showAsideContext);
   const { handleLogOut } = useLogOut();
 
   return (
@@ -37,21 +38,6 @@ const DashboardAside = () => {
               <LogoSvg />
             </Link>
           </div>
-          <AnimatePresence mode="wait">
-            {showAsideDash && (
-              <motion.span
-                key={"hide-dash"}
-                variants={opacityVariant}
-                transition={{ duration: 0.4 }}
-                onClick={() => setShowAsideDash(false)}
-                className="dash-close"
-              >
-                <Title title="hide dashboard nav">
-                  <AiFillCloseCircle className="icon" />
-                </Title>
-              </motion.span>
-            )}
-          </AnimatePresence>
 
           <h4 className="aside-dash-label">main</h4>
 
@@ -87,7 +73,10 @@ const DashboardAside = () => {
             }
             to={"/dashboard/products/add"}
           >
-            <GrProductHunt className="icon" color="var(--twitter)" />
+            <TbSquareRoundedPlusFilled
+              className="icon"
+              color="var(--twitter)"
+            />
             <span>add product</span>
           </Link>
 

@@ -4,7 +4,6 @@
   width: 90%;
   overflow-y: auto;
   margin: 0 auto;
-
   min-height: 60vh;
 }
 table.order {
@@ -13,7 +12,9 @@ table.order {
   min-width: 600px;
   max-width: 800px;
   border-spacing: 0.4px;
-  color: var(--secondary);
+  color: var(--third);
+  margin: 0 auto;
+  margin-bottom: 10px;
   > * {
     font-weight: bold;
   }
@@ -21,6 +22,7 @@ table.order {
     height: 40px;
     background: var(--sale);
     color: var(--white);
+    padding: 2px;
 
     text-transform: capitalize;
     font-size: 1.2rem;
@@ -54,7 +56,7 @@ table.order {
     width: 100%;
     max-width: 400px;
     margin: 0 auto;
-    background: var(--main);
+    background: var(--secondary);
     height: 100px;
     display: flex;
     flex-direction: column;
@@ -72,6 +74,9 @@ table.order {
       display: flex;
       gap: 8px;
       align-items: center;
+      width: 80%;
+      min-width: 260px;
+      justify-content: space-between;
       .mobile-order-id {
         font-weight: normal;
         color: var(--twitter);
@@ -100,7 +105,7 @@ table.order {
   display: inline-block;
   font-weight: bold;
   margin-top: 3px;
-  color: var(--secondary);
+  color: var(--white);
 }
 
 .order-delete-mobile {
@@ -114,10 +119,10 @@ table.order {
   position: absolute;
   top: 20px;
   right: -3px;
-  width: 80px;
+  width: 90px;
   background: var(--main);
   z-index: 100;
-  padding: 5px;
+  padding: 4px;
   &.notification-actions {
     width: 160px !important;
     font-size: 10px;
@@ -162,21 +167,21 @@ table.order {
   }
 }
 .table-order-detail {
-  grid-area: table;
-
+  grid-area: tabl;
   background-color: var(--main);
-  margin-top: 20px;
   text-align: center;
   vertical-align: middle;
   border-spacing: 0;
   th {
-    color: var(--main);
-    background: var(--secondary);
+    color: var(--white);
+    background: var(--sale);
     height: 40px;
     text-transform: capitalize;
+    font-size: 1rem;
+    letter-spacing: 0.8px;
   }
   td {
-    color: var(--secondary);
+    color: var(--third);
     height: 30px;
     font-weight: 600;
     &:first-child {
@@ -198,11 +203,13 @@ table.order {
 }
 
 .customer {
-  grid-area: customer;
+  display: grid;
+  grid-area: cust;
   margin-top: 12px;
   background: var(--main);
   padding: 12px;
-  color: var(--secondary);
+
+  color: var(--third);
 
   h2 + .hr {
     margin-top: 6px;
@@ -223,36 +230,33 @@ table.order {
 
 .order-detail-par {
   svg {
-    fill: var(--white);
-    margin-left: 30px;
+    margin-left: 10px;
   }
-}
-
-.order-summery {
-  grid-area: summery;
-  padding: 10px;
-  height: fit-content;
-  align-self: center;
-  color: var(--secondary);
 }
 
 .order-details-grid {
   display: grid;
   gap: 4px 8px;
-  grid-template-columns: repeat(3, 1fr);
-
+  grid-template-columns: 2fr 1fr;
   grid-template-areas:
-    "table table summery "
-    "customer customer summery";
+    "tabl  summ"
+    "cust  summ";
+  .order-summery {
+    grid-area: summ;
+    padding: 15px;
+    color: var(--third);
+    height: fit-content;
+    align-self: flex-start;
+  }
 }
 
 @media (max-width: 600px) {
   .order-details-grid {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: 1fr;
     grid-template-areas:
-      "table"
-      "customer"
-      "summery";
+      "tabl"
+      "cust"
+      "summ";
     gap: 10px;
     .table-order-detail {
       font-size: 0.7rem;

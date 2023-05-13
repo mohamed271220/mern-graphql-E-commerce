@@ -38,13 +38,13 @@ const NotificationDropDown = ({ bool }: Props) => {
   const [dataShown, setDataShown] = useState<notificationInterface[]>([]);
 
   useEffect(() => {
+    if (notificatins.length === 0) {
+      setShowAll(true);
+    }
     if (showAll) {
       setDataShown(notificatins);
     } else {
       setDataShown(notificatins.filter((e) => e.isRead === false));
-    }
-    if (notificatins.length === 0) {
-      setShowAll(true);
     }
   }, [notificatins, showAll]);
 
@@ -62,15 +62,17 @@ const NotificationDropDown = ({ bool }: Props) => {
       dispatch(MarkAllAsReadNotificationRedux());
     }
   };
+  console.log({ showAll });
   return (
     <DropDown bool={bool} cls="notifications" head="notifications">
       {notificatins.length >= 1 && (
         <div className="notification-btns w-100 center between">
-          <div className="filter-btn gap center">
+          <div className="filter-btn center">
             <button
               onClick={() => {
                 setShowAll(true);
               }}
+              style={{ opacity: showAll ? 1 : 0.4 }}
             >
               all
             </button>
@@ -78,20 +80,31 @@ const NotificationDropDown = ({ bool }: Props) => {
               onClick={() => {
                 setShowAll(false);
               }}
+              style={{ opacity: !showAll ? 1 : 0.4 }}
             >
               unread
             </button>
           </div>
 
-          <div className="btn-handle-all gap center">
-            <button onClick={handleClear}>clear</button>
-            <button onClick={handleMarkAllAsRead}>mark all as read</button>
+          <div className="btn-handle-all  center">
+            <button
+              style={{ fontWeight: "bold" }}
+              onClick={handleMarkAllAsRead}
+            >
+              mark all as read
+            </button>
+            <button
+              onClick={handleClear}
+              style={{ fontWeight: "bold", color: "var(--delete)" }}
+            >
+              clear
+            </button>
           </div>
         </div>
       )}
       <NoData
         message={`no ${!showAll ? "unread " : ""}notifications`}
-        length={dataShown.length}
+        length={showAll ? notificatins.length : dataShown.length}
       >
         <AnimatePresence>
           {dataShown.map((notificatin, i) => {

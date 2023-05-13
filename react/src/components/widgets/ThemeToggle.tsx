@@ -20,11 +20,7 @@ const ThemeToggle = ({ linkClr, navClr }: Props) => {
     },
   };
   return (
-    <motion.div
-      // style={{ background: linkClr }}
-      onClick={toggleTheme}
-      className="theme"
-    >
+    <motion.div className="theme">
       <Title title={theme === "light" ? "apply dark mode" : "apply light mode"}>
         <AnimatePresence initial={false}>
           <motion.div
@@ -35,9 +31,9 @@ const ThemeToggle = ({ linkClr, navClr }: Props) => {
             initial="start"
           >
             {theme === "dark" ? (
-              <TbMoonFilled className="moon" />
+              <TbMoonFilled onClick={toggleTheme} />
             ) : (
-              <FaSun className="sun" />
+              <FaSun className="sun" onClick={toggleTheme} />
             )}
           </motion.div>
         </AnimatePresence>

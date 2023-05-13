@@ -18,7 +18,7 @@ const OrderDetails = () => {
       data.order;
     return (
       <DashMain head="">
-        <h2
+        {/* <h2
           className="shadow  mobile-order-details 
             underline header
           "
@@ -33,7 +33,7 @@ const OrderDetails = () => {
             order{" "}
           </span>
           #{_id}
-        </h2>
+        </h2> */}
 
         <div className="order-details-grid">
           <table

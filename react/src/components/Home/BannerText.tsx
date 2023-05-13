@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { btnHover, btnTap, opacityVariant } from "../../variants/globals";
+import { opacityVariant } from "../../variants/globals";
 import { Link } from "react-scroll";
 import OpacityBtn from "../widgets/OpacityBtn";
 
@@ -20,20 +20,13 @@ const BannerText = ({ fn, header, clr, button, to, slogan }: Props) => {
       animate="end"
       transition={{ duration: 0.6, delay: 0.4 }}
       variants={opacityVariant}
-      //   style={{ background: "green" }}
     >
       <h1 style={{ color: `${clr}` }}>{header}</h1>
 
       <p>{slogan}</p>
 
       <div className="product-links center">
-        <Link
-          to={to}
-          smooth
-          className="btn banner-btn"
-          // onClick={fn}
-          style={{ padding: 0 }}
-        >
+        <Link to={to} smooth className="btn banner-btn" style={{ padding: 0 }}>
           <motion.span
             style={{
               background: `linear-gradient(30deg, var(--wheat), ${clr})`,

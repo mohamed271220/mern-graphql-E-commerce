@@ -13,8 +13,10 @@ import { FiRefreshCcw } from "react-icons/fi";
 import { productListContext } from "../../../../context/FilterData";
 import Category from "./Category";
 import { asideVariant } from "../../../../variants/globals";
+import { useAppSelector } from "../../../../custom/reduxTypes";
 
 const Aside = ({ startFiltering }: { startFiltering: boolean }) => {
+  const { Allproducts } = useAppSelector((st) => st.Allproducts);
   const {
     categoryFilter,
     setCategoryFilter,
@@ -43,17 +45,12 @@ const Aside = ({ startFiltering }: { startFiltering: boolean }) => {
     }).then(({ data }) => setProducts(data?.filterAllTypes));
   };
 
-  console.log({
-    price: priceFilter === 0 ? 10000 : priceFilter,
-    category: categoryFilter === "" ? categoriesArr : [categoryFilter],
-    state: productFeatured === "" ? FeaturedProductsArr : [productFeatured],
-    rate: RateChecked === "" ? 5 : Number(RateChecked),
-  });
   const handleResetFiltering = () => {
     setCategoryFilter("");
     setRateChecked("");
     setPriceFilter(0);
     setProductFeatured("");
+    setProducts(Allproducts);
   };
   return (
     <motion.aside
@@ -65,7 +62,7 @@ const Aside = ({ startFiltering }: { startFiltering: boolean }) => {
     >
       <div className="aside-head center">
         <div className="filter-icon center">
-          <IoFilter className="icon" color="var(--secondary)" />
+          <IoFilter className="icon" color="var(--third)" />
           <span className="filter-head">filter</span>
         </div>
 

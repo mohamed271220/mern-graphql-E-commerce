@@ -60,7 +60,7 @@ const CompareIcons = ({ id, title }: Props) => {
         marginRight: -10,
         marginTop: -10,
         marginBottom: -10,
-        color: "var(--main)",
+        color: "var(--third)",
       }}
     >
       <AnimatePresence mode="wait">

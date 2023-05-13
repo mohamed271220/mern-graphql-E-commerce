@@ -115,10 +115,7 @@ const ProductFliter = ({
           </AnimatePresence>
         </div>
         <div className="center col">
-          <h5
-            className="header underline product-head-underline"
-            style={{ color: "var(--main)" }}
-          >
+          <h5 className="header underline product-head-underline">
             {productSearchWord
               ? category
                   .split(new RegExp(`(${productSearchWord})`, "gi"))
@@ -232,7 +229,7 @@ const ProductFliter = ({
             ) : (
               <span onClick={() => navigat(`/dashboard/products/${_id}`)}>
                 <Title title="edit product">
-                  <RiEditLine fontSize={16} />
+                  <RiEditLine fontSize={16} color="var(--third)" />
                 </Title>
               </span>
             )}

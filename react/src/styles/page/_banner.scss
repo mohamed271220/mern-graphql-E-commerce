@@ -62,7 +62,7 @@
     color: var(--green);
   }
   p {
-    color: var(--secondary);
+    color: var(--third);
     letter-spacing: 0.1rem;
     text-shadow: 0.2px 0.1px 1px black;
     font-size: 1.2rem;
@@ -77,16 +77,14 @@
 
 .banner-dots-par {
   position: absolute;
-  // width: 100px;
   width: 100%;
   bottom: 5px;
-  // left: 50%;
-  // transform: translateX(-50%);
+
   .banner-dot {
     display: inline-block;
     width: 10px;
     height: 10px;
-    border: 1.5px solid var(--main);
+    border: 1px solid var(--white);
     background: var(--secondary);
     margin: 4px;
     border-radius: 50%;

@@ -35,7 +35,13 @@ const UserMobile = ({
           user
           <span style={{ fontWeight: "normal" }}> #{_id}</span>
         </span> */}
-        <span style={{ fontWeight: "bold" }}>
+        <span
+          style={{
+            fontWeight: "bold",
+            color: "var(--white)",
+            marginBottom: -4,
+          }}
+        >
           <span>Name : </span>
           {name}
         </span>

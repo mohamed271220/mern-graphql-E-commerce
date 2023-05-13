@@ -30,7 +30,7 @@ const App = () => {
                 containerClassName=""
                 toastOptions={{
                   style: {
-                    background: "var(--secondary)",
+                    background: "var(--third)",
                     color: "var(--main)",
                     width: "240px",
                     whiteSpace: "nowrap",

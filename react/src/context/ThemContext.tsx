@@ -17,14 +17,17 @@ const ThemContext = ({ children }: ChildrenInterFace) => {
         "--main",
         "rgb(247, 246, 246)"
       );
-      document.documentElement.style.setProperty("--secondary", "#222222");
+      document.documentElement.style.setProperty("--third", "#XXXXXX");
+      document.documentElement.style.setProperty("--secondary", "#333333");
       localStorage.setItem("zimart-theme", "light");
     } else {
+      document.documentElement.style.setProperty("--secondary", "#1D2226");
+      document.documentElement.style.setProperty("--main", "#222222");
+      document.documentElement.style.setProperty("--third", "#333333");
       document.documentElement.style.setProperty(
-        "--secondary",
+        "--third",
         "rgb(247, 246, 246)"
       );
-      document.documentElement.style.setProperty("--main", "#222222");
       localStorage.setItem("zimart-theme", "dark");
     }
   }, [theme]);

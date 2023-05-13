@@ -42,8 +42,7 @@ aside {
   font-weight: bold;
   text-transform: capitalize;
   letter-spacing: 0.8px;
-  color: var(--secondary);
-
+  color: var(--third);
   margin-top: 6px;
   margin-bottom: 10px;
   &.header {
@@ -202,7 +201,7 @@ svg.svg-star {
   font-size: clamp(12px, 1rem, 1rem);
   position: relative;
   padding: 5px;
-  background: var(--secondary);
+  background: var(--main);
   box-shadow: 1px 1px 3px black;
   gap: 1px;
   font-weight: bold;
@@ -212,14 +211,14 @@ svg.svg-star {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
+  height: 260px;
 
-  &.grid {
-    height: 260px;
-  }
+  // &.grid {
+  // }
 
-  &.list {
-    height: 220px;
-  }
+  // &.list {
+  //   height: 260px;
+  // }
 
   &:hover {
     box-shadow: 2px 2px 5px var(--green);
@@ -231,7 +230,9 @@ svg.svg-star {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
+
     white-space: pre-wrap;
+    color: var(--third);
   }
 
   .img-par {
@@ -364,7 +365,7 @@ svg.svg-star {
   right: 10px;
   border-radius: 2px;
   background-color: var(--main);
-  color: var(--secondary);
+  color: var(--green);
   display: flex;
   align-items: center;
   flex-direction: column;

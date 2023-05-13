@@ -45,7 +45,12 @@ const SelectedProductData = ({
       <img src={images[0]?.productPath} alt={title} />
       <span
         className=" select-text"
-        style={{ fontWeight: "bold", fontSize: "1.2rem", textAlign: "center" }}
+        style={{
+          fontWeight: "bold",
+          fontSize: "1.2rem",
+          textAlign: "center",
+          color: "var(--third)",
+        }}
       >
         {title}
       </span>
@@ -59,8 +64,10 @@ const SelectedProductData = ({
         key={`${title}-rate`}
         avgRate={avgRate}
         ratingLen={reviewLength}
+        rating={rating}
+        reviews={reviews}
       />
-      <p>{description}</p>
+      <p style={{ color: "var(--third)" }}> {description}</p>
       <OpacityBtn
         fn={() => {
           handleRemoveFromCompare();

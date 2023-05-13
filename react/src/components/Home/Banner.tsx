@@ -96,7 +96,7 @@ const Banner = () => {
   const [animateRef, { width }] = useMeasure();
 
   return (
-    <section className="banner-par center" ref={animateRef}>
+    <section className="banner-par center" id="banner" ref={animateRef}>
       <AnimatePresence custom={{ dir, width }} mode="wait">
         {bannerArr
           .reverse()

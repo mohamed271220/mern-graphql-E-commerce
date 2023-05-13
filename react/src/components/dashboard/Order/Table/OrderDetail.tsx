@@ -6,7 +6,7 @@ interface Props {
 }
 const OrderDetail = ({ span, value }: Props) => {
   return (
-    <div className="order-detail center between w-100">
+    <div className="order-detail center between ">
       <span>{span}</span>
       <span>{value}</span>
     </div>

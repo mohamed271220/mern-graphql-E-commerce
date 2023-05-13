@@ -58,33 +58,29 @@ const TotalPrice = ({ subTotal }: { subTotal: number }) => {
     exit: { width: 0, transition: { delay: 0.5, duration: 0.2 } },
   };
 
-  //   console.log({ totalPriceState });
-  //   const totalPriceVariant = {
-  //     start: (str: string) => ({
-  //       opacity: 0,
-  //       y: str === "increase" ? -100 : 100,
-  //     }),
-  //     end: { opacity: 1, y: 0, transition: { duration: 0.3 } },
-  //     exit: (str: string) => ({
-  //       y: str === "increase" ? 10 : -100,
-  //       transition: { duration: 0.3 },
-  //     }),
-  //   };
-
   const { handlePurchase } = useBuy(cart);
 
   return (
     <div className="totel-price center between col box-shadow">
       <div className="center col" style={{ height: 40 }}>
-        <h3 className="header underline" style={{ marginBottom: 8 }}>
+        <h3
+          className="header underline"
+          style={{ color: "var(--white)", marginBottom: 8 }}
+        >
           order summary
         </h3>
 
         <h3>
-          <span style={{ textTransform: "capitalize", fontWeight: "bold" }}>
+          <span
+            style={{
+              textTransform: "capitalize",
+              fontWeight: "bold",
+              color: "var(--white)",
+            }}
+          >
             total:
           </span>
-          <span>
+          <span style={{ color: "var(--white)" }}>
             <span> $</span>
             <AnimatePresence mode="wait">
               <Price
@@ -110,14 +106,7 @@ const TotalPrice = ({ subTotal }: { subTotal: number }) => {
 
         <div className="center between w-100">
           <span className="cart-detail">Shipping :</span>
-          <span
-            className="free-par"
-            // variants={parVariant}
-            // initial="start"
-            // animate={freeShipping ? "end" : ""}
-            // exit={!freeShipping ? "exit" : ""}
-            // custom={freeShipping}
-          >
+          <span className="free-par">
             <motion.span
               variants={priceVariant}
               custom={freeShipping}

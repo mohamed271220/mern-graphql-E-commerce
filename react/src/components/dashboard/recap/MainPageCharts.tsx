@@ -13,18 +13,17 @@ const MainPageCharts = ({ userData }: { userData: any[] }) => {
   const orderChartData = useChartData(order, "Orders");
   const EarningChartData = useChartData(order, "Earnings", "earn");
   const userChartData = useChartData(userData, "users");
-  const { theme } = useContext(themeContext);
   ChartJS.register(CategoryScale);
   const options = {
     scales: {
       x: {
         grid: {
-          color: theme === "light" ? "white" : "black",
+          color: "grey",
         },
       },
       y: {
         grid: {
-          color: theme === "light" ? "white" : "black",
+          color: "grey",
         },
       },
     },
@@ -42,14 +41,14 @@ const MainPageCharts = ({ userData }: { userData: any[] }) => {
           className="box-shadow center w-100 chart-par between col"
           style={{ marginTop: 10 }}
         >
-          <h3>Orders Per Time</h3>
+          <h3>Earnings Per Time</h3>
           <Bar data={EarningChartData || []} options={options} />
         </div>
         <div
           className="box-shadow center w-100 chart-par col between"
           style={{ marginTop: 10 }}
         >
-          <h3>Earnings Per Time</h3>
+          <h3>Orders Per Time</h3>
 
           <Pie data={orderChartData || []} options={options} />
         </div>
@@ -66,7 +65,7 @@ const MainPageCharts = ({ userData }: { userData: any[] }) => {
           style={{ marginTop: 10 }}
         >
           <h3>Users Per Time</h3>
-          <PolarArea data={userChartData || []} options={options} />
+          <Line data={userChartData || []} options={options} />
         </div>
       </div>
     </>

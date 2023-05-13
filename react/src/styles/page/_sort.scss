@@ -68,15 +68,15 @@
   margin: 0 auto;
   position: relative;
   input {
-    background: var(--wheat-light);
     background: var(--secondary);
+    box-shadow: 0.2px 0.2px 2px black;
     border: 0;
     outline: 0;
     width: 100%;
     height: 25px;
     border-radius: 5px;
     padding: 0 8px;
-    color: var(--main);
+    color: var(--white);
     letter-spacing: 0.8px;
     font-size: 0.9em;
     font-weight: 700;
@@ -87,7 +87,7 @@
     transform: translateY(-50%);
     right: 5px;
     font-size: 12px;
-    color: var(--main);
+    color: var(--white);
   }
 
   .dropdown-search {
@@ -99,7 +99,7 @@
     z-index: 100;
     list-style: none;
     gap: 2px;
-    color: var(--secondary);
+    color: var(--white);
     padding: 2px 0;
     .search-res {
       padding: 5px;

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { notificationInterface } from "../../redux/notificationsSlice";
 import { BiDotsHorizontal } from "react-icons/bi";
 import NotificationActionsDropDown from "./NotificationActionsDropDown";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import Title from "../widgets/Title";
 import FadeElement from "../widgets/FadeElement";
 
@@ -15,10 +15,6 @@ const Notificatin = ({
   const [showActions, setShowActions] = useState(false);
   return (
     <FadeElement cls="notification relative" key={createdAt}>
-      {/* <div className=""
-
-    
-    > */}
       <span
         className="dots"
         onClick={() => {
@@ -34,9 +30,9 @@ const Notificatin = ({
       </span>
       <AnimatePresence>
         {!isRead && (
-          <FadeElement cls="">
+          <FadeElement cls="is-read">
             <Title title="unread" abs>
-              <span className="is-read"></span>
+              <></>
             </Title>
           </FadeElement>
         )}
@@ -46,7 +42,6 @@ const Notificatin = ({
         {new Date(createdAt).toLocaleDateString()} -{" "}
         {new Date(createdAt).toLocaleTimeString()}
       </div>
-      {/* </div> */}
     </FadeElement>
   );
 };

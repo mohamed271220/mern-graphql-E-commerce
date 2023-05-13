@@ -65,8 +65,7 @@ const Order = ({
           className="order-state center"
           style={{
             width: "100%",
-            color: `white`,
-            background: `var(--${state.split(" ").slice(-1)})`,
+            color: `var(--${state.split(" ").slice(-1)})`,
           }}
         >
           <AnimatePresence mode="wait">

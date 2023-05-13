@@ -14,7 +14,7 @@ const NoData = ({ length, children, message }: Props) => {
         children
       ) : (
         <FadeElement cls="shadow no-data" key={message}>
-          <div className="">{message}</div>
+          <>{message}</>
         </FadeElement>
       )}
     </AnimatePresence>

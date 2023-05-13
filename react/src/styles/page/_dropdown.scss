@@ -77,7 +77,7 @@
   top: 35px;
   right: -4px;
   border-radius: 5px;
-  box-shadow: 0.8px 2px 2px black;
+  box-shadow: 0.8px 2px 4px black !important;
 }
 
 .user-drop {
@@ -105,7 +105,7 @@
     justify-content: flex-start;
     margin-bottom: 4px;
     padding: 0 8px;
-    color: var(--secondary);
+    color: var(--third);
   }
 }
 
@@ -117,7 +117,7 @@
   align-items: center;
   transition: 0.3s;
   padding: 0 8px;
-  color: var(--secondary);
+  color: var(--third);
 
   &:hover {
     background: var(--wheat-lighter);

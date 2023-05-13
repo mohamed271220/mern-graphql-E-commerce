@@ -136,7 +136,7 @@ const ProductDetails = ({ setShowPop }: Props) => {
             <Title title="show all reviews">
               <BiShow
                 fontSize={12}
-                color="var(--secondary)"
+                color="var(--third)"
                 onClick={handleshowPop}
               />
             </Title>
@@ -171,7 +171,7 @@ const ProductDetails = ({ setShowPop }: Props) => {
       <div className="details-bottom">
         <StyledPrice price={price} />
 
-        <p>{description}</p>
+        <p style={{ color: "var(--third)" }}>{description}</p>
 
         <div className="hr"></div>
 

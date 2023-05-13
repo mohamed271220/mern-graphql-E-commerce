@@ -21,10 +21,8 @@ import { useAppDispatch, useAppSelector } from "../../custom/reduxTypes";
 import { isAuthContext } from "../../context/isAuth";
 import { useMutation } from "@apollo/client";
 import { Reset_Notification } from "../../graphql/mutations/user";
-import {
-  changeNotificatinsCountRedux,
-  changeNotificationCount,
-} from "../../redux/notificationsSlice";
+import { changeNotificationCount } from "../../redux/notificationsSlice";
+import { AiFillCloseCircle } from "react-icons/ai";
 
 interface contextInterface {
   showAsideDash: boolean;
@@ -67,11 +65,11 @@ const Dashboard = () => {
     <showAsideContext.Provider value={{ showAsideDash, setShowAsideDash }}>
       <div className="dashboard-par " ref={ref}>
         <Transition />
-        <div style={{ marginRight: 10, gap: 20 }} className="dash-nav center">
+        <div style={{ marginRight: 10, gap: 8 }} className="dash-nav center">
           <span className="relative">
             <RiNotification2Line
-              className="shdaow"
-              color="var(--secondary)"
+              className="shdaow above"
+              color="var(--third)"
               fontSize={20}
               onClick={async () => {
                 await resetNotification();
@@ -83,27 +81,39 @@ const Dashboard = () => {
             <NotificationDropDown bool={showNotifications} />
           </span>
           <NavImg />
+          <AnimatePresence mode="wait">
+            {!showAsideDash ? (
+              <motion.span
+                key={"show-dash"}
+                variants={opacityVariant}
+                initial="start"
+                exit="exit"
+                animate="end"
+                className=" dash-show"
+                transition={{ duration: 0.4, delay: showAsideDash ? 0 : 0.4 }}
+                onClick={() => setShowAsideDash(true)}
+              >
+                <Title title="show dashboard aside nav">
+                  <RxDashboard className="icon green" />
+                </Title>
+              </motion.span>
+            ) : (
+              <motion.span
+                key={"hide-dash"}
+                variants={opacityVariant}
+                transition={{ duration: 0.4 }}
+                className="dash-show"
+                onClick={() => setShowAsideDash(false)}
+              >
+                <Title title="hide dashboard nav">
+                  <AiFillCloseCircle className="icon red" />
+                </Title>
+              </motion.span>
+            )}
+          </AnimatePresence>
           <ThemeToggle navClr={navClr} linkClr={LinkClr} />
         </div>
 
-        <AnimatePresence mode="wait">
-          {!showAsideDash && (
-            <motion.span
-              key={"show-dash"}
-              variants={opacityVariant}
-              initial="start"
-              exit="exit"
-              animate="end"
-              className="dash-show"
-              transition={{ duration: 0.4, delay: showAsideDash ? 0 : 0.4 }}
-              onClick={() => setShowAsideDash(true)}
-            >
-              <Title title="show dashboard aside nav">
-                <RxDashboard className="icon" />
-              </Title>
-            </motion.span>
-          )}
-        </AnimatePresence>
         <DashboardAside />
         <Outlet />
       </div>

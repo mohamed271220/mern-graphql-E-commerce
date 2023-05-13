@@ -24,6 +24,7 @@ const OpacityBtn = ({ fn, btn, cls, Icon, title }: Props) => {
         whileTap={btnTap}
         className={cls}
         onClick={fn}
+        style={{ color: "var(--white)" }}
       >
         {Icon && <Icon />}
         {btn}

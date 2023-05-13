@@ -60,7 +60,7 @@ const OrderTable = () => {
         <th style={{ width: 150 }}> order state </th>
       </thead>
 
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {dataShown.map((order: any, i: number) => {
           return (
             <motion.tr

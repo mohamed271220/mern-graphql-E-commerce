@@ -108,7 +108,8 @@ const SelectFilter = () => {
               return (
                 <motion.li
                   style={{
-                    color: opt === selectValue ? "var(--wheat)" : "var(--main)",
+                    color:
+                      opt === selectValue ? "var(--wheat)" : "var(--third)",
                   }}
                   variants={opacityVariant}
                   onClick={() => setIsSelectFocus(false)}

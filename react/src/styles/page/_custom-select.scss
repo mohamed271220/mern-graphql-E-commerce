@@ -43,7 +43,7 @@
   width: 100%;
   z-index: 2;
   box-shadow: 0.25px 0.25px 2px black;
-  color: var(--main);
+  color: var(--white);
   padding: 4px;
   align-items: flex-start;
   padding-left: 10px;
@@ -60,7 +60,7 @@
   padding: 10px;
   text-transform: capitalize;
   font-weight: bold;
-
+  color: var(--third);
   .drop-country {
     background: var(--green);
     height: 200px;

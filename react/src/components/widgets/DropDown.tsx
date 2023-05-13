@@ -26,7 +26,6 @@ const DropDown = ({ bool, head, cls, children }: Props) => {
               <h3
                 className="underline header "
                 style={{
-                  color: "var(--secondary)",
                   width: "fit-content",
                   margin: "10px 0 10px 5px",
                 }}

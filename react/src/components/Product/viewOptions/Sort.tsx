@@ -32,7 +32,7 @@ const Sort = () => {
                   animate="end"
                   transition={{ duration: 0.4 }}
                   key={"show-filter"}
-                  style={{ color: "var(--secondary)" }}
+                  style={{ color: "var(--third)" }}
                 >
                   Hide Filters
                 </motion.span>
@@ -56,14 +56,14 @@ const Sort = () => {
           </button>
         </div>
         <div className="view-par center ">
-          <span className="display" style={{ color: "var(--secondary)" }}>
+          <span className="display" style={{ color: "var(--third)" }}>
             Display
           </span>
 
           <Title title="list view">
             <BsListTask
               onClick={() => setGridView(false)}
-              style={{ color: gridView ? "var(--secondary)" : "var(--green)" }}
+              style={{ color: gridView ? "var(--third)" : "var(--green)" }}
               className={`view-icon  ${!gridView ? "shadow" : ""} `}
             />
           </Title>
@@ -71,7 +71,7 @@ const Sort = () => {
           <Title title="grid view">
             <HiOutlineViewGrid
               onClick={() => setGridView(true)}
-              style={{ color: gridView ? "var(--green)" : "var(--secondary)" }}
+              style={{ color: gridView ? "var(--green)" : "var(--third)" }}
               className={`view-icon  ${gridView ? "shadow" : ""} `}
             />
           </Title>
