@@ -42,7 +42,6 @@ interface authContextInterface extends userDataState {
   setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
   isAdmin: boolean;
   setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsUpdated: React.Dispatch<React.SetStateAction<boolean>>;
   userId: string;
   profile: string;
   setProfile: React.Dispatch<React.SetStateAction<string>>;
@@ -56,7 +55,6 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isowner, setIsowner] = useState(false);
   const [isModerator, setIsModerator] = useState(false);
-  const [isIsUpdated, setIsUpdated] = useState(false);
   const [userId, setUserId] = useState<string>("");
   const [profile, setProfile] = useState<string>("");
   const [userData, setUserData] = useState({
@@ -96,15 +94,7 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
         },
       });
     }
-  }, [userId, isIsUpdated]);
-
-  useEffect(() => {
-    if (isIsUpdated) {
-      setTimeout(() => {
-        setIsUpdated(false);
-      }, 1000);
-    }
-  }, [isIsUpdated]);
+  }, [userId]);
 
   useEffect(() => {
     if (data?.getUserData) {
@@ -145,7 +135,6 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
         userId,
         profile,
         setProfile,
-        setIsUpdated,
         isAdmin,
         setIsAdmin,
       }}

@@ -5,7 +5,7 @@ interface Props {
   dimension: number;
 }
 const ProfileImg = ({ dimension }: Props) => {
-  const { profile, name = "guest", isAuth } = useContext(isAuthContext);
+  const { profile, name = "guest" } = useContext(isAuthContext);
 
   return (
     <>

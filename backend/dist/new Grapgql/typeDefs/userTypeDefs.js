@@ -136,5 +136,14 @@ exports.userTypeDefs = (0, apollo_server_express_1.gql) `
     toggleReadNotification(id: ID!, userId: ID!, isRead: Boolean): StatusMsg
     ClearNotification(userId: ID!): StatusMsg
     MarkAllAsReadNotification(userId: ID!): StatusMsg
+    updateUserName(_id: ID!, name: String!): StatusMsg
+    updateUserCountry(_id: ID!, country: String!): StatusMsg
+    updateUserPhone(_id: ID!, phone: String!): StatusMsg
+    updateEmail(_id: ID!, email: String!): StatusMsg
+    updatePassword(
+      _id: ID!
+      oldPassword: String!
+      newPassword: String!
+    ): StatusMsg
   }
 `;

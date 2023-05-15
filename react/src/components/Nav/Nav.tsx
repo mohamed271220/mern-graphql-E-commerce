@@ -27,7 +27,7 @@ const Nav = () => {
   const { isAuth } = useContext(isAuthContext);
   const { theme } = useContext(themeContext);
   const navRef = useRef<HTMLElement | null>(null);
-  const [showFav, handleShowFav, handleHideFav, toggleFav] = useHide();
+  const [showFav, setShowFav] = useState(false);
   const { cart } = useAppSelector((state) => state.cart);
   const { compare } = useAppSelector((state) => state.compare);
   const { fav } = useAppSelector((state) => state.fav);
@@ -107,13 +107,16 @@ const Nav = () => {
               style={{ color: showFav ? "var(--delete)" : LinkClr }}
               className="fav-par center"
             >
-              <WishList showFav={showFav} />
+              <WishList showFav={showFav} setter={setShowFav} />
               <Title
                 title={!showFav ? "show your wishlist" : "hide your wishList"}
               >
                 <ShowCount length={fav.length} />
 
-                <AiFillHeart fontSize={"1.2rem"} onClick={toggleFav} />
+                <AiFillHeart
+                  fontSize={"1.2rem"}
+                  onClick={() => setShowFav(true)}
+                />
               </Title>
             </motion.li>
             <motion.li>

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { RefObject, useContext } from "react";
 import DropDown from "./DropDown";
 import ProfileImg from "../ProfileImg";
 import { isAuthContext } from "../../context/isAuth";
@@ -10,8 +10,9 @@ import useLogOut from "../../custom/useLogOut";
 
 interface Props {
   bool: boolean;
+  setter: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const UserDropDown = ({ bool }: Props) => {
+const UserDropDown = ({ bool, setter }: Props) => {
   const { name } = useContext(isAuthContext);
   const { handleLogOut } = useLogOut();
   const dropArr = [
@@ -27,7 +28,7 @@ const UserDropDown = ({ bool }: Props) => {
   ];
 
   return (
-    <DropDown cls="user-drop" bool={bool}>
+    <DropDown cls="user-drop" bool={bool} setter={setter}>
       <div className="w-100">
         <div className="user-drop-img center gap">
           <ProfileImg dimension={30} />

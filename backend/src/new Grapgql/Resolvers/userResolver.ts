@@ -1,7 +1,10 @@
 import { Response } from "express";
 import jwt from "jsonwebtoken";
 import { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } from "../../config.js";
-import { authenticateMiddleware } from "../../middlewares/authenticate.js";
+import {
+  authenticateMiddleware,
+  checkOldPass,
+} from "../../middlewares/authenticate.js";
 import { hashPassword } from "../../middlewares/hashPassword.js";
 import { userCollection } from "../../mongoose/schema/user.js";
 import { IdInterface } from "../interfaces/graqphInterfaces.js";
@@ -214,7 +217,6 @@ export const userResolver = {
     },
 
     updateUserRole: async (_: any, args: { _id: string; role: string }) => {
-      console.log(args);
       try {
         await userCollection.findByIdAndUpdate(args._id, { role: args.role });
         return { msg: `now ,user role is ${args.role}` };
@@ -227,7 +229,6 @@ export const userResolver = {
       args: { _id: string; lastLogIn: string },
       ctx: { res: Response }
     ) {
-      console.log(args);
       await userCollection.findByIdAndUpdate(args._id, {
         lastLogIn: args.lastLogIn,
       });
@@ -276,6 +277,48 @@ export const userResolver = {
         "notifications.$[].isRead": true,
       });
       return { status: 200 };
+    },
+
+    async updateUserName(_: any, args: { _id: string; name: string }) {
+      await userCollection.findByIdAndUpdate(args._id, { name: args.name });
+      return { status: 200, msg: "username is successfully updated  " };
+    },
+    async updateUserCountry(_: any, args: { _id: string; country: string }) {
+      await userCollection.findByIdAndUpdate(args._id, {
+        country: args.country,
+      });
+      return { status: 200, msg: "your country  is successfully updated  " };
+    },
+
+    async updateUserPhone(_: any, args: { _id: string; phone: string }) {
+      await userCollection.findByIdAndUpdate(args._id, { phone: args.phone });
+      return { status: 200 };
+    },
+    async updateEmail(_: any, args: { _id: string; email: string }) {
+      const check = await userCollection.find({ email: args.email });
+      if (check.length) {
+        return { msg: "this email already used", status: 401 };
+      } else {
+        await userCollection.findByIdAndUpdate(args._id, {
+          email: args.email,
+        });
+        return { msg: "your email is updated successfully", status: 200 };
+      }
+    },
+
+    async updatePassword(
+      _: any,
+      args: { _id: string; oldPassword: string; newPassword: string }
+    ) {
+      const result = await checkOldPass(args._id, args.oldPassword);
+      if (result) {
+        await userCollection.findByIdAndUpdate(args._id, {
+          password: hashPassword(args.newPassword),
+        });
+        return { msg: "your password successfully updated", status: 200 };
+      } else {
+        return { msg: "enter your correct old password", status: 404 };
+      }
     },
   },
 };

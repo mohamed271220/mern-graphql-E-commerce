@@ -15,6 +15,7 @@ import {
 import { productListContext } from "../../../context/FilterData";
 import FadeElement from "../../widgets/FadeElement";
 import { useAppSelector } from "../../../custom/reduxTypes";
+import useClickOutside from "../../../custom/useClickOutside";
 const optionsArr = [
   "relevance",
   "highest price",
@@ -77,11 +78,14 @@ const SelectFilter = () => {
   }, [selectValue]);
 
   const [isSelectFocus, setIsSelectFocus] = useState(false);
-
+  const ref = useClickOutside<HTMLDivElement>(() => {
+    setIsSelectFocus(false);
+  }, isSelectFocus);
   return (
     <div
       className="custom-select"
       onClick={() => setIsSelectFocus(!isSelectFocus)}
+      ref={ref}
     >
       <BiDownArrow
         className="  box-shadow: 0.25px 0.25px 2px black;

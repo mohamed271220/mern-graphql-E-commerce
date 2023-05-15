@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Detail from "./Detail";
 import { isAuthContext } from "../../context/isAuth";
 import { useMutation } from "@apollo/client";
@@ -10,6 +10,14 @@ import {
 } from "../../graphql/mutations/user.js";
 import Password from "./Password";
 
+export interface userDataInterface {
+  name: string;
+  email: string;
+  country: string;
+  phone: string;
+  [key: string]: any;
+}
+
 const UserInfo = () => {
   const { name, email, userId, country, phone } = useContext(isAuthContext);
   const [updateName, setUpdateName] = useState(false);
@@ -20,11 +28,21 @@ const UserInfo = () => {
   const [updatePhoneFn] = useMutation(Update_User_Phone);
   const [updateEmailFn] = useMutation(Update_User_Email);
   const [updateCountryFn] = useMutation(Update_Country);
-
+  const [userData, setUserData] = useState<userDataInterface>({
+    name: "",
+    email: "",
+    country: "",
+    phone: "",
+  });
+  useEffect(() => {
+    if (name !== "") {
+      setUserData({ name, email, country, phone });
+    }
+  }, [name]);
   const userArr = [
     {
       detail: "name",
-      value: name,
+      value: userData.name,
       setter: setUpdateName,
       fn: updateNameFn,
       bool: updateName,
@@ -32,21 +50,21 @@ const UserInfo = () => {
 
     {
       detail: "email",
-      value: email,
+      value: userData.email,
       setter: setUpdateEmail,
       fn: updateEmailFn,
       bool: updateEmail,
     },
     {
       detail: "phone",
-      value: phone || "No Phone Number is Added",
+      value: userData.phone || "No Phone Number is Added",
       setter: setUpdatePhone,
       fn: updatePhoneFn,
       bool: updatePhone,
     },
     {
       detail: "country",
-      value: country,
+      value: userData.country,
       setter: setUpdateCountry,
       bool: updateCountry,
       fn: updateCountryFn,
@@ -66,6 +84,8 @@ const UserInfo = () => {
               setter={setter}
               fn={fn}
               bool={bool}
+              setUpdateUserData={setUserData}
+              userdata={userData}
             />
             <div className="hr"></div>
             {detail === "email" && (

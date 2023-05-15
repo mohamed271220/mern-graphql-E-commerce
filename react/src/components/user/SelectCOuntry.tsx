@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { BiDownArrow } from "react-icons/bi";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import { opacityVariant, selectDropDownVariants } from "../../variants/globals";
+import useClickOutside from "../../custom/useClickOutside";
 interface Props {
   setCountry: React.Dispatch<React.SetStateAction<string>>;
   country: string;
@@ -18,6 +19,9 @@ const SelectCOuntry = ({ setCountry, country, bottom }: Props) => {
   const [flag, setFlag] = useState("https://flagcdn.com/w320/eg.png");
   // const [flag, setFlag] = useState("");
   const [showDropSelect, setShowSelectDrop] = useState(false);
+  const selectRef = useClickOutside<HTMLDivElement>(() => {
+    setShowSelectDrop(false);
+  }, showDropSelect);
 
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
@@ -64,6 +68,7 @@ const SelectCOuntry = ({ setCountry, country, bottom }: Props) => {
     <div
       className="select-country-par relative center start "
       onClick={toggleShowSelectDrop}
+      ref={selectRef}
     >
       <AnimatePresence mode="wait">
         <motion.div

@@ -1,8 +1,6 @@
 import React from "react";
-import SlideButton from "../widgets/SlideButton";
-import { useMutation } from "@apollo/client";
-import { Update_Country } from "../../graphql/mutations/user";
 import SelectCOuntry from "./SelectCOuntry";
+import { userDataInterface } from "./UserInfo";
 interface Props {
   setCountry: React.Dispatch<React.SetStateAction<string>>;
   country: string;

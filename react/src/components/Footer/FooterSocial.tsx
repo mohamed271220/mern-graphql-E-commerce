@@ -34,9 +34,9 @@ const FooterLinks = () => {
     { id: 4, icon: <AiOutlineWhatsApp />, title: "send me whatApp message" },
   ];
   return (
-    <div className="footer-about">
+    <div className="icons-footer">
       <h3 className="underline header footer-head">contact me</h3>
-      <div className="icons-footer center gap">
+      <div className="social-icons center">
         {iconsArr.map(({ icon, id, title }) => {
           return (
             <motion.span

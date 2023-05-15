@@ -5,7 +5,7 @@ import { Link } from "react-scroll";
 const FooterLinks = () => {
   const linksArr = ["dashboard", "about", "faq"];
   return (
-    <div className="footer-category">
+    <div className="footer-important-links footer-links ">
       <h3 className="underline header footer-head ">links</h3>
       <Link to="banner" smooth style={{ cursor: "pointer" }}>
         home

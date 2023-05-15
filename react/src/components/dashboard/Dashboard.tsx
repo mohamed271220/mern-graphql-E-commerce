@@ -32,16 +32,7 @@ interface contextInterface {
 export const showAsideContext = createContext({} as contextInterface);
 
 const Dashboard = () => {
-  const dispatch = useAppDispatch();
-  const { userId } = useContext(isAuthContext);
-  const [resetNotification] = useMutation(Reset_Notification, {
-    variables: {
-      id: userId,
-    },
-  });
-  const { count } = useAppSelector((st) => st.notification);
   const [showAsideDash, setShowAsideDash] = useState(false);
-  const [showNotifications, setShowNotifications] = useState(false);
 
   const ref = useRef<HTMLDivElement | null>(null);
   const { scrollY } = useScroll({
@@ -66,20 +57,7 @@ const Dashboard = () => {
       <div className="dashboard-par " ref={ref}>
         <Transition />
         <div style={{ marginRight: 10, gap: 8 }} className="dash-nav center">
-          <span className="relative">
-            <RiNotification2Line
-              className="shdaow above"
-              color="var(--third)"
-              fontSize={20}
-              onClick={async () => {
-                await resetNotification();
-                dispatch(changeNotificationCount(0));
-                setShowNotifications(!showNotifications);
-              }}
-            />
-            <ShowCount length={count} />
-            <NotificationDropDown bool={showNotifications} />
-          </span>
+          <NotificationDropDown />
           <NavImg />
           <AnimatePresence mode="wait">
             {!showAsideDash ? (

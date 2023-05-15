@@ -153,7 +153,6 @@ exports.userResolver = {
             }
         }),
         updateUserRole: (_, args) => __awaiter(void 0, void 0, void 0, function* () {
-            console.log(args);
             try {
                 yield user_js_1.userCollection.findByIdAndUpdate(args._id, { role: args.role });
                 return { msg: `now ,user role is ${args.role}` };
@@ -164,7 +163,6 @@ exports.userResolver = {
         }),
         logOut(_par, args, ctx) {
             return __awaiter(this, void 0, void 0, function* () {
-                console.log(args);
                 yield user_js_1.userCollection.findByIdAndUpdate(args._id, {
                     lastLogIn: args.lastLogIn,
                 });
@@ -214,6 +212,54 @@ exports.userResolver = {
                     "notifications.$[].isRead": true,
                 });
                 return { status: 200 };
+            });
+        },
+        updateUserName(_, args) {
+            return __awaiter(this, void 0, void 0, function* () {
+                yield user_js_1.userCollection.findByIdAndUpdate(args._id, { name: args.name });
+                return { status: 200, msg: "username is successfully updated  " };
+            });
+        },
+        updateUserCountry(_, args) {
+            return __awaiter(this, void 0, void 0, function* () {
+                yield user_js_1.userCollection.findByIdAndUpdate(args._id, {
+                    country: args.country,
+                });
+                return { status: 200, msg: "your country  is successfully updated  " };
+            });
+        },
+        updateUserPhone(_, args) {
+            return __awaiter(this, void 0, void 0, function* () {
+                yield user_js_1.userCollection.findByIdAndUpdate(args._id, { phone: args.phone });
+                return { status: 200 };
+            });
+        },
+        updateEmail(_, args) {
+            return __awaiter(this, void 0, void 0, function* () {
+                const check = yield user_js_1.userCollection.find({ email: args.email });
+                if (check.length) {
+                    return { msg: "this email already used", status: 401 };
+                }
+                else {
+                    yield user_js_1.userCollection.findByIdAndUpdate(args._id, {
+                        email: args.email,
+                    });
+                    return { msg: "your email is updated successfully", status: 200 };
+                }
+            });
+        },
+        updatePassword(_, args) {
+            return __awaiter(this, void 0, void 0, function* () {
+                const result = yield (0, authenticate_js_1.checkOldPass)(args._id, args.oldPassword);
+                if (result) {
+                    yield user_js_1.userCollection.findByIdAndUpdate(args._id, {
+                        password: (0, hashPassword_js_1.hashPassword)(args.newPassword),
+                    });
+                    return { msg: "your password successfully updated", status: 200 };
+                }
+                else {
+                    return { msg: "enter your correct old password", status: 404 };
+                }
             });
         },
     },

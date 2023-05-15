@@ -8,13 +8,22 @@ import DropDown from "../widgets/DropDown";
 import FadeElement from "../widgets/FadeElement";
 import NoData from "../widgets/NoData";
 
-const WishList = ({ showFav }: { showFav: boolean }) => {
+interface Props {
+  setter: React.Dispatch<React.SetStateAction<boolean>>;
+  showFav: boolean;
+}
+const WishList = ({ showFav, setter }: Props) => {
   const { fav } = useAppSelector((state) => state.fav);
   const [showClearFav, setShowClearFav] = useState(false);
 
   return (
     <>
-      <DropDown cls="fav-drop" head=" your wishlist" bool={showFav}>
+      <DropDown
+        cls="fav-drop"
+        head=" your wishlist"
+        bool={showFav}
+        setter={setter}
+      >
         <NoData length={fav.length} message="your wishlist is empty">
           <div
             className="center"

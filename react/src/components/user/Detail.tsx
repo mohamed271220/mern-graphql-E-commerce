@@ -9,24 +9,38 @@ import { AnimatePresence } from "framer-motion";
 import UpdateCountry from "./UpdateCountry";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { userDataInterface } from "./UserInfo";
+import { toast } from "react-hot-toast";
 interface Props {
   value: string;
   detail: string;
-  fn: (variables: any) => void;
+  fn: (variables: any) => any;
   setter: React.Dispatch<React.SetStateAction<boolean>>;
   bool: boolean;
   placeholder?: string;
+  setUpdateUserData: React.Dispatch<React.SetStateAction<userDataInterface>>;
+  userdata: userDataInterface;
 }
 
-const Detail = ({ detail, value, setter, fn, bool, placeholder }: Props) => {
-  const { userData, userId, setIsUpdated } = useContext(isAuthContext);
+const Detail = ({
+  detail,
+  value,
+  setter,
+  fn,
+  bool,
+  placeholder,
+  setUpdateUserData,
+  userdata,
+}: Props) => {
+  const { userId } = useContext(isAuthContext);
   const [UpdatedCountry, setUpdatedCountry] = useState("");
+  const [IsStatus200, setIsStatus200] = useState(false);
 
   useEffect(() => {
-    if (userData?.country) {
-      setUpdatedCountry(userData.country);
+    if (userdata?.country && UpdatedCountry === "") {
+      setUpdatedCountry(userdata.country);
     }
-  }, [userData?.country]);
+  }, [userdata?.country]);
   const schema: { [key: string]: any } = {
     name: yup.object().shape({
       name: yup.string().min(6).max(12).required("insert a name"),
@@ -65,43 +79,76 @@ const Detail = ({ detail, value, setter, fn, bool, placeholder }: Props) => {
       phone: yup.mixed().notRequired(),
     }),
   };
-  // const k = yup.object().shape({
-  // name: yup.string().min(6).max(12).required(),
-  // email: yup.string().email().required("insert a vaild email"),
-  // password: yup
-  //   .string()
-  //   .min(6)
-  //   .max(20)
 
-  //   .matches(
-  //     /\w+\d+[^a-zA-Z0-9]+/,
-  //     "insert 1 number,1 letter and 1 character"
-  //   ),
-  // confirm: yup
-  //   .string()
-  //   .oneOf([yup.ref("password")], "doesn't match your password")
-  //   .required(),
-  // phone: yup.string().min(10),
-  // });
   const methods = useForm({ resolver: yupResolver(schema[detail]) });
   const {
     getValues,
+
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors, isValid, dirtyFields },
   } = methods;
   const { [detail]: detailvalue } = getValues();
-  const update = () => {
-    fn({
+
+  useEffect(() => {
+    if (!IsStatus200) return;
+    const timer = setTimeout(() => {
+      setIsStatus200(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [IsStatus200]);
+
+  const update = async () => {
+    const { data: res } = await fn({
       variables: {
         _id: userId,
         [detail]: detail === "country" ? UpdatedCountry : detailvalue,
       },
     });
-    setIsUpdated(true);
+
+    if (detail === "email") {
+      if (res?.updateEmail?.status === 200) {
+        setIsStatus200(true);
+      } else {
+        toast.error(res?.updateEmail.msg);
+        setIsStatus200(false);
+      }
+    }
+
+    if (detail === "phone") {
+      if (res?.updateUserPhone?.status === 200) {
+        setIsStatus200(true);
+      } else {
+        toast.error(res?.updateUserPhone.msg);
+        setIsStatus200(false);
+      }
+    }
+
+    if (detail === "name") {
+      if (res?.updateUserName?.status === 200) {
+        setIsStatus200(true);
+      } else {
+        toast.error(res?.updateUserName.msg);
+        setIsStatus200(false);
+      }
+    }
+
+    if (detail === "country") {
+      if (res?.updateUserCountry?.status === 200) {
+        setIsStatus200(true);
+      } else {
+        toast.error(res?.updateUserCountry.msg);
+        setIsStatus200(false);
+      }
+    }
+
+    setUpdateUserData((cur: userDataInterface) => ({
+      ...cur,
+      [detail]: detailvalue,
+      country: UpdatedCountry,
+    }));
   };
-  const OnSubmit = (data: FieldValues) => {
+  const OnSubmit = async (data: FieldValues) => {
     console.log(data);
-    update();
   };
 
   return (
@@ -130,16 +177,21 @@ const Detail = ({ detail, value, setter, fn, bool, placeholder }: Props) => {
                 doneMsg={`your ${detail} is updated`}
                 fn={update}
                 isVaild={detail !== "detail" ? isValid : true}
+                IsStatus200={IsStatus200}
                 head={`update your ${detail}`}
               >
                 {detail !== "country" && (
-                  <Input
-                    placeholder={placeholder || detail}
-                    defaultVal={userData[detail]}
-                    err={(errors as { [key: string]: any })[
-                      detail
-                    ]?.message?.toString()}
-                  />
+                  <>
+                    <>{console.log({ detail })}</>
+                    <Input
+                      type={detail === "phone" ? "number" : "text"}
+                      placeholder={placeholder || detail}
+                      defaultVal={value}
+                      err={(errors as { [key: string]: any })[
+                        detail
+                      ]?.message?.toString()}
+                    />
+                  </>
                 )}
                 {detail === "country" && (
                   <UpdateCountry

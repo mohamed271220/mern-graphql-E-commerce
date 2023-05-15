@@ -202,18 +202,22 @@ export const Update_User_Email = gql`
   }
 `;
 
-export const Check_Old_Pass = gql`
-  mutation ($_id: ID!, $password: String!) {
-    checkOldPassword(password: $password, _id: $_id) {
-      msg
-      status
-    }
-  }
-`;
+// export const Check_Old_Pass = gql`
+//   mutation ($_id: ID!, $password: String!) {
+//     checkOldPassword(password: $password, _id: $_id) {
+//       msg
+//       status
+//     }
+//   }
+// `;
 
 export const Update_Pass = gql`
-  mutation ($_id: ID!, $password: String!) {
-    updatePassword(password: $password, _id: $_id) {
+  mutation ($_id: ID!, $newPassword: String!, $oldPassword: String!) {
+    updatePassword(
+      newPassword: $newPassword
+      _id: $_id
+      oldPassword: $oldPassword
+    ) {
       msg
       status
     }

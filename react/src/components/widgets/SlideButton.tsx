@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Overley from "./Overley";
 import {
   motion,
@@ -17,6 +17,7 @@ interface Props extends ChildrenInterFace {
   height: number;
   fn: () => void;
   isVaild?: boolean;
+  IsStatus200?: boolean;
 }
 const SlideButton = ({
   height,
@@ -27,6 +28,7 @@ const SlideButton = ({
   children,
   isVaild,
   fn,
+  IsStatus200,
 }: Props) => {
   const offset = useMotionValue(0);
 
@@ -44,6 +46,15 @@ const SlideButton = ({
       transition: { delay: 0.8, repeatDelay: 1, duration: 0.4 },
     },
   };
+
+  useEffect(() => {
+    if (IsStatus200) {
+      setIsConfirmed(true);
+    } else {
+      controls.start({ x: 0, y: 0 });
+    }
+  }, [IsStatus200, fn]);
+
   return (
     <Overley
       sethide={sethide}
@@ -83,8 +94,6 @@ const SlideButton = ({
               }}
               onPanEnd={(e, info) => {
                 if (info.offset.x >= 200 && isVaild) {
-                  console.log("slide btn runs");
-                  setIsConfirmed(true);
                   fn();
                 } else {
                   controls.start({ x: 0, y: 0 });

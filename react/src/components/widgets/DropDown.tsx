@@ -1,19 +1,26 @@
 import { AnimatePresence, motion } from "framer-motion";
-import React from "react";
+import React, { RefObject } from "react";
 import { popVariant } from "../../variants/globals";
 import { ChildrenInterFace } from "../../interfaces/general";
+import useClickOutside from "../../custom/useClickOutside";
 
 interface Props extends ChildrenInterFace {
   bool: boolean;
   head?: string;
   cls: string;
+  setter: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const DropDown = ({ bool, head, cls, children }: Props) => {
+
+const DropDown = ({ bool, head, cls, setter, children }: Props) => {
+  const ref = useClickOutside<HTMLDivElement>(() => {
+    setter(false);
+  }, bool);
   return (
     <>
       <AnimatePresence mode="wait">
         {bool && (
           <motion.div
+            ref={ref}
             key={"fav-drop"}
             variants={popVariant}
             custom={{ dir: "" }}

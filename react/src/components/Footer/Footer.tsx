@@ -10,8 +10,8 @@ const Footer = () => {
     <footer>
       <div className="content">
         <AboutFooter />
-        <FooterCategory />
         <FooterLinks />
+        <FooterCategory />
         <FooterSocial />
       </div>
       <CopyRight />

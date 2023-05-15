@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Title from "./Title";
 import UserDropDown from "./userDropDown";
@@ -7,15 +7,19 @@ import { isAuthContext } from "../../context/isAuth";
 const NavImg = () => {
   const [showUserDrop, setShowUserDrop] = useState(false);
   const { isAuth } = useContext(isAuthContext);
-  const toggleSHowUser = () => {
+  const handleSHowUser = () => {
     if (isAuth) {
-      setShowUserDrop(!showUserDrop);
+      if (!showUserDrop) {
+        // console.log("handleshowSubmit");
+        setShowUserDrop(true);
+      }
     }
   };
+
   return (
     <>
       <motion.span
-        onClick={toggleSHowUser}
+        onClick={handleSHowUser}
         className="relative"
         style={{ display: "inline-block", height: "100%" }}
       >
@@ -23,7 +27,7 @@ const NavImg = () => {
           <ProfileImg dimension={30} />
         </Title>
 
-        <UserDropDown bool={showUserDrop} />
+        <UserDropDown bool={showUserDrop} setter={setShowUserDrop} />
       </motion.span>
     </>
   );

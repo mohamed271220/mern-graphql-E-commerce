@@ -16,7 +16,7 @@ const FooterCategory = () => {
   };
 
   return (
-    <div className="footer-category">
+    <div className="footer-category footer-links">
       <h3 className="header underline footer-head">category</h3>
       {categoriesArr.map((link, i) => {
         return (

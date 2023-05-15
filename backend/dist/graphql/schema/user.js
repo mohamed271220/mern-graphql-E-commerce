@@ -209,13 +209,13 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                 return __awaiter(this, void 0, void 0, function* () {
                     const check = yield user_js_1.userCollection.find({ email: args.email });
                     if (check.length) {
-                        return { msg: "this email already used" };
+                        return { msg: "this email already used", status: 401 };
                     }
                     else {
                         yield user_js_1.userCollection.findByIdAndUpdate(args._id, {
                             email: args.email,
                         });
-                        return { msg: "your email is updated successfully" };
+                        return { msg: "your email is updated successfully", status: 200 };
                     }
                 });
             },
@@ -662,26 +662,6 @@ exports.userMutation = new graphql_1.GraphQLObjectType({
                 });
             },
         },
-        //order
-        // addOrder: {
-        //   type: orderType,
-        //   args: {
-        //     userId: { type: GraphQLID },
-        //     state: { type: GraphQLString },
-        //     productId: { type: new GraphQLList(orderProduct) },
-        //     count: { type: GraphQLInt },
-        //     cost: { type: GraphQLFloat },
-        //     createdAt: { type: DateType },
-        //   },
-        //   async resolve(_, args) {
-        //     try {
-        //       return await OrderCollection.create(args);
-        //     } catch (err) {
-        //       console.log(err);
-        //     }
-        //     // return { res, msg: "order is submitted" };
-        //   },
-        // },
         deleteOrder: {
             type: order_js_1.orderType,
             args: {
