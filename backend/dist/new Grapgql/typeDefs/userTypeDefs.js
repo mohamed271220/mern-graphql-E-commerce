@@ -135,6 +135,7 @@ exports.userTypeDefs = (0, apollo_server_express_1.gql) `
     deleteNotification(id: ID!, userId: ID!): StatusMsg
     toggleReadNotification(id: ID!, userId: ID!, isRead: Boolean): StatusMsg
     ClearNotification(userId: ID!): StatusMsg
+    ClearFav(userId: ID!): StatusMsg
     MarkAllAsReadNotification(userId: ID!): StatusMsg
     updateUserName(_id: ID!, name: String!): StatusMsg
     updateUserCountry(_id: ID!, country: String!): StatusMsg

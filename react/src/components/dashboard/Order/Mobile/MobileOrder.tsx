@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import Title from "../../../widgets/Title";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, useInView, motion } from "framer-motion";
 import FadeElement from "../../../widgets/FadeElement";
 import StyledPrice from "../../../widgets/StyledPrice";
 import { AiTwotoneDelete } from "react-icons/ai";
@@ -8,6 +8,8 @@ import { checkContext } from "../Orders";
 import useDeleteOrder from "../../../../custom/useDeleteOrder";
 import OrderDetailsIcon from "../OrderDetailsIcon";
 import DashDropDown from "../DashDropDown";
+import { useScrollDirection } from "react-use-scroll-direction";
+
 interface Props {
   state: string;
   _id: string;
@@ -29,8 +31,15 @@ const MobileOrder = ({
   const { setarrOfOrders } = useContext(checkContext);
   const { handleDeleteOrder } = useDeleteOrder([_id]);
   const [orderState, setOrderState] = useState(state);
+
+  const { isScrollingDown } = useScrollDirection();
   return (
-    <div className="order-mobile box-shadow">
+    <motion.div
+      initial={{ y: isScrollingDown ? -40 : 40 }}
+      whileInView={{ y: 0 }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
+      className="order-mobile box-shadow"
+    >
       <span className="order-delete-mobile center gap ">
         <Title title={`delete this order`}>
           <AiTwotoneDelete
@@ -89,7 +98,7 @@ const MobileOrder = ({
         </AnimatePresence>
       </span>
       <StyledPrice price={cost} />
-    </div>
+    </motion.div>
   );
 };
 

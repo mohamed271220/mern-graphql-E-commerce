@@ -31,9 +31,9 @@ const ThemeToggle = ({ linkClr, navClr }: Props) => {
             initial="start"
           >
             {theme === "dark" ? (
-              <TbMoonFilled onClick={toggleTheme} />
+              <TbMoonFilled onClick={toggleTheme} className="above" />
             ) : (
-              <FaSun className="sun" onClick={toggleTheme} />
+              <FaSun className="above sun" onClick={toggleTheme} />
             )}
           </motion.div>
         </AnimatePresence>

@@ -205,6 +205,14 @@ exports.userResolver = {
                 return { msg: "Notifications are successfull cleared " };
             });
         },
+        ClearFav(_, args) {
+            return __awaiter(this, void 0, void 0, function* () {
+                yield user_js_1.userCollection.findByIdAndUpdate(args.userId, {
+                    fav: [],
+                });
+                return { msg: "your wishlist is successfully cleared ", status: 200 };
+            });
+        },
         MarkAllAsReadNotification(_, args) {
             return __awaiter(this, void 0, void 0, function* () {
                 console.log(args);

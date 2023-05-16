@@ -1,15 +1,15 @@
 @import "../variables.scss";
 
 .custom-check-parent {
-  background: rgba(93, 92, 92, 0.424);
+  background: rgba(117, 111, 111, 0.8);
   border-radius: 2px;
   width: 12px;
   height: 12px;
-
+  box-shadow: 0.5px 0.5px 1px black;
   .custom-check {
     width: fit-content;
     // background: var(--green);
-    background: var(--third);
+    background: var(--secondary);
     border-radius: 2px;
   }
 }

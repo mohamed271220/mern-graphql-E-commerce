@@ -36,13 +36,16 @@ footer {
     h3 {
       margin-left: 0;
     }
-
-    a {
-      text-transform: capitalize;
-      letter-spacing: 1px;
-      color: var(--wheat);
-      text-align: start;
+    span {
       width: 100%;
+      width: 100%;
+      a {
+        padding: 6px;
+        text-transform: capitalize;
+        letter-spacing: 1px;
+        color: var(--wheat);
+        text-align: start;
+      }
     }
   }
 }

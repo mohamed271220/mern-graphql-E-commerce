@@ -41,7 +41,8 @@ const Favorite = ({
             unsave
           </button>
           <button
-            className="btn shadow"
+            className="btn shadow "
+            style={{ color: "var(--white" }}
             onClick={() => navigate(`/${parentId}`)}
           >
             details

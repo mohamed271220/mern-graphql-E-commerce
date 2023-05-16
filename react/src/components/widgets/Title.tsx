@@ -36,7 +36,7 @@ const Title = ({ title, dir, children, abs }: Props) => {
             initial="start"
             exit={"exit"}
             animate="end"
-            className={`custom-title ${dir === "left" ? "left" : "right"}`}
+            className={` custom-title ${dir === "left" ? "left" : "right"}`}
           >
             {" "}
             {title}

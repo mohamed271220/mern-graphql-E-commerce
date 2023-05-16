@@ -34,7 +34,7 @@ export const userResolver = {
     },
   },
   Mutation: {
-    addUser: async (_: any, { input }: any) => {
+    addUser: async (_: unknown, { input }: any) => {
       const check = await userCollection.find({ email: input.email });
       if (check.length > 0) {
         return {
@@ -56,7 +56,7 @@ export const userResolver = {
     },
 
     authenticate: async (
-      _: any,
+      _: unknown,
       args: { password: string; email: string },
       { res }: { res: Response }
     ) =>
@@ -256,7 +256,7 @@ export const userResolver = {
     },
 
     async toggleReadNotification(
-      _: any,
+      _: unknown,
       args: { id: string; userId: string; isRead: boolean }
     ) {
       await userCollection.findOneAndUpdate(
@@ -265,13 +265,19 @@ export const userResolver = {
       );
       return { status: 200 };
     },
-    async ClearNotification(_: any, args: { userId: string }) {
+    async ClearNotification(_: unknown, args: { userId: string }) {
       await userCollection.findByIdAndUpdate(args.userId, {
         notifications: [],
       });
       return { msg: "Notifications are successfull cleared " };
     },
-    async MarkAllAsReadNotification(_: any, args: { userId: string }) {
+    async ClearFav(_: unknown, args: { userId: string }) {
+      await userCollection.findByIdAndUpdate(args.userId, {
+        fav: [],
+      });
+      return { msg: "your wishlist is successfully cleared ", status: 200 };
+    },
+    async MarkAllAsReadNotification(_: unknown, args: { userId: string }) {
       console.log(args);
       await userCollection.findByIdAndUpdate(args.userId, {
         "notifications.$[].isRead": true,
@@ -307,7 +313,7 @@ export const userResolver = {
     },
 
     async updatePassword(
-      _: any,
+      _: unknown,
       args: { _id: string; oldPassword: string; newPassword: string }
     ) {
       const result = await checkOldPass(args._id, args.oldPassword);

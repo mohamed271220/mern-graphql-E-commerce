@@ -48,11 +48,15 @@ const SlideButton = ({
   };
 
   useEffect(() => {
+    let timer: number;
     if (IsStatus200) {
       setIsConfirmed(true);
     } else {
-      controls.start({ x: 0, y: 0 });
+      timer = setTimeout(() => {
+        controls.start({ x: 0, y: 0 });
+      }, 200);
     }
+    return () => clearTimeout(timer);
   }, [IsStatus200, fn]);
 
   return (

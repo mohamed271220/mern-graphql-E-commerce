@@ -63,7 +63,10 @@ const Login = () => {
 
       <FormProvider {...methods}>
         <form action="" className="center" onSubmit={handleSubmit(onSubmit)}>
-          <h2 className="underline header white"> log in</h2>
+          <h2 className="underline header " style={{ color: "var(--white)" }}>
+            {" "}
+            log in
+          </h2>
           <Input
             placeholder={"email"}
             err={errors.email?.message?.toString()}

@@ -60,13 +60,13 @@ const Review = ({ _id, image, user, rate, review, i }: Props) => {
               {count}
             </motion.span>
           </AnimatePresence>
-          <span className="five center" style={{ color: "var(--secondary)" }}>
-            <span>/</span>5
+          <span className="five center">
+            <span style={{ color: "var(--third)" }}>/</span>5
           </span>
         </span>
       </div>
 
-      <div className="user-review center" style={{ color: "var(--secondary)" }}>
+      <div className="user-review center" style={{ color: "var(--third)" }}>
         <span>
           <FaQuoteLeft className="icon" fill={clrsArr[i]} />
         </span>

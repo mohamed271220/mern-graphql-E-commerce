@@ -20,6 +20,7 @@ import { toast } from "react-hot-toast";
 import { isAuthContext } from "../../context/isAuth";
 import Recap from "../dashboard/recap/Recap";
 import UsersDashboard from "../dashboard/User/UsersDashboard";
+import FaqComponent from "../Faq";
 
 const AppRoutes = () => {
   const location = useLocation();
@@ -92,6 +93,7 @@ const AppRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/about" element={<About />} />
+        <Route path="/faq" element={<FaqComponent />} />
         <Route path="/cart" element={isAuth ? <Cart /> : <Login />} />
         <Route path="/user" element={isAuth ? <User /> : <Login />} />
         <Route

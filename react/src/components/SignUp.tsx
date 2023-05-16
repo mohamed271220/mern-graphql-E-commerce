@@ -104,7 +104,13 @@ const SignUp = () => {
           onSubmit={handleSubmit(OnSubmit)}
           ref={formRef}
         >
-          <h2 className="underline header white"> sign Up</h2>
+          <h2
+            className="underline header white"
+            style={{ color: "var(--white)" }}
+          >
+            {" "}
+            sign Up
+          </h2>
           <Input
             placeholder={"name"}
             err={errors?.name?.message?.toString()}

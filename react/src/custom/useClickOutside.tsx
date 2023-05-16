@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 const useClickOutside = <T extends HTMLElement>(
   fn: () => void,
@@ -6,17 +6,21 @@ const useClickOutside = <T extends HTMLElement>(
 ) => {
   const ref = useRef<T | null>(null);
   useEffect(() => {
+    let timer: number;
     const handler = (e: MouseEvent) => {
       if (!ref.current?.contains(e.target as Node) && bool) {
         console.log("click outside");
-        setTimeout(() => {
+        timer = setTimeout(() => {
           fn();
         }, 200);
       }
     };
     document.addEventListener("mousedown", handler);
 
-    return () => document.removeEventListener("mousedown", handler);
+    return () => {
+      document.removeEventListener("mousedown", handler);
+      clearTimeout(timer);
+    };
   }, [ref, fn]);
 
   return ref;

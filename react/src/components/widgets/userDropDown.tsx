@@ -7,6 +7,7 @@ import { FiEdit } from "react-icons/fi";
 import { RiLogoutCircleRFill } from "react-icons/ri";
 import { FcSettings } from "react-icons/fc";
 import useLogOut from "../../custom/useLogOut";
+import { FaQuestionCircle } from "react-icons/fa";
 
 interface Props {
   bool: boolean;
@@ -17,7 +18,7 @@ const UserDropDown = ({ bool, setter }: Props) => {
   const { handleLogOut } = useLogOut();
   const dropArr = [
     { link: "update your data", icon: FiEdit, to: "/user", fn: () => null },
-    { link: "settings", icon: FcSettings, to: "/setting", fn: () => null },
+    { link: "faq", icon: FaQuestionCircle, to: "/faq", fn: () => null },
 
     {
       link: "logout",

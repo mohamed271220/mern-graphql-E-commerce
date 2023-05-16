@@ -6,7 +6,7 @@ export const checkSvgVariant = {
       // opacity: {
       // duration: 0.4,
       // },
-      delay: index ? 0.1 * index : 0,
+      delay: index ? 0.025 * index : 0,
       when: "beforeChildren",
     },
   }),
@@ -15,7 +15,7 @@ export const checkSvgVariant = {
     transition: {
       when: "afterChildren",
       // duration: 0.2,
-      delay: index ? 0.04 * index : 0,
+      delay: index ? 0.02 * index : 0,
     },
   }),
 };
@@ -27,7 +27,7 @@ export const checkpathVariant = {
     pathOffset: 0,
     transition: {
       //  duration: 0.4,
-      delay: index ? index * 0.05 : 0,
+      delay: index ? index * 0.025 : 0,
     },
   }),
   exit: (index: number) => ({
@@ -35,7 +35,7 @@ export const checkpathVariant = {
     pathOffset: 1,
     transition: {
       // duration: 0.4,
-      delay: index ? index * 0.04 : 0,
+      delay: index ? index * 0.02 : 0,
     },
   }),
 };
@@ -55,7 +55,7 @@ export const parentVarient = {
         when: "beforeChildren",
         duration: 0.3,
       },
-      delay: index ? index * 0.05 : 0,
+      delay: index ? index * 0.025 : 0,
     },
   }),
   exit: ({ index }: parentVarientParam) => ({

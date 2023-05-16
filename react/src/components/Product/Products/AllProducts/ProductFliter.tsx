@@ -25,7 +25,7 @@ import useCarousel from "../../../../custom/useCarousel";
 import useIndex from "../../../../custom/useIndex";
 import CompareIcons from "../../../widgets/CompareIcons";
 import StyledPrice from "../../../widgets/StyledPrice";
-import RatingDetails from "../RateDetails";
+import { useScrollDirection } from "react-use-scroll-direction";
 
 type Props = {
   _id: string;
@@ -87,11 +87,16 @@ const ProductFliter = ({
 
     return () => clearTimeout(timer);
   }, [changeImgOnHover, imgInd]);
+
+  const { isScrollingDown } = useScrollDirection();
   return (
     <motion.div
       ref={ref}
       onHoverStart={() => setChnageImgOnHover(true)}
       onHoverEnd={() => setChnageImgOnHover(false)}
+      initial={{ y: isScrollingDown ? -40 : 40 }}
+      whileInView={{ y: 0 }}
+      transition={{ duration: 0.3 }}
     >
       <motion.section
         className={`product-List center ${

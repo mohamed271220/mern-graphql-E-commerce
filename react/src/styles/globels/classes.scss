@@ -97,9 +97,10 @@
 
 .hr {
   width: 95%;
-  height: 0.3px;
-  background: var(--secondary);
+  height: 0.2px;
+  background: grey;
   margin: 0 auto;
+  opacity: 0.4;
 }
 
 .overley {
@@ -250,14 +251,16 @@
   top: 115%;
   width: fit-content;
   padding: 4px 6px;
-  background: var(--wheat-title);
-  color: var(--white);
+  background: var(--secondary);
+  color: var(--white) !important;
   z-index: 1000;
   white-space: nowrap;
   border-radius: 4px;
   letter-spacing: 0.8px;
   height: 20px;
   font-size: 1rem;
+  box-shadow: 0.5px 0.5px 1px black;
+  text-transform: capitalize;
   &.right {
     right: 0;
   }
@@ -287,11 +290,22 @@
   align-items: center;
   text-transform: capitalize;
   font-weight: bold;
-  color: var(--secondary);
+  color: var(--third);
   letter-spacing: 1px;
 }
 
 .above {
   position: relative;
   z-index: 5;
+}
+
+.faq {
+  section:last-child {
+    border: none;
+  }
+  > * {
+    padding: 20px;
+    padding-bottom: 0;
+    box-shadow: 1px 1px 5px black;
+  }
 }

@@ -17,26 +17,25 @@ const OrderTable = () => {
   const { handleDeleteOrder } = useDeleteOrder(arrOfOrders);
   return (
     <table className="order box-shadow">
-      <AnimatePresence>
-        {arrOfOrders.length && (
-          <FadeElement cls="delete-order" key={"delete-order"}>
-            <div className=" center gap">
-              <Title
-                title={`delete ${arrOfOrders.length} order${
-                  arrOfOrders.length >= 2 ? "s" : ""
-                }`}
-                abs
+      <AnimatePresence mode="wait">
+        {arrOfOrders.length >= 1 && (
+          <FadeElement cls="center gap delete-order" key={"delete-order"}>
+            <Title
+              title={`delete ${arrOfOrders.length} order${
+                arrOfOrders.length >= 2 ? "s" : ""
+              }`}
+              dir="left"
+              abs
+            >
+              <span
+                onClick={() => {
+                  handleDeleteOrder();
+                  setarrOfOrders([]);
+                }}
               >
-                <span
-                  onClick={() => {
-                    handleDeleteOrder();
-                    setarrOfOrders([]);
-                  }}
-                >
-                  <AiTwotoneDelete className="icon " />
-                </span>
-              </Title>
-            </div>
+                <AiTwotoneDelete className="icon " />
+              </span>
+            </Title>
           </FadeElement>
         )}
       </AnimatePresence>
@@ -60,7 +59,7 @@ const OrderTable = () => {
         <th style={{ width: 150 }}> order state </th>
       </thead>
 
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {dataShown.map((order: any, i: number) => {
           return (
             <motion.tr

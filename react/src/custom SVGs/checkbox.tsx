@@ -83,7 +83,7 @@ const Checkbox = ({
           >
             <motion.path
               fill="none"
-              stroke="var(--wheat-light)"
+              stroke="var(--wheat)"
               strokeMiterlimit="10"
               strokeWidth="3"
               d="M21 6L9 18 4 13"

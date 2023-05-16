@@ -61,12 +61,13 @@
   .five {
     font-size: 10px;
     gap: 2px;
+    color: var(--third);
   }
 }
 
 p.review-user {
-  text-shadow: 0.4px 0.5px 1px grey;
-
+  text-shadow: 0.4px 0.5px 1px black;
+  color: var(--third);
   margin: 0 auto;
   margin-top: 6px;
   font-weight: bold;

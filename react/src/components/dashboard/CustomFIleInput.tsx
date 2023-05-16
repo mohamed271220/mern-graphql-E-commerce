@@ -10,7 +10,6 @@ interface Props {
 const CustomFIleInput = ({ err }: Props) => {
   const {
     register,
-    getValues,
     setValue,
     watch,
     formState: { errors },
@@ -18,7 +17,6 @@ const CustomFIleInput = ({ err }: Props) => {
   const fileRef = useRef<HTMLInputElement | null>(null);
   const watchfiles = watch("images", []);
 
-  console.log({ watchfiles });
   return (
     <div className="inp-parent custom-file">
       <InpErr key={"description"} err={err} />
@@ -27,13 +25,6 @@ const CustomFIleInput = ({ err }: Props) => {
         {
           ref: fileRef,
           onChange(e) {
-            // const arr = [];
-            // if (e?.target?.files) {
-            // for (const f of e.target.files) {
-            // arr.push(f);
-            // }
-            // setValue("images", arr, { shouldValidate: true });
-            // }
             setValue("images", e.target.files, { shouldValidate: true });
           },
         })}

@@ -35,7 +35,6 @@ const BannerText = ({ fn, header, clr, button, to, slogan }: Props) => {
             }}
           >
             <OpacityBtn fn={fn} btn={button} cls="btn banner-btn transparent" />
-            {/* {button} */}
           </motion.span>
         </Link>
         <button className="btn banner-btn  about">About us</button>

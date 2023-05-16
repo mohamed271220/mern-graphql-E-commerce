@@ -9,10 +9,7 @@ const NavImg = () => {
   const { isAuth } = useContext(isAuthContext);
   const handleSHowUser = () => {
     if (isAuth) {
-      if (!showUserDrop) {
-        // console.log("handleshowSubmit");
-        setShowUserDrop(true);
-      }
+      setShowUserDrop(true);
     }
   };
 

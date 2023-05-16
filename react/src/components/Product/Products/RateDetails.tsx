@@ -5,9 +5,13 @@ import { BiPlus } from "react-icons/bi";
 import { opacityVariant, parentVariant } from "../../../variants/globals";
 import Star from "./Aside/Star";
 import { IoIosArrowDown } from "react-icons/io";
+import useClickOutside from "../../../custom/useClickOutside";
 
 const RatingDetails = ({ arr, pos }: { pos: string; arr: number[] }) => {
   const [show, setShow] = useState(false);
+  const ref = useClickOutside<HTMLDivElement>(() => {
+    setShow(false);
+  }, show);
 
   const stars = [];
 
@@ -48,6 +52,7 @@ const RatingDetails = ({ arr, pos }: { pos: string; arr: number[] }) => {
       <AnimatePresence>
         {show && (
           <motion.div
+            ref={ref}
             variants={parentVariant}
             style={{ [pos]: "140%" }}
             key={pos}

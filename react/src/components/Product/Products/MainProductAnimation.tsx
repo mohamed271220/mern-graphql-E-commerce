@@ -4,7 +4,7 @@ import { motion, useInView } from "framer-motion";
 const clrs = ["red", "green", "wheat", "blue", "yellow"];
 const scaleArr = [1.15, 1.3, 1.5, 1.3, 1.15];
 const xArr = [225, 125, 0, -125, -225];
-const zIndexArr = [1, 2, 4, 2, 1];
+const zIndexArr = [1, 2, 3, 2, 1];
 const delayArr = [0.8, 0.4, 0.2, 0.4, 0.8];
 const imgArr = [
   "https://res.cloudinary.com/domobky11/image/upload/v1682582542/Daco_4755868_a8ln06.png",

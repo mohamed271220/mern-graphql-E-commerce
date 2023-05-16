@@ -154,10 +154,10 @@ const DashForm = ({ type, Icon, fn, id, obj, head, btn }: Props) => {
     <DashMain head="">
       <FormProvider {...methods}>
         <form
-          className="update-product-form center  col"
+          className="update-product-form center  col box-shadow"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <h2 className="underline header " style={{ color: "var(--main)" }}>
+          <h2 className="underline header " style={{ color: "var(--white)" }}>
             {head}
           </h2>
           {inpArr.map(({ placeholder, type: inptype }, i) => {

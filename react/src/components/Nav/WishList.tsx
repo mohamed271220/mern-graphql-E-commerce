@@ -1,21 +1,43 @@
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { opacityVariant } from "../../variants/globals";
 import Favorite from "../widgets/Favorite";
-import { useAppSelector } from "../../custom/reduxTypes";
+import { useAppDispatch, useAppSelector } from "../../custom/reduxTypes";
 import SlideButton from "../widgets/SlideButton";
 import DropDown from "../widgets/DropDown";
 import FadeElement from "../widgets/FadeElement";
 import NoData from "../widgets/NoData";
+import { useMutation } from "@apollo/client";
+import { Clear_Fav } from "../../graphql/mutations/user.js";
+import { clearAllFav } from "../../redux/favSlice";
+import { isAuthContext } from "../../context/isAuth";
 
 interface Props {
   setter: React.Dispatch<React.SetStateAction<boolean>>;
   showFav: boolean;
 }
 const WishList = ({ showFav, setter }: Props) => {
+  const dispatch = useAppDispatch();
+  const { userId } = useContext(isAuthContext);
   const { fav } = useAppSelector((state) => state.fav);
   const [showClearFav, setShowClearFav] = useState(false);
 
+  const [IsStatus200, setIsStatus200] = useState(false);
+  const [clearFav] = useMutation(Clear_Fav, {
+    variables: {
+      userId,
+    },
+  });
+  const handleClearFav = async () => {
+    const { data } = await clearFav();
+    console.log({ data });
+    if (data?.ClearFav?.status === 200) {
+      setIsStatus200(true);
+      dispatch(clearAllFav());
+    } else {
+      setIsStatus200(false);
+    }
+  };
   return (
     <>
       <DropDown
@@ -65,7 +87,9 @@ const WishList = ({ showFav, setter }: Props) => {
                 doneMsg="All CLeared"
                 head="are you sure you want to clear ALl?"
                 height={120}
-                fn={() => null}
+                fn={handleClearFav}
+                IsStatus200={IsStatus200}
+                isVaild
               >
                 {" "}
               </SlideButton>

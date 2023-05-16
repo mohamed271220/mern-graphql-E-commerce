@@ -2,7 +2,9 @@
 
 .custom-file {
   height: 30px;
-  background: var(--main);
+  box-shadow: 0.5px 0.5px 1px black;
+  background-color: var(--main);
+  border-radius: 4px;
   input {
     opacity: 0;
     transform: translateX(1000px);
@@ -25,5 +27,6 @@
     letter-spacing: 0.8px;
     text-transform: capitalize;
     left: 10px;
+    color: var(--white);
   }
 }

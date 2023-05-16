@@ -90,7 +90,7 @@ const DashboardAside = () => {
           <h4 className="aside-dash-label">users</h4>
           <Link
             className={
-              location.pathname.split("/").slice(-1)[0] === "add"
+              location.pathname.split("/").slice(-1)[0] === "users"
                 ? "active"
                 : ""
             }
@@ -100,15 +100,7 @@ const DashboardAside = () => {
             <span>users</span>
           </Link>
 
-          <Link
-            className={
-              location.pathname.split("/").slice(-1)[0] === "add"
-                ? "active"
-                : ""
-            }
-            to={"/login"}
-            onClick={handleLogOut}
-          >
+          <Link to={"/login"} onClick={handleLogOut}>
             <RiLogoutCircleRFill className="icon" color="var(--twitter)" />
             <span>logout</span>
           </Link>

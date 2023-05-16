@@ -264,6 +264,15 @@ export const Clear_Notification = gql`
   }
 `;
 
+export const Clear_Fav = gql`
+  mutation ($userId: ID!) {
+    ClearFav(userId: $userId) {
+      msg
+      status
+    }
+  }
+`;
+
 export const Mark_All_as_Notification = gql`
   mutation ($userId: ID!) {
     MarkAllAsReadNotification(userId: $userId) {

@@ -9,6 +9,7 @@ import {
 import useUpdateOrder from "../../../custom/useUpdateOrder";
 import { isAuthContext } from "../../../context/isAuth";
 import useUpdateUserRole from "../../../custom/useUpdateUserRole";
+import { themeContext } from "../../../context/ThemContext";
 
 interface Props {
   state: string;
@@ -20,6 +21,7 @@ interface Props {
 
 const DashDropDown = ({ type, state, setter, _id, arr }: Props) => {
   const { isAuth } = useContext(isAuthContext);
+  const { theme } = useContext(themeContext);
   const [isSClicked, setIsCLicked] = useState(false);
 
   const handleToggle = () => setIsCLicked(!isSClicked);
@@ -31,7 +33,7 @@ const DashDropDown = ({ type, state, setter, _id, arr }: Props) => {
         <HiDotsVertical
           className="icon"
           onClick={handleToggle}
-          color="var(--white)"
+          color={theme === "light" ? "grey" : "var(--white)"}
         />
       </Title>
       <AnimatePresence>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import OrderDropDown from "../Order/DashDropDown";
 import FadeElement from "../../widgets/FadeElement";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import DashDropDown from "../Order/DashDropDown";
 
 interface Props {
@@ -26,7 +25,10 @@ const UserMobile = ({
   const [updateRole, setUpdateRole] = useState(role);
 
   return (
-    <div
+    <motion.div
+      initial={{ y: 40 }}
+      viewport={{ once: true }}
+      whileInView={{ y: 0 }}
       className="order-mobile box-shadow center gap col start"
       style={{ padding: 20 }}
     >
@@ -65,10 +67,6 @@ const UserMobile = ({
           />
         </div>
       </div>
-      {/* <span className="date">
-        <span className="order-date">name : </span>
-        {name}
-      </span> */}
 
       <span className="date">
         <span className="order-date" style={{ margin: 0 }}>
@@ -98,7 +96,7 @@ const UserMobile = ({
         </AnimatePresence>
       </span>
       {/* <StyledPrice price={cost} /> */}
-    </div>
+    </motion.div>
   );
 };
 
