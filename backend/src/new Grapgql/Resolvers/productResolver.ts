@@ -163,12 +163,12 @@ export const productResolver = {
           {
             $push: { reviews: { user, userId, rate, review, image } },
           },
-          { new: true }
+          { projection: { reviews: { $slice: [-1, 1] } }, new: true }
         );
-        const addedReview = data!.reviews[data!.reviews.length - 1];
-        addedReview.msg = "review added";
-        addedReview.status = 200;
-        return addedReview;
+        const newReview = data!.reviews[0];
+        newReview.msg = "review added";
+        newReview.status = 200;
+        return newReview;
       } catch (err) {
         return (err as Error).message;
       }

@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from "react";
 import ProductRate from "../../../product Route/ProductRate";
 import useAvg from "../../../../custom/useAvg";
 import ProductListHeart from "../../../widgets/ProductListHeart";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import { imagesInterface } from "../../../../interfaces/user";
 import {
   AnimatePresence,
@@ -107,16 +109,20 @@ const ProductFliter = ({
       >
         <div className={` img-par center ${gridView ? "grid" : "list"}`}>
           <AnimatePresence mode="wait">
-            <motion.img
+            <motion.span
               key={images[imgInd].productPath}
-              src={images[imgInd].productPath}
-              alt={title}
               variants={imgVariant as Variants}
               animate="end"
               initial="start"
               exit={"exit"}
               custom={{ dir, width: 100 }}
-            />
+            >
+              <LazyLoadImage
+                effect="blur"
+                src={images[imgInd].productPath}
+                alt={title}
+              />
+            </motion.span>
           </AnimatePresence>
         </div>
         <div className="center col">

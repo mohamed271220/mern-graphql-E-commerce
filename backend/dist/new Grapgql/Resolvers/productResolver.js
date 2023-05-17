@@ -162,11 +162,11 @@ exports.productResolver = {
                     const { userId, rate, review, image, user } = input;
                     const data = yield product_js_1.default.findByIdAndUpdate(input._id, {
                         $push: { reviews: { user, userId, rate, review, image } },
-                    }, { new: true });
-                    const addedReview = data.reviews[data.reviews.length - 1];
-                    addedReview.msg = "review added";
-                    addedReview.status = 200;
-                    return addedReview;
+                    }, { projection: { reviews: { $slice: [-1, 1] } }, new: true });
+                    const newReview = data.reviews[0];
+                    newReview.msg = "review added";
+                    newReview.status = 200;
+                    return newReview;
                 }
                 catch (err) {
                     return err.message;

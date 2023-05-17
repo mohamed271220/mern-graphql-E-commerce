@@ -4,6 +4,7 @@ import Title from "./Title";
 import UserDropDown from "./userDropDown";
 import ProfileImg from "../ProfileImg";
 import { isAuthContext } from "../../context/isAuth";
+
 const NavImg = () => {
   const [showUserDrop, setShowUserDrop] = useState(false);
   const { isAuth } = useContext(isAuthContext);

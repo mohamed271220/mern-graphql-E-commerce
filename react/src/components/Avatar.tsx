@@ -63,7 +63,7 @@ const Avatar = ({ setEdit, newImg, handleCancel }: Props) => {
 
   return (
     <>
-      <h2 className="underline header">update your profile image</h2>
+      <h3 className="underline header">update your profile image</h3>
       <AvatarEditor
         style={{ backgroundColor: "white", border: "0" }}
         ref={editorRef}

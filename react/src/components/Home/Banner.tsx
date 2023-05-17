@@ -8,8 +8,8 @@ import { productListContext } from "../../context/FilterData";
 import useFilterState from "../../custom/useFIlterState";
 import BannerText from "./BannerText";
 import { useAppSelector } from "../../custom/reduxTypes";
+import BannerImg from "./BannerImg";
 const arrClrs = ["var(--fb)", "var(--green)", "var(--delete)", "var(--sale)"];
-
 const Banner = () => {
   const { Allproducts } = useAppSelector((st) => st.Allproducts);
   const categoryfn = useFilterCategory();
@@ -37,7 +37,8 @@ const Banner = () => {
   const bannerArr = [
     {
       image:
-        "https://res.cloudinary.com/domobky11/image/upload/v1681712865/pngfind.com-shrug-png-3162414_wpbshx.png",
+        // "https://res.cloudinary.com/domobky11/image/upload/v1681712865/pngfind.com-shrug-png-3162414_wpbshx.png",
+        "https://res.cloudinary.com/domobky11/image/upload/v1684337379/26651-8-mens-fashion-file_ivhkrw.png",
       slogan: `Experience the difference with our products in action. Our high-quality items are designed to exceed your expectations and elevate your daily life.`,
       button: "shop now",
       header: "Enhance Your Daily Experience",
@@ -87,7 +88,7 @@ const Banner = () => {
   useEffect(() => {
     timer = setTimeout(() => {
       setBannerIndex((cur) => convertNegativeToZero(cur + 1, bannerArr.length));
-    }, 4000);
+    }, 3000);
 
     return () => clearTimeout(timer);
   }, [bannerIndex]);
@@ -131,7 +132,7 @@ const Banner = () => {
                   ></div>
 
                   <div className="banner-image center ">
-                    <img src={image} alt="" />
+                    <BannerImg img={image} />
                   </div>
                 </motion.div>
               );

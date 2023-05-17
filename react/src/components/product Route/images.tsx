@@ -3,6 +3,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { productContext } from "./Product";
 import { SideBySideMagnifier } from "react-image-magnifiers";
 import { opacityVariant } from "../../variants/globals";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 interface Props {
   data: {
     images: {
@@ -139,14 +141,15 @@ const ProductImages = ({
       <div className="small-img-par center">
         {images.map(({ productPath }, index) => {
           return (
-            <motion.img
+            <motion.span
               custom={index}
               variants={smallImageVariant}
               className="small-img"
-              src={productPath}
               key={index}
               onClick={() => setBigImgInd(index)}
-            />
+            >
+              <LazyLoadImage effect="blur" src={productPath} />
+            </motion.span>
           );
         })}
       </div>

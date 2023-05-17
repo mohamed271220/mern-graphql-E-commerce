@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-
-const clrs = ["red", "green", "wheat", "blue", "yellow"];
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 const scaleArr = [1.15, 1.3, 1.5, 1.3, 1.15];
 const xArr = [225, 125, 0, -125, -225];
 const zIndexArr = [1, 2, 3, 2, 1];
@@ -50,7 +50,7 @@ const MainProductAnimation = () => {
                 transition={{ delay: delayArr[i], duration: 0.4 }}
                 animate="end"
               >
-                <img src={imgArr[i]} />
+                <LazyLoadImage src={imgArr[i]} effect="blur" />
               </motion.div>
             );
           })}

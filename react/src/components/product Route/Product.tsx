@@ -26,13 +26,8 @@ const Product = () => {
   const { Allproducts } = useAppSelector((st) => st.Allproducts);
 
   useEffect(() => {
-    console.log("useeffect of product outside");
-
     if (Allproducts?.length >= 1) {
-      console.log("useeffect of product");
       const pro = Allproducts.find((product: any) => product._id === id);
-      console.log({ pro });
-
       setSingleProduct(pro);
     }
   }, [Allproducts]);
@@ -50,6 +45,7 @@ const Product = () => {
       price,
       rating,
       reviews,
+      createdAt,
     } = singleProduct;
 
     return (
@@ -69,6 +65,7 @@ const Product = () => {
               stock,
               startHover,
               setStartHover,
+              createdAt,
             }}
           >
             <Transition />
@@ -93,7 +90,6 @@ const Product = () => {
                   )}
                 </AnimatePresence>
               </section>
-              {/* <SLiderComponent /> */}
             </div>
           </productContext.Provider>
         )}

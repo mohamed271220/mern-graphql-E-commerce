@@ -53,8 +53,6 @@ const AddReview = ({
     rate: rateIndex + 1,
   };
 
-  console.log({ updateReviewObj });
-
   const [updateReviewFn] = useMutation(update_Review, {
     variables: {
       input: updateReviewObj,
@@ -71,6 +69,7 @@ const AddReview = ({
 
   const handleAddReview = async () => {
     const { data } = await addReviewFn();
+    console.log({ addReview: data });
     if (data?.addReview?._id) {
       setIsStatus200(true);
       dispatch(
