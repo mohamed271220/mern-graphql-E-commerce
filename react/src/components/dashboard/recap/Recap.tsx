@@ -50,7 +50,7 @@ const Recap = () => {
       to: "/dashboard/orders",
       head: "earnings",
       percentage: Number(orderEaringProgress.toFixed(2)),
-      analytics: "$ " + String(orderEaring.toFixed(2)),
+      analytics: String(orderEaring.toFixed(2)),
       link: "go to earning",
       Icon: FaDollarSign,
     },

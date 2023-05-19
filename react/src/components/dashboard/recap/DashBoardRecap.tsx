@@ -1,6 +1,7 @@
 import React from "react";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { Link } from "react-router-dom";
+import CountUpAnimation from "../../widgets/CountUpAnimation";
 interface Props {
   head: string;
   percentage: number;
@@ -30,7 +31,11 @@ const DashBoardRecap = ({
           {percentage}%
         </span>
       </div>
-      <div className="analytics">{analytics}</div>
+      <div className="analytics">
+        {" "}
+        {head === "earnings" ? "$ " : ""}
+        <CountUpAnimation num={Number(analytics)} tofixed={0} />{" "}
+      </div>
       <div className="links-recap center between">
         <Link to={to}> {link}</Link>
         <Icon />

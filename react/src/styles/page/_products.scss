@@ -123,6 +123,9 @@ aside {
   &.list {
     display: flex;
     flex-direction: column;
+    .product-data {
+      width: 70%;
+    }
   }
   &.grid {
     display: grid;
@@ -212,6 +215,7 @@ svg.svg-star {
   justify-content: center !important;
   align-items: center !important;
   height: 260px;
+  overflow: hidden;
 
   // &.grid {
   // }
@@ -230,30 +234,37 @@ svg.svg-star {
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
-
     white-space: pre-wrap;
     color: var(--third);
+    max-width: 80%;
   }
 
   .img-par {
-    max-width: 100px;
-
     &.grid {
       width: 100%;
       height: 120px;
+      img {
+        height: 80px;
+        width: 90%;
+      }
     }
     &.list {
-      width: 400px;
+      width: 30% !important;
       height: 90%;
+      img {
+        min-width: 85px;
+        width: 60%;
+        object-fit: contain;
+      }
     }
     margin-bottom: 4px;
     overflow: hidden;
     padding: 4px;
     img {
       transition: 0.5s;
-      height: 80px;
-      width: 90%;
       object-fit: contain;
+      padding: 5px;
+
       filter: drop-shadow(2px 2px 3px black);
     }
     &:hover {
@@ -356,7 +367,7 @@ svg.svg-star {
     margin: 10%;
     width: 80%;
     height: 80%;
-    object-fit: contain;
+
     filter: drop-shadow(2px 5px 5px black);
   }
 }

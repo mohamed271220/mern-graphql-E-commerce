@@ -107,25 +107,25 @@ const ProductFliter = ({
         {...motionProps}
         ref={sectionRef}
       >
-        <div className={` img-par center ${gridView ? "grid" : "list"}`}>
+        <motion.div
+          className={` img-par center ${gridView ? "grid" : "list"}`}
+          key={images[imgInd].productPath}
+          variants={imgVariant as Variants}
+          animate="end"
+          initial="start"
+          exit={"exit"}
+          custom={{ dir, width: 100 }}
+        >
           <AnimatePresence mode="wait">
-            <motion.span
-              key={images[imgInd].productPath}
-              variants={imgVariant as Variants}
-              animate="end"
-              initial="start"
-              exit={"exit"}
-              custom={{ dir, width: 100 }}
-            >
-              <LazyLoadImage
-                effect="blur"
-                src={images[imgInd].productPath}
-                alt={title}
-              />
-            </motion.span>
+            <LazyLoadImage
+              effect="blur"
+              src={images[imgInd].productPath}
+              alt={title}
+            />
           </AnimatePresence>
-        </div>
-        <div className="center col">
+        </motion.div>
+
+        <div className="center col product-data">
           <h5 className="header underline product-head-underline">
             {productSearchWord
               ? category
