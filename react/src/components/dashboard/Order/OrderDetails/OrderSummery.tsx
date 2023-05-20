@@ -1,5 +1,7 @@
 import React from "react";
 import OrderDetail from "../Table/OrderDetail";
+import { reverseVariant } from "../../../../variants/globals";
+import { motion } from "framer-motion";
 interface Props {
   delivered: string;
   created: string;
@@ -33,7 +35,7 @@ const OrderSummery = ({ total, created, delivered }: Props) => {
     },
   ];
   return (
-    <div className="box-shadow order-summery">
+    <motion.div variants={reverseVariant} className="box-shadow order-summery">
       <h3 className="underline header">order summery</h3>
       {orderArr.map((obj, i) => {
         return (
@@ -42,7 +44,7 @@ const OrderSummery = ({ total, created, delivered }: Props) => {
           </>
         );
       })}
-    </div>
+    </motion.div>
   );
 };
 

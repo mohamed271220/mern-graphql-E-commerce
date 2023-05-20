@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   height: calc(100vh - 40px);
+  position: relative;
 
   .product-page {
     overflow: hidden;
@@ -16,7 +17,6 @@
     width: 90%;
     max-width: 800px;
     margin: 0 auto;
-
     gap: 20px;
     .images {
       width: 45%;

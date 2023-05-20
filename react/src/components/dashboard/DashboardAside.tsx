@@ -80,7 +80,7 @@ const DashboardAside = () => {
             <span>add product</span>
           </Link>
 
-          <h4 className="aside-dash-label">main</h4>
+          <h4 className="aside-dash-label">orders</h4>
 
           <NavLink to={"/dashboard/orders"}>
             <FaClipboardList className="icon" color="var(--twitter)" />

@@ -34,7 +34,9 @@ const Orders = () => {
     >
       <DashMain head="orders" key={"order-dashmain"}>
         {!isMobile ? (
-          <OrderTable key={"table-order"} />
+          <>
+            <OrderTable key={"table-order"} />
+          </>
         ) : (
           <MobileOrders key={"mobile-order"} />
         )}

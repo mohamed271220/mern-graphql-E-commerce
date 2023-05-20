@@ -72,17 +72,10 @@ export const productResolver = {
             images: 1,
             rating: 1,
             reviews: 1,
-            rateAvg: { $avg: "$rating" },
-            avgReviewRating: { $avg: "$reviews.rate" },
+            avgRate: { $avg: { $concatArrays: ["$rating", "$reviews.rate"] } },
           },
         },
-        {
-          $addFields: {
-            avgRate: {
-              $divide: [{ $add: ["$rateAvg", "$avgReviewRating"] }, 2],
-            },
-          },
-        },
+
         { $sort: { avgRate: args.rate } },
       ]);
     },
@@ -94,8 +87,6 @@ export const productResolver = {
     },
     async filterAllTypes(_: any, args: filterAllInterface) {
       try {
-        console.log(args);
-
         const data = await productCollection.aggregate([
           {
             $project: {
@@ -109,7 +100,9 @@ export const productResolver = {
               images: 1,
               rating: 1,
               reviews: 1,
-              avgRate: { $avg: "$rating" || 1 },
+              avgRate: {
+                $avg: { $concatArrays: ["$rating", "$reviews.rate"] } || 1,
+              },
             },
           },
           {
@@ -122,7 +115,6 @@ export const productResolver = {
           },
         ]);
 
-        console.log(data);
         return data;
       } catch (err) {
         console.log((err as Error).message);

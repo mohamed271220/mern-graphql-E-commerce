@@ -1,42 +1,37 @@
 @import "../variables.scss";
 
 .banner-par {
-  height: 100vh;
-  width: 100%;
-  position: relative;
-  background: linear-gradient(135deg, var(--main), grey);
   .banner {
     width: 100%;
     margin: 0 auto;
-    height: 100%;
-    gap: 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    height: 100vh;
 
-    .background {
-      position: absolute;
-      top: 0;
-      right: 0;
-      clip-path: polygon(24% 0, 100% 0, 100% 100%, 0% 100%);
-      height: 100%;
-      width: 50%;
-    }
+    // .background {
+    //   position: absolute;
+    //   top: 0;
+    //   right: 0;
+    //   height: 100%;
+    //   width: 100%;
+    //   opacity: 0.2;
+    //   z-index: 2;
+    // }
 
     .banner-image {
-      display: flex;
-      max-width: 500px;
-      width: 45vw;
-      justify-content: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
       height: 100%;
-      margin-left: 20px;
-      margin-top: 20px;
+      overflow: hidden;
 
       img {
+        margin-top: 40px;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        width: 100vw;
         object-fit: cover;
-        height: 80%;
-        max-width: 300px;
-        filter: drop-shadow(4px 10px 5px black);
+        object-position: center;
       }
     }
   }
@@ -48,27 +43,38 @@
   align-items: center;
 }
 .banner-content {
+  background: rgba(49, 47, 47, 0.404);
+  box-shadow: 1px 1px 4px black;
+  padding: 10px 20px;
   display: flex;
   flex-direction: column;
+
+  min-width: 250px;
   gap: 10px;
-  width: 50%;
-  margin-left: 10px;
+  position: absolute;
+  z-index: 4;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   h1 {
     letter-spacing: 1px;
     white-space: nowrap;
     text-shadow: 0.4px 0.5px 1px black;
+    text-shadow: 0.5px 0.5px 3px black;
+
     font-size: 1.8rem;
     color: var(--green);
   }
   p {
-    color: var(--third);
+    color: var(--white);
     letter-spacing: 0.1rem;
     text-shadow: 0.2px 0.1px 1px black;
     font-size: 1.2rem;
     width: 90%;
     padding: 4px;
     text-align: center;
+    text-shadow: 1px 1px 2px black;
     &::first-letter {
       color: var(--wheat);
     }
@@ -79,6 +85,7 @@
   position: absolute;
   width: 100%;
   bottom: 5px;
+  z-index: 4;
 
   .banner-dot {
     display: inline-block;
@@ -92,11 +99,5 @@
     &.active {
       opacity: 1;
     }
-  }
-}
-
-@media (max-width: 700px) {
-  .banner-par .banner .background {
-    clip-path: polygon(24% 0, 100% 0, 100% 100%, 0% 100%);
   }
 }

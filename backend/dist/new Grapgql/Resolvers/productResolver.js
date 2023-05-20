@@ -67,15 +67,7 @@ exports.productResolver = {
                         images: 1,
                         rating: 1,
                         reviews: 1,
-                        rateAvg: { $avg: "$rating" },
-                        avgReviewRating: { $avg: "$reviews.rate" },
-                    },
-                },
-                {
-                    $addFields: {
-                        avgRate: {
-                            $divide: [{ $add: ["$rateAvg", "$avgReviewRating"] }, 2],
-                        },
+                        avgRate: { $avg: { $concatArrays: ["$rating", "$reviews.rate"] } },
                     },
                 },
                 { $sort: { avgRate: args.rate } },
@@ -94,7 +86,6 @@ exports.productResolver = {
         filterAllTypes(_, args) {
             return __awaiter(this, void 0, void 0, function* () {
                 try {
-                    console.log(args);
                     const data = yield product_js_1.default.aggregate([
                         {
                             $project: {
@@ -108,7 +99,9 @@ exports.productResolver = {
                                 images: 1,
                                 rating: 1,
                                 reviews: 1,
-                                avgRate: { $avg: "$rating" || 1 },
+                                avgRate: {
+                                    $avg: { $concatArrays: ["$rating", "$reviews.rate"] } || 1,
+                                },
                             },
                         },
                         {
@@ -120,7 +113,6 @@ exports.productResolver = {
                             },
                         },
                     ]);
-                    console.log(data);
                     return data;
                 }
                 catch (err) {

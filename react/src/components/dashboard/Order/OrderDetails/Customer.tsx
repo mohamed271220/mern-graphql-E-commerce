@@ -3,7 +3,8 @@ import React, { useEffect } from "react";
 import { GET_USER_DATA } from "../../../../graphql/mutations/user";
 import { date } from "yup";
 import OrderDetail from "../Table/OrderDetail";
-
+import { motion } from "framer-motion";
+import { reverseVariant } from "../../../../variants/globals";
 interface Props {
   userId: string;
   state: string;
@@ -27,7 +28,11 @@ const Customer = ({ userId, state, cost }: Props) => {
       { span: "note", value: "N/A" },
     ];
     return (
-      <div className="box-shadow customer">
+      <motion.div
+        variants={reverseVariant}
+        custom={"first"}
+        className="box-shadow customer"
+      >
         <h2>customer and order details</h2>
         <div className="hr"></div>
 
@@ -39,7 +44,7 @@ const Customer = ({ userId, state, cost }: Props) => {
             </>
           );
         })}
-      </div>
+      </motion.div>
     );
   } else {
     return <></>;

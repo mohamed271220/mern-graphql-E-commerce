@@ -10,6 +10,11 @@ import BannerText from "./BannerText";
 import { useAppSelector } from "../../custom/reduxTypes";
 import BannerImg from "./BannerImg";
 const arrClrs = ["var(--fb)", "var(--green)", "var(--delete)", "var(--sale)"];
+import MainImage from "../../assets/banner/4.jpg";
+import LapImage from "../../assets/banner/laptop.jpg";
+import FashionImage from "../../assets/banner/fashion.jpg";
+import SaleImage from "../../assets/banner/sale.jpg";
+import Animation from "../widgets/Animation";
 const Banner = () => {
   const { Allproducts } = useAppSelector((st) => st.Allproducts);
   const categoryfn = useFilterCategory();
@@ -36,9 +41,7 @@ const Banner = () => {
 
   const bannerArr = [
     {
-      image:
-        // "https://res.cloudinary.com/domobky11/image/upload/v1681712865/pngfind.com-shrug-png-3162414_wpbshx.png",
-        "https://res.cloudinary.com/domobky11/image/upload/v1684337379/26651-8-mens-fashion-file_ivhkrw.png",
+      image: MainImage,
       slogan: `Experience the difference with our products in action. Our high-quality items are designed to exceed your expectations and elevate your daily life.`,
       button: "shop now",
       header: "Enhance Your Daily Experience",
@@ -46,9 +49,7 @@ const Banner = () => {
       fn: () => handleGetAllProducts(),
     },
     {
-      image:
-        "https://res.cloudinary.com/domobky11/image/upload/v1680639415/My_project_tz5dad.png",
-
+      image: FashionImage,
       header: "Elevate your wardrobe game",
       slogan:
         "Stay Ahead of the Fashion Curve with Our Affordable and On-Trend Styles Look Great Without Breaking the Bank - Shop Our Fashion-Forward Collection",
@@ -58,8 +59,7 @@ const Banner = () => {
     },
 
     {
-      image:
-        "https://res.cloudinary.com/domobky11/image/upload/v1681711640/139536-using-smiling-laptop-girl-png-download-free_nfifxo.png",
+      image: LapImage,
       slogan:
         "Unlock Your Potential with Our Range of High-Performance Laptops. From sleek ultrabooks to powerful gaming laptops, we've got you covered.",
       button: "see our laptops",
@@ -73,13 +73,13 @@ const Banner = () => {
         "Don't miss out on our limited time offer! Shop now and enjoy huge savings on our top products. From electronics to fashion,Hurry, this offer won't last forever!",
       header: "Save Big on Our Top Products",
       button: "watch Sale Products",
-      image:
-        "https://res.cloudinary.com/domobky11/image/upload/v1681714243/pngegg_exmpip.png",
+      image: SaleImage,
       to: "products",
       fn: () => handleState("sale"),
     },
   ];
-  const [bannerIndex, setBannerIndex] = useState(0);
+
+  const [bannerIndex, setBannerIndex] = useState(2);
 
   let timer: number | undefined;
 
@@ -97,64 +97,64 @@ const Banner = () => {
   const [animateRef, { width }] = useMeasure();
 
   return (
-    <section className="banner-par center" id="banner" ref={animateRef}>
-      <AnimatePresence custom={{ dir, width }} mode="wait">
-        {bannerArr
-          .reverse()
-          .map(({ image, slogan, button, header, to, fn }, index) => {
-            if (index === bannerIndex) {
-              return (
-                <motion.div
-                  variants={variant as Variants}
-                  className="banner "
-                  key={index}
-                  initial="start"
-                  exit="exit"
-                  animate="end"
-                  custom={{ dir, width }}
-                >
-                  {/* here */}
-                  <BannerText
-                    header={header}
-                    clr={arrClrs[index]}
-                    button={button}
-                    slogan={slogan}
-                    to={to}
-                    fn={fn}
-                    key={header}
-                  />
-                  <div
-                    className="background"
-                    style={{
-                      background: arrClrs[bannerIndex],
-                      opacity: 0.5,
-                    }}
-                  ></div>
+    <Animation>
+      <section className="banner-par center" id="banner" ref={animateRef}>
+        <AnimatePresence custom={{ dir, width }} mode="wait">
+          {bannerArr
+            .reverse()
+            .map(({ image, slogan, button, header, to, fn }, index) => {
+              if (index === bannerIndex) {
+                return (
+                  <motion.div
+                    variants={variant as Variants}
+                    className="banner "
+                    key={index}
+                    initial="start"
+                    exit="exit"
+                    animate="end"
+                    custom={{ dir, width }}
+                  >
+                    <BannerText
+                      header={header}
+                      clr={arrClrs[index]}
+                      button={button}
+                      slogan={slogan}
+                      to={to}
+                      fn={fn}
+                      key={header}
+                    />
+                    <div
+                      className="background"
+                      style={{
+                        background: arrClrs[bannerIndex],
+                      }}
+                    ></div>
 
-                  <div className="banner-image center ">
-                    <BannerImg img={image} />
-                  </div>
-                </motion.div>
-              );
-            }
+                    <div className="banner-image center ">
+                      <BannerImg img={image} />
+                    </div>
+                  </motion.div>
+                );
+              }
+            })}
+        </AnimatePresence>
+        <div className=" banner-dots-par center">
+          {[0, 1, 2, 3].map((dot) => {
+            return (
+              <span
+                onClick={() => {
+                  setBannerIndex(dot);
+                }}
+                key={dot}
+                className={`box-shadow banner-dot ${
+                  dot === bannerIndex ? "active" : ""
+                }`}
+              ></span>
+            );
           })}
-      </AnimatePresence>
-      <div className=" banner-dots-par center">
-        {[0, 1, 2, 3].map((dot) => {
-          return (
-            <span
-              onClick={() => {
-                setBannerIndex(dot);
-              }}
-              key={dot}
-              className={`box-shadow banner-dot ${
-                dot === bannerIndex ? "active" : ""
-              }`}
-            ></span>
-          );
-        })}
-      </div>
-    </section>
+        </div>
+      </section>
+    </Animation>
   );
 };
 

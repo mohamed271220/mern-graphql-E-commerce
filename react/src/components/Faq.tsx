@@ -1,6 +1,7 @@
 import React from "react";
+//@ts-ignore
 import Faq from "react-faq-component";
-
+import Animation from "./widgets/Animation";
 const data = {
   title: "Frequently Asked Questions",
   rows: [
@@ -54,26 +55,28 @@ const data = {
 
 const FaqComponent = () => {
   return (
-    <div
-      className="center box-shadow faq"
-      style={{ padding: 40, marginTop: 40 }}
-    >
-      <Faq
-        data={data}
-        styles={{
-          bgColor: "var(--secondary)",
-          rowContentPaddingLeft: "10px",
-          rowContentPaddingRight: "20px",
-          rowContentPaddingBottom: "8px",
-          rowContentColor: "var(--white)",
-          titleTextColor: "var(--twitter)",
-          rowTitleColor: "var(--wheat)",
-          arrowColor: "var(--white)",
-          rowContentTextSize: "12px",
-          rowTitleTextSize: "14px",
-        }}
-      />
-    </div>
+    <Animation>
+      <div
+        className="center box-shadow faq"
+        style={{ padding: 40, marginTop: 40 }}
+      >
+        <Faq
+          data={data}
+          styles={{
+            bgColor: "var(--secondary)",
+            rowContentPaddingLeft: "10px",
+            rowContentPaddingRight: "20px",
+            rowContentPaddingBottom: "8px",
+            rowContentColor: "var(--white)",
+            titleTextColor: "var(--twitter)",
+            rowTitleColor: "var(--wheat)",
+            arrowColor: "var(--white)",
+            rowContentTextSize: "12px",
+            rowTitleTextSize: "14px",
+          }}
+        />
+      </div>
+    </Animation>
   );
 };
 

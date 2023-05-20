@@ -56,7 +56,7 @@ const Cart = () => {
             );
           })}
         </div>
-        <Transition />
+        {/* <Transition /> */}
 
         <div className="center row between w-100">
           <NoData length={cart.length} message="No products at your cart">

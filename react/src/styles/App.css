@@ -40,12 +40,17 @@
   align-items: center;
 }
 
-.remove-border, .inp, .btn {
+.remove-border,
+.inp,
+.btn {
   border: 0;
   outline: 0;
 }
 
-.shadow, .about-par p.middle, .custom-title, .btn {
+.shadow,
+.about-par p.middle,
+.custom-title,
+.btn {
   filter: drop-shadow 0.2px 0.5px 0.8px black;
   text-shadow: 0.2px 0.5px 0.8px black;
 }
@@ -218,7 +223,7 @@
 .underline:before {
   content: "";
   -webkit-clip-path: polygon(0 11%, 0 4%, 100% 10%);
-          clip-path: polygon(0 11%, 0 4%, 100% 10%);
+  clip-path: polygon(0 11%, 0 4%, 100% 10%);
   position: absolute;
   top: 100%;
   left: 0;
@@ -589,18 +594,21 @@ nav ul li a.link::after {
   background: var(--wheat);
   width: 0;
 }
-nav ul li a.link:hover:before, nav ul li a.link.active:before {
+nav ul li a.link:hover:before,
+nav ul li a.link.active:before {
   border-bottom-right-radius: 3px;
   width: 50%;
 }
-nav ul li a.link:hover:after, nav ul li a.link.active:after {
+nav ul li a.link:hover:after,
+nav ul li a.link.active:after {
   width: 50%;
   border-bottom-left-radius: 3px;
 }
 nav ul li a.link.active {
   color: var(--green);
 }
-nav ul li a.link.active.active:before, nav ul li a.link.active.active:after {
+nav ul li a.link.active.active:before,
+nav ul li a.link.active.active:after {
   width: 50%;
 }
 
@@ -770,7 +778,7 @@ nav ul li a.link.active.active:before, nav ul li a.link.active.active:after {
   width: 9vw;
   max-width: 70px;
   -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   padding: 5px;
   filter: drop-shadow(1.5px 4px 1.5px black);
 }
@@ -825,7 +833,7 @@ nav ul li a.link.active.active:before, nav ul li a.link.active.active:after {
     height: 50px;
     width: 50px;
     -o-object-fit: contain;
-       object-fit: contain;
+    object-fit: contain;
   }
 }
 
@@ -1039,7 +1047,7 @@ p::first-letter {
   width: 80px;
   height: 80px;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   border-radius: 50%;
 }
 
@@ -1155,7 +1163,7 @@ p.review-user {
   top: 0;
   right: 0;
   -webkit-clip-path: polygon(24% 0, 100% 0, 100% 100%, 0% 100%);
-          clip-path: polygon(24% 0, 100% 0, 100% 100%, 0% 100%);
+  clip-path: polygon(24% 0, 100% 0, 100% 100%, 0% 100%);
   height: 100%;
   width: 50%;
 }
@@ -1170,7 +1178,7 @@ p.review-user {
 }
 .banner-par .banner .banner-image img {
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   height: 80%;
   max-width: 300px;
   filter: drop-shadow(4px 10px 5px black);
@@ -1231,7 +1239,7 @@ p.review-user {
 @media (max-width: 700px) {
   .banner-par .banner .background {
     -webkit-clip-path: polygon(24% 0, 100% 0, 100% 100%, 0% 100%);
-            clip-path: polygon(24% 0, 100% 0, 100% 100%, 0% 100%);
+    clip-path: polygon(24% 0, 100% 0, 100% 100%, 0% 100%);
   }
 }
 :root {
@@ -1504,7 +1512,7 @@ svg.svg-star {
   height: 80px;
   width: 90%;
   -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   filter: drop-shadow(2px 2px 3px black);
 }
 .product-List .img-par:hover img {
@@ -1602,7 +1610,7 @@ svg.svg-star {
   width: 90%;
   height: 90%;
   -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
   filter: drop-shadow(2px 5px 5px black);
 }
 
@@ -2330,7 +2338,11 @@ table.order tr:nth-child(odd) {
   transition: 0.3s;
   color: var(--secondary);
 }
-.sort-par .view-par .view-icon.shadow, .sort-par .view-par .view-icon.btn, .sort-par .view-par .view-icon.custom-title, .sort-par .view-par .about-par p.view-icon.middle, .about-par .sort-par .view-par p.view-icon.middle {
+.sort-par .view-par .view-icon.shadow,
+.sort-par .view-par .view-icon.btn,
+.sort-par .view-par .view-icon.custom-title,
+.sort-par .view-par .about-par p.view-icon.middle,
+.about-par .sort-par .view-par p.view-icon.middle {
   filter: drop-shadow(0.5px 1.5px 1px black);
 }
 
@@ -2520,7 +2532,7 @@ table.order tr:nth-child(odd) {
   text-transform: capitalize;
 }
 
-input[type=range] {
+input[type="range"] {
   accent-color: var(--wheat-light);
 }
 
@@ -2592,12 +2604,17 @@ input[type=range] {
   align-items: center;
 }
 
-.remove-border, .btn, .inp {
+.remove-border,
+.btn,
+.inp {
   border: 0;
   outline: 0;
 }
 
-.shadow, .btn, .custom-title, .about-par p.middle {
+.shadow,
+.btn,
+.custom-title,
+.about-par p.middle {
   filter: drop-shadow 0.2px 0.5px 0.8px black;
   text-shadow: 0.2px 0.5px 0.8px black;
 }
@@ -2770,7 +2787,7 @@ input[type=range] {
 .underline:before {
   content: "";
   -webkit-clip-path: polygon(0 11%, 0 4%, 100% 10%);
-          clip-path: polygon(0 11%, 0 4%, 100% 10%);
+  clip-path: polygon(0 11%, 0 4%, 100% 10%);
   position: absolute;
   top: 100%;
   left: 0;
@@ -3097,7 +3114,8 @@ input[type=range] {
   align-items: center;
   gap: 10px;
 }
-#dash-aside a.active, #dash-aside a:hover {
+#dash-aside a.active,
+#dash-aside a:hover {
   background: var(--green);
   font-weight: bold;
   color: var(--main);
@@ -3406,7 +3424,7 @@ div.dash-nav {
   width: 20vw;
   height: 120px;
   -o-object-fit: contain;
-     object-fit: contain;
+  object-fit: contain;
 }
 
 .nodata-compare {
@@ -3517,7 +3535,9 @@ div.dash-nav {
   opacity: 0;
   transform: translateX(1000px);
 }
-.custom-file .custon-file-pos, .custom-file .span-file, .custom-file .btn-file {
+.custom-file .custon-file-pos,
+.custom-file .span-file,
+.custom-file .btn-file {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -3532,4 +3552,4 @@ div.dash-nav {
   letter-spacing: 0.8px;
   text-transform: capitalize;
   left: 10px;
-}/*# sourceMappingURL=App.css.map */
+} /*# sourceMappingURL=App.css.map */

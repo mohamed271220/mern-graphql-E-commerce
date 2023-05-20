@@ -21,7 +21,7 @@ const DashMain = ({ head, children }: Props) => {
       transition={{ delay: showAsideDash ? 0.2 : 0.7 }}
     >
       <BeardCrumbs />
-      <Transition />
+      {/* <Transition /> */}
       <h2 className="underline header">{head}</h2>
       {children}
     </motion.section>

@@ -6,6 +6,7 @@ import { useAppSelector } from "../../custom/reduxTypes";
 import SelectedProductData from "./SelectedProductData";
 import { motion, AnimatePresence } from "framer-motion";
 import FadeElement from "../widgets/FadeElement";
+import { reverseVariant } from "../../variants/globals";
 interface Props {
   product: string;
   setProduct: React.Dispatch<React.SetStateAction<string>>;
@@ -19,7 +20,13 @@ const SeletedProduct = ({ product, setProduct, order }: Props) => {
   });
 
   return (
-    <div className="center col gap w-100">
+    <motion.div
+      className="center col gap w-100"
+      variants={reverseVariant}
+      initial="start"
+      animate="end"
+      custom={order}
+    >
       <ProductSelect
         setProduct={setProduct}
         product={product === "" ? `-- select ${order} product --` : product}
@@ -58,7 +65,7 @@ const SeletedProduct = ({ product, setProduct, order }: Props) => {
           </AnimatePresence>
         </motion.div>
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 };
 export default SeletedProduct;

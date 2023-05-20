@@ -6,7 +6,9 @@ import DashMain from "../../DashMain";
 import OrderDetailTr from "./OrderDetialTr";
 import Customer from "./Customer";
 import OrderSummery from "./OrderSummery";
-
+import { motion } from "framer-motion";
+import { parentVariant, reverseVariant } from "../../../../variants/globals";
+import Animation from "../../../widgets/Animation";
 const OrderDetails = () => {
   const { id } = useParams();
 
@@ -18,47 +20,40 @@ const OrderDetails = () => {
       data.order;
     return (
       <DashMain head="">
-        {/* <h2
-          className="shadow  mobile-order-details 
-            underline header
-          "
-          style={{
-            margin: 6,
-
-            color: "var(--secondary)",
-            fontSize: "1.1rem",
-          }}
-        >
-          <span style={{ color: "var(--wheat-light)" }} className="shadow">
-            order{" "}
-          </span>
-          #{_id}
-        </h2> */}
-
-        <div className="order-details-grid">
-          <table
-            className="table-order-detail box-shadow"
-            style={{ width: "100%" }}
+        <Animation addIntialX={false}>
+          <motion.div
+            variants={parentVariant}
+            // initial="start"
+            // animate="end"
+            custom={0.4}
+            className="order-details-grid"
           >
-            <th>items summary</th>
-            <th>QTY</th>
-            <th>Price</th>
-            <th>total price</th>
-            {productId.map((ob: any, i: number) => {
-              return (
-                <>
-                  <OrderDetailTr OrderDetailTr key={ob._id} {...ob} />
-                </>
-              );
-            })}
-          </table>
-          <Customer state={state} userId={userId} cost={cost} />
-          <OrderSummery
-            created={createdAt}
-            delivered={deliveredAt}
-            total={cost}
-          />
-        </div>
+            <motion.table
+              variants={reverseVariant}
+              custom={"first"}
+              className="table-order-detail box-shadow"
+              style={{ width: "100%" }}
+            >
+              <th>items summary</th>
+              <th>QTY</th>
+              <th>Price</th>
+              <th>total price</th>
+              {productId.map((ob: any, i: number) => {
+                return (
+                  <>
+                    <OrderDetailTr OrderDetailTr key={ob._id} {...ob} />
+                  </>
+                );
+              })}
+            </motion.table>
+            <Customer state={state} userId={userId} cost={cost} />
+            <OrderSummery
+              created={createdAt}
+              delivered={deliveredAt}
+              total={cost}
+            />
+          </motion.div>
+        </Animation>
       </DashMain>
     );
   } else {

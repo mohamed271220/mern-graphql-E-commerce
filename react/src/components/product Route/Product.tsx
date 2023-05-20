@@ -6,8 +6,10 @@ import { ProductInterface, reviewInterface } from "../../interfaces/product";
 import { AnimatePresence } from "framer-motion";
 import { useParams } from "react-router-dom";
 import Transition from "../widgets/Transition";
+import Animation from "../widgets/Animation";
 import { useAppSelector } from "../../custom/reduxTypes";
 import { isAuthContext } from "../../context/isAuth";
+import ContinueShopping from "../widgets/ContinueShopping";
 
 export interface productContextInterface extends ProductInterface {
   reviews: reviewInterface[];
@@ -49,7 +51,7 @@ const Product = () => {
     } = singleProduct;
 
     return (
-      <>
+      <Animation>
         {singleProduct && (
           <productContext.Provider
             value={{
@@ -68,8 +70,9 @@ const Product = () => {
               createdAt,
             }}
           >
-            <Transition />
+            {/* <Transition /> */}
             <div className="product-container box-shadow">
+              <ContinueShopping />
               <section className="product-page">
                 <ProductImages
                   key={_id}
@@ -93,7 +96,7 @@ const Product = () => {
             </div>
           </productContext.Provider>
         )}
-      </>
+      </Animation>
     );
   } else {
     return <> loading</>;

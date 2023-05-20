@@ -55,7 +55,7 @@ const Dashboard = () => {
   return (
     <showAsideContext.Provider value={{ showAsideDash, setShowAsideDash }}>
       <div className="dashboard-par " ref={ref}>
-        <Transition />
+        {/* <Transition /> */}
         <div style={{ marginRight: 10, gap: 8 }} className="dash-nav center">
           <NotificationDropDown />
           <NavImg />

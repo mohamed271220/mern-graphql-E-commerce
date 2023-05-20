@@ -19,14 +19,14 @@ export const btnTap = {
 
 export const parentVariant = {
   start: { height: 0 },
-  end: {
+  end: (delay: number) => ({
     height: "auto",
     transition: {
       when: "beforeChildren",
-      staggerChildren: 0.1,
+      staggerChildren: delay || 0.1,
       duration: 0.4,
     },
-  },
+  }),
   exit: {
     height: 0,
     transition: {
@@ -146,4 +146,9 @@ export const textVariant = {
     opacity: 1,
     transition: { delay: 0.8, repeatDelay: 1, duration: 0.4 },
   },
+};
+
+export const reverseVariant = {
+  start: (order: string) => ({ x: order === "first" ? -800 : 800 }),
+  end: { x: 0, transition: { type: "tween" } },
 };

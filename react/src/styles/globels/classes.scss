@@ -241,7 +241,6 @@
 }
 .custom-title {
   display: inline-flex;
-
   justify-content: center;
   align-items: center;
   @extend .shadow;
@@ -258,7 +257,7 @@
   border-radius: 4px;
   letter-spacing: 0.8px;
   height: 20px;
-  font-size: 1rem;
+  font-size: 0.8rem;
   box-shadow: 0.5px 0.5px 1px black;
   text-transform: capitalize;
   &.right {
@@ -307,5 +306,17 @@
     padding: 20px;
     padding-bottom: 0;
     box-shadow: 1px 1px 5px black;
+    max-width: 700px;
+  }
+}
+
+.continue-shopping {
+  position: absolute;
+  top: 0px;
+  left: 5px;
+  background: linear-gradient(30deg, var(--wheat), var(--sale));
+
+  svg {
+    font-size: 1.4rem;
   }
 }
