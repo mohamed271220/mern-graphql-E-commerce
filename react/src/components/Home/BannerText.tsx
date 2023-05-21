@@ -15,7 +15,7 @@ interface Props {
 const BannerText = ({ fn, header, clr, button, to, slogan }: Props) => {
   return (
     <motion.div
-      className="banner-content center"
+      className="banner-content center col"
       initial="start"
       animate="end"
       transition={{ duration: 0.6, delay: 0.4 }}

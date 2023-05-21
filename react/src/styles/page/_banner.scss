@@ -3,18 +3,18 @@
 .banner-par {
   .banner {
     width: 100%;
-    margin: 0 auto;
     height: 100vh;
+    margin: 0 auto;
 
-    // .background {
-    //   position: absolute;
-    //   top: 0;
-    //   right: 0;
-    //   height: 100%;
-    //   width: 100%;
-    //   opacity: 0.2;
-    //   z-index: 2;
-    // }
+    .background {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.4);
+    }
 
     .banner-image {
       position: absolute;
@@ -28,9 +28,10 @@
         margin-top: 40px;
         margin: 0;
         padding: 0;
-        height: 100vh;
-        width: 100vw;
+        height: 100%;
+        width: 100%;
         object-fit: cover;
+        transition: 0.3s;
         object-position: center;
       }
     }
@@ -46,10 +47,7 @@
   background: rgba(49, 47, 47, 0.404);
   box-shadow: 1px 1px 4px black;
   padding: 10px 20px;
-  display: flex;
-  flex-direction: column;
-
-  min-width: 250px;
+  min-width: 280px;
   gap: 10px;
   position: absolute;
   z-index: 4;
@@ -60,8 +58,7 @@
   h1 {
     letter-spacing: 1px;
     white-space: nowrap;
-    text-shadow: 0.4px 0.5px 1px black;
-    text-shadow: 0.5px 0.5px 3px black;
+    text-shadow: 0.5px 0.5px 1px black;
 
     font-size: 1.8rem;
     color: var(--green);

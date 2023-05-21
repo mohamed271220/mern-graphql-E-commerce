@@ -10,6 +10,7 @@ import {
   motion,
   MotionProps,
   useAnimate,
+  useAnimationControls,
   Variants,
 } from "framer-motion";
 import useMeasure from "react-use-measure";
@@ -28,6 +29,7 @@ import useIndex from "../../../../custom/useIndex";
 import CompareIcons from "../../../widgets/CompareIcons";
 import StyledPrice from "../../../widgets/StyledPrice";
 import { useScrollDirection } from "react-use-scroll-direction";
+import { opacityVariant } from "../../../../variants/globals";
 
 type Props = {
   _id: string;
@@ -91,6 +93,11 @@ const ProductFliter = ({
   }, [changeImgOnHover, imgInd]);
 
   const { isScrollingDown } = useScrollDirection();
+  const [imgRef, animateImg] = useAnimate();
+  useEffect(() => {
+    animateImg("span", { opacity: [0, 1] }, { delay: 0.4, duration: 0.4 });
+  }, [gridView]);
+
   return (
     <motion.div
       ref={ref}
@@ -106,6 +113,9 @@ const ProductFliter = ({
         }`}
         {...motionProps}
         ref={sectionRef}
+        initial={{ height: sectionWidth <= 400 && !gridView ? 260 : 180 }}
+        animate={{ height: sectionWidth <= 400 && !gridView ? 180 : 260 }}
+        transition={{ duration: 0.1, type: "tween" }}
       >
         <motion.div
           className={` img-par center ${gridView ? "grid" : "list"}`}
@@ -115,6 +125,7 @@ const ProductFliter = ({
           initial="start"
           exit={"exit"}
           custom={{ dir, width: 100 }}
+          ref={imgRef}
         >
           <AnimatePresence mode="wait">
             <LazyLoadImage
@@ -126,7 +137,10 @@ const ProductFliter = ({
         </motion.div>
 
         <div className="center col product-data">
-          <h5 className="header underline product-head-underline">
+          <h5
+            className="header underline product-head-underline"
+            style={{ marginBottom: 12 }}
+          >
             {productSearchWord
               ? category
                   .split(new RegExp(`(${productSearchWord})`, "gi"))
@@ -173,9 +187,27 @@ const ProductFliter = ({
               <span className="stock"> {stock}</span>in stock
             </span>
           )}
-          {!gridView && sectionWidth >= 400 && (
-            <p style={{ fontWeight: "normal" }}>{description}</p>
-          )}
+
+          <AnimatePresence mode="wait">
+            {!gridView && sectionWidth >= 400 && (
+              <motion.p
+                key={description}
+                initial={{
+                  height: 0,
+                  opacity: 0,
+                }}
+                animate={{
+                  height: 50,
+                  opacity: 1,
+                  transition: { delay: 0.3, duration: 0.3 },
+                }}
+                exit={{ height: 0, opacity: 0, transition: { duration: 0.3 } }}
+                style={{ fontWeight: "normal" }}
+              >
+                {description}
+              </motion.p>
+            )}
+          </AnimatePresence>
           <StyledPrice price={price} />
           <span> </span>
 

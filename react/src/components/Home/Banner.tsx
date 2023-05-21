@@ -1,20 +1,28 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, useRef } from "react";
 import useIndex from "../../custom/useIndex";
 import useCarousel from "../../custom/useCarousel";
-import { AnimatePresence, Variants, motion } from "framer-motion";
+import {
+  AnimatePresence,
+  Variants,
+  motion,
+  useInView,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import useMeasure from "react-use-measure";
 import useFilterCategory from "../../custom/useFilterCategory";
 import { productListContext } from "../../context/FilterData";
 import useFilterState from "../../custom/useFIlterState";
 import BannerText from "./BannerText";
 import { useAppSelector } from "../../custom/reduxTypes";
-import BannerImg from "./BannerImg";
-const arrClrs = ["var(--fb)", "var(--green)", "var(--delete)", "var(--sale)"];
 import MainImage from "../../assets/banner/4.jpg";
 import LapImage from "../../assets/banner/laptop.jpg";
 import FashionImage from "../../assets/banner/fashion.jpg";
 import SaleImage from "../../assets/banner/sale.jpg";
 import Animation from "../widgets/Animation";
+import { mergeRefs } from "react-merge-refs";
+
+const arrClrs = ["var(--gmail)", "var(--delete)", "var(--fb)", "var(--green)"];
 const Banner = () => {
   const { Allproducts } = useAppSelector((st) => st.Allproducts);
   const categoryfn = useFilterCategory();
@@ -84,21 +92,34 @@ const Banner = () => {
   let timer: number | undefined;
 
   const [convertNegativeToZero] = useIndex();
-
+  const [animateRef, { width }] = useMeasure();
+  const ref = useRef<HTMLElement | null>(null);
+  const inview = useInView(ref, { amount: "all" });
   useEffect(() => {
-    timer = setTimeout(() => {
-      setBannerIndex((cur) => convertNegativeToZero(cur + 1, bannerArr.length));
-    }, 3000);
+    if (inview) {
+      timer = setTimeout(() => {
+        setBannerIndex((cur) =>
+          convertNegativeToZero(cur + 1, bannerArr.length)
+        );
+      }, 3000);
+    }
 
     return () => clearTimeout(timer);
-  }, [bannerIndex]);
+  }, [bannerIndex, inview]);
 
   const [variant, dir] = useCarousel(bannerIndex, bannerArr.length);
-  const [animateRef, { width }] = useMeasure();
-
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+  const bgWidth = useTransform(scrollYProgress, [0, 1], ["100%", "140%"]);
   return (
     <Animation>
-      <section className="banner-par center" id="banner" ref={animateRef}>
+      <section
+        className="banner-par center"
+        id="banner"
+        ref={mergeRefs([ref, animateRef])}
+      >
         <AnimatePresence custom={{ dir, width }} mode="wait">
           {bannerArr
             .reverse()
@@ -123,15 +144,13 @@ const Banner = () => {
                       fn={fn}
                       key={header}
                     />
-                    <div
-                      className="background"
-                      style={{
-                        background: arrClrs[bannerIndex],
-                      }}
-                    ></div>
+                    <div className="background"></div>
 
                     <div className="banner-image center ">
-                      <BannerImg img={image} />
+                      <motion.img
+                        src={image}
+                        style={{ width: bgWidth, height: bgWidth }}
+                      />
                     </div>
                   </motion.div>
                 );
@@ -139,15 +158,15 @@ const Banner = () => {
             })}
         </AnimatePresence>
         <div className=" banner-dots-par center">
-          {[0, 1, 2, 3].map((dot) => {
+          {[...Array(4)].map((_, i) => {
             return (
               <span
                 onClick={() => {
-                  setBannerIndex(dot);
+                  setBannerIndex(i);
                 }}
-                key={dot}
+                key={i}
                 className={`box-shadow banner-dot ${
-                  dot === bannerIndex ? "active" : ""
+                  i === bannerIndex ? "active" : ""
                 }`}
               ></span>
             );

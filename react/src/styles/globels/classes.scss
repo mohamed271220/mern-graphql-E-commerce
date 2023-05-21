@@ -278,6 +278,9 @@
 .icon {
   font-size: 1rem;
   filter: drop-shadow(0.2px 0.1px 0.2px black);
+  &.icon-shadow {
+    filter: drop-shadow(1px 1px 1.25px black);
+  }
 }
 
 .no-data {

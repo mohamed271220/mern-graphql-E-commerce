@@ -5,28 +5,8 @@
   margin-top: 50px;
   margin-bottom: 20px;
 }
-.log-in form {
-  background: #000;
-  width: 40vw;
-  max-width: 300px;
-  height: -moz-fit-content;
-  height: fit-content;
-  padding: 40px 0;
-  border-radius: 5px;
-  flex-direction: column;
-  gap: 25px;
-  overflow: hidden;
-}
-.log-in form input {
-  height: 30px;
-  padding-right: 20px;
-}
-.log-in form button {
-  height: 30px;
-  margin: 0 auto;
-}
 .log-in .redirect {
-  color: var(--main);
+  color: var(--white);
   letter-spacing: 1.1px;
 }
 .log-in .redirect a {
@@ -45,13 +25,38 @@
   text-decoration-color: var(--green);
   cursor: pointer;
 }
+.log-in form {
+  background: var(--secondary);
+  width: 40vw;
+  max-width: 300px;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 40px 0;
+  border-radius: 5px;
+  flex-direction: column;
+  box-shadow: 0.5px 0.5px 2px black;
+  gap: 25px;
+  overflow: hidden;
+}
+.log-in form input {
+  height: 30px;
+  padding-right: 20px;
+  background-color: var(--main);
+  box-shadow: 0.5px 0.5px 0.5px black;
+  border-radius: 5px;
+  color: var(--third);
+}
+.log-in form button {
+  height: 30px;
+  margin: 0 auto;
+}
 .log-in .log-with {
   gap: 10px;
 }
 .log-in .log-with .log-social {
   width: 2.2rem;
   height: 2.2rem;
-  background: var(--main);
+  background: var(--secondary);
   border-radius: 5px;
   transition: 0.5s;
 }
@@ -63,6 +68,9 @@
 .or {
   position: relative;
   top: 10px;
+}
+.or span {
+  background-color: var(--secondary) !important;
 }
 
 .inp-parent {
@@ -84,11 +92,11 @@
 }
 .inp-parent .placeholder.placeholder-center {
   left: 5px;
-  color: var(--sale);
+  color: var(--wheat);
 }
 .inp-parent .placeholder.placeholder-top {
   left: 5px;
-  color: var(--main);
+  color: var(--white);
   text-shadow: 1px 0.5px 1px black;
   transform: translateY(-50%);
   background: var(--trending);
@@ -102,7 +110,7 @@
   top: 50%;
   transform: translateY(-50%);
   font-size: 1.2rem;
-  color: var(--delete);
+  color: var(--gmail);
   cursor: pointer;
 }
 

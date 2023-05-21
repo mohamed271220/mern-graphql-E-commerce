@@ -64,7 +64,7 @@ const Sort = () => {
             <BsListTask
               onClick={() => setGridView(false)}
               style={{ color: gridView ? "var(--third)" : "var(--green)" }}
-              className={`view-icon  ${!gridView ? "shadow" : ""} `}
+              className={`view-icon  ${!gridView ? "icon icon-shadow" : ""} `}
             />
           </Title>
 
@@ -72,7 +72,7 @@ const Sort = () => {
             <HiOutlineViewGrid
               onClick={() => setGridView(true)}
               style={{ color: gridView ? "var(--green)" : "var(--third)" }}
-              className={`view-icon  ${gridView ? "shadow" : ""} `}
+              className={`view-icon  ${gridView ? "icon icon-shadow" : ""} `}
             />
           </Title>
         </div>

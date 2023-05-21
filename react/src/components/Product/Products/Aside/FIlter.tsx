@@ -56,7 +56,7 @@ const FIlter = ({ head, children }: Props) => {
           </AnimatePresence>
         </>
       </div>
-      <div className="hr"></div>
+      {head !== "price" && <div className="hr"></div>}
     </>
   );
 };

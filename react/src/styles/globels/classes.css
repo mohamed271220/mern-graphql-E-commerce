@@ -18,15 +18,15 @@
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
-  --pending: rgba(128, 128, 128, 0.493);
-  --user: rgba(128, 128, 128, 0.493);
-  --canceled: rgba(137, 29, 29, 0.543);
-  --hold: rgba(243, 165, 20, 0.591);
-  --owner: rgba(243, 165, 20, 0.591);
-  --shipped: rgba(4, 81, 4, 0.446);
-  --admin: rgba(4, 81, 4, 0.446);
-  --delivered: rgba(44, 44, 171, 0.528);
-  --moderator: rgba(44, 44, 171, 0.528);
+  --pending: rgb(128, 128, 128);
+  --user: rgb(128, 128, 128);
+  --canceled: rgb(137, 29, 29);
+  --hold: rgb(243, 165, 20);
+  --owner: rgb(243, 165, 20);
+  --shipped: rgb(4, 81, 4);
+  --admin: rgb(4, 81, 4);
+  --delivered: var(--sale);
+  --moderator: var(--sale);
 }
 
 .center {
@@ -46,7 +46,7 @@
 }
 
 .box-shadow {
-  box-shadow: 0.2px 2px 2px black;
+  box-shadow: 0.2px 2px 4px black;
 }
 
 .btn {
@@ -70,7 +70,7 @@
 }
 .btn.about {
   background: var(--main);
-  color: var(--secondary);
+  color: var(--third);
 }
 .btn.main {
   background: linear-gradient(30deg, var(--wheat), var(--green));
@@ -84,6 +84,7 @@
   width: 80%;
   margin: 0 auto;
   font-size: 1rem;
+  box-shadow: 0.5px 0.5px 1.5px black;
 }
 
 .or {
@@ -120,16 +121,12 @@
   white-space: nowrap;
 }
 
-.icon {
-  filter: drop-shadow(0px 0.5px 0.5px rgba(0, 0, 0, 0.616));
-  font-size: 1rem;
-}
-
 .hr {
   width: 95%;
-  height: 0.3px;
-  background: var(--secondary);
+  height: 0.2px;
+  background: grey;
   margin: 0 auto;
+  opacity: 0.4;
 }
 
 .overley {
@@ -156,7 +153,7 @@
   font-weight: bold;
   font-size: 0.8rem;
   background: var(--gmail);
-  color: var(--main);
+  color: var(--white);
   border-radius: 50%;
 }
 
@@ -204,18 +201,20 @@
   margin-top: -5px;
   text-transform: capitalize;
   letter-spacing: 0.8px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
 }
 
 .underline {
   position: relative;
-  color: var(--secondary);
+  color: var(--third);
 }
 .underline:before {
   content: "";
   -webkit-clip-path: polygon(0 11%, 0 4%, 100% 10%);
           clip-path: polygon(0 11%, 0 4%, 100% 10%);
   position: absolute;
-  top: 100%;
+  top: 120%;
   left: 0;
   width: 100%;
   height: 40px;
@@ -283,14 +282,16 @@
   width: -moz-fit-content;
   width: fit-content;
   padding: 4px 6px;
-  background: var(--wheat-title);
-  color: var(--white);
+  background: var(--secondary);
+  color: var(--white) !important;
   z-index: 1000;
   white-space: nowrap;
   border-radius: 4px;
   letter-spacing: 0.8px;
   height: 20px;
-  font-size: 1rem;
+  font-size: 0.8rem;
+  box-shadow: 0.5px 0.5px 1px black;
+  text-transform: capitalize;
 }
 .custom-title.right {
   right: 0;
@@ -308,6 +309,44 @@
 }
 
 .icon {
-  filter: drop-shadow(0.5px 1.2px 0.4px black);
-  filter: drop-shadow(0.5px 1px 0.4px black);
+  font-size: 1rem;
+  filter: drop-shadow(0.2px 0.1px 0.2px black);
+}
+
+.no-data {
+  width: 100%;
+  height: 70%;
+  min-height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: capitalize;
+  font-weight: bold;
+  color: var(--third);
+  letter-spacing: 1px;
+}
+
+.above {
+  position: relative;
+  z-index: 5;
+}
+
+.faq section:last-child {
+  border: none;
+}
+.faq > * {
+  padding: 20px;
+  padding-bottom: 0;
+  box-shadow: 1px 1px 5px black;
+  max-width: 700px;
+}
+
+.continue-shopping {
+  position: absolute;
+  top: 0px;
+  left: 5px;
+  background: linear-gradient(30deg, var(--wheat), var(--sale));
+}
+.continue-shopping svg {
+  font-size: 1.4rem;
 }/*# sourceMappingURL=classes.css.map */

@@ -18,13 +18,13 @@
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
-  --pending: rgba(128, 128, 128, 0.493);
-  --user: rgba(128, 128, 128, 0.493);
-  --canceled: rgba(137, 29, 29, 0.543);
-  --hold: rgba(243, 165, 20, 0.591);
-  --owner: rgba(243, 165, 20, 0.591);
-  --shipped: rgba(4, 81, 4, 0.446);
-  --admin: rgba(4, 81, 4, 0.446);
-  --delivered: rgba(44, 44, 171, 0.528);
-  --moderator: rgba(60, 229, 108, 0.528);
-} /*# sourceMappingURL=variables.css.map */
+  --pending: rgb(128, 128, 128);
+  --user: rgb(128, 128, 128);
+  --canceled: rgb(137, 29, 29);
+  --hold: rgb(243, 165, 20);
+  --owner: rgb(243, 165, 20);
+  --shipped: rgb(4, 81, 4);
+  --admin: rgb(4, 81, 4);
+  --delivered: var(--sale);
+  --moderator: var(--sale);
+}/*# sourceMappingURL=variables.css.map */

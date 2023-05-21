@@ -7,6 +7,7 @@ import { AnimatePresence } from "framer-motion";
 import SLiderComponent from "../../widgets/SLider";
 import { viewContext } from "../../../context/gridView";
 import Transition from "../../widgets/Transition";
+import Animation from "../../widgets/Animation";
 import NoData from "../../widgets/NoData";
 
 const offerArr = [
@@ -37,7 +38,7 @@ const Cart = () => {
   }, []);
 
   return (
-    <>
+    <Animation>
       <div className="cart-cont center col">
         <div className="offer-cart center col">
           {offerArr.map(({ offer, money }, i) => {
@@ -74,7 +75,7 @@ const Cart = () => {
         </div>
       </div>
       {showSlider && <SLiderComponent key={"cart-slider"} />}
-    </>
+    </Animation>
   );
 };
 
