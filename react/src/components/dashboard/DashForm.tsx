@@ -20,6 +20,7 @@ import {
   updateProductRedux,
 } from "../../redux/productSlice";
 import { useAppDispatch } from "../../custom/reduxTypes";
+import FormAnimation from "../widgets/FormAnimation";
 
 interface keyedProduct extends ProductInterface {
   [key: string]: any;
@@ -153,9 +154,9 @@ const DashForm = ({ type, Icon, fn, id, obj, head, btn }: Props) => {
   return (
     <DashMain head="">
       <FormProvider {...methods}>
-        <form
-          className="update-product-form center  col box-shadow"
-          onSubmit={handleSubmit(onSubmit)}
+        <FormAnimation
+          fn={handleSubmit(onSubmit)}
+          cls="update-product-form center  col box-shadow"
         >
           <h2 className="underline header " style={{ color: "var(--white)" }}>
             {head}
@@ -194,7 +195,7 @@ const DashForm = ({ type, Icon, fn, id, obj, head, btn }: Props) => {
             fn={() => null}
             Icon={Icon}
           />
-        </form>
+        </FormAnimation>
         <AnimatePresence>
           <motion.span
             variants={opacityVariant}

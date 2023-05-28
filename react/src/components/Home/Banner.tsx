@@ -147,10 +147,7 @@ const Banner = () => {
                     <div className="background"></div>
 
                     <div className="banner-image center ">
-                      <motion.img
-                        src={image}
-                        style={{ width: bgWidth, height: bgWidth }}
-                      />
+                      <motion.img src={image} style={{ width: bgWidth }} />
                     </div>
                   </motion.div>
                 );

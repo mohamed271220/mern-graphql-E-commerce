@@ -6,14 +6,12 @@ import { FcMinus } from "react-icons/fc";
 import { BiPlus } from "react-icons/bi";
 import { ChildrenInterFace } from "../../../../interfaces/general";
 import Title from "../../../widgets/Title";
-import useShowTitle from "../../../../custom/useShowTitle";
 
 interface Props extends ChildrenInterFace {
   head: string;
 }
 const FIlter = ({ head, children }: Props) => {
   const [showCategory, handleShowCategory, handleHideCategory] = useHide();
-  const [bool, show, hide] = useShowTitle();
   return (
     <>
       <div className="category-par  ">

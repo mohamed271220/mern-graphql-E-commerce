@@ -6,7 +6,6 @@ import CircleCheckSvg from "../../../custom SVGs/CircleCheckSvg";
 import { AnimatePresence } from "framer-motion";
 import SLiderComponent from "../../widgets/SLider";
 import { viewContext } from "../../../context/gridView";
-import Transition from "../../widgets/Transition";
 import Animation from "../../widgets/Animation";
 import NoData from "../../widgets/NoData";
 
@@ -57,12 +56,11 @@ const Cart = () => {
             );
           })}
         </div>
-        {/* <Transition /> */}
 
         <div className="center row between w-100">
           <NoData length={cart.length} message="No products at your cart">
             <div className="carts-par center col">
-              {cart.map((item, index) => {
+              {cart.map((item) => {
                 return (
                   <>
                     <CartItem key={item._id} {...item} />

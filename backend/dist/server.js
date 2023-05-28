@@ -21,9 +21,7 @@ const uploudRoute_js_1 = require("./Upload/uploudRoute.js");
 const stripe_js_1 = __importDefault(require("./stripe/stripe.js"));
 const passport_1 = __importDefault(require("passport"));
 require("./oAuth/google.js");
-require("./oAuth/fb.js");
 const googleAuth_js_1 = require("./routes/googleAuth.js");
-const fbRoutes_js_1 = require("./routes/fbRoutes.js");
 const cookieSession = require("cookie-session");
 const apollo_server_express_1 = require("apollo-server-express");
 const ProductDefTypes_js_1 = require("./new Grapgql/typeDefs/ProductDefTypes.js");
@@ -76,7 +74,6 @@ const server = new apollo_server_express_1.ApolloServer({
 // );
 app.use("/", uploudRoute_js_1.uploadRoute);
 app.use("/", stripe_js_1.default);
-app.use("/", fbRoutes_js_1.fbOAuthRouter);
 app.use("/", googleAuth_js_1.oAuthRouter);
 app.use("/token", tokensRoutes_js_1.AuthRouter);
 (() => __awaiter(void 0, void 0, void 0, function* () {

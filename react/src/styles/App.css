@@ -317,6 +317,9 @@
   font-size: 1rem;
   filter: drop-shadow(0.2px 0.1px 0.2px black);
 }
+.icon.icon-shadow {
+  filter: drop-shadow(1px 1px 1.25px black);
+}
 
 .no-data {
   width: 100%;
@@ -458,6 +461,19 @@ input::-webkit-inner-spin-button {
   text-decoration-color: var(--green);
   cursor: pointer;
 }
+.log-in .google-log {
+  height: 30px;
+  padding: 0 10px;
+  border-radius: 5px;
+  justify-content: flex-start;
+  gap: 20px;
+  box-shadow: 0.5px 0.5px 0.5px black;
+  text-transform: capitalize;
+  font-weight: bold;
+  color: var(--wheat);
+  letter-spacing: 1px;
+  cursor: pointer;
+}
 .log-in form {
   background: var(--secondary);
   width: 40vw;
@@ -482,20 +498,6 @@ input::-webkit-inner-spin-button {
 .log-in form button {
   height: 30px;
   margin: 0 auto;
-}
-.log-in .log-with {
-  gap: 10px;
-}
-.log-in .log-with .log-social {
-  width: 2.2rem;
-  height: 2.2rem;
-  background: var(--secondary);
-  border-radius: 5px;
-  transition: 0.5s;
-}
-.log-in .log-with .log-social svg {
-  width: 1.5rem;
-  height: 1.5rem;
 }
 
 .or {
@@ -1198,8 +1200,8 @@ p.review-user {
 
 .banner-par .banner {
   width: 100%;
-  margin: 0 auto;
   height: 100vh;
+  margin: 0 auto;
 }
 .banner-par .banner .background {
   position: absolute;
@@ -1207,8 +1209,8 @@ p.review-user {
   right: 0;
   height: 100%;
   width: 100%;
-  opacity: 0.14;
   z-index: 2;
+  background: rgba(0, 0, 0, 0.4);
 }
 .banner-par .banner .banner-image {
   position: absolute;
@@ -1222,10 +1224,11 @@ p.review-user {
   margin-top: 40px;
   margin: 0;
   padding: 0;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  transition: 0.3s;
   -o-object-position: center;
      object-position: center;
 }
@@ -1240,9 +1243,7 @@ p.review-user {
   background: rgba(49, 47, 47, 0.404);
   box-shadow: 1px 1px 4px black;
   padding: 10px 20px;
-  display: flex;
-  flex-direction: column;
-  min-width: 250px;
+  min-width: 280px;
   gap: 10px;
   position: absolute;
   z-index: 4;
@@ -1253,8 +1254,7 @@ p.review-user {
 .banner-content h1 {
   letter-spacing: 1px;
   white-space: nowrap;
-  text-shadow: 0.4px 0.5px 1px black;
-  text-shadow: 0.5px 0.5px 3px black;
+  text-shadow: 0.5px 0.5px 1px black;
   font-size: 1.8rem;
   color: var(--green);
 }
@@ -1528,8 +1528,8 @@ svg.svg-star {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  height: 260px;
   overflow: hidden;
+  padding: 10px;
 }
 .product-List:hover {
   box-shadow: 2px 2px 5px var(--green);
@@ -2956,6 +2956,9 @@ input[type=range] {
   font-size: 1rem;
   filter: drop-shadow(0.2px 0.1px 0.2px black);
 }
+.icon.icon-shadow {
+  filter: drop-shadow(1px 1px 1.25px black);
+}
 
 .no-data {
   width: 100%;
@@ -3258,7 +3261,7 @@ form.update-product-form input {
   box-shadow: 0.5px 0.5px 1px black;
   background-color: var(--main);
   border-radius: 4px;
-  color: var(--white);
+  color: var(--third);
 }
 
 textarea.update-product {
@@ -3267,6 +3270,7 @@ textarea.update-product {
   box-shadow: 0.5px 0.5px 1px black;
   background-color: var(--main);
   border-radius: 4px;
+  color: var(--third);
 }
 
 .progressbar {
@@ -3742,6 +3746,8 @@ footer .footer-links span a {
   padding: 10px;
   text-transform: capitalize;
   font-weight: bold;
+  box-shadow: 0.5px 0.5px 0.5px black;
+  border-radius: 5px;
   color: var(--third);
 }
 .select-country-par .drop-country {

@@ -82,7 +82,10 @@ const SelectCOuntry = ({ setCountry, country, bottom }: Props) => {
         >
           <motion.img src={flag} alt={"flag"} variants={selectedFlag} />
 
-          <motion.span variants={opacityVariant}> {country}</motion.span>
+          <motion.span style={{ fontSize: 9 }} variants={opacityVariant}>
+            {" "}
+            {country}
+          </motion.span>
         </motion.div>
       </AnimatePresence>
       <BiDownArrow className="icon select-icon arrow" />

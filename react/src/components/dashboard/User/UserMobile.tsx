@@ -51,7 +51,7 @@ const UserMobile = ({
           <AnimatePresence mode="wait">
             <FadeElement cls="" key={role}>
               <span
-                style={{ background: `var(--${role.split(" ").slice(-1)})` }}
+                style={{ background: `var(--${role?.split(" ").slice(-1)})` }}
                 className="order-state center gap"
               >
                 {role}

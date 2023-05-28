@@ -72,13 +72,13 @@ const ProductFliter = ({
 
   const [ref, animate] = useAnimate();
   const [imgVariant, dir] = useCarousel(imgInd, images.length);
-  useEffect(() => {
-    animate(
-      ".product-List",
-      { opacity: [0, 0.4, 1], x: [10, 5, 0], y: [5, 0] },
-      { delay: index * 0.15, duration: 0.15 }
-    );
-  }, []);
+  // useEffect(() => {
+  //   animate(
+  //     ".product-List",
+  //     { opacity: [0, 0.4, 1], x: [10, 5, 0], y: [5, 0] },
+  //     { delay: index * 0.15, duration: 0.15 }
+  //   );
+  // }, []);
   const navigat = useNavigate();
   const [convertNegativeToZero] = useIndex();
 
@@ -99,7 +99,7 @@ const ProductFliter = ({
   }, [gridView]);
 
   return (
-    <motion.div
+    <motion.span
       ref={ref}
       onHoverStart={() => setChnageImgOnHover(true)}
       onHoverEnd={() => setChnageImgOnHover(false)}
@@ -107,180 +107,197 @@ const ProductFliter = ({
       whileInView={{ y: 0 }}
       transition={{ duration: 0.3 }}
     >
-      <motion.section
-        className={`product-List center ${
-          gridView ? "grid col" : "list between "
-        }`}
-        {...motionProps}
-        ref={sectionRef}
-        initial={{ height: sectionWidth <= 400 && !gridView ? 260 : 180 }}
-        animate={{ height: sectionWidth <= 400 && !gridView ? 180 : 260 }}
-        transition={{ duration: 0.1, type: "tween" }}
+      <motion.div
+        className="par"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0 }}
+        onAnimationComplete={() => {
+          animate(
+            ".par , .product-List",
+            { opacity: [0, 0.4, 1], x: [10, 5, 0], y: [5, 0] },
+            { delay: index * 0.15, duration: 0.15 }
+          );
+        }}
       >
-        <motion.div
-          className={` img-par center ${gridView ? "grid" : "list"}`}
-          key={images[imgInd].productPath}
-          variants={imgVariant as Variants}
-          animate="end"
-          initial="start"
-          exit={"exit"}
-          custom={{ dir, width: 100 }}
-          ref={imgRef}
+        <motion.section
+          className={`product-List center ${
+            gridView ? "grid col" : "list between "
+          }`}
+          {...motionProps}
+          ref={sectionRef}
+          initial={{ height: sectionWidth <= 400 && !gridView ? 260 : 180 }}
+          animate={{ height: sectionWidth <= 400 && !gridView ? 180 : 260 }}
+          transition={{ duration: 0.1, type: "tween" }}
         >
-          <AnimatePresence mode="wait">
-            <LazyLoadImage
-              effect="blur"
-              src={images[imgInd].productPath}
-              alt={title}
-            />
-          </AnimatePresence>
-        </motion.div>
-
-        <div className="center col product-data">
-          <h5
-            className="header underline product-head-underline"
-            style={{ marginBottom: 12 }}
+          <motion.div
+            className={` img-par center ${gridView ? "grid" : "list"}`}
+            key={images[imgInd].productPath}
+            variants={imgVariant as Variants}
+            animate="end"
+            initial="start"
+            exit={"exit"}
+            custom={{ dir, width: 100 }}
+            ref={imgRef}
           >
-            {productSearchWord
-              ? category
-                  .split(new RegExp(`(${productSearchWord})`, "gi"))
-                  .map((part, index) => {
-                    if (
-                      part?.toLowerCase() === productSearchWord.toLowerCase()
-                    ) {
-                      return (
-                        <span key={index} className="highlight">
-                          {part}
-                        </span>
-                      );
-                    } else {
-                      return <span key={index}>{part}</span>;
-                    }
-                  })
-              : category}
-          </h5>
-          <span className="title-product">
-            {" "}
-            {productSearchWord
-              ? title
-                  .split(new RegExp(`(${productSearchWord})`, "gi"))
-                  .map((part, index) => {
-                    if (
-                      part?.toLowerCase() === productSearchWord.toLowerCase()
-                    ) {
-                      return (
-                        <span key={index} className="highlight">
-                          {part}
-                        </span>
-                      );
-                    } else {
-                      return <span key={index}>{part}</span>;
-                    }
-                  })
-              : title}
-          </span>
-          {isDash && (
-            <span className=" center stock-par shadow">
-              <span className="stock-icon box-shadow">
-                <AiOutlineCheck className=" icon" />
-              </span>
-              <span className="stock"> {stock}</span>in stock
+            <AnimatePresence mode="wait">
+              <LazyLoadImage
+                effect="blur"
+                src={images[imgInd].productPath}
+                alt={title}
+              />
+            </AnimatePresence>
+          </motion.div>
+
+          <div className="center col product-data">
+            <h5
+              className="header underline product-head-underline"
+              style={{ marginBottom: 12 }}
+            >
+              {productSearchWord
+                ? category
+                    .split(new RegExp(`(${productSearchWord})`, "gi"))
+                    .map((part, index) => {
+                      if (
+                        part?.toLowerCase() === productSearchWord.toLowerCase()
+                      ) {
+                        return (
+                          <span key={index} className="highlight">
+                            {part}
+                          </span>
+                        );
+                      } else {
+                        return <span key={index}>{part}</span>;
+                      }
+                    })
+                : category}
+            </h5>
+            <span className="title-product">
+              {" "}
+              {productSearchWord
+                ? title
+                    .split(new RegExp(`(${productSearchWord})`, "gi"))
+                    .map((part, index) => {
+                      if (
+                        part?.toLowerCase() === productSearchWord.toLowerCase()
+                      ) {
+                        return (
+                          <span key={index} className="highlight">
+                            {part}
+                          </span>
+                        );
+                      } else {
+                        return <span key={index}>{part}</span>;
+                      }
+                    })
+                : title}
             </span>
-          )}
-
-          <AnimatePresence mode="wait">
-            {!gridView && sectionWidth >= 400 && (
-              <motion.p
-                key={description}
-                initial={{
-                  height: 0,
-                  opacity: 0,
-                }}
-                animate={{
-                  height: 50,
-                  opacity: 1,
-                  transition: { delay: 0.3, duration: 0.3 },
-                }}
-                exit={{ height: 0, opacity: 0, transition: { duration: 0.3 } }}
-                style={{ fontWeight: "normal" }}
-              >
-                {description}
-              </motion.p>
+            {isDash && (
+              <span className=" center stock-par shadow">
+                <span className="stock-icon box-shadow">
+                  <AiOutlineCheck className=" icon" />
+                </span>
+                <span className="stock"> {stock}</span>in stock
+              </span>
             )}
-          </AnimatePresence>
-          <StyledPrice price={price} />
-          <span> </span>
 
-          <div className="product-rate-filter center ">
-            <ProductRate
-              key={`${_id}-rate`}
-              id={_id}
-              avgRate={avgRate}
-              ratingLen={reviewLength}
-              reviews={reviews}
-              rating={rating}
-              pos={"bottom"}
-            />
-          </div>
-          {!isDash && (
-            <div className="product-links center">
-              <AnimatePresence mode="wait">
-                {!onCart ? (
-                  <ListCartBtn
-                    key={"ListCartBtn"}
-                    setOnCart={setOnCart}
-                    price={price}
-                    title={title}
-                    parentId={_id}
-                    images={images}
-                    btn="add to cart"
-                  />
-                ) : (
-                  <ListCartBtn
-                    key={"removeListCartBtn"}
-                    setOnCart={setOnCart}
-                    price={price}
-                    title={title}
-                    parentId={_id}
-                    images={images}
-                    btn="remove from cart"
-                  />
-                )}
-              </AnimatePresence>
+            <AnimatePresence mode="wait">
+              {!gridView && sectionWidth >= 400 && (
+                <motion.p
+                  key={description}
+                  initial={{
+                    height: 0,
+                    opacity: 0,
+                  }}
+                  animate={{
+                    height: 50,
+                    opacity: 1,
+                    transition: { delay: 0.3, duration: 0.3 },
+                  }}
+                  exit={{
+                    height: 0,
+                    opacity: 0,
+                    transition: { duration: 0.3 },
+                  }}
+                  style={{ fontWeight: "normal" }}
+                >
+                  {description}
+                </motion.p>
+              )}
+            </AnimatePresence>
+            <StyledPrice price={price} />
+            <span> </span>
 
-              <DetailsBtn
-                btn="details"
-                cls="btn details center shadow gap"
-                _id={_id}
-                Icon={BsInfoCircleFill}
+            <div className="product-rate-filter center ">
+              <ProductRate
+                key={`${_id}-rate`}
+                id={_id}
+                avgRate={avgRate}
+                ratingLen={reviewLength}
+                reviews={reviews}
+                rating={rating}
+                pos={"bottom"}
               />
             </div>
-          )}
-          <span className="heart-filter ">
-            {!isDash ? (
-              <span className="center col">
-                <ProductListHeart
-                  isFavoraited={isFavoraited}
-                  price={price}
-                  title={title}
-                  setIsFavorited={setIsFavorited}
-                  parentId={_id}
-                  images={images}
+            {!isDash && (
+              <div className="product-links center">
+                <AnimatePresence mode="wait">
+                  {!onCart ? (
+                    <ListCartBtn
+                      key={"ListCartBtn"}
+                      setOnCart={setOnCart}
+                      price={price}
+                      title={title}
+                      parentId={_id}
+                      images={images}
+                      btn="add to cart"
+                    />
+                  ) : (
+                    <ListCartBtn
+                      key={"removeListCartBtn"}
+                      setOnCart={setOnCart}
+                      price={price}
+                      title={title}
+                      parentId={_id}
+                      images={images}
+                      btn="remove from cart"
+                    />
+                  )}
+                </AnimatePresence>
+
+                <DetailsBtn
+                  btn="details"
+                  cls="btn details center shadow gap"
+                  _id={_id}
+                  Icon={BsInfoCircleFill}
                 />
-                <CompareIcons id={_id} title={title} />
-              </span>
-            ) : (
-              <span onClick={() => navigat(`/dashboard/products/${_id}`)}>
-                <Title title="edit product">
-                  <RiEditLine fontSize={16} color="var(--third)" />
-                </Title>
-              </span>
+              </div>
             )}
-          </span>
-          <span className={`product-state center ${state}`}>{state}</span>
-        </div>
-      </motion.section>
-    </motion.div>
+            <span className="heart-filter ">
+              {!isDash ? (
+                <span className="center col">
+                  <ProductListHeart
+                    isFavoraited={isFavoraited}
+                    price={price}
+                    title={title}
+                    setIsFavorited={setIsFavorited}
+                    parentId={_id}
+                    images={images}
+                  />
+                  <CompareIcons id={_id} title={title} />
+                </span>
+              ) : (
+                <span onClick={() => navigat(`/dashboard/products/${_id}`)}>
+                  <Title title="edit product">
+                    <RiEditLine fontSize={16} color="var(--third)" />
+                  </Title>
+                </span>
+              )}
+            </span>
+            <span className={`product-state center ${state}`}>{state}</span>
+          </div>
+        </motion.section>
+      </motion.div>
+    </motion.span>
   );
 };
 

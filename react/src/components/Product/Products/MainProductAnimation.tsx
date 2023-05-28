@@ -29,12 +29,12 @@ const MainProductAnimation = () => {
     }),
   };
   const ref = useRef<HTMLDivElement | null>(null);
-  const view = useInView(ref);
+  const view = useInView(ref, { once: true });
   return (
     <div className="products-animation-par" ref={ref}>
       {view && (
         <>
-          {[1, 2, 3, 4, 5].map((_, i) => {
+          {[...Array(5)].map((_, i) => {
             return (
               <motion.div
                 key={i}

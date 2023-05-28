@@ -7,9 +7,7 @@ import { uploadRoute } from "./Upload/uploudRoute.js";
 import stripeRoutes from "./stripe/stripe.js";
 import passport from "passport";
 import "./oAuth/google.js";
-import "./oAuth/fb.js";
 import { oAuthRouter } from "./routes/googleAuth.js";
-import { fbOAuthRouter } from "./routes/fbRoutes.js";
 import cookieSession = require("cookie-session");
 import { ApolloServer } from "apollo-server-express";
 import { productTypeDefs } from "./new Grapgql/typeDefs/ProductDefTypes.js";
@@ -77,7 +75,6 @@ const server = new ApolloServer({
 app.use("/", uploadRoute);
 app.use("/", stripeRoutes);
 
-app.use("/", fbOAuthRouter);
 app.use("/", oAuthRouter);
 app.use("/token", AuthRouter);
 

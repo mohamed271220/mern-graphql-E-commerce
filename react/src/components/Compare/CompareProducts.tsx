@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import Transition from "../widgets/Transition";
 import Animation from "../widgets/Animation";
-import ProductSelect from "./ProductSelect";
 import SeletedProduct from "./SeletedProduct";
 
 const CompareProducts = () => {
@@ -10,7 +8,6 @@ const CompareProducts = () => {
   return (
     <Animation addIntialX={false}>
       <div className="select-compare">
-        {/* <Transition /> */}
         <SeletedProduct
           order="first"
           product={firstproduct}

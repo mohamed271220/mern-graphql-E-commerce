@@ -16,7 +16,6 @@ const ProductList = ({ isDash }: { isDash?: boolean }) => {
 
   const arr = isDash ? Allproducts || [] : products || [];
   const [dataShown, numberOfPages] = usePagination(8, page, arr);
-  console.log(Allproducts);
   return (
     <NoData length={dataShown.length} message="no products matched">
       <motion.div
@@ -30,7 +29,6 @@ const ProductList = ({ isDash }: { isDash?: boolean }) => {
               key={`${product._id}-list`}
               isDash={isDash}
               index={index}
-              // {...product}
               _id={product._id}
               price={product.price}
               stock={product.stock}
@@ -46,9 +44,7 @@ const ProductList = ({ isDash }: { isDash?: boolean }) => {
                 type: "tween",
                 ease: "easeOut",
                 duration: 0.5,
-                // stiffness: 300,
                 damping: 7,
-                // mass: 0.8,
               }}
             />
           );

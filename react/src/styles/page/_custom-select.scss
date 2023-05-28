@@ -60,6 +60,9 @@
   padding: 10px;
   text-transform: capitalize;
   font-weight: bold;
+  box-shadow: 0.5px 0.5px 0.5px black;
+  border-radius: 5px;
+
   color: var(--third);
   .drop-country {
     background: var(--green);
@@ -138,7 +141,6 @@
 }
 .select-text {
   display: inline-block;
-
   width: 80%;
   text-overflow: ellipsis;
   white-space: nowrap;

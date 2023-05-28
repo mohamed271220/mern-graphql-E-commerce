@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useRef, useState } from "react";
-import Transition from "../widgets/Transition";
 import DashboardAside from "./DashboardAside";
 import { Outlet } from "react-router-dom";
 import {
@@ -14,14 +13,7 @@ import Title from "../widgets/Title";
 import ThemeToggle from "../widgets/ThemeToggle";
 import { themeContext } from "../../context/ThemContext";
 import NavImg from "../widgets/NavImg";
-import { RiNotification2Line } from "react-icons/ri";
-import ShowCount from "../widgets/showCounter";
 import NotificationDropDown from "./NotificationDropDown";
-import { useAppDispatch, useAppSelector } from "../../custom/reduxTypes";
-import { isAuthContext } from "../../context/isAuth";
-import { useMutation } from "@apollo/client";
-import { Reset_Notification } from "../../graphql/mutations/user";
-import { changeNotificationCount } from "../../redux/notificationsSlice";
 import { AiFillCloseCircle } from "react-icons/ai";
 
 interface contextInterface {
@@ -55,7 +47,6 @@ const Dashboard = () => {
   return (
     <showAsideContext.Provider value={{ showAsideDash, setShowAsideDash }}>
       <div className="dashboard-par " ref={ref}>
-        {/* <Transition /> */}
         <div style={{ marginRight: 10, gap: 8 }} className="dash-nav center">
           <NotificationDropDown />
           <NavImg />

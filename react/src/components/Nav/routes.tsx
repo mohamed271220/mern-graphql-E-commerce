@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import Home from "../Home/Home";
 import About from "../About";
-import Login from "../login";
-import SignUp from "../SignUp";
+import Login from "../log/login";
+import SignUp from "../log/SignUp";
 import Cart from "./cart/Cart";
 import Product from "../product Route/Product";
 import User from "../user/User";
@@ -85,7 +85,7 @@ const AppRoutes = () => {
     }, 1000);
     return () => clearTimeout(timer);
   }, [isRegistered]);
-
+  console.log(location);
   return (
     <AnimatePresence initial={false} mode="wait">
       <Routes location={location} key={location.pathname}>

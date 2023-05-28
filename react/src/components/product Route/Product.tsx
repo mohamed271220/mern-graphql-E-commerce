@@ -1,14 +1,12 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import ProductImages from "./images";
 import ProductDetails from "./ProductDetails";
 import Reviews from "./Reviews";
 import { ProductInterface, reviewInterface } from "../../interfaces/product";
 import { AnimatePresence } from "framer-motion";
 import { useParams } from "react-router-dom";
-import Transition from "../widgets/Transition";
 import Animation from "../widgets/Animation";
 import { useAppSelector } from "../../custom/reduxTypes";
-import { isAuthContext } from "../../context/isAuth";
 import ContinueShopping from "../widgets/ContinueShopping";
 
 export interface productContextInterface extends ProductInterface {
@@ -70,7 +68,6 @@ const Product = () => {
               createdAt,
             }}
           >
-            {/* <Transition /> */}
             <div className="product-container box-shadow">
               <ContinueShopping />
               <section className="product-page">
