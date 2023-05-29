@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { showAsideContext } from "./Dashboard";
 import { motion } from "framer-motion";
 import { ChildrenInterFace } from "../../interfaces/general";
-import Animation from "../widgets/Animation";
+import Transition from "../widgets/react Transition";
 import BeardCrumbs from "./BeardCrumbs";
 
 interface Props extends ChildrenInterFace {
@@ -20,11 +20,11 @@ const DashMain = ({ head, children }: Props) => {
       }}
       transition={{ delay: showAsideDash ? 0.2 : 0.7 }}
     >
-      <Animation>
-        <BeardCrumbs />
-        <h2 className="underline header">{head}</h2>
-        {children}
-      </Animation>
+      <Transition />
+
+      <BeardCrumbs />
+      <h2 className="underline header">{head}</h2>
+      {children}
     </motion.section>
   );
 };

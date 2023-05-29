@@ -29,8 +29,6 @@ import useIndex from "../../../../custom/useIndex";
 import CompareIcons from "../../../widgets/CompareIcons";
 import StyledPrice from "../../../widgets/StyledPrice";
 import { useScrollDirection } from "react-use-scroll-direction";
-import { opacityVariant } from "../../../../variants/globals";
-
 type Props = {
   _id: string;
   price: number;
@@ -49,6 +47,7 @@ type Props = {
 const ProductFliter = ({
   isDash,
   category,
+
   _id,
   price,
   stock,
@@ -72,13 +71,6 @@ const ProductFliter = ({
 
   const [ref, animate] = useAnimate();
   const [imgVariant, dir] = useCarousel(imgInd, images.length);
-  // useEffect(() => {
-  //   animate(
-  //     ".product-List",
-  //     { opacity: [0, 0.4, 1], x: [10, 5, 0], y: [5, 0] },
-  //     { delay: index * 0.15, duration: 0.15 }
-  //   );
-  // }, []);
   const navigat = useNavigate();
   const [convertNegativeToZero] = useIndex();
 

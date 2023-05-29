@@ -1,0 +1,4 @@
+@mixin fexien($width) {
+  font-family: "Fexien Sans";
+  font-variation-settings: "wdth" $width;
+}

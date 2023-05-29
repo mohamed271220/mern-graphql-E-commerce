@@ -15,7 +15,7 @@ import { themeContext } from "../../context/ThemContext";
 import NavImg from "../widgets/NavImg";
 import NotificationDropDown from "./NotificationDropDown";
 import { AiFillCloseCircle } from "react-icons/ai";
-
+import Transition from "../widgets/react Transition";
 interface contextInterface {
   showAsideDash: boolean;
   setShowAsideDash: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,7 +24,9 @@ interface contextInterface {
 export const showAsideContext = createContext({} as contextInterface);
 
 const Dashboard = () => {
-  const [showAsideDash, setShowAsideDash] = useState(false);
+  const [showAsideDash, setShowAsideDash] = useState(
+    Boolean(sessionStorage.getItem("show-aside")) || false
+  );
 
   const ref = useRef<HTMLDivElement | null>(null);
   const { scrollY } = useScroll({

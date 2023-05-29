@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Loading from "./components/Loading";
 import "./styles/App.scss";
 import Nav from "./components/Nav/Nav";
@@ -11,6 +11,12 @@ import FilterDataContext from "./context/FilterData";
 import ThemeContext from "./context/ThemContext";
 
 const App = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+  }, []);
   return (
     <ThemeContext>
       <IsAuthContextComponent>
@@ -18,10 +24,14 @@ const App = () => {
           <FilterDataContext>
             <BrowserRouter>
               <div className="App">
-                {/* <Loading /> */}
-
-                <Nav />
-                <AppRoutes />
+                {isLoading ? (
+                  <Loading />
+                ) : (
+                  <>
+                    <Nav />
+                    <AppRoutes />
+                  </>
+                )}
               </div>
 
               <Toaster

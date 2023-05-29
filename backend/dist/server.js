@@ -33,6 +33,8 @@ const userResolver_js_1 = require("./new Grapgql/Resolvers/userResolver.js");
 const graphql_middleware_1 = require("graphql-middleware");
 const tokensRoutes_js_1 = require("./routes/tokensRoutes.js");
 const permissions_js_1 = require("./new Grapgql/shield/permissions.js");
+const blogResolver_js_1 = require("./new Grapgql/Resolvers/blogResolver.js");
+const blogsType_js_1 = require("./new Grapgql/typeDefs/blogsType.js");
 const { makeExecutableSchema } = require("@graphql-tools/schema");
 mongoose_1.default.connect(config_js_1.MongoDB_URL);
 const app = (0, express_1.default)();
@@ -49,8 +51,8 @@ app.use((0, cors_1.default)({
     origin: "http://localhost:5173",
 }));
 const schema = makeExecutableSchema({
-    typeDefs: [ProductDefTypes_js_1.productTypeDefs, orderType_js_1.orderDefType, userTypeDefs_js_1.userTypeDefs],
-    resolvers: [productResolver_js_1.productResolver, orderResolver_js_1.orderResolver, userResolver_js_1.userResolver],
+    typeDefs: [ProductDefTypes_js_1.productTypeDefs, orderType_js_1.orderDefType, userTypeDefs_js_1.userTypeDefs, blogsType_js_1.BlogDefType],
+    resolvers: [productResolver_js_1.productResolver, orderResolver_js_1.orderResolver, userResolver_js_1.userResolver, blogResolver_js_1.blogResolver],
 });
 const schemaWithPermissions = (0, graphql_middleware_1.applyMiddleware)(schema, permissions_js_1.permissions);
 app.use(express_1.default.json());

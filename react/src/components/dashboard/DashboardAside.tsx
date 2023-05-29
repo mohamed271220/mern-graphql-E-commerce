@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { asideVariant, opacityVariant } from "../../variants/globals";
 import { NavLink, Link } from "react-router-dom";
@@ -16,6 +16,9 @@ const DashboardAside = () => {
   const { showAsideDash } = useContext(showAsideContext);
   const { handleLogOut } = useLogOut();
 
+  useEffect(() => {
+    sessionStorage.setItem("show-aside", String(showAsideDash));
+  }, [showAsideDash]);
   return (
     <AnimatePresence mode="wait">
       {showAsideDash && (

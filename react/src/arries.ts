@@ -17,6 +17,10 @@ export const linksArr = [
     link: "dashboard",
   },
   {
+    to: "/blogs",
+    link: "blogs",
+  },
+  {
     to: "/about",
     link: "about",
   },

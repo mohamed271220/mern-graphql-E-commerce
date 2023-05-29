@@ -1,12 +1,23 @@
 @import "../variables.scss";
+@import "../globels/mixins";
+
+@font-face {
+  font-family: "Fexien Sans";
+  src: url("/fonts/studio-feixen-sans-variable.woff2") format("woff2");
+  font-weight: 400 1000;
+  font-display: swap;
+}
+
 * {
-  font-family: "PT Sans", sans-serif;
+  // font-family: "PT Sans", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
 body {
+  @include fexien(115);
+
   overflow-x: hidden;
   background-color: var(--main);
 }

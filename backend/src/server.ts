@@ -19,6 +19,8 @@ import { userResolver } from "./new Grapgql/Resolvers/userResolver.js";
 import { applyMiddleware } from "graphql-middleware";
 import { AuthRouter } from "./routes/tokensRoutes.js";
 import { permissions } from "./new Grapgql/shield/permissions.js";
+import { blogResolver } from "./new Grapgql/Resolvers/blogResolver.js";
+import { BlogDefType } from "./new Grapgql/typeDefs/blogsType.js";
 const { makeExecutableSchema } = require("@graphql-tools/schema");
 
 mongoose.connect(MongoDB_URL as unknown as string);
@@ -43,8 +45,8 @@ app.use(
 );
 
 const schema = makeExecutableSchema({
-  typeDefs: [productTypeDefs, orderDefType, userTypeDefs],
-  resolvers: [productResolver, orderResolver, userResolver],
+  typeDefs: [productTypeDefs, orderDefType, userTypeDefs, BlogDefType],
+  resolvers: [productResolver, orderResolver, userResolver, blogResolver],
 });
 
 const schemaWithPermissions = applyMiddleware(schema, permissions);

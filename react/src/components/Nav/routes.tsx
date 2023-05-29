@@ -21,6 +21,7 @@ import { isAuthContext } from "../../context/isAuth";
 import Recap from "../dashboard/recap/Recap";
 import UsersDashboard from "../dashboard/User/UsersDashboard";
 import FaqComponent from "../Faq";
+import Blogs from "../blogs/Blogs";
 
 const AppRoutes = () => {
   const location = useLocation();
@@ -85,7 +86,6 @@ const AppRoutes = () => {
     }, 1000);
     return () => clearTimeout(timer);
   }, [isRegistered]);
-  console.log(location);
   return (
     <AnimatePresence initial={false} mode="wait">
       <Routes location={location} key={location.pathname}>
@@ -93,6 +93,7 @@ const AppRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/about" element={<About />} />
+        <Route path="/blogs" element={<Blogs />} />
         <Route path="/faq" element={<FaqComponent />} />
         <Route path="/cart" element={isAuth ? <Cart /> : <Login />} />
         <Route path="/user" element={isAuth ? <User /> : <Login />} />
