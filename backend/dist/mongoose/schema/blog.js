@@ -10,7 +10,7 @@ const BlogSchema = new mongoose_1.default.Schema({
     intro: String,
     end: String,
     image: String,
-    ccontent: [
+    content: [
         {
             title: String,
             paragraph: String,

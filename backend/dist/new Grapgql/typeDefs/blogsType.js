@@ -13,7 +13,7 @@ exports.BlogDefType = (0, apollo_server_express_1.gql) `
     intro: String
     end: String
     image: String
-    ccontent: [BlogContent]
+    content: [BlogContent]
   }
 
   type Query {

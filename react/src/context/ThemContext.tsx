@@ -17,7 +17,7 @@ const ThemContext = ({ children }: ChildrenInterFace) => {
         "--main",
         "rgb(247, 246, 246)"
       );
-      document.documentElement.style.setProperty("--third", "#XXXXXX");
+      document.documentElement.style.setProperty("--third", "#000");
       document.documentElement.style.setProperty("--secondary", "#333333");
       localStorage.setItem("zimart-theme", "light");
     } else {

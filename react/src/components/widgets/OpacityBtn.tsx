@@ -9,8 +9,9 @@ interface Props {
   cls: string;
   Icon?: React.ComponentType;
   title?: string;
+  pos?: string;
 }
-const OpacityBtn = ({ fn, btn, cls, Icon, title }: Props) => {
+const OpacityBtn = ({ pos = "left", fn, btn, cls, Icon, title }: Props) => {
   return (
     <Title title={title ? title : ""}>
       <motion.button
@@ -26,8 +27,9 @@ const OpacityBtn = ({ fn, btn, cls, Icon, title }: Props) => {
         onClick={fn}
         style={{ color: "var(--white)" }}
       >
-        {Icon && <Icon />}
+        {Icon && pos === "left" && <Icon />}
         {btn}
+        {Icon && pos === "right" && <Icon />}
       </motion.button>
     </Title>
   );

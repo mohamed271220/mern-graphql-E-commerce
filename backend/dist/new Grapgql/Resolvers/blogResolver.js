@@ -13,17 +13,15 @@ exports.blogResolver = void 0;
 const blog_js_1 = require("./../../mongoose/schema/blog.js");
 exports.blogResolver = {
     Query: {
-        blogs: {
-            blogs() {
-                return __awaiter(this, void 0, void 0, function* () {
-                    return blog_js_1.BlogCollection.find({});
-                });
-            },
-            blog(_, args) {
-                return __awaiter(this, void 0, void 0, function* () {
-                    return blog_js_1.BlogCollection.findById(args.id);
-                });
-            },
+        blogs() {
+            return __awaiter(this, void 0, void 0, function* () {
+                return yield blog_js_1.BlogCollection.find({});
+            });
+        },
+        blog(_, args) {
+            return __awaiter(this, void 0, void 0, function* () {
+                return yield blog_js_1.BlogCollection.findById(args.id);
+            });
         },
     },
 };

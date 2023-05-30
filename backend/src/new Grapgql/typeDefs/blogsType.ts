@@ -11,7 +11,7 @@ export const BlogDefType = gql`
     intro: String
     end: String
     image: String
-    ccontent: [BlogContent]
+    content: [BlogContent]
   }
 
   type Query {

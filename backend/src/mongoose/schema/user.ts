@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { productInterface, productSchema } from "./product";
 
 const userSchema = new mongoose.Schema({
   name: String,
