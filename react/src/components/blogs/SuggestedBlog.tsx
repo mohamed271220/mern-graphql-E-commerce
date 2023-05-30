@@ -13,45 +13,12 @@ interface Props {
 const SuggestedBlog = ({ head, intro, image, _id }: Props) => {
   const navigate = useNavigate();
 
-  const variant = {
-    exit: { transition: { when: "afterChildren" } },
-    start: {},
-    end: {},
-  };
-  const imgVar = {
-    exit: {
-      // top: 0,
-      // zIndex: 100,
-      // left: 0,
-      // width: "100vw",
-      // height: "100vh",
-      scale: 5,
-    },
-  };
-  const [isCLicked, setIsCLiked] = useState(false);
-
   return (
-    <motion.div
-      key={_id}
-      className="suggested-blog"
-      variants={variant}
-      initial="start"
-      animate="end"
-      exit={"exit"}
-    >
+    <div key={_id} className="suggested-blog">
       <AnimatePresence mode="wait">
-        <motion.div
-          key={"img-par"}
-          variants={imgVar}
-          transition={{ duration: 0.1 }}
-          className="suggested-blog-img"
-          style={{
-            position: "relative",
-            zIndex: 10,
-          }}
-        >
+        <div key={"img-par"} className="suggested-blog-img">
           <LazyLoadImage effect="blur" src={image} alt={head} />
-        </motion.div>
+        </div>
       </AnimatePresence>
 
       <h4 className="blog-head">{head.split(" ").slice(0, 7).join(" ")} ...</h4>
@@ -62,11 +29,10 @@ const SuggestedBlog = ({ head, intro, image, _id }: Props) => {
         cls="btn main center gap suggested-btn"
         fn={() => {
           navigate(`/blogs/${_id}`);
-          setIsCLiked(true);
         }}
         pos="right"
       />
-    </motion.div>
+    </div>
   );
 };
 

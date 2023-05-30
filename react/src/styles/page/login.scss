@@ -31,7 +31,7 @@
     border-radius: 5px;
     justify-content: flex-start;
     gap: 20px;
-    box-shadow: 0.5px 0.5px 0.5px black;
+    box-shadow: var(--secondary-shadow);
     text-transform: capitalize;
     font-weight: bold;
     color: var(--wheat);
@@ -56,7 +56,7 @@
       height: 30px;
       padding-right: 20px;
       background-color: var(--main);
-      box-shadow: 0.5px 0.5px 0.5px black;
+      box-shadow: var(--secondary-shadow);
       border-radius: 5px;
       color: var(--third);
     }

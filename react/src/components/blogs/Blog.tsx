@@ -13,39 +13,13 @@ const Blog = () => {
     variables: { id },
   });
 
-  const [isLastedOneSec, setIsLastedOneSec] = useState(true);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLastedOneSec(false);
-    }, 300);
-  }, []);
   if (data?.blog) {
     const { head, intro, end, image, _id, content } = data.blog;
     return (
       <div className="blog">
         <div className="blog-details">
           <h1>{head}</h1>
-          <motion.div
-            className="blog-img"
-            initial={{
-              // top: 0,
-              // right: 0,
-
-              scale: 2,
-            }}
-            animate={{
-              // width: "100%",
-              // height: "400px",
-              scale: 1,
-            }}
-            transition={{ duration: 0.1 }}
-            style={{
-              // position: isLastedOneSec ? "fixed" : "relative",
-              position: "relative",
-              zIndex: 9,
-            }}
-          >
+          <motion.div className="blog-img">
             <LazyLoadImage effect="blur" src={image} alt={head} />
           </motion.div>
           <p>{intro}</p>
