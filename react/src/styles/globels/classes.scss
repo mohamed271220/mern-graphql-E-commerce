@@ -1,5 +1,5 @@
 @import "../variables.scss";
-
+@import "../globels/mixins";
 .center {
   display: flex;
   justify-content: center;
@@ -169,13 +169,13 @@
   }
 }
 .header {
+  @include fexien(125);
   width: fit-content;
   margin: 0 auto;
   margin-bottom: 30px;
   margin-top: -5px;
   text-transform: capitalize;
   letter-spacing: 0.8px;
-  font-family: "Montserrat", sans-serif;
   font-weight: 800;
 }
 .underline {
@@ -321,5 +321,22 @@
 
   svg {
     font-size: 1.4rem;
+  }
+}
+
+form {
+  &.hide {
+    opacity: 0;
+    & > * {
+      opacity: 0;
+    }
+    input,
+    textarea {
+      padding-right: 20px;
+      background-color: var(--main);
+      box-shadow: var(--secondary-shadow);
+      border-radius: 5px;
+      color: var(--third);
+    }
   }
 }

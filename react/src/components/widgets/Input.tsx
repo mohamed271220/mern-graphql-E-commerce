@@ -8,8 +8,15 @@ interface Props {
   err?: string;
   defaultVal?: string;
   type?: string;
+  inptype?: string;
 }
-const Input = ({ placeholder, err, type, defaultVal }: Props) => {
+const Input = ({
+  inptype = "input",
+  placeholder,
+  err,
+  type,
+  defaultVal,
+}: Props) => {
   const { watch, register, resetField, setValue } = useFormContext();
   const inpVal = watch(placeholder);
 
@@ -26,18 +33,30 @@ const Input = ({ placeholder, err, type, defaultVal }: Props) => {
   }, [defaultVal]);
   return (
     <div className="inp-parent">
-      <input
-        className="inp"
-        type={type || "text"}
-        onFocus={() => setIsFocus(true)}
-        {...register(placeholder, {
-          onBlur() {
-            setIsFocus(false);
-          },
-        })}
-        defaultValue={defaultVal}
-        step={type === "number" ? ".01" : "any"}
-      />
+      {inptype === "input" ? (
+        <input
+          className="inp"
+          type={type || "text"}
+          onFocus={() => setIsFocus(true)}
+          {...register(placeholder, {
+            onBlur() {
+              setIsFocus(false);
+            },
+          })}
+          defaultValue={defaultVal}
+          step={type === "number" ? ".01" : "any"}
+        />
+      ) : (
+        <textarea
+          className="inp"
+          onFocus={() => setIsFocus(true)}
+          {...register(placeholder, {
+            onBlur() {
+              setIsFocus(false);
+            },
+          })}
+        />
+      )}
       <AnimatePresence>
         {err && (
           <motion.span
@@ -52,38 +71,43 @@ const Input = ({ placeholder, err, type, defaultVal }: Props) => {
           </motion.span>
         )}
       </AnimatePresence>
-
-      <motion.span
-        variants={placeholderVariant}
-        initial="start"
-        animate="end"
-        className={`placeholder ${
-          inpVal || isFocus ? "placeholder-top" : "placeholder-center"
-        }`}
-      >
-        {placeholder === "new" ||
-        placeholder === "old" ||
-        placeholder === "confirm"
-          ? `${placeholder} password`
-          : placeholder}
-      </motion.span>
-      <AnimatePresence>
-        {inpVal && (
-          <Title title={`clear ${placeholder} field`} abs={true}>
+      <>
+        {inptype === "input" && (
+          <>
             <motion.span
-              className="x-inp"
-              onClick={() => resetField(placeholder)}
-              variants={opacityVariant}
+              variants={placeholderVariant}
               initial="start"
               animate="end"
-              exit="exit"
-              transition={{ duration: 0.4 }}
+              className={`placeholder ${
+                inpVal || isFocus ? "placeholder-top" : "placeholder-center"
+              }`}
             >
-              x
+              {placeholder === "new" ||
+              placeholder === "old" ||
+              placeholder === "confirm"
+                ? `${placeholder} password`
+                : placeholder}
             </motion.span>
-          </Title>
+            <AnimatePresence>
+              {inpVal && (
+                <Title title={`clear ${placeholder} field`} abs={true}>
+                  <motion.span
+                    className="x-inp"
+                    onClick={() => resetField(placeholder)}
+                    variants={opacityVariant}
+                    initial="start"
+                    animate="end"
+                    exit="exit"
+                    transition={{ duration: 0.4 }}
+                  >
+                    x
+                  </motion.span>
+                </Title>
+              )}
+            </AnimatePresence>
+          </>
         )}
-      </AnimatePresence>
+      </>
     </div>
   );
 };

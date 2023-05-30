@@ -23,6 +23,7 @@ import UsersDashboard from "../dashboard/User/UsersDashboard";
 import FaqComponent from "../Faq";
 import Blogs from "../blogs/Blogs";
 import Blog from "../blogs/Blog";
+import ContactUs from "../contactUs/ContactUs";
 
 const AppRoutes = () => {
   const location = useLocation();
@@ -94,6 +95,7 @@ const AppRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<ContactUs />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blogs/:id" element={<Blog />} />
         <Route path="/faq" element={<FaqComponent />} />

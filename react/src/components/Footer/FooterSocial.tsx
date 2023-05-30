@@ -3,6 +3,7 @@ import { AiFillGithub, AiOutlineWhatsApp } from "react-icons/ai";
 import { GrLinkedinOption } from "react-icons/gr";
 import { opacityVariant } from "../../variants/globals";
 import { motion } from "framer-motion";
+
 const FooterLinks = () => {
   const iconsArr = [
     {

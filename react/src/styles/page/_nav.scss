@@ -10,7 +10,6 @@ nav {
   justify-content: space-between;
   padding: 4px 20px;
   box-shadow: var(--nav-shadow);
-
   ul {
     // li#cart-link-par {
     //   position: relative;
@@ -131,5 +130,11 @@ nav {
         color: #fdb813;
       }
     }
+  }
+}
+
+@media (max-width: 400px) {
+  nav {
+    display: none;
   }
 }

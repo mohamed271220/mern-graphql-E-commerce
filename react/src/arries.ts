@@ -21,6 +21,10 @@ export const linksArr = [
     link: "blogs",
   },
   {
+    to: "/contact",
+    link: "contact us",
+  },
+  {
     to: "/about",
     link: "about",
   },

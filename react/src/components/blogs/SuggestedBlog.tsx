@@ -14,14 +14,16 @@ const SuggestedBlog = ({ head, intro, image, _id }: Props) => {
   const navigate = useNavigate();
 
   return (
-    <div key={_id} className="suggested-blog">
+    <div key={_id} className="suggested-blog" style={{ opacity: 0 }}>
       <AnimatePresence mode="wait">
         <div key={"img-par"} className="suggested-blog-img">
           <LazyLoadImage effect="blur" src={image} alt={head} />
         </div>
       </AnimatePresence>
 
-      <h4 className="blog-head">{head.split(" ").slice(0, 7).join(" ")} ...</h4>
+      <h4 className="blog-head">
+        {head.split(" ").slice(0, 7).join(" ").slice(0, 30)} ...
+      </h4>
       <p>{intro.split(" ").slice(0, 10).join(" ")} ...</p>
       <OpacityBtn
         Icon={BiRightArrowAlt}

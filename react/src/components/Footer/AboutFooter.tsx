@@ -6,10 +6,13 @@ const AboutFooter = () => {
     <div className="about-footer center col ">
       <LogoSvg />
       <p>
-        I created this e-commerce using SCSS, React, TypeScript, Apollo Client,
-        React Router DOM, Framer Motion for Frontend <br />
-        TypeScript, Mongoose, Node.js, Express, GraphQL, Stripe, OAuth Google,
-        Authorization (Backend).
+        I created this E-commerce using React, TypeScript,Sass Apollo Client,
+        React Router DOM, Framer Motion SCSSfor Frontend. <br />
+      </p>
+      <p>
+        {" "}
+        and I use TypeScript, Mongoose, Node.js, Express, GraphQL, Stripe, OAuth
+        Google, Authorization for Backend.
       </p>
     </div>
   );

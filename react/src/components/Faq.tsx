@@ -72,7 +72,8 @@ const FaqComponent = () => {
             rowTitleColor: "var(--wheat)",
             arrowColor: "var(--white)",
             rowContentTextSize: "12px",
-            rowTitleTextSize: "14px",
+            rowTitleTextSize: "1rem",
+            titleTextSize: "1.5rem",
           }}
         />
       </div>
