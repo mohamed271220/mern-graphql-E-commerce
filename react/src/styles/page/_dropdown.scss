@@ -7,7 +7,6 @@
 
   .fav-drop {
     padding: 4px;
-
     width: 200px;
     height: 200px;
     background: var(--main);
@@ -124,5 +123,19 @@
 
   &:hover {
     background: var(--wheat-lighter);
+  }
+}
+
+@media (max-width: 700px) {
+  .dropdown {
+    position: fixed;
+    bottom: 0px !important;
+    right: 0;
+    top: initial;
+    left: initial;
+    width: 100% !important;
+    height: calc(100vh - 40px) !important;
+    z-index: 50 !important;
+    border-radius: initial;
   }
 }

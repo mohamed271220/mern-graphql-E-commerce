@@ -8,29 +8,34 @@ nav {
   z-index: 5;
   display: flex;
   justify-content: space-between;
-  padding: 4px 20px;
+  padding: 0 20px;
   box-shadow: var(--nav-shadow);
+  .links-par {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    min-width: 450px;
+    .e-commerce-features {
+      width: 90%;
+      justify-content: space-between;
+    }
+  }
   ul {
-    // li#cart-link-par {
-    //   position: relative;
-    // }
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
     li {
       list-style: none;
       position: relative;
       margin: 5px;
-      // .img-nav {
-      //   width: 30px;
-      //   height: 30px;
-      //   border-radius: 50%;
-      //   border: 0.5px grey solid;
-      // }
       a {
-        transition: 0.3s;
+        white-space: nowrap;
+        // transition: 0.3s;
         color: inherit;
         font-weight: bold;
         letter-spacing: 1px;
         text-transform: capitalize;
+        font-size: 0.8rem;
         &.cart-active-link.active {
           color: var(--green);
         }
@@ -78,6 +83,12 @@ nav {
       }
     }
   }
+  .nav-features {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 50px;
+  }
 }
 
 .no-data-fav {
@@ -90,26 +101,6 @@ nav {
   color: var(--green);
 }
 
-// #logo-svg {
-//   position: relative;
-//   z-index: 5;
-//   padding: 3px 0;
-//   &:before {
-//     content: "";
-//     position: absolute;
-//     width: 124%;
-//     height: 100%;
-//     left: -12%;
-//     top: 0;
-//     background: rgba(0, 0, 0, 0.736);
-//     transform: skew(20deg);
-//   }
-//   svg {
-//     position: relative;
-//     z-index: 6;
-//   }
-// }
-
 .theme {
   width: 30px;
   height: 22px;
@@ -120,7 +111,6 @@ nav {
   .toggle-icon {
     width: 20px;
     height: 20px;
-    // background: var(--secondary);
     border-radius: 50%;
     svg {
       font-size: 16px;
@@ -133,8 +123,36 @@ nav {
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 700px) {
   nav {
-    display: none;
+    padding: 0 6px;
+
+    .links-par {
+      justify-content: flex-end;
+      min-width: initial;
+      width: initial;
+    }
+  }
+  .aside-links {
+    position: fixed;
+    top: 40px;
+    width: 100%;
+    height: calc(100vh - 40px);
+    right: 0;
+    background-color: var(--secondary);
+    .links {
+      height: 100%;
+      flex-direction: column;
+      justify-content: center;
+      gap: 30px;
+
+      a {
+        font-size: 20px;
+        &:before,
+        &:after {
+          content: initial;
+        }
+      }
+    }
   }
 }

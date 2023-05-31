@@ -152,3 +152,24 @@ export const reverseVariant = {
   start: (order: string) => ({ x: order === "first" ? -800 : 800 }),
   end: { x: 0, transition: { type: "tween" } },
 };
+
+export const mobileDropDownVariant = {
+  start: { width: "0vw" },
+  end: {
+    width: "100vw",
+    transition: {
+      duration: 0.3,
+      when: "beforeChildren",
+      staggerChildren: 0.2,
+    },
+  },
+  exit: {
+    width: "0vw",
+    transition: {
+      duration: 0.3,
+      when: "afterChildren",
+      staggerChildren: 0.1,
+      staggerDirection: -1,
+    },
+  },
+};

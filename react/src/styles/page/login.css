@@ -31,7 +31,7 @@
   border-radius: 5px;
   justify-content: flex-start;
   gap: 20px;
-  box-shadow: 0.5px 0.5px 0.5px black;
+  box-shadow: var(--secondary-shadow);
   text-transform: capitalize;
   font-weight: bold;
   color: var(--wheat);
@@ -55,7 +55,7 @@
   height: 30px;
   padding-right: 20px;
   background-color: var(--main);
-  box-shadow: 0.5px 0.5px 0.5px black;
+  box-shadow: var(--secondary-shadow);
   border-radius: 5px;
   color: var(--third);
 }
@@ -103,14 +103,28 @@
   border-right: 2px solid var(--sale);
   border-left: 2px solid var(--sale);
 }
-.inp-parent .x-inp {
+.inp-parent .inp-controls {
   position: absolute;
   right: 5px;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex-direction: row-reverse;
+}
+.inp-parent .inp-controls .x-inp {
   font-size: 1.2rem;
   color: var(--gmail);
   cursor: pointer;
+}
+.inp-parent .inp-controls .pass-inp {
+  font-size: 1.2rem;
+}
+.inp-parent .inp-controls .pass-inp svg {
+  position: relative;
+  z-index: 5;
+  color: var(--wheat-light);
 }
 
 .err-form {

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { opacityVariant } from "../../variants/globals";
 import { Link } from "react-scroll";
 import OpacityBtn from "../widgets/OpacityBtn";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   header: string;
@@ -13,6 +14,8 @@ interface Props {
   fn: () => void;
 }
 const BannerText = ({ fn, header, clr, button, to, slogan }: Props) => {
+  const navigate = useNavigate();
+  const handleContactBtn = () => navigate("/contact");
   return (
     <motion.div
       className="banner-content center col"
@@ -37,7 +40,11 @@ const BannerText = ({ fn, header, clr, button, to, slogan }: Props) => {
             <OpacityBtn fn={fn} btn={button} cls="btn banner-btn transparent" />
           </motion.span>
         </Link>
-        <button className="btn banner-btn  about">About us</button>
+        <OpacityBtn
+          fn={handleContactBtn}
+          btn={"contact us"}
+          cls="btn banner-btn  about"
+        />
       </div>
     </motion.div>
   );

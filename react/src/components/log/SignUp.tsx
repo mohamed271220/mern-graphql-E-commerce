@@ -99,10 +99,12 @@ const SignUp = () => {
             <Input
               placeholder={"password"}
               err={errors?.password?.message?.toString()}
+              type="password"
             />
             <Input
               placeholder={"confirm"}
               err={errors?.confirm?.message?.toString()}
+              type="password"
             />
             <SelectCOuntry setCountry={setCountry} country={country} />
             <OpacityBtn btn="sign up" cls="btn main" fn={() => null} />

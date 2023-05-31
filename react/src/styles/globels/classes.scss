@@ -44,7 +44,7 @@
   }
   &.about {
     background: var(--main);
-    color: var(--third);
+    color: var(--third) !important;
   }
   &.main {
     background: linear-gradient(30deg, var(--wheat), var(--green));

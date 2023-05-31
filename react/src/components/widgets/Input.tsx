@@ -3,6 +3,9 @@ import { useFormContext } from "react-hook-form";
 import { motion, AnimatePresence } from "framer-motion";
 import { opacityVariant } from "../../variants/globals";
 import Title from "./Title";
+import { AiTwotoneEye } from "react-icons/ai";
+import { MdOutlineClear } from "react-icons/md";
+import FadeElement from "./FadeElement";
 interface Props {
   placeholder: string;
   err?: string;
@@ -14,9 +17,13 @@ const Input = ({
   inptype = "input",
   placeholder,
   err,
-  type,
+  type = "text",
   defaultVal,
 }: Props) => {
+  const [typeSt, settypeSt] = useState(type);
+  const handlePass = () =>
+    typeSt === "password" ? settypeSt("text") : settypeSt("password");
+
   const { watch, register, resetField, setValue } = useFormContext();
   const inpVal = watch(placeholder);
 
@@ -36,7 +43,7 @@ const Input = ({
       {inptype === "input" ? (
         <input
           className="inp"
-          type={type || "text"}
+          type={typeSt}
           onFocus={() => setIsFocus(true)}
           {...register(placeholder, {
             onBlur() {
@@ -88,23 +95,42 @@ const Input = ({
                 ? `${placeholder} password`
                 : placeholder}
             </motion.span>
-            <AnimatePresence>
-              {inpVal && (
-                <Title title={`clear ${placeholder} field`} abs={true}>
-                  <motion.span
-                    className="x-inp"
-                    onClick={() => resetField(placeholder)}
-                    variants={opacityVariant}
-                    initial="start"
-                    animate="end"
-                    exit="exit"
-                    transition={{ duration: 0.4 }}
-                  >
-                    x
-                  </motion.span>
-                </Title>
-              )}
-            </AnimatePresence>
+            <div className="inp-controls">
+              <AnimatePresence>
+                {inpVal && type !== "password" && (
+                  <Title title={`clear ${placeholder} field`} abs={true}>
+                    <motion.span
+                      className="x-inp"
+                      onClick={() => resetField(placeholder)}
+                      variants={opacityVariant}
+                      initial="start"
+                      animate="end"
+                      exit="exit"
+                      transition={{ duration: 0.4 }}
+                    >
+                      <MdOutlineClear />
+                    </motion.span>
+                  </Title>
+                )}
+              </AnimatePresence>
+              <AnimatePresence>
+                {type === "password" && inpVal && (
+                  <FadeElement key={"show-eye"} cls="">
+                    <Title
+                      title={
+                        typeSt === "password"
+                          ? "show password"
+                          : "hide password"
+                      }
+                    >
+                      <motion.span className="pass-inp" onClick={handlePass}>
+                        <AiTwotoneEye />
+                      </motion.span>
+                    </Title>
+                  </FadeElement>
+                )}
+              </AnimatePresence>
+            </div>
           </>
         )}
       </>

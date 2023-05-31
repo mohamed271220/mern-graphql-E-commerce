@@ -106,14 +106,29 @@
       border-left: 2px solid var(--sale);
     }
   }
-  .x-inp {
+  .inp-controls {
     position: absolute;
     right: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.2rem;
-    color: var(--gmail);
-    cursor: pointer;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-direction: row-reverse;
+    .x-inp {
+      font-size: 1.2rem;
+      color: var(--gmail);
+      cursor: pointer;
+    }
+    .pass-inp {
+      font-size: 1.2rem;
+
+      svg {
+        position: relative;
+        z-index: 5;
+        color: var(--wheat-light);
+      }
+    }
   }
 }
 

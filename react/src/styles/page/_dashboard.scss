@@ -288,3 +288,10 @@ div.dash-nav {
     border: 0;
   }
 }
+
+@media (max-width: 700px) {
+  .notifications {
+    bottom: 0px;
+    top: initial;
+  }
+}

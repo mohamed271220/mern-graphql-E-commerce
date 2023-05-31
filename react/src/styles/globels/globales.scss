@@ -17,7 +17,6 @@
 
 body {
   @include fexien(115);
-
   overflow-x: hidden;
   background-color: var(--main);
 }
@@ -36,16 +35,6 @@ a {
     font-size: 12px;
   }
 }
-
-// @media (min-width: 800px) {
-//   :root {
-//     font-size: 14px;
-//   }
-// }
-
-// .svg-star {
-//   transform: scale(0.019);
-// }
 
 *::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px var(--green);

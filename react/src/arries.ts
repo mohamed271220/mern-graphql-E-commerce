@@ -22,10 +22,10 @@ export const linksArr = [
   },
   {
     to: "/contact",
-    link: "contact us",
+    link: "contact ",
   },
-  {
-    to: "/about",
-    link: "about",
-  },
+  // {
+  //   to: "/about",
+  //   link: "about",
+  // },
 ];

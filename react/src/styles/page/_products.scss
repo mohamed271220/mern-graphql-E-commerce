@@ -2,7 +2,7 @@
 
 .products-par {
   //-remove margin top
-
+  overflow: hidden;
   // margin-top: 60px;
   width: 100%;
   height: auto;
@@ -357,7 +357,7 @@ svg.svg-star {
   justify-content: center;
   position: relative;
   box-shadow: 2px 2px 10px black;
-  width: 18vw;
+  width: 16vw;
   height: 60%;
   max-width: 100px;
   background: var(--secondary);

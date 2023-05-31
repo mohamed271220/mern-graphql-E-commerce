@@ -1,8 +1,9 @@
 import { AnimatePresence, motion } from "framer-motion";
 import React, { RefObject } from "react";
-import { popVariant } from "../../variants/globals";
+import { mobileDropDownVariant, popVariant } from "../../variants/globals";
 import { ChildrenInterFace } from "../../interfaces/general";
 import useClickOutside from "../../custom/useClickOutside";
+import useIsMobile from "../../custom/useIsMobile";
 
 interface Props extends ChildrenInterFace {
   bool: boolean;
@@ -15,6 +16,8 @@ const DropDown = ({ bool, head, cls, setter, children }: Props) => {
   const ref = useClickOutside<HTMLDivElement>(() => {
     setter(false);
   }, bool);
+  const { isMobile } = useIsMobile(700);
+
   return (
     <>
       <AnimatePresence mode="wait">
@@ -22,7 +25,7 @@ const DropDown = ({ bool, head, cls, setter, children }: Props) => {
           <motion.div
             ref={ref}
             key={"fav-drop"}
-            variants={popVariant}
+            variants={isMobile ? mobileDropDownVariant : popVariant}
             custom={{ dir: "" }}
             initial="start"
             animate="end"

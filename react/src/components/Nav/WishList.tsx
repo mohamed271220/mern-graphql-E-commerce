@@ -68,7 +68,9 @@ const WishList = ({ showFav, setter }: Props) => {
               <FadeElement key={"fav-parent"} cls="center col">
                 <AnimatePresence>
                   {fav.map((arr) => {
-                    return <Favorite key={arr.productId} {...arr} />;
+                    return (
+                      <Favorite key={arr.productId} {...arr} setter={setter} />
+                    );
                   })}
                 </AnimatePresence>
               </FadeElement>

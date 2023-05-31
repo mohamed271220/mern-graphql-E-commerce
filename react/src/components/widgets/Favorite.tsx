@@ -4,7 +4,11 @@ import { favArrInterface, isAuthContext } from "../../context/isAuth";
 import { opacityVariant } from "../../variants/globals";
 import { useNavigate } from "react-router-dom";
 import useRemoveFromFav from "../../custom/useRemoveFeomFav";
+import useIsMobile from "../../custom/useIsMobile";
 
+interface Props extends favArrInterface {
+  setter: React.Dispatch<React.SetStateAction<boolean>>;
+}
 const Favorite = ({
   _id,
   price,
@@ -12,22 +16,24 @@ const Favorite = ({
   productId,
   path,
   parentId,
-}: favArrInterface) => {
+  setter,
+}: Props) => {
   const navigate = useNavigate();
   const { userId } = useContext(isAuthContext);
   const { handleRemoveFromFav } = useRemoveFromFav({
     userId,
     productId: [productId as string],
   });
+  const { isMobile } = useIsMobile(700);
   return (
     <motion.div
       className="fav-product center"
       variants={opacityVariant}
       key={_id}
-      initial="start"
-      exit={"exit"}
-      animate="end"
-      transition={{ duration: 0.4 }}
+      // initial="start"
+      // exit={"exit"}
+      // animate="end"
+      // transition={{ duration: 0.4 }}
     >
       <div className="fav-img center ">
         <img src={path} alt="" />
@@ -43,7 +49,12 @@ const Favorite = ({
           <button
             className="btn shadow "
             style={{ color: "var(--white" }}
-            onClick={() => navigate(`/${parentId}`)}
+            onClick={() => {
+              navigate(`/${parentId}`);
+              if (isMobile) {
+                setter(false);
+              }
+            }}
           >
             details
           </button>

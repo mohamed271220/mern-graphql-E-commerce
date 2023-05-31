@@ -117,14 +117,17 @@ const Password = () => {
                 <Input
                   placeholder={"old"}
                   err={errors?.old?.message?.toString()}
+                  type="password"
                 />
                 <Input
                   placeholder={"new"}
                   err={errors?.new?.message?.toString()}
+                  type="password"
                 />
                 <Input
                   placeholder={"confirm"}
                   err={errors?.confirm?.message?.toString()}
+                  type="password"
                 />
               </SlideButton>
             )}
