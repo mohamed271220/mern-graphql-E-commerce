@@ -9,6 +9,7 @@ import { GET_ALL_ORDERS } from "../graphql/queries.js";
 import { addToOrderRedux } from "../redux/OrderSlice.js";
 import { GET_ALL_USERS } from "../graphql/mutations/user.js";
 import { addToUserRedux } from "../redux/UserSlice.js";
+import useIsMobile from "../custom/useIsMobile.js";
 
 interface productListContextInterface {
   setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
@@ -34,7 +35,7 @@ export const productListContext = createContext(
 
 const FilterDataContext = ({ children }: ChildrenInterFace) => {
   const { data, loading } = useQuery(Get_All_Products, {});
-
+  const { isMobile } = useIsMobile();
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (data?.products) {
@@ -43,7 +44,8 @@ const FilterDataContext = ({ children }: ChildrenInterFace) => {
     }
   }, [loading]);
 
-  const [showFilter, setShowFilter] = useState(true);
+  const [showFilter, setShowFilter] = useState(false);
+
   const [products, setProducts] = useState<ProductInterface[]>([]);
   const [categoryFilter, setCategoryFilter] = useState<string | number>("");
   const [productFeatured, setProductFeatured] = useState<string | number>("");

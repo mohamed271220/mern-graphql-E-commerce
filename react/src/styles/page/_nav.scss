@@ -87,7 +87,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 50px;
+    width: 60px;
   }
 }
 
@@ -140,6 +140,7 @@ nav {
     height: calc(100vh - 40px);
     right: 0;
     background-color: var(--secondary);
+    z-index: 100;
     .links {
       height: 100%;
       flex-direction: column;

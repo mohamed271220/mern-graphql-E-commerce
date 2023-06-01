@@ -1,21 +1,12 @@
 import React, { createContext, useContext, useRef, useState } from "react";
 import DashboardAside from "./DashboardAside";
 import { Outlet } from "react-router-dom";
-import {
-  AnimatePresence,
-  motion,
-  useScroll,
-  useTransform,
-} from "framer-motion";
-import { opacityVariant } from "../../variants/globals";
-import { RxDashboard } from "react-icons/rx";
-import Title from "../widgets/Title";
+import { useScroll, useTransform } from "framer-motion";
 import ThemeToggle from "../widgets/ThemeToggle";
 import { themeContext } from "../../context/ThemContext";
 import NavImg from "../widgets/NavImg";
 import NotificationDropDown from "./NotificationDropDown";
-import { AiFillCloseCircle } from "react-icons/ai";
-import Transition from "../widgets/react Transition";
+import MenuTogglar from "../widgets/MenuTogglar";
 interface contextInterface {
   showAsideDash: boolean;
   setShowAsideDash: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,9 +15,7 @@ interface contextInterface {
 export const showAsideContext = createContext({} as contextInterface);
 
 const Dashboard = () => {
-  const [showAsideDash, setShowAsideDash] = useState(
-    Boolean(JSON.parse(sessionStorage.getItem("show-aside") as string) || false)
-  );
+  const [showAsideDash, setShowAsideDash] = useState(false);
 
   const ref = useRef<HTMLDivElement | null>(null);
   const { scrollY } = useScroll({
@@ -49,40 +38,16 @@ const Dashboard = () => {
   return (
     <showAsideContext.Provider value={{ showAsideDash, setShowAsideDash }}>
       <div className="dashboard-par " ref={ref}>
-        <div style={{ marginRight: 10, gap: 8 }} className="dash-nav center">
+        <div style={{ marginRight: 10, gap: 12 }} className="dash-nav center">
           <NotificationDropDown />
-          <NavImg />
-          <AnimatePresence mode="wait">
-            {!showAsideDash ? (
-              <motion.span
-                key={"show-dash"}
-                variants={opacityVariant}
-                initial="start"
-                exit="exit"
-                animate="end"
-                className=" dash-show"
-                transition={{ duration: 0.4, delay: showAsideDash ? 0 : 0.4 }}
-                onClick={() => setShowAsideDash(true)}
-              >
-                <Title title="show dashboard aside nav">
-                  <RxDashboard className="icon green" />
-                </Title>
-              </motion.span>
-            ) : (
-              <motion.span
-                key={"hide-dash"}
-                variants={opacityVariant}
-                transition={{ duration: 0.4 }}
-                className="dash-show"
-                onClick={() => setShowAsideDash(false)}
-              >
-                <Title title="hide dashboard nav">
-                  <AiFillCloseCircle className="icon red" />
-                </Title>
-              </motion.span>
-            )}
-          </AnimatePresence>
+
           <ThemeToggle navClr={navClr} linkClr={LinkClr} />
+          <MenuTogglar
+            bool={showAsideDash}
+            setter={setShowAsideDash}
+            hideMsg="hide dashboard"
+            showMsg="show dashboard"
+          />
         </div>
 
         <DashboardAside setShowAsideDash={setShowAsideDash} />

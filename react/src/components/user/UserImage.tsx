@@ -1,10 +1,10 @@
 import React, { useRef, useState, useContext } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import Avatar from "../Avatar";
+import Avatar from "./Avatar";
 import Overley from "../widgets/Overley";
 import OpacityBtn from "../widgets/OpacityBtn";
 import { isAuthContext } from "../../context/isAuth";
-import ProfileImg from "../ProfileImg";
+import ProfileImg from "../widgets/ProfileImg";
 const UserImage = () => {
   const inpFile = useRef<HTMLInputElement | null>(null);
 

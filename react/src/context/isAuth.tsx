@@ -3,7 +3,7 @@ import { cartInterface, favInterface } from "../interfaces/user";
 import { useMutation } from "@apollo/client";
 import { GET_USER_DATA } from "../graphql/mutations/user";
 import Cookies from "js-cookie";
-import { useAppDispatch } from "../custom/reduxTypes";
+import { useAppDispatch, useAppSelector } from "../custom/reduxTypes";
 import { addToFavRedux } from "../redux/favSlice";
 import { addToCartRedux, changeCartCountRedux } from "../redux/CartSlice";
 import { ChildrenInterFace } from "../interfaces/general.js";
@@ -70,7 +70,10 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
   const [getData, { data, loading }] = useMutation(GET_USER_DATA);
 
   const dispatch = useAppDispatch();
-
+  const { fav } = useAppSelector((st) => st.fav);
+  const { notificatins } = useAppSelector((st) => st.notification);
+  const { cart } = useAppSelector((st) => st.cart);
+  const { compare } = useAppSelector((st) => st.compare);
   useEffect(() => {
     setUserId(Cookies.get("user-id") as unknown as string);
   }, [isAuth]);
@@ -96,8 +99,11 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
     }
   }, [userId]);
 
+  const check =
+    !cart.length && !notificatins.length && !compare.length && !fav.length;
+  // this check variable because when i log in then log out then log in data added again
   useEffect(() => {
-    if (data?.getUserData) {
+    if (data?.getUserData && check) {
       setUserData(data?.getUserData);
       dispatch(addToFavRedux(data?.getUserData?.fav));
       dispatch(addToCartRedux(data?.getUserData?.cart));
@@ -115,10 +121,6 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
     }
   }, [data?.getUserData?.name]);
 
-  console.log({
-    count: data?.getUserData?.notificationsCount,
-    user: data?.getUserData,
-  });
   return (
     <isAuthContext.Provider
       value={{

@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import Home from "../Home/Home";
-import About from "../About";
 import Login from "../log/login";
 import SignUp from "../log/SignUp";
 import Cart from "./cart/Cart";
@@ -20,7 +19,7 @@ import { toast } from "react-hot-toast";
 import { isAuthContext } from "../../context/isAuth";
 import Recap from "../dashboard/recap/Recap";
 import UsersDashboard from "../dashboard/User/UsersDashboard";
-import FaqComponent from "../Faq";
+import FaqComponent from "../user/Faq";
 import Blogs from "../blogs/Blogs";
 import Blog from "../blogs/Blog";
 import ContactUs from "../contactUs/ContactUs";
@@ -94,7 +93,6 @@ const AppRoutes = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/about" element={<About />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blogs/:id" element={<Blog />} />

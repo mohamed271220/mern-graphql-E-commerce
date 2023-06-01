@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { categoriesArr } from "../../../../arries";
+import { categoriesArr } from "../../../../assets/arries/arries";
 import { opacityVariant } from "../../../../variants/globals";
 import { productListContext } from "../../../../context/FilterData";
 import Checkbox from "../../../../custom SVGs/checkbox";

@@ -1,17 +1,14 @@
 import React, { useContext, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { asideVariant, opacityVariant } from "../../variants/globals";
-import { NavLink, Link } from "react-router-dom";
-import { GrProductHunt } from "react-icons/gr";
-import { AiFillCloseCircle, AiFillDashboard } from "react-icons/ai";
+import { Link } from "react-router-dom";
 import Title from "../widgets/Title";
 import { showAsideContext } from "./Dashboard";
-import { FaClipboardList, FaUserAlt } from "react-icons/fa";
 import LogoSvg from "../widgets/LogoSvg";
-import { RiLogoutCircleRFill } from "react-icons/ri";
 import useLogOut from "../../custom/useLogOut";
-import { TbSquareRoundedPlusFilled } from "react-icons/tb";
+import { AiFillCloseCircle } from "react-icons/ai";
 import useIsMobile from "../../custom/useIsMobile";
+import { dashAsideLinks } from "../../assets/arries/LinksArr.js";
 
 interface Props {
   setShowAsideDash: React.Dispatch<React.SetStateAction<boolean>>;
@@ -20,71 +17,8 @@ const DashboardAside = ({ setShowAsideDash }: Props) => {
   const { showAsideDash } = useContext(showAsideContext);
   const { handleLogOut } = useLogOut();
 
-  useEffect(() => {
-    sessionStorage.setItem("show-aside", String(showAsideDash));
-  }, [showAsideDash]);
   const { isMobile } = useIsMobile();
 
-  const dashAsideLinks = [
-    {
-      head: "Main",
-      links: [
-        {
-          link: "dashboard",
-          to: "/dashboard",
-          Icon: AiFillDashboard,
-          active: "dashboard",
-        },
-      ],
-    },
-    {
-      head: "products",
-      links: [
-        {
-          link: "all products",
-          to: "/dashboard/products",
-          Icon: GrProductHunt,
-          active: "products",
-        },
-        {
-          link: "add product",
-          to: "/dashboard/products/add",
-          Icon: TbSquareRoundedPlusFilled,
-          active: "add",
-        },
-      ],
-    },
-
-    {
-      head: "orders",
-      links: [
-        {
-          link: "orders",
-          to: "/dashboard/orders",
-          Icon: FaClipboardList,
-          active: "orders",
-        },
-      ],
-    },
-
-    {
-      head: "users",
-      links: [
-        {
-          link: "users",
-          to: "/dashboard/users",
-          Icon: FaUserAlt,
-          active: "users",
-        },
-        {
-          link: "logout",
-          to: "/login",
-          Icon: AiFillCloseCircle,
-          active: "login",
-        },
-      ],
-    },
-  ];
   return (
     <AnimatePresence mode="wait">
       {showAsideDash && (

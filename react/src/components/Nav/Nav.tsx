@@ -39,17 +39,11 @@ const Nav = () => {
   const location = useLocation();
   const [showNav, setShowNav] = useState(true);
   useEffect(() => {
-    let counter: number;
     if (location.pathname.startsWith("/dashboard") && isAuth) {
-      counter = setTimeout(() => {
-        setShowNav(false);
-      }, 430);
+      setShowNav(false);
     } else {
-      counter = setTimeout(() => {
-        setShowNav(true);
-      }, 430);
+      setShowNav(true);
     }
-    return () => clearTimeout(counter);
   }, [location, isAuth]);
 
   const { isMobile } = useIsMobile();

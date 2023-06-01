@@ -6,7 +6,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import FeaturedProducts from "./FeaturedProducts";
 import { useMutation } from "@apollo/client";
 import { FILTER_All } from "../../../../graphql/mutations/product.js";
-import { FeaturedProductsArr, categoriesArr } from "../../../../arries.js";
+import {
+  FeaturedProductsArr,
+  categoriesArr,
+} from "../../../../assets/arries/arries.js";
 import OpacityBtn from "../../../widgets/OpacityBtn";
 import { MdFilterListAlt } from "react-icons/md";
 import { FiRefreshCcw } from "react-icons/fi";

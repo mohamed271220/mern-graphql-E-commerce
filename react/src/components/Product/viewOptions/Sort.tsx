@@ -63,21 +63,29 @@ const Sort = () => {
             </span>
           )}
 
-          <Title title="list view">
-            <BsListTask
-              onClick={() => setGridView(false)}
-              style={{ color: gridView ? "var(--third)" : "var(--green)" }}
-              className={`view-icon  ${!gridView ? "icon icon-shadow" : ""} `}
-            />
-          </Title>
+          {!isMobile && (
+            <>
+              <Title title="list view">
+                <BsListTask
+                  onClick={() => setGridView(false)}
+                  style={{ color: gridView ? "var(--third)" : "var(--green)" }}
+                  className={`view-icon  ${
+                    !gridView ? "icon icon-shadow" : ""
+                  } `}
+                />
+              </Title>
 
-          <Title title="grid view">
-            <HiOutlineViewGrid
-              onClick={() => setGridView(true)}
-              style={{ color: gridView ? "var(--green)" : "var(--third)" }}
-              className={`view-icon  ${gridView ? "icon icon-shadow" : ""} `}
-            />
-          </Title>
+              <Title title="grid view">
+                <HiOutlineViewGrid
+                  onClick={() => setGridView(true)}
+                  style={{ color: gridView ? "var(--green)" : "var(--third)" }}
+                  className={`view-icon  ${
+                    gridView ? "icon icon-shadow" : ""
+                  } `}
+                />
+              </Title>
+            </>
+          )}
         </div>
         <SelectFilter />
       </div>

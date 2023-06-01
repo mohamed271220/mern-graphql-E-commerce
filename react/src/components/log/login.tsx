@@ -12,9 +12,15 @@ import { NavLink } from "react-router-dom";
 import Animation from "../widgets/Animation";
 import LogInWithGoogle from "./LogInWithGoogle";
 import FormAnimation from "../widgets/FormAnimation";
-
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 const Login = () => {
-  const methods = useForm();
+  const schema = yup.object().shape({
+    email: yup.string().email("insert a valid email").required(),
+    password: yup.string().required(),
+  });
+
+  const methods = useForm({ resolver: yupResolver(schema) });
   const {
     formState: { errors },
     handleSubmit,
@@ -22,9 +28,6 @@ const Login = () => {
   } = methods;
 
   const { setIsAuth } = useContext(isAuthContext);
-  const onSubmit = (data: FieldValues) => {
-    console.log(data);
-  };
 
   const [authenticate] = useMutation(Authenticate_Query);
   const handleLogIn = async () => {
@@ -42,6 +45,10 @@ const Login = () => {
       toast.success(res.data.authenticate.msg);
       setIsAuth(true);
     }
+  };
+  const onSubmit = (data: FieldValues) => {
+    console.log(data);
+    handleLogIn();
   };
 
   return (
@@ -63,7 +70,12 @@ const Login = () => {
               type={"password"}
             />
 
-            <OpacityBtn cls="btn main w-100" fn={handleLogIn} btn="log In" />
+            <OpacityBtn
+              cls="btn main w-100"
+              fn={() => null}
+              btn="log In"
+              type="submit"
+            />
 
             <div className="redirect">
               <span> don&#39;t have an account</span>

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { categoriesArr } from "../../arries";
+import { categoriesArr } from "../../assets/arries/arries";
 import { Link } from "react-scroll";
 import { productListContext } from "../../context/FilterData";
 import useFilterCategory from "../../custom/useFilterCategory";

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Checkbox from "../../../../custom SVGs/checkbox";
 import { opacityVariant } from "../../../../variants/globals";
-import { FeaturedProductsArr } from "../../../../arries.js";
+import { FeaturedProductsArr } from "../../../../assets/arries/arries.js";
 import { productListContext } from "../../../../context/FilterData";
 import { motion } from "framer-motion";
 import FIlter from "./FIlter";

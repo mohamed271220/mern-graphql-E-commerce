@@ -1,6 +1,6 @@
 import React, { RefObject, useContext } from "react";
 import DropDown from "./DropDown";
-import ProfileImg from "../ProfileImg";
+import ProfileImg from "./ProfileImg";
 import { isAuthContext } from "../../context/isAuth";
 import { NavLink } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";

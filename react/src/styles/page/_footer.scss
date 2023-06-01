@@ -1,7 +1,7 @@
 @import "../variables.scss";
 
 footer {
-  background-color: var(--secondary);
+  background-color: var(--main);
   padding-bottom: 0;
   padding-top: 20px;
   width: 100%;
@@ -32,7 +32,7 @@ footer {
 
     p {
       width: 80%;
-      color: var(--white);
+      color: var(--third);
     }
   }
   .footer-links {
@@ -55,6 +55,7 @@ footer {
         letter-spacing: 1px;
         color: var(--wheat);
         text-align: start;
+        font-weight: bold;
       }
     }
   }
@@ -93,7 +94,7 @@ footer {
 .footer-head {
   font-size: 1.3rem;
   margin-bottom: 10px;
-  color: var(--white);
+  color: var(--third);
 }
 
 .footer-about {
