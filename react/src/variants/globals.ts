@@ -119,15 +119,15 @@ export const selectDropDownVariants = {
 
 export const asideVariant = {
   start: { width: 0, opacity: 0 },
-  end: {
-    width: 200,
+  end: (bool = false) => ({
+    width: bool ? "100%" : 200,
     opacity: 1,
     transition: {
       opacity: { delay: 0.4, duration: 0.4 },
       width: { delay: 0, duration: 0.4 },
       when: "beforeChildren",
     },
-  },
+  }),
   exit: {
     width: 0,
     opacity: 0,
@@ -154,9 +154,9 @@ export const reverseVariant = {
 };
 
 export const mobileDropDownVariant = {
-  start: { width: "0vw" },
+  start: { width: 0 },
   end: {
-    width: "100vw",
+    width: "100%",
     transition: {
       duration: 0.3,
       when: "beforeChildren",
@@ -164,7 +164,7 @@ export const mobileDropDownVariant = {
     },
   },
   exit: {
-    width: "0vw",
+    width: 0,
     transition: {
       duration: 0.3,
       when: "afterChildren",

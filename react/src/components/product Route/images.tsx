@@ -5,6 +5,7 @@ import { SideBySideMagnifier } from "react-image-magnifiers";
 import { opacityVariant } from "../../variants/globals";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
+import useIsMobile from "../../custom/useIsMobile";
 interface Props {
   data: {
     images: {
@@ -70,7 +71,7 @@ const ProductImages = ({
   };
 
   const ref = useRef<HTMLDivElement | null>(null);
-
+  const { isMobile } = useIsMobile();
   return (
     <motion.div
       ref={ref}
@@ -94,7 +95,6 @@ const ProductImages = ({
             custom={direction}
             variants={bigImageVariant}
             // exit="exit"
-
             onAnimationStart={() => setChangeImage(true)}
             onAnimationComplete={() => setChangeImage(false)}
           >
@@ -103,11 +103,12 @@ const ProductImages = ({
                 imageSrc={images[bigImgInd].productPath}
                 style={{
                   height: "fit-content",
-                  width: 250,
+                  width: !isMobile ? 250 : "100%",
+                  zIndex: 3,
                   objectFit: "contain",
                   filter: " drop-shadow(5px 10px 2px black)",
                 }}
-                alwaysInPlace={false}
+                alwaysInPlace={isMobile}
                 fillAvailableSpace
                 fillGapTop={40}
                 fillGapRight={ref?.current ? ref?.current?.offsetLeft - 10 : 0}

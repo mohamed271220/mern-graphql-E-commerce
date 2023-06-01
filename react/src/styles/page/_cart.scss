@@ -2,29 +2,36 @@
 
 .cart-cont {
   width: 100%;
-  min-width: 0 auto;
   margin-top: 50px;
   gap: 4px;
-  padding: 4px;
+  padding: 8px;
   .carts-par {
     // margin: 0 5%;
-    width: 70%;
+    width: 65%;
     gap: 4px;
     align-self: flex-start;
     .cart-content {
       gap: 10px;
-      align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-self: flex-start;
+
       .cart-detail {
+        display: inline-block;
+
         display: inline-block;
         font-weight: bold;
         letter-spacing: 1px;
         color: var(--green);
         text-transform: capitalize;
-        width: 60px;
+        width: 80px;
         margin-right: 4px;
         text-align: end;
+        font-size: 0.8rem;
       }
       .cart-value {
+        display: inline-block;
         letter-spacing: 0.7;
         color: var(--wheat);
         font-size: 0.8rem;
@@ -61,7 +68,8 @@
 .totel-price {
   padding: 25px 0;
   background: var(--sale);
-  width: 25%;
+  width: 30%;
+
   align-self: flex-start;
   border-start-start-radius: 5px;
   color: var(--main);
@@ -78,14 +86,10 @@
     background: var(--wheat-light);
     border-radius: 4px;
     padding: 4px 8px;
-    width: 70%;
+    width: 65%;
     align-self: flex-start;
   }
 }
-
-// .disable-check {
-//   position: a;
-// }
 
 .order-details {
   gap: 10px;
@@ -132,13 +136,30 @@
     font-size: 0.6rem;
   }
 }
-@media (max-width: 700px) {
+@media (max-width: 650px) {
   .cart-cont {
-    // .carts-par {
-    //   margin: 0;
-    // }
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 50px;
+
+    h3.head {
+      width: 100%;
+    }
+    .cart-data {
+      flex-direction: column;
+
+      gap: 20px;
+    }
+    .carts-par {
+      width: 100%;
+    }
     .totel-price {
-      width: 28%;
+      position: initial;
+      top: initial;
+      right: initial;
+      width: 100%;
+      font-size: 1.2rem;
+      padding: 25px;
     }
   }
 }

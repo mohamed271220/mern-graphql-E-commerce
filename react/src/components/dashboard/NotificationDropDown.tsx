@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import DropDown from "../widgets/DropDown";
 import { useAppDispatch, useAppSelector } from "../../custom/reduxTypes";
 import Notificatin from "./Notificatin";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useMutation } from "@apollo/client";
 import {
   Clear_Notification,
@@ -20,6 +20,7 @@ import {
 import NoData from "../widgets/NoData";
 import { RiNotification2Line } from "react-icons/ri";
 import ShowCount from "../widgets/showCounter";
+import { opacityVariant, parentVariant } from "../../variants/globals";
 
 const NotificationDropDown = () => {
   const { userId } = useContext(isAuthContext);
@@ -95,7 +96,10 @@ const NotificationDropDown = () => {
           head="notifications"
         >
           {notificatins.length >= 1 && (
-            <div className="notification-btns w-100 center between">
+            <motion.div
+              variants={opacityVariant}
+              className="notification-btns w-100 center between"
+            >
               <div className="filter-btn center">
                 <button
                   onClick={() => {
@@ -129,7 +133,7 @@ const NotificationDropDown = () => {
                   clear
                 </button>
               </div>
-            </div>
+            </motion.div>
           )}
           <NoData
             message={`no ${!showAll ? "unread " : ""}notifications`}

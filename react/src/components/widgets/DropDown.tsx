@@ -16,7 +16,7 @@ const DropDown = ({ bool, head, cls, setter, children }: Props) => {
   const ref = useClickOutside<HTMLDivElement>(() => {
     setter(false);
   }, bool);
-  const { isMobile } = useIsMobile(700);
+  const { isMobile } = useIsMobile();
 
   return (
     <>
@@ -24,7 +24,7 @@ const DropDown = ({ bool, head, cls, setter, children }: Props) => {
         {bool && (
           <motion.div
             ref={ref}
-            key={"fav-drop"}
+            key={"fav-drop" + "_" + head}
             variants={isMobile ? mobileDropDownVariant : popVariant}
             custom={{ dir: "" }}
             initial="start"

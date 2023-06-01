@@ -44,23 +44,27 @@ const OrderTable = () => {
 
       <table className="order box-shadow">
         <thead>
-          <th className="center">
-            <Title
-              title={selectALl === "all" ? "unselect all" : "select all orders"}
-              dir="left"
-            >
-              <Checkbox
-                filter={"all"}
-                isChecked={selectALl}
-                setIsChecked={setSlectALl}
-              />{" "}
-            </Title>
-          </th>
-          <th> order id</th>
-          <th> created At</th>
-          <th>delivered At</th>
-          <th> total </th>
-          <th style={{ width: 150 }}> order state </th>
+          <tr>
+            <th className="center">
+              <Title
+                title={
+                  selectALl === "all" ? "unselect all" : "select all orders"
+                }
+                dir="left"
+              >
+                <Checkbox
+                  filter={"all"}
+                  isChecked={selectALl}
+                  setIsChecked={setSlectALl}
+                />{" "}
+              </Title>
+            </th>
+            <th> order id</th>
+            <th> created At</th>
+            <th>delivered At</th>
+            <th> total </th>
+            <th style={{ width: 150 }}> order state </th>
+          </tr>
         </thead>
         <AnimatePresence>
           <tbody>

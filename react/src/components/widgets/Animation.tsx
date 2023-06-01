@@ -1,7 +1,6 @@
 import React from "react";
 import { ChildrenInterFace } from "../../interfaces/general";
 import { motion } from "framer-motion";
-import useIsMobile from "../../custom/useIsMobile";
 interface Props extends ChildrenInterFace {
   addIntialX?: boolean;
 }

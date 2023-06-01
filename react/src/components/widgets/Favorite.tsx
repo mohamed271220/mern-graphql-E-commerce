@@ -24,7 +24,7 @@ const Favorite = ({
     userId,
     productId: [productId as string],
   });
-  const { isMobile } = useIsMobile(700);
+  const { isMobile } = useIsMobile();
   return (
     <motion.div
       className="fav-product center"

@@ -78,7 +78,7 @@ aside {
     gap: 8px;
     font-size: 1rem;
     padding-left: 10px;
-    color: var(--secondary);
+    color: var(--third);
   }
 }
 .rate-filter-par {
@@ -385,4 +385,24 @@ svg.svg-star {
   padding-right: 14px;
   box-shadow: 0.5px 0.5px 2.5px black;
   z-index: 10;
+}
+
+@media (max-width: 600px) {
+  aside.aside-products {
+    position: fixed;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 40px);
+    z-index: 50;
+    background-color: var(--main);
+    box-shadow: var(--main-shadow);
+    padding-top: 40px;
+    .category-par,
+    .aside-head,
+    .hr {
+      width: 70%;
+      margin: 0 auto;
+    }
+  }
 }

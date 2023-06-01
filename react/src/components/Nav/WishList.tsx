@@ -47,7 +47,8 @@ const WishList = ({ showFav, setter }: Props) => {
         setter={setter}
       >
         <NoData length={fav.length} message="your wishlist is empty">
-          <div
+          <motion.div
+            variants={opacityVariant}
             className="center"
             style={{ justifyContent: "flex-end", padding: "0 5px" }}
           >
@@ -62,7 +63,7 @@ const WishList = ({ showFav, setter }: Props) => {
             >
               clear All
             </button>
-          </div>
+          </motion.div>
           <AnimatePresence mode="wait">
             {fav.length >= 1 ? (
               <FadeElement key={"fav-parent"} cls="center col">

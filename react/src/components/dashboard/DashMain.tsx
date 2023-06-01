@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ChildrenInterFace } from "../../interfaces/general";
 import Transition from "../widgets/react Transition";
 import BeardCrumbs from "./BeardCrumbs";
+import useIsMobile from "../../custom/useIsMobile";
 
 interface Props extends ChildrenInterFace {
   head: string;
@@ -11,17 +12,19 @@ interface Props extends ChildrenInterFace {
 
 const DashMain = ({ head, children }: Props) => {
   const { showAsideDash } = useContext(showAsideContext);
+  const { isMobile } = useIsMobile();
+  console.log({ isMobile });
   return (
     <motion.section
       className="dash-product"
       animate={{
-        width: showAsideDash ? "calc(100% - 210px )" : "95%",
-        margin: showAsideDash ? "20px 10px 10px 210px" : "20px auto",
+        width: showAsideDash && !isMobile ? "calc(100% - 210px )" : "95%",
+        margin:
+          showAsideDash && !isMobile ? "20px 10px 10px 210px" : "20px auto",
       }}
       transition={{ delay: showAsideDash ? 0.2 : 0.7 }}
     >
-      <Transition />
-
+      {/* <Transition /> */}
       <BeardCrumbs />
       <h2 className="underline header">{head}</h2>
       {children}

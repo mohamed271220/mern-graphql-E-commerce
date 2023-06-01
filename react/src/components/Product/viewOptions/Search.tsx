@@ -38,7 +38,7 @@ const Search = () => {
     <form className="center search" onSubmit={handleSubmit}>
       <input
         ref={inpRef}
-        placeholder="Search By Category Or Title"
+        placeholder="Search By Title"
         type="text"
         onChange={handleInputChange}
       />

@@ -9,20 +9,23 @@ import { useAppSelector } from "../../../../custom/reduxTypes";
 import NoData from "../../../widgets/NoData";
 import { Tilt } from "react-tilt";
 import { defaultOptions } from "../../../../assets/Objects/Tilt.js";
+import useIsMobile from "../../../../custom/useIsMobile";
 
 const ProductList = ({ isDash }: { isDash?: boolean }) => {
   const { Allproducts } = useAppSelector((st) => st.Allproducts);
   const { showFilter, products } = useContext(productListContext);
   const { gridView } = useContext(viewContext);
   const [page, setPage] = useState(1);
-
+  const { isMobile } = useIsMobile();
   const arr = isDash ? Allproducts || [] : products || [];
   const [dataShown, numberOfPages] = usePagination(8, page, arr);
   return (
     <NoData length={dataShown.length} message="no products matched">
       <motion.div
         className={`product-list-par ${!gridView ? "list" : "grid"} `}
-        animate={{ width: showFilter ? " calc(100% - 200px - 20px)" : "90%" }}
+        animate={{
+          width: showFilter && !isMobile ? " calc(100% - 200px - 20px)" : "90%",
+        }}
         transition={{ delay: 0.4 }}
       >
         {dataShown?.map((product: any, index: number) => {

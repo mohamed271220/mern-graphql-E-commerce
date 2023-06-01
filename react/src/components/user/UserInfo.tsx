@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, Fragment } from "react";
 import Detail from "./Detail";
 import { isAuthContext } from "../../context/isAuth";
 import { useMutation } from "@apollo/client";
@@ -76,9 +76,8 @@ const UserInfo = () => {
 
       {userArr.map(({ detail, value, fn, setter, bool }, i) => {
         return (
-          <>
+          <Fragment key={detail}>
             <Detail
-              key={detail}
               detail={detail}
               value={value}
               setter={setter}
@@ -94,7 +93,7 @@ const UserInfo = () => {
                 <div className="hr"></div>
               </>
             )}
-          </>
+          </Fragment>
         );
       })}
     </div>

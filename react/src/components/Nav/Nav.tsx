@@ -52,7 +52,7 @@ const Nav = () => {
     return () => clearTimeout(counter);
   }, [location, isAuth]);
 
-  const { isMobile } = useIsMobile(700);
+  const { isMobile } = useIsMobile();
   return (
     <>
       {showNav && (

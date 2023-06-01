@@ -2,8 +2,8 @@
 
 .dashboard-par {
   width: 100%;
-  // margin-top: 40px;
   display: flex;
+  overflow: hidden;
 }
 #dash-aside {
   position: fixed;
@@ -103,7 +103,7 @@ textarea.update-product {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 5px;
-  // padding: 10px;
+
   & > div {
     width: 100% !important;
   }
@@ -114,6 +114,7 @@ textarea.update-product {
   gap: 6px;
   margin-left: 10px;
   margin-top: 25px;
+  margin-bottom: 25px;
 }
 a.crumb-link {
   display: inline-block;
@@ -218,7 +219,7 @@ div.dash-nav {
 
 .notifications {
   height: 200px;
-  width: 180px;
+  width: 220px;
   z-index: 10;
   top: 25px;
   background: var(--main);
@@ -289,9 +290,30 @@ div.dash-nav {
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   .notifications {
     bottom: 0px;
     top: initial;
+  }
+
+  .dash-aside-close {
+    position: absolute;
+    top: 30px;
+    right: 20px;
+    transform: translate(-50%, -50%);
+    color: var(--delete);
+    svg {
+      transform: scale(1.5);
+      path {
+        font-size: 40px !important;
+      }
+    }
+  }
+  #dash-aside {
+    z-index: 100;
+    border-radius: initial;
+  }
+  form.update-product-form {
+    width: 80vw;
   }
 }

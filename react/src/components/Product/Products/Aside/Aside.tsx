@@ -12,8 +12,11 @@ import { MdFilterListAlt } from "react-icons/md";
 import { FiRefreshCcw } from "react-icons/fi";
 import { productListContext } from "../../../../context/FilterData";
 import Category from "./Category";
-import { asideVariant } from "../../../../variants/globals";
+import { asideVariant, opacityVariant } from "../../../../variants/globals";
 import { useAppSelector } from "../../../../custom/reduxTypes";
+import useIsMobile from "../../../../custom/useIsMobile";
+import { AiFillCloseCircle } from "react-icons/ai";
+import Title from "../../../widgets/Title";
 
 const Aside = ({ startFiltering }: { startFiltering: boolean }) => {
   const { Allproducts } = useAppSelector((st) => st.Allproducts);
@@ -27,11 +30,15 @@ const Aside = ({ startFiltering }: { startFiltering: boolean }) => {
     productFeatured,
     setProductFeatured,
     setProducts,
+    setShowFilter,
   } = useContext(productListContext);
-
+  const { isMobile } = useIsMobile();
   const [filterAllFn] = useMutation(FILTER_All);
 
   const handleFiltering = () => {
+    if (isMobile) {
+      setShowFilter(false);
+    }
     filterAllFn({
       variables: {
         input: {
@@ -59,6 +66,8 @@ const Aside = ({ startFiltering }: { startFiltering: boolean }) => {
       exit="exit"
       animate="end"
       key={"aside"}
+      custom={isMobile}
+      className="aside-products"
     >
       <div className="aside-head center">
         <div className="filter-icon center">
@@ -95,6 +104,21 @@ const Aside = ({ startFiltering }: { startFiltering: boolean }) => {
             fn={handleResetFiltering}
             Icon={FiRefreshCcw}
           />
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {isMobile && (
+          <motion.span
+            key={"hide-dash"}
+            variants={opacityVariant}
+            transition={{ duration: 0.4 }}
+            className="dash-aside-close"
+            onClick={() => setShowFilter(false)}
+          >
+            <Title title="hide filters">
+              <AiFillCloseCircle className="icon red" />
+            </Title>
+          </motion.span>
         )}
       </AnimatePresence>
     </motion.aside>

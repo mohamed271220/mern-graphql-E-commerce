@@ -26,6 +26,7 @@ const DashUpdateProduct = () => {
           obj={data.product}
           fn={updateProductFn}
           Icon={FaEdit}
+          key="update-dash-form"
         />
         <Outlet />
       </>

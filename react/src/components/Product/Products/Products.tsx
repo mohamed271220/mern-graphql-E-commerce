@@ -34,7 +34,7 @@ const Products = () => {
       <MainProductAnimation />
       <Sort />
 
-      <div className="center row start between">
+      <div className="center row start between relative">
         <AnimatePresence mode="wait">
           {showFilter && <Aside startFiltering={startFiltering} />}
         </AnimatePresence>

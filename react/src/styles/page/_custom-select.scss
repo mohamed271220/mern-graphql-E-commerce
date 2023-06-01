@@ -88,7 +88,7 @@
 }
 
 .select-compare {
-  width: 95% !important;
+  width: 95%;
   min-width: 400px;
   max-width: 900px;
   display: flex;
@@ -96,6 +96,7 @@
   gap: 20px;
   margin: 0 auto;
   color: var(--secondary);
+  overflow-x: hidden;
 }
 
 .selected-pro-data {
@@ -145,4 +146,19 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
+
+@media (max-width: 500px) {
+  .select-compare {
+    width: 100%;
+    gap: 5px;
+    margin-top: 10vh;
+    min-width: initial;
+    .selected-pro-data {
+      height: 50vh;
+    }
+  }
+  .nodata-compare {
+    font-size: 0.8rem;
+  }
 }

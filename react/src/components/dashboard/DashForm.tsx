@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { FieldValues, FormProvider, useForm } from "react-hook-form";
 import Input from "../widgets/Input";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -8,12 +8,11 @@ import InpErr from "../widgets/InpErr";
 import { ProductInterface } from "../../interfaces/product";
 import CustomFIleInput from "./CustomFIleInput";
 import axios from "axios";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { motion, AnimatePresence } from "framer-motion";
 import { opacityVariant } from "../../variants/globals";
 import OpacityBtn from "../widgets/OpacityBtn";
-import { GrAddCircle } from "react-icons/gr";
 import DashMain from "./DashMain";
 import {
   addToProductRedux,
@@ -83,7 +82,6 @@ const DashForm = ({ type, Icon, fn, id, obj, head, btn }: Props) => {
   const {
     handleSubmit,
     register,
-    getValues,
     formState: { errors },
   } = methods;
 
@@ -163,18 +161,20 @@ const DashForm = ({ type, Icon, fn, id, obj, head, btn }: Props) => {
           </h2>
           {inpArr.map(({ placeholder, type: inptype }, i) => {
             return (
-              <>
+              <Fragment key={`${type + placeholder}-${i}`}>
                 <Input
-                  key={i}
                   placeholder={placeholder}
                   defaultVal={obj?.category ? obj[placeholder] : ""}
                   type={inptype}
-                  err={(errors as { [key: string]: any })[placeholder]?.message}
+                  err={(errors as { [key: string]: any })[
+                    placeholder
+                  ]?.message.toString()}
+                  inptype="input"
                 />
                 {placeholder === "title" && type !== "update" && (
-                  <CustomFIleInput err="" />
+                  <CustomFIleInput err="" key="custom-input" />
                 )}
-              </>
+              </Fragment>
             );
           })}
           <div className="inp-parent">
@@ -193,6 +193,7 @@ const DashForm = ({ type, Icon, fn, id, obj, head, btn }: Props) => {
             btn={btn}
             cls="main btn center gap "
             fn={() => null}
+            type="submit"
             Icon={Icon}
           />
         </FormAnimation>

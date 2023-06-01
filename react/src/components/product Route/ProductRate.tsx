@@ -1,5 +1,5 @@
 import StarIcon from "../../custom SVGs/StarIcon";
-import React from "react";
+import React, { Fragment } from "react";
 import RatingDetails from "../Product/Products/RateDetails";
 import { reviewInterface } from "../../interfaces/product";
 
@@ -20,15 +20,11 @@ const ProductRate = ({
 }) => {
   return (
     <div className="product-rate center">
-      <>
+      <Fragment>
         {[1, 2, 3, 4, 5].map((e, i) => {
-          return (
-            <>
-              <StarIcon key={e} id={i} avgRate={avgRate} optional={id} />
-            </>
-          );
+          return <StarIcon key={e} id={i} avgRate={avgRate} optional={id} />;
         })}
-      </>
+      </Fragment>
 
       <span className="shadow rate center">
         {avgRate >= 0 ? avgRate.toFixed(1) : "0"}

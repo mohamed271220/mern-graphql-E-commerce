@@ -210,6 +210,7 @@ p {
   border-radius: 5px;
   font-weight: bold;
   font-style: 12px;
+  z-index: 4;
   transform: translateX(-50%);
   background: var(--wheat-lighter);
 }
@@ -244,4 +245,43 @@ p {
   font-size: 1.2rem;
   font-weight: bold;
   color: var(--secondary);
+}
+
+@media (max-width: 600px) {
+  .product-container {
+    padding-top: 20px;
+    height: auto !important;
+
+    .product-page {
+      height: 800px !important;
+      min-height: 100vh;
+
+      padding-top: 60px;
+      flex-direction: column;
+      justify-content: center;
+
+      // gap: 20px;
+
+      .details {
+        width: 90%;
+      }
+      .images {
+        width: 100%;
+        margin: 0 auto;
+        .small-img-par {
+          align-self: center;
+        }
+      }
+    }
+  }
+  .big-img-par {
+    width: 100vw !important;
+    height: 50vh;
+    position: relative;
+    .zoom {
+      div:nth-child(2) {
+        background-color: var(--main);
+      }
+    }
+  }
 }

@@ -107,7 +107,12 @@ const SignUp = () => {
               type="password"
             />
             <SelectCOuntry setCountry={setCountry} country={country} />
-            <OpacityBtn btn="sign up" cls="btn main" fn={() => null} />
+            <OpacityBtn
+              btn="sign up"
+              cls="btn main"
+              fn={() => null}
+              type="submit"
+            />
             <div className="redirect">
               <span> have an account</span>
               <NavLink to="/login">log in</NavLink>

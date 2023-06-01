@@ -6,20 +6,6 @@
   padding: 0 20px;
   position: relative;
 
-  // select {
-  //   border: 0;
-  //   outline: 0;
-  //   background: var(--wheat-light);
-  //   text-transform: capitalize;
-  //   border-radius: 4px;
-  //   color: var(--secondary);
-  //   font-size: 1rem;
-  //   padding: 2px 4px;
-  //   option {
-  //     background: #000;
-  //     color: white;
-  //   }
-  // }
   .view-opt {
     gap: 1.5vw;
     font-weight: bold;
@@ -63,8 +49,7 @@
 }
 
 .search {
-  max-width: 400px;
-  width: 400px;
+  width: 50%;
   margin: 0 auto;
   position: relative;
   input {

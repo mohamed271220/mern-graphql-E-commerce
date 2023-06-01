@@ -48,18 +48,16 @@ const Pages = ({ numOfPages, setPage, page }: Props) => {
               {pageArr?.map((num, index) => {
                 {
                   return (
-                    <>
-                      <div
-                        className={`page center ${
-                          page === index + 1 ? "page-active" : ""
-                        }`}
-                        onClick={() => setPage(index + 1)}
-                        key={index}
-                      >
-                        {" "}
-                        {num}
-                      </div>
-                    </>
+                    <div
+                      className={`page center ${
+                        page === index + 1 ? "page-active" : ""
+                      }`}
+                      onClick={() => setPage(index + 1)}
+                      key={index}
+                    >
+                      {" "}
+                      {num}
+                    </div>
                   );
                 }
               })}

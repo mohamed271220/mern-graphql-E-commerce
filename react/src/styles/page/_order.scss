@@ -16,6 +16,7 @@ table.order {
   margin: 0 auto;
   margin-bottom: 10px;
   overflow: hidden;
+  overflow-y: initial;
   > * {
     font-weight: bold;
   }
@@ -55,13 +56,13 @@ table.order {
   flex-direction: column;
   gap: 40px !important;
   margin: 10px;
-
+  padding-bottom: 10px;
   .order-mobile {
     width: 100%;
-    max-width: 400px;
+    max-width: 500px;
     margin: 0 auto;
     background: var(--secondary);
-    height: 100px;
+    height: 110px;
     display: flex;
     flex-direction: column;
     gap: 4px;
@@ -92,7 +93,7 @@ table.order {
 
 .order-state {
   padding: 4px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: bold;
   letter-spacing: 0.8px;
   color: var(--white);
@@ -255,7 +256,7 @@ table.order {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .order-details-grid {
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -263,12 +264,23 @@ table.order {
       "cust"
       "summ";
     gap: 10px;
+
     .table-order-detail {
       font-size: 0.7rem;
       td {
         .table-order {
           width: 10vw !important;
         }
+      }
+    }
+  }
+  .mobile-order-par .order-mobile {
+    .mobile-order-title {
+      width: 85%;
+      .mobile-order-id {
+        font-size: 1rem;
+      }
+      .order-state {
       }
     }
   }

@@ -11,20 +11,87 @@ import LogoSvg from "../widgets/LogoSvg";
 import { RiLogoutCircleRFill } from "react-icons/ri";
 import useLogOut from "../../custom/useLogOut";
 import { TbSquareRoundedPlusFilled } from "react-icons/tb";
+import useIsMobile from "../../custom/useIsMobile";
 
-const DashboardAside = () => {
+interface Props {
+  setShowAsideDash: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const DashboardAside = ({ setShowAsideDash }: Props) => {
   const { showAsideDash } = useContext(showAsideContext);
   const { handleLogOut } = useLogOut();
 
   useEffect(() => {
     sessionStorage.setItem("show-aside", String(showAsideDash));
   }, [showAsideDash]);
+  const { isMobile } = useIsMobile();
+
+  const dashAsideLinks = [
+    {
+      head: "Main",
+      links: [
+        {
+          link: "dashboard",
+          to: "/dashboard",
+          Icon: AiFillDashboard,
+          active: "dashboard",
+        },
+      ],
+    },
+    {
+      head: "products",
+      links: [
+        {
+          link: "all products",
+          to: "/dashboard/products",
+          Icon: GrProductHunt,
+          active: "products",
+        },
+        {
+          link: "add product",
+          to: "/dashboard/products/add",
+          Icon: TbSquareRoundedPlusFilled,
+          active: "add",
+        },
+      ],
+    },
+
+    {
+      head: "orders",
+      links: [
+        {
+          link: "orders",
+          to: "/dashboard/orders",
+          Icon: FaClipboardList,
+          active: "orders",
+        },
+      ],
+    },
+
+    {
+      head: "users",
+      links: [
+        {
+          link: "users",
+          to: "/dashboard/users",
+          Icon: FaUserAlt,
+          active: "users",
+        },
+        {
+          link: "logout",
+          to: "/login",
+          Icon: AiFillCloseCircle,
+          active: "login",
+        },
+      ],
+    },
+  ];
   return (
     <AnimatePresence mode="wait">
       {showAsideDash && (
         <motion.aside
           id="dash-aside"
           variants={asideVariant}
+          custom={isMobile}
           initial="start"
           exit="exit"
           animate="end"
@@ -42,71 +109,55 @@ const DashboardAside = () => {
             </Link>
           </div>
 
-          <h4 className="aside-dash-label">main</h4>
+          {dashAsideLinks.map(({ head, links }, i) => {
+            return (
+              <span key={`dash-link ${head}`}>
+                <h4 className="aside-dash-label">{head}</h4>
+                <>
+                  {links.map(({ link, to, Icon, active }, i) => {
+                    return (
+                      <Link
+                        key={link}
+                        className={
+                          location.pathname.split("/").slice(-1)[0] === active
+                            ? "active"
+                            : ""
+                        }
+                        to={to}
+                        onClick={() => {
+                          if (isMobile) {
+                            setShowAsideDash(false);
+                          }
+                          if (link === "logout") {
+                            handleLogOut();
+                          }
+                        }}
+                      >
+                        <Icon className="icon" color="var(--twitter)" />
+                        <span>{link}</span>
+                      </Link>
+                    );
+                  })}
+                </>
+              </span>
+            );
+          })}
 
-          <Link
-            className={
-              location.pathname.split("/").slice(-1)[0] === "dashboard"
-                ? "active"
-                : ""
-            }
-            to={"/dashboard"}
-          >
-            <AiFillDashboard className="icon" color="var(--twitter)" />
-            <span>dashboard</span>
-          </Link>
-          <h4 className="aside-dash-label">products</h4>
-
-          <Link
-            to={"/dashboard/products"}
-            className={
-              location.pathname.split("/").slice(-1)[0] === "products"
-                ? "active"
-                : ""
-            }
-          >
-            <GrProductHunt className="icon" color="var(--twitter)" />
-            <span>all products</span>
-          </Link>
-          <Link
-            className={
-              location.pathname.split("/").slice(-1)[0] === "add"
-                ? "active"
-                : ""
-            }
-            to={"/dashboard/products/add"}
-          >
-            <TbSquareRoundedPlusFilled
-              className="icon"
-              color="var(--twitter)"
-            />
-            <span>add product</span>
-          </Link>
-
-          <h4 className="aside-dash-label">orders</h4>
-
-          <NavLink to={"/dashboard/orders"}>
-            <FaClipboardList className="icon" color="var(--twitter)" />
-            <span>orders</span>
-          </NavLink>
-
-          <h4 className="aside-dash-label">users</h4>
-          <Link
-            className={
-              location.pathname.split("/").slice(-1)[0] === "users"
-                ? "active"
-                : ""
-            }
-            to={"/dashboard/users"}
-          >
-            <FaUserAlt className="icon" color="var(--twitter)" />
-            <span>users</span>
-          </Link>
-
-          <Link to={"/login"} onClick={handleLogOut}>
-            <RiLogoutCircleRFill className="icon" color="var(--twitter)" />
-            <span>logout</span>
-          </Link>
+          <AnimatePresence>
+            {isMobile && (
+              <motion.span
+                key={"hide-dash"}
+                variants={opacityVariant}
+                transition={{ duration: 0.4 }}
+                className="dash-aside-close"
+                onClick={() => setShowAsideDash(false)}
+              >
+                <Title title="hide dashboard aside nav">
+                  <AiFillCloseCircle className="icon red" />
+                </Title>
+              </motion.span>
+            )}
+          </AnimatePresence>
         </motion.aside>
       )}
     </AnimatePresence>

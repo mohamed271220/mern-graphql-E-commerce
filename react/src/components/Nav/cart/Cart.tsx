@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { useAppSelector } from "../../../custom/reduxTypes";
 import CartItem from "./CartItem";
 import TotalPrice from "./TotalPrice";
@@ -57,14 +57,14 @@ const Cart = () => {
           })}
         </div>
 
-        <div className="center row between w-100">
+        <div className="cart-data center row between w-100">
           <NoData length={cart.length} message="No products at your cart">
             <div className="carts-par center col">
               {cart.map((item) => {
                 return (
-                  <>
-                    <CartItem key={item._id} {...item} />
-                  </>
+                  <Fragment key={item._id}>
+                    <CartItem {...item} />
+                  </Fragment>
                 );
               })}
             </div>

@@ -36,7 +36,7 @@ const CartItem = ({
   return (
     <div className="cart-item center between">
       <img className="cart-img" src={path} alt="" />
-      <div className="center cart-content col">
+      <div className=" cart-content ">
         <div style={{ alignSelf: "center" }}>
           <Counter count={count} productId={productId} key={_id} />
         </div>

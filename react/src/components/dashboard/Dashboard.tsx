@@ -25,7 +25,7 @@ export const showAsideContext = createContext({} as contextInterface);
 
 const Dashboard = () => {
   const [showAsideDash, setShowAsideDash] = useState(
-    Boolean(sessionStorage.getItem("show-aside")) || false
+    Boolean(JSON.parse(sessionStorage.getItem("show-aside") as string) || false)
   );
 
   const ref = useRef<HTMLDivElement | null>(null);
@@ -85,7 +85,7 @@ const Dashboard = () => {
           <ThemeToggle navClr={navClr} linkClr={LinkClr} />
         </div>
 
-        <DashboardAside />
+        <DashboardAside setShowAsideDash={setShowAsideDash} />
         <Outlet />
       </div>
     </showAsideContext.Provider>

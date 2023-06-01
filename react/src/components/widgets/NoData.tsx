@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import FadeElement from "./FadeElement";
 import { ChildrenInterFace } from "../../interfaces/general";
 import { AnimatePresence } from "framer-motion";
@@ -14,7 +14,7 @@ const NoData = ({ length, children, message }: Props) => {
         children
       ) : (
         <FadeElement cls="shadow no-data" key={message}>
-          <>{message}</>
+          <Fragment>{message}</Fragment>
         </FadeElement>
       )}
     </AnimatePresence>

@@ -1,5 +1,5 @@
 import { AnimatePresence } from "framer-motion";
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import FadeElement from "../../widgets/FadeElement";
 import DashDropDown from "../Order/DashDropDown";
 
@@ -24,7 +24,7 @@ const Order = ({
 }: Props) => {
   const [updateRole, setUpdateRole] = useState(role);
   return (
-    <>
+    <Fragment>
       <td>{name}</td>
       <td>{email}</td>
       <td>
@@ -45,29 +45,29 @@ const Order = ({
           )}
         </AnimatePresence>
       </td>
-      <div className=" center gap`">
-        <td
-          className="order-state center"
-          style={{
-            width: "100%",
-            color: `var(--${role?.split(" ").slice(-1)})`,
-          }}
-        >
-          <AnimatePresence mode="wait">
-            <FadeElement cls="" key={role}>
-              <div style={{ width: 70 }}>{role}</div>
-            </FadeElement>
-          </AnimatePresence>
-          <DashDropDown
-            arr={["user", "admin", "owner", "moderator"]}
-            _id={_id}
-            setter={setUpdateRole}
-            state={updateRole}
-            type="user"
-          />
-        </td>
-      </div>
-    </>
+      {/* <div className=" center gap`"> */}
+      <td
+        className="order-state center"
+        style={{
+          width: "100%",
+          color: `var(--${role?.split(" ").slice(-1)})`,
+        }}
+      >
+        <AnimatePresence mode="wait">
+          <FadeElement cls="" key={role}>
+            <div style={{ width: 70 }}>{role}</div>
+          </FadeElement>
+        </AnimatePresence>
+        <DashDropDown
+          arr={["user", "admin", "owner", "moderator"]}
+          _id={_id}
+          setter={setUpdateRole}
+          state={updateRole}
+          type="user"
+        />
+      </td>
+      {/* </div> */}
+    </Fragment>
   );
 };
 

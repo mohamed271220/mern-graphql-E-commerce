@@ -9,13 +9,14 @@ import Search from "./Search";
 import { viewContext } from "../../../context/gridView";
 import { productListContext } from "../../../context/FilterData";
 import Title from "../../widgets/Title";
+import useIsMobile from "../../../custom/useIsMobile";
 
 const Sort = () => {
   const { setShowFilter, showFilter } = useContext(productListContext);
 
   const { setGridView, gridView } = useContext(viewContext);
   const toggleShowFilter = () => setShowFilter(!showFilter);
-
+  const { isMobile } = useIsMobile();
   return (
     <div className="sort-par  center between">
       <Search />
@@ -46,7 +47,7 @@ const Sort = () => {
                   exit="exit"
                   animate="end"
                   transition={{ duration: 0.4 }}
-                  style={{ color: "var(--secondary)" }}
+                  style={{ color: "var(--third)" }}
                 >
                   Show Filters
                 </motion.span>
@@ -56,9 +57,11 @@ const Sort = () => {
           </button>
         </div>
         <div className="view-par center ">
-          <span className="display" style={{ color: "var(--third)" }}>
-            Display
-          </span>
+          {!isMobile && (
+            <span className="display" style={{ color: "var(--third)" }}>
+              Display
+            </span>
+          )}
 
           <Title title="list view">
             <BsListTask
