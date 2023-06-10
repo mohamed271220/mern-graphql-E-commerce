@@ -45,12 +45,12 @@ const ProductList = ({ isDash }: { isDash?: boolean }) => {
                 description={product.description}
                 reviews={product.reviews}
                 layout
-                transition={{
-                  type: "tween",
-                  ease: "easeOut",
-                  duration: 0.5,
-                  damping: 7,
-                }}
+                // transition={{
+                //   type: "tween",
+                //   ease: "easeOut",
+                //   duration: 0.5,
+                //   damping: 7,
+                // }}
               />
             </Tilt>
           );

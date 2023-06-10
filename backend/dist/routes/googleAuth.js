@@ -16,7 +16,7 @@ exports.oAuthRouter = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const express_1 = require("express");
 const passport_1 = __importDefault(require("passport"));
-const config_1 = require("../config");
+const config_js_1 = require("../config.js");
 const user_1 = require("../mongoose/schema/user");
 const successLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
@@ -27,18 +27,21 @@ const successLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         const result = yield user_1.userCollection.findOne({ email });
         console.log(result);
         if (result) {
-            const expire = { expiresIn: "100h" };
-            const accessToken = jsonwebtoken_1.default.sign({ result }, config_1.ACCESS_TOKEN_SECRET, expire);
-            const refToken = jsonwebtoken_1.default.sign({ result }, config_1.REFRESH_TOKEN_SECRET, expire);
+            const expire = { expiresIn: "15s" };
+            const accessToken = jsonwebtoken_1.default.sign({ result }, config_js_1.ACCESS_TOKEN_SECRET, expire);
+            const refToken = jsonwebtoken_1.default.sign({ result }, config_js_1.REFRESH_TOKEN_SECRET);
+            console.log("google");
+            console.log(result);
             const id = result._id.toString();
+            console.log(id);
             res.cookie("user-email", result.email);
             res.cookie("user-id", id);
             res.cookie("access-token", accessToken);
             res.cookie("refresh-token", refToken);
-            res.redirect(`${config_1.Client_Url}/${location}?isLogged=true`);
+            res.redirect(`${config_js_1.Client_Url}?isLogged=true`);
         }
         else {
-            res.redirect(`${config_1.Client_Url}/login?isLogged=false`);
+            res.redirect(`${config_js_1.Client_Url}/login?isLogged=false`);
         }
     }
 });
@@ -49,7 +52,7 @@ const successSignup = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     if (email) {
         const result = yield user_1.userCollection.findOne({ email });
         if (result) {
-            res.redirect(`${config_1.Client_Url}/signup?isRegistered=true`);
+            res.redirect(`${config_js_1.Client_Url}/signup?isRegistered=true`);
         }
         else {
             const obj = {
@@ -57,7 +60,7 @@ const successSignup = (req, res) => __awaiter(void 0, void 0, void 0, function* 
                 email: user === null || user === void 0 ? void 0 : user.emails[0].value,
                 name: user.displayName,
             };
-            res.redirect(`${config_1.Client_Url}/signup?user=` + encodeURIComponent(JSON.stringify(obj)));
+            res.redirect(`${config_js_1.Client_Url}/signup?user=` + encodeURIComponent(JSON.stringify(obj)));
         }
     }
 });

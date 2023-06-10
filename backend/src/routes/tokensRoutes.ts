@@ -17,11 +17,13 @@ export const verfiyRefToken = async (refToken: string) => {
 
 export const getNewRefToken = async (req: Request, res: Response) => {
   const { refToken } = req.body;
+  // console.log(refToken);
   if (!refToken) {
     res.json({});
   } else {
     let { result } = (await verfiyRefToken(refToken)) as any;
-    if (result[0]._id) {
+    console.log(result);
+    if (result[0]?._id || result?._id) {
       const accessToken = Jwt.sign(
         { result },
         ACCESS_TOKEN_SECRET as unknown as string

@@ -1,7 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { overleyVariant, popVariant } from "../../variants/globals";
+import {
+  asideVariant,
+  overleyVariant,
+  popVariant,
+} from "../../variants/globals";
 import { ChildrenInterFace } from "../../interfaces/general";
+import useIsMobile from "../../custom/useIsMobile";
 interface Props extends ChildrenInterFace {
   sethide: React.Dispatch<React.SetStateAction<boolean>>;
   cls: string;
@@ -12,10 +17,12 @@ const Overley = ({ sethide, cls, children, dir = "top", height }: Props) => {
   const handlehidePop = () => {
     sethide(false);
   };
+  const { isMobile } = useIsMobile();
+
   return (
     <motion.div
       className="overley center"
-      variants={overleyVariant}
+      variants={isMobile ? overleyVariant : {}}
       initial="start"
       exit="exit"
       animate="end"
@@ -24,8 +31,8 @@ const Overley = ({ sethide, cls, children, dir = "top", height }: Props) => {
     >
       <motion.section
         className={cls}
-        variants={popVariant}
-        custom={{ dir: dir || "top", height }}
+        variants={isMobile ? asideVariant : popVariant}
+        custom={isMobile ? isMobile : { dir: dir || "top", height }}
         key={"overley-pop"}
         onClick={(e) => {
           e.stopPropagation();

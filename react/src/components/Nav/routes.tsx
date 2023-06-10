@@ -60,7 +60,6 @@ const AppRoutes = () => {
     if (islog === "") return;
     if (islog === "true") {
       toast.success("successfully logged in");
-      setIsAuth(true);
     } else if (islog === "false") {
       toast.success("this email is not registered");
     }
@@ -68,6 +67,7 @@ const AppRoutes = () => {
       replace: true,
     });
 
+    setIsAuth(true);
     const timer = setTimeout(() => {
       setIslog("");
     }, 1000);
@@ -87,6 +87,7 @@ const AppRoutes = () => {
     }, 1000);
     return () => clearTimeout(timer);
   }, [isRegistered]);
+  console.log({ isAuth });
   return (
     <AnimatePresence initial={false} mode="wait">
       <Routes location={location} key={location.pathname}>

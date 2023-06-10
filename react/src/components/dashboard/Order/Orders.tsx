@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { useEffect, createContext, useState } from "react";
 import DashMain from "../DashMain";
 
 import Pages from "../../Product/Products/Pages";
@@ -28,6 +28,11 @@ const Orders = () => {
   const { order } = useAppSelector((st) => st.order);
   const [dataShown, numberOfPages] = usePagination(14, page, order || []);
 
+  useEffect(() => {
+    setTimeout(() => {
+      document.title = "Dashboaed | orders";
+    }, 400);
+  }, []);
   return (
     <checkContext.Provider
       value={{ dataShown, setarrOfOrders, arrOfOrders, setSlectALl, selectALl }}

@@ -19,7 +19,6 @@ import { setContext } from "apollo-link-context";
 
 export const getnewAccess = async () => {
   const refToken = Cookies.get("refresh-token");
-
   const res = await axios.post(
     "http://localhost:3000/token/auth/newRefToken",
     {

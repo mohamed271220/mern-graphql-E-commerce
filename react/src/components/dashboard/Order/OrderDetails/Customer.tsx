@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import React, { useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import { GET_USER_DATA } from "../../../../graphql/mutations/user";
 import { date } from "yup";
 import OrderDetail from "../Table/OrderDetail";
@@ -38,10 +38,10 @@ const Customer = ({ userId, state, cost }: Props) => {
 
         {dataArr.map((obj, i) => {
           return (
-            <>
-              <OrderDetail key={i} {...obj} />
+            <Fragment key={i}>
+              <OrderDetail {...obj} />
               <div className="hr"></div>
-            </>
+            </Fragment>
           );
         })}
       </motion.div>

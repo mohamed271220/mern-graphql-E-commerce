@@ -1,10 +1,15 @@
-import React, { createContext, useContext, useRef, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import DashboardAside from "./DashboardAside";
 import { Outlet } from "react-router-dom";
 import { useScroll, useTransform } from "framer-motion";
 import ThemeToggle from "../widgets/ThemeToggle";
 import { themeContext } from "../../context/ThemContext";
-import NavImg from "../widgets/NavImg";
 import NotificationDropDown from "./NotificationDropDown";
 import MenuTogglar from "../widgets/MenuTogglar";
 interface contextInterface {
@@ -15,6 +20,9 @@ interface contextInterface {
 export const showAsideContext = createContext({} as contextInterface);
 
 const Dashboard = () => {
+  useEffect(() => {
+    document.title = "Dashboaed";
+  }, []);
   const [showAsideDash, setShowAsideDash] = useState(false);
 
   const ref = useRef<HTMLDivElement | null>(null);

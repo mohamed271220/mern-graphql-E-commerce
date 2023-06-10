@@ -22,6 +22,9 @@ interface oAuthInterface {
 }
 
 const SignUp = () => {
+  useEffect(() => {
+    document.title = "Zimart | Signup";
+  }, []);
   const { schema } = useFormSchema();
   const methods = useForm({ resolver: yupResolver(schema) });
   const {
@@ -29,10 +32,6 @@ const SignUp = () => {
     getValues,
     formState: { errors },
   } = methods;
-  const OnSubmit = (data: FieldValues) => {
-    console.log(data);
-    handleSignUp();
-  };
 
   const [userObj, setUserObj] = useState({} as oAuthInterface);
 
@@ -65,8 +64,9 @@ const SignUp = () => {
         },
       },
     });
+    console.log(data);
     if (data.addUser.status === 200) {
-      navigate("/login");
+      navigate(`/login?email=${getValues("email")}`);
       toast.success(data.addUser.msg);
     } else {
       toast(data.addUser.msg, {
@@ -74,11 +74,15 @@ const SignUp = () => {
       });
     }
   };
+  const OnSubmit = (data: FieldValues) => {
+    console.log(data);
+    handleSignUp();
+  };
   return (
     <Animation addIntialX={false}>
       <motion.div className="log-in center">
         <FormProvider {...methods}>
-          <FormAnimation fn={handleSubmit(OnSubmit)} cls="center">
+          <FormAnimation fn={handleSubmit(OnSubmit)} cls="center log-in">
             <h2
               className="underline header white"
               style={{ color: "var(--white)" }}
@@ -115,7 +119,7 @@ const SignUp = () => {
             />
             <div className="redirect">
               <span> have an account</span>
-              <NavLink to="/login">log in</NavLink>
+              <NavLink to={`/login`}>log in</NavLink>
             </div>
             <div className="or center">
               <span>or </span>

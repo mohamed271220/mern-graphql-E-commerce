@@ -96,14 +96,14 @@ const Banner = () => {
   const ref = useRef<HTMLElement | null>(null);
   const inview = useInView(ref, { amount: "all" });
   useEffect(() => {
-    // if (inview) {
-    //   timer = setTimeout(() => {
-    //     setBannerIndex((cur) =>
-    //       convertNegativeToZero(cur + 1, bannerArr.length)
-    //     );
-    //   }, 3000);
-    // }
-    // return () => clearTimeout(timer);
+    if (inview) {
+      timer = setTimeout(() => {
+        setBannerIndex((cur) =>
+          convertNegativeToZero(cur + 1, bannerArr.length)
+        );
+      }, 3000);
+    }
+    return () => clearTimeout(timer);
   }, [bannerIndex, inview]);
 
   const [variant, dir] = useCarousel(bannerIndex, bannerArr.length);

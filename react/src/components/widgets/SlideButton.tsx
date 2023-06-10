@@ -54,7 +54,7 @@ const SlideButton = ({
     } else {
       timer = setTimeout(() => {
         controls.start({ x: 0, y: 0 });
-      }, 200);
+      }, 600);
     }
     return () => clearTimeout(timer);
   }, [IsStatus200, fn]);

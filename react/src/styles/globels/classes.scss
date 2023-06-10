@@ -110,7 +110,7 @@
   width: 100vw;
   height: 100vh;
   background: var(--overley);
-  z-index: 11;
+  z-index: 8;
 }
 
 .between {
@@ -169,7 +169,7 @@
   }
 }
 .header {
-  @include fexien(125);
+  @include fexien(110);
   width: fit-content;
   margin: 0 auto;
   margin-bottom: 30px;
@@ -344,5 +344,5 @@ form {
 p,
 span,
 small {
-  font-family: "PT Sans", sans-serif;
+  @include kyiv(600, -400);
 }

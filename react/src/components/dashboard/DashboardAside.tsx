@@ -9,6 +9,7 @@ import useLogOut from "../../custom/useLogOut";
 import { AiFillCloseCircle } from "react-icons/ai";
 import useIsMobile from "../../custom/useIsMobile";
 import { dashAsideLinks } from "../../assets/arries/LinksArr.js";
+import MobileCloseDropDown from "../widgets/MobileCloseDropDown";
 
 interface Props {
   setShowAsideDash: React.Dispatch<React.SetStateAction<boolean>>;
@@ -77,21 +78,7 @@ const DashboardAside = ({ setShowAsideDash }: Props) => {
             );
           })}
 
-          <AnimatePresence>
-            {isMobile && (
-              <motion.span
-                key={"hide-dash"}
-                variants={opacityVariant}
-                transition={{ duration: 0.4 }}
-                className="dash-aside-close"
-                onClick={() => setShowAsideDash(false)}
-              >
-                <Title title="hide dashboard aside nav">
-                  <AiFillCloseCircle className="icon red" />
-                </Title>
-              </motion.span>
-            )}
-          </AnimatePresence>
+          <MobileCloseDropDown setter={setShowAsideDash} />
         </motion.aside>
       )}
     </AnimatePresence>

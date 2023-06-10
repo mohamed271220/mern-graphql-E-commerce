@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import DashMain from "../DashMain";
-import { useQuery } from "@apollo/client";
 import usePagination from "../../../custom/useNumberOfPages";
 import DashBoardUsersTable from "./DashBoardUsersTable";
 import Pages from "../../Product/Products/Pages";
-import { GET_ALL_USERS } from "../../../graphql/mutations/user";
 import useIsMobile from "../../../custom/useIsMobile";
 import MobileDashUser from "./MobileDashUser";
 import { useAppSelector } from "../../../custom/reduxTypes";
 
 const UsersDashboard = () => {
+  useEffect(() => {
+    setTimeout(() => {
+      document.title = "Dashboard | Users";
+    }, 400);
+  }, []);
   const { user } = useAppSelector((st) => st.user);
   const { isMobile } = useIsMobile();
 

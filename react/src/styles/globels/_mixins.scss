@@ -2,3 +2,8 @@
   font-family: "Fexien Sans";
   font-variation-settings: "wdth" $width;
 }
+
+@mixin kyiv($cont, $mid) {
+  font-family: Kyiv Sans;
+  font-variation-settings: "CONT" $cont, "MIDL" $mid;
+}

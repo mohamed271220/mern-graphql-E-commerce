@@ -43,7 +43,7 @@ const Detail = ({
   }, [userdata?.country]);
   const schema: { [key: string]: any } = {
     name: yup.object().shape({
-      name: yup.string().min(6).max(12).required("insert a name"),
+      name: yup.string().min(6).max(20).required("insert a name"),
     }),
     email: yup.object().shape({
       email: yup.string().email().required("insert a vaild email"),
@@ -55,8 +55,8 @@ const Detail = ({
         .max(20)
 
         .matches(
-          /\w+\d+[^a-zA-Z0-9]+/,
-          "insert 1 number,1 letter and 1 character"
+          /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/,
+          "password must contain at least 1 number and 1 character"
         ),
       new: yup
         .string()

@@ -38,9 +38,10 @@ const Password = () => {
       .max(20)
       .required()
       .matches(
-        /\w+\d+[^a-zA-Z0-9]+/,
-        "insert 1 number,1 letter and 1 character"
-      ),
+        /^(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/,
+        "password must contain at least 1 number and 1 character"
+      )
+      .required(),
     confirm: yup
       .string()
       .oneOf([yup.ref("new")], "doesn't match your password")

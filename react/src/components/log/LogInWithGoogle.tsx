@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
+import { isAuthContext } from "../../context/isAuth";
 
 const LogInWithGoogle = ({ type }: { type?: string }) => {
   return (
@@ -11,7 +12,8 @@ const LogInWithGoogle = ({ type }: { type?: string }) => {
           window.open("http://localhost:3000/auth/signup/google", "_self");
         } else {
           window.open(
-            `http://localhost:3000/auth/login/google?location=/`,
+            // `http://localhost:3000/auth/login/google?location=`,
+            `http://localhost:3000/auth/login/google`,
             "_self"
           );
         }

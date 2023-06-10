@@ -1,4 +1,4 @@
-import { Response } from "express";
+import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import { ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET } from "../../config.js";
 import {
@@ -50,6 +50,7 @@ export const userResolver = {
             input.image ||
             "https://res.cloudinary.com/domobky11/image/upload/v1682383659/download_d2onbx.png",
           password: hashPassword(input.password),
+          role: "user",
         });
         return { ...res, status: 200, msg: "user created successfully" };
       }
@@ -84,10 +85,10 @@ export const userResolver = {
               res.cookie("user-id", id as unknown as string);
               res.cookie("access-token", accessToken);
               res.cookie("refresh-token", refToken);
-              return { msg: "you successfully logged in" };
+              return { msg: "you successfully logged in", status: 200 };
             }
           } else if (!result) {
-            return { msg: "password is wrong" };
+            return { msg: "password is wrong", status: 404 };
           } else {
             return { msg: result };
           }
@@ -227,7 +228,7 @@ export const userResolver = {
     async logOut(
       _par: any,
       args: { _id: string; lastLogIn: string },
-      ctx: { res: Response }
+      ctx: { res: Response; req: Request }
     ) {
       await userCollection.findByIdAndUpdate(args._id, {
         lastLogIn: args.lastLogIn,

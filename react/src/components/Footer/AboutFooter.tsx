@@ -7,7 +7,7 @@ const AboutFooter = () => {
       <LogoSvg />
       <p>
         I created this E-commerce using React, TypeScript,Sass Apollo Client,
-        React Router DOM, Framer Motion SCSSfor Frontend. <br />
+        React Router DOM and Framer Motion for Frontend. <br />
       </p>
       <p>
         {" "}

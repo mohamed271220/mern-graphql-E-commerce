@@ -3,7 +3,7 @@ import { ChildrenInterFace } from "../interfaces/general.js";
 import { useQuery } from "@apollo/client";
 import { Get_All_Products } from "../graphql/general.js";
 import { addToProductRedux } from "../redux/productSlice.js";
-import { useAppDispatch } from "../custom/reduxTypes.js";
+import { useAppDispatch, useAppSelector } from "../custom/reduxTypes.js";
 import { ProductInterface } from "../interfaces/product.js";
 import { GET_ALL_ORDERS } from "../graphql/queries.js";
 import { addToOrderRedux } from "../redux/OrderSlice.js";
@@ -34,11 +34,18 @@ export const productListContext = createContext(
 );
 
 const FilterDataContext = ({ children }: ChildrenInterFace) => {
-  const { data, loading } = useQuery(Get_All_Products, {});
-  const { isMobile } = useIsMobile();
+  // const {}=usecontex
+  const { data, loading } = useQuery(Get_All_Products);
+
+  const { Allproducts } = useAppSelector((st) => st.Allproducts);
+
   const dispatch = useAppDispatch();
+
   useEffect(() => {
-    if (data?.products) {
+    if (
+      data?.products
+      // &&        Allproducts.length === 0
+    ) {
       dispatch(addToProductRedux(data?.products));
       setProducts(data?.products);
     }

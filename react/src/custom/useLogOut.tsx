@@ -10,8 +10,11 @@ const useLogOut = () => {
 
   const [fn] = useMutation(LogOut_Mutation);
   const handleLogOut = async () => {
-    console.log("runs");
     console.log({ setIsAuth, userId });
+    const cookies = Cookies.get();
+    for (const cookie in cookies) {
+      Cookies.remove(cookie);
+    }
     const { data } = await fn({
       variables: {
         lastLogIn: new Date().toISOString(),
@@ -22,11 +25,6 @@ const useLogOut = () => {
     if (data?.logOut.msg) {
       toast.success(data?.logOut.msg);
       setIsAuth(false);
-      const cookies = Cookies.get();
-
-      for (const cookie in cookies) {
-        Cookies.remove(cookie);
-      }
     }
   };
 

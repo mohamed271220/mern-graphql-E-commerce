@@ -75,17 +75,20 @@ footer {
     height: 20px;
     justify-content: center;
     align-items: center;
-    background: var(--white);
+    background: var(--main);
     transition: 0.3s;
     border-radius: 4px;
+    text-decoration: none;
+    color: var(--third);
     path {
       transition: 0.3s;
+      fill: var(--third);
     }
 
     &:hover {
-      background: var(--secondary);
+      background: var(--third);
       path {
-        fill: white;
+        fill: var(--main);
       }
     }
   }

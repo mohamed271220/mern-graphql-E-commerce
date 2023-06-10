@@ -15,9 +15,8 @@ const OrderDetailTr = ({ image, title, price, count }: Props) => {
       </td>
       <td>
         <span style={{ color: "var(--wheat-lighter)" }} className="shadow">
-          {" "}
           x
-        </span>{" "}
+        </span>
         {count}
       </td>
       <td>

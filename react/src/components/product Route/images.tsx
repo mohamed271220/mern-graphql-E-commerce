@@ -103,10 +103,10 @@ const ProductImages = ({
                 imageSrc={images[bigImgInd].productPath}
                 style={{
                   height: "fit-content",
-                  width: !isMobile ? 250 : "100%",
+                  width: !isMobile ? 250 : "70%",
                   zIndex: 3,
                   objectFit: "contain",
-                  filter: " drop-shadow(5px 10px 2px black)",
+                  // filter: " drop-shadow(5px 10px 2px black)",
                 }}
                 alwaysInPlace={isMobile}
                 fillAvailableSpace

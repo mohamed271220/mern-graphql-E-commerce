@@ -9,6 +9,9 @@ const DashProducts = () => {
 
   useEffect(() => {
     setGridView(true);
+    setTimeout(() => {
+      document.title = " Dashboard | all Products";
+    }, 400);
   }, []);
   return (
     <DashMain head="products">

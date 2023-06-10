@@ -5,7 +5,7 @@ import {
   ACCESS_TOKEN_SECRET,
   Client_Url,
   REFRESH_TOKEN_SECRET,
-} from "../config";
+} from "../config.js";
 import { userCollection } from "../mongoose/schema/user";
 
 const successLogin = async (req: Request, res: Response) => {
@@ -16,7 +16,7 @@ const successLogin = async (req: Request, res: Response) => {
     const result: any = await userCollection.findOne({ email });
     console.log(result);
     if (result) {
-      const expire = { expiresIn: "100h" };
+      const expire = { expiresIn: "15s" };
       const accessToken = jwt.sign(
         { result },
         ACCESS_TOKEN_SECRET as unknown as string,
@@ -24,15 +24,17 @@ const successLogin = async (req: Request, res: Response) => {
       );
       const refToken = jwt.sign(
         { result },
-        REFRESH_TOKEN_SECRET as unknown as string,
-        expire
+        REFRESH_TOKEN_SECRET as unknown as string
       );
+      console.log("google");
+      console.log(result);
       const id = result._id.toString();
+      console.log(id);
       res.cookie("user-email", result.email as unknown as string);
       res.cookie("user-id", id as unknown as string);
       res.cookie("access-token", accessToken);
       res.cookie("refresh-token", refToken);
-      res.redirect(`${Client_Url}/${location}?isLogged=true`);
+      res.redirect(`${Client_Url}?isLogged=true`);
     } else {
       res.redirect(`${Client_Url}/login?isLogged=false`);
     }

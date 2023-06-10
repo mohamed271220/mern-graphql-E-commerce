@@ -38,7 +38,7 @@ exports.userResolver = {
             }
             else {
                 const res = yield user_js_1.userCollection.create(Object.assign(Object.assign({}, input), { createdAt: new Date().toISOString(), image: input.image ||
-                        "https://res.cloudinary.com/domobky11/image/upload/v1682383659/download_d2onbx.png", password: (0, hashPassword_js_1.hashPassword)(input.password) }));
+                        "https://res.cloudinary.com/domobky11/image/upload/v1682383659/download_d2onbx.png", password: (0, hashPassword_js_1.hashPassword)(input.password), role: "user" }));
                 return Object.assign(Object.assign({}, res), { status: 200, msg: "user created successfully" });
             }
         }),
@@ -55,11 +55,11 @@ exports.userResolver = {
                         res.cookie("user-id", id);
                         res.cookie("access-token", accessToken);
                         res.cookie("refresh-token", refToken);
-                        return { msg: "you successfully logged in" };
+                        return { msg: "you successfully logged in", status: 200 };
                     }
                 }
                 else if (!result) {
-                    return { msg: "password is wrong" };
+                    return { msg: "password is wrong", status: 404 };
                 }
                 else {
                     return { msg: result };

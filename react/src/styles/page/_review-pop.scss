@@ -109,3 +109,18 @@ p.review-user {
     border-radius: 4px;
   }
 }
+
+@media (max-width: 800px) {
+  .pop-up-reviews {
+    position: fixed;
+    top: 40px;
+    left: 0;
+    height: calc(100vh - 40px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 10;
+  }
+}

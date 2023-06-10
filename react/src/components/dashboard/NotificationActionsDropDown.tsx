@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { Fragment, useContext } from "react";
 import { motion } from "framer-motion";
 import { opacityVariant, selectDropDownVariants } from "../../variants/globals";
 import { useMutation } from "@apollo/client";
@@ -68,9 +68,8 @@ const NotificationActionsDropDown = ({ bool, _id }: Props) => {
     >
       {actionsArr.map(({ btn, fn }, i) => {
         return (
-          <>
+          <Fragment key={i}>
             <motion.div
-              key={i}
               style={{
                 cursor: "pointer",
               }}
@@ -81,7 +80,7 @@ const NotificationActionsDropDown = ({ bool, _id }: Props) => {
             >
               {btn}
             </motion.div>
-          </>
+          </Fragment>
         );
       })}
     </motion.div>

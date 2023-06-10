@@ -7,6 +7,9 @@ import { useAppDispatch, useAppSelector } from "../../custom/reduxTypes";
 import { addToBlogsRedux } from "../../redux/BlogsSlice";
 
 const Blogs = () => {
+  useEffect(() => {
+    document.title = "Zimart | blogs";
+  }, []);
   const { blogs } = useAppSelector((st) => st.blogs);
   const { data } = useQuery(getAllBlogs);
   const dispatch = useAppDispatch();

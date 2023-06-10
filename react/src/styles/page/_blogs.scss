@@ -84,8 +84,8 @@
   gap: 20px;
 
   h1 {
-    @include fexien(125);
-    padding: 10px;
+    @include fexien(105);
+    padding: 5px;
     margin: 20px;
     text-transform: capitalize;
   }

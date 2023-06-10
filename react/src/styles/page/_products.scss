@@ -316,30 +316,21 @@ svg.svg-star {
   margin-top: 4px;
   position: relative;
   text-shadow: 0.2px 0.5px 0.8px black;
+  background: rgba(6, 56, 6, 0.197);
+  padding: 0 1.25px;
 
-  &::before {
-    content: "";
-    background: var(--green);
-    opacity: 0.2;
-    border-radius: 4px;
-    position: absolute;
-    top: 0;
-    left: -40%;
-    height: 100%;
-    width: 200%;
-  }
   .price-top {
-    position: absolute;
-    top: 3px;
+    position: relative;
+    top: -5px;
     font-size: 0.8rem;
     // color: var(--green);
   }
   .dollar {
-    right: 105%;
+    right: 1px;
   }
 
   .float {
-    left: 105%;
+    left: 1px;
   }
 }
 

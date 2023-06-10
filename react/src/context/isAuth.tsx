@@ -77,7 +77,7 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
   useEffect(() => {
     setUserId(Cookies.get("user-id") as unknown as string);
   }, [isAuth]);
-
+  console.log({ userId, data });
   useEffect(() => {
     if (userId) {
       setIsAuth(true);
@@ -103,7 +103,10 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
     !cart.length && !notificatins.length && !compare.length && !fav.length;
   // this check variable because when i log in then log out then log in data added again
   useEffect(() => {
+    console.log("is Auth 1");
     if (data?.getUserData && check) {
+      console.log("is Auth 2");
+
       setUserData(data?.getUserData);
       dispatch(addToFavRedux(data?.getUserData?.fav));
       dispatch(addToCartRedux(data?.getUserData?.cart));

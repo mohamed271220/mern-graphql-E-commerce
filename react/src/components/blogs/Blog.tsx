@@ -9,9 +9,12 @@ import SuggestedBlogs from "./SuggestedBlogs";
 import { motion } from "framer-motion";
 const Blog = () => {
   const { id } = useParams();
-  const { data } = useQuery(getSingleBlog, {
+  const { data, loading } = useQuery(getSingleBlog, {
     variables: { id },
   });
+  useEffect(() => {
+    document.title = data?.blog.head || "Zimart";
+  }, [loading]);
 
   if (data?.blog) {
     const { head, intro, end, image, _id, content } = data.blog;

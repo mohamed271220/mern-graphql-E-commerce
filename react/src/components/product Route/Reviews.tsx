@@ -9,6 +9,8 @@ import { btnHover } from "../../variants/globals";
 import { productContext } from "./Product";
 import useMeasure from "react-use-measure";
 import Overley from "../widgets/Overley";
+import useIsMobile from "../../custom/useIsMobile";
+import MobileCloseDropDown from "../widgets/MobileCloseDropDown";
 
 interface Props {
   setShowPop: React.Dispatch<React.SetStateAction<boolean>>;
@@ -70,6 +72,7 @@ const Reviews = ({ setShowPop }: Props) => {
           <FaGreaterThan />
         </motion.button>
       </div>
+      <MobileCloseDropDown setter={setShowPop} />
     </Overley>
   );
 };

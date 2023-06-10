@@ -4,6 +4,8 @@ import StarIcon from "../../custom SVGs/StarIcon";
 import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import { reviewCounter } from "../../variants/globals";
+import Title from "../widgets/Title";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const clrsArr = [
   "var(--green)",
@@ -41,7 +43,10 @@ const Review = ({ _id, image, user, rate, review, i }: Props) => {
     <div className="review" ref={reviewRef}>
       <div className="img-review center">
         <div className="before" style={{ background: clrsArr[i] }}></div>
-        <img src={image} alt={user} title={user} />
+        <Title title={user}>
+          {/* <img src={image} alt={user} className="relative" /> */}
+          <LazyLoadImage effect="blur" src={image} />
+        </Title>
       </div>
       <p className="review-user center">{user}</p>
       <div className="review-rate center">

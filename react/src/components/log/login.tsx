@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 
 import { useForm, FormProvider, FieldValues } from "react-hook-form";
 
@@ -8,18 +8,23 @@ import { Authenticate_Query } from "../../graphql/mutations/user";
 import OpacityBtn from "../widgets/OpacityBtn";
 import { toast } from "react-hot-toast";
 import { isAuthContext } from "../../context/isAuth";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Animation from "../widgets/Animation";
 import LogInWithGoogle from "./LogInWithGoogle";
 import FormAnimation from "../widgets/FormAnimation";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { AiFillWarning } from "react-icons/ai";
 const Login = () => {
+  useEffect(() => {
+    document.title = "Zimart | login";
+  }, []);
+
   const schema = yup.object().shape({
     email: yup.string().email("insert a valid email").required(),
     password: yup.string().required(),
   });
-
+  const navigate = useNavigate();
   const methods = useForm({ resolver: yupResolver(schema) });
   const {
     formState: { errors },
@@ -41,9 +46,16 @@ const Login = () => {
         credentials: "include",
       },
     });
-    if (res.data.authenticate.msg) {
+    if (res.data.authenticate.status === 404) {
+      toast.error(res.data.authenticate.msg);
+    } else if (res.data.authenticate.status === 200) {
       toast.success(res.data.authenticate.msg);
       setIsAuth(true);
+      navigate("/");
+    } else {
+      toast(res.data.authenticate.msg, {
+        icon: <AiFillWarning fontSize={18} color="var(--star)" />,
+      });
     }
   };
   const onSubmit = (data: FieldValues) => {
@@ -63,6 +75,9 @@ const Login = () => {
             <Input
               placeholder={"email"}
               err={errors.email?.message?.toString()}
+              defaultVal={
+                new URLSearchParams(window.location.search).get("email") || ""
+              }
             />
             <Input
               placeholder={"password"}

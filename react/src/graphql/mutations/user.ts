@@ -79,6 +79,7 @@ export const Authenticate_Query = gql`
   mutation ($email: String!, $password: String!) {
     authenticate(email: $email, password: $password) {
       msg
+      status
     }
   }
 `;

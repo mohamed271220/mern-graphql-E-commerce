@@ -50,7 +50,13 @@ const Nav = () => {
   return (
     <>
       {showNav && (
-        <motion.nav ref={navRef} style={{ background: navClr }}>
+        <motion.nav
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+          transition={{ delay: 0.4 }}
+          ref={navRef}
+          style={{ background: navClr }}
+        >
           <Link to="/" className="logo center">
             <LogoSvg />
           </Link>

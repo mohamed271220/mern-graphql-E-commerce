@@ -20,6 +20,7 @@ import { useAppSelector } from "../../../../custom/reduxTypes";
 import useIsMobile from "../../../../custom/useIsMobile";
 import { AiFillCloseCircle } from "react-icons/ai";
 import Title from "../../../widgets/Title";
+import MobileCloseDropDown from "../../../widgets/MobileCloseDropDown";
 
 const Aside = ({ startFiltering }: { startFiltering: boolean }) => {
   const { Allproducts } = useAppSelector((st) => st.Allproducts);
@@ -109,21 +110,7 @@ const Aside = ({ startFiltering }: { startFiltering: boolean }) => {
           />
         )}
       </AnimatePresence>
-      <AnimatePresence>
-        {isMobile && (
-          <motion.span
-            key={"hide-dash"}
-            variants={opacityVariant}
-            transition={{ duration: 0.4 }}
-            className="dash-aside-close"
-            onClick={() => setShowFilter(false)}
-          >
-            <Title title="hide filters">
-              <AiFillCloseCircle className="icon red" />
-            </Title>
-          </motion.span>
-        )}
-      </AnimatePresence>
+      <MobileCloseDropDown setter={setShowFilter} />
     </motion.aside>
   );
 };

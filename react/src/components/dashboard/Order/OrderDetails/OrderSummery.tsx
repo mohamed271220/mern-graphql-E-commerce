@@ -38,11 +38,7 @@ const OrderSummery = ({ total, created, delivered }: Props) => {
     <motion.div variants={reverseVariant} className="box-shadow order-summery">
       <h3 className="underline header">order summery</h3>
       {orderArr.map((obj, i) => {
-        return (
-          <>
-            <OrderDetail key={i} {...obj} />
-          </>
-        );
+        return <OrderDetail key={i} {...obj} />;
       })}
     </motion.div>
   );
