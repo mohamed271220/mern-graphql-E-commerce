@@ -46,6 +46,7 @@ const Login = () => {
         credentials: "include",
       },
     });
+    console.log(res);
     if (res.data.authenticate.status === 404) {
       toast.error(res.data.authenticate.msg);
     } else if (res.data.authenticate.status === 200) {

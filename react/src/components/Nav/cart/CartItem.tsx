@@ -6,7 +6,7 @@ import useRemoveFromCart from "../../../custom/useRemoveFromCart.js";
 import { isAuthContext } from "../../../context/isAuth.js";
 import { BsFillCartXFill, BsInfoLg } from "react-icons/bs";
 import DetailsBtn from "../../widgets/DetailsBtn.js";
-import axios from "axios";
+
 import { useAppSelector } from "../../../custom/reduxTypes.js";
 import useBuy from "../../../custom/useBuy.js";
 
@@ -30,7 +30,7 @@ const CartItem = ({
     userId,
     productId: [productId],
   });
-  const obj = cart.find((item) => item._id === _id);
+  const obj = cart.find((item: cartInterface) => item._id === _id);
   const { handlePurchase } = useBuy([obj] as unknown as cartInterface[]);
 
   return (

@@ -15,3 +15,15 @@
 .zoom {
   color: var(--third);
 }
+
+@media (max-width: 800px) {
+  .avatar-par {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5%;
+    gap: 20px;
+  }
+}

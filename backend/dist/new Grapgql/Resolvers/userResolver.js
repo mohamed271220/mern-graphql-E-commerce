@@ -46,7 +46,7 @@ exports.userResolver = {
             try {
                 const result = yield (0, authenticate_js_1.authenticateMiddleware)(args.email, args.password);
                 if (Array.isArray(result)) {
-                    if (result.length > 0) {
+                    if (result.length >= 1) {
                         const expire = { expiresIn: "15s" };
                         const accessToken = jsonwebtoken_1.default.sign({ result }, config_js_1.ACCESS_TOKEN_SECRET, expire);
                         const refToken = jsonwebtoken_1.default.sign({ result }, config_js_1.REFRESH_TOKEN_SECRET);

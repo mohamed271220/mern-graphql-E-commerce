@@ -1,7 +1,7 @@
 import React from "react";
 import { REMOVE_FROM_Cart } from "../graphql/mutations/user";
 import { useMutation } from "@apollo/client";
-import { removeFromCartRedux } from "../redux/CartSlice";
+import { removeFromCartRedux } from "../redux/cartSlice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-hot-toast";
 

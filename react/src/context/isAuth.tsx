@@ -5,7 +5,7 @@ import { GET_USER_DATA } from "../graphql/mutations/user";
 import Cookies from "js-cookie";
 import { useAppDispatch, useAppSelector } from "../custom/reduxTypes";
 import { addToFavRedux } from "../redux/favSlice";
-import { addToCartRedux, changeCartCountRedux } from "../redux/CartSlice";
+import { addToCartRedux, changeCartCountRedux } from "../redux/cartSlice";
 import { ChildrenInterFace } from "../interfaces/general.js";
 import { addToCompareRedux } from "../redux/compareSlice";
 import {

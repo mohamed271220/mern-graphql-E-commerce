@@ -36,6 +36,7 @@ const permissions_js_1 = require("./new Grapgql/shield/permissions.js");
 const blogResolver_js_1 = require("./new Grapgql/Resolvers/blogResolver.js");
 const blogsType_js_1 = require("./new Grapgql/typeDefs/blogsType.js");
 const { makeExecutableSchema } = require("@graphql-tools/schema");
+const path_1 = __importDefault(require("path"));
 mongoose_1.default.connect(config_js_1.MongoDB_URL);
 const app = (0, express_1.default)();
 app.use(cookieSession({
@@ -49,7 +50,8 @@ app.use((0, cookie_parser_1.default)());
 app.use(passport_1.default.session());
 app.use((0, cors_1.default)({
     credentials: true,
-    origin: "http://localhost:5173",
+    origin: config_js_1.Client_Url,
+    methods: ["GET", "POST", "PATCH", "DELETE"],
 }));
 const schema = makeExecutableSchema({
     typeDefs: [ProductDefTypes_js_1.productTypeDefs, orderType_js_1.orderDefType, userTypeDefs_js_1.userTypeDefs, blogsType_js_1.BlogDefType],
@@ -57,35 +59,28 @@ const schema = makeExecutableSchema({
 });
 const schemaWithPermissions = (0, graphql_middleware_1.applyMiddleware)(schema, permissions_js_1.permissions);
 app.use(express_1.default.json());
-// server.applyMiddleware({ app });
 const server = new apollo_server_express_1.ApolloServer({
     schema: schemaWithPermissions,
     context: ({ req, res }) => {
         return { req, res };
     },
 });
-//old graphql
-// const schema = mergeSchemas({
-//   schemas: [graphQlSchema, userSchema],
-// });
-// app.use(
-//   "/graphql",
-//   graphqlHTTP({
-//     graphiql: true,
-//     schema,
-//   })
-// );
+app.use(express_1.default.static(path_1.default.join(path_1.default.resolve(), "/react/dist")));
 app.use("/", uploudRoute_js_1.uploadRoute);
 app.use("/", stripe_js_1.default);
 app.use("/", googleAuth_js_1.oAuthRouter);
 app.use("/token", tokensRoutes_js_1.AuthRouter);
+app.get("*", (req, res) => {
+    res.sendFile(path_1.default.join(path_1.default.resolve(), "/react/dist/index.html"));
+});
 (() => __awaiter(void 0, void 0, void 0, function* () {
     yield server.start();
     server.applyMiddleware({
         app,
         cors: {
             credentials: true,
-            origin: "http://localhost:5173",
+            methods: ["GET", "POST", "PATCH", "DELETE"],
+            origin: config_js_1.Client_Url,
         },
     });
     app.listen({ port: 3000 }, () => {

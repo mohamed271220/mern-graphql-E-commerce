@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import { Add_To_Cart } from "../graphql/mutations/user";
 import { useAppDispatch } from "./reduxTypes";
-import { addToCartRedux } from "../redux/CartSlice";
+import { addToCartRedux } from "../redux/cartSlice";
 import { toast } from "react-hot-toast";
 
 interface Props {

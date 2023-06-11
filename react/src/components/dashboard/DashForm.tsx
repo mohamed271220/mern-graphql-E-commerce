@@ -20,6 +20,7 @@ import {
 } from "../../redux/productSlice";
 import { useAppDispatch } from "../../custom/reduxTypes";
 import FormAnimation from "../widgets/FormAnimation";
+import { uploadImagesRoute } from "../../assets/routes.js";
 
 interface keyedProduct extends ProductInterface {
   [key: string]: any;
@@ -134,7 +135,7 @@ const DashForm = ({ type, Icon, fn, id, obj, head, btn }: Props) => {
           formData.append("images", file);
         }
         const { data: addedDocument } = await axios.patch(
-          `http://localhost:3000/products/images/upload/${res.addProduct._id}`,
+          uploadImagesRoute(res.addProduct._id),
           formData,
           {
             onUploadProgress: (data: any) => {

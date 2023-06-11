@@ -3,10 +3,10 @@ import axios from "axios";
 import { useContext } from "react";
 import { isAuthContext } from "../context/isAuth";
 import { ProductInterface } from "../interfaces/product";
-import { StripeRoute, getStripePublicKeyRoute } from "../RestfulRoutes.js";
 import { cartInterface } from "../interfaces/user";
 import { toast } from "react-hot-toast";
 import { getnewAccess } from "../main";
+import { StripeRoute, getStripePublicKeyRoute } from "../assets/routes.js";
 const useBuy = (arrProducts: cartInterface[]) => {
   const { email, userId } = useContext(isAuthContext);
 

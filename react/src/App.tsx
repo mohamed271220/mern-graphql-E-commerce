@@ -11,7 +11,7 @@ import FilterDataContext from "./context/FilterData";
 import ThemeContext from "./context/ThemContext";
 
 const App = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => {
       setIsLoading(false);

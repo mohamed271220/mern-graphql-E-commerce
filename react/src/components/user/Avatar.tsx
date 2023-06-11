@@ -5,6 +5,8 @@ import axios from "axios";
 import AvatarEditor from "react-avatar-editor";
 import { isAuthContext } from "../../context/isAuth";
 import OpacityBtn from "../widgets/OpacityBtn";
+import { updateUserImg } from "../../assets/routes";
+import MobileCloseDropDown from "../widgets/MobileCloseDropDown";
 interface Props {
   setEdit: React.Dispatch<React.SetStateAction<boolean>>;
   setnewImg: React.Dispatch<React.SetStateAction<File | undefined>>;
@@ -26,10 +28,7 @@ const Avatar = ({ setEdit, newImg, handleCancel }: Props) => {
 
   const { userId } = useContext(isAuthContext);
   const uploadFn = async (dataa: any) => {
-    const data = await axios.patch(
-      `http://localhost:3000/upload/${userId}`,
-      dataa
-    );
+    const data = await axios.patch(updateUserImg(userId), dataa);
     console.log(data);
   };
 
@@ -76,6 +75,7 @@ const Avatar = ({ setEdit, newImg, handleCancel }: Props) => {
         onPositionChange={handlePositionChange}
         scale={1 + scale}
       />
+      <MobileCloseDropDown setter={setEdit} />
       <div className="zoom-cont col center start w-100">
         <label htmlFor="zoom" className="zoom">
           {" "}

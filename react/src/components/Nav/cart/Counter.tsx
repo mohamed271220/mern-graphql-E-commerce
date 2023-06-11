@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAnimate } from "framer-motion";
 import { useAppDispatch } from "../../../custom/reduxTypes";
-import { changeCartCountRedux } from "../../../redux/CartSlice";
+import { changeCartCountRedux } from "../../../redux/cartSlice.js";
 import { useMutation } from "@apollo/client";
 import { Change_Cart_Count } from "../../../graphql/mutations/user";
 import Cookies from "js-cookie";

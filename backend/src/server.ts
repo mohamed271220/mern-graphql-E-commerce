@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
-import { MongoDB_URL, SeSSion_Secret } from "./config.js";
+import { Client_Url, MongoDB_URL, SeSSion_Secret } from "./config.js";
 import { uploadRoute } from "./Upload/uploudRoute.js";
 import stripeRoutes from "./stripe/stripe.js";
 import passport from "passport";
@@ -22,6 +22,7 @@ import { permissions } from "./new Grapgql/shield/permissions.js";
 import { blogResolver } from "./new Grapgql/Resolvers/blogResolver.js";
 import { BlogDefType } from "./new Grapgql/typeDefs/blogsType.js";
 const { makeExecutableSchema } = require("@graphql-tools/schema");
+import path from "path";
 
 mongoose.connect(MongoDB_URL as unknown as string);
 
@@ -41,7 +42,8 @@ app.use(passport.session());
 app.use(
   cors({
     credentials: true,
-    origin: "http://localhost:5173",
+    origin: Client_Url,
+    methods: ["GET", "POST", "PATCH", "DELETE"],
   })
 );
 
@@ -53,7 +55,6 @@ const schema = makeExecutableSchema({
 const schemaWithPermissions = applyMiddleware(schema, permissions);
 
 app.use(express.json());
-// server.applyMiddleware({ app });
 
 const server = new ApolloServer({
   schema: schemaWithPermissions,
@@ -62,34 +63,28 @@ const server = new ApolloServer({
   },
 });
 
-//old graphql
-// const schema = mergeSchemas({
-//   schemas: [graphQlSchema, userSchema],
-// });
-
-// app.use(
-//   "/graphql",
-//   graphqlHTTP({
-//     graphiql: true,
-//     schema,
-//   })
-// );
+app.use(express.static(path.join(path.resolve(), "/react/dist")));
 
 app.use("/", uploadRoute);
 app.use("/", stripeRoutes);
 
 app.use("/", oAuthRouter);
 app.use("/token", AuthRouter);
-
+app.get("*", (req, res) => {
+  res.sendFile(path.join(path.resolve(), "/react/dist/index.html"));
+});
 (async () => {
   await server.start();
   server.applyMiddleware({
     app,
     cors: {
       credentials: true,
-      origin: "http://localhost:5173",
+      methods: ["GET", "POST", "PATCH", "DELETE"],
+
+      origin: Client_Url,
     },
   });
+
   app.listen({ port: 3000 }, () => {
     console.log("server-runs");
   });

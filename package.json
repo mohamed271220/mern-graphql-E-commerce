@@ -1,0 +1,22 @@
+{
+  "name": "mern-e-commerce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd backend && npm install -f && cd ../react && npm install -f && npm run build",
+    "start": " node  backend/dist/server.js "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mahmoudaboelenien19/mern-graphql-E-commerce.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mahmoudaboelenien19/mern-graphql-E-commerce/issues"
+  },
+  "homepage": "https://github.com/Mahmoudaboelenien19/mern-graphql-E-commerce#readme"
+}

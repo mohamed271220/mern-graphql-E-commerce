@@ -15,10 +15,10 @@ import { productListContext } from "../../context/FilterData";
 import useFilterState from "../../custom/useFIlterState";
 import BannerText from "./BannerText";
 import { useAppSelector } from "../../custom/reduxTypes";
-import MainImage from "../../assets/images/banner/4.jpg";
-import LapImage from "../../assets/images/banner/laptop.jpg";
-import FashionImage from "../../assets/images/banner/fashion.jpg";
-import SaleImage from "../../assets/images/banner/sale.jpg";
+import MainImage from "/banner/model.jpg";
+import LapImage from "/banner/laptop-Img.jpg";
+import FashionImage from "/banner/fashion-Img.jpg";
+import SaleImage from "/banner/sale-Img.jpg";
 import Animation from "../widgets/Animation";
 import { mergeRefs } from "react-merge-refs";
 

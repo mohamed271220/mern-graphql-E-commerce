@@ -8,6 +8,7 @@ import SLiderComponent from "../../widgets/SLider";
 import { viewContext } from "../../../context/gridView";
 import Animation from "../../widgets/Animation";
 import NoData from "../../widgets/NoData";
+import { cartInterface } from "../../../interfaces/user";
 
 const offerArr = [
   { offer: "Spend $800 or more and get free shipping!", money: 800 },
@@ -60,7 +61,7 @@ const Cart = () => {
         <div className="cart-data center row between w-100">
           <NoData length={cart.length} message="No products at your cart">
             <div className="carts-par center col">
-              {cart.map((item) => {
+              {cart.map((item: cartInterface) => {
                 return (
                   <Fragment key={item._id}>
                     <CartItem {...item} />
