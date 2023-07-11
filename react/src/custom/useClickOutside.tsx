@@ -9,7 +9,6 @@ const useClickOutside = <T extends HTMLElement>(
     let timer: number;
     const handler = (e: MouseEvent) => {
       if (!ref.current?.contains(e.target as Node) && bool) {
-        console.log("click outside");
         timer = setTimeout(() => {
           fn();
         }, 200);

@@ -1,15 +1,19 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useEffect,
+  useState,
+  useTransition,
+} from "react";
 import { ChildrenInterFace } from "../interfaces/general.js";
 import { useQuery } from "@apollo/client";
 import { Get_All_Products } from "../graphql/general.js";
 import { addToProductRedux } from "../redux/productSlice.js";
-import { useAppDispatch, useAppSelector } from "../custom/reduxTypes.js";
+import { useAppDispatch } from "../custom/reduxTypes.js";
 import { ProductInterface } from "../interfaces/product.js";
 import { GET_ALL_ORDERS } from "../graphql/queries.js";
 import { addToOrderRedux } from "../redux/OrderSlice.js";
 import { GET_ALL_USERS } from "../graphql/mutations/user.js";
 import { addToUserRedux } from "../redux/UserSlice.js";
-import useIsMobile from "../custom/useIsMobile.js";
 
 interface productListContextInterface {
   setShowFilter: React.Dispatch<React.SetStateAction<boolean>>;
@@ -27,6 +31,8 @@ interface productListContextInterface {
   setRateChecked: React.Dispatch<React.SetStateAction<number | string>>;
   productSearchWord: string;
   setroductSearchWord: React.Dispatch<React.SetStateAction<string>>;
+  isPending: boolean;
+  startTransition: React.TransitionStartFunction;
 }
 
 export const productListContext = createContext(
@@ -34,18 +40,13 @@ export const productListContext = createContext(
 );
 
 const FilterDataContext = ({ children }: ChildrenInterFace) => {
-  // const {}=usecontex
+  const [isPending, startTransition] = useTransition();
   const { data, loading } = useQuery(Get_All_Products);
-
-  const { Allproducts } = useAppSelector((st) => st.Allproducts);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (
-      data?.products
-      // &&        Allproducts.length === 0
-    ) {
+    if (data?.products) {
       dispatch(addToProductRedux(data?.products));
       setProducts(data?.products);
     }
@@ -57,8 +58,9 @@ const FilterDataContext = ({ children }: ChildrenInterFace) => {
   const [categoryFilter, setCategoryFilter] = useState<string | number>("");
   const [productFeatured, setProductFeatured] = useState<string | number>("");
   const [priceFilter, setPriceFilter] = useState<string | number>(0);
-  const [RateChecked, setRateChecked] = useState<string | number>("");
   const [productSearchWord, setroductSearchWord] = useState<string>("");
+
+  const [RateChecked, setRateChecked] = useState<string | number>("");
   const { data: orderData } = useQuery(GET_ALL_ORDERS);
   useEffect(() => {
     if (orderData?.orders) {
@@ -76,6 +78,8 @@ const FilterDataContext = ({ children }: ChildrenInterFace) => {
   return (
     <productListContext.Provider
       value={{
+        isPending,
+        startTransition,
         setShowFilter,
         showFilter,
         products,

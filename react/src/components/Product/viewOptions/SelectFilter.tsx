@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
+
 import {
   FILTER_BY_Date,
   FILTER_BY_PRICE,
@@ -28,54 +29,58 @@ const optionsArr = [
 
 const SelectFilter = () => {
   const { Allproducts } = useAppSelector((st) => st.Allproducts);
-
-  const { setProducts } = useContext(productListContext);
+  const [isOptSelected, setIsOptSelected] = useState(false);
+  const { setProducts, isPending, startTransition } =
+    useContext(productListContext);
   const [selectValue, setSelectValue] = useState("relevance");
   const [fnPrice] = useMutation(FILTER_BY_PRICE);
   const [fnRate] = useMutation(FILTER_BY_Rate);
   const [fnDate] = useMutation(FILTER_BY_Date);
 
   useEffect(() => {
-    if (selectValue === "relevance") {
-      setProducts(Allproducts);
-    } else if (selectValue === "lowest price") {
-      fnPrice({
-        variables: {
-          price: 1,
-        },
-      }).then(({ data }) => setProducts(data.filterByPrice));
-    } else if (selectValue === "highest price") {
-      fnPrice({
-        variables: {
-          price: -1,
-        },
-      }).then(({ data }) => setProducts(data.filterByPrice));
-    } else if (selectValue === "lowest rate") {
-      fnRate({
-        variables: {
-          rate: 1,
-        },
-      }).then(({ data }) => setProducts(data.filterByRate));
-    } else if (selectValue === "highest rate") {
-      fnRate({
-        variables: {
-          rate: -1,
-        },
-      }).then(({ data }) => setProducts(data.filterByRate));
-    } else if (selectValue === "newest") {
-      fnDate({
-        variables: {
-          date: -1,
-        },
-      }).then(({ data }) => setProducts(data.filterByDate));
-    } else if (selectValue === "oldest") {
-      fnDate({
-        variables: {
-          date: 1,
-        },
-      }).then(({ data }) => setProducts(data.filterByDate));
+    if (!isPending && isOptSelected) {
+      setIsOptSelected(false);
+      if (selectValue === "relevance") {
+        setProducts(Allproducts);
+      } else if (selectValue === "lowest price") {
+        fnPrice({
+          variables: {
+            price: 1,
+          },
+        }).then(({ data }) => setProducts(data.filterByPrice));
+      } else if (selectValue === "highest price") {
+        fnPrice({
+          variables: {
+            price: -1,
+          },
+        }).then(({ data }) => setProducts(data.filterByPrice));
+      } else if (selectValue === "lowest rate") {
+        fnRate({
+          variables: {
+            rate: 1,
+          },
+        }).then(({ data }) => setProducts(data.filterByRate));
+      } else if (selectValue === "highest rate") {
+        fnRate({
+          variables: {
+            rate: -1,
+          },
+        }).then(({ data }) => setProducts(data.filterByRate));
+      } else if (selectValue === "newest") {
+        fnDate({
+          variables: {
+            date: -1,
+          },
+        }).then(({ data }) => setProducts(data.filterByDate));
+      } else if (selectValue === "oldest") {
+        fnDate({
+          variables: {
+            date: 1,
+          },
+        }).then(({ data }) => setProducts(data.filterByDate));
+      }
     }
-  }, [selectValue]);
+  }, [selectValue, isPending]);
 
   const [isSelectFocus, setIsSelectFocus] = useState(false);
   const ref = useClickOutside<HTMLDivElement>(() => {
@@ -111,15 +116,20 @@ const SelectFilter = () => {
             {optionsArr.map((opt, i) => {
               return (
                 <motion.li
+                  className="select-opt"
                   style={{
                     color:
                       opt === selectValue ? "var(--wheat)" : "var(--third)",
                   }}
                   variants={opacityVariant}
-                  onClick={() => setIsSelectFocus(false)}
+                  onClick={() => {
+                    startTransition(() => {
+                      setIsSelectFocus(false);
+                      setSelectValue(opt);
+                    });
+                  }}
                   key={i}
-                  whileHover={{ x: 10 }}
-                  onTapStart={() => setSelectValue(opt)}
+                  onTapStart={() => setIsOptSelected(true)}
                 >
                   {opt}
                 </motion.li>

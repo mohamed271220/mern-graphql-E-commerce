@@ -1,41 +1,104 @@
 import { useMutation } from "@apollo/client";
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { Search_Mutaion } from "../../../graphql/mutations/product";
 import { useNavigate } from "react-router-dom";
 import { productListContext } from "../../../context/FilterData";
+//@ts-ignore
+import useKeypress from "react-use-keypress";
+import useIndex from "../../../custom/useIndex";
+import { motion } from "framer-motion";
+import useClickOutside from "../../../custom/useClickOutside";
+import { useAppSelector } from "../../../custom/reduxTypes";
 
 const Search = () => {
-  const { setProducts, setroductSearchWord, productSearchWord } =
-    useContext(productListContext);
-
+  const { Allproducts } = useAppSelector((st) => st.Allproducts);
+  const [isActive, setIsActive] = useState(-1);
   const inpRef = useRef<HTMLInputElement>(null);
-  const [inp, setInp] = useState("");
-  const [fnSearch, { data }] = useMutation(Search_Mutaion);
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setroductSearchWord(e.target.value);
-    fnSearch({
-      variables: {
-        word: e.target.value,
-      },
-    }).then(({ data }) => setProducts(data.searchProducts));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    fnSearch({
-      variables: {
-        word: productSearchWord,
-      },
-    }).then(({ data }) => setProducts(data.searchProducts));
+  const handleInputValue = (val: string) => {
     if (inpRef?.current) {
-      inpRef.current.value = "";
+      inpRef.current.value = val;
     }
   };
-  const navigate = useNavigate();
+  const [showRes, setShowRes] = useState(false);
+  const formRef = useClickOutside<HTMLFormElement>(() => {
+    setShowRes(false);
+    handleInputValue("");
+    setProducts(Allproducts);
+    setIsActive(-1);
+  }, showRes);
+  const {
+    setProducts,
+    startTransition,
+    productSearchWord,
+    setroductSearchWord,
+    products,
+  } = useContext(productListContext);
 
+  const [fnSearch, { data }] = useMutation(Search_Mutaion);
+
+  useEffect(() => {
+    setroductSearchWord("");
+  }, []);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setroductSearchWord(e.target.value);
+    setShowRes(true);
+    setIsActive(-1);
+
+    if (e.target.value != "") {
+      fnSearch({
+        variables: {
+          word: e.target.value,
+        },
+      }).then(({ data }) =>
+        startTransition(() => setProducts(data.searchProducts))
+      );
+    }
+  };
+
+  const navigate = useNavigate();
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isActive >= 0) {
+      navigate(`/${products[isActive]._id}`);
+    } else {
+      fnSearch({
+        variables: {
+          word: productSearchWord,
+        },
+      }).then(({ data }) =>
+        startTransition(() => {
+          setProducts(data.searchProducts);
+        })
+      );
+      if (inpRef?.current) {
+        inpRef.current.value = "";
+      }
+    }
+  };
+
+  const [convertNegativeToZero] = useIndex();
+  useKeypress(["ArrowUp", "ArrowDown", "Escape"], (e: React.KeyboardEvent) => {
+    const len =
+      data?.searchProducts.length >= 5 ? 5 : data?.searchProducts.length;
+    if (e.key === "ArrowDown") {
+      setIsActive((cur) => convertNegativeToZero(cur + 1, len));
+    } else if (e.key === "Escape") {
+      setIsActive(-1);
+
+      handleInputValue(productSearchWord);
+    } else {
+      setIsActive((cur) => convertNegativeToZero(cur - 1, len));
+    }
+  });
+  useEffect(() => {
+    if (isActive !== -1) {
+      const title = data.searchProducts[isActive].title;
+      handleInputValue(title);
+    }
+  }, [isActive]);
   return (
-    <form className="center search" onSubmit={handleSubmit}>
+    <form className="center search" onSubmit={handleSubmit} ref={formRef}>
       <input
         ref={inpRef}
         placeholder="Search By Title"
@@ -45,86 +108,65 @@ const Search = () => {
       <AiOutlineSearch className="search-icon" />
 
       {productSearchWord !== "" && (
-        <ul className="dropdown-search col center start">
-          {data?.searchProducts.length >= 1 ? (
-            <>
-              <li
-                className="search-res hover  center between"
-                onClick={() => {
-                  if (inpRef?.current) {
-                    inpRef.current.value = productSearchWord;
-                  }
-                }}
-              >
-                {productSearchWord}
-              </li>
-              <div
-                className="hr "
-                style={{
-                  height: 0.5,
-                  background: "var(--main)",
-                  margin: "0 auto",
-                }}
-              >
-                {" "}
-              </div>
-              {data?.searchProducts
-                .slice(0, 5)
-                .map(
-                  (
-                    {
-                      _id,
-                      title,
-                      category,
-                    }: { _id: string; title: string; category: string },
-                    i: number
-                  ) => {
-                    return (
-                      <>
-                        <li
-                          className="search-res hover center between"
-                          key={_id}
-                        >
-                          <span
-                            onClick={() => {
-                              if (inpRef?.current) {
-                                inpRef.current.value = title;
-                              }
-                            }}
-                          >
-                            {title}
-                          </span>
-                          <button
-                            className=" btn list-btn"
-                            style={{ scale: 0.8 }}
-                            onClick={() => navigate(`/${_id}`)}
-                          >
-                            go
-                          </button>
-                        </li>
-                        <div
-                          className="hr "
-                          style={{
-                            height: 0.5,
-                            background: "var(--main)",
-                            margin: "0 auto",
-                            display:
-                              i === data?.searchProducts.length - 1 || i === 4
-                                ? "none"
-                                : "block",
-                          }}
-                        >
-                          {" "}
-                        </div>
-                      </>
-                    );
-                  }
-                )}
-            </>
-          ) : (
-            <li className="search-res center">No Results</li>
+        <>
+          {showRes && (
+            <ul className="dropdown-search col center start">
+              {data?.searchProducts.length >= 1 ? (
+                <>
+                  {data?.searchProducts
+                    .slice(0, 5)
+                    .map(
+                      (
+                        {
+                          _id,
+                          title,
+                        }: { _id: string; title: string; category: string },
+                        i: number
+                      ) => {
+                        return (
+                          <>
+                            <motion.li
+                              onHoverStart={() => {
+                                setIsActive(i);
+                              }}
+                              className={`search-res  center between ${
+                                i === isActive ? "active" : ""
+                              }`}
+                              key={_id}
+                              onClick={() => {
+                                handleInputValue(title);
+
+                                navigate(`/${_id}`);
+                              }}
+                            >
+                              {title}
+                            </motion.li>
+                            <div
+                              className="hr "
+                              style={{
+                                height: 0.5,
+                                background: "var(--main)",
+                                margin: "0 auto",
+                                display:
+                                  i === data?.searchProducts.length - 1 ||
+                                  i === 4
+                                    ? "none"
+                                    : "block",
+                              }}
+                            >
+                              {" "}
+                            </div>
+                          </>
+                        );
+                      }
+                    )}
+                </>
+              ) : (
+                <li className="search-res center">No Results</li>
+              )}
+            </ul>
           )}
-        </ul>
+        </>
       )}
     </form>
   );

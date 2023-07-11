@@ -54,7 +54,7 @@ const SLiderComponent = () => {
             <ProductFliter
               key={`${product._id}-list`}
               index={index}
-              // {...product}
+              isPending={false}
               _id={product._id}
               price={product.price}
               stock={product.stock}

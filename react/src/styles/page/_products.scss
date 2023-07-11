@@ -46,14 +46,6 @@ aside {
   margin-top: 6px;
   margin-bottom: 10px;
   font-size: 0.9rem;
-  &.header {
-    margin: 10px 0;
-    &.underline {
-      &:before {
-        width: 2rem;
-      }
-    }
-  }
 }
 
 .category-par {
@@ -62,15 +54,13 @@ aside {
   flex-direction: column;
   justify-content: center;
   min-height: 20px;
-
+  margin: 5px 0;
   h4 {
     display: flex;
     justify-content: space-between;
     width: 100%;
   }
-  .filter-head {
-    align-self: flex-start;
-  }
+
   .category {
     width: 100%;
     text-transform: capitalize;
@@ -130,7 +120,11 @@ aside {
   }
   &.grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    .product-data {
+      width: 90%;
+    }
   }
 }
 
@@ -237,7 +231,7 @@ svg.svg-star {
     text-overflow: ellipsis;
     white-space: pre-wrap;
     color: var(--third);
-    max-width: 80%;
+    max-width: 90%;
   }
 
   .img-par {
@@ -275,7 +269,7 @@ svg.svg-star {
     }
   }
   .product-rate-filter {
-    transform: scale(0.85);
+    transform: scale(1.2);
     margin-top: -2px;
     margin-left: 5px;
     margin: 0 auto;
@@ -289,6 +283,7 @@ svg.svg-star {
   margin: 0;
   margin-bottom: 10px;
   margin-top: 5px;
+  font-size: 1.2rem;
   &.underline {
     &:before {
       width: 70%;
@@ -303,7 +298,7 @@ svg.svg-star {
   text-overflow: ellipsis;
   overflow: hidden;
   text-align: center;
-  max-width: 70%;
+  max-width: 85%;
   white-space: nowrap;
 }
 .price-product {
@@ -321,7 +316,7 @@ svg.svg-star {
 
   .price-top {
     position: relative;
-    top: -5px;
+    bottom: -4px;
     font-size: 0.8rem;
     // color: var(--green);
   }
@@ -379,6 +374,9 @@ svg.svg-star {
   z-index: 10;
 }
 
+.cls-height {
+  min-height: 90vh !important;
+}
 @media (max-width: 600px) {
   aside.aside-products {
     position: fixed;

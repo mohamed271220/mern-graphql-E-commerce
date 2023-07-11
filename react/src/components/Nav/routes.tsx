@@ -59,6 +59,7 @@ const AppRoutes = () => {
   useEffect(() => {
     if (islog === "") return;
     if (islog === "true") {
+      setIsAuth(true);
       toast.success("successfully logged in");
     } else if (islog === "false") {
       toast.success("this email is not registered");
@@ -67,7 +68,6 @@ const AppRoutes = () => {
       replace: true,
     });
 
-    setIsAuth(true);
     const timer = setTimeout(() => {
       setIslog("");
     }, 1000);

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { IoFilter } from "react-icons/io5";
 import Rating from "./Rating";
 import Price from "./Price";
@@ -15,14 +15,16 @@ import { MdFilterListAlt } from "react-icons/md";
 import { FiRefreshCcw } from "react-icons/fi";
 import { productListContext } from "../../../../context/FilterData";
 import Category from "./Category";
-import { asideVariant, opacityVariant } from "../../../../variants/globals";
+import { asideVariant } from "../../../../variants/globals";
 import { useAppSelector } from "../../../../custom/reduxTypes";
 import useIsMobile from "../../../../custom/useIsMobile";
-import { AiFillCloseCircle } from "react-icons/ai";
-import Title from "../../../widgets/Title";
+
 import MobileCloseDropDown from "../../../widgets/MobileCloseDropDown";
 
-const Aside = ({ startFiltering }: { startFiltering: boolean }) => {
+interface Props {
+  startFiltering: boolean;
+}
+const Aside = ({ startFiltering }: Props) => {
   const { Allproducts } = useAppSelector((st) => st.Allproducts);
   const {
     categoryFilter,
@@ -35,15 +37,17 @@ const Aside = ({ startFiltering }: { startFiltering: boolean }) => {
     setProductFeatured,
     setProducts,
     setShowFilter,
+    startTransition,
   } = useContext(productListContext);
   const { isMobile } = useIsMobile();
   const [filterAllFn] = useMutation(FILTER_All);
 
-  const handleFiltering = () => {
+  const handleFiltering = async () => {
     if (isMobile) {
       setShowFilter(false);
     }
-    filterAllFn({
+
+    const res: any = await filterAllFn({
       variables: {
         input: {
           price: priceFilter === 0 ? 10000 : priceFilter,
@@ -53,15 +57,20 @@ const Aside = ({ startFiltering }: { startFiltering: boolean }) => {
           rate: RateChecked === "" ? 5 : Number(RateChecked),
         },
       },
-    }).then(({ data }) => setProducts(data?.filterAllTypes));
+    });
+    startTransition(() => {
+      setProducts(res?.data.filterAllTypes);
+    });
   };
 
   const handleResetFiltering = () => {
-    setCategoryFilter("");
-    setRateChecked("");
-    setPriceFilter(0);
-    setProductFeatured("");
-    setProducts(Allproducts);
+    startTransition(() => {
+      setCategoryFilter("");
+      setRateChecked("");
+      setPriceFilter(0);
+      setProductFeatured("");
+      setProducts(Allproducts);
+    });
   };
   return (
     <motion.aside

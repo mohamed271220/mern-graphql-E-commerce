@@ -1,11 +1,9 @@
-import React, { useEffect, useState, useContext, useRef } from "react";
-import useIndex from "../../custom/useIndex";
+import React, { useState, useContext, useRef } from "react";
 import useCarousel from "../../custom/useCarousel";
 import {
   AnimatePresence,
   Variants,
   motion,
-  useInView,
   useScroll,
   useTransform,
 } from "framer-motion";
@@ -26,7 +24,8 @@ const arrClrs = ["var(--gmail)", "var(--delete)", "var(--fb)", "var(--green)"];
 const Banner = () => {
   const { Allproducts } = useAppSelector((st) => st.Allproducts);
   const categoryfn = useFilterCategory();
-  const { setProducts, setCategoryFilter } = useContext(productListContext);
+  const { setProducts, setCategoryFilter, startTransition } =
+    useContext(productListContext);
 
   const filterStateFn = useFilterState();
 
@@ -89,22 +88,8 @@ const Banner = () => {
 
   const [bannerIndex, setBannerIndex] = useState(2);
 
-  let timer: number | undefined;
-
-  const [convertNegativeToZero] = useIndex();
   const [animateRef, { width }] = useMeasure();
   const ref = useRef<HTMLElement | null>(null);
-  const inview = useInView(ref, { amount: "all" });
-  useEffect(() => {
-    if (inview) {
-      timer = setTimeout(() => {
-        setBannerIndex((cur) =>
-          convertNegativeToZero(cur + 1, bannerArr.length)
-        );
-      }, 3000);
-    }
-    return () => clearTimeout(timer);
-  }, [bannerIndex, inview]);
 
   const [variant, dir] = useCarousel(bannerIndex, bannerArr.length);
   const { scrollYProgress } = useScroll({
@@ -140,7 +125,7 @@ const Banner = () => {
                       button={button}
                       slogan={slogan}
                       to={to}
-                      fn={fn}
+                      fn={() => startTransition(fn)}
                       key={header}
                     />
                     <div className="background"></div>

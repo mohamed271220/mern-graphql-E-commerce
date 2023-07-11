@@ -10,7 +10,6 @@ import {
   motion,
   MotionProps,
   useAnimate,
-  useAnimationControls,
   Variants,
 } from "framer-motion";
 import useMeasure from "react-use-measure";
@@ -41,13 +40,13 @@ type Props = {
   description: string;
   rating: number[];
   index: number;
+  isPending: boolean;
   reviews: reviewInterface[];
 } & MotionProps;
 
 const ProductFliter = ({
   isDash,
   category,
-
   _id,
   price,
   stock,
@@ -58,6 +57,7 @@ const ProductFliter = ({
   index,
   description,
   reviews,
+  isPending,
   ...motionProps
 }: Props) => {
   const [imgInd, setimgInd] = useState(0);
@@ -84,20 +84,21 @@ const ProductFliter = ({
     return () => clearTimeout(timer);
   }, [changeImgOnHover, imgInd]);
 
-  const { isScrollingDown } = useScrollDirection();
+  // const { isScrollingDown } = useScrollDirection();
   const [imgRef, animateImg] = useAnimate();
-  useEffect(() => {
-    animateImg("span", { opacity: [0, 1] }, { delay: 0.4, duration: 0.4 });
-  }, [gridView]);
+  // useEffect(() => {
+  //   animateImg("span", { opacity: [0, 1] }, { delay: 0.4, duration: 0.4 });
+  // }, [gridView]);
 
   return (
     <motion.span
       ref={ref}
       onHoverStart={() => setChnageImgOnHover(true)}
       onHoverEnd={() => setChnageImgOnHover(false)}
-      initial={{ y: isScrollingDown ? -40 : 40 }}
-      whileInView={{ y: 0 }}
-      transition={{ duration: 0.3 }}
+      // initial={{ y: isScrollingDown ? -40 : 40 }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: isPending ? 0.2 : 1 }}
+      transition={{ duration: 0.125 }}
     >
       <motion.div
         className="par"
@@ -141,10 +142,7 @@ const ProductFliter = ({
           </motion.div>
 
           <div className="center col product-data">
-            <h5
-              className="header underline product-head-underline"
-              style={{ marginBottom: 12 }}
-            >
+            <h5 className="product-head-underline" style={{ marginBottom: 12 }}>
               {productSearchWord
                 ? category
                     .split(new RegExp(`(${productSearchWord})`, "gi"))
@@ -201,7 +199,7 @@ const ProductFliter = ({
                     opacity: 0,
                   }}
                   animate={{
-                    height: 50,
+                    height: "auto",
                     opacity: 1,
                     transition: { delay: 0.3, duration: 0.3 },
                   }}

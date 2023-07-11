@@ -30,12 +30,12 @@ nav {
       margin: 5px;
       a {
         white-space: nowrap;
-        // transition: 0.3s;
+        transition: 0.3s;
         color: inherit;
         font-weight: bold;
         letter-spacing: 1px;
         text-transform: capitalize;
-        font-size: 0.8rem;
+        font-size: 1rem;
         &.cart-active-link.active {
           color: var(--green);
         }
@@ -61,19 +61,23 @@ nav {
             background: var(--wheat);
             width: 0;
           }
-
-          &:hover:before,
+          &:hover {
+            color: var(--green);
+            font-weight: 800;
+          }
           &.active:before {
             border-bottom-right-radius: 3px;
             width: 50%;
           }
-          &:hover:after,
+
           &.active:after {
             width: 50%;
             border-bottom-left-radius: 3px;
           }
           &.active {
             color: var(--green);
+            font-weight: 800;
+
             &.active:before,
             &.active:after {
               width: 50%;

@@ -12,7 +12,8 @@ import Title from "../../widgets/Title";
 import useIsMobile from "../../../custom/useIsMobile";
 
 const Sort = () => {
-  const { setShowFilter, showFilter } = useContext(productListContext);
+  const { setShowFilter, showFilter, startTransition } =
+    useContext(productListContext);
 
   const { setGridView, gridView } = useContext(viewContext);
   const toggleShowFilter = () => setShowFilter(!showFilter);
@@ -67,7 +68,7 @@ const Sort = () => {
             <>
               <Title title="list view">
                 <BsListTask
-                  onClick={() => setGridView(false)}
+                  onClick={() => startTransition(() => setGridView(false))}
                   style={{ color: gridView ? "var(--third)" : "var(--green)" }}
                   className={`view-icon  ${
                     !gridView ? "icon icon-shadow" : ""
@@ -77,7 +78,7 @@ const Sort = () => {
 
               <Title title="grid view">
                 <HiOutlineViewGrid
-                  onClick={() => setGridView(true)}
+                  onClick={() => startTransition(() => setGridView(true))}
                   style={{ color: gridView ? "var(--green)" : "var(--third)" }}
                   className={`view-icon  ${
                     gridView ? "icon icon-shadow" : ""

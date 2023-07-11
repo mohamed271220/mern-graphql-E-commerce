@@ -24,7 +24,7 @@ const Input = ({
   const handlePass = () =>
     typeSt === "password" ? settypeSt("text") : settypeSt("password");
 
-  const { watch, register, resetField, setValue } = useFormContext();
+  const { watch, register, resetField, setValue, setFocus } = useFormContext();
   const inpVal = watch(placeholder);
 
   const [isFocus, setIsFocus] = useState(false);
@@ -38,6 +38,8 @@ const Input = ({
       setValue(placeholder, defaultVal);
     }
   }, [defaultVal]);
+
+  const handleInFocus = () => setFocus(placeholder);
   return (
     <div className="inp-parent">
       {inptype === "input" ? (
@@ -88,6 +90,7 @@ const Input = ({
               className={`placeholder ${
                 inpVal || isFocus ? "placeholder-top" : "placeholder-center"
               }`}
+              onClick={() => setFocus(placeholder)}
             >
               {placeholder === "new" ||
               placeholder === "old" ||
@@ -101,7 +104,7 @@ const Input = ({
                   <Title title={`clear ${placeholder} field`} abs={true}>
                     <motion.span
                       className="x-inp"
-                      onClick={() => resetField(placeholder)}
+                      onClick={handleInFocus}
                       variants={opacityVariant}
                       initial="start"
                       animate="end"

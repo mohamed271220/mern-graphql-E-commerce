@@ -1,5 +1,3 @@
-import React from "react";
-
 const useIndex = () => {
   const convertNegativeToZero = (num: number, arrLen: number) => {
     if (num < 0) {

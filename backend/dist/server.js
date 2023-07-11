@@ -50,7 +50,8 @@ app.use((0, cookie_parser_1.default)());
 app.use(passport_1.default.session());
 app.use((0, cors_1.default)({
     credentials: true,
-    origin: config_js_1.Client_Url,
+    origin: `${config_js_1.Client_Url}/`,
+    // origin: `${Client_Url}`,
     methods: ["GET", "POST", "PATCH", "DELETE"],
 }));
 const schema = makeExecutableSchema({
@@ -83,7 +84,8 @@ app.get("*", (req, res) => {
             origin: config_js_1.Client_Url,
         },
     });
-    app.listen({ port: 3000 }, () => {
+    //change port
+    app.listen({ port: 4000 }, () => {
         console.log("server-runs");
     });
 }))();

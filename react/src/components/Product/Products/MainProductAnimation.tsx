@@ -29,7 +29,7 @@ const MainProductAnimation = () => {
     }),
   };
   const ref = useRef<HTMLDivElement | null>(null);
-  const view = useInView(ref, { once: true });
+  const view = useInView(ref, { once: true, amount: 0.8 });
   return (
     <div className="products-animation-par" ref={ref}>
       {view && (

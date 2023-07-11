@@ -54,7 +54,7 @@
 .btn {
   color: rgb(247, 246, 246);
   white-space: nowrap;
-  padding: 4px 10px;
+  padding: 6px 10px;
   font-weight: bold;
   letter-spacing: 1px;
   font-size: 0.9rem;
@@ -138,7 +138,7 @@
   width: 100vw;
   height: 100vh;
   background: var(--overley);
-  z-index: 11;
+  z-index: 8;
 }
 
 .between {
@@ -196,13 +196,11 @@
 }
 
 .header {
-  font-family: "Fexien Sans";
-  font-variation-settings: "wdth" 125;
   width: -moz-fit-content;
   width: fit-content;
-  margin: 0 auto;
-  margin-bottom: 30px;
-  margin-top: -5px;
+  height: 60px;
+  font-size: 2rem;
+  margin: 20px auto;
   text-transform: capitalize;
   letter-spacing: 0.8px;
   font-weight: 800;
@@ -216,11 +214,13 @@
   content: "";
   -webkit-clip-path: polygon(0 11%, 0 4%, 100% 10%);
           clip-path: polygon(0 11%, 0 4%, 100% 10%);
+  -webkit-clip-path: polygon(0 5%, 100% 37%, 100% 64%, 0 95%);
+          clip-path: polygon(0 5%, 100% 37%, 100% 64%, 0 95%);
   position: absolute;
-  top: 120%;
+  top: 40px;
   left: 0;
+  height: 6px;
   width: 100%;
-  height: 40px;
   background: var(--green);
   background: linear-gradient(60deg, var(--wheat), var(--green));
 }
@@ -352,6 +352,7 @@
   top: 0px;
   left: 5px;
   background: linear-gradient(30deg, var(--wheat), var(--sale));
+  margin-top: 20px;
 }
 .continue-shopping svg {
   font-size: 1.4rem;
@@ -370,4 +371,11 @@ form.hide textarea {
   box-shadow: var(--secondary-shadow);
   border-radius: 5px;
   color: var(--third);
+}
+
+p,
+span,
+small {
+  font-family: Kyiv Sans;
+  font-variation-settings: "CONT" 600, "MIDL" -400;
 }/*# sourceMappingURL=classes.css.map */

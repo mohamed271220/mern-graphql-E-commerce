@@ -111,7 +111,6 @@ The blog articles are published on our website and can be accessed from the proj
 - `React Form Hook`: a library that provides a simple way to manage form state in React.
 - `Framer Motion`: a library for creating animations and gestures in React.
 - `React Hot Toast`: a library for displaying toast notifications in React.
-- `React Tilt`: a library for adding a 3D tilt effect to elements in React.
 - `React Leaflet`: a library for integrating Leaflet maps into React applications.
 - `React Router DOM`: a library for managing client-side routing in React applications.
 - `React Redux`: a library for managing state in React applications using the Redux pattern.

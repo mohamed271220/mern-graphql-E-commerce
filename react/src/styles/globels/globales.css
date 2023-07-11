@@ -37,6 +37,12 @@
   font-weight: 400 1000;
   font-display: swap;
 }
+@font-face {
+  font-family: "Kyiv Sans";
+  src: url("/fonts/Kyiv-sans.woff2") format("woff2-variations");
+  font-weight: 100 1000;
+  font-display: swap;
+}
 * {
   margin: 0;
   padding: 0;
@@ -44,8 +50,7 @@
 }
 
 body {
-  font-family: "Fexien Sans";
-  font-variation-settings: "wdth" 115;
+  font-family: "PT Sans", sans-serif;
   overflow-x: hidden;
   background-color: var(--main);
 }

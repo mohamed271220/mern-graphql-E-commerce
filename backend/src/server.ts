@@ -42,7 +42,8 @@ app.use(passport.session());
 app.use(
   cors({
     credentials: true,
-    origin: Client_Url,
+    origin: `${Client_Url}/`,
+    // origin: `${Client_Url}`,
     methods: ["GET", "POST", "PATCH", "DELETE"],
   })
 );
@@ -80,12 +81,12 @@ app.get("*", (req, res) => {
     cors: {
       credentials: true,
       methods: ["GET", "POST", "PATCH", "DELETE"],
-
       origin: Client_Url,
     },
   });
 
-  app.listen({ port: 3000 }, () => {
+  //change port
+  app.listen({ port: 4000 }, () => {
     console.log("server-runs");
   });
 })();

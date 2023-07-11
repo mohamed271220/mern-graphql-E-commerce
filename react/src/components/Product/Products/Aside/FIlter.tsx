@@ -15,7 +15,7 @@ const FIlter = ({ head, children }: Props) => {
   return (
     <>
       <div className="category-par  ">
-        <h4 className="filter-head  header   underline">
+        <h4 className="filter-head    ">
           {head}
           <AnimatePresence mode="wait">
             <motion.span

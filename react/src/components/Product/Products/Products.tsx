@@ -5,16 +5,22 @@ import { AnimatePresence } from "framer-motion";
 import Sort from "../viewOptions/Sort";
 import { productListContext } from "../../../context/FilterData";
 import MainProductAnimation from "./MainProductAnimation";
+import { useAppSelector } from "../../../custom/reduxTypes";
 
 const Products = () => {
-  const [startFiltering, setStartFiltering] = useState(false);
+  const { Allproducts } = useAppSelector((st) => st.Allproducts);
   const {
     RateChecked,
     priceFilter,
     categoryFilter,
     productFeatured,
     showFilter,
+    setProducts,
   } = useContext(productListContext);
+  const [startFiltering, setStartFiltering] = useState(false);
+  useEffect(() => {
+    setProducts(Allproducts);
+  }, []);
   useEffect(() => {
     if (
       RateChecked === "" &&

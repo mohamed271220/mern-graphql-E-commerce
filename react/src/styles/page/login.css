@@ -40,8 +40,9 @@
 }
 .log-in form {
   background: var(--secondary);
-  width: 40vw;
+  width: 50vw;
   max-width: 300px;
+  min-width: 260px;
   height: -moz-fit-content;
   height: fit-content;
   padding: 40px 0;
@@ -123,7 +124,7 @@
 }
 .inp-parent .inp-controls .pass-inp svg {
   position: relative;
-  z-index: 5;
+  z-index: 4;
   color: var(--wheat-light);
 }
 
@@ -136,4 +137,6 @@
   left: 0;
   color: var(--gmail);
   font-weight: bold;
+  font-size: 0.8rem;
+  text-shadow: var(--secondary-shadow);
 }/*# sourceMappingURL=login.css.map */
