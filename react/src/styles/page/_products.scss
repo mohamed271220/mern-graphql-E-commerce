@@ -3,7 +3,6 @@
 .products-par {
   //-remove margin top
   overflow: hidden;
-  // margin-top: 60px;
   width: 100%;
   height: auto;
   min-height: auto;
@@ -110,6 +109,7 @@ aside {
   position: relative;
   margin: 0 auto;
   min-height: 60vh;
+  margin-bottom: 25px;
 
   &.list {
     display: flex;
@@ -132,6 +132,9 @@ aside {
   position: absolute;
   top: 5px;
   right: 5px;
+  svg {
+    fill: white !important;
+  }
 }
 
 svg.svg-star {
@@ -199,7 +202,7 @@ svg.svg-star {
   font-size: clamp(12px, 1rem, 1rem);
   position: relative;
   padding: 5px;
-  background: var(--main);
+  background: var(--secondary);
   box-shadow: 1px 1px 3px black;
   gap: 1px;
   font-weight: bold;

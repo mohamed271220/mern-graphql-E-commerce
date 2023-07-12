@@ -30,22 +30,22 @@ const MainPageCharts = ({ userData }: { userData: any[] }) => {
   };
   return (
     <>
-      <h2
+      {/* <h2
         style={{ marginTop: 40, marginBottom: -20 }}
         className="underline header col"
       >
         analytics
-      </h2>
+      </h2> */}
       <div className="dash-main-charts">
         <div
-          className="box-shadow center w-100 chart-par between col"
+          className=" center w-100 chart-par between col"
           style={{ marginTop: 10 }}
         >
           <h3>Earnings Per Time</h3>
           <Bar data={EarningChartData || []} options={options} />
         </div>
         <div
-          className="box-shadow center w-100 chart-par col between"
+          className=" center w-100 chart-par col between"
           style={{ marginTop: 10 }}
         >
           <h3>Orders Per Time</h3>
@@ -53,7 +53,7 @@ const MainPageCharts = ({ userData }: { userData: any[] }) => {
           <Pie data={orderChartData || []} options={options} />
         </div>
         <div
-          className="box-shadow center w-100 chart-par col between"
+          className="center w-100 chart-par col between"
           style={{ marginTop: 10 }}
         >
           <h3>Added Products Per Time</h3>
@@ -61,7 +61,7 @@ const MainPageCharts = ({ userData }: { userData: any[] }) => {
         </div>
 
         <div
-          className="box-shadow center w-100 chart-par col between"
+          className="center w-100 chart-par col between"
           style={{ marginTop: 10 }}
         >
           <h3>Users Per Time</h3>

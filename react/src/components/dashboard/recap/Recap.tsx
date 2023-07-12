@@ -64,7 +64,7 @@ const Recap = () => {
     },
   ];
   return (
-    <DashMain head="Zimart Recap">
+    <DashMain head="analytics">
       <div className="dash-recap">
         {recapArr?.map((obj, i) => {
           return (

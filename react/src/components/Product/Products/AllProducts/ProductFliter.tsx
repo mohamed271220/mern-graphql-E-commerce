@@ -1,17 +1,11 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import ProductRate from "../../../product Route/ProductRate";
 import useAvg from "../../../../custom/useAvg";
 import ProductListHeart from "../../../widgets/ProductListHeart";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { imagesInterface } from "../../../../interfaces/user";
-import {
-  AnimatePresence,
-  motion,
-  MotionProps,
-  useAnimate,
-  Variants,
-} from "framer-motion";
+import { AnimatePresence, motion, useAnimate } from "framer-motion";
 import useMeasure from "react-use-measure";
 import { viewContext } from "../../../../context/gridView";
 import { productListContext } from "../../../../context/FilterData";
@@ -23,11 +17,8 @@ import Title from "../../../widgets/Title";
 import { RiEditLine } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 import { BsInfoCircleFill } from "react-icons/bs";
-import useCarousel from "../../../../custom/useCarousel";
-import useIndex from "../../../../custom/useIndex";
 import CompareIcons from "../../../widgets/CompareIcons";
 import StyledPrice from "../../../widgets/StyledPrice";
-import { useScrollDirection } from "react-use-scroll-direction";
 type Props = {
   _id: string;
   price: number;
@@ -42,7 +33,7 @@ type Props = {
   index: number;
   isPending: boolean;
   reviews: reviewInterface[];
-} & MotionProps;
+};
 
 const ProductFliter = ({
   isDash,
@@ -58,10 +49,7 @@ const ProductFliter = ({
   description,
   reviews,
   isPending,
-  ...motionProps
 }: Props) => {
-  const [imgInd, setimgInd] = useState(0);
-  const [changeImgOnHover, setChnageImgOnHover] = useState(false);
   const { avgRate, reviewLength } = useAvg(rating, reviews);
   const [isFavoraited, setIsFavorited] = useState(false);
   const [onCart, setOnCart] = useState(false);
@@ -70,32 +58,11 @@ const ProductFliter = ({
   const [sectionRef, { width: sectionWidth }] = useMeasure();
 
   const [ref, animate] = useAnimate();
-  const [imgVariant, dir] = useCarousel(imgInd, images.length);
   const navigat = useNavigate();
-  const [convertNegativeToZero] = useIndex();
-
-  let timer: number;
-  useEffect(() => {
-    if (!changeImgOnHover) return;
-    timer = setTimeout(() => {
-      setimgInd((cur) => convertNegativeToZero(cur + 1, images.length));
-    }, 1500);
-
-    return () => clearTimeout(timer);
-  }, [changeImgOnHover, imgInd]);
-
-  // const { isScrollingDown } = useScrollDirection();
-  const [imgRef, animateImg] = useAnimate();
-  // useEffect(() => {
-  //   animateImg("span", { opacity: [0, 1] }, { delay: 0.4, duration: 0.4 });
-  // }, [gridView]);
 
   return (
     <motion.span
       ref={ref}
-      onHoverStart={() => setChnageImgOnHover(true)}
-      onHoverEnd={() => setChnageImgOnHover(false)}
-      // initial={{ y: isScrollingDown ? -40 : 40 }}
       initial={{ opacity: 0 }}
       whileInView={{ opacity: isPending ? 0.2 : 1 }}
       transition={{ duration: 0.125 }}
@@ -116,30 +83,18 @@ const ProductFliter = ({
           className={`product-List center ${
             gridView ? "grid col" : "list between "
           }`}
-          {...motionProps}
           ref={sectionRef}
           initial={{ height: sectionWidth <= 400 && !gridView ? 260 : 180 }}
           animate={{ height: sectionWidth <= 400 && !gridView ? 180 : 260 }}
           transition={{ duration: 0.1, type: "tween" }}
         >
-          <motion.div
-            className={` img-par center ${gridView ? "grid" : "list"}`}
-            key={images[imgInd].productPath}
-            variants={imgVariant as Variants}
-            animate="end"
-            initial="start"
-            exit={"exit"}
-            custom={{ dir, width: 100 }}
-            ref={imgRef}
-          >
-            <AnimatePresence mode="wait">
-              <LazyLoadImage
-                effect="blur"
-                src={images[imgInd].productPath}
-                alt={title}
-              />
-            </AnimatePresence>
-          </motion.div>
+          <div className={` img-par center ${gridView ? "grid" : "list"}`}>
+            <LazyLoadImage
+              effect="blur"
+              src={images[0].productPath}
+              alt={title}
+            />
+          </div>
 
           <div className="center col product-data">
             <h5 className="product-head-underline" style={{ marginBottom: 12 }}>

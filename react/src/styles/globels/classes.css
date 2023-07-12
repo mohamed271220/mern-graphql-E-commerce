@@ -200,7 +200,8 @@
   width: fit-content;
   height: 60px;
   font-size: 2rem;
-  margin: 20px auto;
+  margin: 10px auto;
+  margin-bottom: 40px;
   text-transform: capitalize;
   letter-spacing: 0.8px;
   font-weight: 800;

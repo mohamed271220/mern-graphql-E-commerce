@@ -44,6 +44,7 @@ const App = () => {
                     color: "var(--third)",
                     width: "240px",
                     whiteSpace: "nowrap",
+                    textTransform: "capitalize",
                   },
                 }}
               />

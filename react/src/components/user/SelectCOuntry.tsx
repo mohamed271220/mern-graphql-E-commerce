@@ -109,8 +109,7 @@ const SelectCOuntry = ({ setCountry, country, bottom }: Props) => {
                   animate="end"
                   exit="exit"
                   key={i}
-                  className="select-country center gap"
-                  whileHover={{ x: 4 }}
+                  className="select-country center gap select-opt"
                   onClick={() => {
                     setFlag(flag);
                     setCountry(country);

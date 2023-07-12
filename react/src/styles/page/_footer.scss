@@ -95,9 +95,11 @@ footer {
 }
 
 .footer-head {
-  font-size: 1.3rem;
-  margin-bottom: 10px;
+  font-size: 1.5rem;
   color: var(--third);
+  text-transform: capitalize;
+  align-self: flex-start;
+  letter-spacing: 0.8px;
 }
 
 .footer-about {

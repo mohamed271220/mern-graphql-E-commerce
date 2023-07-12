@@ -43,6 +43,10 @@
     button {
       height: 40px;
     }
+    input {
+      background-color: var(--main);
+      color: var(--third);
+    }
     button {
       box-shadow: var(--secondary-shadow);
 

@@ -21,8 +21,8 @@ const Footer = () => {
     <footer ref={scope}>
       <div className="content">
         <AboutFooter />
-        <FooterCategory />
         <FooterLinks />
+        <FooterCategory />
         <FooterSocial />
       </div>
       <CopyRight />

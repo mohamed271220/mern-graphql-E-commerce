@@ -19,7 +19,7 @@ const DashBoardRecap = ({
   link,
 }: Props) => {
   return (
-    <div className="recap box-shadow">
+    <div className="recap">
       <div className="head-recap center between">
         <h3>{head}</h3>
         <span

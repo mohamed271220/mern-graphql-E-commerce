@@ -47,18 +47,25 @@
   height: 25px;
   align-items: center;
 }
+
 .banner-content {
-  background: rgba(49, 47, 47, 0.404);
+  border-radius: 5px;
+  background: rgba(39, 38, 38, 0.985);
   box-shadow: 1px 1px 4px black;
   padding: 10px 20px;
   min-width: 280px;
+  max-width: 400px;
   gap: 10px;
   position: absolute;
   z-index: 4;
+
   top: 50%;
   left: 50%;
+  padding: 20px 15px;
   transform: translate(-50%, -50%);
-
+  .product-links {
+    margin-top: 20px;
+  }
   h1 {
     letter-spacing: 1px;
     white-space: nowrap;
@@ -102,12 +109,13 @@
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 700px) {
   .banner-par {
     .banner {
       .banner-content {
         min-width: initial;
         width: 90%;
+
         h1 {
           letter-spacing: 0.5px;
           white-space: nowrap;

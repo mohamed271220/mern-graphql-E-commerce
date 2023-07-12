@@ -42,8 +42,7 @@ const Pages = ({ numOfPages, setPage, page }: Props) => {
                 <BiLeftArrowAlt />
               </motion.button>
             </Title>
-            {/* )}
-      </AnimatePresence> */}
+
             <div className="center-pages-par">
               {pageArr?.map((num, index) => {
                 {

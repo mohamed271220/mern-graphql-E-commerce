@@ -10,7 +10,6 @@ const SLiderComponent = () => {
   const { Allproducts } = useAppSelector((st) => st.Allproducts);
 
   const settings = {
-    // dots: true,
     infinite: true,
     speed: 500,
     slidesToScroll: 1,
@@ -54,19 +53,7 @@ const SLiderComponent = () => {
             <ProductFliter
               key={`${product._id}-list`}
               index={index}
-              isPending={false}
-              _id={product._id}
-              price={product.price}
-              stock={product.stock}
-              title={product.title}
-              state={product.state}
-              category={product.category}
-              images={product.images}
-              rating={product.rating}
-              reviews={product.reviews}
-              description={product.description}
-
-              //   layout
+              {...product}
             />
           );
         })}

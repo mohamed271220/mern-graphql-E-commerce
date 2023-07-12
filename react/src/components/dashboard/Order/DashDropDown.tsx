@@ -63,13 +63,12 @@ const DashDropDown = ({ type, state, setter, _id, arr }: Props) => {
                       }
                     }}
                     key={i}
-                    whileHover={{ x: 4 }}
                     onTapStart={() => {
                       if (isAuth) {
                         setter(st);
                       }
                     }}
-                    className="order-link"
+                    className="order-link select-opt"
                   >
                     {st}
                   </motion.div>

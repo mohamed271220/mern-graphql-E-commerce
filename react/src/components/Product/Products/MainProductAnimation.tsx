@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 const scaleArr = [1.15, 1.3, 1.5, 1.3, 1.15];
@@ -16,46 +16,38 @@ const imgArr = [
 const MainProductAnimation = () => {
   const variant = {
     start: (i: number) => ({
-      //   scale: i === 2 ? 1.4 : 1,
       zIndex: zIndexArr[i],
-      scale: scaleArr[i],
       x: xArr[i],
     }),
     end: (i: number) => ({
       zIndex: zIndexArr[i],
-
-      scale: scaleArr[i],
       x: 0,
     }),
   };
-  const ref = useRef<HTMLDivElement | null>(null);
-  const view = useInView(ref, { once: true, amount: 0.8 });
   return (
-    <div className="products-animation-par" ref={ref}>
-      {view && (
-        <>
-          {[...Array(5)].map((_, i) => {
-            return (
-              <motion.div
-                key={i}
-                variants={variant}
-                className="products-animate"
-                style={{
-                  x: xArr[i],
-
-                  //   background: clrs[i],
-                }}
-                custom={i}
-                initial="start"
-                transition={{ delay: delayArr[i], duration: 0.4 }}
-                animate="end"
-              >
-                <LazyLoadImage src={imgArr[i]} effect="blur" />
-              </motion.div>
-            );
-          })}
-        </>
-      )}
+    <div className="products-animation-par">
+      <>
+        {[...Array(5)].map((_, i) => {
+          return (
+            <motion.div
+              key={i}
+              variants={variant}
+              className="products-animate"
+              style={{
+                x: xArr[i],
+                scale: scaleArr[i],
+              }}
+              custom={i}
+              viewport={{ once: true }}
+              initial="start"
+              transition={{ delay: delayArr[i], duration: 0.4 }}
+              whileInView="end"
+            >
+              <LazyLoadImage src={imgArr[i]} effect="blur" />
+            </motion.div>
+          );
+        })}
+      </>
     </div>
   );
 };

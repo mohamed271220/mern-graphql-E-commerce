@@ -243,7 +243,8 @@
   width: fit-content;
   height: 60px;
   font-size: 2rem;
-  margin: 20px auto;
+  margin: 10px auto;
+  margin-bottom: 40px;
   text-transform: capitalize;
   letter-spacing: 0.8px;
   font-weight: 800;
@@ -1877,16 +1878,22 @@ p.review-user {
 }
 
 .banner-content {
-  background: rgba(49, 47, 47, 0.404);
+  border-radius: 5px;
+  background: rgba(39, 38, 38, 0.985);
   box-shadow: 1px 1px 4px black;
   padding: 10px 20px;
   min-width: 280px;
+  max-width: 400px;
   gap: 10px;
   position: absolute;
   z-index: 4;
   top: 50%;
   left: 50%;
+  padding: 20px 15px;
   transform: translate(-50%, -50%);
+}
+.banner-content .product-links {
+  margin-top: 20px;
 }
 .banner-content h1 {
   letter-spacing: 1px;
@@ -1929,7 +1936,7 @@ p.review-user {
   opacity: 1;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 700px) {
   .banner-par .banner .banner-content {
     min-width: initial;
     width: 90%;
@@ -2083,6 +2090,7 @@ aside .aside-head {
   position: relative;
   margin: 0 auto;
   min-height: 60vh;
+  margin-bottom: 25px;
 }
 .product-list-par.list {
   display: flex;
@@ -2103,6 +2111,9 @@ aside .aside-head {
   position: absolute;
   top: 5px;
   right: 5px;
+}
+.heart-filter svg {
+  fill: white !important;
 }
 
 svg.svg-star {
@@ -2170,7 +2181,7 @@ svg.svg-star {
   font-size: clamp(12px, 1rem, 1rem);
   position: relative;
   padding: 5px;
-  background: var(--main);
+  background: var(--secondary);
   box-shadow: 1px 1px 3px black;
   gap: 1px;
   font-weight: bold;
@@ -2750,7 +2761,7 @@ svg.svg-star {
   width: 90%;
   overflow-y: auto;
   margin: 0 auto;
-  min-height: 60vh;
+  min-height: 80vh;
 }
 
 table.order {
@@ -2761,7 +2772,7 @@ table.order {
   border-spacing: 0.4px;
   color: var(--third);
   margin: 0 auto;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
   overflow: hidden;
   overflow-y: initial;
 }
@@ -3406,6 +3417,10 @@ input[type=range] {
 .newsletter form button {
   height: 40px;
 }
+.newsletter form input {
+  background-color: var(--main);
+  color: var(--third);
+}
 .newsletter form button {
   box-shadow: var(--secondary-shadow);
   outline: 0;
@@ -3693,7 +3708,8 @@ input[type=range] {
   width: fit-content;
   height: 60px;
   font-size: 2rem;
-  margin: 20px auto;
+  margin: 10px auto;
+  margin-bottom: 40px;
   text-transform: capitalize;
   letter-spacing: 0.8px;
   font-weight: 800;
@@ -4084,17 +4100,20 @@ small {
   width: 100%;
   display: flex;
   overflow: hidden;
+  min-height: 100vh;
 }
+
 #dash-aside {
   position: fixed;
-  box-shadow: 2px 2px 5px black;
   height: 100vh;
-  background: var(--main);
+  background: var(--secondary);
   display: flex;
   flex-direction: column;
   border-top-right-radius: 20px;
   overflow: hidden;
   padding: 0;
+  color: white;
+  box-shadow: 0.2px 0.5px 1.5px rgba(128, 128, 128, 0.372);
 }
 #dash-aside a {
   text-decoration: none;
@@ -4116,7 +4135,10 @@ small {
 .dash-product {
   width: 90%;
   min-height: calc(100vh - 100px);
+  height: -moz-max-content;
+  height: max-content;
   position: relative;
+  margin-bottom: 45px !important;
 }
 
 .dash-show {
@@ -4207,13 +4229,15 @@ a.crumb-link {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 5px;
+  margin-bottom: 80px;
 }
 .dash-recap .recap {
-  background-color: var(--main);
+  background: var(--secondary);
   height: 100px;
   padding: 8px 10px;
   display: flex;
   flex-direction: column;
+  box-shadow: 0.2px 0.5px 1.5px rgba(128, 128, 128, 0.372);
   justify-content: space-between;
 }
 .dash-recap .recap .head-recap {
@@ -4254,12 +4278,13 @@ a.crumb-link {
   display: grid;
   margin-top: 20px;
   gap: 40px;
-  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 }
 .dash-main-charts .chart-par {
-  background-color: var(--main);
+  background: var(--secondary);
   padding: 10px;
   width: 100%;
+  box-shadow: 0.2px 0.5px 1.5px rgba(128, 128, 128, 0.372);
 }
 .dash-main-charts .chart-par h3 {
   color: var(--third);
@@ -4268,7 +4293,7 @@ a.crumb-link {
 }
 
 .dash-aside-head {
-  background-color: var(--secondary);
+  background-color: var(--main);
   box-shadow: 0.2px 0.2px 0.5px black;
 }
 .dash-aside-head a:hover {
@@ -4503,9 +4528,11 @@ footer .footer-links span a {
 }
 
 .footer-head {
-  font-size: 1.3rem;
-  margin-bottom: 10px;
+  font-size: 1.5rem;
   color: var(--third);
+  text-transform: capitalize;
+  align-self: flex-start;
+  letter-spacing: 0.8px;
 }
 
 .footer-about {
@@ -4660,7 +4687,8 @@ footer .footer-links span a {
   border-radius: 2px;
 }
 .select-opt:hover {
-  background-color: var(--green);
+  background-color: black;
+  color: var(--wheat) !important;
 }
 
 .select-icon {

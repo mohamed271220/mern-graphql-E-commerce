@@ -47,15 +47,14 @@ const Dashboard = () => {
     <showAsideContext.Provider value={{ showAsideDash, setShowAsideDash }}>
       <div className="dashboard-par " ref={ref}>
         <div style={{ marginRight: 10, gap: 12 }} className="dash-nav center">
-          <NotificationDropDown />
-
-          <ThemeToggle navClr={navClr} linkClr={LinkClr} />
           <MenuTogglar
             bool={showAsideDash}
             setter={setShowAsideDash}
             hideMsg="hide dashboard"
             showMsg="show dashboard"
           />
+          <NotificationDropDown />
+          <ThemeToggle navClr={navClr} linkClr={LinkClr} />
         </div>
 
         <DashboardAside setShowAsideDash={setShowAsideDash} />

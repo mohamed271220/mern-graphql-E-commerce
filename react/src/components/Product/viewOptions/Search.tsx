@@ -24,6 +24,7 @@ const Search = () => {
   const formRef = useClickOutside<HTMLFormElement>(() => {
     setShowRes(false);
     handleInputValue("");
+    setroductSearchWord("");
     setProducts(Allproducts);
     setIsActive(-1);
   }, showRes);

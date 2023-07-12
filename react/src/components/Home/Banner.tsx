@@ -18,7 +18,6 @@ import LapImage from "/banner/laptop-Img.jpg";
 import FashionImage from "/banner/fashion-Img.jpg";
 import SaleImage from "/banner/sale-Img.jpg";
 import Animation from "../widgets/Animation";
-import { mergeRefs } from "react-merge-refs";
 
 const arrClrs = ["var(--gmail)", "var(--delete)", "var(--fb)", "var(--green)"];
 const Banner = () => {
@@ -86,24 +85,20 @@ const Banner = () => {
     },
   ];
 
-  const [bannerIndex, setBannerIndex] = useState(2);
+  const [bannerIndex, setBannerIndex] = useState(0);
 
   const [animateRef, { width }] = useMeasure();
-  const ref = useRef<HTMLElement | null>(null);
+  const ref = useRef<HTMLDivElement | null>(null);
 
   const [variant, dir] = useCarousel(bannerIndex, bannerArr.length);
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
-  const bgWidth = useTransform(scrollYProgress, [0, 1], ["100%", "140%"]);
+  const scale = useTransform(scrollYProgress, [0, 1], ["1", "1.4"]);
   return (
     <Animation>
-      <section
-        className="banner-par center"
-        id="banner"
-        ref={mergeRefs([ref, animateRef])}
-      >
+      <section className="banner-par center" id="banner" ref={animateRef}>
         <AnimatePresence custom={{ dir, width }} mode="wait">
           {bannerArr
             .reverse()
@@ -130,11 +125,8 @@ const Banner = () => {
                     />
                     <div className="background"></div>
 
-                    <div className="banner-image center ">
-                      <motion.img
-                        src={image}
-                        style={{ width: bgWidth, height: bgWidth }}
-                      />
+                    <div className="banner-image center " ref={ref}>
+                      <motion.img src={image} style={{ scale }} />
                     </div>
                   </motion.div>
                 );

@@ -39,7 +39,7 @@ const Input = ({
     }
   }, [defaultVal]);
 
-  const handleInFocus = () => setFocus(placeholder);
+  const handleInFocus = () => resetField(placeholder);
   return (
     <div className="inp-parent">
       {inptype === "input" ? (

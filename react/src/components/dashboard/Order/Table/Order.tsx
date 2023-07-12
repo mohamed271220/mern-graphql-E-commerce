@@ -1,10 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Checkbox from "../../../../custom SVGs/checkbox";
-import Title from "../../../widgets/Title";
-import { AnimatePresence, motion } from "framer-motion";
-import { opacityVariant } from "../../../../variants/globals";
+import { AnimatePresence } from "framer-motion";
 import FadeElement from "../../../widgets/FadeElement";
-import useUpdateOrder from "../../../../custom/useUpdateOrder";
 import OrderDetailsIcon from "../OrderDetailsIcon";
 import DashDropDown from "../DashDropDown";
 
@@ -22,7 +19,7 @@ const Order = ({
   state,
   _id,
   cost,
-  count,
+
   index,
   createdAt,
 }: Props) => {

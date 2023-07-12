@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState, CSSProperties } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import ProductFliter from "./ProductFliter";
 import Pages from "../Pages";
 import { motion } from "framer-motion";
@@ -18,7 +18,6 @@ const ProductList = ({ isDash }: { isDash?: boolean }) => {
   const { isMobile } = useIsMobile();
   const arr = isDash ? Allproducts || [] : products || [];
   const [dataShown, numberOfPages] = usePagination(8, page, arr);
-
   return (
     <NoData
       length={dataShown.length}
@@ -50,28 +49,7 @@ const ProductList = ({ isDash }: { isDash?: boolean }) => {
           {dataShown?.map((product: any, index: number) => {
             return (
               <Fragment key={`${product._id}-list`}>
-                <ProductFliter
-                  isDash={isDash}
-                  isPending={isPending}
-                  index={index}
-                  _id={product._id}
-                  price={product.price}
-                  stock={product.stock}
-                  title={product.title}
-                  state={product.state}
-                  category={product.category}
-                  images={product.images}
-                  rating={product.rating}
-                  description={product.description}
-                  reviews={product.reviews}
-                  // layout
-                  // transition={{
-                  //   type: "tween",
-                  //   ease: "easeOut",
-                  //   duration: 0.5,
-                  //   damping: 7,
-                  // }}
-                />
+                <ProductFliter {...product} index={index} isDash={isDash} />
               </Fragment>
             );
           })}
