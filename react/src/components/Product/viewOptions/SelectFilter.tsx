@@ -41,43 +41,55 @@ const SelectFilter = () => {
     if (!isPending && isOptSelected) {
       setIsOptSelected(false);
       if (selectValue === "relevance") {
-        setProducts(Allproducts);
+        startTransition(() => setProducts(Allproducts));
       } else if (selectValue === "lowest price") {
         fnPrice({
           variables: {
             price: 1,
           },
-        }).then(({ data }) => setProducts(data.filterByPrice));
+        }).then(({ data }) =>
+          startTransition(() => setProducts(data.filterByPrice))
+        );
       } else if (selectValue === "highest price") {
         fnPrice({
           variables: {
             price: -1,
           },
-        }).then(({ data }) => setProducts(data.filterByPrice));
+        }).then(({ data }) =>
+          startTransition(() => setProducts(data.filterByPrice))
+        );
       } else if (selectValue === "lowest rate") {
         fnRate({
           variables: {
             rate: 1,
           },
-        }).then(({ data }) => setProducts(data.filterByRate));
+        }).then(({ data }) =>
+          startTransition(() => setProducts(data.filterByRate))
+        );
       } else if (selectValue === "highest rate") {
         fnRate({
           variables: {
             rate: -1,
           },
-        }).then(({ data }) => setProducts(data.filterByRate));
+        }).then(({ data }) =>
+          startTransition(() => setProducts(data.filterByRate))
+        );
       } else if (selectValue === "newest") {
         fnDate({
           variables: {
             date: -1,
           },
-        }).then(({ data }) => setProducts(data.filterByDate));
+        }).then(({ data }) =>
+          startTransition(() => setProducts(data.filterByDate))
+        );
       } else if (selectValue === "oldest") {
         fnDate({
           variables: {
             date: 1,
           },
-        }).then(({ data }) => setProducts(data.filterByDate));
+        }).then(({ data }) =>
+          startTransition(() => setProducts(data.filterByDate))
+        );
       }
     }
   }, [selectValue, isPending]);
@@ -123,10 +135,8 @@ const SelectFilter = () => {
                   }}
                   variants={opacityVariant}
                   onClick={() => {
-                    startTransition(() => {
-                      setIsSelectFocus(false);
-                      setSelectValue(opt);
-                    });
+                    setIsSelectFocus(false);
+                    setSelectValue(opt);
                   }}
                   key={i}
                   onTapStart={() => setIsOptSelected(true)}

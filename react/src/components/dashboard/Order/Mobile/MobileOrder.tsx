@@ -54,31 +54,29 @@ const MobileOrder = ({
         <OrderDetailsIcon _id={_id} />
       </span>
 
-      <span className="center" style={{ height: 20 }}></span>
+      <div className="mobile-order-title center between">
+        <span className="mobile-order-id ">
+          <span> Order #{_id}</span>
 
-      <div className="mobile-order-title">
-        <span style={{ fontWeight: "bold" }} className="mobile-order-id">
-          Order
-          <span style={{ fontWeight: "normal" }}> #{_id}</span>
+          <div className="order-state-par center gap">
+            <AnimatePresence mode="wait">
+              <FadeElement cls="" key={state}>
+                <span
+                  style={{ background: `var(--${state.split(" ").slice(-1)})` }}
+                  className="order-state center gap"
+                >
+                  {state}
+                </span>
+              </FadeElement>
+            </AnimatePresence>
+            <DashDropDown
+              arr={["pending", "shipped", "delivered", "canceled", "on hold"]}
+              _id={_id}
+              setter={setOrderState}
+              state={orderState}
+            />
+          </div>
         </span>
-        <div className="order-state-par center gap`">
-          <AnimatePresence mode="wait">
-            <FadeElement cls="" key={state}>
-              <span
-                style={{ background: `var(--${state.split(" ").slice(-1)})` }}
-                className="order-state center gap"
-              >
-                {state}
-              </span>
-            </FadeElement>
-          </AnimatePresence>
-          <DashDropDown
-            arr={["pending", "shipped", "delivered", "canceled", "on hold"]}
-            _id={_id}
-            setter={setOrderState}
-            state={orderState}
-          />
-        </div>
       </div>
       <span className="date" style={{ marginTop: 6 }}>
         <span className="order-date">created at : </span>

@@ -78,22 +78,6 @@ export const reviewCounter = {
   }),
 };
 
-export const heartVariant = {
-  start: (bool: boolean) => ({
-    pathLength: bool ? 0 : 1,
-    pathOffset: bool ? 0 : 0.1,
-    // strokeWidth: 4,
-    stroke: bool ? "var(--main)" : "red",
-    fill: "red",
-  }),
-  end: (bool: boolean) => ({
-    pathLength: bool ? 1 : 0,
-    pathOffset: bool ? 0.15 : 0,
-    stroke: bool ? "red" : "var(--main)",
-    transition: { duration: 0.8 },
-  }),
-};
-
 export const selectDropDownVariants = {
   start: { opacity: 0 },
   end: {
@@ -102,17 +86,14 @@ export const selectDropDownVariants = {
     transition: {
       when: "beforeChildren",
       staggerChildren: 0.1,
-      duration: 0.1,
+      duration: 0.01,
     },
   },
   exit: {
     opacity: 0,
     transition: {
       when: "afterChildren",
-      staggerChildren: 0.1,
-      staggerDirection: -1,
-      duration: 0.1,
-      delayChildren: 0.3,
+      duration: 0.05,
     },
   },
 };

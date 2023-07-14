@@ -11,7 +11,6 @@ interface Props {
 }
 const Pages = ({ numOfPages, setPage, page }: Props) => {
   const [pageArr, setpageArr] = useState([] as number[]);
-
   useEffect(() => {
     setpageArr([]);
     for (let i = 1; i <= numOfPages; i++) {

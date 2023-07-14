@@ -13,7 +13,6 @@ interface Props extends ChildrenInterFace {
 const DashMain = ({ head, children }: Props) => {
   const { showAsideDash } = useContext(showAsideContext);
   const { isMobile } = useIsMobile();
-  console.log({ isMobile });
   return (
     <motion.section
       className="dash-product"
@@ -26,7 +25,8 @@ const DashMain = ({ head, children }: Props) => {
     >
       <Animation>
         <BeardCrumbs />
-        <h2 className="underline header">{head}</h2>
+
+        {head !== "" && <h2 className="underline header">{head}</h2>}
         {children}
       </Animation>
     </motion.section>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ProductSelect from "./ProductSelect";
 import { GET_Product_By_Id } from "../../graphql/general";
 import { useQuery } from "@apollo/client";
@@ -15,7 +15,7 @@ interface Props {
 const SeletedProduct = ({ product, setProduct, order }: Props) => {
   const { compare } = useAppSelector((state) => state.compare);
   const obj = compare.find((ob) => ob.title === product);
-  const { data, error, loading } = useQuery(GET_Product_By_Id, {
+  const { data } = useQuery(GET_Product_By_Id, {
     variables: { id: obj?.productId ? obj!.productId : null },
   });
 
@@ -32,16 +32,7 @@ const SeletedProduct = ({ product, setProduct, order }: Props) => {
         product={product === "" ? `-- select ${order} product --` : product}
       />
       <AnimatePresence initial={false}>
-        <motion.div
-          className="w-100 center col selected-pro-data"
-          initial={{
-            boxShadow: product !== "" ? "0 0 0 #fff" : "2px 2px 5px #000",
-          }}
-          animate={{
-            boxShadow: product !== "" ? "2px 2px 5px #000" : "0 0 0 #fff",
-          }}
-          transition={{ delay: product !== "" ? 0.4 : 0, duration: 0.4 }}
-        >
+        <motion.div className={`w-100 center col selected-pro-data  `}>
           <AnimatePresence mode="wait">
             {product !== "" ? (
               <>

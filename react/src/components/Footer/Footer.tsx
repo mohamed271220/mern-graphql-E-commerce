@@ -4,6 +4,7 @@ import FooterCategory from "./FooterCategory";
 import FooterSocial from "./FooterSocial";
 import CopyRight from "./CopyRight";
 import FooterLinks from "./FooterLinks";
+import { motion } from "framer-motion";
 import { stagger, useAnimate, useInView } from "framer-motion";
 const Footer = () => {
   const [scope, animate] = useAnimate();
@@ -18,7 +19,11 @@ const Footer = () => {
     }
   }, [inView]);
   return (
-    <footer ref={scope}>
+    <motion.footer
+      ref={scope}
+      whileInView={{ opacity: [0, 0.3, 0.6, 1] }}
+      viewport={{ amount: 0.6 }}
+    >
       <div className="content">
         <AboutFooter />
         <FooterLinks />
@@ -26,7 +31,7 @@ const Footer = () => {
         <FooterSocial />
       </div>
       <CopyRight />
-    </footer>
+    </motion.footer>
   );
 };
 

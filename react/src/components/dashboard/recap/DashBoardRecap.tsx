@@ -20,8 +20,7 @@ const DashBoardRecap = ({
 }: Props) => {
   return (
     <div className="recap">
-      <div className="head-recap center between">
-        <h3>{head}</h3>
+      <div className=" center between">
         <span
           className={`center gap ${
             percentage >= 0 ? "percent-pos" : "percent-negative"
@@ -31,10 +30,12 @@ const DashBoardRecap = ({
           {percentage}%
         </span>
       </div>
-      <div className="analytics">
-        {" "}
-        {head === "earnings" ? "$ " : ""}
-        <CountUpAnimation num={Number(analytics)} tofixed={0} />{" "}
+      <div className="analytics center col">
+        <span>
+          {head === "earnings" ? "$ " : ""}
+          <CountUpAnimation num={Number(analytics)} tofixed={0} />{" "}
+        </span>
+        <h3 className=" head-recap header center ">{head}</h3>
       </div>
       <div className="links-recap center between">
         <Link to={to}> {link}</Link>

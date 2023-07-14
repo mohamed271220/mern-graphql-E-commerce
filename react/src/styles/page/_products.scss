@@ -1,7 +1,6 @@
 @import "../variables.scss";
 
 .products-par {
-  //-remove margin top
   overflow: hidden;
   width: 100%;
   height: auto;
@@ -108,7 +107,7 @@ aside {
   padding: 10px;
   position: relative;
   margin: 0 auto;
-  min-height: 60vh;
+  min-height: 100vh;
   margin-bottom: 25px;
 
   &.list {
@@ -133,7 +132,7 @@ aside {
   top: 5px;
   right: 5px;
   svg {
-    fill: white !important;
+    fill: white;
   }
 }
 
@@ -184,8 +183,10 @@ svg.svg-star {
     outline: 0;
     color: white;
     transition: 0.3s;
+    border-radius: 2px;
     &.page-active {
       transform: scale(1.3);
+      box-shadow: var(--forth-shadow);
     }
   }
 }
@@ -203,27 +204,20 @@ svg.svg-star {
   position: relative;
   padding: 5px;
   background: var(--secondary);
-  box-shadow: 1px 1px 3px black;
+  box-shadow: var(--main-shadow);
   gap: 1px;
   font-weight: bold;
   text-transform: capitalize;
-  text-shadow: 0.2px 0.5px 0.8px black;
+  text-shadow: var(--third-shadow);
   transition: 0.3s;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
   overflow: hidden;
   padding: 10px;
-
-  // &.grid {
-  // }
-
-  // &.list {
-  //   height: 260px;
-  // }
-
+  border-radius: 2px;
   &:hover {
-    box-shadow: 2px 2px 5px var(--green);
+    box-shadow: 1px 1px 3px var(--green);
   }
   p {
     overflow: hidden;
@@ -233,25 +227,26 @@ svg.svg-star {
     -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     white-space: pre-wrap;
-    color: var(--third);
+    color: white;
     max-width: 90%;
   }
 
   .img-par {
     &.grid {
       width: 100%;
-      height: 120px;
+      height: 140px;
       img {
-        height: 80px;
+        height: 100px;
         width: 90%;
       }
     }
     &.list {
       width: 30% !important;
-      height: 90%;
+      height: 90% !important;
       img {
         min-width: 85px;
-        width: 60%;
+        max-width: 85%;
+        height: 180px;
         object-fit: contain;
       }
     }
@@ -313,18 +308,13 @@ svg.svg-star {
   border-radius: 4px;
   margin-top: 4px;
   position: relative;
-  text-shadow: 0.2px 0.5px 0.8px black;
   background: rgba(6, 56, 6, 0.197);
-  padding: 0 1.25px;
-
+  padding: 0 1.5px;
+  text-shadow: var(--forth-shadow);
   .price-top {
     position: relative;
     bottom: -4px;
     font-size: 0.8rem;
-    // color: var(--green);
-  }
-  .dollar {
-    right: 1px;
   }
 
   .float {
@@ -361,7 +351,6 @@ svg.svg-star {
     filter: drop-shadow(2px 5px 5px black);
   }
 }
-
 #star-details {
   position: absolute;
   right: 10px;
@@ -377,9 +366,6 @@ svg.svg-star {
   z-index: 10;
 }
 
-.cls-height {
-  min-height: 90vh !important;
-}
 @media (max-width: 600px) {
   aside.aside-products {
     position: fixed;

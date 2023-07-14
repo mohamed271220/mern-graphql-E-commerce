@@ -2,7 +2,7 @@
 @import "../globels/mixins";
 .newsletter {
   width: 100%;
-  background: rgba(245, 222, 179, 0.4);
+  background: rgb(153, 136, 104);
   background-image: url(./../assets/Images/newLetterBackground.png);
   background-size: cover;
   background-position: center;
@@ -15,23 +15,14 @@
   align-items: center;
   position: relative;
   overflow: hidden;
+  box-shadow: var(--forth-shadow);
 
-  &:before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background-color: rgba(0, 0, 0, 0.7);
-  }
   form {
     display: flex;
     align-items: center;
     width: 50%;
     opacity: 0;
-
+    filter: drop-shadow(var(--third-shadow));
     .inp-parent {
       .err-form {
         text-transform: capitalize;
@@ -42,19 +33,23 @@
     input,
     button {
       height: 40px;
+      box-shadow: initial;
     }
     input {
       background-color: var(--main);
       color: var(--third);
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px;
+      &:focus {
+        border-right: 0;
+      }
     }
     button {
-      box-shadow: var(--secondary-shadow);
-
       outline: 0;
       border: 0;
       padding: 0 14px;
       white-space: nowrap;
-      background-color: var(--twitter);
+      background-color: var(--green);
       color: var(--white);
       border-end-end-radius: 2px;
       border-top-right-radius: 2px;
@@ -77,9 +72,11 @@
     span {
       font-weight: 700;
       @include fexien(115);
+      font-weight: 700;
       letter-spacing: 0.8px;
       &.news-spaecial {
-        color: var(--twitter);
+        color: var(--green);
+        text-shadow: var(--forth-shadow);
       }
     }
   }

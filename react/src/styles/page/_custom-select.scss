@@ -8,7 +8,7 @@
   position: relative;
   letter-spacing: 0.7px;
   text-transform: capitalize;
-  box-shadow: 0.25px 0.25px 2px black;
+  box-shadow: var(--third-shadow);
 }
 .select-opt {
   width: 100%;
@@ -31,7 +31,6 @@
   &.arrow {
     right: 5px;
     top: 50%;
-    filter: drop-shadow(0.25px 1px 0.5px black);
   }
   &.sort {
     left: 5px;
@@ -48,11 +47,12 @@
   list-style: none;
   background: var(--main);
   position: absolute;
-  top: 100%;
+  top: 102%;
   left: 0;
   width: 100%;
-  z-index: 2;
-  box-shadow: 0.25px 0.25px 2px black;
+  z-index: 4;
+  box-shadow: var(--third-shadow);
+  border-radius: 2px;
   color: var(--white);
   padding: 4px;
   align-items: flex-start;
@@ -70,7 +70,6 @@
   padding: 10px;
   text-transform: capitalize;
   font-weight: bold;
-  box-shadow: 0.5px 0.5px 0.5px black;
   border-radius: 5px;
 
   color: var(--third);
@@ -119,6 +118,7 @@
   padding: 10px;
   background: var(255, 255, 255, 0.6);
   height: 70vh;
+
   p {
     overflow: hidden;
     display: -webkit-box;

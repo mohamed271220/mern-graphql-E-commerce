@@ -71,7 +71,7 @@ const ProductListHeart = ({
   };
   return (
     <>
-      <HeartSvg fn={handleHeartFns} isFavoraited={isFavoraited} />
+      <HeartSvg fn={handleHeartFns} isFavoraited={isFavoraited} isCard />
     </>
   );
 };

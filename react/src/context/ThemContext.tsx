@@ -19,11 +19,14 @@ const ThemContext = ({ children }: ChildrenInterFace) => {
       );
       document.documentElement.style.setProperty("--third", "#000");
       document.documentElement.style.setProperty("--secondary", " #333335");
+      document.documentElement.style.setProperty("--forth", " #ffffff");
       localStorage.setItem("zimart-theme", "light");
     } else {
       document.documentElement.style.setProperty("--main", "#111417");
       document.documentElement.style.setProperty("--secondary", "#222222");
       document.documentElement.style.setProperty("--third", "#333333");
+      document.documentElement.style.setProperty("--forth", " #000000");
+
       document.documentElement.style.setProperty(
         "--third",
         "rgb(247, 246, 246)"

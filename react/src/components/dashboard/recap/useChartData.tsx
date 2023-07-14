@@ -1,6 +1,3 @@
-import { useContext } from "react";
-import { themeContext } from "../../../context/ThemContext";
-
 const useChartData = (
   arr: { createdAt: string; cost?: number }[],
   head: string,
@@ -14,17 +11,15 @@ const useChartData = (
     return acc;
   }, {});
 
-  const { theme } = useContext(themeContext);
   const barChartData = {
     labels: Object.keys(dataByMonth || []),
     datasets: [
       {
         label: head,
         data: Object.values(dataByMonth || []),
-        backgroundColor: ["#FF8A80", "#80DEEA", "#1877f2"],
-        borderColor: theme === "light" ? "black" : "white",
-        pointBackgroundColor: theme === "light" ? "black" : "white",
-
+        backgroundColor: ["#FF8A80", "#80DEEA", "#1877f2", "#ff0100,#0ff000"],
+        borderColor: "white",
+        pointBackgroundColor: "white",
         borderWidth: 0.5,
       },
     ],

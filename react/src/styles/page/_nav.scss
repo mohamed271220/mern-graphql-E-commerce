@@ -9,7 +9,7 @@ nav {
   display: flex;
   justify-content: space-between;
   padding: 0 20px;
-  box-shadow: var(--nav-shadow);
+  box-shadow: var(--third-shadow);
   .links-par {
     display: flex;
     justify-content: space-between;
@@ -61,8 +61,9 @@ nav {
             background: var(--wheat);
             width: 0;
           }
-          &:hover {
+          &:hover:not(&.active) {
             color: var(--green);
+            opacity: 0.9;
             font-weight: 800;
           }
           &.active:before {
@@ -127,7 +128,7 @@ nav {
   }
 }
 
-@media (max-width: 700px) {
+@media (max-width: 800px) {
   nav {
     padding: 0 6px;
 

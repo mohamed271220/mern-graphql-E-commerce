@@ -18,6 +18,7 @@ const BannerText = ({ fn, header, clr, button, to, slogan }: Props) => {
   const handleContactBtn = () => navigate("/contact");
   return (
     <motion.div
+      whileInView={{ opacity: [0, 0.2, 0.5, 1] }}
       className="banner-content center col"
       initial="start"
       animate="end"

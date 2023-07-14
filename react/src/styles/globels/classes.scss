@@ -12,17 +12,16 @@
 }
 
 .shadow {
-  filter: drop-shadow (0.2px 0.5px 0.8px black);
-  text-shadow: 0.2px 0.5px 0.8px black;
+  filter: drop-shadow (var(--forth-shadow));
+  text-shadow: var(--forth-shadow);
 }
 
 .box-shadow {
-  box-shadow: 0.2px 2px 4px black;
+  box-shadow: var(--main-shadow);
 }
 .btn {
   @extend .remove-border;
-  @extend .shadow;
-
+  text-shadow: var(--forth-shadow);
   color: rgb(247, 246, 246);
   white-space: nowrap;
   padding: 6px 10px;
@@ -39,7 +38,7 @@
   }
   svg {
     path {
-      filter: drop-shadow(0.5px 1px 1px black);
+      filter: drop-shadow(var(--forth-shadow));
     }
   }
   &.about {
@@ -60,7 +59,7 @@
   width: 80%;
   margin: 0 auto;
   font-size: 1rem;
-  box-shadow: 0.5px 0.5px 1.5px black;
+  box-shadow: var(--secondary-shadow);
 }
 
 .or {
@@ -169,6 +168,9 @@
   }
 }
 .header {
+  @include kyiv(600, -400);
+}
+.underline {
   width: fit-content;
   height: 60px;
   font-size: 2rem;
@@ -177,13 +179,10 @@
   text-transform: capitalize;
   letter-spacing: 0.8px;
   font-weight: 800;
-}
-.underline {
   position: relative;
   color: var(--third);
   &:before {
     content: "";
-    clip-path: polygon(0 11%, 0 4%, 100% 10%);
     clip-path: polygon(0 5%, 100% 37%, 100% 64%, 0 95%);
     position: absolute;
 
@@ -191,7 +190,6 @@
     left: 0;
     height: 6px;
     width: 100%;
-    background: var(--green);
     background: linear-gradient(60deg, var(--wheat), var(--green));
   }
 }
@@ -279,9 +277,9 @@
 
 .icon {
   font-size: 1rem;
-  filter: drop-shadow(0.2px 0.1px 0.2px black);
+  filter: drop-shadow(var(--forth-shadow));
   &.icon-shadow {
-    filter: drop-shadow(1px 1px 1.25px black);
+    filter: drop-shadow(var(--third-shadow));
   }
 }
 
@@ -337,13 +335,15 @@ form {
     textarea {
       padding-right: 20px;
       background-color: var(--main);
-      box-shadow: var(--secondary-shadow);
+      box-shadow: var(--third-shadow);
       border-radius: 5px;
       color: var(--third);
     }
   }
 }
-
+.h-80 {
+  min-height: 80vh;
+}
 p,
 span,
 small {

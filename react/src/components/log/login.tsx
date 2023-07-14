@@ -71,7 +71,7 @@ const Login = () => {
           <FormAnimation fn={handleSubmit(onSubmit)} cls="center">
             <h2 className="underline header " style={{ color: "var(--white)" }}>
               {" "}
-              log in
+              Log in
             </h2>
             <Input
               placeholder={"email"}
@@ -87,7 +87,7 @@ const Login = () => {
             />
 
             <OpacityBtn
-              cls="btn main w-100"
+              cls="btn main"
               fn={() => null}
               btn="log In"
               type="submit"

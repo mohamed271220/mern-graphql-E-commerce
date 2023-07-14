@@ -53,7 +53,7 @@ const ProductFliter = ({
   const { avgRate, reviewLength } = useAvg(rating, reviews);
   const [isFavoraited, setIsFavorited] = useState(false);
   const [onCart, setOnCart] = useState(false);
-  const { productSearchWord } = useContext(productListContext);
+  const { productSearchWord, showFilter } = useContext(productListContext);
   const { gridView } = useContext(viewContext);
   const [sectionRef, { width: sectionWidth }] = useMeasure();
 
@@ -64,8 +64,8 @@ const ProductFliter = ({
     <motion.span
       ref={ref}
       initial={{ opacity: 0 }}
-      whileInView={{ opacity: isPending ? 0.2 : 1 }}
       transition={{ duration: 0.125 }}
+      whileInView={{ opacity: [0, 0.2, 0.4, 0.6, 1] }}
     >
       <motion.div
         className="par"
@@ -84,8 +84,15 @@ const ProductFliter = ({
             gridView ? "grid col" : "list between "
           }`}
           ref={sectionRef}
-          initial={{ height: sectionWidth <= 400 && !gridView ? 260 : 180 }}
-          animate={{ height: sectionWidth <= 400 && !gridView ? 180 : 260 }}
+          initial={{ height: 0 }}
+          animate={{
+            height:
+              sectionWidth <= 400 && !gridView && showFilter
+                ? 200
+                : !gridView
+                ? 240
+                : 300,
+          }}
           transition={{ duration: 0.1, type: "tween" }}
         >
           <div className={` img-par center ${gridView ? "grid" : "list"}`}>
@@ -138,10 +145,11 @@ const ProductFliter = ({
             </span>
             {isDash && (
               <span className=" center stock-par shadow">
-                <span className="stock-icon box-shadow">
+                <span className="stock-icon ">
                   <AiOutlineCheck className=" icon" />
                 </span>
-                <span className="stock"> {stock}</span>in stock
+                <span className="stock "> {stock}</span>{" "}
+                <span className="stock-card">in stock</span>
               </span>
             )}
 

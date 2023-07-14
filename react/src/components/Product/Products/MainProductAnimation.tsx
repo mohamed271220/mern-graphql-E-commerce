@@ -16,16 +16,18 @@ const imgArr = [
 const MainProductAnimation = () => {
   const variant = {
     start: (i: number) => ({
-      zIndex: zIndexArr[i],
       x: xArr[i],
     }),
-    end: (i: number) => ({
-      zIndex: zIndexArr[i],
+    end: {
       x: 0,
-    }),
+    },
   };
   return (
-    <div className="products-animation-par">
+    <motion.div
+      className="products-animation-par"
+      style={{ opacity: 0 }}
+      whileInView={{ opacity: [0, 0.2, 0.4, 0.6, 1] }}
+    >
       <>
         {[...Array(5)].map((_, i) => {
           return (
@@ -35,12 +37,16 @@ const MainProductAnimation = () => {
               className="products-animate"
               style={{
                 x: xArr[i],
+                zIndex: zIndexArr[i],
                 scale: scaleArr[i],
               }}
               custom={i}
               viewport={{ once: true }}
               initial="start"
-              transition={{ delay: delayArr[i], duration: 0.4 }}
+              transition={{
+                delay: 0.2 + delayArr[i],
+                duration: 0.4,
+              }}
               whileInView="end"
             >
               <LazyLoadImage src={imgArr[i]} effect="blur" />
@@ -48,7 +54,7 @@ const MainProductAnimation = () => {
           );
         })}
       </>
-    </div>
+    </motion.div>
   );
 };
 

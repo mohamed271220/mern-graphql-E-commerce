@@ -16,7 +16,6 @@ const NewsLetter = () => {
     formState: { errors, isValid },
   } = methods;
   const OnSubmit = async (data: FieldValues) => {
-    console.log(data);
     if (isValid) {
       resetField("email");
       toast.success("you successfully subscribed to newsletter ");
@@ -40,7 +39,11 @@ const NewsLetter = () => {
     }
   }, [inView]);
   return (
-    <div className="newsletter" ref={scope}>
+    <motion.div
+      whileInView={{ opacity: [0, 0.2, 0.4, 0.6, 1] }}
+      className="newsletter"
+      ref={scope}
+    >
       <div className="news-content">
         <h2>sign up for newsletter</h2>
         <span>
@@ -54,7 +57,7 @@ const NewsLetter = () => {
           <button type="submit">sign up</button>
         </form>
       </FormProvider>
-    </div>
+    </motion.div>
   );
 };
 

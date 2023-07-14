@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useContext, useRef, useState } from "react";
 import ProductFliter from "./ProductFliter";
 import Pages from "../Pages";
 import { motion } from "framer-motion";
@@ -8,43 +8,37 @@ import usePagination from "../../../../custom/useNumberOfPages";
 import { useAppSelector } from "../../../../custom/reduxTypes";
 import NoData from "../../../widgets/NoData";
 import useIsMobile from "../../../../custom/useIsMobile";
-import { Grid } from "react-loader-spinner";
+import useMeasure from "react-use-measure";
+import GridLoader from "../../../widgets/GridLoader";
 
 const ProductList = ({ isDash }: { isDash?: boolean }) => {
   const { Allproducts } = useAppSelector((st) => st.Allproducts);
-  const { showFilter, products, isPending } = useContext(productListContext);
+  const { showFilter, products, isPending, startTransition } =
+    useContext(productListContext);
   const { gridView } = useContext(viewContext);
   const [page, setPage] = useState(1);
   const { isMobile } = useIsMobile();
   const arr = isDash ? Allproducts || [] : products || [];
-  const [dataShown, numberOfPages] = usePagination(8, page, arr);
+  const [dataShown, numberOfPages] = usePagination(
+    8,
+    page,
+    arr,
+    startTransition
+  );
+  const ref = useRef<HTMLDivElement | null>(null);
   return (
-    <NoData
-      length={dataShown.length}
-      message="no products matched"
-      cls="cls-height"
-    >
+    <NoData length={dataShown.length} message="no products matched" cls="h-80">
       {isPending ? (
-        <div className="loading center text">
-          <Grid
-            height="25"
-            width="25"
-            color="#4fa94d"
-            ariaLabel="grid-loading"
-            radius="12.5"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-          />
-        </div>
+        <GridLoader />
       ) : (
         <motion.div
+          ref={ref}
           className={`product-list-par ${!gridView ? "list" : "grid"} `}
           animate={{
             width:
               showFilter && !isMobile ? " calc(100% - 200px - 20px)" : "90%",
           }}
-          transition={{ delay: 0.4 }}
+          style={{ height: ref.current?.offsetHeight || "auto" }}
         >
           {dataShown?.map((product: any, index: number) => {
             return (

@@ -10,6 +10,7 @@ import useUpdateOrder from "../../../custom/useUpdateOrder";
 import { isAuthContext } from "../../../context/isAuth";
 import useUpdateUserRole from "../../../custom/useUpdateUserRole";
 import { themeContext } from "../../../context/ThemContext";
+import useClickOutside from "../../../custom/useClickOutside";
 
 interface Props {
   state: string;
@@ -27,6 +28,10 @@ const DashDropDown = ({ type, state, setter, _id, arr }: Props) => {
   const handleToggle = () => setIsCLicked(!isSClicked);
   const { handleUpdateOrder } = useUpdateOrder(_id, state);
   const { handleUpdateUserRole } = useUpdateUserRole(_id, state);
+  const ref = useClickOutside<HTMLDivElement>(
+    () => setIsCLicked(false),
+    isSClicked
+  );
   return (
     <div className="relative">
       <Title title={isSClicked ? "update order state" : ""}>
@@ -44,6 +49,7 @@ const DashDropDown = ({ type, state, setter, _id, arr }: Props) => {
             initial="start"
             animate="end"
             exit="exit"
+            ref={ref}
           >
             <>
               {arr.map((st, i) => {

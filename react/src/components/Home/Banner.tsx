@@ -95,7 +95,7 @@ const Banner = () => {
     target: ref,
     offset: ["start start", "end start"],
   });
-  const scale = useTransform(scrollYProgress, [0, 1], ["1", "1.4"]);
+  const scale = useTransform(scrollYProgress, [0, 1], ["1", "1.1"]);
   return (
     <Animation>
       <section className="banner-par center" id="banner" ref={animateRef}>

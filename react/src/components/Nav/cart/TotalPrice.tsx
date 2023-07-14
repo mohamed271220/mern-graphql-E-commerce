@@ -69,27 +69,6 @@ const TotalPrice = ({ subTotal }: { subTotal: number }) => {
         >
           order summary
         </h3>
-
-        <h3>
-          <span
-            style={{
-              textTransform: "capitalize",
-              fontWeight: "bold",
-              color: "var(--white)",
-            }}
-          >
-            total:
-          </span>
-          <span style={{ color: "var(--white)" }}>
-            <span> $</span>
-            <AnimatePresence mode="wait">
-              <Price
-                num={cart.length ? Number(total.toFixed(2)) : 0}
-                key={"total-$"}
-              />
-            </AnimatePresence>
-          </span>
-        </h3>
       </div>
 
       <div className="order-details center col w-100">
@@ -159,6 +138,18 @@ const TotalPrice = ({ subTotal }: { subTotal: number }) => {
             </AnimatePresence>
           </span>
         </div>
+        <h3 className="total-cost">
+          <span>total:</span>
+          <span style={{ color: "var(--white)" }}>
+            <span> $</span>
+            <AnimatePresence mode="wait">
+              <Price
+                num={cart.length ? Number(total.toFixed(2)) : 0}
+                key={"total-$"}
+              />
+            </AnimatePresence>
+          </span>
+        </h3>
       </div>
       <OpacityBtn
         btn="checkout now"

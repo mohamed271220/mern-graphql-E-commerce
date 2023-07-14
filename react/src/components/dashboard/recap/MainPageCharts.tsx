@@ -1,11 +1,10 @@
-import React, { useContext } from "react";
-import useDashProgress from "../../../custom/useDashProgress";
+import React from "react";
 import { useAppSelector } from "../../../custom/reduxTypes";
 import { Chart as ChartJS } from "chart.js/auto";
 import { CategoryScale } from "chart.js";
-import { PolarArea, Bar, Pie, Line } from "react-chartjs-2";
+import { Bar, Pie, Line } from "react-chartjs-2";
 import useChartData from "./useChartData";
-import { themeContext } from "../../../context/ThemContext";
+
 const MainPageCharts = ({ userData }: { userData: any[] }) => {
   const { Allproducts } = useAppSelector((st) => st.Allproducts);
   const { order } = useAppSelector((st) => st.order);
@@ -30,40 +29,24 @@ const MainPageCharts = ({ userData }: { userData: any[] }) => {
   };
   return (
     <>
-      {/* <h2
-        style={{ marginTop: 40, marginBottom: -20 }}
-        className="underline header col"
-      >
-        analytics
-      </h2> */}
       <div className="dash-main-charts">
-        <div
-          className=" center w-100 chart-par between col"
-          style={{ marginTop: 10 }}
-        >
-          <h3>Earnings Per Time</h3>
+        <div className=" center chart-par between col ">
+          <h3 className="header">Earnings Per Time</h3>
+
           <Bar data={EarningChartData || []} options={options} />
         </div>
-        <div
-          className=" center w-100 chart-par col between"
-          style={{ marginTop: 10 }}
-        >
-          <h3>Orders Per Time</h3>
-
-          <Pie data={orderChartData || []} options={options} />
+        <div className=" center chart-par col  between">
+          <h3 className="header">Orders Per Time</h3>
+          <div>
+            <Pie data={orderChartData || []} options={options} />
+          </div>
         </div>
-        <div
-          className="center w-100 chart-par col between"
-          style={{ marginTop: 10 }}
-        >
-          <h3>Added Products Per Time</h3>
+        <div className="center  chart-par col  between">
+          <h3 className="header">Added Products Per Time</h3>
           <Line data={productChartData || []} options={options} />
         </div>
 
-        <div
-          className="center w-100 chart-par col between"
-          style={{ marginTop: 10 }}
-        >
+        <div className="center chart-par col  between">
           <h3>Users Per Time</h3>
           <Line data={userChartData || []} options={options} />
         </div>

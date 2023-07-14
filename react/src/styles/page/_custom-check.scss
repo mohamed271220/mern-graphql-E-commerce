@@ -5,11 +5,10 @@
   border-radius: 2px;
   width: 12px;
   height: 12px;
-  box-shadow: 0.5px 0.5px 1px black;
+  box-shadow: var(--forth-shadow);
   .custom-check {
     width: fit-content;
-    // background: var(--green);
-    background: var(--secondary);
+    background: var(--third);
     border-radius: 2px;
   }
 }

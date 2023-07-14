@@ -4,7 +4,7 @@ import {
   useScroll,
   useTransform,
   motion,
-  AnimatePresence,
+  
 } from "framer-motion";
 import LogoSvg from "../widgets/LogoSvg";
 

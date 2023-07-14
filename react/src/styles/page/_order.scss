@@ -56,36 +56,42 @@ table.order {
   flex-direction: column;
   gap: 40px !important;
   margin: 10px;
-  padding-bottom: 10px;
+  .order-date {
+    margin: 0;
+  }
+
   .order-mobile {
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
     background: var(--secondary);
-    height: 110px;
+    height: 120px;
     display: flex;
     flex-direction: column;
     gap: 4px;
-    margin-bottom: 4px;
-    box-shadow: 1px 1px 3px grey;
+    box-shadow: var(--main-shadow);
     position: relative;
-    padding: 20px;
     border-radius: 5px;
+    justify-content: center;
+    padding: 0 10px;
     .mobile-order-title {
-      position: absolute;
-      top: 6px;
-      left: 8px;
       font-weight: bold;
       font-size: 1.2rem;
-      display: flex;
       gap: 8px;
+      display: flex;
       align-items: center;
       width: 80%;
       min-width: 260px;
-      justify-content: space-between;
+
       .mobile-order-id {
         font-weight: normal;
         color: var(--twitter);
+        display: inline-flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 5px;
+        width: 80%;
+        max-width: 340px;
       }
     }
   }
@@ -116,8 +122,8 @@ table.order {
 
 .order-delete-mobile {
   position: absolute;
-  top: 6px;
-  right: 8px;
+  top: 12px;
+  right: 10px;
   color: var(--delete);
 }
 
@@ -163,6 +169,7 @@ table.order {
   width: 70px;
   display: flex;
   justify-content: flex-end !important;
+  align-items: center;
   margin-left: -8px;
 }
 
@@ -224,11 +231,13 @@ table.order {
   h2 {
     text-transform: capitalize;
     color: var(--sale);
-    text-shadow: 0.5px 0.5px 1px #000;
+    text-shadow: var(--forth-shadow);
+    padding: 12px 0;
   }
 }
 .order-detail {
   height: 30px;
+
   span:first-child {
     font-weight: bold;
     text-transform: capitalize;
@@ -253,7 +262,12 @@ table.order {
     padding: 15px;
     color: var(--third);
     height: fit-content;
+    background: var(--main);
+
     align-self: flex-start;
+    .header {
+      font-size: 1.4rem;
+    }
   }
 }
 
@@ -280,8 +294,6 @@ table.order {
       width: 85%;
       .mobile-order-id {
         font-size: 1rem;
-      }
-      .order-state {
       }
     }
   }
