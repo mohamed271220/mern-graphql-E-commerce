@@ -7,39 +7,29 @@ import { FiEdit } from "react-icons/fi";
 import { RiLogoutCircleRFill } from "react-icons/ri";
 import useLogOut from "../../custom/useLogOut";
 import { FaQuestionCircle } from "react-icons/fa";
-import useIsMobile from "../../custom/useIsMobile";
 
 interface Props {
   bool: boolean;
   setter: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const UserDropDown = ({ bool, setter }: Props) => {
-  const { isMobile } = useIsMobile();
-
   const { name } = useContext(isAuthContext);
   const { handleLogOut } = useLogOut();
-  const handleMobileCLose = () => {
-    if (isMobile) {
-      setter(false);
-    }
-  };
+
   const dropArr = [
     {
       link: "update your data",
       icon: FiEdit,
       to: "/user",
-      fn: handleMobileCLose,
+      fn: () => null,
     },
-    { link: "faq", icon: FaQuestionCircle, to: "/faq", fn: handleMobileCLose },
+    { link: "faq", icon: FaQuestionCircle, to: "/faq", fn: () => null },
 
     {
       link: "logout",
       icon: RiLogoutCircleRFill,
       to: "/login",
-      fn: () => {
-        handleLogOut();
-        handleMobileCLose();
-      },
+      fn: handleLogOut,
     },
   ];
 

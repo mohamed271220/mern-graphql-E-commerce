@@ -70,7 +70,9 @@ const SlideButton = ({
     >
       {!isConfirmed ? (
         <>
-          <h4 className="underline header pop-head ">{head}</h4>
+          <h4 className="underline header underline-sm header-sm pop-head ">
+            {head}
+          </h4>
 
           {children}
           <motion.div

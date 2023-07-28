@@ -62,14 +62,16 @@ const Avatar = ({ setEdit, newImg, handleCancel }: Props) => {
 
   return (
     <>
-      <h3 className="underline header">update your profile image</h3>
+      <h3 className="header underline  underline-sm header-sm">
+        update your profile image
+      </h3>
       <AvatarEditor
         style={{ backgroundColor: "white", border: "0" }}
         ref={editorRef}
         image={newImg ? URL.createObjectURL(newImg as any) : ""}
-        width={250}
-        height={250}
-        border={5}
+        width={200}
+        height={200}
+        border={2}
         borderRadius={125}
         position={position}
         onPositionChange={handlePositionChange}
@@ -93,8 +95,12 @@ const Avatar = ({ setEdit, newImg, handleCancel }: Props) => {
         />
       </div>
       <div className=" center gap " style={{ gap: 30, marginTop: 6 }}>
-        <OpacityBtn fn={handleSaveButtonClick} btn="Save" cls="btn main" />
-        <OpacityBtn fn={handleCancel} btn="cancel" cls="btn details" />
+        <OpacityBtn
+          fn={handleSaveButtonClick}
+          btn="Save"
+          cls="btn main border"
+        />
+        <OpacityBtn fn={handleCancel} btn="cancel" cls="btn cancel-outline" />
       </div>
     </>
   );

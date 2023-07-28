@@ -51,7 +51,7 @@ const UserImage = () => {
       </form>
       <AnimatePresence mode="wait">
         {edit && (
-          <Overley cls="avatar-par" sethide={setEdit}>
+          <Overley cls="avatar-par center col gap" sethide={setEdit}>
             <Avatar
               setEdit={setEdit}
               setnewImg={setnewImg}

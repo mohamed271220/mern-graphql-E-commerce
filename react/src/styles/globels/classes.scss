@@ -50,6 +50,9 @@
   }
   &.main {
     background: var(--green);
+    &.border {
+      border: 1.5px solid var(--green);
+    }
   }
   &.main-outline {
     transition: 0.3s;
@@ -59,8 +62,18 @@
       color: white !important;
     }
   }
-  &.transparent {
-    background: transparent;
+  &.cancel-outline {
+    transition: 0.3s;
+    border: 1.5px solid var(--third);
+    color: grey !important;
+    &:hover {
+      background: var(--third);
+      color: var(--main) !important;
+    }
+
+    &.transparent {
+      background: transparent;
+    }
   }
 }
 
