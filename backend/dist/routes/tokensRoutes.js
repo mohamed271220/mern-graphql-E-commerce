@@ -30,18 +30,16 @@ exports.verfiyRefToken = verfiyRefToken;
 const getNewRefToken = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     const { refToken } = req.body;
-    // console.log(refToken);
     if (!refToken) {
         res.json({});
     }
     else {
         let { result } = (yield (0, exports.verfiyRefToken)(refToken));
-        console.log(result);
         if (((_a = result[0]) === null || _a === void 0 ? void 0 : _a._id) || (result === null || result === void 0 ? void 0 : result._id)) {
             const accessToken = jsonwebtoken_1.default.sign({ result }, config_1.ACCESS_TOKEN_SECRET);
             const refreshToken = jsonwebtoken_1.default.sign({ result }, config_1.REFRESH_TOKEN_SECRET);
-            res.cookie("access-token", accessToken);
-            res.cookie("refresh-token", refreshToken);
+            res.cookie("access_token", accessToken);
+            res.cookie("refresh_token", refreshToken);
             res.json({ accessToken });
             return true;
         }

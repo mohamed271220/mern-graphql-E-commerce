@@ -51,7 +51,7 @@ const uploadProductImgs = (req, res) => __awaiter(void 0, void 0, void 0, functi
     res.json({ data: result, msg: "product added successfully" });
 });
 exports.uploadRoute = (0, express_1.Router)();
-exports.uploadRoute.route("/upload/:id").patch(upload_js_1.upload.single("image"), updateUserImgFn);
+exports.uploadRoute.route("/:id").patch(upload_js_1.upload.single("image"), updateUserImgFn);
 exports.uploadRoute
     .route("/products/images/upload/:id")
     .patch(upload_js_1.upload.array("images"), uploadProductImgs);

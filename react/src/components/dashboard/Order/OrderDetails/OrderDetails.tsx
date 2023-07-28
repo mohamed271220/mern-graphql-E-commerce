@@ -23,7 +23,7 @@ const OrderDetails = () => {
     const { _id, productId, cost, userId, state, createdAt, deliveredAt } =
       data.order;
     return (
-      <DashMain head="">
+      <DashMain>
         <Animation addIntialX={false}>
           <motion.div
             variants={parentVariant}

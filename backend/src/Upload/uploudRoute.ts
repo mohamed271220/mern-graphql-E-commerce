@@ -40,7 +40,7 @@ const uploadProductImgs = async (req: Request, res: Response) => {
 };
 
 export const uploadRoute = Router();
-uploadRoute.route("/upload/:id").patch(upload.single("image"), updateUserImgFn);
+uploadRoute.route("/:id").patch(upload.single("image"), updateUserImgFn);
 uploadRoute
   .route("/products/images/upload/:id")
   .patch(upload.array("images"), uploadProductImgs);

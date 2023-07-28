@@ -19,6 +19,7 @@ const HeartSvg = ({ fn, isFavoraited, isCard = false }: Props) => {
             fill: isFavoraited ? "red" : isCard ? "white" : "var(--third)",
             transition: "0.3s",
           }}
+          className="svg-heart"
           width="25"
           height="25"
           viewBox="0 0 25 25"

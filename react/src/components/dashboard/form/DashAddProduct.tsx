@@ -2,8 +2,7 @@ import React, { Fragment, useEffect } from "react";
 
 import DashForm from "./DashForm";
 import { useMutation } from "@apollo/client";
-import { Add_Product } from "../../graphql/mutations/product.js";
-import { GrAddCircle } from "react-icons/gr";
+import { Add_Product } from "../../../graphql/mutations/product.js";
 
 const DashAddProduct = () => {
   const [addProductFn] = useMutation(Add_Product);
@@ -16,7 +15,6 @@ const DashAddProduct = () => {
     <Fragment>
       <DashForm
         key={"addProduct"}
-        Icon={GrAddCircle}
         head="add product"
         fn={addProductFn}
         btn="add"

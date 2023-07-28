@@ -18,9 +18,9 @@ const Pages = ({ numOfPages, setPage, page }: Props) => {
     }
   }, [numOfPages]);
   return (
-    <AnimatePresence>
+    <>
       {numOfPages > 0 && (
-        <FadeElement cls="">
+        <FadeElement cls="" delay={0.6}>
           <div className="pages-par center">
             <Title title="prev page">
               <motion.button
@@ -83,7 +83,7 @@ const Pages = ({ numOfPages, setPage, page }: Props) => {
           </div>
         </FadeElement>
       )}
-    </AnimatePresence>
+    </>
   );
 };
 

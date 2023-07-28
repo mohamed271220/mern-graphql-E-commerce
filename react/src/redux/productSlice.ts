@@ -10,7 +10,6 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     addToProductRedux(state, action) {
-      console.log(action.payload);
       if (Array.isArray(action.payload)) {
         state.Allproducts = [...action.payload, ...state.Allproducts];
       } else {

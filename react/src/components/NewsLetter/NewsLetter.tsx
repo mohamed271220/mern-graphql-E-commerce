@@ -40,6 +40,7 @@ const NewsLetter = () => {
   }, [inView]);
   return (
     <motion.div
+      style={{ opacity: 0 }}
       whileInView={{ opacity: [0, 0.2, 0.4, 0.6, 1] }}
       className="newsletter"
       ref={scope}

@@ -13,8 +13,7 @@
   --overley: rgba(19, 78, 26, 0.423);
   --star: #ffd700;
   --star-dark: #d3d3d3;
-  --nav-shadow: 0.5px 2px 2pxblack;
-  --trending: #d7bc25b2;
+  --trending: #d7bc25;
   --new: var(--green);
   --sale: #0e458d;
   --clr-banner: rgb(102, 98, 96);
@@ -27,8 +26,10 @@
   --admin: rgb(4, 81, 4);
   --delivered: var(--sale);
   --moderator: var(--sale);
-  --main-shadow: 1px 1px 3px black;
-  --secondary-shadow: 0.5px 0.5px 0.5px black;
+  --main-shadow: 0.75px 0.75px 1.5px black;
+  --secondary-shadow: 0.5px 0.5px 1.5px black;
+  --third-shadow: 0.5px 0.5px 0.5px black;
+  --forth-shadow: 0.3px 0.3px 0.2px black;
 }
 
 @font-face {
@@ -52,23 +53,17 @@
 body {
   font-family: "PT Sans", sans-serif;
   overflow-x: hidden;
-  background-color: var(--main);
+  background: linear-gradient(120deg, var(--forth), var(--main));
 }
 
-@media (max-width: 600px) {
-  :root {
-    font-size: 10px;
-  }
+:root {
+  font-size: clamp(12px, 1vw, 14px);
 }
+
 a {
   text-decoration: none;
 }
 
-@media (min-width: 600px) {
-  :root {
-    font-size: 12px;
-  }
-}
 *::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px var(--green);
 }

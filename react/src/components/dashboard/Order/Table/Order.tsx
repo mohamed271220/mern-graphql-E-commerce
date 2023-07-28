@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import Checkbox from "../../../../custom SVGs/checkbox";
-import { AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import FadeElement from "../../../widgets/FadeElement";
 import OrderDetailsIcon from "../OrderDetailsIcon";
 import DashDropDown from "../DashDropDown";
+import { opacityVariant } from "../../../../variants/globals";
 
 interface Props {
   state: string;
@@ -14,20 +15,18 @@ interface Props {
   createdAt: string;
   deliveredAt: string;
 }
-const Order = ({
-  deliveredAt,
-  state,
-  _id,
-  cost,
-
-  index,
-  createdAt,
-}: Props) => {
+const Order = ({ deliveredAt, state, _id, cost, index, createdAt }: Props) => {
   const [isSelected, setIsSeleted] = useState<number | string>("");
   const [orderState, setOrderState] = useState(state);
 
   return (
-    <>
+    <motion.tr
+      variants={opacityVariant}
+      initial="start"
+      animate="end"
+      exit="exit"
+      transition={{ duration: 0.5 }}
+    >
       <td className="center" style={{ height: 20 }}>
         <Checkbox
           filter={_id}
@@ -81,8 +80,9 @@ const Order = ({
           </div>
         </td>
       </div>
-    </>
+    </motion.tr>
   );
 };
 
+Order.displayName = "Order";
 export default Order;

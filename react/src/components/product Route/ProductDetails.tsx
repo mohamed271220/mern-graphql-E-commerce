@@ -177,7 +177,7 @@ const ProductDetails = ({ setShowPop }: Props) => {
 
         <div className="product-btn  ">
           <OpacityBtn
-            cls="btn checkout center"
+            cls="btn btn-buy center"
             fn={handlePurchase}
             Icon={BiPurchaseTagAlt}
             btn="Buy Now"

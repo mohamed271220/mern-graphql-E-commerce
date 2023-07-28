@@ -46,6 +46,9 @@ const App = () => {
                     whiteSpace: "nowrap",
                     textTransform: "capitalize",
                   },
+                  success: {
+                    duration: 3000,
+                  },
                 }}
               />
             </BrowserRouter>

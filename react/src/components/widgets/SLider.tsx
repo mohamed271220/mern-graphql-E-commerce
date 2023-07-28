@@ -47,7 +47,7 @@ const SLiderComponent = () => {
         you may like{" "}
       </h2>
 
-      <Slider {...settings}>
+      <Slider {...settings} lazyLoad="anticipated">
         {Allproducts?.map((product: any, index: number) => {
           return (
             <ProductFliter

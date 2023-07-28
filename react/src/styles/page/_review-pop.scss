@@ -2,10 +2,11 @@
 
 .pop-up {
   background: var(--main);
-  filter: drop-shadow(4px 5px 5px black);
+  filter: drop-shadow(var(--main-shadow));
   overflow: hidden;
   position: relative;
   z-index: 10000;
+  border-radius: 4px;
 }
 
 .pop-up-reviews {
@@ -16,6 +17,13 @@
     width: fit-content;
     margin: 10px auto;
     padding-bottom: 4px;
+    font-size: 1.2rem;
+    height: 20px;
+    &.underline {
+      &:before {
+        top: 120%;
+      }
+    }
   }
 }
 
@@ -113,14 +121,25 @@ p.review-user {
 @media (max-width: 800px) {
   .pop-up-reviews {
     position: fixed;
-    top: 40px;
+    top: 0px;
     left: 0;
-    height: calc(100vh - 40px);
+    height: calc(100vh);
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     gap: 10px;
     z-index: 10;
+    h2 {
+      font-size: 3rem;
+      &.underline {
+        &:before {
+          top: 180%;
+        }
+      }
+    }
+    .user-review {
+      font-size: 1.2rem;
+    }
   }
 }

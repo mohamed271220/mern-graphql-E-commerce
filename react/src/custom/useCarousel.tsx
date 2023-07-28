@@ -31,7 +31,7 @@ const useCarousel = (index: number, len: number) => {
     }),
     exit: ({ dir, width }: { dir: string; width: number }) => ({
       x: dir === "increase" ? -0.5 * width : 0.5 * width,
-      transition: { type: "tween", duraion: 0.2 },
+      transition: { type: "tween", duraion: 0.1 },
     }),
   };
 

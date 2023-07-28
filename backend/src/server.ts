@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import mongoose from "mongoose";
@@ -31,8 +31,7 @@ app.use(
   cookieSession({
     name: "session",
     keys: [SeSSion_Secret as unknown as string],
-    maxAge: 60 * 100,
-    // maxAge: 24 * 60 * 60 * 100,
+    maxAge: 24 * 60 * 60 * 100,
   })
 );
 
@@ -42,8 +41,8 @@ app.use(passport.session());
 app.use(
   cors({
     credentials: true,
-    origin: `${Client_Url}/`,
-    // origin: `${Client_Url}`,
+    // origin: `${Client_Url}/`, // deployment
+    origin: `${Client_Url}`,
     methods: ["GET", "POST", "PATCH", "DELETE"],
   })
 );
@@ -65,13 +64,18 @@ const server = new ApolloServer({
 });
 
 app.use(express.static(path.join(path.resolve(), "/react/dist")));
+app.get("/cookie", (req: Request, res) => {
+  const { access_token, refresh_token, user_id } = req.cookies;
 
-app.use("/", uploadRoute);
-app.use("/", stripeRoutes);
+  res.json({ access_token, refresh_token, user_id });
+});
+app.use("/upload", uploadRoute);
+app.use("/stripe", stripeRoutes);
 
 app.use("/", oAuthRouter);
 app.use("/token", AuthRouter);
-app.get("*", (req, res) => {
+
+app.get("*", (_, res) => {
   res.sendFile(path.join(path.resolve(), "/react/dist/index.html"));
 });
 (async () => {

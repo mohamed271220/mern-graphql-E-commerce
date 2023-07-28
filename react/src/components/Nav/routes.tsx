@@ -8,10 +8,10 @@ import Product from "../product Route/Product";
 import User from "../user/User";
 import { AnimatePresence } from "framer-motion";
 import Dashboard from "../dashboard/Dashboard";
-import DashProducts from "../dashboard/DashProducts";
+import DashProducts from "../dashboard/dash-products/DashProducts";
 // import UpdateProduct from "./dashboard/UpdateProduct";
-import DashUpdateProduct from "../dashboard/DashUpdateProduct";
-import DashAddProduct from "../dashboard/DashAddProduct";
+import DashUpdateProduct from "../dashboard/form/DashUpdateProduct";
+import DashAddProduct from "../dashboard/form/DashAddProduct";
 import Orders from "../dashboard/Order/Orders";
 import CompareProducts from "../Compare/CompareProducts";
 import OrderDetails from "../dashboard/Order/OrderDetails/OrderDetails";
@@ -31,7 +31,7 @@ const AppRoutes = () => {
   // Check isLogged and do something
   const [islog, setIslog] = useState("");
   const [isRegistered, setIsRegistered] = useState("");
-  const { setIsAuth, isAuth } = useContext(isAuthContext);
+  const { setIsAuth } = useContext(isAuthContext);
   const handleShowToastLogIn = () => {
     const query = new URLSearchParams(location.search);
     const isLoggedvalue = query.get("isLogged");
@@ -87,9 +87,11 @@ const AppRoutes = () => {
     }, 1000);
     return () => clearTimeout(timer);
   }, [isRegistered]);
-  console.log({ isAuth });
   return (
-    <AnimatePresence initial={false} mode="wait">
+    <AnimatePresence
+      // initial={false}
+      mode="wait"
+    >
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
@@ -98,13 +100,10 @@ const AppRoutes = () => {
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blogs/:id" element={<Blog />} />
         <Route path="/faq" element={<FaqComponent />} />
-        <Route path="/cart" element={isAuth ? <Cart /> : <Login />} />
-        <Route path="/user" element={isAuth ? <User /> : <Login />} />
-        <Route
-          path="/compare"
-          element={isAuth ? <CompareProducts /> : <Login />}
-        />
-        <Route path="/dashboard" element={isAuth ? <Dashboard /> : <Login />}>
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/user" element={<User />} />
+        <Route path="/compare" element={<CompareProducts />} />
+        <Route path="/dashboard" element={<Dashboard />}>
           <Route path="" element={<Recap />} />
           <Route path="users" element={<UsersDashboard />} />
           <Route path="products">

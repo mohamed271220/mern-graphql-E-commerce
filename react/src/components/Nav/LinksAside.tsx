@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import NavLinks from "./NavLinks";
 import { mobileDropDownVariant } from "../../variants/globals.js";
 import MenuTogglar from "../widgets/MenuTogglar";
+import ThemeToggle from "../widgets/ThemeToggle";
 
 const LinksAside = () => {
   const [showAside, setShowAside] = useState(false);
@@ -25,6 +26,8 @@ const LinksAside = () => {
             exit="exit"
             className="aside-links"
           >
+            <ThemeToggle />
+
             <NavLinks setShowAside={setShowAside} />
           </motion.aside>
         )}

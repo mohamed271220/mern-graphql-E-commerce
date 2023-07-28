@@ -1,17 +1,9 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import DashboardAside from "./DashboardAside";
-import { Outlet } from "react-router-dom";
-import { useScroll, useTransform } from "framer-motion";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { Navigate, Outlet } from "react-router-dom";
 import ThemeToggle from "../widgets/ThemeToggle";
-import { themeContext } from "../../context/ThemContext";
-import NotificationDropDown from "./NotificationDropDown";
+import NotificationDropDown from "./Notification/NotificationDropDown";
 import MenuTogglar from "../widgets/MenuTogglar";
+import { isAuthContext } from "../../context/isAuth";
 interface contextInterface {
   showAsideDash: boolean;
   setShowAsideDash: React.Dispatch<React.SetStateAction<boolean>>;
@@ -20,44 +12,31 @@ interface contextInterface {
 export const showAsideContext = createContext({} as contextInterface);
 
 const Dashboard = () => {
+  const { isAuth } = useContext(isAuthContext);
   useEffect(() => {
     document.title = "Dashboaed";
   }, []);
-  const [showAsideDash, setShowAsideDash] = useState(false);
-
-  const ref = useRef<HTMLDivElement | null>(null);
-  const { scrollY } = useScroll({
-    target: ref,
-  });
-
-  const { theme } = useContext(themeContext);
-  const navClr = useTransform(
-    scrollY,
-    [0],
-    [theme === "dark" ? "#000" : "#fff"]
+  const [showAsideDash, setShowAsideDash] = useState(
+    Boolean(JSON.parse(sessionStorage.getItem("show-aside")!)) || false
   );
 
-  const LinkClr = useTransform(
-    scrollY,
-    [0],
-    [theme !== "light" ? "#fff" : "#000"]
-  );
-
+  if (!isAuth) {
+    return <Navigate to={"/login"} />;
+  }
   return (
     <showAsideContext.Provider value={{ showAsideDash, setShowAsideDash }}>
-      <div className="dashboard-par " ref={ref}>
+      <div className="dashboard-par ">
         <div className="dash-nav center">
+          <ThemeToggle />
+          <NotificationDropDown />
           <MenuTogglar
             bool={showAsideDash}
             setter={setShowAsideDash}
             hideMsg="hide dashboard"
             showMsg="show dashboard"
           />
-          <NotificationDropDown />
-          <ThemeToggle navClr={navClr} linkClr={LinkClr} />
         </div>
 
-        <DashboardAside setShowAsideDash={setShowAsideDash} />
         <Outlet />
       </div>
     </showAsideContext.Provider>

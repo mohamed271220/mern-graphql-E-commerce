@@ -16,11 +16,14 @@ const auth_js_1 = require("../middlewares/auth.js");
 const user_js_1 = require("../mongoose/schema/user.js");
 // const process = new stripe(Stripe_key);
 const stripeData = require("stripe")(config_js_1.Stripe_key);
+let orderData;
+let session;
+let email;
 const stripeFn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const date = () => new Date();
     try {
         const userId = req.params.userid;
         const { products, email } = req.body;
+        orderData = products;
         const lineItems = yield Promise.all(products.map((item) => {
             return {
                 price_data: {
@@ -33,7 +36,7 @@ const stripeFn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 quantity: item.count,
             };
         }));
-        const session = yield stripeData.checkout.sessions.create({
+        session = yield stripeData.checkout.sessions.create({
             line_items: lineItems,
             mode: "payment",
             success_url: `${config_js_1.Client_Url}?success=true`,
@@ -41,6 +44,7 @@ const stripeFn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             payment_method_types: ["card"],
             customer_email: email,
         });
+        const date = () => new Date();
         res.json(session);
         yield order_js_1.OrderCollection.create({
             createdAt: date(),
@@ -61,8 +65,7 @@ const stripeFn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
             content: `${email} created a new order`,
             createdAt: new Date().toISOString(),
         };
-        console.log(notificationObj);
-        yield user_js_1.userCollection.updateMany({ role: { $in: ["admin", "moderator", "owner"] } }, {
+        yield user_js_1.userCollection.updateMany({ role: { $in: ["admin", "moderator", "owner", "user"] } }, {
             $push: {
                 notifications: notificationObj,
             },
@@ -75,6 +78,37 @@ const stripeFn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         console.log(err);
     }
 });
+const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const date = () => new Date();
+    const userId = req.params.userid;
+    yield order_js_1.OrderCollection.create({
+        createdAt: date(),
+        cost: session.amount_total / 100,
+        userId,
+        productId: orderData.map((e) => ({
+            id: e._id,
+            count: e.count,
+            title: e.title,
+            price: e.price,
+            image: e.path,
+        })),
+        state: "pending",
+        count: orderData.length,
+    });
+    const notificationObj = {
+        isRead: false,
+        content: `${email} created a new order`,
+        createdAt: new Date().toISOString(),
+    };
+    yield user_js_1.userCollection.updateMany({ role: { $in: ["admin", "moderator", "owner", "user"] } }, {
+        $push: {
+            notifications: notificationObj,
+        },
+        $inc: {
+            notificationsCount: +1,
+        },
+    });
+});
 const getStripeublicKey = (_, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         res.json(config_js_1.Stripe_Public);
@@ -84,6 +118,9 @@ const getStripeublicKey = (_, res) => __awaiter(void 0, void 0, void 0, function
     }
 });
 const stripeRoutes = (0, express_1.Router)();
-stripeRoutes.route("/stripe/:userid").post(auth_js_1.RestfullAuth, stripeFn);
-stripeRoutes.route("/getkey/stripe").get(auth_js_1.RestfullAuth, getStripeublicKey);
+stripeRoutes.route("/checkout/:userid").post(auth_js_1.RestfullAuth, stripeFn);
+stripeRoutes
+    .route("/checkout/order/create/:userid")
+    .post(auth_js_1.RestfullAuth, createOrder);
+stripeRoutes.route("/getkey").get(auth_js_1.RestfullAuth, getStripeublicKey);
 exports.default = stripeRoutes;

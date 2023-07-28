@@ -5,9 +5,11 @@ import { ChildrenInterFace } from "../../interfaces/general";
 interface Props extends ChildrenInterFace {
   title: string;
   dir?: string;
+  cls?: string;
+
   abs?: boolean;
 }
-const Title = ({ title, dir, children, abs }: Props) => {
+const Title = ({ title, cls, dir, children, abs }: Props) => {
   const variant = {
     start: { opacity: 0, y: 10 },
     end: { opacity: 1, y: 0, transition: { duration: 0.6 } },
@@ -22,7 +24,7 @@ const Title = ({ title, dir, children, abs }: Props) => {
 
   return (
     <motion.span
-      className={`title-par ${abs ? "" : "relative"}`}
+      className={`title-par ${abs ? "" : "relative"} ${cls}`}
       onHoverStart={show}
       onHoverEnd={hide}
       onTapStart={hide}
@@ -37,6 +39,7 @@ const Title = ({ title, dir, children, abs }: Props) => {
             exit={"exit"}
             animate="end"
             className={` custom-title ${dir === "left" ? "left" : "right"}`}
+            onHoverStart={hide}
           >
             {" "}
             {title}

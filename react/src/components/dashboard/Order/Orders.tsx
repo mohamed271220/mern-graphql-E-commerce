@@ -9,6 +9,7 @@ import MobileOrders from "./Mobile/MobileOrders";
 import useIsMobile from "../../../custom/useIsMobile";
 import OrderTable from "./Table/OrderTable";
 import { Outlet } from "react-router-dom";
+import NoData from "../../widgets/NoData";
 
 interface contextInterface {
   setarrOfOrders: React.Dispatch<React.SetStateAction<string[]>>;
@@ -37,11 +38,11 @@ const Orders = () => {
     <checkContext.Provider
       value={{ dataShown, setarrOfOrders, arrOfOrders, setSlectALl, selectALl }}
     >
-      <DashMain head="orders" key={"order-dashmain"}>
+      <DashMain key={"order-dashmain"}>
         {!isMobile ? (
-          <>
+          <NoData message="no orders" length={order.length >= 1} cls="h-50">
             <OrderTable key={"table-order"} />
-          </>
+          </NoData>
         ) : (
           <MobileOrders key={"mobile-order"} />
         )}
@@ -51,6 +52,7 @@ const Orders = () => {
           numOfPages={numberOfPages}
           setPage={setPage}
         />
+
         <Outlet />
       </DashMain>
     </checkContext.Provider>

@@ -1,35 +1,37 @@
 import React, { useContext, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { asideVariant, opacityVariant } from "../../variants/globals";
+import { asideVariant } from "../../../variants/globals";
 import { Link } from "react-router-dom";
-import Title from "../widgets/Title";
-import { showAsideContext } from "./Dashboard";
-import LogoSvg from "../widgets/LogoSvg";
-import useLogOut from "../../custom/useLogOut";
-import { AiFillCloseCircle } from "react-icons/ai";
-import useIsMobile from "../../custom/useIsMobile";
-import { dashAsideLinks } from "../../assets/arries/LinksArr.js";
-import MobileCloseDropDown from "../widgets/MobileCloseDropDown";
+import { showAsideContext } from "../Dashboard";
+import LogoSvg from "../../widgets/LogoSvg";
+import useLogOut from "../../../custom/useLogOut";
+import useIsMobile from "../../../custom/useIsMobile";
+import { dashAsideLinks } from "../../../assets/arries/LinksArr.js";
+import MobileCloseDropDown from "../../widgets/MobileCloseDropDown";
 
-interface Props {
-  setShowAsideDash: React.Dispatch<React.SetStateAction<boolean>>;
-}
-const DashboardAside = ({ setShowAsideDash }: Props) => {
-  const { showAsideDash } = useContext(showAsideContext);
+const DashboardAside = () => {
+  const { showAsideDash, setShowAsideDash } = useContext(showAsideContext);
   const { handleLogOut } = useLogOut();
 
   const { isMobile } = useIsMobile();
 
+  useEffect(() => {
+    if (showAsideDash) {
+      sessionStorage.setItem("show-aside", JSON.stringify(true));
+    } else {
+      sessionStorage.setItem("show-aside", JSON.stringify(false));
+    }
+  }, [showAsideDash]);
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="wait" initial={false}>
       {showAsideDash && (
         <motion.aside
           id="dash-aside"
           variants={asideVariant}
-          custom={isMobile}
+          custom={{ bool: isMobile }}
           initial="start"
+          animate={"end"}
           exit="exit"
-          animate="end"
           key={"dash-aside"}
         >
           <div
@@ -44,12 +46,12 @@ const DashboardAside = ({ setShowAsideDash }: Props) => {
             </Link>
           </div>
 
-          {dashAsideLinks.map(({ head, links }, i) => {
+          {dashAsideLinks.map(({ head, links }) => {
             return (
               <span key={`dash-link ${head}`}>
                 <h4 className="aside-dash-label">{head}</h4>
                 <>
-                  {links.map(({ link, to, Icon, active }, i) => {
+                  {links.map(({ link, to, Icon, active }) => {
                     return (
                       <Link
                         key={link}
@@ -78,7 +80,7 @@ const DashboardAside = ({ setShowAsideDash }: Props) => {
             );
           })}
 
-          <MobileCloseDropDown setter={setShowAsideDash} />
+          <MobileCloseDropDown setter={setShowAsideDash} title="close" />
         </motion.aside>
       )}
     </AnimatePresence>

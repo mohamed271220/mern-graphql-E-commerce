@@ -17,7 +17,7 @@ const FooterCategory = () => {
 
   return (
     <div className="footer-category footer-links">
-      <h3 className="  footer-head">category</h3>
+      <h3 className="header  footer-head">category</h3>
       {categoriesArr.map((link, i) => {
         return (
           <motion.span key={i} whileHover={{ x: 10 }}>

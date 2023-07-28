@@ -1,9 +1,12 @@
 import React from "react";
 import { Grid } from "react-loader-spinner";
 
-const GridLoader = () => {
+interface Props {
+  cls: string;
+}
+const GridLoader = ({ cls }: Props) => {
   return (
-    <div className="loading center text">
+    <div className={`grid-loading center text ${cls}`}>
       <Grid
         height="25"
         width="25"

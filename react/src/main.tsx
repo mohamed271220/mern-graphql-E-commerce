@@ -8,26 +8,32 @@ import {
   HttpLink,
   from,
   ApolloLink,
-  RequestHandler,
 } from "@apollo/client";
 
 import { store } from "./redux/store.js";
 import { Provider } from "react-redux";
-import Cookies from "js-cookie";
 import axios from "axios";
 import { setContext } from "apollo-link-context";
-import { graphQLRoute, newRefToken } from "./assets/routes.js";
+import { backendRoute, graphQLRoute, newRefToken } from "./assets/routes.js";
 
+const getrefToken = async () => {
+  const {
+    data: { refresh_token },
+  } = await axios.get(`${backendRoute}cookie`, { withCredentials: true });
+  return refresh_token;
+};
 export const getnewAccess = async () => {
-  const refToken = Cookies.get("refresh-token");
-  const res = await axios.post(
+  const refToken = await getrefToken();
+  const {
+    data: { accessToken },
+  } = await axios.post(
     newRefToken,
     {
       refToken,
     },
     { withCredentials: true }
   );
-  return res.data.accessToken;
+  return accessToken;
 };
 
 const httpLink = new HttpLink({ uri: graphQLRoute });

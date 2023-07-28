@@ -9,6 +9,8 @@ import { viewContext } from "../../../context/gridView";
 import Animation from "../../widgets/Animation";
 import NoData from "../../widgets/NoData";
 import { cartInterface } from "../../../interfaces/user";
+import { Navigate } from "react-router-dom";
+import { isAuthContext } from "../../../context/isAuth";
 
 const offerArr = [
   { offer: "Spend $800 or more and get free shipping!", money: 800 },
@@ -21,10 +23,11 @@ const Cart = () => {
   const [subTotal, setSubTotal] = useState(0);
   const [showSlider, setShowSLider] = useState(false);
   useEffect(() => {
+    document.title = "cart";
     setTimeout(() => {
       setShowSLider(true);
     }, 1000);
-  });
+  }, []);
 
   useEffect(() => {
     if (Array.isArray(cart)) {
@@ -33,10 +36,14 @@ const Cart = () => {
   }, [cart]);
 
   const { setGridView } = useContext(viewContext);
+  const { isAuth } = useContext(isAuthContext);
   useEffect(() => {
     setGridView(true);
   }, []);
 
+  if (!isAuth) {
+    return <Navigate to={"/login"} />;
+  }
   return (
     <Animation>
       <div className="cart-cont center col">
@@ -59,7 +66,11 @@ const Cart = () => {
         </div>
 
         <div className="cart-data center row between w-100">
-          <NoData length={cart.length} message="No products at your cart">
+          <NoData
+            length={cart.length >= 1}
+            message="No products at your cart"
+            cls={"h-50 center"}
+          >
             <div className="carts-par center col">
               {cart.map((item: cartInterface) => {
                 return (

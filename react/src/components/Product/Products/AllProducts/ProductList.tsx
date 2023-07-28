@@ -8,28 +8,25 @@ import usePagination from "../../../../custom/useNumberOfPages";
 import { useAppSelector } from "../../../../custom/reduxTypes";
 import NoData from "../../../widgets/NoData";
 import useIsMobile from "../../../../custom/useIsMobile";
-import useMeasure from "react-use-measure";
 import GridLoader from "../../../widgets/GridLoader";
 
 const ProductList = ({ isDash }: { isDash?: boolean }) => {
   const { Allproducts } = useAppSelector((st) => st.Allproducts);
-  const { showFilter, products, isPending, startTransition } =
-    useContext(productListContext);
+  const { showFilter, products, isPending } = useContext(productListContext);
   const { gridView } = useContext(viewContext);
   const [page, setPage] = useState(1);
   const { isMobile } = useIsMobile();
   const arr = isDash ? Allproducts || [] : products || [];
-  const [dataShown, numberOfPages] = usePagination(
-    8,
-    page,
-    arr,
-    startTransition
-  );
+  const [dataShown, numberOfPages] = usePagination(8, page, arr);
   const ref = useRef<HTMLDivElement | null>(null);
   return (
-    <NoData length={dataShown.length} message="no products matched" cls="h-80">
+    <NoData
+      length={dataShown.length >= 1}
+      message="no products matched"
+      cls="h-80 center"
+    >
       {isPending ? (
-        <GridLoader />
+        <GridLoader cls={`${showFilter ? "nodata-w-80" : "h-80"} center`} />
       ) : (
         <motion.div
           ref={ref}
@@ -38,7 +35,6 @@ const ProductList = ({ isDash }: { isDash?: boolean }) => {
             width:
               showFilter && !isMobile ? " calc(100% - 200px - 20px)" : "90%",
           }}
-          style={{ height: ref.current?.offsetHeight || "auto" }}
         >
           {dataShown?.map((product: any, index: number) => {
             return (

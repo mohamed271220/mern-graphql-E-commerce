@@ -1,18 +1,21 @@
 import React, { Fragment, useContext } from "react";
 import { motion } from "framer-motion";
-import { opacityVariant, selectDropDownVariants } from "../../variants/globals";
+import {
+  opacityVariant,
+  selectDropDownVariants,
+} from "../../../variants/globals";
 import { useMutation } from "@apollo/client";
-import { isAuthContext } from "../../context/isAuth";
+import { isAuthContext } from "../../../context/isAuth";
 import {
   Delete_Notification,
   Toggle_Read_Notification,
-} from "../../graphql/mutations/user";
+} from "../../../graphql/mutations/user";
 import { toast } from "react-hot-toast";
-import { useAppDispatch } from "../../custom/reduxTypes";
+import { useAppDispatch } from "../../../custom/reduxTypes";
 import {
   removeFromNotificatinsRedux,
   toggleReadNotificatinsRedux,
-} from "../../redux/notificationsSlice";
+} from "../../../redux/notificationsSlice";
 
 interface Props {
   bool: boolean;

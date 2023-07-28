@@ -2,16 +2,17 @@ import React, { createContext, useState, useEffect } from "react";
 import { cartInterface, favInterface } from "../interfaces/user";
 import { useMutation } from "@apollo/client";
 import { GET_USER_DATA } from "../graphql/mutations/user";
-import Cookies from "js-cookie";
 import { useAppDispatch, useAppSelector } from "../custom/reduxTypes";
 import { addToFavRedux } from "../redux/favSlice";
-import { addToCartRedux, changeCartCountRedux } from "../redux/cartSlice";
+import { addToCartRedux } from "../redux/cartSlice";
 import { ChildrenInterFace } from "../interfaces/general.js";
 import { addToCompareRedux } from "../redux/compareSlice";
 import {
   addToNotificatinsRedux,
   changeNotificationCount,
 } from "../redux/notificationsSlice";
+import { backendRoute } from "../assets/routes";
+import axios from "axios";
 
 export interface favArrInterface {
   productId: string;
@@ -40,8 +41,6 @@ interface userDataState {
 interface authContextInterface extends userDataState {
   isAuth: boolean;
   setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
-  isAdmin: boolean;
-  setIsAdmin: React.Dispatch<React.SetStateAction<boolean>>;
   userId: string;
   profile: string;
   setProfile: React.Dispatch<React.SetStateAction<string>>;
@@ -52,10 +51,8 @@ export const isAuthContext = createContext({} as authContextInterface);
 
 const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
   const [isAuth, setIsAuth] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [isowner, setIsowner] = useState(false);
-  const [isModerator, setIsModerator] = useState(false);
   const [userId, setUserId] = useState<string>("");
+
   const [profile, setProfile] = useState<string>("");
   const [userData, setUserData] = useState({
     email: "",
@@ -67,46 +64,51 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
     phone: "",
     role: "",
   } as userDataState);
-  const [getData, { data, loading }] = useMutation(GET_USER_DATA);
+  const [getData, { data }] = useMutation(GET_USER_DATA);
 
   const dispatch = useAppDispatch();
   const { fav } = useAppSelector((st) => st.fav);
   const { notificatins } = useAppSelector((st) => st.notification);
   const { cart } = useAppSelector((st) => st.cart);
   const { compare } = useAppSelector((st) => st.compare);
-  useEffect(() => {
-    setUserId(Cookies.get("user-id") as unknown as string);
-  }, [isAuth]);
-  console.log({ userId, data });
-  useEffect(() => {
-    if (userId) {
-      setIsAuth(true);
-    } else {
-      setIsAuth(false);
-      setIsAdmin(false);
-      setIsModerator(false);
-      setIsowner(false);
-    }
-  }, [userId]);
 
-  useEffect(() => {
-    if (userId) {
+  const isAuthFn = async () => {
+    const {
+      data: { access_token, refresh_token, user_id },
+    } = await axios.get(`${backendRoute}cookie`, {
+      withCredentials: true,
+    });
+    if (access_token && refresh_token) {
+      setIsAuth(true);
+      setUserId(user_id);
       getData({
         variables: {
-          id: userId,
+          id: user_id,
         },
       });
+    } else {
+      setIsAuth(false);
     }
-  }, [userId]);
+  };
+  useEffect(() => {
+    isAuthFn();
+  }, [isAuth]);
+
+  // useEffect(() => {
+  //   if (userId) {
+  //     getData({
+  //       variables: {
+  //         id: userId,
+  //       },
+  //     });
+  //   }
+  // }, [userId]);
 
   const check =
     !cart.length && !notificatins.length && !compare.length && !fav.length;
   // this check variable because when i log in then log out then log in data added again
   useEffect(() => {
-    console.log("is Auth 1");
     if (data?.getUserData && check) {
-      console.log("is Auth 2");
-
       setUserData(data?.getUserData);
       dispatch(addToFavRedux(data?.getUserData?.fav));
       dispatch(addToCartRedux(data?.getUserData?.cart));
@@ -114,13 +116,6 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
       dispatch(addToNotificatinsRedux(data?.getUserData?.notifications));
       dispatch(changeNotificationCount(data?.getUserData?.notificationsCount));
       setProfile(data?.getUserData?.image);
-    }
-    if (data?.getUserData?.role === "admin") {
-      setIsAdmin(true);
-    } else if (data?.getUserData?.role === "moderator") {
-      setIsModerator(true);
-    } else if (data?.getUserData?.role === "owner") {
-      setIsowner(true);
     }
   }, [data?.getUserData?.name]);
 
@@ -140,8 +135,6 @@ const IsAuthContextComponent = ({ children }: ChildrenInterFace) => {
         userId,
         profile,
         setProfile,
-        isAdmin,
-        setIsAdmin,
       }}
     >
       {children}

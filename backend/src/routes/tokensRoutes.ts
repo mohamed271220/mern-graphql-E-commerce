@@ -17,12 +17,10 @@ export const verfiyRefToken = async (refToken: string) => {
 
 export const getNewRefToken = async (req: Request, res: Response) => {
   const { refToken } = req.body;
-  // console.log(refToken);
   if (!refToken) {
     res.json({});
   } else {
     let { result } = (await verfiyRefToken(refToken)) as any;
-    console.log(result);
     if (result[0]?._id || result?._id) {
       const accessToken = Jwt.sign(
         { result },
@@ -32,8 +30,8 @@ export const getNewRefToken = async (req: Request, res: Response) => {
         { result },
         REFRESH_TOKEN_SECRET as unknown as string
       );
-      res.cookie("access-token", accessToken);
-      res.cookie("refresh-token", refreshToken);
+      res.cookie("access_token", accessToken);
+      res.cookie("refresh_token", refreshToken);
       res.json({ accessToken });
       return true;
     } else {

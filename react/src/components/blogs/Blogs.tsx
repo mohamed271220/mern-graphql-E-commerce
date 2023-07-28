@@ -5,6 +5,7 @@ import Blog from "./MainBlog";
 import { BlogInterface } from "../../interfaces/blog.js";
 import { useAppDispatch, useAppSelector } from "../../custom/reduxTypes";
 import { addToBlogsRedux } from "../../redux/BlogsSlice";
+import Animation from "../widgets/Animation";
 
 const Blogs = () => {
   useEffect(() => {
@@ -19,14 +20,15 @@ const Blogs = () => {
     }
   }, [data]);
   return (
-    <div className="blogs">
-      <h2 className="underline header">blogs</h2>
-      <>
-        {data?.blogs?.map((blog: BlogInterface, i: number) => {
-          return <Blog key={i} i={i} {...blog} />;
-        })}
-      </>
-    </div>
+    <Animation>
+      <div className="blogs">
+        <>
+          {data?.blogs?.map((blog: BlogInterface, i: number) => {
+            return <Blog key={i} i={i} {...blog} />;
+          })}
+        </>
+      </div>
+    </Animation>
   );
 };
 

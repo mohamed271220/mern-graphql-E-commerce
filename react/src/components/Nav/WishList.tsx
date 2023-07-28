@@ -45,8 +45,13 @@ const WishList = ({ showFav, setter }: Props) => {
         head=" your wishlist"
         bool={showFav}
         setter={setter}
+        title={"close your wishlist"}
       >
-        <NoData length={fav.length} message="your wishlist is empty">
+        <NoData
+          length={fav.length >= 1}
+          message="your wishlist is empty"
+          cls="no-data-80"
+        >
           <motion.div
             variants={opacityVariant}
             className="center"

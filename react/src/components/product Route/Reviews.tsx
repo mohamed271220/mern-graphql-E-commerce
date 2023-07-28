@@ -72,7 +72,7 @@ const Reviews = ({ setShowPop }: Props) => {
           <FaGreaterThan />
         </motion.button>
       </div>
-      <MobileCloseDropDown setter={setShowPop} />
+      <MobileCloseDropDown setter={setShowPop} title={"close reviews"} />
     </Overley>
   );
 };

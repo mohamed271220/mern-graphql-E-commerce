@@ -34,10 +34,10 @@ const successLogin = (req, res) => __awaiter(void 0, void 0, void 0, function* (
             console.log(result);
             const id = result._id.toString();
             console.log(id);
-            res.cookie("user-email", result.email);
-            res.cookie("user-id", id);
-            res.cookie("access-token", accessToken);
-            res.cookie("refresh-token", refToken);
+            res.cookie("user_email", result.email);
+            res.cookie("user_id", id);
+            res.cookie("access_token", accessToken);
+            res.cookie("refresh_token", refToken);
             res.redirect(`${config_js_1.Client_Url}?isLogged=true`);
         }
         else {

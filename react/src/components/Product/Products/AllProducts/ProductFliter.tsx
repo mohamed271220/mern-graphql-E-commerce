@@ -64,7 +64,7 @@ const ProductFliter = ({
     <motion.span
       ref={ref}
       initial={{ opacity: 0 }}
-      transition={{ duration: 0.125 }}
+      transition={{ delay: 0.05 }}
       whileInView={{ opacity: [0, 0.2, 0.4, 0.6, 1] }}
     >
       <motion.div
@@ -192,7 +192,7 @@ const ProductFliter = ({
               />
             </div>
             {!isDash && (
-              <div className="product-links center">
+              <div className="product-links center  w-100">
                 <AnimatePresence mode="wait">
                   {!onCart ? (
                     <ListCartBtn
@@ -217,17 +217,18 @@ const ProductFliter = ({
                   )}
                 </AnimatePresence>
 
-                <DetailsBtn
+                {/* <DetailsBtn
                   btn="details"
-                  cls="btn details center shadow gap"
+                  cls="btn details-outline center shadow gap"
                   _id={_id}
                   Icon={BsInfoCircleFill}
-                />
+                /> */}
               </div>
             )}
-            <span className="heart-filter ">
+            <span className="heart-filter  center">
               {!isDash ? (
-                <span className="center col">
+                <div className="center col ">
+                  <DetailsBtn _id={_id} />{" "}
                   <ProductListHeart
                     isFavoraited={isFavoraited}
                     price={price}
@@ -236,8 +237,10 @@ const ProductFliter = ({
                     parentId={_id}
                     images={images}
                   />
-                  <CompareIcons id={_id} title={title} />
-                </span>
+                  <span style={{ marginLeft: 4 }}>
+                    <CompareIcons id={_id} title={title} />
+                  </span>
+                </div>
               ) : (
                 <span onClick={() => navigat(`/dashboard/products/${_id}`)}>
                   <Title title="edit product">

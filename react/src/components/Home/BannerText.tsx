@@ -1,8 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { opacityVariant } from "../../variants/globals";
 import { Link } from "react-scroll";
-import OpacityBtn from "../widgets/OpacityBtn";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -14,38 +12,48 @@ interface Props {
   fn: () => void;
 }
 const BannerText = ({ fn, header, clr, button, to, slogan }: Props) => {
+  const bannerTextVariant = {
+    start: {
+      opacity: 0,
+      x: 120,
+    },
+    end: {
+      opacity: [0, 0.2, 0.5, 0.7, 1],
+      x: 0,
+      transition: { duration: 0.4, delay: 1.2 },
+    },
+  };
   const navigate = useNavigate();
   const handleContactBtn = () => navigate("/contact");
   return (
     <motion.div
-      whileInView={{ opacity: [0, 0.2, 0.5, 1] }}
+      variants={bannerTextVariant}
+      key={header}
       className="banner-content center col"
-      initial="start"
+      initial={"start"}
       animate="end"
-      transition={{ duration: 0.6, delay: 0.4 }}
-      variants={opacityVariant}
+      style={{ opacity: 0 }}
     >
-      <h1 style={{ color: `${clr}` }}>{header}</h1>
+      <h1 className="header" style={{ color: `${clr}` }}>
+        {header}
+      </h1>
 
       <p>{slogan}</p>
 
       <div className="product-links center">
-        <Link to={to} smooth className="btn banner-btn" style={{ padding: 0 }}>
-          <motion.span
-            style={{
-              background: `linear-gradient(30deg, var(--wheat), ${clr})`,
-              cursor: "pointer",
-              borderRadius: "4px 10px",
-            }}
+        <Link to={to} smooth className=" ">
+          <button
+            onClick={fn}
+            className="banner-btn btn"
+            style={{ background: clr, cursor: "pointer" }}
           >
-            <OpacityBtn fn={fn} btn={button} cls="btn banner-btn transparent" />
-          </motion.span>
+            {button}
+          </button>
         </Link>
-        <OpacityBtn
-          fn={handleContactBtn}
-          btn={"contact us"}
-          cls="btn banner-btn  about"
-        />
+        <button onClick={handleContactBtn} className="btn banner-btn  about">
+          {" "}
+          contact us
+        </button>
       </div>
     </motion.div>
   );

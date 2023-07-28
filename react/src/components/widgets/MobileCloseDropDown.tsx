@@ -6,8 +6,9 @@ import useIsMobile from "../../custom/useIsMobile";
 import Title from "./Title";
 interface Props {
   setter: React.Dispatch<React.SetStateAction<boolean>>;
+  title: string;
 }
-const MobileCloseDropDown = ({ setter }: Props) => {
+const MobileCloseDropDown = ({ setter, title }: Props) => {
   const { isMobile } = useIsMobile();
   return (
     <AnimatePresence>
@@ -19,7 +20,7 @@ const MobileCloseDropDown = ({ setter }: Props) => {
           className="dash-aside-close"
           onClick={() => setter(false)}
         >
-          <Title title="hide dashboard aside nav">
+          <Title title={title}>
             <AiFillCloseCircle className="icon red" />
           </Title>
         </motion.span>

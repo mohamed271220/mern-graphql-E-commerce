@@ -9,6 +9,7 @@ import DetailsBtn from "../../widgets/DetailsBtn.js";
 
 import { useAppSelector } from "../../../custom/reduxTypes.js";
 import useBuy from "../../../custom/useBuy.js";
+import Title from "../../widgets/Title.js";
 
 const CartItem = ({
   _id,
@@ -49,25 +50,16 @@ const CartItem = ({
           );
         })}
       </div>
-      <div className="cart-btns center gap ">
-        <OpacityBtn
-          cls="btn remove"
-          fn={handleRemoveFromCart}
-          btn={""}
-          Icon={BsFillCartXFill}
-          title="remove from your cart list"
-        />
-
-        <DetailsBtn
-          _id={parentId}
-          btn=""
-          cls="btn details details-cart"
-          Icon={BsInfoLg}
-          title="more details"
-        />
+      <div className="cart-btns center  ">
+        <Title title="remove from your cart list">
+          <button className="btn cart-remove" onClick={handleRemoveFromCart}>
+            <BsFillCartXFill />
+          </button>
+        </Title>
+        <DetailsBtn _id={parentId} />
       </div>
       <div>
-        <OpacityBtn btn="purchase" fn={handlePurchase} cls="btn purchase" />
+        <OpacityBtn btn="purchase" fn={handlePurchase} cls="btn btn-buy" />
       </div>
     </div>
   );

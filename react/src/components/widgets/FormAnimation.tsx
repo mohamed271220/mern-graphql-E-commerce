@@ -15,7 +15,10 @@ const FormAnimation = ({ children, fn, cls }: Props) => {
     if (inView) {
       animateForm(
         ref.current,
-        { x: [20, 0], opacity: [0, 1] },
+        {
+          x: [20, 0],
+          opacity: [0, 1],
+        },
         { duration: 0.2 }
       ).then(() => {
         animateForm(

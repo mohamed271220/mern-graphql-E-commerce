@@ -5,10 +5,7 @@ import Title from "./Title";
 import { MdPlaylistAdd, MdPlaylistRemove } from "react-icons/md";
 import { opacityVariant } from "../../variants/globals";
 import { useMutation } from "@apollo/client";
-import {
-  AddTo_Compare,
-  remove_From_Compare,
-} from "../../graphql/mutations/user";
+import { AddTo_Compare } from "../../graphql/mutations/user";
 import { useAppDispatch, useAppSelector } from "../../custom/reduxTypes";
 import { addToCompareRedux } from "../../redux/compareSlice";
 import { toast } from "react-hot-toast";
@@ -39,7 +36,6 @@ const CompareIcons = ({ id, title }: Props) => {
     try {
       const obj = { userId, productId: id, title };
       const { data } = await addToCompare({ variables: { input: obj } });
-      console.log({ data });
       if (data?.addToCompare?.msg)
         dispatch(addToCompareRedux({ _id: data?.addToCompare, ...obj }));
       toast.success(data?.addToCompare?.msg);
@@ -55,14 +51,7 @@ const CompareIcons = ({ id, title }: Props) => {
     productId: id,
   });
   return (
-    <div
-      style={{
-        marginRight: -10,
-        marginTop: -10,
-        marginBottom: -10,
-        color: "var(--third)",
-      }}
-    >
+    <div>
       <AnimatePresence mode="wait">
         {atCompare ? (
           <motion.span

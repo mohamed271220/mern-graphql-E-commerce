@@ -1,21 +1,19 @@
 import React, { useContext } from "react";
 import Checkbox from "../../../../custom SVGs/checkbox";
 import Title from "../../../widgets/Title";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { AiTwotoneDelete } from "react-icons/ai";
 import useDeleteOrder from "../../../../custom/useDeleteOrder";
 import FadeElement from "../../../widgets/FadeElement";
 import { checkContext } from "../Orders";
-import { GrUpgrade } from "react-icons/gr";
 import Order from "./Order";
-import { opacityVariant } from "../../../../variants/globals";
 
 const OrderTable = () => {
   const { arrOfOrders, setarrOfOrders, selectALl, setSlectALl, dataShown } =
     useContext(checkContext);
 
   const { handleDeleteOrder } = useDeleteOrder(arrOfOrders);
-  console.log({ arrOfOrders });
+
   return (
     <>
       <div
@@ -41,51 +39,40 @@ const OrderTable = () => {
           )}
         </AnimatePresence>
       </div>
-
-      <table className="order box-shadow">
-        <thead>
-          <tr>
-            <th className="center">
-              <Title
-                title={
-                  selectALl === "all" ? "unselect all" : "select all orders"
-                }
-                dir="left"
-              >
-                <Checkbox
-                  filter={"all"}
-                  isChecked={selectALl}
-                  setIsChecked={setSlectALl}
-                />{" "}
-              </Title>
-            </th>
-            <th> order id</th>
-            <th> created At</th>
-            <th>delivered At</th>
-            <th> total </th>
-            <th style={{ width: 150 }}> order state </th>
-          </tr>
-        </thead>
-        <AnimatePresence>
-          <tbody>
-            {dataShown.map((order: any, i: number) => {
-              return (
-                <motion.tr
-                  layout
-                  key={order._id}
-                  variants={opacityVariant}
-                  initial="start"
-                  animate="end"
-                  exit="exit"
-                  transition={{ duration: 0.5 }}
+      <FadeElement delay={0.3} cls="">
+        <table className="order box-shadow">
+          <thead>
+            <tr>
+              <th className="center">
+                <Title
+                  title={
+                    selectALl === "all" ? "unselect all" : "select all orders"
+                  }
+                  dir="left"
                 >
-                  <Order index={i} {...order} />
-                </motion.tr>
-              );
-            })}
+                  <Checkbox
+                    filter={"all"}
+                    isChecked={selectALl}
+                    setIsChecked={setSlectALl}
+                  />{" "}
+                </Title>
+              </th>
+              <th> order id</th>
+              <th> created At</th>
+              <th>delivered At</th>
+              <th> total </th>
+              <th style={{ width: 150 }}> order state </th>
+            </tr>
+          </thead>
+          <tbody style={{ overflow: "hidden" }}>
+            <AnimatePresence mode="popLayout">
+              {dataShown.map((order: any, i: number) => {
+                return <Order key={order._id} index={i} {...order} />;
+              })}
+            </AnimatePresence>
           </tbody>
-        </AnimatePresence>
-      </table>
+        </table>
+      </FadeElement>
     </>
   );
 };

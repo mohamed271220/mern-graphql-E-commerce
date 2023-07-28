@@ -46,7 +46,8 @@ const ContactForm = () => {
         />
         <OpacityBtn
           type="submit"
-          cls="btn main gap center"
+          cls="btn main gap center w-100"
+          parCls="w-80"
           fn={() => null}
           btn="send"
           Icon={IoSend}

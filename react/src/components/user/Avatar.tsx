@@ -75,7 +75,7 @@ const Avatar = ({ setEdit, newImg, handleCancel }: Props) => {
         onPositionChange={handlePositionChange}
         scale={1 + scale}
       />
-      <MobileCloseDropDown setter={setEdit} />
+      <MobileCloseDropDown setter={setEdit} title={"close"} />
       <div className="zoom-cont col center start w-100">
         <label htmlFor="zoom" className="zoom">
           {" "}

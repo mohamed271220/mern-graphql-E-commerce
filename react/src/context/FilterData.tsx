@@ -41,6 +41,7 @@ export const productListContext = createContext(
 
 const FilterDataContext = ({ children }: ChildrenInterFace) => {
   const [isPending, startTransition] = useTransition();
+
   const { data, loading } = useQuery(Get_All_Products);
 
   const dispatch = useAppDispatch();
@@ -48,6 +49,7 @@ const FilterDataContext = ({ children }: ChildrenInterFace) => {
   useEffect(() => {
     if (data?.products) {
       dispatch(addToProductRedux(data?.products));
+
       setProducts(data?.products);
     }
   }, [loading]);

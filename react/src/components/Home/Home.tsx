@@ -4,21 +4,21 @@ import Products from "../Product/Products/Products";
 import StripeSuccess from "../widgets/StripeSuccess";
 import Footer from "../Footer/Footer";
 import NewsLetter from "../NewsLetter/NewsLetter";
-
+import Animation from "../widgets/Animation";
 const Home = () => {
   useEffect(() => {
     document.title = "Zimart";
   }, []);
 
   return (
-    <>
+    <Animation>
       <Banner />
       <Products />
       <StripeSuccess />
-      {/* <About /> */}
+
       <NewsLetter />
       <Footer />
-    </>
+    </Animation>
   );
 };
 

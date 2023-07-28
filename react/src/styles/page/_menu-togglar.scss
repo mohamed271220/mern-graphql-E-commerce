@@ -8,14 +8,14 @@
   justify-content: space-between;
   align-items: center;
   position: relative;
-  margin: 0 5px;
+  margin-left: 10px;
   .menu-toggle-span {
     display: inline-block;
     height: 2px;
     border-radius: 4px;
     width: 100%;
     transition: 0.3s 0.2s;
-    background: linear-gradient(130deg, var(--wheat-light), var(--third));
+    background: linear-gradient(130deg, var(--wheat-light), grey);
     &.animate {
       transition: 0.3s 0.7s;
     }

@@ -36,7 +36,7 @@ const SelectFilter = () => {
   const [fnPrice] = useMutation(FILTER_BY_PRICE);
   const [fnRate] = useMutation(FILTER_BY_Rate);
   const [fnDate] = useMutation(FILTER_BY_Date);
-
+  console.log({ selectValue });
   useEffect(() => {
     if (!isPending && isOptSelected) {
       setIsOptSelected(false);
@@ -96,7 +96,9 @@ const SelectFilter = () => {
 
   const [isSelectFocus, setIsSelectFocus] = useState(false);
   const ref = useClickOutside<HTMLDivElement>(() => {
-    setIsSelectFocus(false);
+    if (isSelectFocus) {
+      setIsSelectFocus(false);
+    }
   }, isSelectFocus);
   return (
     <div
@@ -110,11 +112,9 @@ const SelectFilter = () => {
       />
       <span className="icon select-icon sort center">
         <MdOutlineSort /> sort:
-        <AnimatePresence mode="wait">
-          <FadeElement key={selectValue} cls="value" transition={0.3}>
-            {selectValue}
-          </FadeElement>
-        </AnimatePresence>
+        <FadeElement key={selectValue} cls="value" transition={0.3}>
+          {selectValue}
+        </FadeElement>
       </span>
       <AnimatePresence>
         {isSelectFocus && (

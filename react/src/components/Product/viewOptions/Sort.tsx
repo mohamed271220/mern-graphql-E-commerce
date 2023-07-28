@@ -10,86 +10,99 @@ import { viewContext } from "../../../context/gridView";
 import { productListContext } from "../../../context/FilterData";
 import Title from "../../widgets/Title";
 import useIsMobile from "../../../custom/useIsMobile";
+import FadeElement from "../../widgets/FadeElement";
 
 const Sort = () => {
   const { setShowFilter, showFilter, startTransition } =
     useContext(productListContext);
 
-  const { setGridView, gridView } = useContext(viewContext);
-  const toggleShowFilter = () => setShowFilter(!showFilter);
+  const { setGridView, gridView, showSearch } = useContext(viewContext);
+  const ShowFilter = () => setShowFilter(true);
+  const hideFilter = () => setShowFilter(false);
   const { isMobile } = useIsMobile();
   return (
     <div className="sort-par  center between">
       <Search />
-      <div className="center view-opt">
-        <div className="hide-filter-par">
-          <button className="center">
-            <AnimatePresence mode="wait">
-              {showFilter ? (
-                <motion.span
-                  onClick={toggleShowFilter}
-                  variants={opacityVariant}
-                  initial="start"
-                  exit="exit"
-                  animate="end"
-                  transition={{ duration: 0.4 }}
-                  key={"show-filter"}
-                  style={{ color: "var(--third)" }}
-                >
-                  Hide Filters
-                </motion.span>
-              ) : (
-                <motion.span
-                  key={"hide-filter"}
-                  onClick={toggleShowFilter}
-                  className="center"
-                  variants={opacityVariant}
-                  initial="start"
-                  exit="exit"
-                  animate="end"
-                  transition={{ duration: 0.4 }}
-                  style={{ color: "var(--third)" }}
-                >
-                  Show Filters
-                </motion.span>
+      <AnimatePresence mode="wait">
+        {(!isMobile || (isMobile && !showSearch)) && (
+          <FadeElement cls=" center view-opt" key={"sort-mobile"} delay={0.1}>
+            <div className="hide-filter-par">
+              <button className="center">
+                <AnimatePresence mode="wait">
+                  {showFilter ? (
+                    <motion.span
+                      onClick={hideFilter}
+                      variants={opacityVariant}
+                      initial="start"
+                      exit="exit"
+                      animate="end"
+                      transition={{ duration: 0.4 }}
+                      key={"show-filter"}
+                      style={{ color: "var(--third)" }}
+                    >
+                      Hide Filters
+                    </motion.span>
+                  ) : (
+                    <motion.span
+                      key={"hide-filter"}
+                      onClick={ShowFilter}
+                      className="center"
+                      variants={opacityVariant}
+                      initial="start"
+                      exit="exit"
+                      animate="end"
+                      transition={{ duration: 0.4 }}
+                      style={{ color: "var(--third)" }}
+                    >
+                      Show Filters
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+                <IoFilter color="var(--secondary)" />
+              </button>
+            </div>
+            <div className="view-par  ">
+              {!isMobile && (
+                <span className="display" style={{ color: "var(--third)" }}>
+                  Display
+                </span>
               )}
-            </AnimatePresence>
-            <IoFilter color="var(--secondary)" />
-          </button>
-        </div>
-        <div className="view-par center ">
-          {!isMobile && (
-            <span className="display" style={{ color: "var(--third)" }}>
-              Display
-            </span>
-          )}
 
-          {!isMobile && (
-            <>
-              <Title title="list view">
-                <BsListTask
-                  onClick={() => startTransition(() => setGridView(false))}
-                  style={{ color: gridView ? "var(--third)" : "var(--green)" }}
-                  className={`view-icon  ${
-                    !gridView ? "icon icon-shadow" : ""
-                  } `}
-                />
-              </Title>
+              {!isMobile && (
+                <span className="center gap view-type">
+                  <BsListTask
+                    onClick={() => {
+                      if (gridView) {
+                        startTransition(() => setGridView(false));
+                      }
+                    }}
+                    style={{
+                      color: gridView ? "var(--third)" : "var(--green)",
+                      transition: "0s",
+                    }}
+                    className={`view-icon  ${gridView ? " icon-shadow" : ""} `}
+                  />
 
-              <Title title="grid view">
-                <HiOutlineViewGrid
-                  onClick={() => startTransition(() => setGridView(true))}
-                  style={{ color: gridView ? "var(--green)" : "var(--third)" }}
-                  className={`view-icon  ${
-                    gridView ? "icon icon-shadow" : ""
-                  } `}
-                />
-              </Title>
-            </>
-          )}
-        </div>
-        <SelectFilter />
-      </div>
+                  <HiOutlineViewGrid
+                    onClick={() => {
+                      if (!gridView) {
+                        startTransition(() => setGridView(true));
+                      }
+                    }}
+                    style={{
+                      color: gridView ? "var(--green)" : "var(--third)",
+                      transition: "0s",
+                    }}
+                    className={`view-icon  ${!gridView ? " icon-shadow" : ""} `}
+                  />
+                </span>
+              )}
+            </div>
+            <SelectFilter />
+            {/* </div> */}
+          </FadeElement>
+        )}
+      </AnimatePresence>
       <div className="hr sort-hr"></div>
     </div>
   );

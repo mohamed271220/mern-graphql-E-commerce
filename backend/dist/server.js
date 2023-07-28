@@ -42,16 +42,15 @@ const app = (0, express_1.default)();
 app.use(cookieSession({
     name: "session",
     keys: [config_js_1.SeSSion_Secret],
-    maxAge: 60 * 100,
-    // maxAge: 24 * 60 * 60 * 100,
+    maxAge: 24 * 60 * 60 * 100,
 }));
 app.use(passport_1.default.initialize());
 app.use((0, cookie_parser_1.default)());
 app.use(passport_1.default.session());
 app.use((0, cors_1.default)({
     credentials: true,
-    origin: `${config_js_1.Client_Url}/`,
-    // origin: `${Client_Url}`,
+    // origin: `${Client_Url}/`, // deployment
+    origin: `${config_js_1.Client_Url}`,
     methods: ["GET", "POST", "PATCH", "DELETE"],
 }));
 const schema = makeExecutableSchema({
@@ -67,11 +66,15 @@ const server = new apollo_server_express_1.ApolloServer({
     },
 });
 app.use(express_1.default.static(path_1.default.join(path_1.default.resolve(), "/react/dist")));
-app.use("/", uploudRoute_js_1.uploadRoute);
-app.use("/", stripe_js_1.default);
+app.get("/cookie", (req, res) => {
+    const { access_token, refresh_token, user_id } = req.cookies;
+    res.json({ access_token, refresh_token, user_id });
+});
+app.use("/upload", uploudRoute_js_1.uploadRoute);
+app.use("/stripe", stripe_js_1.default);
 app.use("/", googleAuth_js_1.oAuthRouter);
 app.use("/token", tokensRoutes_js_1.AuthRouter);
-app.get("*", (req, res) => {
+app.get("*", (_, res) => {
     res.sendFile(path_1.default.join(path_1.default.resolve(), "/react/dist/index.html"));
 });
 (() => __awaiter(void 0, void 0, void 0, function* () {

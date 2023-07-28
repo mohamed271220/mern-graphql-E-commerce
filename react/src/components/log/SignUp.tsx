@@ -113,9 +113,10 @@ const SignUp = () => {
             <SelectCOuntry setCountry={setCountry} country={country} />
             <OpacityBtn
               btn="sign up"
-              cls="btn main"
+              cls="btn main w-80"
               fn={() => null}
               type="submit"
+              parCls="w-100"
             />
             <div className="redirect">
               <span> have an account</span>

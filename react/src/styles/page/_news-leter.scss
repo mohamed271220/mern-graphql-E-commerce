@@ -14,8 +14,8 @@
   min-height: 160px;
   align-items: center;
   position: relative;
-  overflow: hidden;
   box-shadow: var(--forth-shadow);
+  overflow: hidden;
 
   form {
     display: flex;
@@ -85,13 +85,28 @@
 @media (max-width: 700px) {
   .newsletter {
     flex-direction: column;
+    padding: 20px 0;
+
     .news-content {
+      width: 100%;
+
       h2 {
         text-align: center;
       }
+      span {
+        text-align: center;
+        width: 100%;
+      }
     }
     form {
-      width: 80%;
+      width: 95% !important;
+      .inp-parent {
+        width: 100% !important;
+
+        input {
+          width: 100%;
+        }
+      }
       button {
         padding: 0 12px;
         font-size: 1rem;

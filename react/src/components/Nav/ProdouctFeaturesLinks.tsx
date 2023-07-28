@@ -52,27 +52,7 @@ const ProdouctFeaturesLinks = ({ LinkClr = "white" }: Props) => {
           <AiFillHeart fontSize={"1.2rem"} onClick={() => setShowFav(true)} />
         </Title>
       </motion.li>
-      <motion.li>
-        <AnimatePresence mode="wait">
-          {isAuth ? (
-            <FadeElement cls="" key={"profile-image"}>
-              <NavImg />
-            </FadeElement>
-          ) : (
-            <motion.span
-              key={"login"}
-              variants={opacityVariant}
-              transition={{ duration: 0.4 }}
-              initial="start"
-              animate="end"
-              exit="exit"
-              style={{ color: LinkClr }}
-            >
-              <NavLink to={"/login"}>log in</NavLink>
-            </motion.span>
-          )}
-        </AnimatePresence>
-      </motion.li>
+      {/* <motion.li className="center auth-par"></motion.li> */}
     </ul>
   );
 };

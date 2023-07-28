@@ -6,10 +6,9 @@ interface Props extends ChildrenInterFace {
 }
 const Animation = ({ children, addIntialX = true }: Props) => {
   const variant = {
-    start: { x: addIntialX ? -100 : 0, opacity: 0, y: 0 },
-    end: { x: 0, opacity: 1, y: 0 },
+    start: { opacity: 0 },
+    end: { x: 0, opacity: [0, 0.2, 0.4, 0.6, 1] },
     exit: {
-      x: 100,
       opacity: 0,
     },
   };
@@ -19,7 +18,7 @@ const Animation = ({ children, addIntialX = true }: Props) => {
       initial="start"
       animate="end"
       exit={"exit"}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.6 }}
     >
       {children}
     </motion.div>

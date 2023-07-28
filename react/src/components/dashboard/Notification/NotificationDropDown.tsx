@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import DropDown from "../widgets/DropDown";
-import { useAppDispatch, useAppSelector } from "../../custom/reduxTypes";
+import DropDown from "../../widgets/DropDown";
+import { useAppDispatch, useAppSelector } from "../../../custom/reduxTypes";
 import Notificatin from "./Notificatin";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMutation } from "@apollo/client";
@@ -8,19 +8,19 @@ import {
   Clear_Notification,
   Mark_All_as_Notification,
   Reset_Notification,
-} from "../../graphql/mutations/user";
-import { isAuthContext } from "../../context/isAuth";
+} from "../../../graphql/mutations/user";
+import { isAuthContext } from "../../../context/isAuth";
 import { toast } from "react-hot-toast";
 import {
   MarkAllAsReadNotificationRedux,
   changeNotificationCount,
   clearNotificationRedux,
   notificationInterface,
-} from "../../redux/notificationsSlice";
-import NoData from "../widgets/NoData";
+} from "../../../redux/notificationsSlice";
+import NoData from "../../widgets/NoData";
 import { RiNotification2Line } from "react-icons/ri";
-import ShowCount from "../widgets/showCounter";
-import { opacityVariant, parentVariant } from "../../variants/globals";
+import ShowCount from "../../widgets/showCounter";
+import { opacityVariant } from "../../../variants/globals";
 
 const NotificationDropDown = () => {
   const { userId } = useContext(isAuthContext);
@@ -94,6 +94,7 @@ const NotificationDropDown = () => {
           bool={showNotifications}
           cls="notifications"
           head="notifications"
+          title="close notifications"
         >
           {notificatins.length >= 1 && (
             <motion.div
@@ -137,7 +138,8 @@ const NotificationDropDown = () => {
           )}
           <NoData
             message={`no ${!showAll ? "unread " : ""}notifications`}
-            length={showAll ? notificatins.length : dataShown.length}
+            length={showAll ? notificatins.length >= 1 : dataShown.length >= 1}
+            cls="no-data-80"
           >
             <AnimatePresence>
               {dataShown.map((notificatin, i) => {

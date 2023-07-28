@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { notificationInterface } from "../../redux/notificationsSlice";
+import { notificationInterface } from "../../../redux/notificationsSlice";
 import { BiDotsHorizontal } from "react-icons/bi";
 import NotificationActionsDropDown from "./NotificationActionsDropDown";
 import { AnimatePresence } from "framer-motion";
-import Title from "../widgets/Title";
-import FadeElement from "../widgets/FadeElement";
+import Title from "../../widgets/Title";
+import FadeElement from "../../widgets/FadeElement";
 
 const Notificatin = ({
   _id,

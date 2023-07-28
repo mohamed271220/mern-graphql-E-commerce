@@ -32,7 +32,9 @@ const Overley = ({ sethide, cls, children, dir = "top", height }: Props) => {
       <motion.section
         className={cls}
         variants={isMobile ? asideVariant : popVariant}
-        custom={isMobile ? isMobile : { dir: dir || "top", height }}
+        custom={
+          isMobile ? { isMobile, w: "100%" } : { dir: dir || "top", height }
+        }
         key={"overley-pop"}
         onClick={(e) => {
           e.stopPropagation();

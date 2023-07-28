@@ -1,33 +1,40 @@
-import React, { useState, useContext, useRef } from "react";
-import useCarousel from "../../custom/useCarousel";
-import {
-  AnimatePresence,
-  Variants,
-  motion,
-  useScroll,
-  useTransform,
-} from "framer-motion";
-import useMeasure from "react-use-measure";
+import React, { useContext, useEffect, useRef } from "react";
 import useFilterCategory from "../../custom/useFilterCategory";
 import { productListContext } from "../../context/FilterData";
 import useFilterState from "../../custom/useFIlterState";
 import BannerText from "./BannerText";
 import { useAppSelector } from "../../custom/reduxTypes";
-import MainImage from "/banner/model.jpg";
-import LapImage from "/banner/laptop-Img.jpg";
-import FashionImage from "/banner/fashion-Img.jpg";
-import SaleImage from "/banner/sale-Img.jpg";
-import Animation from "../widgets/Animation";
+
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import FadeElement from "../widgets/FadeElement";
 
 const arrClrs = ["var(--gmail)", "var(--delete)", "var(--fb)", "var(--green)"];
+
 const Banner = () => {
+  const settings = {
+    slidesToScroll: 1,
+    slidesToShow: 1,
+    ease: "esaeInOut",
+    dots: true,
+    infinite: true,
+    speed: 1000,
+    initialSlide: -5,
+  };
   const { Allproducts } = useAppSelector((st) => st.Allproducts);
   const categoryfn = useFilterCategory();
-  const { setProducts, setCategoryFilter, startTransition } =
-    useContext(productListContext);
+  const { setProducts, setCategoryFilter } = useContext(productListContext);
 
   const filterStateFn = useFilterState();
-
+  const sliderRef = useRef<null | Slider>(null);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      sliderRef?.current?.slickNext();
+    }, 500);
+    return () => clearTimeout(timer);
+  }, []);
   const handleCategory = (category: string) => {
     categoryfn({ variables: { category } }).then(({ data }) => {
       setProducts(data.filterBycatageory);
@@ -47,109 +54,86 @@ const Banner = () => {
 
   const bannerArr = [
     {
-      image: MainImage,
-      slogan: `Experience the difference with our products in action. Our high-quality items are designed to exceed your expectations and elevate your daily life.`,
+      image:
+        "https://res.cloudinary.com/domobky11/image/upload/v1689516849/pngwing.com_1_jpjjnq.png",
+      slogan: `feel the  difference with our collection. Our high quality items  are designed to exceed your expectations.`,
       button: "shop now",
-      header: "Enhance Your Daily Experience",
+      header: "Unlock Your Fashion Potential",
       to: "products",
       fn: () => handleGetAllProducts(),
     },
     {
-      image: FashionImage,
-      header: "Elevate your wardrobe game",
+      image:
+        "https://res.cloudinary.com/domobky11/image/upload/v1689516668/kisspng-ranbir-kapoor-jeans-roy-t-shirt-denim-ranveer-kapoor-5b377a066ed380.816650471530362374454_adktpe.png", // header: "Elevate your wardrobe game",
+
+      header: "Shop  latest fashion trends",
       slogan:
-        "Stay Ahead of the Fashion Curve with Our Affordable and On-Trend Styles Look Great Without Breaking the Bank - Shop Our Fashion-Forward Collection",
-      button: "Watch Fashion Collection",
+        "Stay Ahead of the Fashion Curve with Our Affordable  items .Look awesome Without Breaking the Bank.",
+      button: "watch fashion",
       to: "products",
       fn: () => handleCategory("fashion"),
     },
 
     {
-      image: LapImage,
+      image:
+        "https://res.cloudinary.com/domobky11/image/upload/v1681711640/139536-using-smiling-laptop-girl-png-download-free_nfifxo.png",
       slogan:
-        "Unlock Your Potential with Our Range of High-Performance Laptops. From sleek ultrabooks to powerful gaming laptops, we've got you covered.",
-      button: "see our laptops",
-      header: "Stay Connected and Productive",
+        "Unlock Your Potential with High Performance Laptops and pcs. From lighweight ultrabooks to  gaming laptops.",
+      button: "watch laptops",
+      header: "Stay connected and Productive",
       to: "products",
       fn: () => handleCategory("laptops"),
     },
 
     {
       slogan:
-        "Don't miss out on our limited time offer! Shop now and enjoy huge savings on our top products. From electronics to fashion,Hurry, this offer won't last forever!",
+        "Don't miss out on our limited time offer! Shop now and enjoy huge savings on our top items. From electronics to fashion,",
+
       header: "Save Big on Our Top Products",
-      button: "watch Sale Products",
-      image: SaleImage,
+      button: "watch Sales",
+      image:
+        "https://res.cloudinary.com/domobky11/image/upload/v1689515916/pngegg_3_oklao1.png",
       to: "products",
       fn: () => handleState("sale"),
     },
   ];
 
-  const [bannerIndex, setBannerIndex] = useState(0);
-
-  const [animateRef, { width }] = useMeasure();
-  const ref = useRef<HTMLDivElement | null>(null);
-
-  const [variant, dir] = useCarousel(bannerIndex, bannerArr.length);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-  const scale = useTransform(scrollYProgress, [0, 1], ["1", "1.1"]);
   return (
-    <Animation>
-      <section className="banner-par center" id="banner" ref={animateRef}>
-        <AnimatePresence custom={{ dir, width }} mode="wait">
-          {bannerArr
-            .reverse()
-            .map(({ image, slogan, button, header, to, fn }, index) => {
-              if (index === bannerIndex) {
-                return (
-                  <motion.div
-                    variants={variant as Variants}
-                    className="banner "
-                    key={index}
-                    initial="start"
-                    exit="exit"
-                    animate="end"
-                    custom={{ dir, width }}
-                  >
-                    <BannerText
-                      header={header}
-                      clr={arrClrs[index]}
-                      button={button}
-                      slogan={slogan}
-                      to={to}
-                      fn={() => startTransition(fn)}
-                      key={header}
-                    />
-                    <div className="background"></div>
-
-                    <div className="banner-image center " ref={ref}>
-                      <motion.img src={image} style={{ scale }} />
-                    </div>
-                  </motion.div>
-                );
-              }
-            })}
-        </AnimatePresence>
-        <div className=" banner-dots-par center">
-          {[...Array(4)].map((_, i) => {
-            return (
-              <span
-                onClick={() => {
-                  setBannerIndex(i);
-                }}
-                key={i}
-                className={`box-shadow banner-dot ${
-                  i === bannerIndex ? "active" : ""
-                }`}
-              ></span>
-            );
-          })}
-        </div>
-      </section>
-    </Animation>
+    <>
+      <Slider
+        ref={sliderRef}
+        {...settings}
+        lazyLoad="ondemand"
+        className="banner-par "
+        dotsClass="slick-dots banner-dot"
+        dots
+        waitForAnimate
+        arrows={false}
+      >
+        {bannerArr.map((ob, index) => {
+          return (
+            <div className="banner " key={index}>
+              <BannerText clr={arrClrs[index]} {...ob} key={ob.header} />
+              <div className="banner-image  ">
+                <FadeElement delay={1.7} cls="">
+                  <LazyLoadImage
+                    src={ob.image}
+                    alt={`banner proile`}
+                    effect="blur"
+                    width={"fit-content"}
+                    height={340}
+                  />
+                  {/* <img src={image} alt={`banner proile`} /> */}
+                </FadeElement>
+              </div>
+            </div>
+          );
+        })}
+      </Slider>
+      <FadeElement cls="" delay={0.1}>
+        <div className="background"></div>
+      </FadeElement>
+    </>
   );
 };
 

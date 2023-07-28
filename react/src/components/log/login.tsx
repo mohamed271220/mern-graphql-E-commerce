@@ -8,7 +8,7 @@ import { Authenticate_Query } from "../../graphql/mutations/user";
 import OpacityBtn from "../widgets/OpacityBtn";
 import { toast } from "react-hot-toast";
 import { isAuthContext } from "../../context/isAuth";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, Navigate, useNavigate } from "react-router-dom";
 import Animation from "../widgets/Animation";
 import LogInWithGoogle from "./LogInWithGoogle";
 import FormAnimation from "../widgets/FormAnimation";
@@ -32,7 +32,7 @@ const Login = () => {
     getValues,
   } = methods;
 
-  const { setIsAuth } = useContext(isAuthContext);
+  const { setIsAuth, isAuth } = useContext(isAuthContext);
 
   const [authenticate] = useMutation(Authenticate_Query);
   const handleLogIn = async () => {
@@ -46,7 +46,6 @@ const Login = () => {
         credentials: "include",
       },
     });
-    console.log(res);
     if (res.data.authenticate.status === 404) {
       toast.error(res.data.authenticate.msg);
     } else if (res.data.authenticate.status === 200) {
@@ -63,6 +62,10 @@ const Login = () => {
     console.log(data);
     handleLogIn();
   };
+
+  if (isAuth) {
+    return <Navigate to={"/"} />;
+  }
 
   return (
     <Animation>
@@ -87,7 +90,8 @@ const Login = () => {
             />
 
             <OpacityBtn
-              cls="btn main"
+              cls="btn main w-80"
+              parCls="w-100"
               fn={() => null}
               btn="log In"
               type="submit"

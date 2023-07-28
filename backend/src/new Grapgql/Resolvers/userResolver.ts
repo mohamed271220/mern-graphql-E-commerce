@@ -52,6 +52,22 @@ export const userResolver = {
           password: hashPassword(input.password),
           role: "user",
         });
+        const notificationObj = {
+          isRead: false,
+          content: `${input.email} created a new account`,
+          createdAt: new Date().toISOString(),
+        };
+        await userCollection.updateMany(
+          { role: { $in: ["admin", "moderator", "owner", "user"] } },
+          {
+            $push: {
+              notifications: notificationObj,
+            },
+            $inc: {
+              notificationsCount: +1,
+            },
+          }
+        );
         return { ...res, status: 200, msg: "user created successfully" };
       }
     },
@@ -83,10 +99,16 @@ export const userResolver = {
               );
 
               const id = result[0]._id.toString();
-              res.cookie("user-email", result[0].email as unknown as string);
-              res.cookie("user-id", id as unknown as string);
-              res.cookie("access-token", accessToken);
-              res.cookie("refresh-token", refToken);
+              res.cookie("user_email", result[0].email as unknown as string, {
+                httpOnly: true,
+              });
+              res.cookie("user_id", id as unknown as string, {
+                httpOnly: true,
+              });
+              res.cookie("access_token", accessToken, {
+                httpOnly: true,
+              });
+              res.cookie("refresh_token", refToken, { httpOnly: true });
               return { msg: "you successfully logged in", status: 200 };
             }
           } else if (!result) {
@@ -222,23 +244,24 @@ export const userResolver = {
     updateUserRole: async (_: any, args: { _id: string; role: string }) => {
       try {
         await userCollection.findByIdAndUpdate(args._id, { role: args.role });
+
         return { msg: `now ,user role is ${args.role}` };
       } catch (err) {
         return (err as Error).message;
       }
     },
     async logOut(
-      _par: any,
+      _: any,
       args: { _id: string; lastLogIn: string },
-      ctx: { res: Response; req: Request }
+      { res }: { res: Response }
     ) {
       await userCollection.findByIdAndUpdate(args._id, {
         lastLogIn: args.lastLogIn,
       });
-      // ctx.res.clearCookie("access-token");
-      // ctx.res.clearCookie("user-id");
-      // ctx.res.clearCookie("refresh-token");
-      // ctx.res.clearCookie("user-email");
+      res.clearCookie("access_token", { httpOnly: true });
+      res.clearCookie("user_id", { httpOnly: true });
+      res.clearCookie("refresh_token", { httpOnly: true });
+      res.clearCookie("user_email", { httpOnly: true });
       return { msg: "you successfully signed out", status: 200 };
     },
 
@@ -281,7 +304,6 @@ export const userResolver = {
       return { msg: "your wishlist is successfully cleared ", status: 200 };
     },
     async MarkAllAsReadNotification(_: unknown, args: { userId: string }) {
-      console.log(args);
       await userCollection.findByIdAndUpdate(args.userId, {
         "notifications.$[].isRead": true,
       });
@@ -290,6 +312,7 @@ export const userResolver = {
 
     async updateUserName(_: any, args: { _id: string; name: string }) {
       await userCollection.findByIdAndUpdate(args._id, { name: args.name });
+
       return { status: 200, msg: "username is successfully updated  " };
     },
     async updateUserCountry(_: any, args: { _id: string; country: string }) {

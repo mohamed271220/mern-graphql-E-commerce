@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
-import InpErr from "../widgets/InpErr";
+import InpErr from "../../widgets/InpErr";
 import { useFormContext } from "react-hook-form";
 import { AnimatePresence, motion } from "framer-motion";
-import { opacityVariant } from "../../variants/globals";
+import { opacityVariant } from "../../../variants/globals";
 
 interface Props {
   err: string;

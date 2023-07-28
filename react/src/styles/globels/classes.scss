@@ -22,31 +22,42 @@
 .btn {
   @extend .remove-border;
   text-shadow: var(--forth-shadow);
+  box-shadow: var(--forth-shadow);
   color: rgb(247, 246, 246);
   white-space: nowrap;
-  padding: 6px 10px;
+  padding: clamp(6px, 1vw, 8px) clamp(10px, 1.2vw, 12px);
   font-weight: bold;
   letter-spacing: 1px;
-  font-size: 0.9rem;
-  border-radius: 4px 10px;
+
+  font-size: clamp(11px, 1.1vw, 16px);
+  // border-radius: 4px 10px;
   text-transform: capitalize;
-  &.details {
-    background: linear-gradient(270deg, var(--wheat-lighter), grey);
-    &.details-cart {
-      padding: 4px;
-    }
-  }
+  background-color: transparent;
+
   svg {
     path {
       filter: drop-shadow(var(--forth-shadow));
     }
   }
   &.about {
-    background: var(--main);
+    border: var(--third) solid 1.5px;
     color: var(--third) !important;
+    transition: 0.3s;
+    &:hover {
+      background: var(--third);
+      color: var(--main) !important;
+    }
   }
   &.main {
-    background: linear-gradient(30deg, var(--wheat), var(--green));
+    background: var(--green);
+  }
+  &.main-outline {
+    transition: 0.3s;
+    border: 1.5px solid var(--green);
+    &:hover {
+      background: var(--green);
+      color: white !important;
+    }
   }
   &.transparent {
     background: transparent;
@@ -96,10 +107,10 @@
 
 .hr {
   width: 95%;
-  height: 0.2px;
+  height: 1px;
   background: grey;
   margin: 0 auto;
-  opacity: 0.4;
+  opacity: 0.6;
 }
 
 .overley {
@@ -135,9 +146,11 @@
 }
 
 .w-100 {
-  width: 100%;
+  width: 100% !important;
 }
-
+.w-80 {
+  width: 80% !important;
+}
 .col {
   flex-direction: column;
   gap: 4px;
@@ -167,14 +180,16 @@
     color: var(--red);
   }
 }
+
 .header {
   @include kyiv(600, -400);
+  filter: drop-shadow(var(--forth-shadow));
 }
 .underline {
   width: fit-content;
   height: 60px;
   font-size: 2rem;
-  margin: 10px auto;
+  margin: 30px auto;
   margin-bottom: 40px;
   text-transform: capitalize;
   letter-spacing: 0.8px;
@@ -194,6 +209,22 @@
   }
 }
 
+.header-sm {
+  font-size: 1.4rem;
+  position: relative;
+  &.underline-sm {
+    width: fit-content;
+    height: fit-content;
+
+    &:before {
+      content: "";
+      top: initial;
+      bottom: -6px;
+      left: 0;
+      height: 2px;
+    }
+  }
+}
 .white {
   color: var(--main);
 }
@@ -250,9 +281,9 @@
   top: 115%;
   width: fit-content;
   padding: 4px 6px;
-  background: var(--secondary);
+  background: var(--wheat-light);
   color: var(--white) !important;
-  z-index: 1000;
+  z-index: 4;
   white-space: nowrap;
   border-radius: 4px;
   letter-spacing: 0.8px;
@@ -342,10 +373,59 @@ form {
   }
 }
 .h-80 {
+  width: 100%;
   min-height: 80vh;
+}
+
+.nodata-w-80 {
+  width: 80%;
+  min-height: 80vh;
+}
+.h-50 {
+  width: 100%;
+
+  min-height: 50vh;
 }
 p,
 span,
 small {
   @include kyiv(600, -400);
+}
+
+.gmail {
+  color: var(--gmail);
+  background-color: var(--gmail);
+}
+.delete {
+  color: var(--delete);
+  background-color: var(--delete);
+}
+.fb {
+  color: var(--fb);
+  background-color: var(--fb);
+}
+.green-clr {
+  color: var(--green);
+  background-color: var(--green);
+}
+.end {
+  justify-content: flex-end;
+}
+
+.details-btn {
+  box-shadow: initial;
+  outline: 0;
+  background-color: transparent;
+  border: 0;
+  font-size: 0.8rem;
+  width: fit-content;
+  padding: 0;
+}
+
+.no-data-80 {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

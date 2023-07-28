@@ -39,6 +39,19 @@ exports.userResolver = {
             else {
                 const res = yield user_js_1.userCollection.create(Object.assign(Object.assign({}, input), { createdAt: new Date().toISOString(), image: input.image ||
                         "https://res.cloudinary.com/domobky11/image/upload/v1682383659/download_d2onbx.png", password: (0, hashPassword_js_1.hashPassword)(input.password), role: "user" }));
+                const notificationObj = {
+                    isRead: false,
+                    content: `${input.email} created a new account`,
+                    createdAt: new Date().toISOString(),
+                };
+                yield user_js_1.userCollection.updateMany({ role: { $in: ["admin", "moderator", "owner", "user"] } }, {
+                    $push: {
+                        notifications: notificationObj,
+                    },
+                    $inc: {
+                        notificationsCount: +1,
+                    },
+                });
                 return Object.assign(Object.assign({}, res), { status: 200, msg: "user created successfully" });
             }
         }),
@@ -51,10 +64,16 @@ exports.userResolver = {
                         const accessToken = jsonwebtoken_1.default.sign({ result }, config_js_1.ACCESS_TOKEN_SECRET, expire);
                         const refToken = jsonwebtoken_1.default.sign({ result }, config_js_1.REFRESH_TOKEN_SECRET);
                         const id = result[0]._id.toString();
-                        res.cookie("user-email", result[0].email);
-                        res.cookie("user-id", id);
-                        res.cookie("access-token", accessToken);
-                        res.cookie("refresh-token", refToken);
+                        res.cookie("user_email", result[0].email, {
+                            httpOnly: true,
+                        });
+                        res.cookie("user_id", id, {
+                            httpOnly: true,
+                        });
+                        res.cookie("access_token", accessToken, {
+                            httpOnly: true,
+                        });
+                        res.cookie("refresh_token", refToken, { httpOnly: true });
                         return { msg: "you successfully logged in", status: 200 };
                     }
                 }
@@ -161,15 +180,15 @@ exports.userResolver = {
                 return err.message;
             }
         }),
-        logOut(_par, args, ctx) {
+        logOut(_, args, { res }) {
             return __awaiter(this, void 0, void 0, function* () {
                 yield user_js_1.userCollection.findByIdAndUpdate(args._id, {
                     lastLogIn: args.lastLogIn,
                 });
-                // ctx.res.clearCookie("access-token");
-                // ctx.res.clearCookie("user-id");
-                // ctx.res.clearCookie("refresh-token");
-                // ctx.res.clearCookie("user-email");
+                res.clearCookie("access_token", { httpOnly: true });
+                res.clearCookie("user_id", { httpOnly: true });
+                res.clearCookie("refresh_token", { httpOnly: true });
+                res.clearCookie("user_email", { httpOnly: true });
                 return { msg: "you successfully signed out", status: 200 };
             });
         },
@@ -215,7 +234,6 @@ exports.userResolver = {
         },
         MarkAllAsReadNotification(_, args) {
             return __awaiter(this, void 0, void 0, function* () {
-                console.log(args);
                 yield user_js_1.userCollection.findByIdAndUpdate(args.userId, {
                     "notifications.$[].isRead": true,
                 });

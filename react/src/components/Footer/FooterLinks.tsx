@@ -10,7 +10,7 @@ const FooterLinks = () => {
   ];
   return (
     <div className="footer-important-links footer-links ">
-      <h3 className=" footer-head ">links</h3>
+      <h3 className=" footer-head header">links</h3>
       <motion.span whileHover={{ x: 10 }}>
         <Link to="banner" smooth style={{ cursor: "pointer" }}>
           home

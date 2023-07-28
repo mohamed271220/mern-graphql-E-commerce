@@ -16,6 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "src/custom/.tsx"],
+  "include": ["src", "src/custom/.tsx", "lib/variants"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

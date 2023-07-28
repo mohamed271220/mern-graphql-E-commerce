@@ -1,8 +1,6 @@
 import React from "react";
 import { FaGreaterThan } from "react-icons/fa";
 import { NavLink, useLocation } from "react-router-dom";
-import FadeElement from "../widgets/FadeElement";
-import { AnimatePresence } from "framer-motion";
 
 const BeardCrumbs = () => {
   const location = useLocation();
@@ -29,7 +27,15 @@ const BeardCrumbs = () => {
       );
     });
 
-  return <div className="crumbs">{crumbs}</div>;
+  return (
+    <div className="crumbs ">
+      <NavLink className={"crumb-link"} to={"/"}>
+        Home
+      </NavLink>
+      <div className="crumbs-line"></div>
+      {crumbs}
+    </div>
+  );
 };
 
 export default BeardCrumbs;

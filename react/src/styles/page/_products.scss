@@ -3,6 +3,7 @@
 .products-par {
   overflow: hidden;
   width: 100%;
+  // max-width: 100%;
   height: auto;
   min-height: auto;
   margin-bottom: 10px;
@@ -20,6 +21,7 @@ aside {
 
   .aside-head {
     justify-content: space-between;
+    padding: 6px 0;
   }
 }
 
@@ -42,7 +44,7 @@ aside {
   letter-spacing: 0.8px;
   color: var(--third);
   margin-top: 6px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   font-size: 0.9rem;
 }
 
@@ -104,7 +106,7 @@ aside {
 
 .product-list-par {
   gap: 5px;
-  padding: 10px;
+  padding: 10px 0;
   position: relative;
   margin: 0 auto;
   min-height: 100vh;
@@ -129,10 +131,18 @@ aside {
 
 .heart-filter {
   position: absolute;
-  top: 5px;
+  top: 12px;
   right: 5px;
+  width: 20px;
+
   svg {
     fill: white;
+    &:not(&.svg-heart) {
+      transform: scale(1.3);
+    }
+    &.svg-heart {
+      transform: scale(0.45);
+    }
   }
 }
 
@@ -194,15 +204,12 @@ svg.svg-star {
 .product-links {
   margin-top: 6px;
   gap: 2rem;
-  button {
-    font-size: 0.8rem;
-  }
 }
 
 .product-List {
   font-size: clamp(12px, 1rem, 1rem);
   position: relative;
-  padding: 5px;
+  margin: 0 1px;
   background: var(--secondary);
   box-shadow: var(--main-shadow);
   gap: 1px;
@@ -219,6 +226,7 @@ svg.svg-star {
   &:hover {
     box-shadow: 1px 1px 3px var(--green);
   }
+
   p {
     overflow: hidden;
     display: -webkit-box;
@@ -308,7 +316,6 @@ svg.svg-star {
   border-radius: 4px;
   margin-top: 4px;
   position: relative;
-  background: rgba(6, 56, 6, 0.197);
   padding: 0 1.5px;
   text-shadow: var(--forth-shadow);
   .price-top {
@@ -366,13 +373,13 @@ svg.svg-star {
   z-index: 10;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 649px) {
   aside.aside-products {
     position: fixed;
     top: 40px;
     left: 0;
     width: 100%;
-    height: calc(100vh - 40px);
+    min-height: calc(100vh - 40px);
     z-index: 50;
     background-color: var(--main);
     box-shadow: var(--main-shadow);
@@ -381,7 +388,11 @@ svg.svg-star {
     .aside-head,
     .hr {
       width: 70%;
-      margin: 0 auto;
+      margin-right: auto;
+      margin-left: auto;
     }
+  }
+  .product-list-par {
+    width: 95% !important;
   }
 }

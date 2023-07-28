@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { IoFilter } from "react-icons/io5";
 import Rating from "./Rating";
 import Price from "./Price";
@@ -36,6 +36,7 @@ const Aside = ({ startFiltering }: Props) => {
     productFeatured,
     setProductFeatured,
     setProducts,
+    products,
     setShowFilter,
     startTransition,
   } = useContext(productListContext);
@@ -43,10 +44,6 @@ const Aside = ({ startFiltering }: Props) => {
   const [filterAllFn] = useMutation(FILTER_All);
 
   const handleFiltering = async () => {
-    if (isMobile) {
-      setShowFilter(false);
-    }
-
     const res: any = await filterAllFn({
       variables: {
         input: {
@@ -60,17 +57,21 @@ const Aside = ({ startFiltering }: Props) => {
     });
     startTransition(() => {
       setProducts(res?.data.filterAllTypes);
+      if (isMobile) {
+        setShowFilter(false);
+      }
     });
   };
 
   const handleResetFiltering = () => {
-    startTransition(() => {
-      setCategoryFilter("");
-      setRateChecked("");
-      setPriceFilter(0);
-      setProductFeatured("");
+    setCategoryFilter("");
+    setRateChecked("");
+    setPriceFilter(0);
+    setProductFeatured("");
+
+    if (products.length !== Allproducts.length) {
       setProducts(Allproducts);
-    });
+    }
   };
   return (
     <motion.aside
@@ -79,11 +80,11 @@ const Aside = ({ startFiltering }: Props) => {
       exit="exit"
       animate="end"
       key={"aside"}
-      custom={isMobile}
+      custom={{ bool: isMobile, w: 300 }}
       className="aside-products"
     >
-      <div className="aside-head center">
-        <div className="filter-icon center">
+      <div className="aside-head center gap">
+        <div className="filter-icon center ">
           <IoFilter className="icon" color="var(--third)" />
           <span className="filter-head">filter</span>
         </div>
@@ -119,7 +120,7 @@ const Aside = ({ startFiltering }: Props) => {
           />
         )}
       </AnimatePresence>
-      <MobileCloseDropDown setter={setShowFilter} />
+      <MobileCloseDropDown setter={setShowFilter} title="close" />
     </motion.aside>
   );
 };

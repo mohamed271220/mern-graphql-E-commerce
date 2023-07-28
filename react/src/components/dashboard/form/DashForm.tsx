@@ -1,26 +1,26 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { FieldValues, FormProvider, useForm } from "react-hook-form";
-import Input from "../widgets/Input";
+import Input from "../../widgets/Input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { toast } from "react-hot-toast";
-import InpErr from "../widgets/InpErr";
-import { ProductInterface } from "../../interfaces/product";
+import InpErr from "../../widgets/InpErr";
+import { ProductInterface } from "../../../interfaces/product";
 import CustomFIleInput from "./CustomFIleInput";
 import axios from "axios";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { motion, AnimatePresence } from "framer-motion";
-import { opacityVariant } from "../../variants/globals";
-import OpacityBtn from "../widgets/OpacityBtn";
-import DashMain from "./DashMain";
+import { opacityVariant } from "../../../variants/globals";
+import OpacityBtn from "../../widgets/OpacityBtn";
+import DashMain from "../DashMain";
 import {
   addToProductRedux,
   updateProductRedux,
-} from "../../redux/productSlice";
-import { useAppDispatch } from "../../custom/reduxTypes";
-import FormAnimation from "../widgets/FormAnimation";
-import { uploadImagesRoute } from "../../assets/routes.js";
+} from "../../../redux/productSlice";
+import { useAppDispatch } from "../../../custom/reduxTypes";
+import FormAnimation from "../../widgets/FormAnimation";
+import { uploadImagesRoute } from "../../../assets/routes.js";
 
 interface keyedProduct extends ProductInterface {
   [key: string]: any;
@@ -33,10 +33,9 @@ interface Props {
   obj?: keyedProduct;
   head: string;
   btn: string;
-  Icon: React.ComponentType;
 }
 
-const DashForm = ({ type, Icon, fn, id, obj, head, btn }: Props) => {
+const DashForm = ({ type, fn, id, obj, head, btn }: Props) => {
   const dispatch = useAppDispatch();
 
   const date = () => new Date();
@@ -139,11 +138,10 @@ const DashForm = ({ type, Icon, fn, id, obj, head, btn }: Props) => {
           formData,
           {
             onUploadProgress: (data: any) => {
-              // (Math.round(data.total / data.loaded) * 100);
+              console.log(data);
             },
           }
         );
-        console.log(addedDocument);
         dispatch(addToProductRedux(addedDocument.data));
         toast.success(addedDocument.msg);
       }
@@ -151,7 +149,7 @@ const DashForm = ({ type, Icon, fn, id, obj, head, btn }: Props) => {
   };
 
   return (
-    <DashMain head="">
+    <DashMain>
       <FormProvider {...methods}>
         <FormAnimation
           fn={handleSubmit(onSubmit)}
@@ -192,10 +190,10 @@ const DashForm = ({ type, Icon, fn, id, obj, head, btn }: Props) => {
 
           <OpacityBtn
             btn={btn}
-            cls="main btn center gap "
+            cls="main btn center gap w-100"
             fn={() => null}
+            parCls="w-80"
             type="submit"
-            Icon={Icon}
           />
         </FormAnimation>
         <AnimatePresence>

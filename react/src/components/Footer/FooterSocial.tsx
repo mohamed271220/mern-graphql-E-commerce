@@ -43,7 +43,7 @@ const FooterLinks = () => {
   ];
   return (
     <div className="icons-footer">
-      <h3 className=" footer-head">contact me</h3>
+      <h3 className=" footer-head header">contact me</h3>
       <div className="social-icons center">
         {iconsArr.map(({ icon, id, title, link }) => {
           return (

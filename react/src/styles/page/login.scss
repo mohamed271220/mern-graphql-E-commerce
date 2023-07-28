@@ -4,7 +4,7 @@
   flex-direction: column;
   margin-top: 50px;
   margin-bottom: 20px;
-
+  overflow: hidden;
   .header {
     margin-bottom: 0;
     letter-spacing: 2px;
@@ -41,6 +41,7 @@
     color: var(--wheat);
     letter-spacing: 1px;
     cursor: pointer;
+    white-space: nowrap;
   }
   form {
     background: var(--secondary);
@@ -152,6 +153,6 @@
 
 input:focus {
   &:focus {
-    border: solid var(--green) 1px;
+    border: solid var(--green) 2px;
   }
 }

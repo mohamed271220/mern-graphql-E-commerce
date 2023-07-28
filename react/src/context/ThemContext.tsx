@@ -9,7 +9,7 @@ export const themeContext = createContext({} as themeContextInterface);
 
 const ThemContext = ({ children }: ChildrenInterFace) => {
   const localstorageTheme = localStorage.getItem("zimart-theme");
-  const [theme, setTheme] = useState(localstorageTheme || "light");
+  const [theme, setTheme] = useState(localstorageTheme || "dark");
 
   useEffect(() => {
     if (theme == "light") {

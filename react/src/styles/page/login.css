@@ -4,6 +4,11 @@
   flex-direction: column;
   margin-top: 50px;
   margin-bottom: 20px;
+  overflow: hidden;
+}
+.log-in .header {
+  margin-bottom: 0;
+  letter-spacing: 2px;
 }
 .log-in .redirect {
   color: var(--white);
@@ -31,12 +36,13 @@
   border-radius: 5px;
   justify-content: flex-start;
   gap: 20px;
-  box-shadow: var(--secondary-shadow);
+  box-shadow: var(--third-shadow);
   text-transform: capitalize;
   font-weight: bold;
   color: var(--wheat);
   letter-spacing: 1px;
   cursor: pointer;
+  white-space: nowrap;
 }
 .log-in form {
   background: var(--secondary);
@@ -56,7 +62,7 @@
   height: 30px;
   padding-right: 20px;
   background-color: var(--main);
-  box-shadow: var(--secondary-shadow);
+  box-shadow: var(--third-shadow);
   border-radius: 5px;
   color: var(--third);
 }
@@ -138,5 +144,9 @@
   color: var(--gmail);
   font-weight: bold;
   font-size: 0.8rem;
-  text-shadow: var(--secondary-shadow);
+  text-shadow: var(--third-shadow);
+}
+
+input:focus:focus {
+  border: solid var(--green) 2px;
 }/*# sourceMappingURL=login.css.map */

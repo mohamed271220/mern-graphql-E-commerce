@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useAnimate } from "framer-motion";
 import { useAppDispatch } from "../../../custom/reduxTypes";
 import { changeCartCountRedux } from "../../../redux/cartSlice.js";
 import { useMutation } from "@apollo/client";
 import { Change_Cart_Count } from "../../../graphql/mutations/user";
-import Cookies from "js-cookie";
-import OpacityBtn from "../../widgets/OpacityBtn";
+import { isAuthContext } from "../../../context/isAuth";
 
 const Counter = ({
   count: defaultCount,
@@ -14,7 +13,6 @@ const Counter = ({
   productId: string;
   count: number;
 }) => {
-  const userId = Cookies.get("user-id");
   const [count, setCount] = useState(defaultCount);
   const handleCount = (num: number) => {
     if (num < 1) {
@@ -25,6 +23,7 @@ const Counter = ({
       return num;
     }
   };
+  const { userId } = useContext(isAuthContext);
   const dispatch = useAppDispatch();
   const [changeCartCuntDB] = useMutation(Change_Cart_Count);
   const handleIncrease = () => setCount((cur): number => handleCount(cur + 1));
@@ -68,22 +67,22 @@ const Counter = ({
 
   return (
     <div className="counter-par center " ref={countRef}>
-      <OpacityBtn
-        btn="-"
-        cls="btn  center counter red "
-        fn={handleDecreaseCount}
-        title={"decrease"}
-      />
+      <button
+        className="btn  center counter red "
+        onClick={handleDecreaseCount}
+      >
+        -
+      </button>
       <span className="count ">
         <small>{count}</small>
       </span>
 
-      <OpacityBtn
-        btn="+"
-        cls="btn  center green counter relative"
-        fn={handleIncreaseFn}
-        title={"increase"}
-      />
+      <button
+        className="btn  center green counter relative"
+        onClick={handleIncreaseFn}
+      >
+        +
+      </button>
     </div>
   );
 };

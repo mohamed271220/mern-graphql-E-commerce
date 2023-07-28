@@ -10,11 +10,13 @@ interface Props {
   Icon?: React.ComponentType;
   title?: string;
   pos?: string;
+  parCls?: string;
   type?: "submit" | "button" | "reset";
 }
 const OpacityBtn = ({
   type = "button",
   pos = "left",
+  parCls,
   fn,
   btn,
   cls,
@@ -22,7 +24,7 @@ const OpacityBtn = ({
   title,
 }: Props) => {
   return (
-    <Title title={title ? title : ""}>
+    <Title title={title ? title : ""} cls={parCls}>
       <motion.button
         key={"apply-btn"}
         variants={opacityVariant}

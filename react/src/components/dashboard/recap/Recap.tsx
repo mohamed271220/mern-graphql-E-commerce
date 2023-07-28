@@ -59,7 +59,7 @@ const Recap = () => {
     },
   ];
   return (
-    <DashMain head="analytics">
+    <DashMain >
       <div className="dash-recap">
         {recapArr?.map((obj, i) => {
           return (

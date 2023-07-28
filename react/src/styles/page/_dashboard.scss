@@ -9,6 +9,9 @@
 #dash-aside {
   position: fixed;
   height: 100vh;
+  align-self: flex-start;
+  top: 0;
+  left: 0;
   background: var(--secondary);
   display: flex;
   flex-direction: column;
@@ -32,6 +35,8 @@
     &:hover {
       background: var(--green);
       font-weight: bold;
+      // transition: 0.4s;
+
       color: white;
     }
     &:hover:not(&.active) {
@@ -41,9 +46,9 @@
 }
 
 .dash-product {
-  width: 90%;
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh);
   height: max-content;
+  margin: 0 auto;
   position: relative;
   margin-bottom: 45px !important;
   .header {
@@ -76,7 +81,7 @@ form.update-product-form {
   max-width: 600px;
   background: var(--secondary);
   margin: 0 auto;
-  padding: 20px;
+  padding: 30px;
   gap: 30px;
   input {
     padding-right: 20px;
@@ -111,7 +116,6 @@ textarea.update-product {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 5px;
-
   & > div {
     width: 100% !important;
   }
@@ -121,8 +125,20 @@ textarea.update-product {
   display: flex;
   gap: 6px;
   margin-left: 10px;
-  margin-top: 25px;
-  margin-bottom: 25px;
+
+  align-items: center;
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  .crumbs-line {
+    margin: 10px;
+
+    background-color: var(--wheat-light);
+    font-weight: 900;
+    width: 2px;
+    height: 20px;
+    border-radius: 2px;
+  }
 }
 a.crumb-link {
   display: inline-block;
@@ -176,10 +192,11 @@ a.crumb-link {
       justify-content: center;
       gap: 5px;
       h3 {
-        font-size: 11px;
+        font-size: 10px;
         letter-spacing: 1px;
-        opacity: 0.6;
+        opacity: 0.4;
         padding: 0;
+        text-shadow: var(--forth-shadow);
         margin: 0;
       }
     }
@@ -245,11 +262,12 @@ div.dash-nav {
   top: 10px;
   right: 12px;
   gap: 12px;
+  z-index: 5;
 }
 
 .notifications {
-  height: 200px;
-  width: 220px;
+  height: 300px;
+  width: 250px;
   z-index: 10;
   top: 25px;
   background: var(--main);
@@ -320,7 +338,7 @@ div.dash-nav {
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 650px) {
   .notifications {
     bottom: 0px;
     top: initial;
@@ -328,10 +346,11 @@ div.dash-nav {
 
   .dash-aside-close {
     position: absolute;
-    top: 30px;
-    right: 20px;
+    top: 20px;
+    right: 10px;
     transform: translate(-50%, -50%);
     color: var(--delete);
+    z-index: 10;
     svg {
       transform: scale(1.5);
       path {

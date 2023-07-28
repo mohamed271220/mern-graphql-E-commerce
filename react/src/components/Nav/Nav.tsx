@@ -1,11 +1,6 @@
 import React, { useRef, useContext, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import {
-  useScroll,
-  useTransform,
-  motion,
-  
-} from "framer-motion";
+import { useScroll, useTransform, motion } from "framer-motion";
 import LogoSvg from "../widgets/LogoSvg";
 
 import { isAuthContext } from "../../context/isAuth";
@@ -16,12 +11,13 @@ import NavLinks from "./NavLinks";
 import ProdouctFeaturesLinks from "./ProdouctFeaturesLinks";
 import useIsMobile from "../../custom/useIsMobile";
 import LinksAside from "./LinksAside";
+import IsAuth from "./IsAuth";
+import FadeElement from "../widgets/FadeElement";
 
 const Nav = () => {
   const { isAuth } = useContext(isAuthContext);
   const { theme } = useContext(themeContext);
   const navRef = useRef<HTMLElement | null>(null);
-
   const { scrollY } = useScroll({
     target: navRef,
   });
@@ -35,6 +31,11 @@ const Nav = () => {
     scrollY,
     [0, 0.5],
     [theme === "dark" ? "#fff" : "#000", theme === "light" ? "#fff" : "#000"]
+  );
+  const boxShadow = useTransform(
+    scrollY,
+    [0, 0.5],
+    ["0 0 0 000", ".5px .5px 1.5px 000"]
   );
   const location = useLocation();
   const [showNav, setShowNav] = useState(true);
@@ -53,9 +54,9 @@ const Nav = () => {
         <motion.nav
           animate={{ opacity: 1 }}
           initial={{ opacity: 0 }}
-          transition={{ delay: 0.4 }}
+          transition={{ delay: 1.4 }}
           ref={navRef}
-          style={{ background: navClr }}
+          style={{ background: navClr, boxShadow }}
         >
           <Link to="/" className="logo center">
             <LogoSvg />
@@ -69,9 +70,11 @@ const Nav = () => {
                 </>
               </div>
             )}
-            <ProdouctFeaturesLinks LinkClr={LinkClr} />
-            <div className="nav-features">
-              <ThemeToggle navClr={navClr} linkClr={LinkClr} />
+            <div className="center ">
+              {!isMobile && <ThemeToggle navClr={navClr} linkClr={LinkClr} />}
+            </div>
+            <div className="center">
+              <IsAuth color={LinkClr} />
               {isMobile && <LinksAside />}
             </div>
           </div>

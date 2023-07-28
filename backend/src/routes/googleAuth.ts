@@ -30,10 +30,10 @@ const successLogin = async (req: Request, res: Response) => {
       console.log(result);
       const id = result._id.toString();
       console.log(id);
-      res.cookie("user-email", result.email as unknown as string);
-      res.cookie("user-id", id as unknown as string);
-      res.cookie("access-token", accessToken);
-      res.cookie("refresh-token", refToken);
+      res.cookie("user_email", result.email as unknown as string);
+      res.cookie("user_id", id as unknown as string);
+      res.cookie("access_token", accessToken);
+      res.cookie("refresh_token", refToken);
       res.redirect(`${Client_Url}?isLogged=true`);
     } else {
       res.redirect(`${Client_Url}/login?isLogged=false`);

@@ -5,7 +5,7 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 const scaleArr = [1.15, 1.3, 1.5, 1.3, 1.15];
 const xArr = [225, 125, 0, -125, -225];
 const zIndexArr = [1, 2, 3, 2, 1];
-const delayArr = [0.8, 0.4, 0.2, 0.4, 0.8];
+const delayArr = [0.8, 0.4, 0, 0.4, 0.8];
 const imgArr = [
   "https://res.cloudinary.com/domobky11/image/upload/v1682582542/Daco_4755868_a8ln06.png",
   "https://res.cloudinary.com/domobky11/image/upload/v1681798935/products/Daco_4236128.png.png",
@@ -26,6 +26,7 @@ const MainProductAnimation = () => {
     <motion.div
       className="products-animation-par"
       style={{ opacity: 0 }}
+      transition={{ delay: 0.05 }}
       whileInView={{ opacity: [0, 0.2, 0.4, 0.6, 1] }}
     >
       <>
@@ -44,7 +45,7 @@ const MainProductAnimation = () => {
               viewport={{ once: true }}
               initial="start"
               transition={{
-                delay: 0.2 + delayArr[i],
+                delay: delayArr[i],
                 duration: 0.4,
               }}
               whileInView="end"

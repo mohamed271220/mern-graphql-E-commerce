@@ -1,35 +1,55 @@
-import React, { RefObject, useContext } from "react";
+import React, { useContext } from "react";
 import DropDown from "./DropDown";
 import ProfileImg from "./ProfileImg";
 import { isAuthContext } from "../../context/isAuth";
 import { NavLink } from "react-router-dom";
 import { FiEdit } from "react-icons/fi";
 import { RiLogoutCircleRFill } from "react-icons/ri";
-import { FcSettings } from "react-icons/fc";
 import useLogOut from "../../custom/useLogOut";
 import { FaQuestionCircle } from "react-icons/fa";
+import useIsMobile from "../../custom/useIsMobile";
 
 interface Props {
   bool: boolean;
   setter: React.Dispatch<React.SetStateAction<boolean>>;
 }
 const UserDropDown = ({ bool, setter }: Props) => {
+  const { isMobile } = useIsMobile();
+
   const { name } = useContext(isAuthContext);
   const { handleLogOut } = useLogOut();
+  const handleMobileCLose = () => {
+    if (isMobile) {
+      setter(false);
+    }
+  };
   const dropArr = [
-    { link: "update your data", icon: FiEdit, to: "/user", fn: () => null },
-    { link: "faq", icon: FaQuestionCircle, to: "/faq", fn: () => null },
+    {
+      link: "update your data",
+      icon: FiEdit,
+      to: "/user",
+      fn: handleMobileCLose,
+    },
+    { link: "faq", icon: FaQuestionCircle, to: "/faq", fn: handleMobileCLose },
 
     {
       link: "logout",
       icon: RiLogoutCircleRFill,
       to: "/login",
-      fn: handleLogOut,
+      fn: () => {
+        handleLogOut();
+        handleMobileCLose();
+      },
     },
   ];
 
   return (
-    <DropDown cls="user-drop" bool={bool} setter={setter}>
+    <DropDown
+      cls="user-drop"
+      bool={bool}
+      setter={setter}
+      title={"close user dropdown"}
+    >
       <div className="w-100">
         <div className="user-drop-img center gap">
           <ProfileImg dimension={30} />
@@ -42,7 +62,6 @@ const UserDropDown = ({ bool, setter }: Props) => {
         return (
           <div key={i} className="w-100 " onClick={fn}>
             <NavLink className={"gap user-drop-link"} to={`${to}`}>
-              {" "}
               <Icon fontSize={15} className="shadow  user-icon" />
               {link}
             </NavLink>

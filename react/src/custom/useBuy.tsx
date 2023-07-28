@@ -2,7 +2,6 @@ import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import { useContext } from "react";
 import { isAuthContext } from "../context/isAuth";
-import { ProductInterface } from "../interfaces/product";
 import { cartInterface } from "../interfaces/user";
 import { toast } from "react-hot-toast";
 import { getnewAccess } from "../main";
@@ -18,7 +17,6 @@ const useBuy = (arrProducts: cartInterface[]) => {
           Authorization: `Bearer ${newAccessToken}`,
         },
       });
-      console.log(newAccessToken);
       if (key) {
         const stripePromise = await loadStripe(key);
         const res = await axios.post(

@@ -64,19 +64,19 @@ const TotalPrice = ({ subTotal }: { subTotal: number }) => {
     <div className="totel-price center between col box-shadow">
       <div className="center col" style={{ height: 40 }}>
         <h3
-          className="header underline"
+          className="header underline header-sm underline-sm"
           style={{ color: "var(--white)", marginBottom: 8 }}
         >
           order summary
         </h3>
       </div>
 
-      <div className="order-details center col w-100">
+      <div className="order-details gap center col w-100">
         <div className="center between w-100">
           <span className="cart-detail">Subtotal :</span>
           <span className="order-val">
             {" "}
-            $
+            ${" "}
             <AnimatePresence mode="wait">
               <Price num={Number(subTotal.toFixed(2))} key={"subtotal"} />
             </AnimatePresence>
@@ -129,7 +129,7 @@ const TotalPrice = ({ subTotal }: { subTotal: number }) => {
         <div className="center between w-100">
           <span className="cart-detail ">Discount :</span>
           <span className="order-val">
-            $
+            ${" "}
             <AnimatePresence>
               <Price
                 key={"discounted"}
@@ -153,11 +153,10 @@ const TotalPrice = ({ subTotal }: { subTotal: number }) => {
       </div>
       <OpacityBtn
         btn="checkout now"
-        cls="btn checkout  center gap"
+        cls="btn btn-buy  center gap"
         Icon={FaShoppingCart}
         fn={handlePurchase}
       />
-      {/* </AnimatePresence> */}
     </div>
   );
 };
