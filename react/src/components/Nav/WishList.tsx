@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { opacityVariant } from "../../variants/globals";
 import Favorite from "../widgets/Favorite";
 import { useAppDispatch, useAppSelector } from "../../custom/reduxTypes";
@@ -30,7 +30,6 @@ const WishList = ({ showFav, setter }: Props) => {
   });
   const handleClearFav = async () => {
     const { data } = await clearFav();
-    console.log({ data });
     if (data?.ClearFav?.status === 200) {
       setIsStatus200(true);
       dispatch(clearAllFav());
@@ -38,6 +37,15 @@ const WishList = ({ showFav, setter }: Props) => {
       setIsStatus200(false);
     }
   };
+
+  useEffect(() => {
+    if (!IsStatus200) return;
+    const timer = setTimeout(() => {
+      setIsStatus200(false);
+      setShowClearFav(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, [IsStatus200]);
   return (
     <>
       <DropDown
@@ -89,11 +97,11 @@ const WishList = ({ showFav, setter }: Props) => {
           <AnimatePresence>
             {showClearFav && (
               <SlideButton
-                key={"slide-button"}
+                key={"slide-button-clear"}
                 sethide={setShowClearFav}
                 cls="clear-all"
                 doneMsg="All CLeared"
-                head="are you sure you want to clear ALl?"
+                head="are you sure you want to clear All?"
                 height={120}
                 fn={handleClearFav}
                 IsStatus200={IsStatus200}

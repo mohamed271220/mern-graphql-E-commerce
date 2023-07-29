@@ -85,7 +85,7 @@ const Detail = ({
     getValues,
 
     handleSubmit,
-    formState: { errors, isValid, dirtyFields },
+    formState: { errors, isValid },
   } = methods;
   const { [detail]: detailvalue } = getValues();
 
@@ -182,7 +182,6 @@ const Detail = ({
               >
                 {detail !== "country" && (
                   <>
-                    <>{console.log({ detail })}</>
                     <Input
                       type={detail === "phone" ? "number" : "text"}
                       placeholder={placeholder || detail}

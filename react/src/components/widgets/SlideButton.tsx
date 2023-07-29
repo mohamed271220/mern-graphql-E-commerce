@@ -37,7 +37,6 @@ const SlideButton = ({
   const background = useTransform(offset, [0, 200], ["#378758", "#c5af87c9"]);
 
   const [isConfirmed, setIsConfirmed] = useState(false);
-
   const textVariant = {
     start: { y: 20, opacity: 0 },
     end: {
@@ -54,7 +53,7 @@ const SlideButton = ({
     } else {
       timer = setTimeout(() => {
         controls.start({ x: 0, y: 0 });
-      }, 600);
+      }, 2000);
     }
     return () => clearTimeout(timer);
   }, [IsStatus200, fn]);
