@@ -4,7 +4,7 @@
   width: 90%;
   overflow-y: auto;
   margin: 0 auto;
-  min-height: 80vh;
+  min-height: calc(60vh - 60px);
 }
 table.order {
   position: relative;
@@ -14,9 +14,9 @@ table.order {
   border-spacing: 0.4px;
   color: var(--third);
   margin: 0 auto;
-  margin-bottom: 40px;
   overflow: hidden;
   overflow-y: initial;
+  margin-bottom: 45px;
   > * {
     font-weight: bold;
   }
@@ -89,8 +89,7 @@ table.order {
         display: inline-flex;
         justify-content: space-between;
         align-items: center;
-        gap: 5px;
-        width: 80%;
+        gap: 25px;
         max-width: 340px;
       }
     }
@@ -133,7 +132,7 @@ table.order {
   right: -3px;
   width: 90px;
   background: var(--main);
-  z-index: 100;
+  z-index: 5;
   padding: 4px;
   font-size: 0.8rem;
   &.notification-actions {

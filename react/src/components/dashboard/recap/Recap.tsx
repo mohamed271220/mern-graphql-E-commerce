@@ -7,6 +7,7 @@ import { useAppSelector } from "../../../custom/reduxTypes";
 import useDashProgress from "../../../custom/useDashProgress";
 import { FaDollarSign, FaUserAlt } from "react-icons/fa";
 import MainPageCharts from "./MainPageCharts";
+import useMeasure from "react-use-measure";
 
 const Recap = () => {
   const { user } = useAppSelector((st) => st.user);
@@ -58,19 +59,21 @@ const Recap = () => {
       Icon: FaUserAlt,
     },
   ];
+  const [ref, { width }] = useMeasure();
+
   return (
-    <DashMain >
-      <div className="dash-recap">
+    <DashMain>
+      <div
+        className="dash-recap"
+        ref={ref}
+        style={{ flexWrap: width <= 800 ? "wrap" : "nowrap" }}
+      >
         {recapArr?.map((obj, i) => {
-          return (
-            <div key={i + 10} className="recap-items-par">
-              <DashBoardRecap key={i} {...obj} />
-            </div>
-          );
+          return <DashBoardRecap key={i} {...obj} />;
         })}
       </div>
 
-      <MainPageCharts userData={user} />
+      <MainPageCharts width={width} />
     </DashMain>
   );
 };
